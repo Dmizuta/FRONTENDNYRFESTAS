@@ -4,11 +4,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4; /* Light background color */
-    color: #333; /* Dark text color for better readability */
+    color: #78B7D0; /* Dark text color for better readability */
 }
 
 header {
-    background-color: #007bff; /* Header background color */
+    background-color: #16325B; /* Header background color */
     color: white; /* White text color */
     padding: 20px 0; /* Top and bottom padding */
     text-align: center; /* Center header text */
@@ -40,7 +40,7 @@ main {
 
 h2, h3 {
     text-align: center; /* Center align section headings */
-    color: #007bff; /* Use the same color as the header */
+    color: #227B94; /* Use the same color as the header */
 }
 
 #customer-info {
@@ -67,7 +67,7 @@ input[type="number"] {
 }
 
 button {
-    background-color: #28a745; /* Green button */
+    background-color: #FFDC7F; /* Green button */
     color: white; /* White text */
     border: none; /* Remove default border */
     padding: 10px 15px; /* Padding inside the button */
@@ -76,7 +76,7 @@ button {
 }
 
 button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #FFDC7F; /* Darker green on hover */
 }
 
 /* Products List Section */
@@ -107,7 +107,7 @@ button:hover {
 footer {
     text-align: center; /* Center footer text */
     padding: 15px; /* Padding for the footer */
-    background-color: #007bff; /* Footer background color */
+    background-color: #16325B; /* Footer background color */
     color: white; /* White text color */
     position: relative; /* Relative positioning */
     bottom: 0; /* Position at the bottom */
