@@ -113,3 +113,40 @@ footer {
     bottom: 0; /* Position at the bottom */
     width: 100%; /* Full width */
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0; /* Adjust padding for smaller screens */
+    }
+
+    #customer-info {
+        padding: 15px; /* Reduce padding for the form */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+        width: 100%; /* Ensure inputs and buttons take full width */
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column; /* Stack navigation items vertically */
+        align-items: center; /* Center align navigation items */
+    }
+
+    nav ul li {
+        margin: 10px 0; /* Space between menu items */
+    }
+}
+
+@media (max-width: 480px) {
+    h2, h3 {
+        font-size: 1.2em; /* Adjust font size for smaller screens */
+    }
+
+    button {
+        padding: 10px; /* Adjust button padding */
+    }
+}
