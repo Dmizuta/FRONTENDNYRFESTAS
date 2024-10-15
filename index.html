@@ -1,56 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Product Store</title>
+    <title>Minha Loja de Produtos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to My Product Store</h1>
+        <h1>Bem-vindo à Minha Loja de Produtos</h1>
         <nav>
             <ul>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#products">Produtos</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
-        <section id="products">
-            <h2>Our Products</h2>
-            <div class="product">
-                <h3>Product 1</h3>
-                <p>Description of Product 1.</p>
-                <button>Add to Order</button>
+        <!-- Seção de Informações do Cliente -->
+        <section id="customer-info">
+            <h2>Informações do Cliente</h2>
+            <form id="order-form">
+                <label for="company-name">Nome da Empresa:</label>
+                <input type="text" id="company-name" name="company-name" required>
+
+                <label for="product-code">Código do Produto:</label>
+                <input type="text" id="product-code" name="product-code" required>
+                <p id="product-description"></p> <!-- Descrição será mostrada aqui -->
+
+                <label for="quantity">Quantidade:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+
+                <button type="button" id="add-product">ADICIONAR</button>
+            </form>
+        </section>
+
+        <!-- Seção da Lista de Produtos -->
+        <section id="products-list">
+            <h2>Produtos Adicionados</h2>
+            <div id="products-container">
+                <ul id="product-items"></ul>
             </div>
-            <div class="product">
-                <h3>Product 2</h3>
-                <p>Description of Product 2.</p>
-                <button>Add to Order</button>
-            </div>
-            <div class="product">
-                <h3>Product 3</h3>
-                <p>Description of Product 3.</p>
-                <button>Add to Order</button>
-            </div>
+            <h3>Preço Total: <span id="total-price">R$ 0,00</span></h3>
         </section>
 
         <section id="about">
-            <h2>About Us</h2>
-            <p>Information about the store and its mission.</p>
+            <h2>Sobre Nós</h2>
+            <p>Informações sobre a loja e sua missão.</p>
         </section>
 
         <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Contact information.</p>
+            <h2>Contato</h2>
+            <p>Informações de contato.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 My Product Store. All rights reserved.</p>
+        <p>&copy; 2024 Minha Loja de Produtos. Todos os direitos reservados.</p>
     </footer>
+
+    <script src="script.js"></script> <!-- Link para o seu arquivo JavaScript -->
 </body>
 </html>
