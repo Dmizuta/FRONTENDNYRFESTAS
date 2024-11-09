@@ -1,152 +1,198 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Light background color */
-    color: #78B7D0; /* Dark text color for better readability */
+    font-family: Arial, sans-serif;
 }
 
-header {
-    background-color: #16325B; /* Header background color */
-    color: white; /* White text color */
-    padding: 20px 0; /* Top and bottom padding */
-    text-align: center; /* Center header text */
+body {
+    background-color: #fff;
+    color: #333;
 }
 
-h1 {
-    margin: 0; /* Remove default margin */
+nav {
+    background-color: #D2691E;
+    padding: 10px;
 }
 
 nav ul {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove padding */
-}
-
-nav ul li {
-    display: inline; /* Display list items inline */
-    margin: 0 15px; /* Space between menu items */
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
 }
 
 nav a {
-    color: white; /* White text for links */
-    text-decoration: none; /* Remove underline */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 10px 4px 10px;
+    border: 2px solid white;
+    border-radius: 20px;
 }
 
-/* Main Styles */
-main {
-    padding: 20px; /* Padding for the main content */
+.pagina {
+    padding: 20px;
 }
 
-h2, h3 {
-    text-align: center; /* Center align section headings */
-    color: #227B94; /* Use the same color as the header */
+h2 {
+    color: #D2691E;
+    margin-bottom: 10px;
 }
 
-#customer-info {
-    background-color: white; /* White background for the form */
-    padding: 20px; /* Padding for the form */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    margin-bottom: 20px; /* Space below the customer info section */
-}
-
-#customer-info form {
-    display: flex;
-    flex-direction: column; /* Stack form elements vertically */
-    gap: 15px; /* Space between elements */
-    align-items: center; /* Center form elements */
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 100%; /* Full width for input fields */
-    padding: 10px; /* Padding inside input fields */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 5px; /* Rounded corners */
+form label, form input {
+    display: block;
+    margin-bottom: 10px;
 }
 
 button {
-    background-color: #FFDC7F; /* Green button */
-    color: white; /* White text */
-    border: none; /* Remove default border */
-    padding: 10px 15px; /* Padding inside the button */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #D2691E;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #FFDC7F; /* Darker green on hover */
+    background-color: #A0522D;
 }
 
-/* Products List Section */
-#products-list {
-    background-color: white; /* White background for product list */
-    padding: 20px; /* Padding for the product list */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-#products-container {
-    border: 1px solid #ddd; /* Light border for the product list */
-    padding: 10px; /* Padding for the container */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #fff; /* White background */
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
 }
 
-#product-items {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove padding */
+th {
+    background-color: #D2691E;
+    color: white;
 }
 
-#product-items li {
-    margin: 5px 0; /* Space between products */
+.teclado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Footer Styles */
-footer {
-    text-align: center; /* Center footer text */
-    padding: 15px; /* Padding for the footer */
-    background-color: #16325B; /* Footer background color */
-    color: white; /* White text color */
-    position: relative; /* Relative positioning */
-    bottom: 0; /* Position at the bottom */
-    width: 100%; /* Full width */
+.teclado .display {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    background-color: #90EE90;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    header {
-        padding: 15px 0; /* Adjust padding for smaller screens */
-    }
-
-    #customer-info {
-        padding: 15px; /* Reduce padding for the form */
-    }
-
-    input[type="text"],
-    input[type="number"],
-    button {
-        width: 100%; /* Ensure inputs and buttons take full width */
-    }
-
-    nav ul {
-        display: flex;
-        flex-direction: column; /* Stack navigation items vertically */
-        align-items: center; /* Center align navigation items */
-    }
-
-    nav ul li {
-        margin: 10px 0; /* Space between menu items */
-    }
+.teclado .botoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 
-@media (max-width: 480px) {
-    h2, h3 {
-        font-size: 1.2em; /* Adjust font size for smaller screens */
-    }
+.teclado button {
+    padding: 15px;
+    font-size: 18px;
+    background-color: #90EE90;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
 
-    button {
-        padding: 10px; /* Adjust button padding */
-    }
+.teclado button:hover {
+    background-color: #32CD32;
+}
+
+header {
+    background-color: #D2691E;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #D2691E;
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 15px 0;
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+
+
+
+
+.pagina {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    width: 100%;
+    max-width: 98%;
+}
+
+h2 {
+    color: #D2691E;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.cadastro-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.cadastro-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.cadastro-form input:focus {
+    border-color: #D2691E;
+}
+
+button {
+    background-color: #D2691E;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #A0522D;
+}
+
+button:active {
+    background-color: #8B4513;
 }
