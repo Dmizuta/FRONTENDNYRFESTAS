@@ -69,10 +69,22 @@ th, td {
     text-align: center;
 }
 
+.valor-total {
+    background-color: #D2691E;
+    color: white;
+    padding: 8px;
+}
+
+
+
 th {
     background-color: #D2691E;
     color: white;
 }
+
+
+
+
 
 .teclado {
     display: flex;
