@@ -151,13 +151,7 @@ header {
     font-family: Arial, sans-serif;
 }
 
-header {
-    background-color: #D2691E;
-    color: white;
-    text-align: center;
-    width: 100%;
-    padding: 15px 0;
-}
+
 
 header h1 {
     font-size: 2em;
@@ -226,31 +220,40 @@ button:active {
 }
 /* New page-specific styles */
 .new-page header {
-    background-color: #D2691E;
+    ackground-color: #D2691E;
     color: white;
     text-align: center;
-    width: 100%;
-    padding: 15px 0;
+    padding: 10px;
+    gap: 10px;
 }
 
+
+
 .new-page header h1 {
-    font-size: 2.5em;
+    font-size: 2.em;
     margin: 0;
 }
 
+
+
+
+
+
+
+
+
 .new-page nav ul {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     list-style-type: none;
-    margin-top: 10px;
 }
+
 
 .new-page nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 8px 20px;
-    margin: 0 10px;
+    padding: 4px 10px 4px 10px;
     border: 2px solid white;
     border-radius: 20px;
 }
