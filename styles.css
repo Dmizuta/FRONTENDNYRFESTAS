@@ -293,7 +293,7 @@ button:active {
 }
 
 .new-page .product-image img {
-    width: 100%;
+    width: 50%;
     height: auto;
     max-width: 300px;
     border-radius: 8px;
