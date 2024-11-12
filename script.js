@@ -1,3 +1,3 @@
 function itemAdicionado() {
-    alert("Item adicionado ao pedido!");
+    alert("Adicionado com sucesso!");
 }
