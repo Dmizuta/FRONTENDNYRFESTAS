@@ -36,18 +36,21 @@
 
                 <!-- Right: Product Prices -->
                 <div class="product-prices">
-                    <p class="price">R$ 50,00</p>
-                    <p class="price">R$ 45,00 (acima de 10 unidades)</p>
+                    <p class="price">R$ 50,00 (fracionado 4pçs)</p>
+                    <p class="price">R$ 45,00 (caixa fechada 40pçs)</p>
                 </div>
             </div>
 
             <!-- Quantity Input and Buttons -->
             <div class="quantity-container">
                 <input type="number" placeholder="Digite a quantidade" class="quantity-input" />
-                <button class="add-to-order">
+                <button onclick="itemAdicionado()" class="add-to-order">
                     <span>+</span> Adicionar
                 </button>
+                
+                </button>
                 <button class="go-back"><a href="index.html">Voltar</a>
+                
 
 
 
@@ -56,6 +59,7 @@
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 
 </body>
 </html>
