@@ -266,6 +266,7 @@ th {
     color: #789DBC;
     font-size: 1.8em;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .addItem .product-description {
