@@ -305,6 +305,10 @@ th {
     font-size: 1.5em;
     margin: 0;
 
+.addItem .pricecondition {
+  font-size: 1em
+      color: white
+}
 
 
 .addItem .quantity-container {
