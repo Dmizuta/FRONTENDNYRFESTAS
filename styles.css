@@ -297,17 +297,23 @@ th {
 
 
 
-
-
-.addItem h3 {
+.addItem .pricebox h3{
     font-size: 1.6em;
-    color: white
-       
+    color: rgb(255, 255, 255);
+
+    
+
 }
-.addItem p {
-    font-size: 1em;
-    color: rgb(36, 36, 36)
+
+
+    
      
+       
+
+.addItem .pricebox p {
+    font-size: 1em;
+    color: rgb(107, 107, 107);
+  margin-bottom: 10px;
 }
 
 
