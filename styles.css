@@ -175,6 +175,11 @@ th {
 }
 
 /* New Page-Specific Styles */
+/* New Page-Specific Styles */
+/* New Page-Specific Styles */
+/* New Page-Specific Styles */
+
+
 .addItem header {
     background-color: #789DBC;
     color: whitesmokete;
@@ -294,6 +299,13 @@ th {
     color: #789DBC;
     padding: 20px;
 }
+
+
+.addItem h3 {
+    font-size: 1.5em;
+    margin: 0;
+
+
 
 .addItem .quantity-container {
     display: flex;
