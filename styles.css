@@ -216,7 +216,7 @@ th {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #DCE4C9;
+    background-color: #F5F5DC;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -297,13 +297,13 @@ th {
 .addItem .price h3 {
     font-size: 2em;
     color: white
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     padding: 20px;
  {
 .addItem .pricecondition p {
   font-size: 0.5em
       color: #1A1A1D
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     padding: 20px;
 }
 
