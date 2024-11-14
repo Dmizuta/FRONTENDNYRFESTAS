@@ -301,13 +301,14 @@ th {
 }
 
 
-.addItem h3 {
-    font-size: 1.5em;
+.addItem .price h3 {
+    font-size: 6em;
+    color: #FF8000
     margin: 0;
 
 .addItem .pricecondition p {
   font-size: 1em
-      color: white
+      color: #FF8000
 }
 
 
