@@ -233,7 +233,9 @@ th {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
+    margim-top:20px
     margin-bottom: 20px;
+    padding: 20px;
     width: 100%;
 }
 
