@@ -302,13 +302,13 @@ th {
 
 
 .addItem .price h3 {
-    font-size: 6em;
+    font-size: 2em;
     color: white
     margin: 0;
  {
 .addItem .pricecondition p {
-  font-size: 1em
-      color: white
+  font-size: 0.5em
+      color: #1A1A1D
 }
 
 
