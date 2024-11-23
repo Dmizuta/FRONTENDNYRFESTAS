@@ -236,7 +236,7 @@ th {
 
 .addItem {
     display: flex;
-align-self: center;
+    justify-content: center;
 }
 
 .addItem .product-container {
