@@ -1,304 +1,114 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYR FESTAS - WEB APP</title>
-    <link rel="icon" type="image/png" href="./LOGO_NYR.png">
-    <link rel="stylesheet" href="styles.css">
+    <title>Modal Example</title>
+    <style>
+        /* Modal Styles */
+        #page {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        .modal h2, .modal p {
+            margin-bottom: 10px;
+        }
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .modal button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .modal button:hover {
+            background-color: #218838;
+        }
+        .close-btn {
+            background-color: #dc3545;
+        }
+    </style>
 </head>
-
 <body>
-    <header>
-        <h1>NYR Festas</h1>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="cadastro.html">Cadastro</a></li>
-            <li><a href="index.html">Lista de Produtos</a></li>
-            <li><a href="pedidos.html">Pedidos</a></li>
-        </ul>
-    </nav>
+    <!-- Product List -->
+    <div class="product">
+        <h3>Produto 1</h3>
+        <p>Descrição do produto 1</p>
+        <p>Preço: R$ 100</p>
+        <button onclick="adicionarItem('Produto 1', 'Descrição do produto 1', 100)">Adicionar</button>
+    </div>
 
-    <main>
-        <!-- Product List Table -->
-        <section id="product-list">
-            <h2>Lista de Produtos</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Imagem</th>
-                        <th>Código do Produto</th>
-                        <th>Descrição</th>
-                        <th>Quantidade 1</th>
-                        <th>Preço 1</th>
-                        <th>Quantidade 2</th>
-                        <th>Preço 2</th>
-                        <th>Adicionar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example Rows -->
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="#" onclick="adicionarItem()"><button class="add-to-cart">+</button></a></td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="1.jpg" alt="Produto 1" width="50" height="50"></td>
-                        <td>MOD-11</td>
-                        <td>Descrição do Produto 1</td>
-                        <td>10</td>
-                        <td>R$ 50,00</td>
-                        <td>5</td>
-                        <td>R$ 25,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-11"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="2.jpg" alt="Produto 2" width="50" height="50"></td>
-                        <td>MOD-22</td>
-                        <td>Descrição do Produto 2</td>
-                        <td>15</td>
-                        <td>R$ 75,00</td>
-                        <td>8</td>
-                        <td>R$ 40,00</td>
-                        <td><a href="adicionar-item.html?productCode=MOD-22"><button class="add-to-cart">+</button></a>
-                        </td>
-                    </tr>
-                    <!-- Additional rows as needed -->
-                </tbody>
-            </table>
-        </section>
-    </main>
+    <div class="product">
+        <h3>Produto 2</h3>
+        <p>Descrição do produto 2</p>
+        <p>Preço: R$ 200</p>
+        <button onclick="adicionarItem('Produto 2', 'Descrição do produto 2', 200)">Adicionar</button>
+    </div>
 
-    <!-- Modal Pedido -->
-    <div class="addItem">
-
-        <div id="page">
-            <div class="content-wrapper">
-                <!-- Container for product image, details, and prices -->
-                <div class="product-container">
-                    <!-- Left: Product Image -->
-                    <div class="product-image">
-                        <img src="2.jpg" alt="Produto" />
-                    </div>
-
-                    <!-- Middle: Product Title and Description -->
-                    <div class="product-details">
-                        <h2>MOD-260</h2>
-                        <p class="product-description">CHAPÉU SEREIA
-                            BRILHANTE C/
-                            ELÁSTICO - SORTIDOS</p>
-                    </div>
-
-                    <!-- Right: Product Prices -->
-                    <div class="product-prices">
-                        <div class="pricebox">
-
-                            <h3 class="price">R$ 2,60</h3>
-                            <p class="pricecondition">(fracionado 12PÇS)</p>
-
-                            <h3 class="price">R$ 2,89</h3>
-                            <p class="pricecondition">(caixa fechada 360PÇS)</p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quantity Input and Buttons -->
-                <div class="quantity-container">
-                    <input type="number" placeholder="Digite a quantidade" class="quantity-input" />
-                    <button onclick="itemAdicionado()" class="add-to-order">
-                        <span>+</span> Adicionar
-                    </button>
-
-                    </button>
-                    <button class="go-back"><a href="index.html">Voltar</a>
-
-                    </button>
-                </div>
-            </div>
+    <!-- Modal -->
+    <div id="page">
+        <div class="modal">
+            <h2 id="productName"></h2>
+            <p id="productDescription"></p>
+            <p id="productPrice"></p>
+            <input type="number" id="productQuantity" placeholder="Quantidade">
+            <button onclick="itemAdicionado()">Adicionar</button>
+            <button class="close-btn" onclick="closeModal()">Fechar</button>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 NYR Festas. Todos os direitos reservados.</p>
-    </footer>
+    <!-- JavaScript -->
+    <script>
+        // Function to open the modal with dynamic content
+        function adicionarItem(productName, productDescription, productPrice) {
+            // Get the modal elements by ID
+            const page = document.getElementById("page");
+            const nameElement = document.getElementById("productName");
+            const descriptionElement = document.getElementById("productDescription");
+            const priceElement = document.getElementById("productPrice");
 
-    <script src="script.js"></script> <!-- Link para o seu arquivo JavaScript -->
+            // Populate the modal with the selected item data
+            nameElement.textContent = productName;
+            descriptionElement.textContent = productDescription;
+            priceElement.textContent = `Preço: R$ ${productPrice}`;
+
+            // Make the modal visible
+            page.style.display = "flex";
+        }
+
+        // Function to handle item added action
+        function itemAdicionado() {
+            alert("Adicionado com sucesso!");
+            closeModal();  // Close the modal after adding the item
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            const page = document.getElementById("page");
+            page.style.display = "none";  // Hide the modal
+        }
+    </script>
+    
 </body>
-
 </html>
