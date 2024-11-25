@@ -4,50 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modal Example</title>
-    <style>
-        /* Modal Styles */
-        #page {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            width: 300px;
-            text-align: center;
-        }
-        .modal h2, .modal p {
-            margin-bottom: 10px;
-        }
-        .modal input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .modal button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .modal button:hover {
-            background-color: #218838;
-        }
-        .close-btn {
-            background-color: #dc3545;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -78,37 +35,6 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        // Function to open the modal with dynamic content
-        function adicionarItem(productName, productDescription, productPrice) {
-            // Get the modal elements by ID
-            const page = document.getElementById("page");
-            const nameElement = document.getElementById("productName");
-            const descriptionElement = document.getElementById("productDescription");
-            const priceElement = document.getElementById("productPrice");
-
-            // Populate the modal with the selected item data
-            nameElement.textContent = productName;
-            descriptionElement.textContent = productDescription;
-            priceElement.textContent = `Preço: R$ ${productPrice}`;
-
-            // Make the modal visible
-            page.style.display = "flex";
-        }
-
-        // Function to handle item added action
-        function itemAdicionado() {
-            alert("Adicionado com sucesso!");
-            closeModal();  // Close the modal after adding the item
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            const page = document.getElementById("page");
-            page.style.display = "none";  // Hide the modal
-        }
-    </script>
-    
+    <script src="script.js"></script>
 </body>
 </html>
