@@ -1,28 +1,39 @@
-// Function to open the modal with dynamic content
-function adicionarItem(productName, productDescription, productPrice) {
-    // Get the modal elements by ID
-    const page = document.getElementById("page");
-    const nameElement = document.getElementById("productName");
-    const descriptionElement = document.getElementById("productDescription");
-    const priceElement = document.getElementById("productPrice");
+// Open Modal with dynamic content based on the product selected
+function openModal(productName, productDescription, productPrice) {
+    const modal = document.getElementById('modal');
+    const productNameElem = document.getElementById('modal-product-name');
+    const productDescriptionElem = document.getElementById('modal-product-description');
+    const productPriceElem = document.getElementById('modal-product-price');
+    
+    // Set modal content dynamically
+    productNameElem.textContent = productName;
+    productDescriptionElem.textContent = productDescription;
+    productPriceElem.textContent = `Preço: R$ ${productPrice}`;
 
-    // Populate the modal with the selected item data
-    nameElement.textContent = productName;
-    descriptionElement.textContent = productDescription;
-    priceElement.textContent = `Preço: R$ ${productPrice}`;
-
-    // Make the modal visible
-    page.style.display = "flex";
+    // Show the modal
+    modal.style.display = 'flex';
 }
 
-// Function to handle item added action
+// Close the modal
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+// Handle adding the item to the cart (for now just a success alert)
 function itemAdicionado() {
-    alert("Adicionado com sucesso!");
+    alert("Item adicionado ao pedido com sucesso!");
     closeModal();  // Close the modal after adding the item
 }
 
-// Function to close the modal
-function closeModal() {
-    const page = document.getElementById("page");
-    page.style.display = "none";  // Hide the modal
-}
+// Add event listeners to "Adicionar" buttons
+document.querySelectorAll('.add-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const product = this.closest('.product');
+        const productName = product.getAttribute('data-name');
+        const productDescription = product.getAttribute('data-description');
+        const productPrice = product.getAttribute('data-price');
+        
+        openModal(productName, productDescription, productPrice);
+    });
+});
