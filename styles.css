@@ -563,7 +563,13 @@ th {
     background-color: #EEF5FF;
 }
 
-
+.addItem {
+    isplay: flex;
+    justify-content: center;
+    align-items:center;
+    height: 100vh;
+        gap:2rem;
+}
 #page {
     display: flex;
     justify-content: center;
