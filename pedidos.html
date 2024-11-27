@@ -12,16 +12,16 @@
         <h1>NYR Festas</h1>
     </header>
 
-   <nav>
-    <ul>
-        <li><a href="cadastro.html">Cadastro</a></li>
-        <li><a href="index.html">Lista de Produtos</a></li>
-        <li><a href="pedidos.html">Pedidos</a></li>
-    </ul>
-</nav>
+    <nav>
+        <ul>
+            <li><a href="/cadastro.html">Cadastro</a></li>
+            <li><a href="/lista-produtos.html">Lista de Produtos</a></li>
+            <li><a href="/pedidos.html">Pedidos</a></li>
+        </ul>
+    </nav>
    
     
-  <!--  <section class="pagina">
+    <section class="pagina">
         <h2>Pedidos</h2>
         <table>
             <thead>
@@ -33,94 +33,14 @@
                 
             </thead>
             <tbody>
-                  
+                <!-- Adicione as linhas de pedido aqui -->
                  <tr>
                     <td><a href="pedido-especifico.html">Pedido 00001</a></td>
-                    <td>R$ 5000,00</td>
-                    <td>Em andamento</td>
-                </tr>
-                <tr>
-                    <td><a href="pedido-especifico.html">Pedido 00002</a></td>
-                    <td>R$ 10.000,00</td>
-                    <td>Em andamento</td>
-                </tr>
-                
-                <tr>
-                    <td><a href="pedido-especifico.html">Pedido 00002</a></td>
-                    <td>R$ 10.000,00</td>
+                    <td>R$ 100,00</td>
                     <td>Em andamento</td>
                 </tr>
             </tbody>
         </table>
-    </section>-->
-
-
-
-
-
-   
-
-
-    <section class="pagina">
-
-    <h1>Pedidos</h1>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Pedido</th>
-                <th>Valor</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody id="order-table-body">
-            <!-- Rows will be dynamically inserted here -->
-        </tbody>
-    </table>
-</section>
-
-
-
-
-
-    <script>
-        // Mock data (replace this with an actual data fetch in a real app)
-        const orders = [
-            { id: 1, name: "Pedido 00001", value: "R$ 5,000.00", status: "Em andamento" },
-            { id: 2, name: "Pedido 00002", value: "R$ 10,000.00", status: "Processado" },
-            { id: 3, name: "Pedido 00003", value: "R$ 3,000.00", status: "Em andamento" }
-        ];
-
-        // Target the <tbody> element
-        const tableBody = document.getElementById("order-table-body");
-
-        // Populate the table with rows for each order
-        orders.forEach(order => {
-            const row = document.createElement("tr");
-
-            // Create columns for each order property
-            row.innerHTML = `
-                <td><a href="order.html?orderId=${order.id}">${order.name}</a></td>
-                <td>${order.value}</td>
-                <td>${order.status}</td>
-            `;
-
-            // Append the row to the table body
-            tableBody.appendChild(row);
-        });
-    </script>
+    </section>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
