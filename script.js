@@ -1,5 +1,5 @@
 // Simulate a public API with product data
-const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // Mock API endpoint for testing
+const API_URL = 'http://localhost:3000/produtos'; // Mock API endpoint for testing
 
 // Function to fetch product data from the API
 async function fetchProductData() {
@@ -35,9 +35,9 @@ function populateProductTable(products) {
         // For simulation purposes, using random data for each product
         cell1.innerHTML = `<img src="https://via.placeholder.com/50" alt="Product Image">`;  // Placeholder image
         cell2.innerHTML = `Code-${product.id}`;  // Simulate Product Code
-        cell3.innerHTML = product.title;  // Simulate Product Description
-        cell4.innerHTML = Math.floor(Math.random() * 100);  // Simulate Quantity 1
-        cell5.innerHTML = `R$ ${(Math.random() * 100).toFixed(2)}`;  // Simulate Price 1
+        cell3.innerHTML = `${product.nome}`;  // Simulate Product Description
+        cell4.innerHTML = `${product.quantidade}`;  // Simulate Quantity 1
+        cell5.innerHTML = `${product.preco}`;  // Simulate Price 1
         cell6.innerHTML = Math.floor(Math.random() * 100);  // Simulate Quantity 2
         cell7.innerHTML = `R$ ${(Math.random() * 100).toFixed(2)}`;  // Simulate Price 2
         cell8.innerHTML = `<button class="openModalBtn">View Details</button>`; // Add button at the end of each row
