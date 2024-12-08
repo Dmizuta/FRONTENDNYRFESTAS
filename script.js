@@ -41,6 +41,7 @@ function populateProductTable(products) {
             const cell5 = row.insertCell(4); // Price Closed
             const cell6 = row.insertCell(5); // Quantity Fractioned
             const cell7 = row.insertCell(6); // Price Fractioned
+            const cell8 = row.insertCell(7); // View Details Button
 
             // Insert data from backend
             cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
@@ -51,25 +52,54 @@ function populateProductTable(products) {
             cell6.innerHTML = `${product.cxfracionada || 'N/A'}`;  // Quantity Fractioned
             cell7.innerHTML = `R$ ${parseFloat(product.precofracionada).toFixed(2)}`;  // Price Fractioned
 
+            // Add the "View Details" button in the 8th column
+            cell8.innerHTML = `<button class="openModalBtn">View Details</button>`;
 
-// Add event listener for the "View Details" button
-const openModalBtn = row.querySelector('.openModalBtn');
-openModalBtn.addEventListener('click', function() {
-    const productName = row.cells[2].textContent; // Product description
-    const productDesc = row.cells[2].textContent; // Detailed description
-    const productPrice = row.cells[4].textContent; // Price 1
-    const productImage = row.querySelector('img').src; // Product image
+            // Add event listener for the "View Details" button
+            const openModalBtn = row.querySelector('.openModalBtn');
+            openModalBtn.addEventListener('click', function() {
+                const productName = row.cells[2].textContent; // Product description
+                const productDesc = row.cells[2].textContent; // Detailed description
+                const productPrice = row.cells[4].textContent; // Price 1
+                const productImage = row.querySelector('img').src; // Product image
 
-    openModal(productName, productDesc, productPrice, productImage);
-
-
-
+                openModal(productName, productDesc, productPrice, productImage);
+            });
         });
     } else {
         // If no products found, show a message
         tableBody.innerHTML = '<tr><td colspan="7">No products available.</td></tr>';
     }
 }
+
+// Function to update and show modal with product details
+const modal = document.getElementById('myModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+
+function openModal(productName, productDesc, productPrice, productImage) {
+    const productInfo = modal.querySelector('.modal-stage-one .product-info');
+    const priceInfo = modal.querySelector('.modal-stage-one .price-info');
+    const productImageElement = modal.querySelector('.modal-stage-one img');
+    
+    productInfo.querySelector('h3').textContent = productName;
+    productInfo.querySelector('p').textContent = productDesc;
+    priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
+    productImageElement.src = productImage;
+
+    modal.style.display = 'block'; // Show modal
+}
+
+// Close modal functionality
+closeModalBtn.addEventListener('click', function() {
+    modal.style.display = 'none'; // Close the modal
+});
+
+// Close modal if clicked outside modal content
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none'; // Close modal
+    }
+});
 
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
