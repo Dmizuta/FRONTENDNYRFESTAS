@@ -194,7 +194,7 @@ th {
 
 /* Modal Image */
 .modal-stage-one img {
-    max-width: 100%; /* Ensure image is responsive and fits inside */
+    max-width: 50%; /* Ensure image is responsive and fits inside */
     height: auto; /* Maintain aspect ratio */
     object-fit: contain; /* Makes sure the image is contained without distortion */
     margin-bottom: 20px; /* Adds space below the image */
@@ -266,7 +266,7 @@ th {
 /* Responsive Modal */
 @media (max-width: 768px) {
     .modal-content {
-        width: 80%; /* Make modal width smaller on mobile */
+        width: 20%; /* Make modal width smaller on mobile */
         padding: 20px; /* Reduce padding on mobile */
     }
 
