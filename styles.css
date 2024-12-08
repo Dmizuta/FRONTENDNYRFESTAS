@@ -1,210 +1,233 @@
+/* Universal Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Modern, rounded font */
 }
 
+/* Body */
 body {
-    background-color: #fff;
-    color: #333;
+    background-color: #F9F7F1; /* Soft off-white */
+    color: #333; /* Dark gray for readability */
 }
 
+/* Header */
+header {
+    background-color: #F1C40F; /* Gold for a festive yet classy feel */
+    color: #fff;
+    text-align: center;
+    padding: 30px; /* Increased padding for more space */
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+header h1 {
+    font-size: 2.5em; /* Larger size for the header */
+    margin: 0;
+    letter-spacing: 4px; /* Increased letter spacing for a more elegant feel */
+    font-weight: 600;
+}
+
+/* Navigation */
 nav {
-    background-color: #D2691E;
-    padding: 10px;
+    background-color: #E74C3C; /* Elegant yet vibrant red */
+    padding: 18px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 nav ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     list-style-type: none;
+    gap: 30px; /* Increased gap for balance */
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    padding: 4px 10px 4px 10px;
-    border: 2px solid white;
-    border-radius: 20px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 1.4em; /* Larger font size */
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
 }
 
+nav a:hover {
+    background-color: #F1C40F; /* Highlight with gold on hover */
+    transform: scale(1.05); /* Slight scaling effect for modern feel */
+}
+
+/* Page Content */
 .pagina {
-    padding: 20px;
+    padding: 50px;
+    background-color: #fff; /* White background to maintain brightness */
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
+    margin: 30px auto;
+    width: 90%;
+    max-width: 1100px;
+    transition: transform 0.3s ease;
 }
 
+.pagina:hover {
+    transform: scale(1.01); /* Slight zoom effect on hover */
+}
+
+/* Headings */
 h2 {
-    color: #D2691E;
-    margin-bottom: 10px;
+    color: #E74C3C; /* Red for a pop of color */
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+    font-size: 1.8em; /* Larger size */
+    border-bottom: 3px solid #F1C40F;
+    font-weight: 600;
 }
 
+/* Form */
 form label, form input {
     display: block;
-    margin-bottom: 10px;
-}
-
-button {
-    background-color: #D2691E;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #A0522D;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-.valor-total {
-    background-color: #D2691E;
-    color: white;
-    padding: 8px;
-}
-
-
-
-th {
-    background-color: #D2691E;
-    color: white;
-}
-
-
-
-
-
-.teclado {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.teclado .display {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 10px;
-    width: 100px;
-    text-align: center;
-    background-color: #90EE90;
-}
-
-.teclado .botoes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.teclado button {
-    padding: 15px;
-    font-size: 18px;
-    background-color: #90EE90;
-    border: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.teclado button:hover {
-    background-color: #32CD32;
-}
-
-header {
-    background-color: #D2691E;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    gap: 10px;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-header {
-    background-color: #D2691E;
-    color: white;
-    text-align: center;
-    width: 100%;
-    padding: 15px 0;
-}
-
-header h1 {
-    font-size: 2em;
-    margin: 0;
-}
-
-
-
-
-
-.pagina {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
-    width: 100%;
-    max-width: 98%;
-}
-
-h2 {
-    color: #D2691E;
-    margin-bottom: 15px;
-    text-align: center;
+    margin-bottom: 18px; /* Increased margin for spacing */
 }
 
 .cadastro-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1em; /* Larger label font */
 }
 
 .cadastro-form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 18px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     outline: none;
-    transition: border-color 0.3s ease;
+    font-size: 1em; /* Larger input font */
+    transition: border-color 0.3s, box-shadow 0.2s ease;
 }
 
 .cadastro-form input:focus {
-    border-color: #D2691E;
+    border-color: #E74C3C; /* Red focus for input field */
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
 }
 
+/* Buttons */
 button {
-    background-color: #D2691E;
-    color: white;
-    padding: 12px;
+    background-color: #E74C3C; /* Red to match navigation */
+    color: #fff;
+    padding: 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     cursor: pointer;
     width: 100%;
-    font-size: 1em;
+    font-size: 1em; /* Larger button font */
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+button:hover, button:active {
+    background-color: #F1C40F; /* Gold hover for a celebratory vibe */
+    transform: translateY(-2px); /* Button lift effect */
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle table shadow */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px; /* Larger padding for balance */
+    text-align: center;
+    font-size: 1.1em; /* Larger font size */
+    font-weight: 500;
+}
+
+th {
+    background-color: #E74C3C; /* Red for the table headers */
+    color: #fff;
+}
+
+.valor-total {
+    background-color: #E74C3C;
+    color: #fff;
+    padding: 18px; /* Larger padding */
+    font-size: 1.2em; /* Larger font size */
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 8% auto;
+    padding: 35px;
+    width: 50%;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal-content:hover {
+    transform: scale(1.02); /* Slight zoom effect on modal */
+}
+
+/* Modal Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 16px 35px;
+    margin: 0 15px;
+    font-size: 1em; 
+    font-weight: 600;
+    background-color: #E74C3C;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+.modal-buttons button:hover {
+    background-color: #F1C40F;
+    transform: translateY(-2px);
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px; /* Larger close button */
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    color: #E74C3C;
+    transition: color 0.3s;
 }
 
-button:hover {
-    background-color: #A0522D;
-}
-
-button:active {
-    background-color: #8B4513;
+.close:hover {
+    color: #F1C40F;
 }
