@@ -21,6 +21,14 @@ async function fetchProductData() {
     }
 }
 
+
+
+
+
+
+
+
+
 // Function to populate the product table dynamically
 function populateProductTable(products) {
     const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
@@ -28,42 +36,40 @@ function populateProductTable(products) {
     // Clear any existing rows
     tableBody.innerHTML = '';
 
+    // Loop through the products and add rows
     products.forEach(product => {
-        // Create a new row for each product
         const row = tableBody.insertRow();
 
-        // Insert cells for each product detail based on your table structure
-        const cell1 = row.insertCell(0); // Image
-        const cell2 = row.insertCell(1); // Product Code
-        const cell3 = row.insertCell(2); // Description
-        const cell4 = row.insertCell(3); // Box Quantity (cxfechada)
-        const cell5 = row.insertCell(4); // Box Price (precofechada)
-        const cell6 = row.insertCell(5); // Fractional Quantity (cxfracionada)
-        const cell7 = row.insertCell(6); // Fractional Price (preco frac)
-        const cell8 = row.insertCell(7); // This will be the button cell
+        // Create the cells for each column (7 columns)
+        const cell1 = row.insertCell(0);  // Image
+        const cell2 = row.insertCell(1);  // CodProduto (Product Code)
+        const cell3 = row.insertCell(2);  // Descricao (Description)
+        const cell4 = row.insertCell(3);  // CxFechada (Closed box quantity)
+        const cell5 = row.insertCell(4);  // PrecoFechada (Closed box price)
+        const cell6 = row.insertCell(5);  // CxFracionada (Fractional box quantity)
+        const cell7 = row.insertCell(6);  // PrecoFracionada (Fractional box price)
 
-        // Insert data from backend (use real data)
-        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Use product image from API or placeholder
-        cell2.innerHTML = `Code-${product.id}`;  // Product ID
-        cell3.innerHTML = `${product.nome}`;  // Product description
-        cell4.innerHTML = `${product.cxfechada || 0}`;  // Box quantity (default to 0 if missing)
-        cell5.innerHTML = `R$ ${(product.precofechada || 0).toFixed(2)}`;  // Box price (default to 0 if missing)
-        cell6.innerHTML = `${product.cxfracionada || 0}`;  // Fractional quantity (default to 0 if missing)
-        cell7.innerHTML = `R$ ${(product.precofracionada || 0).toFixed(2)}`;  // Fractional price (default to 0 if missing)
-        cell8.innerHTML = `<button class="openModalBtn">View Details</button>`; // Add button for modal
-
-        // Add event listener for the "View Details" button
-        const openModalBtn = row.querySelector('.openModalBtn');
-        openModalBtn.addEventListener('click', function() {
-            const productName = row.cells[2].textContent; // Product name
-            const productDesc = row.cells[2].textContent; // Detailed description
-            const productPrice = row.cells[4].textContent; // Box price
-            const productImage = row.querySelector('img').src; // Product image
-
-            openModal(productName, productDesc, productPrice, productImage);
-        });
+        // Fill the cells with the data from the product
+        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;
+        cell2.innerHTML = `Code-${product.id}`;  // Assuming 'id' is the product code
+        cell3.innerHTML = product.descricao || 'No description available';  // Assuming 'descricao' is the description
+        cell4.innerHTML = product.cxfechada || 0;  // If no value, display 0 for closed box quantity
+        cell5.innerHTML = `R$ ${product.precofechada ? product.precofechada.toFixed(2) : '0.00'}`;  // Display price for closed box
+        cell6.innerHTML = product.cxfracionada || 0;  // If no value, display 0 for fractional box quantity
+        cell7.innerHTML = `R$ ${product.precofracionada ? product.precofracionada.toFixed(2) : '0.00'}`;  // Display price for fractional box
     });
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // Function to update and show modal with product details
 const modal = document.getElementById('myModal');
