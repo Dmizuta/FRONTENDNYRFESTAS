@@ -1,18 +1,15 @@
 // API URL for fetching product data
 const API_URL = 'https://backendnyrfestas.vercel.app/products'; // Adjust to your live backend URL
 
-// Function to format the price (check if it's a number first)
-function formatPrice(price) {
-    return isNaN(price) ? 'R$ 0.00' : `R$ ${parseFloat(price).toFixed(2)}`;
-}
-
 // Function to fetch product data from the API
 async function fetchProductData() {
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
+
+        // Log the fetched data to check the structure
         console.log(data);
-        
+
         // Map the data into the table
         populateProductTable(data);
     } catch (error) {
@@ -36,22 +33,33 @@ function populateProductTable(products) {
         const row = tableBody.insertRow();
 
         // Insert cells for each product detail
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        const cell3 = row.insertCell(2);
-        const cell4 = row.insertCell(3);
-        const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
-        const cell7 = row.insertCell(6);
+        const cell1 = row.insertCell(0); // Image
+        const cell2 = row.insertCell(1); // Product Code
+        const cell3 = row.insertCell(2); // Description
+        const cell4 = row.insertCell(3); // Quantity (cxfechada)
+        const cell5 = row.insertCell(4); // Price (precofechada)
+        const cell6 = row.insertCell(5); // Quantity (cxfechada again, or update to another value)
+        const cell7 = row.insertCell(6); // Price (precofechada again, or update to another value)
 
-        // Insert data from backend (use real data, no random values)
-        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Use product image from API or placeholder
-        cell2.innerHTML = `Code-${product.id}`;  // Product ID
-        cell3.innerHTML = product.nome;  // Product name
-        cell4.innerHTML = product.cxfechada || 0;  // Default to 0 if not available
-        cell5.innerHTML = formatPrice(product.precofechada);  // Use formatPrice function
-        cell6.innerHTML = product.cxfracionada || 0;  // Default to 0 if not available
-        cell7.innerHTML = formatPrice(product.precofracionada);  // Use formatPrice function
+        // Insert data from backend
+        cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Use product image from API or placeholder
+        cell2.innerHTML = `Code-${product.codproduto}`;  // Product code
+        cell3.innerHTML = product.descricao;  // Product description
+        cell4.innerHTML = product.cxfechada || 0;  // Quantity (default to 0 if not available)
+        cell5.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Price formatted as currency
+        cell6.innerHTML = product.cxfechada || 0;  // Quantity (you can update to another field if needed)
+        cell7.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Another price field or similar
+
+        // Add event listener for the "View Details" button (if needed)
+        const openModalBtn = row.querySelector('.openModalBtn');
+        openModalBtn.addEventListener('click', function() {
+            const productName = row.cells[2].textContent; // Product name
+            const productDesc = row.cells[2].textContent; // Detailed description
+            const productPrice = row.cells[4].textContent; // Product price
+            const productImage = row.querySelector('img').src; // Product image
+
+            openModal(productName, productDesc, productPrice, productImage);
+        });
     });
 }
 
