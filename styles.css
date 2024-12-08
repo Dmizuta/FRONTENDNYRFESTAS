@@ -184,7 +184,7 @@ th {
     width: 50%;
     max-width: 800px; /* Ensures modal doesn't get too wide */
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -194,7 +194,7 @@ th {
 
 /* Modal Image */
 .modal-stage-one img {
-    max-width: 50%; /* Ensure image is responsive and fits inside */
+    max-width: 35%; /* Ensure image is responsive and fits inside */
     height: auto; /* Maintain aspect ratio */
     object-fit: contain; /* Makes sure the image is contained without distortion */
     margin-bottom: 20px; /* Adds space below the image */
