@@ -76,6 +76,7 @@ function populateProductTable(products) {
 const modal = document.getElementById('myModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 
+// Function to open modal
 function openModal(productName, productDesc, productPrice, productImage) {
     const productInfo = modal.querySelector('.modal-stage-one .product-info');
     const priceInfo = modal.querySelector('.modal-stage-one .price-info');
@@ -84,34 +85,11 @@ function openModal(productName, productDesc, productPrice, productImage) {
     productInfo.querySelector('h3').textContent = productName;
     productInfo.querySelector('p').textContent = productDesc;
     priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
-    productImageElement.src = productImage;
-
-    modal.style.display = 'block'; // Show modal
-}
-
-
-
-
-
-
-
-
-
-
-
-
-// Function to update and show modal
-const modal = document.getElementById('myModal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-function openModal(productName, productDesc, productPrice, productImage) {
-    const productInfo = modal.querySelector('.modal-stage-one .product-info');
-    const priceInfo = modal.querySelector('.modal-stage-one .price-info');
-    const productImageElement = modal.querySelector('.modal-stage-one img');
     
-    productInfo.querySelector('h3').textContent = productName;
-    productInfo.querySelector('p').textContent = productDesc;
-    priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
+    // Adjust image size in modal
     productImageElement.src = productImage;
+    productImageElement.style.width = '100%';  // Make image fit inside modal
+    productImageElement.style.height = 'auto'; // Maintain aspect ratio
 
     modal.style.display = 'block'; // Show modal
 }
@@ -127,19 +105,6 @@ window.addEventListener('click', function(event) {
         modal.style.display = 'none'; // Close modal
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
