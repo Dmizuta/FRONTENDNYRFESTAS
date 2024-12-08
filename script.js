@@ -37,15 +37,23 @@ function populateProductTable(products) {
             const cell1 = row.insertCell(0); // Image
             const cell2 = row.insertCell(1); // Product Code
             const cell3 = row.insertCell(2); // Description
+            const cell4 = row.insertCell(3); // Quantity Closed
+            const cell5 = row.insertCell(4); // Price Closed
+            const cell6 = row.insertCell(5); // Quantity Fractioned
+            const cell7 = row.insertCell(6); // Price Fractioned
 
             // Insert data from backend
-            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Image
-            cell2.innerHTML = `Code-${product.codproduto}`;  // Product Code
+            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
+            cell2.innerHTML = `Code: ${product.codproduto}`;  // Product Code
             cell3.innerHTML = product.descricao;  // Description
+            cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
+            cell5.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Price Closed
+            cell6.innerHTML = `${product.cxfracionada || 'N/A'}`;  // Quantity Fractioned
+            cell7.innerHTML = `R$ ${parseFloat(product.precofracionada).toFixed(2)}`;  // Price Fractioned
         });
     } else {
         // If no products found, show a message
-        tableBody.innerHTML = '<tr><td colspan="3">No products available.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7">No products available.</td></tr>';
     }
 }
 
