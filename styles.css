@@ -174,114 +174,51 @@ th {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 8% auto;
-    padding: 35px;
-    width: 50%;
-    max-width: 800px; /* Ensures modal doesn't get too wide */
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.modal-content:hover {
-    transform: scale(1.02); /* Slight zoom effect on modal */
-}
-
-/* Modal Image */
-.modal-stage-one img {
-    max-width: 100%; /* Ensure image is responsive and fits inside */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain; /* Makes sure the image is contained without distortion */
-    margin-bottom: 20px; /* Adds space below the image */
-    border-radius: 10px; /* Rounded corners for a polished look */
-}
-
-/* Modal Text */
-.modal-stage-one .product-info h3 {
-    font-size: 1.8em;
-    color: #E74C3C;
-    margin-bottom: 10px;
-}
-
-.modal-stage-one .product-info p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Price Info */
-.modal-stage-one .price-info p {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #E74C3C;
-    margin-top: 10px;
-}
-
-/* Modal Buttons */
-.modal-buttons {
-    display: flex;
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
 }
 
-.modal-buttons button {
-    padding: 16px 35px;
-    margin: 0 15px;
-    font-size: 1em;
+.modal-stage-one {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.modal-stage-one img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain; /* Maintain aspect ratio */
+}
+
+.modal-stage-one .product-info {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.modal-stage-one .price-info p {
+    font-size: 1.4em;
     font-weight: 600;
-    background-color: #E74C3C;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
-}
-
-.modal-buttons button:hover {
-    background-color: #F1C40F;
-    transform: translateY(-2px);
 }
 
 /* Close Button */
-.close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 20px; /* Larger close button */
-    font-weight: bold;
+.close-btn {
+    background-color: #E74C3C;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
-    color: #E74C3C;
-    transition: color 0.3s;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s;
 }
 
-.close:hover {
-    color: #F1C40F;
-}
-
-/* Responsive Modal */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 80%; /* Make modal width smaller on mobile */
-        padding: 20px; /* Reduce padding on mobile */
-    }
-
-    .modal-stage-one img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .modal-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modal-buttons button {
-        margin-bottom: 15px;
-        width: 100%;
-    }
+.close-btn:hover {
+    background-color: #F1C40F; /* Gold on hover */
 }
