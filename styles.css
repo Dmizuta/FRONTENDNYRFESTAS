@@ -1,3 +1,170 @@
+/* Universal Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; /* Modern, rounded font */
+}
+
+/* Body */
+body {
+    background-color: #F9F7F1; /* Soft off-white */
+    color: #333; /* Dark gray for readability */
+}
+
+/* Header */
+header {
+    background-color: #F1C40F; /* Gold for a festive yet classy feel */
+    color: #fff;
+    text-align: center;
+    padding: 30px; /* Increased padding for more space */
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+header h1 {
+    font-size: 2.5em; /* Larger size for the header */
+    margin: 0;
+    letter-spacing: 4px; /* Increased letter spacing for a more elegant feel */
+    font-weight: 600;
+}
+
+/* Navigation */
+nav {
+    background-color: #E74C3C; /* Elegant yet vibrant red */
+    padding: 18px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 30px; /* Increased gap for balance */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 1.4em; /* Larger font size */
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+nav a:hover {
+    background-color: #F1C40F; /* Highlight with gold on hover */
+    transform: scale(1.05); /* Slight scaling effect for modern feel */
+}
+
+/* Page Content */
+.pagina {
+    padding: 50px;
+    background-color: #fff; /* White background to maintain brightness */
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
+    margin: 30px auto;
+    width: 90%;
+    max-width: 1100px;
+    transition: transform 0.3s ease;
+}
+
+.pagina:hover {
+    transform: scale(1.01); /* Slight zoom effect on hover */
+}
+
+/* Headings */
+h2 {
+    color: #E74C3C; /* Red for a pop of color */
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+    font-size: 1.8em; /* Larger size */
+    border-bottom: 3px solid #F1C40F;
+    font-weight: 600;
+}
+
+/* Form */
+form label, form input {
+    display: block;
+    margin-bottom: 18px; /* Increased margin for spacing */
+}
+
+.cadastro-form label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1em; /* Larger label font */
+}
+
+.cadastro-form input {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1em; /* Larger input font */
+    transition: border-color 0.3s, box-shadow 0.2s ease;
+}
+
+.cadastro-form input:focus {
+    border-color: #E74C3C; /* Red focus for input field */
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+/* Buttons */
+button {
+    background-color: #E74C3C; /* Red to match navigation */
+    color: #fff;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em; /* Larger button font */
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+button:hover, button:active {
+    background-color: #F1C40F; /* Gold hover for a celebratory vibe */
+    transform: translateY(-2px); /* Button lift effect */
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle table shadow */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px; /* Larger padding for balance */
+    text-align: center;
+    font-size: 1.1em; /* Larger font size */
+    font-weight: 500;
+}
+
+th {
+    background-color: #E74C3C; /* Red for the table headers */
+    color: #fff;
+}
+
+.valor-total {
+    background-color: #E74C3C;
+    color: #fff;
+    padding: 18px; /* Larger padding */
+    font-size: 1.2em; /* Larger font size */
+    font-weight: 600;
+    border-radius: 10px;
+}
+
 /* Modal Styles */
 .modal {
     display: none;
@@ -15,7 +182,6 @@
     margin: 8% auto;
     padding: 35px;
     width: 50%;
-    max-width: 800px; /* Ensures modal doesn't get too wide */
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
@@ -23,36 +189,6 @@
 
 .modal-content:hover {
     transform: scale(1.02); /* Slight zoom effect on modal */
-}
-
-/* Modal Image */
-.modal-stage-one img {
-    max-width: 100%; /* Ensure image is responsive and fits inside */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain; /* Makes sure the image is contained without distortion */
-    margin-bottom: 20px; /* Adds space below the image */
-    border-radius: 10px; /* Rounded corners for a polished look */
-}
-
-/* Modal Text */
-.modal-stage-one .product-info h3 {
-    font-size: 1.8em;
-    color: #E74C3C;
-    margin-bottom: 10px;
-}
-
-.modal-stage-one .product-info p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Price Info */
-.modal-stage-one .price-info p {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #E74C3C;
-    margin-top: 10px;
 }
 
 /* Modal Buttons */
@@ -65,7 +201,7 @@
 .modal-buttons button {
     padding: 16px 35px;
     margin: 0 15px;
-    font-size: 1em;
+    font-size: 1em; 
     font-weight: 600;
     background-color: #E74C3C;
     color: #fff;
@@ -94,27 +230,4 @@
 
 .close:hover {
     color: #F1C40F;
-}
-
-/* Responsive Modal */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 80%; /* Make modal width smaller on mobile */
-        padding: 20px; /* Reduce padding on mobile */
-    }
-
-    .modal-stage-one img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .modal-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modal-buttons button {
-        margin-bottom: 15px;
-        width: 100%;
-    }
 }
