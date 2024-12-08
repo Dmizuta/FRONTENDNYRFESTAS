@@ -1,5 +1,5 @@
 // Simulate a public API with product data
-const API_URL = 'http://localhost:3000/produtos'; // Mock API endpoint for testing
+const API_URL = 'https://backendnyrfestas.vercel.app/produtos'; // Mock API endpoint for testing
 
 // Function to fetch product data from the API
 async function fetchProductData() {
