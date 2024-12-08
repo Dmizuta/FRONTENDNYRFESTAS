@@ -11,6 +11,7 @@ async function fetchProductData() {
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
+        console.log(data);
         
         // Map the data into the table
         populateProductTable(data);
