@@ -1,5 +1,5 @@
 // API URL for fetching product data
-const API_URL = 'https://backendnyrfestas.vercel.app/produtos'; // Adjust to your live backend URL
+const API_URL = 'https://backendnyrfestas.vercel.app/products'; // Adjust to your live backend URL
 
 // Function to fetch product data from the API
 async function fetchProductData() {
