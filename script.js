@@ -50,6 +50,20 @@ function populateProductTable(products) {
             cell5.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Price Closed
             cell6.innerHTML = `${product.cxfracionada || 'N/A'}`;  // Quantity Fractioned
             cell7.innerHTML = `R$ ${parseFloat(product.precofracionada).toFixed(2)}`;  // Price Fractioned
+
+
+// Add event listener for the "View Details" button
+const openModalBtn = row.querySelector('.openModalBtn');
+openModalBtn.addEventListener('click', function() {
+    const productName = row.cells[2].textContent; // Product description
+    const productDesc = row.cells[2].textContent; // Detailed description
+    const productPrice = row.cells[4].textContent; // Price 1
+    const productImage = row.querySelector('img').src; // Product image
+
+    openModal(productName, productDesc, productPrice, productImage);
+
+
+
         });
     } else {
         // If no products found, show a message
