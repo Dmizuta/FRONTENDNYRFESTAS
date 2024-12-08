@@ -1,38 +1,10 @@
 // API URL for fetching product data
 const API_URL = 'https://backendnyrfestas.vercel.app/products'; // Adjust to your live backend URL
 
-
-
-
-
-
-
-// Function to fetch product data from the API
-async function fetchProductData() {
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-
-        // Step 1: Log the fetched data to the console to inspect the structure
-        console.log(data);  // This will show the data in the browser's console
-
-        // Populate the table with the fetched data
-        populateProductTable(data); 
-    } catch (error) {
-        console.error('Error fetching product data:', error);
-
-        // If there’s an error, show a user-friendly message in the table
-        const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
-        tableBody.innerHTML = '<tr><td colspan="7">Unable to load products at the moment. Please try again later.</td></tr>';
-    }
+// Function to format the price (check if it's a number first)
+function formatPrice(price) {
+    return isNaN(price) ? 'R$ 0.00' : `R$ ${parseFloat(price).toFixed(2)}`;
 }
-
-
-
-/* 
-
-
-
 
 // Function to fetch product data from the API
 async function fetchProductData() {
@@ -51,20 +23,6 @@ async function fetchProductData() {
     }
 }
 
-
-
-
-
-
-
-*/
-
-
-
-
-
-
-
 // Function to populate the product table dynamically
 function populateProductTable(products) {
     const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
@@ -72,27 +30,27 @@ function populateProductTable(products) {
     // Clear any existing rows
     tableBody.innerHTML = '';
 
-    // Loop through the products and add rows
     products.forEach(product => {
+        // Create a new row for each product
         const row = tableBody.insertRow();
 
-        // Create the cells for each column (7 columns)
-        const cell1 = row.insertCell(0);  // Image
-        const cell2 = row.insertCell(1);  // CodProduto (Product Code)
-        const cell3 = row.insertCell(2);  // Descricao (Description)
-        const cell4 = row.insertCell(3);  // CxFechada (Closed box quantity)
-        const cell5 = row.insertCell(4);  // PrecoFechada (Closed box price)
-        const cell6 = row.insertCell(5);  // CxFracionada (Fractional box quantity)
-        const cell7 = row.insertCell(6);  // PrecoFracionada (Fractional box price)
+        // Insert cells for each product detail
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        const cell4 = row.insertCell(3);
+        const cell5 = row.insertCell(4);
+        const cell6 = row.insertCell(5);
+        const cell7 = row.insertCell(6);
 
-        // Fill the cells with the data from the product
-        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;
-        cell2.innerHTML = `Code-${product.id}`;  // Assuming 'id' is the product code
-        cell3.innerHTML = product.descricao || 'No description available';  // Assuming 'descricao' is the description
-        cell4.innerHTML = product.cxfechada || 0;  // If no value, display 0 for closed box quantity
-        cell5.innerHTML = `R$ ${product.precofechada ? product.precofechada.toFixed(2) : '0.00'}`;  // Display price for closed box
-        cell6.innerHTML = product.cxfracionada || 0;  // If no value, display 0 for fractional box quantity
-        cell7.innerHTML = `R$ ${product.precofracionada ? product.precofracionada.toFixed(2) : '0.00'}`;  // Display price for fractional box
+        // Insert data from backend (use real data, no random values)
+        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Use product image from API or placeholder
+        cell2.innerHTML = `Code-${product.id}`;  // Product ID
+        cell3.innerHTML = product.nome;  // Product name
+        cell4.innerHTML = product.cxfechada || 0;  // Default to 0 if not available
+        cell5.innerHTML = formatPrice(product.precofechada);  // Use formatPrice function
+        cell6.innerHTML = product.cxfracionada || 0;  // Default to 0 if not available
+        cell7.innerHTML = formatPrice(product.precofracionada);  // Use formatPrice function
     });
 }
 
