@@ -89,6 +89,33 @@ function openModal(productName, productDesc, productPrice, productImage) {
     modal.style.display = 'block'; // Show modal
 }
 
+
+
+
+
+
+
+
+
+
+
+
+// Function to update and show modal
+const modal = document.getElementById('myModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+function openModal(productName, productDesc, productPrice, productImage) {
+    const productInfo = modal.querySelector('.modal-stage-one .product-info');
+    const priceInfo = modal.querySelector('.modal-stage-one .price-info');
+    const productImageElement = modal.querySelector('.modal-stage-one img');
+    
+    productInfo.querySelector('h3').textContent = productName;
+    productInfo.querySelector('p').textContent = productDesc;
+    priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
+    productImageElement.src = productImage;
+
+    modal.style.display = 'block'; // Show modal
+}
+
 // Close modal functionality
 closeModalBtn.addEventListener('click', function() {
     modal.style.display = 'none'; // Close the modal
@@ -100,6 +127,19 @@ window.addEventListener('click', function(event) {
         modal.style.display = 'none'; // Close modal
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
