@@ -88,8 +88,8 @@ function openModal(productName, productDesc, productPrice, productImage) {
     
     // Adjust image size in modal
     productImageElement.src = productImage;
-    productImageElement.style.width = '100%';  // Make image fit inside modal
-    productImageElement.style.height = 'auto'; // Maintain aspect ratio
+   // productImageElement.style.width = '100%';  // Make image fit inside modal
+    //productImageElement.style.height = 'auto'; // Maintain aspect ratio
 
     modal.style.display = 'block'; // Show modal 
 }
