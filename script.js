@@ -1,6 +1,39 @@
 // API URL for fetching product data
 const API_URL = 'https://backendnyrfestas.vercel.app/products'; // Adjust to your live backend URL
 
+
+
+
+
+
+
+// Function to fetch product data from the API
+async function fetchProductData() {
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        // Step 1: Log the fetched data to the console to inspect the structure
+        console.log(data);  // This will show the data in the browser's console
+
+        // Populate the table with the fetched data
+        populateProductTable(data); 
+    } catch (error) {
+        console.error('Error fetching product data:', error);
+
+        // If there’s an error, show a user-friendly message in the table
+        const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '<tr><td colspan="7">Unable to load products at the moment. Please try again later.</td></tr>';
+    }
+}
+
+
+
+/* 
+
+
+
+
 // Function to fetch product data from the API
 async function fetchProductData() {
     try {
@@ -17,6 +50,20 @@ async function fetchProductData() {
         tableBody.innerHTML = '<tr><td colspan="7">Unable to load products at the moment. Please try again later.</td></tr>';
     }
 }
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
 
 // Function to populate the product table dynamically
 function populateProductTable(products) {
