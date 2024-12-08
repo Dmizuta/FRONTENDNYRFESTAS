@@ -7,9 +7,6 @@ async function fetchProductData() {
         const response = await fetch(API_URL);
         const data = await response.json();
         
-        // Log the data for debugging purposes
-        console.log(data);
-
         // Map the data into the table
         populateProductTable(data);
     } catch (error) {
@@ -17,17 +14,9 @@ async function fetchProductData() {
 
         // Handle errors and show a user-friendly message in the table
         const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
-        tableBody.innerHTML = '<tr><td colspan="8">Unable to load products at the moment. Please try again later.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7">Unable to load products at the moment. Please try again later.</td></tr>';
     }
 }
-
-
-
-
-
-
-
-
 
 // Function to populate the product table dynamically
 function populateProductTable(products) {
@@ -59,17 +48,6 @@ function populateProductTable(products) {
         cell7.innerHTML = `R$ ${product.precofracionada ? product.precofracionada.toFixed(2) : '0.00'}`;  // Display price for fractional box
     });
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // Function to update and show modal with product details
 const modal = document.getElementById('myModal');
