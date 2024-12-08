@@ -86,12 +86,12 @@ function openModal(productName, productDesc, productPrice, productImage) {
     productInfo.querySelector('p').textContent = productDesc;
     priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
     
-    // Adjust image size in modal
+    /* Adjust image size in modal
     productImageElement.src = productImage;
     productImageElement.style.width = '100%';  // Make image fit inside modal
     productImageElement.style.height = 'auto'; // Maintain aspect ratio
 
-    modal.style.display = 'block'; // Show modal
+    modal.style.display = 'block'; // Show modal */
 }
 
 // Close modal functionality
