@@ -44,7 +44,7 @@ function populateProductTable(products) {
             const cell8 = row.insertCell(7); // View Details Button
 
             // Insert data from backend
-            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
+            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Image
             cell2.innerHTML = `Code: ${product.codproduto}`;  // Product Code
             cell3.innerHTML = product.descricao;  // Description
             cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
@@ -76,7 +76,6 @@ function populateProductTable(products) {
 const modal = document.getElementById('myModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 
-// Function to open modal
 function openModal(productName, productDesc, productPrice, productImage) {
     const productInfo = modal.querySelector('.modal-stage-one .product-info');
     const priceInfo = modal.querySelector('.modal-stage-one .price-info');
@@ -85,13 +84,9 @@ function openModal(productName, productDesc, productPrice, productImage) {
     productInfo.querySelector('h3').textContent = productName;
     productInfo.querySelector('p').textContent = productDesc;
     priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
-    
-    /* Adjust image size in modal
     productImageElement.src = productImage;
-    productImageElement.style.width = '100%';  // Make image fit inside modal
-    productImageElement.style.height = 'auto'; // Maintain aspect ratio
 
-    modal.style.display = 'block'; // Show modal */
+    modal.style.display = 'block'; // Show modal
 }
 
 // Close modal functionality
