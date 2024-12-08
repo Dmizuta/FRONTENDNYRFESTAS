@@ -44,7 +44,7 @@ function populateProductTable(products) {
             const cell8 = row.insertCell(7); // View Details Button
 
             // Insert data from backend
-            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" class="product-image">`;  // Image
+            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
             cell2.innerHTML = `Code: ${product.codproduto}`;  // Product Code
             cell3.innerHTML = product.descricao;  // Description
             cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
@@ -86,8 +86,10 @@ function openModal(productName, productDesc, productPrice, productImage) {
     productInfo.querySelector('p').textContent = productDesc;
     priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
     
-    // Set the product image in the modal
+    // Adjust image size in modal
     productImageElement.src = productImage;
+    productImageElement.style.width = '100%';  // Make image fit inside modal
+    productImageElement.style.height = 'auto'; // Maintain aspect ratio
 
     modal.style.display = 'block'; // Show modal 
 }
