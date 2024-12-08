@@ -1,5 +1,5 @@
-// Simulate a public API with product data
-const API_URL = 'https://backendnyrfestas.vercel.app/produtos'; // Mock API endpoint for testing
+// API URL for fetching product data
+const API_URL = 'https://backendnyrfestas.vercel.app/produtos'; // Adjust to your live backend URL
 
 // Function to fetch product data from the API
 async function fetchProductData() {
@@ -11,6 +11,10 @@ async function fetchProductData() {
         populateProductTable(data);
     } catch (error) {
         console.error('Error fetching product data:', error);
+
+        // Handle errors and show a user-friendly message in the table
+        const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '<tr><td colspan="8">Unable to load products at the moment. Please try again later.</td></tr>';
     }
 }
 
@@ -18,8 +22,11 @@ async function fetchProductData() {
 function populateProductTable(products) {
     const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
 
+    // Clear any existing rows
+    tableBody.innerHTML = '';
+
     products.forEach(product => {
-        // Create a new row
+        // Create a new row for each product
         const row = tableBody.insertRow();
 
         // Insert cells for each product detail
@@ -32,22 +39,22 @@ function populateProductTable(products) {
         const cell7 = row.insertCell(6);
         const cell8 = row.insertCell(7); // This will be the button cell
 
-        // For simulation purposes, using random data for each product
-        cell1.innerHTML = `<img src="https://via.placeholder.com/50" alt="Product Image">`;  // Placeholder image
-        cell2.innerHTML = `Code-${product.id}`;  // Simulate Product Code
-        cell3.innerHTML = `${product.nome}`;  // Simulate Product Description
-        cell4.innerHTML = `${product.quantidade}`;  // Simulate Quantity 1
-        cell5.innerHTML = `${product.preco}`;  // Simulate Price 1
-        cell6.innerHTML = Math.floor(Math.random() * 100);  // Simulate Quantity 2
-        cell7.innerHTML = `R$ ${(Math.random() * 100).toFixed(2)}`;  // Simulate Price 2
-        cell8.innerHTML = `<button class="openModalBtn">View Details</button>`; // Add button at the end of each row
+        // Insert data from backend (use real data, no random values)
+        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Use product image from API or placeholder
+        cell2.innerHTML = `Code-${product.id}`;  // Product ID
+        cell3.innerHTML = `${product.nome}`;  // Product name
+        cell4.innerHTML = `${product.quantidade}`;  // Product quantity
+        cell5.innerHTML = `R$ ${product.preco.toFixed(2)}`;  // Price formatted as currency
+        cell6.innerHTML = `${product.quantidade}`;  // Quantity (you can update to another field if needed)
+        cell7.innerHTML = `R$ ${product.preco.toFixed(2)}`;  // Another price field or similar
+        cell8.innerHTML = `<button class="openModalBtn">View Details</button>`; // Add button for modal
 
         // Add event listener for the "View Details" button
         const openModalBtn = row.querySelector('.openModalBtn');
         openModalBtn.addEventListener('click', function() {
-            const productName = row.cells[2].textContent; // Product description
-            const productDesc = row.cells[2].textContent; // Detailed description
-            const productPrice = row.cells[4].textContent; // Price 1
+            const productName = row.cells[2].textContent; // Product name
+            const productDesc = row.cells[2].textContent; // Detailed description (use 'nome' or another field)
+            const productPrice = row.cells[4].textContent; // Product price
             const productImage = row.querySelector('img').src; // Product image
 
             openModal(productName, productDesc, productPrice, productImage);
@@ -55,7 +62,7 @@ function populateProductTable(products) {
     });
 }
 
-// Function to update and show modal
+// Function to update and show modal with product details
 const modal = document.getElementById('myModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 function openModal(productName, productDesc, productPrice, productImage) {
@@ -83,5 +90,5 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// Fetch and populate products on page load
+// Fetch and populate products when the page loads
 window.onload = fetchProductData;
