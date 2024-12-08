@@ -1,5 +1,5 @@
-// Simulate a public API with product data
-const API_URL = 'https://backendnyrfestas.vercel.app/products'; // Mock API endpoint for testing
+// API URL for fetching product data
+const API_URL = 'https://backendnyrfestas.vercel.app/products'; // Adjust to your live backend URL
 
 // Function to fetch product data from the API
 async function fetchProductData() {
@@ -7,10 +7,17 @@ async function fetchProductData() {
         const response = await fetch(API_URL);
         const data = await response.json();
         
+        // Log the data for debugging purposes
+        console.log(data);
+
         // Map the data into the table
         populateProductTable(data);
     } catch (error) {
         console.error('Error fetching product data:', error);
+
+        // Handle errors and show a user-friendly message in the table
+        const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '<tr><td colspan="8">Unable to load products at the moment. Please try again later.</td></tr>';
     }
 }
 
@@ -18,36 +25,39 @@ async function fetchProductData() {
 function populateProductTable(products) {
     const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
 
+    // Clear any existing rows
+    tableBody.innerHTML = '';
+
     products.forEach(product => {
-        // Create a new row
+        // Create a new row for each product
         const row = tableBody.insertRow();
 
-        // Insert cells for each product detail
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        const cell3 = row.insertCell(2);
-        const cell4 = row.insertCell(3);
-        const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
-        const cell7 = row.insertCell(6);
+        // Insert cells for each product detail based on your table structure
+        const cell1 = row.insertCell(0); // Image
+        const cell2 = row.insertCell(1); // Product Code
+        const cell3 = row.insertCell(2); // Description
+        const cell4 = row.insertCell(3); // Box Quantity (cxfechada)
+        const cell5 = row.insertCell(4); // Box Price (precofechada)
+        const cell6 = row.insertCell(5); // Fractional Quantity (cxfracionada)
+        const cell7 = row.insertCell(6); // Fractional Price (preco frac)
         const cell8 = row.insertCell(7); // This will be the button cell
 
-        // For simulation purposes, using random data for each product
-        cell1.innerHTML = `<img src="https://via.placeholder.com/50" alt="Product Image">`;  // Placeholder image
-        cell2.innerHTML = `Code-${product.id}`;  // Simulate Product Code
-        cell3.innerHTML = `${product.nome}`;  // Simulate Product Description
-        cell4.innerHTML = `${product.quantidade}`;  // Simulate Quantity 1
-        cell5.innerHTML = `${product.preco}`;  // Simulate Price 1
-        cell6.innerHTML = Math.floor(Math.random() * 100);  // Simulate Quantity 2
-        cell7.innerHTML = `R$ ${(Math.random() * 100).toFixed(2)}`;  // Simulate Price 2
-        cell8.innerHTML = `<button class="openModalBtn">View Details</button>`; // Add button at the end of each row
+        // Insert data from backend (use real data)
+        cell1.innerHTML = `<img src="${product.imageUrl || 'https://via.placeholder.com/50'}" alt="Product Image">`;  // Use product image from API or placeholder
+        cell2.innerHTML = `Code-${product.id}`;  // Product ID
+        cell3.innerHTML = `${product.nome}`;  // Product description
+        cell4.innerHTML = `${product.cxfechada || 0}`;  // Box quantity (default to 0 if missing)
+        cell5.innerHTML = `R$ ${(product.precofechada || 0).toFixed(2)}`;  // Box price (default to 0 if missing)
+        cell6.innerHTML = `${product.cxfracionada || 0}`;  // Fractional quantity (default to 0 if missing)
+        cell7.innerHTML = `R$ ${(product.precofracionada || 0).toFixed(2)}`;  // Fractional price (default to 0 if missing)
+        cell8.innerHTML = `<button class="openModalBtn">View Details</button>`; // Add button for modal
 
         // Add event listener for the "View Details" button
         const openModalBtn = row.querySelector('.openModalBtn');
         openModalBtn.addEventListener('click', function() {
-            const productName = row.cells[2].textContent; // Product description
+            const productName = row.cells[2].textContent; // Product name
             const productDesc = row.cells[2].textContent; // Detailed description
-            const productPrice = row.cells[4].textContent; // Price 1
+            const productPrice = row.cells[4].textContent; // Box price
             const productImage = row.querySelector('img').src; // Product image
 
             openModal(productName, productDesc, productPrice, productImage);
@@ -55,7 +65,7 @@ function populateProductTable(products) {
     });
 }
 
-// Function to update and show modal
+// Function to update and show modal with product details
 const modal = document.getElementById('myModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 function openModal(productName, productDesc, productPrice, productImage) {
@@ -83,5 +93,5 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// Fetch and populate products on page load
+// Fetch and populate products when the page loads
 window.onload = fetchProductData;
