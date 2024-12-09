@@ -50,10 +50,10 @@ function populateProductTable(products) {
             cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
             cell5.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Price Closed
             cell6.innerHTML = `${product.cxfracionada || 'N/A'}`;  // Quantity Fractioned
-            cell7.innerHTML = `R$ ${parseFloat(product.precofracionada).toFixed(2)}`;  // Price Fractioned
+            cell7.innerHTML = `R$ ${parseFloat(product.precofrac).toFixed(2)}`;  // Price Fractioned
 
             // Add the "View Details" button in the 8th column
-            cell8.innerHTML = `<button class="openModalBtn">View Details</button>`;
+            cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
 
             // Add event listener for the "View Details" button
             const openModalBtn = row.querySelector('.openModalBtn');
