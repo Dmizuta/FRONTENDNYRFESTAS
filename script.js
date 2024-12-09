@@ -45,7 +45,7 @@ function populateProductTable(products) {
 
             // Insert data from backend
             cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
-            cell2.innerHTML = `Code: ${product.codproduto}`;  // Product Code
+            cell2.innerHTML = `${product.codproduto}`;  // Product Code
             cell3.innerHTML = product.descricao;  // Description
             cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
             cell5.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Price Closed
