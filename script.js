@@ -51,8 +51,8 @@ function populateProductTable(products) {
             
             cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" 
                    alt="Product Image" 
-                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.1s; cursor: pointer;" 
-                   onmouseover="this.style.transform='scale(1.5)'" 
+                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                   onmouseover="this.style.transform='scale(3)'" 
                    onmouseout="this.style.transform='scale(1)'">`;
 
             
