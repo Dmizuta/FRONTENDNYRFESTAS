@@ -177,6 +177,13 @@ th {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+
+
+
+
+
+
+/* Modal Styles */
 .modal-content {
     background-color: #fff;
     margin: 8% auto;
@@ -185,12 +192,34 @@ th {
     max-width: 800px; /* Ensures modal doesn't get too wide */
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out; /* Keep transition for a smooth appearance */
 }
 
+/* Remove or comment out the hover effect */
 .modal-content:hover {
-    transform: scale(1.02); /* Slight zoom effect on modal */
+    /* transform: scale(1.02); */ /* Commented to remove zoom effect */
 }
+
+/* Keep the button zoom effect */
+.modal-buttons button:hover {
+    background-color: #F1C40F;
+    transform: translateY(-2px); /* This still applies only to buttons */
+}
+
+
+/* Modal Buttons 
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+*/
+
+
+
+
+
 
 /* Modal Image */
 .modal-stage-one img {
@@ -222,12 +251,7 @@ th {
     margin-top: 10px;
 }
 
-/* Modal Buttons */
-.modal-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+
 
 .modal-buttons button {
     padding: 16px 35px;
