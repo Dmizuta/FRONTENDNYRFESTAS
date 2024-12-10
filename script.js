@@ -166,7 +166,7 @@ function searchProducts() {
     const tableRows = document.querySelectorAll('#productTable tbody tr');
 
     tableRows.forEach(row => {
-        const productName = row.cells[1].textContent.toLowerCase();  // Assuming column 2 is the product description
+        const productName = row.cells[2].textContent.toLowerCase();  // Assuming column 2 is the product description
         
         if (productName.includes(searchQuery)) {
             row.style.display = ''; // Show row if product matches the search query
