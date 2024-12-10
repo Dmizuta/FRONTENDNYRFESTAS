@@ -51,41 +51,38 @@
         </form>
     </section>
     <script>
-        document.getElementById('cadastroButton').addEventListener('click', async () => {
-            const form = document.getElementById('cadastroForm');
-            const formData = {
-                representante: form.representante.value,
-                razaoSocial: form.razaoSocial.value,
-                cnpj: form.cnpj.value,
-                inscricaoEstadual: form.inscricaoEstadual.value,
-                endereco: form.endereco.value,
-                cidade: form.cidade.value,
-                estado: form.estado.value,
-                telefone: form.telefone.value,
-                email: form.email.value,
-            };
+       
 
-            try {
-                const response = await fetch('https://backendnyrfestas.vercel.app/api/customers', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
 
-                if (response.ok) {
-                    alert('Cadastro realizado com sucesso!');
-                    form.reset();
-                } else {
-                    const errorData = await response.json();
-                    alert(`Erro ao cadastrar: ${errorData.message}`);
-                }
-            } catch (error) {
-                alert('Erro ao conectar ao servidor.');
-                console.error(error);
-            }
-        });
+       const form = document.getElementById('test-form');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const A = document.getElementById('fieldA').value; // Input for column A
+  const B = document.getElementById('fieldB').value; // Input for column B
+
+  try {
+    const response = await fetch('https://backendnyrfestas.vercel.app/test', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ A, B }),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert('Data successfully inserted: ' + JSON.stringify(result));
+    } else {
+      alert('Error: ' + result.error);
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Failed to submit the data.');
+  }
+});
+
+
+
     </script>
 </body>
 </html>
