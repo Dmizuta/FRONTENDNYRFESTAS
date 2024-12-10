@@ -160,7 +160,7 @@ addButton.addEventListener('click', function() {
 window.onload = fetchProductData;
 
 
-
+/*
 function searchProducts() {
     const searchQuery = document.getElementById('searchInput').value.toLowerCase();
     const tableRows = document.querySelectorAll('#productTable tbody tr');
@@ -173,5 +173,27 @@ function searchProducts() {
         } else {
             row.style.display = 'none'; // Hide row if product doesn't match
         }
+        
+    });
+}*/
+
+
+function searchProducts() {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    const tableRows = document.querySelectorAll('#productTable tbody tr');
+
+    tableRows.forEach(row => {
+        const productCode = row.cells[1].textContent.toLowerCase(); // Assuming column 1 is the product code
+        const productDescription = row.cells[2].textContent.toLowerCase(); // Assuming column 2 is the product description
+
+        // Check if either the product code or description includes the search query
+        if (productCode.includes(searchQuery) || productDescription.includes(searchQuery)) {
+            row.style.display = ''; // Show row if either matches
+        } else {
+            row.style.display = 'none'; // Hide row if neither matches
+        }
     });
 }
+
+
+    
