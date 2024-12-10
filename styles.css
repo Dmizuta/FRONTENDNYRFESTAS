@@ -29,6 +29,27 @@ header h1 {
     font-weight: 600;
 }
 
+
+
+
+/* Search Wrapper */
+.search-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding-right: 10px; /* Adjust the right padding for better alignment */
+}
+
+/* Search Input */
+#searchInput {
+    width: 300px; /* You can adjust the width as per your preference */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+
 /* Navigation */
 nav {
     background-color: #E74C3C; /* Elegant yet vibrant red */
