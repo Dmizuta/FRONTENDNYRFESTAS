@@ -44,7 +44,25 @@ function populateProductTable(products) {
             const cell8 = row.insertCell(7); // View Details Button
 
             // Insert data from backend
-            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
+            
+            
+            
+            
+            
+            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" 
+                   alt="Product Image" 
+                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                   onmouseover="this.style.transform='scale(1.1)'" 
+                   onmouseout="this.style.transform='scale(1)'">`;
+
+            
+            
+            
+            
+            
+            
+            
+            //cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
             cell2.innerHTML = `${product.codproduto}`;  // Product Code
             cell3.innerHTML = product.descricao;  // Description
             cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
