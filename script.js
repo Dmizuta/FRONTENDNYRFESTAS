@@ -158,3 +158,20 @@ addButton.addEventListener('click', function() {
 
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
+
+
+
+function searchProducts() {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    const tableRows = document.querySelectorAll('#productTable tbody tr');
+
+    tableRows.forEach(row => {
+        const productName = row.cells[1].textContent.toLowerCase();  // Assuming column 2 is the product description
+        
+        if (productName.includes(searchQuery)) {
+            row.style.display = ''; // Show row if product matches the search query
+        } else {
+            row.style.display = 'none'; // Hide row if product doesn't match
+        }
+    });
+}
