@@ -75,6 +75,21 @@ function populateProductTable(products) {
 // Function to update and show modal with product details
 const modal = document.getElementById('myModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
+const quantityInput = document.getElementById('quantity');
+const addButton = document.getElementById('addButton');
+const errorMessage = document.createElement("span");
+const successMessage = document.createElement("span");
+
+// Error and success messages
+errorMessage.style.color = "red";
+errorMessage.style.display = "none";
+errorMessage.innerText = "Please enter a valid quantity (greater than 0).";
+document.querySelector(".modal-buttons").appendChild(errorMessage);
+
+successMessage.style.color = "green";
+successMessage.style.display = "none";
+successMessage.innerText = "Product added successfully!";
+document.querySelector(".modal-buttons").appendChild(successMessage);
 
 // Function to open modal
 function openModal(productName, productDesc, productPrice, productImage) {
@@ -88,9 +103,7 @@ function openModal(productName, productDesc, productPrice, productImage) {
     
     // Adjust image size in modal
     productImageElement.src = productImage;
-   // productImageElement.style.width = '100%';  // Make image fit inside modal
-    //productImageElement.style.height = 'auto'; // Maintain aspect ratio
-
+    
     modal.style.display = 'block'; // Show modal 
 }
 
@@ -103,6 +116,25 @@ closeModalBtn.addEventListener('click', function() {
 window.addEventListener('click', function(event) {
     if (event.target === modal) {
         modal.style.display = 'none'; // Close modal
+    }
+});
+
+// Validate quantity and show appropriate message when "Add Quantity" is clicked
+addButton.addEventListener('click', function() {
+    // Clear previous messages
+    errorMessage.style.display = "none";
+    successMessage.style.display = "none";
+
+    let quantity = quantityInput.value;
+
+    // Check if quantity is a valid positive number
+    if (quantity <= 0 || isNaN(quantity) || quantity === "") {
+        // Show error message
+        errorMessage.style.display = "inline";
+    } else {
+        // Show success message
+        successMessage.style.display = "inline";
+        // Add product to order or perform necessary action here
     }
 });
 
