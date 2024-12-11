@@ -160,22 +160,7 @@ addButton.addEventListener('click', function() {
 window.onload = fetchProductData;
 
 
-/*
-function searchProducts() {
-    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-    const tableRows = document.querySelectorAll('#productTable tbody tr');
 
-    tableRows.forEach(row => {
-        const productName = row.cells[2].textContent.toLowerCase();  // Assuming column 2 is the product description
-        
-        if (productName.includes(searchQuery)) {
-            row.style.display = ''; // Show row if product matches the search query
-        } else {
-            row.style.display = 'none'; // Hide row if product doesn't match
-        }
-        
-    });
-}*/
 
 
 function searchProducts() {
