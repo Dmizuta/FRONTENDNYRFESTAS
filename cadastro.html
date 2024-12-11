@@ -18,19 +18,19 @@
         </ul>
     </nav>
     <section class="pagina">
-        <h2>Cadastro de Usuário</h2>
+        <h2>Cadastro de Cliente</h2>
         <form id="cadastroForm" class="cadastro-form">
             <label for="representante">Representante:</label>
             <input type="text" id="representante" name="representante" placeholder="Nome do Representante" required>
             
-            <label for="razaoSocial">Razão Social:</label>
-            <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Razão Social da empresa" required>
+            <label for="razaosocial">Razão Social:</label>
+            <input type="text" id="razaosocial" name="razaosocial" placeholder="Razão Social da empresa" required>
             
             <label for="cnpj">CNPJ:</label>
             <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ da empresa" required>
             
-            <label for="inscricaoEstadual">Inscrição Estadual:</label>
-            <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" placeholder="Inscrição Estadual da empresa" required>
+            <label for="inscrest">Inscrição Estadual:</label>
+            <input type="text" id="inscrest" name="inscrest" placeholder="Inscrição Estadual da empresa" required>
             
             <label for="endereco">Endereço:</label>
             <input type="text" id="endereco" name="endereco" placeholder="Logradouro" required>
@@ -47,61 +47,57 @@
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="E-mail" required>
             
-            <button type="button" id="cadastroButton">Cadastrar</button>
+            <button type="submit" id="cadastroButton">Cadastrar</button>
         </form>
     </section>
 
-
-
-    <form id="test-form">
-        <label for="fieldA">Field A:</label>
-        <input type="text" id="fieldA" name="A" required>
-        <br>
-        <label for="fieldB">Field B:</label>
-        <input type="text" id="fieldB" name="B" required>
-        <br>
-        <button type="submit">Submit</button>
-      </form>
-      
-
-
-
-
-
-
     <script>
-       
+        const form = document.getElementById('cadastroForm'); // Ensure we're using the correct form ID
 
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent form from reloading the page
 
-       const form = document.getElementById('test-form');
+            // Collecting form data
+            const representante = document.getElementById('representante').value;
+            const razaosocial = document.getElementById('razaosocial').value;
+            const cnpj = document.getElementById('cnpj').value;
+            const inscrest = document.getElementById('inscrest').value;
+            const endereco = document.getElementById('endereco').value;
+            const cidade = document.getElementById('cidade').value;
+            const estado = document.getElementById('estado').value;
+            const telefone = document.getElementById('telefone').value;
+            const email = document.getElementById('email').value;
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+            try {
+                // Sending POST request to backend
+                const response = await fetch('https://backendnyrfestas.vercel.app/cadastro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        representante,
+                        razaosocial,
+                        cnpj,
+                        inscrest,
+                        endereco,
+                        cidade,
+                        estado,
+                        telefone,
+                        email
+                    }),
+                });
 
-  const A = document.getElementById('fieldA').value; // Input for column A
-  const B = document.getElementById('fieldB').value; // Input for column B
-
-  try {
-    const response = await fetch('https://backendnyrfestas.vercel.app/test', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ A, B }),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      alert('Data successfully inserted: ' + JSON.stringify(result));
-    } else {
-      alert('Error: ' + result.error);
-    }
-  } catch (error) {
-    console.error('Error submitting form:', error);
-    alert('Failed to submit the data.');
-  }
-});
-
-
-
+                // Handle the response from the server
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Cadastro realizado com sucesso! Dados: ' + JSON.stringify(result));
+                } else {
+                    alert('Erro: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Erro ao enviar o formulário:', error);
+                alert('Falha ao enviar o formulário.');
+            }
+        });
     </script>
 </body>
 </html>
