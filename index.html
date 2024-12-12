@@ -15,7 +15,7 @@
       background-color: #f0f0f0;
     }
     .login-container {
-      background-color: rgb(240, 221, 135);
+      background-color: rgb(240, 135, 158);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -26,31 +26,28 @@
       margin-bottom: 20px;
     }
     .login-container input {
-
-
-
-        width: 100%;
+      width: 100%;
       padding: 10px;
-      
-     
+      margin: 10px 0;
       border: 1px solid #ccc;
-     
       border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-
-
-
-
-
-
-
-  
-      
-
-     
      
     }
+
+
+    input {
+  width: calc(100% - 20px); /* Subtract padding to avoid stretching to the border */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensure padding is inside the width */
+}
+
+
+
+
+
     .login-container button {
       width: 100%;
       padding: 10px;
