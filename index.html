@@ -32,14 +32,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box; /* Ensure padding is inside the width */
-     
     }
-
-
-
-
-
-
     .login-container button {
       width: 100%;
       padding: 10px;
@@ -58,6 +51,20 @@
       text-align: center;
       font-size: 14px;
     }
+    .register-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #f0f0f0; /* Light gray background */
+      color: #333; /* Darker text color */
+      border: 1px solid #ccc; /* Subtle border */
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .register-btn:hover {
+      background-color: #e0e0e0; /* Slightly darker gray on hover */
+    }
   </style>
 </head>
 <body>
@@ -70,6 +77,8 @@
       <button type="submit">Login</button>
     </form>
     <p class="error" id="errorMessage"></p>
+    <!-- Subtle Registration Button -->
+    <button class="register-btn" onclick="window.location.href='register.html'">Register</button>
   </div>
 
   <script>
