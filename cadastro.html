@@ -121,6 +121,11 @@ if (!username) {
     window.location.href = '/'; // Redirect to login page if not logged in
 }
 
+// Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');  // Remove login data
+    window.location.href = '/';  // Redirect to login page
+});
 
 
     </script>

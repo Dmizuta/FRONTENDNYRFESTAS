@@ -256,8 +256,3 @@ async function handleLogin(username, password) {
 
 
 
-// Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');  // Remove login data
-    window.location.href = '/';  // Redirect to login page
-});
