@@ -21,7 +21,7 @@
 
 
         <div id="user-info">
-            <span id="username-display">teste</span>
+            <span id="username-display"></span>
             <button id="logoutBtn">Logout</button>
         </div>
 
@@ -98,13 +98,14 @@
 
 
     <script>
-        // Snippet to check login status
- const username = localStorage.getItem('username'); // Check if username exists in localStorage
- 
- if (!username) {
-     alert("You need to log in to access this page!");
-     window.location.href = '/'; // Redirect to login page if not logged in
- }
+             // Handle login status
+             const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
  // Logout function
 document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
