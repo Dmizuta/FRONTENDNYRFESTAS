@@ -229,15 +229,7 @@ async function handleLogin(username, password) {
 
 
 
-// Shared function to verify if the user is logged in
-function verifyLogin() {
-    const username = localStorage.getItem('username'); // Check if username exists in localStorage
 
-    if (!username) {
-        alert("You need to log in to access this page!");
-        window.location.href = '/'; // Redirect to login page if not logged in
-    }
-}
 
 
 
