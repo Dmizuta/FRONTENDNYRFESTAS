@@ -197,4 +197,30 @@ if (!isLoggedIn) {
 
 
 
+
+
+async function handleLogin(username, password) {
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        // If login is successful, store login data in localStorage
+        localStorage.setItem('username', data.user.username); // Storing the username
+        // Optionally, you can store additional data like user ID or a session token here
+
+        alert("Login successful!");
+        window.location.href = '/home'; // Redirect the user to the homepage or dashboard
+    } else {
+        alert(data.message); // Show error message if login failed
+    }
+}
+
+
     
