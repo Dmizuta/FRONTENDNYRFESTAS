@@ -156,6 +156,29 @@ addButton.addEventListener('click', function() {
     }
 });
 
+
+
+
+
+
+
+
+
+window.onload = function() {
+    const username = localStorage.getItem('username');
+   
+        document.getElementById('username-display').textContent = `Hello, ${username}`;
+    
+    
+};
+
+
+
+
+
+
+
+
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
 
@@ -232,20 +255,7 @@ async function handleLogin(username, password) {
 
 
 
-/*
 
-
-
-
-window.onload = function() {
-    const username = localStorage.getItem('username');
-   
-        document.getElementById('username-display').textContent = `Hello, ${username}`;
-    
-    
-};
-
-*/
 // Logout function
 document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
