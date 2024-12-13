@@ -306,3 +306,13 @@ th {
         width: 100%;
     }
 }
+#user-info {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+}
+
+#logoutBtn {
+    margin-left: 10px;
+}
