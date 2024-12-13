@@ -101,13 +101,13 @@
             document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
         } else {
             alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/.html';
+            window.location.href = '/';
         }
 
         // Handle logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('username');
-            window.location.href = '/.html';
+            window.location.href = '/';
         });
     </script>
 </body>
