@@ -180,7 +180,7 @@ function searchProducts() {
     });
 }
 
-/*
+
 // Simulating a login check
 const isLoggedIn = localStorage.getItem('username'); // Or your chosen indicator
 
@@ -232,7 +232,7 @@ async function handleLogin(username, password) {
 
 
 
-
+/*
 
 
 
