@@ -250,3 +250,23 @@ function logout() {
     // Redirect the user to the login page
     window.location.href = '/'; // Redirect to the login page
 }
+
+
+
+
+window.onload = function() {
+    const username = localStorage.getItem('username');
+    if (username) {
+        // Display username in the top-right corner
+        document.getElementById('username-display').textContent = `Hello, ${username}`;
+    } else {
+        // Redirect to login if no user is logged in
+        window.location.href = '/login';
+    }
+};
+
+// Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');  // Remove login data
+    window.location.href = '/login';  // Redirect to login page
+});
