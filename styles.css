@@ -313,6 +313,14 @@ th {
     font-size: 16px;
 }
 
+#username-display{
+
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+
+
 #logoutBtn {
     margin-left: 10px;
 }
