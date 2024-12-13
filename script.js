@@ -240,13 +240,10 @@ async function handleLogin(username, password) {
 
 window.onload = function() {
     const username = localStorage.getItem('username');
-    if (username) {
-        // Display username in the top-right corner
+   
         document.getElementById('username-display').textContent = `Hello, ${username}`;
-    } else {
-        // Redirect to login if no user is logged in
-        window.location.href = '/';
-    }
+    
+    
 };
 
 // Logout function
