@@ -190,7 +190,7 @@ if (!isLoggedIn) {
 } else {
     console.log("Access granted. Welcome back!");
 }
-*/
+
 
 
 
@@ -251,3 +251,4 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
     window.location.href = '/';  // Redirect to login page
 });
+*/
