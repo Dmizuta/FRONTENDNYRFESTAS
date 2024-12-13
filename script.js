@@ -180,7 +180,7 @@ function searchProducts() {
     });
 }
 
-
+/*
 // Simulating a login check
 const isLoggedIn = localStorage.getItem('username'); // Or your chosen indicator
 
@@ -190,7 +190,7 @@ if (!isLoggedIn) {
 } else {
     console.log("Access granted. Welcome back!");
 }
-
+*/
 
 
 
