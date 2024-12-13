@@ -231,7 +231,6 @@ async function handleLogin(username, password) {
 
 
 
-*/
 
 
 
@@ -246,6 +245,7 @@ window.onload = function() {
     
 };
 
+*/
 // Logout function
 document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
