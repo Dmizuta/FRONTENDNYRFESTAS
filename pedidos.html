@@ -9,22 +9,7 @@
 
 
 
-    <script>
-        // Snippet to check login status
-  const username = localStorage.getItem('username'); // Check if username exists in localStorage
-  
-  if (!username) {
-      alert("You need to log in to access this page!");
-      window.location.href = '/'; // Redirect to login page if not logged in
-  }
-  // Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');  // Remove login data
-    window.location.href = '/';  // Redirect to login page
-});
-
-      </script>
-
+    
 
 </head>
 <body>
@@ -74,6 +59,21 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
    
 </body>
 
+<script>
+    // Snippet to check login status
+const username = localStorage.getItem('username'); // Check if username exists in localStorage
+
+if (!username) {
+  alert("You need to log in to access this page!");
+  window.location.href = '/'; // Redirect to login page if not logged in
+}
+// Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+localStorage.removeItem('username');  // Remove login data
+window.location.href = '/';  // Redirect to login page
+});
+
+  </script>
 
 
 
