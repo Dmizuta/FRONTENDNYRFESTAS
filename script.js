@@ -248,5 +248,5 @@ function logout() {
     localStorage.removeItem('username'); // Or any other stored data like user ID, token, etc.
 
     // Redirect the user to the login page
-    window.location.href = '/login'; // Redirect to the login page
+    window.location.href = '/'; // Redirect to the login page
 }
