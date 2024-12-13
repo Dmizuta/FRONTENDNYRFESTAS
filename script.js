@@ -235,7 +235,7 @@ function verifyLogin() {
 
     if (!username) {
         alert("You need to log in to access this page!");
-        window.location.href = '/login'; // Redirect to login page if not logged in
+        window.location.href = '/'; // Redirect to login page if not logged in
     }
 }
 
@@ -261,12 +261,12 @@ window.onload = function() {
         document.getElementById('username-display').textContent = `Hello, ${username}`;
     } else {
         // Redirect to login if no user is logged in
-        window.location.href = '/login';
+        window.location.href = '/';
     }
 };
 
 // Logout function
 document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
-    window.location.href = '/login';  // Redirect to login page
+    window.location.href = '/';  // Redirect to login page
 });
