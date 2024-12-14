@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product List with Modal</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+    <header>
+        <h1>NYR Festas</h1>
+
+
+        <div id="user-info">
+            <span id="username-display"></span>
+            <button id="logoutBtn">Logout</button>
+        </div>
+
+    </header>
+
+    
+
+
+    <nav>
+        <ul>
+            <li><a href="cadastro.html">Cadastro</a></li>
+            <li><a href="produtos.html">Lista de Produtos</a></li>
+            <li><a href="pedidos.html">Pedidos</a></li>
+        </ul>
+    </nav>
+
+
+
+    <h1>Lista de Produtos</h1>
+
+
+<!-- Search Wrapper -->
+<div class="search-wrapper">
+    <input type="text" id="searchInput" placeholder=" Enter product code..." oninput="searchProducts()">
+</div>
+
+
+
+ 
+
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Product Code</th>
+                <th>Product Description</th>
+                <th>Quantity 1</th>
+                <th>Price 1</th>
+                <th>Quantity 2</th>
+                <th>Price 2</th>
+                <th>Add Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Product rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <div class="modal-stage-one">
+                <img src="https://via.placeholder.com/150" alt="Product Image">
+                <div class="product-info">
+                    <h3>Product Name</h3>
+                    <p>This is a brief description of the product. It is very useful and high quality!</p>
+                </div>
+                <div class="price-info">
+                    <p><strong>Price: R$ 0.00</strong></p>
+                </div>
+                <div class="modal-buttons">
+                   <!-- <label for="quantity">Quantity:</label> -->
+                    <input type="number" id="quantity" name="quantity" min="1" value="1">
+                    <button id="addButton">Add Quantity</button>
+                    <button id="cancelButton">Cancel</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
+    <script>
+             // Handle login status
+             const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
+ // Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');  // Remove login data
+    window.location.href = '/';  // Redirect to login page
+});
+
+     </script>
+    <script src="script.js"></script>
+
+  
+</body>
+</html>

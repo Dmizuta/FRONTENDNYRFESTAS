@@ -156,6 +156,29 @@ addButton.addEventListener('click', function() {
     }
 });
 
+
+
+
+
+
+
+
+
+window.onload = function() {
+    const username = localStorage.getItem('username');
+   
+        document.getElementById('username-display').textContent = `Hello, ${username}`;
+    
+    
+};
+
+
+
+
+
+
+
+
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
 
@@ -181,4 +204,55 @@ function searchProducts() {
 }
 
 
+// Simulating a login check
+const isLoggedIn = localStorage.getItem('username'); // Or your chosen indicator
+
+if (!isLoggedIn) {
+    alert("You need to log in to access this page!");
+    window.location.href = '/login'; // Redirect to the login page
+} else {
+    console.log("Access granted. Welcome back!");
+}
+
+
+
+
+
+
+
+
+
+async function handleLogin(username, password) {
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        // If login is successful, store login data in localStorage
+        localStorage.setItem('username', data.user.username); // Storing the username
+        // Optionally, you can store additional data like user ID or a session token here
+
+        alert("Login successful!");
+        window.location.href = '/home'; // Redirect the user to the homepage or dashboard
+    } else {
+        alert(data.message); // Show error message if login failed
+    }
+}
+
+
     
+
+
+
+
+
+
+
+
+
