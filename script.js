@@ -236,7 +236,7 @@ function searchProducts() {
 }
 
 
-// Simulating a login check
+/* Simulating a login check
 const isLoggedIn = localStorage.getItem('username'); // Or your chosen indicator
 
 if (!isLoggedIn) {
@@ -244,7 +244,7 @@ if (!isLoggedIn) {
     window.location.href = '/login'; // Redirect to the login page
 } else {
     console.log("Access granted. Welcome back!");
-}
+}*/
 
 
 async function handleLogin(username, password) {
