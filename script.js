@@ -137,24 +137,56 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// Validate quantity and show appropriate message when "Add Quantity" is clicked
-addButton.addEventListener('click', function() {
-    // Clear previous messages
-    errorMessage.style.display = "none";
-    successMessage.style.display = "none";
 
-    let quantity = quantityInput.value;
 
-    // Check if quantity is a valid positive number
-    if (quantity <= 0 || isNaN(quantity) || quantity === "") {
-        // Show error message
-        errorMessage.style.display = "inline";
-    } else {
-        // Show success message
-        successMessage.style.display = "inline";
-        // Add product to order or perform necessary action here
+
+
+
+
+
+
+
+
+document.getElementById('addButton').addEventListener('click', async () => {
+    const productData = {
+        username: 'testuser',
+        razaosocial: 'Test Company',
+        codproduto: 'P001',
+        descricao: 'Product Example',
+        quantidade: 2,
+        preco: 100
+    };
+
+    try {
+        const response = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(productData)
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(`Product added to order! Order ID: ${result.orderId}`);
+        } else {
+            console.error(result.error);
+            alert('Failed to add product to order');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred');
     }
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
