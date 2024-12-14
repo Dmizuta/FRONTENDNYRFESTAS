@@ -149,7 +149,7 @@ window.addEventListener('click', function(event) {
 
 document.getElementById('addButton').addEventListener('click', async () => {
     const productData = {
-        username: 'testuser',
+        username: localStorage.getItem("username"),
         razaosocial: 'Test Company',
         codproduto: 'P001',
         descricao: 'Product Example',
@@ -245,13 +245,6 @@ if (!isLoggedIn) {
 } else {
     console.log("Access granted. Welcome back!");
 }
-
-
-
-
-
-
-
 
 
 async function handleLogin(username, password) {
