@@ -236,16 +236,6 @@ function searchProducts() {
 }
 
 
-/* Simulating a login check
-const isLoggedIn = localStorage.getItem('username'); // Or your chosen indicator
-
-if (!isLoggedIn) {
-    alert("You need to log in to access this page!");
-    window.location.href = '/login'; // Redirect to the login page
-} else {
-    console.log("Access granted. Welcome back!");
-}*/
-
 
 async function handleLogin(username, password) {
     const response = await fetch('/login', {
