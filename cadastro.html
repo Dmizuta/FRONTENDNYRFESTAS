@@ -49,28 +49,29 @@
     <script>
 
 
-
-
-
 // Handle form submission
 const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Get the logged-in username from localStorage
+    const loggedInUsername = localStorage.getItem('username');  // assuming the username is saved here
+
+    // Get form data
     const formData = {
         representante: document.getElementById('representante').value,
         razaosocial: document.getElementById('razaosocial').value,
         cnpj: document.getElementById('cnpj').value,
         telefone: document.getElementById('telefone').value,
-        email: document.getElementById('email').value
-        // No need to include 'username' here as it will be retrieved from the backend session
+        email: document.getElementById('email').value,
+        username: loggedInUsername,  // Add username to the form data
     };
 
     try {
         const response = await fetch('https://backendnyrfestas.vercel.app/cadastro', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData), // Just sending the data that needs to be stored
+            body: JSON.stringify(formData),
         });
 
         const result = await response.json();
@@ -85,8 +86,6 @@ form.addEventListener('submit', async (e) => {
         alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
     }
 });
-
-
 
 
 
