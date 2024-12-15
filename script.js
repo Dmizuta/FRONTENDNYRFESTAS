@@ -73,6 +73,74 @@ function populateProductTable(products) {
             // Add the "View Details" button in the 8th column
             cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
 
+
+
+
+
+
+
+
+
+
+
+// Open the modal and populate it with product details
+function openModal(product) {
+    const modal = document.getElementById('myModal');
+    const modalProductName = document.getElementById('modalProductName');
+    const modalProductDesc = document.getElementById('modalProductDesc');
+    const modalPrice1 = document.getElementById('modalPrice1');
+    const modalPrice2 = document.getElementById('modalPrice2');
+    const modalProductImage = document.getElementById('modalProductImage');
+    const quantityInput = document.getElementById('quantity');
+
+    // Set the content of the modal
+    modalProductName.textContent = product.nome;  // Product Name
+    modalProductDesc.textContent = product.descricao;  // Product Description
+    modalPrice1.innerHTML = `<strong>Price 1: R$ ${product.preco1}</strong>`;  // Price 1
+    modalPrice2.innerHTML = `<strong>Price 2: R$ ${product.preco2}</strong>`;  // Price 2
+    modalProductImage.src = product.imagem;  // Product Image
+
+    // Pass additional product details to the add-to-order functionality
+    const addButton = document.getElementById('addButton');
+    addButton.onclick = function() {
+        const quantity = quantityInput.value;  // Get the quantity from input
+        const productData = {
+            codproduto: product.codproduto,  // Product Code
+            descricao: product.descricao,    // Product Description
+            quantidade: quantity,            // Quantity
+            preco: product.preco1            // Selected Price (or based on your needs)
+        };
+        addToOrder(productData);  // Function to add product to the order
+    };
+
+    // Display the modal
+    modal.style.display = 'block';
+}
+
+// Close the modal
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+
+// Event listener for the close button
+document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
             // Add event listener for the "View Details" button
             const openModalBtn = row.querySelector('.openModalBtn');
             openModalBtn.addEventListener('click', function() {
@@ -137,7 +205,7 @@ window.addEventListener('click', function(event) {
     }
 });
 
-
+*/
 
 
 
