@@ -142,13 +142,7 @@ window.addEventListener('click', function(event) {
 
 
 document.getElementById('addButton').addEventListener('click', async () => {
-    // Fetch user data from backend (username and razaosocial) based on logged-in user
-    const username = localStorage.getItem("username");
-
-    if (!username) {
-        alert('User not logged in');
-        return;
-    }
+    
 
     try {
         const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
