@@ -227,7 +227,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
    
     catch (error) {
         console.error('Error:', error);
-        alert('An error occurred');}
+        alert('algo dentro do try deu pau');}
 });
 
 
