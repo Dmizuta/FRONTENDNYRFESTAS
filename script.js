@@ -83,7 +83,7 @@ function populateProductTable(products) {
 const openModalBtn = row.querySelector('.openModalBtn');
 openModalBtn.addEventListener('click', function() {
     const productName = row.cells[2].textContent; // Product description
-    const productDesc = row.cells[2].textContent; // Detailed description
+    const productDesc = row.cells[3].textContent; // Detailed description
     const productPrice = row.cells[4].textContent; // Price 1
     const productImage = row.querySelector('img').src; // Product image
 
