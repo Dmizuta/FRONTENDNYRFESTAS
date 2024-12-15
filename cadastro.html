@@ -73,12 +73,12 @@ form.addEventListener('submit', async (e) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
         });
-        
+
 
         const result = await response.json();
         if (response.ok) {
-            alert('Cadastro atualizado com sucesso!');
-            form.reset();
+            alert(result.message); // Shows the dynamic message like "Cadastro created successfully." or "Cadastro updated successfully."
+      form.reset();
         } else {
             alert('Erro: ' + (result.error || 'Falha no cadastro.'));
         }
