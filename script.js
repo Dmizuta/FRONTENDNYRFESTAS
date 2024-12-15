@@ -141,12 +141,57 @@ window.addEventListener('click', function(event) {
 
 
 
+document.getElementById('addButton').addEventListener('click', async () => {
+    // Fetch user data from backend (username and razaosocial) based on logged-in user
+    const username = localStorage.getItem("username");
+
+    if (!username) {
+        alert('User not logged in');
+        return;
+    }
+
+    try {
+        const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
+        const userData = await userResponse.json();
+
+        if (userResponse.ok) {
+            // Construct the product data with real user information
+            const productData = {
+                username: userData.username,  // Now getting username dynamically
+                razaosocial: userData.razaosocial,  // Getting razaosocial dynamically
+                codproduto: document.getElementById('productCode').value,  // Get product code from UI
+                descricao: document.getElementById('productDescription').value,  // Get product description
+                quantidade: parseInt(document.getElementById('productQuantity').value),  // Get quantity
+                preco: parseFloat(document.getElementById('productPrice').value)  // Get price
+            };
+
+            const response = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(productData)
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert(`Product added to order! Order ID: ${result.orderId}`);
+            } else {
+                console.error(result.error);
+                alert('Failed to add product to order');
+            }
+        } else {
+            alert('Failed to fetch user data');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred');
+    }
+});
 
 
 
 
 
-
+/*
 document.getElementById('addButton').addEventListener('click', async () => {
     const productData = {
         username: localStorage.getItem("username"),
@@ -177,7 +222,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
     }
 });
 
-
+*/
 
 
 
