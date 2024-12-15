@@ -94,12 +94,14 @@ form.addEventListener('submit', async (e) => {
 
 
 
+    
+  
 
 
         // Handle login status
          const usuario = localStorage.getItem('username');
         if (usuario) {
-            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+            document.getElementById('username-display').textContent = `Bem-vindo, ${usuario}`;
         } else {
             alert("Você precisa estar logado para acessar esta página!");
             window.location.href = '/';
