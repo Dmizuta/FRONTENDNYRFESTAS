@@ -138,10 +138,17 @@ window.addEventListener('click', function(event) {
 });
 
 
-document.getElementById('addButton').addEventListener('click', async () => {
-    const username = localStorage.getItem("username");  // Get the username from localStorage
 
-    if (!username) {
+
+
+
+
+
+
+document.getElementById('addButton').addEventListener('click', async () => {
+    const usuario = localStorage.getItem("username");  // Get the username from localStorage
+
+    if (!usuario) {
         alert('User not logged in');
         return;
     }
@@ -151,7 +158,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
         const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: username })
+            body: JSON.stringify({ username: usuario })
         });
 
         if (!cadastroResponse.ok) {
@@ -165,7 +172,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
             // Cadastro is complete, proceed with adding the product to the order
 
             // Fetch user info (e.g., razaosocial)
-            const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
+            const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${usuario}`);
 
             if (userResponse.ok) {
                 const userData = await userResponse.json();
@@ -184,7 +191,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 }
 
                 const productData = {
-                    username: username,
+                    username: usuario,
                     razaosocial: razaosocial,
                     codproduto: productCode,
                     descricao: productDescription,
