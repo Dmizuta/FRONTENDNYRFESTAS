@@ -76,71 +76,85 @@ function populateProductTable(products) {
 
 
 
-/*
 
+// Add event listener for the "View Details" button
+const openModalBtn = row.querySelector('.openModalBtn');
+openModalBtn.addEventListener('click', function() {
+    const productName = row.cells[2].textContent; // Product name (column 2)
+    const productDesc = row.cells[3].textContent; // Product description (column 3)
+    const productPrice = row.cells[4].textContent; // Price (column 4)
+    const productImage = row.querySelector('img').src; // Product image
 
+    // Pass product details to openModal function
+    openModal({
+        nome: productName,
+        descricao: productDesc,
+        preco1: productPrice,
+        imagem: productImage
+    });
+});
 
+// Function to update and show modal with product details
+const modal = document.getElementById('myModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const quantityInput = document.getElementById('quantity');
+const addButton = document.getElementById('addButton');
+const errorMessage = document.createElement("span");
+const successMessage = document.createElement("span");
 
-
-
-// Open the modal and populate it with product details
+// Open modal with the product details
 function openModal(product) {
-    const modal = document.getElementById('myModal');
     const modalProductName = document.getElementById('modalProductName');
     const modalProductDesc = document.getElementById('modalProductDesc');
     const modalPrice1 = document.getElementById('modalPrice1');
     const modalPrice2 = document.getElementById('modalPrice2');
     const modalProductImage = document.getElementById('modalProductImage');
-    const quantityInput = document.getElementById('quantity');
 
     // Set the content of the modal
     modalProductName.textContent = product.nome;  // Product Name
     modalProductDesc.textContent = product.descricao;  // Product Description
     modalPrice1.innerHTML = `<strong>Price 1: R$ ${product.preco1}</strong>`;  // Price 1
-    modalPrice2.innerHTML = `<strong>Price 2: R$ ${product.preco2}</strong>`;  // Price 2
+    modalPrice2.innerHTML = `<strong>Price 2: R$ ${product.preco2 || 'N/A'}</strong>`;  // Price 2 (if available)
     modalProductImage.src = product.imagem;  // Product Image
 
-    // Pass additional product details to the add-to-order functionality
-    const addButton = document.getElementById('addButton');
-    addButton.onclick = function() {
-        const quantity = quantityInput.value;  // Get the quantity from input
-        const productData = {
-            codproduto: product.codproduto,  // Product Code
-            descricao: product.descricao,    // Product Description
-            quantidade: quantity,            // Quantity
-            preco: product.preco1            // Selected Price (or based on your needs)
-        };
-        addToOrder(productData);  // Function to add product to the order
-    };
-
-    // Display the modal
+    // Show the modal
     modal.style.display = 'block';
 }
 
-// Close the modal
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'none';
-}
+// Close modal functionality
+closeModalBtn.addEventListener('click', function() {
+    modal.style.display = 'none'; // Close the modal
+});
 
-// Event listener for the close button
-document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+// Close modal if clicked outside modal content
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none'; // Close modal
+    }
+});
+
+// Add button functionality (to add the product to the order)
+addButton.addEventListener('click', function() {
+    const quantity = quantityInput.value;  // Get the quantity from input
+    const productData = {
+        nome: modalProductName.textContent,
+        descricao: modalProductDesc.textContent,
+        quantidade: quantity,
+        preco: modalPrice1.textContent // Assuming using price1
+    };
+    addToOrder(productData);  // Function to add product to the order
+});
 
 
 
 
-*/
 
 
 
 
 
 
-
-
-
-
-
+/*
             // Add event listener for the "View Details" button
             const openModalBtn = row.querySelector('.openModalBtn');
             openModalBtn.addEventListener('click', function() {
@@ -197,7 +211,7 @@ function openModal(productName, productDesc, productPrice, productImage) {
     productInfo.querySelector('h3').textContent = productName;
     productInfo.querySelector('p').textContent = productDesc;
     priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
-    */
+  
     // Adjust image size in modal
     productImageElement.src = productImage;
     
@@ -218,7 +232,7 @@ window.addEventListener('click', function(event) {
 
 
 
-
+*/
 
 
 
