@@ -141,6 +141,82 @@ window.addEventListener('click', function(event) {
 
 
 
+
+
+
+document.getElementById('addButton').addEventListener('click', async () => {
+    const username = localStorage.getItem("username");  // Get the username from localStorage
+
+    try {
+        // First, check if the user has a completed cadastro
+        const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: username })
+        });
+
+        const cadastroResult = await cadastroResponse.json();
+
+        if (cadastroResponse.ok && cadastroResult.cadastroFilled) {
+            // Cadastro is complete, proceed with adding the product to the order
+
+            // Fetch user info (e.g., razaosocial)
+            const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
+            
+            if (userResponse.ok) {
+                const userData = await userResponse.json();
+                const { razaosocial } = userData;
+
+                const productData = {
+                    username: username,
+                    razaosocial: razaosocial,
+                    codproduto: 'P001',
+                    descricao: 'Product Example',
+                    quantidade: 2,
+                    preco: 100
+                };
+
+                const addResponse = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(productData)
+                });
+
+                const addResult = await addResponse.json();
+
+                if (addResponse.ok) {
+                    alert(addResult.message); // "Product added to existing draft order" or "New draft order created"
+                } else {
+                    console.error(addResult.error);
+                    alert('Failed to add product to order');
+                }
+            } else {
+                console.error('Failed to fetch user info');
+                alert('Failed to fetch user info');
+            }
+        } else {
+            // If cadastro is incomplete or not found, show alert
+            alert(cadastroResult.error || 'Unknown error with cadastro');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred');
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 document.getElementById('addButton').addEventListener('click', async () => {
     const username = localStorage.getItem("username");  // Get the username from localStorage
 
@@ -192,47 +268,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
     }
 });
 
-
-
-
-
-
-/*
-document.getElementById('addButton').addEventListener('click', async () => {
-    const productData = {
-        username: localStorage.getItem("username"),
-        razaosocial: 'Test Company',
-        codproduto: 'P001',
-        descricao: 'Product Example',
-        quantidade: 2,
-        preco: 100
-    };
-
-    try {
-        const response = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(productData)
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-            alert(`Product added to order! Order ID: ${result.orderId}`);
-        } else {
-            console.error(result.error);
-            alert('Failed to add product to order');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred');
-    }
-});
-
 */
-
-
-
-
 
 
 
