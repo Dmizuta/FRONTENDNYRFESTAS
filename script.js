@@ -82,12 +82,13 @@ function populateProductTable(products) {
 // Add event listener for the "View Details" button
 const openModalBtn = row.querySelector('.openModalBtn');
 openModalBtn.addEventListener('click', function() {
-    const productName = row.cells[2].textContent; // Product description
-    const productDesc = row.cells[3].textContent; // Detailed description
-    const productPrice = row.cells[4].textContent; // Price 1
+    const productName = row.cells[1].textContent; // Product description
+    const productDesc = row.cells[2].textContent; // Detailed description
+    const productPrice1 = row.cells[4].textContent; // Price 1
+    const productPrice2 = row.cells[6].textContent; // Price 2
     const productImage = row.querySelector('img').src; // Product image
 
-    openModal(productName, productDesc, productPrice, productImage);
+    openModal(productName, productDesc, productPrice1, productPrice2, productImage);
 });
 });
 } else {
