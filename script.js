@@ -209,7 +209,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 // Fetch product details from modal
                 const productName = document.querySelector('#codprod').textContent;
                 const productDesc = document.querySelector('#descrip').textContent;
-                const productPrice = parseFloat(document.querySelector('#preco1').textContent.replace('Price: ', '').trim());
+                const productPrice = document.querySelector('#preco1').textContent;//replace('Price: ', '').trim());
                 
                 const quantity = parseInt(document.getElementById('quantity').value);
 
