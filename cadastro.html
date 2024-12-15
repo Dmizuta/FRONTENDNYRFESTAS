@@ -92,18 +92,18 @@ form.addEventListener('submit', async (e) => {
 
 
 
-/*
+
 
 
         // Handle login status
-        const username = localStorage.getItem('username');
-        if (username) {
+        // const username = localStorage.getItem('username');
+        if (loggedInUsername) {
             document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
         } else {
             alert("Você precisa estar logado para acessar esta página!");
             window.location.href = '/';
         }
-*/
+
         // Handle logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('username');
