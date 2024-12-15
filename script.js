@@ -108,7 +108,7 @@ const successMessage = document.createElement("span");
 
 
 // Function to open modal
-function openModal(productName, productDesc, productPrice1, productPrice2, productImage) {
+function openModal(productName, productDesc, productPrice, productImage) {
 const productInfo = modal.querySelector('.modal-stage-one .product-info');
 const priceInfo1 = modal.querySelector('.modal-stage-one .price1-info');
 const priceInfo2 = modal.querySelector('.modal-stage-one .price2-info');
