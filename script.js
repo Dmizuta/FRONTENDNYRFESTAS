@@ -224,11 +224,10 @@ document.getElementById('addButton').addEventListener('click', async () => {
             alert(cadastroResult.error || 'Unknown error with cadastro');
         }
     } 
-    
-    /*catch (error) {
+   
+    catch (error) {
         console.error('Error:', error);
-        alert('An error occurred');
-    }*/
+        alert('An error occurred');}
 });
 
 
