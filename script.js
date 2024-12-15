@@ -167,13 +167,18 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 const userData = await userResponse.json();
                 const { razaosocial } = userData;
 
+
+
+                
+                
+
                 const productData = {
                     username: username,
                     razaosocial: razaosocial,
-                    codproduto: 'P001',
-                    descricao: 'Product Example',
-                    quantidade: 2,
-                    preco: 100
+                    codproduto = document.getElementById('productCode').value;
+                    descricao = document.getElementById('productDescription').value;
+                    quantidade = parseInt(document.getElementById('quantity').value);
+                    preco = parseFloat(document.getElementById('price').value);
                 };
 
                 const addResponse = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
