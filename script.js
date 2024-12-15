@@ -220,14 +220,14 @@ document.getElementById('addButton').addEventListener('click', async () => {
 
 
 
-
+/*
                 // Basic validation
                 console.log('Product details:', { productName, productDesc, productPrice, quantity });
                 if (!productName || !productDesc || isNaN(quantity) || isNaN(productPrice) || quantity <= 0 || productPrice <= 0) {
                     alert('Please fill in valid product details');
                     console.error('Invalid product details');
                     return;
-                }
+                }*/
 
                 const productData = {
                     username: username,
