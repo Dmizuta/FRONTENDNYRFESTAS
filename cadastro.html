@@ -96,8 +96,8 @@ form.addEventListener('submit', async (e) => {
 
 
         // Handle login status
-        // const username = localStorage.getItem('username');
-        if (loggedInUsername) {
+         const usuario = localStorage.getItem('username');
+        if (usuario) {
             document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
         } else {
             alert("Você precisa estar logado para acessar esta página!");
