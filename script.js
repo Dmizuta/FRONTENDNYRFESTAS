@@ -223,10 +223,12 @@ document.getElementById('addButton').addEventListener('click', async () => {
             // If cadastro is incomplete or not found, show alert
             alert(cadastroResult.error || 'Unknown error with cadastro');
         }
-    } catch (error) {
+    } 
+    
+    /*catch (error) {
         console.error('Error:', error);
         alert('An error occurred');
-    }
+    }*/
 });
 
 
@@ -256,15 +258,14 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 const { razaosocial } = userData;
 
 
-
-                const productData = {
-
-                    username: username,
-                    razaosocial: razaosocial,
-                    codproduto : document.getElementById('productCode').value,
-                    descricao : document.getElementById('productDescription').value,
-                    quantidade : parseInt(document.getElementById('quantity').value),
-                    preco : parseFloat(document.getElementById('price').value),
+const productData = {
+                username: username,
+                razaosocial: razaosocial,  // Use the fetched razaosocial
+                codproduto: 'P001',
+                descricao: 'Product Example',
+                quantidade: 2,
+                preco: 100
+                
                 };
 
                 const addResponse = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
@@ -299,76 +300,6 @@ document.getElementById('addButton').addEventListener('click', async () => {
 
 
 */
-
-
-
-
-
-
-/*
-
-
-document.getElementById('addButton').addEventListener('click', async () => {
-    const username = localStorage.getItem("username");  // Get the username from localStorage
-
-    try {
-        // Fetch user info from the backend (razaosocial and username)
-        const response = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
-        
-        // Check if the response is okay
-        if (response.ok) {
-            const userData = await response.json();
-            
-            // Log the fetched user data to the console
-            console.log("Fetched user data:", userData);
-            
-            // Extract razaosocial and username from the response
-            const { razaosocial } = userData;
-
-            const productData = {
-                username: username,
-                razaosocial: razaosocial,  // Use the fetched razaosocial
-                codproduto: 'P001',
-                descricao: 'Product Example',
-                quantidade: 2,
-                preco: 100
-            };
-
-            // Now send the product data to the backend
-            const addResponse = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(productData)
-            });
-
-            const addResult = await addResponse.json();
-
-            if (addResponse.ok) {
-                alert(`Product added to order! Order ID: ${addResult.orderId}`);
-            } else {
-                console.error(addResult.error);
-                alert('Failed to add product to order');
-            }
-        } else {
-            console.error('Failed to fetch user info');
-            alert('Failed to fetch user info');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred');
-    }
-});
-
-*/
-
-
-
-
-
-
-
-
-
 
 
 
