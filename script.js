@@ -108,7 +108,7 @@ const successMessage = document.createElement("span");
 
 
 // Function to open modal
-function openModal(productName, productDesc, productPrice, productImage) {
+function openModal(productName, productDesc, productPrice1, productPrice2, productImage) {
 const productInfo = modal.querySelector('.modal-stage-one .product-info');
 const priceInfo1 = modal.querySelector('.modal-stage-one .price1-info');
 const priceInfo2 = modal.querySelector('.modal-stage-one .price2-info');
@@ -116,8 +116,8 @@ const productImageElement = modal.querySelector('.modal-stage-one img');
 
 productInfo.querySelector('h3').textContent = productName;
 productInfo.querySelector('p').textContent = productDesc;
-priceInfo1.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
-priceInfo2.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
+priceInfo1.querySelector('p').innerHTML = `<strong>Price1: ${productPrice1}</strong>`;
+priceInfo2.querySelector('p').innerHTML = `<strong>Price2: ${productPrice2}</strong>`;
 
 // Adjust image size in modal
 productImageElement.src = productImage;
