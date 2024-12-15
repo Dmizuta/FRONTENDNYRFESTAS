@@ -143,9 +143,9 @@ window.addEventListener('click', function(event) {
 
 
 document.getElementById('addButton').addEventListener('click', async () => {
-    const userId = localStorage.getItem("username");  // Get the user ID from localStorage
+    const username = localStorage.getItem("username");  // Get the username from localStorage
 
-    if (!userId) {
+    if (!username) {
         alert('User not logged in');
         return;
     }
@@ -155,7 +155,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
         const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: userId })
+            body: JSON.stringify({ username: username })
         });
 
         if (!cadastroResponse.ok) {
@@ -169,7 +169,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
             // Cadastro is complete, proceed with adding the product to the order
 
             // Fetch user info (e.g., razaosocial)
-            const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${userId}`);
+            const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
 
             if (userResponse.ok) {
                 const userData = await userResponse.json();
@@ -188,7 +188,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 }
 
                 const productData = {
-                    username: userId,
+                    username: username,
                     razaosocial: razaosocial,
                     codproduto: productCode,
                     descricao: productDescription,
@@ -223,13 +223,11 @@ document.getElementById('addButton').addEventListener('click', async () => {
             // If cadastro is incomplete or not found, show alert
             alert(cadastroResult.error || 'Unknown error with cadastro');
         }
-    } 
-   
-    catch (error) {
+    } catch (error) {
         console.error('Error:', error);
-        alert('algo dentro do try deu pau');}
+        alert('algo dentro do try deu pau');
+    }
 });
-
 
 
 /*
@@ -305,9 +303,9 @@ const productData = {
 
 
 window.onload = function() {
-    const username = localStorage.getItem('username');
+    const userid = localStorage.getItem('username');
    
-        document.getElementById('username-display').textContent = `Hello, ${username}`;
+        document.getElementById('username-display').textContent = `Hello, ${userid}`;
     
     
 };
