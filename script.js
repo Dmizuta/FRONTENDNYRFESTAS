@@ -207,9 +207,9 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 const { razaosocial } = userData;
 
                 // Fetch product details from modal
-                const productName = document.querySelector('.modal-stage-one #codprod').textContent;
-                const productDesc = document.querySelector('.modal-stage-one #pdescrip').textContent;
-                const productPrice = parseFloat(document.querySelector('.modal-stage-one #preco1').textContent.replace('Price: ', '').trim());
+                const productName = document.querySelector('#codprod').textContent;
+                const productDesc = document.querySelector('#descrip').textContent;
+                const productPrice = parseFloat(document.querySelector('#preco1').textContent.replace('Price: ', '').trim());
                 
                 const quantity = parseInt(document.getElementById('quantity').value);
 
