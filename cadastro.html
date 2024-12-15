@@ -73,10 +73,11 @@ form.addEventListener('submit', async (e) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
         });
+        
 
         const result = await response.json();
         if (response.ok) {
-            alert('Cadastro realizado com sucesso!');
+            alert('Cadastro atualizado com sucesso!');
             form.reset();
         } else {
             alert('Erro: ' + (result.error || 'Falha no cadastro.'));
