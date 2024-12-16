@@ -49,6 +49,51 @@
     <script>
 
 
+
+
+
+
+
+
+
+
+window.addEventListener('DOMContentLoaded', async () => {
+    const userId = localStorage.getItem('userId'); // Replace with your actual user identifier logic
+    if (!userId) return;
+
+    try {
+        const response = await fetch(`/cadastropage?userId=${userId}`);
+        const result = await response.json();
+
+        if (result.success && result.data) {
+            document.getElementById('representante').value = result.data.representante || '';
+            document.getElementById('razaosocial').value = result.data.razaosocial || '';
+            document.getElementById('cnpj').value = result.data.cnpj || '';
+            document.getElementById('telefone').value = result.data.telefone || '';
+            document.getElementById('email').value = result.data.email || '';
+        }
+    } catch (error) {
+        console.error('Error fetching cadastro data:', error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Handle form submission
 const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {

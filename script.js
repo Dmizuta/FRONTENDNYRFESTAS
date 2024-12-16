@@ -153,3 +153,5 @@ document.getElementById('addButton').addEventListener('click', async () => {
 
 // Fetch products when the page loads
 window.onload = fetchProductData;
+
+
