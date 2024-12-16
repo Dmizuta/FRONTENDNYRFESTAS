@@ -59,28 +59,30 @@
 
     <script>
 
+
+
 window.addEventListener('DOMContentLoaded', async () => {
-    const loggedInUsername = localStorage.getItem('username'); // Replace with your actual user identifier logic
-    if (!loggedInUsername) return; // Ensure the username is available
+  const loggedInUsername = localStorage.getItem('username');  // Assuming 'username' is stored in localStorage
 
-    try {
-        const response = await fetch(`/cadastropage?userId=${loggedInUsername}`); // Use loggedInUsername here
-        const result = await response.json();
+  if (!loggedInUsername) return;  // If there's no username in localStorage, stop
 
-        if (result.success && result.data) {
-            document.getElementById('representante').value = result.data.representante || '';
-            document.getElementById('razaosocial').value = result.data.razaosocial || '';
-            document.getElementById('cnpj').value = result.data.cnpj || '';
-            document.getElementById('telefone').value = result.data.telefone || '';
-            document.getElementById('email').value = result.data.email || '';
-        }
-    } catch (error) {
-        console.error('Error fetching cadastro data:', error);
+  try {
+    // Fetch user data by username
+    const response = await fetch(`/cadastropage?username=${loggedInUsername}`);
+    const result = await response.json();
+
+    if (result.success && result.data) {
+      // Fill the form fields with the data returned from the backend
+      document.getElementById('representante').value = result.data.representante || '';
+      document.getElementById('razaosocial').value = result.data.razaosocial || '';
+      document.getElementById('cnpj').value = result.data.cnpj || '';
+      document.getElementById('telefone').value = result.data.telefone || '';
+      document.getElementById('email').value = result.data.email || '';
     }
+  } catch (error) {
+    console.error('Error fetching cadastro data:', error);
+  }
 });
-
-
-
 
 
 
