@@ -63,13 +63,26 @@
 
 window.addEventListener('DOMContentLoaded', async () => {
   const loggedInUsername = localStorage.getItem('username');  // Assuming 'username' is stored in localStorage
+  console.log('Logged in username from localStorage:', loggedInUsername); // Track the username
 
-  if (!loggedInUsername) return;  // If there's no username in localStorage, stop
+  // If there's no username, stop and log an error
+  if (!loggedInUsername) {
+    console.log('No username found in localStorage');
+    return;
+  }
 
   try {
     // Fetch user data by username
+    console.log('Fetching data for username:', loggedInUsername); // Track the fetch request
     const response = await fetch(`/cadastropage?username=${loggedInUsername}`);
+    
+    if (!response.ok) {
+      console.log('Error in fetch response:', response.status); // Log fetch response errors
+      return;
+    }
+
     const result = await response.json();
+    console.log('Result from backend:', result); // Track what the backend returned
 
     if (result.success && result.data) {
       // Fill the form fields with the data returned from the backend
@@ -78,11 +91,14 @@ window.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('cnpj').value = result.data.cnpj || '';
       document.getElementById('telefone').value = result.data.telefone || '';
       document.getElementById('email').value = result.data.email || '';
+    } else {
+      console.log('No data returned or result.success is false');
     }
   } catch (error) {
-    console.error('Error fetching cadastro data:', error);
+    console.error('Error fetching cadastro data:', error); // Log any other errors
   }
 });
+
 
 
 
