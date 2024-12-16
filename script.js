@@ -145,8 +145,9 @@ document.getElementById('addButton').addEventListener('click', async () => {
 
         const result = await response.json();
         alert(result.message || 'Product added successfully!');
+
         const modal = document.getElementById('myModal');
-        modal.style.display = 'none'; 
+        modal.style.display = 'hide'; 
         
     } catch (error) {
         console.error('Error adding product to order:', error);
