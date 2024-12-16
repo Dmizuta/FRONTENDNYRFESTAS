@@ -61,10 +61,10 @@
 
 window.addEventListener('DOMContentLoaded', async () => {
     const loggedInUsername = localStorage.getItem('username'); // Replace with your actual user identifier logic
-    if (!userId) return;
+    if (!loggedInUsername) return; // Ensure the username is available
 
     try {
-        const response = await fetch(`/cadastropage?userId=${userId}`);
+        const response = await fetch(`/cadastropage?userId=${loggedInUsername}`); // Use loggedInUsername here
         const result = await response.json();
 
         if (result.success && result.data) {
