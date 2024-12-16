@@ -100,6 +100,13 @@ document.getElementById('closeModalBtn').addEventListener('click', function () {
     document.getElementById('myModal').style.display = 'none';
 });
 
+
+// Event listener to close modal
+document.getElementById('cancelButton').addEventListener('click', function () {
+    document.getElementById('myModal').style.display = 'none';
+});
+
+
 // Close modal when clicking outside of it
 window.addEventListener('click', function (event) {
     const modal = document.getElementById('myModal');
