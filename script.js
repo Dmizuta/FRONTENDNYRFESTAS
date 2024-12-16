@@ -115,6 +115,19 @@ window.addEventListener('click', function (event) {
     }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Handle the "Add Quantity" button click
 document.getElementById('addButton').addEventListener('click', async () => {
     const username = localStorage.getItem('username');
@@ -159,3 +172,117 @@ document.getElementById('addButton').addEventListener('click', async () => {
 window.onload = fetchProductData;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+window.onload = function() {
+    const userid = localStorage.getItem('username');
+   
+        document.getElementById('username-display').textContent = `Hello, ${userid}`;
+    
+    
+};
+
+
+
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+// Fetch and populate products when the page loads
+window.onload = fetchProductData;
+
+
+
+
+
+function searchProducts() {
+    const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    const tableRows = document.querySelectorAll('#productTable tbody tr');
+
+    tableRows.forEach(row => {
+        const productCode = row.cells[1].textContent.toLowerCase(); // Assuming column 1 is the product code
+        const productDescription = row.cells[2].textContent.toLowerCase(); // Assuming column 2 is the product description
+
+        // Check if either the product code or description includes the search query
+        if (productCode.includes(searchQuery) || productDescription.includes(searchQuery)) {
+            row.style.display = ''; // Show row if either matches
+        } else {
+            row.style.display = 'none'; // Hide row if neither matches
+        }
+    });
+}
+
+
+
+async function handleLogin(username, password) {
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        // If login is successful, store login data in localStorage
+        localStorage.setItem('username', data.user.username); // Storing the username
+        // Optionally, you can store additional data like user ID or a session token here
+
+        alert("Login successful!");
+        window.location.href = '/home'; // Redirect the user to the homepage or dashboard
+    } else {
+        alert(data.message); // Show error message if login failed
+    }
+}
