@@ -292,6 +292,22 @@ window.onload = function() {
 
 
 
+document.getElementById('cancelButton').addEventListener('click', async () => {
+    closeModal();
+  });
+  
+    
+
+
+
+
+
+
+
+
+
+
+
 // Fetch and populate products when the page loads
 window.onload = fetchProductData;
 
