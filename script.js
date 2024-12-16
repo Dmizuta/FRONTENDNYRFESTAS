@@ -73,21 +73,28 @@ function populateProductTable(products) {
             // Add the "View Details" button in the 8th column
             cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
 
-            // Add event listener for the "View Details" button
-            const openModalBtn = row.querySelector('.openModalBtn');
-            openModalBtn.addEventListener('click', function() {
-                const productName = row.cells[2].textContent; // Product description
-                const productDesc = row.cells[2].textContent; // Detailed description
-                const productPrice = row.cells[4].textContent; // Price 1
-                const productImage = row.querySelector('img').src; // Product image
 
-                openModal(productName, productDesc, productPrice, productImage);
-            });
-        });
-    } else {
-        // If no products found, show a message
-        tableBody.innerHTML = '<tr><td colspan="7">No products available.</td></tr>';
-    }
+
+
+
+
+            
+// Add event listener for the "View Details" button
+const openModalBtn = row.querySelector('.openModalBtn');
+openModalBtn.addEventListener('click', function() {
+    const productName = row.cells[1].textContent; // Product description
+    const productDesc = row.cells[2].textContent; // Detailed description
+    const productPrice1 = row.cells[4].textContent; // Price 1
+    const productPrice2 = row.cells[6].textContent; // Price 2
+    const productImage = row.querySelector('img').src; // Product image
+
+    openModal(productName, productDesc, productPrice1, productPrice2, productImage);
+});
+});
+} else {
+// If no products found, show a message
+tableBody.innerHTML = '<tr><td colspan="7">No products available.</td></tr>';
+}
 }
 
 // Function to update and show modal with product details
@@ -98,79 +105,194 @@ const addButton = document.getElementById('addButton');
 const errorMessage = document.createElement("span");
 const successMessage = document.createElement("span");
 
-// Error and success messages
-errorMessage.style.color = "red";
-errorMessage.style.display = "none";
-errorMessage.innerText = "Please enter a valid quantity (greater than 0).";
-document.querySelector(".modal-buttons").appendChild(errorMessage);
 
-successMessage.style.color = "green";
-successMessage.style.display = "none";
-successMessage.innerText = "Product added successfully!";
-document.querySelector(".modal-buttons").appendChild(successMessage);
 
 // Function to open modal
-function openModal(productName, productDesc, productPrice, productImage) {
-    const productInfo = modal.querySelector('.modal-stage-one .product-info');
-    const priceInfo = modal.querySelector('.modal-stage-one .price-info');
-    const productImageElement = modal.querySelector('.modal-stage-one img');
-    
-    productInfo.querySelector('h3').textContent = productName;
-    productInfo.querySelector('p').textContent = productDesc;
-    priceInfo.querySelector('p').innerHTML = `<strong>Price: ${productPrice}</strong>`;
-    
-    // Adjust image size in modal
-    productImageElement.src = productImage;
-    
-    modal.style.display = 'block'; // Show modal 
+function openModal(productName, productDesc, productPrice1, productPrice2, productImage) {
+const productInfo = modal.querySelector('.modal-stage-one .product-info');
+const priceInfo1 = modal.querySelector('.modal-stage-one .price1-info');
+const priceInfo2 = modal.querySelector('.modal-stage-one .price2-info');
+const productImageElement = modal.querySelector('.modal-stage-one img');
+
+productInfo.querySelector('h3').textContent = productName;
+productInfo.querySelector('p').textContent = productDesc;
+priceInfo1.querySelector('p').innerHTML = `<strong>Price1: ${productPrice1}</strong>`;
+priceInfo2.querySelector('p').innerHTML = `<strong>Price2: ${productPrice2}</strong>`;
+
+// Adjust image size in modal
+productImageElement.src = productImage;
+
+modal.style.display = 'block'; // Show modal 
 }
 
 // Close modal functionality
 closeModalBtn.addEventListener('click', function() {
-    modal.style.display = 'none'; // Close the modal
+modal.style.display = 'none'; // Close the modal
 });
 
 // Close modal if clicked outside modal content
 window.addEventListener('click', function(event) {
-    if (event.target === modal) {
-        modal.style.display = 'none'; // Close modal
-    }
+if (event.target === modal) {
+modal.style.display = 'none'; // Close modal
+}
 });
 
 // Validate quantity and show appropriate message when "Add Quantity" is clicked
 addButton.addEventListener('click', function() {
-    // Clear previous messages
-    errorMessage.style.display = "none";
-    successMessage.style.display = "none";
+// Clear previous messages
+errorMessage.style.display = "none";
+successMessage.style.display = "none";
 
-    let quantity = quantityInput.value;
+let quantity = quantityInput.value;
 
-    // Check if quantity is a valid positive number
-    if (quantity <= 0 || isNaN(quantity) || quantity === "") {
-        // Show error message
-        errorMessage.style.display = "inline";
-    } else {
-        // Show success message
-        successMessage.style.display = "inline";
-        // Add product to order or perform necessary action here
-    }
+// Check if quantity is a valid positive number
+if (quantity <= 0 || isNaN(quantity) || quantity === "") {
+// Show error message
+errorMessage.style.display = "inline";
+} else {
+// Show success message
+successMessage.style.display = "inline";
+// Add product to order or perform necessary action here
+}
 });
 
 
 
 
 
+
+
+
+
+
+
+
+document.getElementById('addButton').addEventListener('click', async () => {
+    const username = localStorage.getItem("username");  // Get the username from localStorage
+
+    if (!username) {
+        alert('User not logged in');
+        return;
+    }
+
+    try {
+        // First, check if the user has a completed cadastro
+        console.log('Checking cadastro for username:', username);
+        const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: username })
+        });
+
+        if (!cadastroResponse.ok) {
+            alert('Error checking cadastro');
+            console.error('Error checking cadastro:', cadastroResponse);
+            return;
+        }
+
+        const cadastroResult = await cadastroResponse.json();
+        console.log('Cadastro check result:', cadastroResult);
+
+        if (cadastroResult.cadastroFilled) {
+            // Cadastro is complete, proceed with adding the product to the order
+            console.log('Cadastro is complete, proceeding with adding product to order');
+
+            // Fetch user info (e.g., razaosocial)
+            console.log('Fetching user info for username:', username);
+            const userResponse = await fetch(`https://backendnyrfestas.vercel.app/get-user-info?username=${username}`);
+
+            if (userResponse.ok) {
+                const userData = await userResponse.json();
+                console.log('User info fetched:', userData);
+                const { razaosocial } = userData;
+
+                // Fetch product details from modal
+                const productName = document.querySelector('#codprod').textContent;
+                const productDesc = document.querySelector('#descrip').textContent;
+                const productPrice = document.querySelector('#preco1').textContent;//replace('Price: ', '').trim());
+                
+                const quantity = parseInt(document.getElementById('quantity').value);
+
+
+                
+                    
+
+
+
+
+/*
+                // Basic validation
+                console.log('Product details:', { productName, productDesc, productPrice, quantity });
+                if (!productName || !productDesc || isNaN(quantity) || isNaN(productPrice) || quantity <= 0 || productPrice <= 0) {
+                    alert('Please fill in valid product details');
+                    console.error('Invalid product details');
+                    return;
+                }*/
+
+                const productData = {
+                    username: username,
+                    razaosocial: razaosocial,
+                    codproduto: productName,  // Assuming the product code is productName (can be changed if needed)
+                    descricao: productDesc,
+                    quantidade: quantity,
+                    preco: productPrice
+                };
+
+                // Log the product data to be sent
+                console.log('Sending product data to add to order:', productData);
+
+                const addResponse = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(productData)
+                });
+
+                const addResult = await addResponse.json();
+                console.log('Add product result:', addResult);
+
+                if (addResponse.ok) {
+                    alert(addResult.message); // "Product added to existing draft order" or "New draft order created"
+                    console.log('Product successfully added to order');
+                    // Optionally clear the form fields
+                    document.getElementById('quantity').value = '';  // Clear quantity field
+                } else {
+                    console.error('Failed to add product to order:', addResult.error);
+                    alert('Failed to add product to order');
+                }
+            } else {
+                console.error('Failed to fetch user info:', userResponse);
+                alert('Failed to fetch user info');
+            }
+        } else {
+            // If cadastro is incomplete or not found, show alert
+            alert(cadastroResult.error || 'Unknown error with cadastro');
+            console.error('Cadastro incomplete or error:', cadastroResult.error);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong, please try again later');
+    }
+});
 
 
 
 
 window.onload = function() {
-    const username = localStorage.getItem('username');
+    const userid = localStorage.getItem('username');
    
-        document.getElementById('username-display').textContent = `Hello, ${username}`;
+        document.getElementById('username-display').textContent = `Hello, ${userid}`;
     
     
 };
+
+
+
+
+  
+    
+
+
+
 
 
 
@@ -204,23 +326,6 @@ function searchProducts() {
 }
 
 
-// Simulating a login check
-const isLoggedIn = localStorage.getItem('username'); // Or your chosen indicator
-
-if (!isLoggedIn) {
-    alert("You need to log in to access this page!");
-    window.location.href = '/login'; // Redirect to the login page
-} else {
-    console.log("Access granted. Welcome back!");
-}
-
-
-
-
-
-
-
-
 
 async function handleLogin(username, password) {
     const response = await fetch('/login', {
@@ -244,15 +349,3 @@ async function handleLogin(username, password) {
         alert(data.message); // Show error message if login failed
     }
 }
-
-
-    
-
-
-
-
-
-
-
-
-
