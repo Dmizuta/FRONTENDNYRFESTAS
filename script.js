@@ -221,7 +221,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
 
 
 /*
-                // Basic validation
+                // Basic validation testeste
                 console.log('Product details:', { productName, productDesc, productPrice, quantity });
                 if (!productName || !productDesc || isNaN(quantity) || isNaN(productPrice) || quantity <= 0 || productPrice <= 0) {
                     alert('Please fill in valid product details');
