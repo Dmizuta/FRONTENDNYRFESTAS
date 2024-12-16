@@ -287,7 +287,10 @@ window.onload = function() {
 
 
 
-
+const closeModal = () => {
+    document.getElementById('productModal').style.display = 'none';
+  };
+  
 
 
 
