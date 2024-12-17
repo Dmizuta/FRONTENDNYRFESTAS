@@ -71,38 +71,72 @@
             }
         }
 
-        // Function to dynamically display orders
-        function displayOrders(orders) {
-            console.log('displayOrders function called with:', orders); // Log the input to this function
-            const container = document.getElementById('orders-container');
-            container.innerHTML = ''; // Clear existing content
 
-            if (orders.length === 0) {
-                console.log('No orders found'); // Log if no orders exist
-                container.innerHTML = '<p>No orders found.</p>';
-                return;
-            }
 
-            orders.forEach(order => {
-                console.log('Processing order:', order); // Log each order being processed
 
-                const statusText = order.status === 1 ? 'Submitted' : 'Draft';
-                const orderRow = `
-                    <div class="order-row">
-                        <div class="order-details">
-                            <div><strong>ID:</strong> ${order.id}</div>
-                            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                            <div><strong>Total:</strong> R$ ${order.total.toFixed(2)}</div>
-                            <div class="status"><strong>Status:</strong> ${statusText}</div>
-                        </div>
-                        <button class="view-button" onclick="viewOrder(${order.id})">Ver Detalhes</button>
-                    </div>
-                `;
-                container.innerHTML += orderRow;
-            });
-            console.log('All orders displayed'); // Log when all orders are displayed
+
+
+
+
+
+
+
+// Function to dynamically display orders
+function displayOrders(orders) {
+    console.log('displayOrders function called with:', orders); // Log the input to this function
+    const container = document.getElementById('orders-container');
+    container.innerHTML = ''; // Clear existing content
+
+    if (orders.length === 0) {
+        console.log('No orders found'); // Log if no orders exist
+        container.innerHTML = '<p>No orders found.</p>';
+        return;
+    }
+
+    orders.forEach(order => {
+        console.log('Processing order:', order); // Log each order being processed
+
+        // Ensure the total is a valid number and handle non-numeric values
+        const total = parseFloat(order.total);
+        if (isNaN(total)) {
+            console.error('Invalid total value:', order.total);  // Log if total is invalid
         }
+
+        const statusText = order.status === 1 ? 'Submitted' : 'Draft';
+        const orderRow = `
+            <div class="order-row">
+                <div class="order-details">
+                    <div><strong>ID:</strong> ${order.id}</div>
+                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                    <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+                    <div class="status"><strong>Status:</strong> ${statusText}</div>
+                </div>
+                <button class="view-button" onclick="viewOrder(${order.id})">Ver Detalhes</button>
+            </div>
+        `;
+        container.innerHTML += orderRow;
+    });
+    console.log('All orders displayed'); // Log when all orders are displayed
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Function to view order details (placeholder)
         function viewOrder(orderId) {
