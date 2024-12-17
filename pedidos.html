@@ -6,90 +6,103 @@
     <title>Pedidos - NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
+
+
+
+    
+
 </head>
-<body>
-    <!-- Assuming there's a navbar or other components you want to load dynamically -->
-    <div id="navbar-container"></div> <!-- This div is where the navbar will load -->
 
-    <h1>Meus Pedidos</h1>
 
-    <div id="orders-container">
-        <!-- Orders will be inserted here dynamically -->
-    </div>
-
-    <script>
-        // Function to load orders from the backend
-        async function loadOrders() {
-            // Fetch username from localStorage
-            const username = localStorage.getItem('username');
-            console.log('Username from localStorage:', username); // Log the username from localStorage
-
-            // Check if username exists
-            if (!username) {
-                console.log('No username found in localStorage');
-                document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
-                return;
-            }
-
-            try {
-                const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username, {
-                    method: 'GET',
-                    // You may need credentials: 'include' if you're using cookies/sessions
-                });
-
-                // Check if the response is ok
-                if (!response.ok) {
-                    console.log('Failed to fetch orders:', response.statusText);
-                    document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+   
+    
+    
+    <body>
+        <h1>Meus Pedidos</h1>
+    
+        <div id="orders-container">
+            <!-- Orders will be inserted here dynamically -->
+        </div>
+    
+        <script>
+            // Function to load orders from the backend
+            async function loadOrders() {
+                // Fetch username from localStorage
+                const username = localStorage.getItem('username');
+                console.log('Username from localStorage:', username); // Log the username from localStorage
+    
+                // Check if username exists
+                if (!username) {
+                    console.log('No username found in localStorage');
+                    document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
                     return;
                 }
+    
+                try {
 
-                const orders = await response.json();
-                console.log('Fetched orders:', orders); // Log the fetched orders
-                displayOrders(orders);
 
-            } catch (error) {
-                console.log('Error fetching orders:', error);
-                document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+
+                  const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username, {
+    method: 'GET'
+    // No need for credentials: 'include' if you're not sending cookies or session data.
+});
+
+                    // Send the username to the backend via query parameters
+                   
+                    // Check if the response is ok
+                    if (!response.ok) {
+                        console.log('Failed to fetch orders:', response.statusText);
+                        document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+                        return;
+                    }
+    
+                    const orders = await response.json();
+                    console.log('Fetched orders:', orders); // Log the fetched orders
+                    displayOrders(orders);
+    
+                } catch (error) {
+                    console.log('Error fetching orders:', error);
+                    document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+                }
             }
-        }
-
-        // Function to dynamically display orders
-        function displayOrders(orders) {
-            const container = document.getElementById('orders-container');
-            container.innerHTML = ''; // Clear existing content
-
-            if (orders.length === 0) {
-                container.innerHTML = '<p>No orders found.</p>';
-                return;
-            }
-
-            orders.forEach(order => {
-                const statusText = order.status === 1 ? 'Submitted' : 'Draft';
-                const orderRow = `
-                    <div class="order-row">
-                        <div class="order-details">
-                            <div><strong>ID:</strong> ${order.id}</div>
-                            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                            <div><strong>Total:</strong> R$ ${order.total.toFixed(2)}</div>
-                            <div class="status"><strong>Status:</strong> ${statusText}</div>
+    
+            // Function to dynamically display orders
+            function displayOrders(orders) {
+                const container = document.getElementById('orders-container');
+                container.innerHTML = ''; // Clear existing content
+    
+                if (orders.length === 0) {
+                    container.innerHTML = '<p>No orders found.</p>';
+                    return;
+                }
+    
+                orders.forEach(order => {
+                    const statusText = order.status === 1 ? 'Submitted' : 'Draft';
+                    const orderRow = `
+                        <div class="order-row">
+                            <div class="order-details">
+                                <div><strong>ID:</strong> ${order.id}</div>
+                                <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+                                <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                                <div><strong>Total:</strong> R$ ${order.total.toFixed(2)}</div>
+                                <div class="status"><strong>Status:</strong> ${statusText}</div>
+                            </div>
+                            <button class="view-button" onclick="viewOrder(${order.id})">Ver Detalhes</button>
                         </div>
-                        <button class="view-button" onclick="viewOrder(${order.id})">Ver Detalhes</button>
-                    </div>
-                `;
-                container.innerHTML += orderRow;
-            });
-        }
-
-        // Function to view order details (placeholder)
-        function viewOrder(orderId) {
-            alert(`Visualizar detalhes do pedido ${orderId}`);
-            // You can redirect to another page or show a modal with more details here
-        }
-
-        // Load orders when the page is ready
-        document.addEventListener('DOMContentLoaded', loadOrders);
-    </script>
-</body>
-</html>
+                    `;
+                    container.innerHTML += orderRow;
+                });
+            }
+    
+            // Function to view order details (placeholder)
+            function viewOrder(orderId) {
+                alert(`Visualizar detalhes do pedido ${orderId}`);
+                // You can redirect to another page or show a modal with more details here
+            }
+    
+            // Load orders when the page is ready
+            document.addEventListener('DOMContentLoaded', loadOrders);
+        </script>
+    </body>
+    </html>
+    
