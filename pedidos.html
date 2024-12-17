@@ -51,13 +51,16 @@
                 }
     
                 try {
+
+
+
+                  const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username, {
+    method: 'GET'
+    // No need for credentials: 'include' if you're not sending cookies or session data.
+});
+
                     // Send the username to the backend via query parameters
-                    console.log('Sending request with username:', username);
-                    const response = await fetch(`https://backendnyrfestas.vercel.app/orders?username=${username}`, {
-                        method: 'GET',
-                        credentials: 'include' // Include cookies if authentication uses sessions
-                    });
-    
+                   
                     // Check if the response is ok
                     if (!response.ok) {
                         console.error('Failed to fetch orders:', response.statusText);
