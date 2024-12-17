@@ -34,73 +34,7 @@
     </nav>
    
     
-   
-        <style>
-            /* Basic styling for the orders page */
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f9f9f9;
-            }
-    
-            h1 {
-                text-align: center;
-                margin-top: 20px;
-                color: #333;
-            }
-    
-            #orders-container {
-                margin: 20px auto;
-                width: 90%;
-                max-width: 800px;
-                background: white;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-                overflow: hidden;
-            }
-    
-            .order-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px;
-                border-bottom: 1px solid #ddd;
-            }
-    
-            .order-row:last-child {
-                border-bottom: none;
-            }
-    
-            .order-details {
-                flex: 1;
-            }
-    
-            .order-details div {
-                margin: 5px 0;
-            }
-    
-            .status {
-                font-weight: bold;
-                color: #007bff;
-            }
-    
-            .view-button {
-                padding: 5px 10px;
-                color: white;
-                background-color: #28a745;
-                border: none;
-                border-radius: 3px;
-                cursor: pointer;
-            }
-    
-            .view-button:hover {
-                background-color: #218838;
-            }
-        </style>
-    
-        <title>Meus Pedidos</title>
-    </head>
+  
     <body>
         <h1>Meus Pedidos</h1>
     
@@ -173,43 +107,3 @@
     </body>
     </html>
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         // Handle login status
-         const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-        } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
-        }
-// Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-localStorage.removeItem('username');  // Remove login data
-window.location.href = '/';  // Redirect to login page
-});
-
-  </script>
-</body>
-
-
-
-
-
-</html>
