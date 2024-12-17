@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
 </head>
-
 <body>
+    <!-- Assuming there's a navbar or other components you want to load dynamically -->
+    <div id="navbar-container"></div> <!-- This div is where the navbar will load -->
+
     <h1>Meus Pedidos</h1>
 
     <div id="orders-container">
@@ -30,9 +32,9 @@
             }
 
             try {
-                // Send the username to the backend via query parameters
-                const response = await fetch(`https://backendnyrfestas.vercel.app/orders?username=${username}`, {
-                    method: 'GET'
+                const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username, {
+                    method: 'GET',
+                    // You may need credentials: 'include' if you're using cookies/sessions
                 });
 
                 // Check if the response is ok
@@ -42,17 +44,10 @@
                     return;
                 }
 
-                // Parse the orders data
                 const orders = await response.json();
                 console.log('Fetched orders:', orders); // Log the fetched orders
-                
-                // Check if the response contains orders
-                if (orders.success === false) {
-                    document.getElementById('orders-container').innerHTML = '<p>No orders found.</p>';
-                } else {
-                    displayOrders(orders); // Display orders if data is valid
-                }
-    
+                displayOrders(orders);
+
             } catch (error) {
                 console.log('Error fetching orders:', error);
                 document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
@@ -69,7 +64,6 @@
                 return;
             }
 
-            // Loop through the orders and display them
             orders.forEach(order => {
                 const statusText = order.status === 1 ? 'Submitted' : 'Draft';
                 const orderRow = `
