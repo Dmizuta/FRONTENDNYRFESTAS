@@ -98,6 +98,8 @@
                 background-color: #218838;
             }
         </style>
+    
+        <title>Meus Pedidos</title>
     </head>
     <body>
         <h1>Meus Pedidos</h1>
@@ -109,8 +111,16 @@
         <script>
             // Function to load orders from the backend
             async function loadOrders() {
+                // Retrieve username from localStorage
+                const username = localStorage.getItem('username');
+    
+                if (!username) {
+                    alert("You need to be logged in to view your orders.");
+                    return;
+                }
+    
                 try {
-                    const response = await fetch('https://backendnyrfestas.vercel.app/orders', {
+                    const response = await fetch(`https://backendnyrfestas.vercel.app/orders?username=${username}`, {
                         method: 'GET',
                         credentials: 'include' // Include cookies if authentication uses sessions
                     });
@@ -163,37 +173,6 @@
     </body>
     </html>
     
-
-
-
-<!--
-
-    
-    <section class="pagina">
-        <h2>Pedidos</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Pedido</th>
-                    <th>Valor</th>
-                    <th>Status</th>
-                </tr>
-                
-            </thead>
-            <tbody>
-                
-                 <tr>
-                    <td><a href="pedido-especifico.html">Pedido 00001</a></td>
-                    <td>R$ 100,00</td>
-                    <td>Em andamento</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
--->
-   
-<script>
-
 
 
 
