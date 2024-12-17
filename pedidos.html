@@ -33,7 +33,7 @@
     
                 // Check if username exists
                 if (!username) {
-                    console.error('No username found in localStorage');
+                    console.log('No username found in localStorage');
                     document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
                     return;
                 }
@@ -51,7 +51,7 @@
                    
                     // Check if the response is ok
                     if (!response.ok) {
-                        console.error('Failed to fetch orders:', response.statusText);
+                        console.log('Failed to fetch orders:', response.statusText);
                         document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
                         return;
                     }
@@ -61,7 +61,7 @@
                     displayOrders(orders);
     
                 } catch (error) {
-                    console.error('Error fetching orders:', error);
+                    console.log('Error fetching orders:', error);
                     document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
                 }
             }
