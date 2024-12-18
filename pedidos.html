@@ -8,86 +8,19 @@
     <script src="scripts/loadComponents.js" defer></script>
 </head>
 <style>
-    /* The CSS code I provided earlier goes here */
+/* The CSS code I provided earlier goes here */
 
 /* General page styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
 
-/* Header styling */
-header {
-    background-color: #007BFF;
-    color: white;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 24px;
-    margin: 0;
-}
-
-#user-info {
-    display: flex;
-    align-items: center;
-}
-
-#username-display {
-    margin-right: 10px;
-}
-
-#logoutBtn {
-    background-color: #FF5733;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#logoutBtn:hover {
-    background-color: #D94428;
-}
-
-/* Navigation styling */
-nav {
-    background-color: #343A40;
-    padding: 10px;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Main content */
-h1 {
+h1{
+    padding-top: 20px ;
     text-align: center;
-    margin-top: 30px;
-    font-size: 28px;
 }
+
+
+
+
+
 
 /* Orders container */
 #orders-container {
@@ -99,9 +32,10 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Order row layout */
 .order-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensure spacing between items */
     padding: 15px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
@@ -111,19 +45,25 @@ h1 {
 
 .order-details {
     display: flex;
-    flex-direction: column;
+    flex: 1; /* Allow it to fill available space */
+    justify-content: space-between; /* Distribute space between columns */
 }
 
 .order-details div {
-    margin: 5px 0;
+    margin: 0 10px; /* Spacing between order details */
+    font-size: 1em;
+    color: #333; /* Slightly darker text for better readability */
 }
 
+/* Status styling */
 .status {
     font-weight: bold;
     color: #007BFF;
 }
 
+/* View button */
 .view-button {
+    width: 10%;
     background-color: #28a745;
     color: white;
     padding: 8px 16px;
@@ -141,14 +81,20 @@ h1 {
     background-color: #eef2f5;
 }
 
+/* Responsive layout for mobile */
 @media (max-width: 768px) {
     .order-row {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: flex-start; /* Align left on small screens */
+    }
+
+    .order-details {
+        flex-direction: column; /* Stack the details vertically in smaller space */
     }
 
     .view-button {
         margin-top: 10px;
+        width: 100%; /* Make the button full width on mobile */
     }
 }
 
@@ -273,7 +219,7 @@ function displayOrders(orders) {
                     <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
-                <button class="view-button" onclick="viewOrder(${order.id})">Ver Detalhes</button>
+                <button class="view-button" id="details" onclick="viewOrder(${order.id})">Ver Detalhes</button>
             </div>
         `;
         container.innerHTML += orderRow;
