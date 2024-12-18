@@ -7,7 +7,168 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
 </head>
+<style>
+    /* The CSS code I provided earlier goes here */
+
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+}
+
+#username-display {
+    margin-right: 10px;
+}
+
+#logoutBtn {
+    background-color: #FF5733;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#logoutBtn:hover {
+    background-color: #D94428;
+}
+
+/* Navigation styling */
+nav {
+    background-color: #343A40;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main content */
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 28px;
+}
+
+/* Orders container */
+#orders-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-details div {
+    margin: 5px 0;
+}
+
+.status {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.view-button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.view-button:hover {
+    background-color: #218838;
+}
+
+.order-row:hover {
+    background-color: #eef2f5;
+}
+
+@media (max-width: 768px) {
+    .order-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .view-button {
+        margin-top: 10px;
+    }
+}
+
+
+
+</style>
+
+
+
+
+
+
 <body>
+
+
+
+
+
+
+
     <header>
         <h1>NYR Festas</h1>
         <div id="user-info">
