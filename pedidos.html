@@ -169,6 +169,126 @@ h1{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Modal - Initially Hidden */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Overlay background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+    overflow: auto;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}
+
+#close-modal-btn {
+    background-color: #dc3545;
+}
+
+#close-modal-btn:hover {
+    background-color: #c82333;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-info {
+    flex: 1;
+}
+
+.order-info-row {
+    margin: 5px 0;
+}
+
+/* Modal table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#order-items-body tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#total-value {
+    font-weight: bold;
+}
+
+/* When modal is open, make it visible */
+.modal.show {
+    display: flex;
+}
+
+/* Responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
+    }
+
+    .order-info {
+        margin-top: 20px;
+    }
+}
+
+
 </style>
 
 
@@ -225,6 +345,85 @@ h1{
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal Structure (Initially hidden) -->
+<div id="order-details-modal" class="modal">
+    <div class="modal-content">
+        <!-- Header Section with Order Information -->
+        <div class="order-header">
+            <div class="order-info">
+                <div class="order-info-row">
+                    <span>Numero do Pedido:</span>
+                    <span id="order-id"></span> <!-- Dynamically set order ID -->
+                </div>
+                <div class="order-info-row">
+                    <span>Razao Social:</span>
+                    <span id="razao-social"></span> <!-- Dynamically set Razao Social -->
+                </div>
+                <div class="order-info-row">
+                    <span>CNPJ:</span>
+                    <span id="cnpj"></span> <!-- Dynamically set CNPJ -->
+                </div>
+            </div>
+            <img src="logo-url-here" alt="Logo" id="logo-image"> <!-- Logo -->
+        </div>
+
+        <!-- Table with Product Details -->
+        <table id="order-items-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Código do Produto</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody id="order-items-body">
+                <!-- Product rows will be dynamically populated here -->
+            </tbody>
+        </table>
+
+        <!-- Total Order Section -->
+        <div class="order-total">
+            <div>
+                <span>Total do Pedido:</span>
+                <span id="total-value">R$ 0,00</span> <!-- Dynamically calculate the total -->
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="modal-actions">
+            <button id="submit-order-btn" class="action-btn">Submit</button>
+            <button id="delete-order-btn" class="action-btn">Delete</button>
+        </div>
+
+        <!-- Close Modal Button -->
+        <button id="close-modal-btn" class="action-btn">Close</button>
+    </div>
+</div>
+
+<!-- Example of a "Ver Detalhes" button -->
+<button class="view-button" id="view-order-btn">Ver Detalhes</button>
+
+
+
+
+
 
 
 
@@ -336,8 +535,8 @@ function displayOrders(orders) {
 
 <!-- Add this button in your order row, where you want the "Ver Detalhes" button -->
 <button class="view-button" id="view-order-btn">Ver Detalhes</button>
-              <!-- <button class="view-button" id="details" onclick="viewOrder(${order.id})">Ver Detalhes old</button>-->
-            </div>
+
+              
         `
         
         
@@ -414,12 +613,6 @@ function displayOrders(orders) {
 
 
 
-
-
-
-
-
-
 // Get the modal element
 const modal = document.getElementById("order-modal");
 const closeModalBtn = document.getElementById("close-modal");
@@ -453,6 +646,65 @@ window.addEventListener("click", function(event) {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to open the modal and populate it
+function openOrderModal(orderId) {
+    // Find the modal by ID
+    const modal = document.getElementById('order-details-modal');
+    
+    // Example of populating data dynamically, adjust as needed
+    document.getElementById('order-id').textContent = orderId; // Set Order ID
+    // Fill in other order details (you can replace this with actual dynamic data)
+    
+    // Open the modal
+    modal.classList.add('show');
+}
+
+// Function to close the modal
+function closeOrderModal() {
+    const modal = document.getElementById('order-details-modal');
+    modal.classList.remove('show');
+}
+
+// Event listener for "Ver Detalhes" buttons (you would have one for each order)
+const viewOrderBtns = document.querySelectorAll('.view-button');
+viewOrderBtns.forEach((btn) => {
+    btn.addEventListener('click', function () {
+        const orderId = this.getAttribute('data-order-id'); // Assuming you set the order ID as a data attribute
+        openOrderModal(orderId);
+    });
+});
+
+// Close the modal when clicking the "Close" button
+document.getElementById('close-modal-btn').addEventListener('click', closeOrderModal);
 
 
 
