@@ -100,6 +100,75 @@ h1{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Width of the modal */
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#order-details-content {
+    padding: 10px;
+}
+
+/* Optional: Add a fade-in transition for the modal */
+.modal-content {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
 </style>
 
 
@@ -136,6 +205,38 @@ h1{
     <div id="orders-container">
         <!-- Orders will be inserted here dynamically -->
     </div>
+
+
+
+
+
+
+
+
+
+
+                <!-- Modal for order details -->
+                <div id="order-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" id="close-modal">&times;</span>
+                        <h2>Order Details</h2>
+                        <div id="order-details-content">
+                            <!-- Order details will go here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
         // Function to load orders from the backend
@@ -219,9 +320,30 @@ function displayOrders(orders) {
                     <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
-                <button class="view-button" id="details" onclick="viewOrder(${order.id})">Ver Detalhes</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Add this button in your order row, where you want the "Ver Detalhes" button -->
+<button class="view-button" id="view-order-btn">Ver Detalhes</button>
+              <!-- <button class="view-button" id="details" onclick="viewOrder(${order.id})">Ver Detalhes old</button>-->
             </div>
-        `;
+        `
+        
+        
+        
+        
+        ;
         container.innerHTML += orderRow;
     });
     console.log('All orders displayed'); // Log when all orders are displayed
@@ -272,6 +394,79 @@ function displayOrders(orders) {
             localStorage.removeItem('username');  // Remove login data
             window.location.href = '/';  // Redirect to login page
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Get the modal element
+const modal = document.getElementById("order-modal");
+const closeModalBtn = document.getElementById("close-modal");
+
+// Event listener for opening the modal
+document.getElementById("orders-container").addEventListener("click", function(event) {
+    // Check if the clicked element is the "Ver Detalhes" button
+    if (event.target && event.target.classList.contains("view-button")) {
+        // Here you can also pass the specific order ID to dynamically fetch the order data
+        const orderId = event.target.getAttribute("data-order-id");
+        console.log("Clicked order ID:", orderId);
+        
+        // Show the modal
+        modal.style.display = "block";
+        
+        // You can add code here to fetch order details based on the orderId
+        // and populate the modal with data.
+    }
+});
+
+// Event listener for closing the modal
+closeModalBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

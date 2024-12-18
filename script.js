@@ -151,7 +151,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
         });
 
         if (!cadastroResponse.ok) {
-            alert('Error checking cadastro');
+            alert('Favor preencher seu Cadastro.');
             console.error('Error checking cadastro:', cadastroResponse);
             return;
         }
