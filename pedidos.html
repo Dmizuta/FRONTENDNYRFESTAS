@@ -18,10 +18,6 @@ h1{
 }
 
 
-
-
-
-
 /* Orders container */
 #orders-container {
     max-width: 1200px;
@@ -98,21 +94,6 @@ h1{
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Modal Styling */
 .modal {
     display: none; /* Hidden by default */
@@ -167,25 +148,6 @@ h1{
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Modal - Initially Hidden */
@@ -287,8 +249,6 @@ table th, table td {
         margin-top: 20px;
     }
 }
-
-
 </style>
 
 
@@ -297,12 +257,6 @@ table th, table td {
 
 
 <body>
-
-
-
-
-
-
 
     <header>
         <h1>NYR Festas</h1>
@@ -320,6 +274,8 @@ table th, table td {
         </ul>
     </nav>
 
+
+
     <h1>Meus Pedidos</h1>
 
     <div id="orders-container">
@@ -327,40 +283,10 @@ table th, table td {
     </div>
 
 
-
-
-
-
-
-
-
-
-                <!-- Modal for order details -->
-                <div id="order-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-btn" id="close-modal">&times;</span>
-                        <h2>Order Details</h2>
-                        <div id="order-details-content">
-                            <!-- Order details will go here dynamically -->
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+          
 
 <!-- Modal Structure (Initially hidden) -->
-<div id="order-details-modal" class="modal">
+<div id="order-modal" class="modal">
     <div class="modal-content">
         <!-- Header Section with Order Information -->
         <div class="order-header">
@@ -393,7 +319,7 @@ table th, table td {
                     <th>Valor</th>
                 </tr>
             </thead>
-            <tbody id="order-items-body">
+            <tbody id="order-details-content">
                 <!-- Product rows will be dynamically populated here -->
             </tbody>
         </table>
@@ -413,24 +339,9 @@ table th, table td {
         </div>
 
         <!-- Close Modal Button -->
-        <button id="close-modal-btn" class="action-btn">Close</button>
+        <button id="close-modal" class="action-btn">Close</button>
     </div>
 </div>
-
-<!-- Example of a "Ver Detalhes" button -->
-<button class="view-button" id="view-order-btn">Ver Detalhes</button>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -482,12 +393,6 @@ table th, table td {
 
 
 
-
-
-
-
-
-
 // Function to dynamically display orders
 function displayOrders(orders) {
     console.log('displayOrders function called with:', orders); // Log the input to this function
@@ -520,23 +425,9 @@ function displayOrders(orders) {
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Add this button in your order row, where you want the "Ver Detalhes" button -->
 <button class="view-button" id="view-order-btn">Ver Detalhes</button>
 
-              
         `
         
         
@@ -547,22 +438,6 @@ function displayOrders(orders) {
     });
     console.log('All orders displayed'); // Log when all orders are displayed
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -579,39 +454,7 @@ function displayOrders(orders) {
             loadOrders();
         });
 
-        // Handle login status
-        const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-        } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
-        }
-
-        // Logout function
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            localStorage.removeItem('username');  // Remove login data
-            window.location.href = '/';  // Redirect to login page
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 // Get the modal element
 const modal = document.getElementById("order-modal");
@@ -648,77 +491,20 @@ window.addEventListener("click", function(event) {
 
 
 
+    // Handle login status
+    const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Function to open the modal and populate it
-function openOrderModal(orderId) {
-    // Find the modal by ID
-    const modal = document.getElementById('order-details-modal');
-    
-    // Example of populating data dynamically, adjust as needed
-    document.getElementById('order-id').textContent = orderId; // Set Order ID
-    // Fill in other order details (you can replace this with actual dynamic data)
-    
-    // Open the modal
-    modal.classList.add('show');
-}
-
-// Function to close the modal
-function closeOrderModal() {
-    const modal = document.getElementById('order-details-modal');
-    modal.classList.remove('show');
-}
-
-// Event listener for "Ver Detalhes" buttons (you would have one for each order)
-const viewOrderBtns = document.querySelectorAll('.view-button');
-viewOrderBtns.forEach((btn) => {
-    btn.addEventListener('click', function () {
-        const orderId = this.getAttribute('data-order-id'); // Assuming you set the order ID as a data attribute
-        openOrderModal(orderId);
-    });
-});
-
-// Close the modal when clicking the "Close" button
-document.getElementById('close-modal-btn').addEventListener('click', closeOrderModal);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // Logout function
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('username');  // Remove login data
+            window.location.href = '/';  // Redirect to login page
+        });
     </script>
 </body>
 </html>
