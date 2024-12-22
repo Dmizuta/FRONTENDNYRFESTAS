@@ -104,6 +104,8 @@
 
           if (result.success) {
             localStorage.setItem('username', username); // Store the username in localStorage
+            localStorage.setItem('token', result.token); // Store the token in localStorage
+            localStorage.setItem('role', result.role); // Store the role in localStorage
             window.location.href = 'produtos.html'; // Redirect to products page
           } else {
             errorMessage.textContent = result.message; // Show error message
