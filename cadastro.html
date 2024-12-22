@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
 </head>
 <body>
     <header>
@@ -46,7 +47,62 @@
         </form>
     </section>
 
+
+
+
+
+
+
+
+
+
+
+
     <script>
+
+
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const loggedInUsername = localStorage.getItem('username'); // Fetch the username from localStorage
+
+  if (!loggedInUsername) {
+    console.error("No username found in localStorage.");
+    return;
+  }
+
+  try {
+    // Sending the username to the backend via query string
+    
+    const response = await fetch(`https://backendnyrfestas.vercel.app/cadastropage?username=${loggedInUsername}`);
+
+    const result = await response.json();
+
+    if (result.success && result.data) {
+      // Fill the form fields with the data returned from the backend
+      document.getElementById('representante').value = result.data.representante || '';
+      document.getElementById('razaosocial').value = result.data.razaosocial || '';
+      document.getElementById('cnpj').value = result.data.cnpj || '';
+      document.getElementById('telefone').value = result.data.telefone || '';
+      document.getElementById('email').value = result.data.email || '';
+    }
+  } catch (error) {
+    console.error('Error fetching cadastro data:', error);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Handle form submission

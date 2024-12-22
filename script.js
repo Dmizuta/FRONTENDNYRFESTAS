@@ -16,19 +16,18 @@ async function fetchProductData() {
         console.error('Error fetching product data:', error);
 
         // Handle errors and show a user-friendly message in the table
-        const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+        const tableBody = document.querySelector('#productTable tbody');
         tableBody.innerHTML = '<tr><td colspan="7">Unable to load products at the moment. Please try again later.</td></tr>';
     }
 }
 
 // Function to populate the product table dynamically
 function populateProductTable(products) {
-    const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+    const tableBody = document.querySelector('#productTable tbody');
 
     // Clear any existing rows
     tableBody.innerHTML = '';
 
-    // Check if data exists and loop through the products
     if (products && products.length > 0) {
         products.forEach(product => {
             const row = tableBody.insertRow();
@@ -43,118 +42,85 @@ function populateProductTable(products) {
             const cell7 = row.insertCell(6); // Price Fractioned
             const cell8 = row.insertCell(7); // View Details Button
 
-            // Insert data from backend
-            
-            
-            
-            
-            
-            cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" 
-                   alt="Product Image" 
-                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
-                   onmouseover="this.style.transform='scale(3)'" 
-                   onmouseout="this.style.transform='scale(1)'">`;
+            // Populate cells with product data
+            cell1.innerHTML = `
+                <img src="${product.imagem || 'https://via.placeholder.com/50'}" 
+                     alt="Product Image" 
+                     style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                     onmouseover="this.style.transform='scale(3)'" 
+                     onmouseout="this.style.transform='scale(1)'">
+            `;
 
-            
-            
-            
-            
-            
-            
-            
-            //cell1.innerHTML = `<img src="${product.imagem || 'https://via.placeholder.com/50'}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover;">`;  // Image
-            cell2.innerHTML = `${product.codproduto}`;  // Product Code
-            cell3.innerHTML = product.descricao;  // Description
-            cell4.innerHTML = `${product.cxfechada || 'N/A'}`;  // Quantity Closed
-            cell5.innerHTML = `R$ ${parseFloat(product.precofechada).toFixed(2)}`;  // Price Closed
-            cell6.innerHTML = `${product.cxfracionada || 'N/A'}`;  // Quantity Fractioned
-            cell7.innerHTML = `R$ ${parseFloat(product.precofrac).toFixed(2)}`;  // Price Fractioned
-
-            // Add the "View Details" button in the 8th column
+            cell2.textContent = product.codproduto || 'N/A'; // Product Code
+            cell3.textContent = product.descricao || 'N/A'; // Description
+            cell4.textContent = product.cxfechada || 'N/A'; // Quantity Closed
+            cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
+            cell6.textContent = product.cxfracionada || 'N/A'; // Quantity Fractioned
+            cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
             cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
 
+            // Add event listener for "Add" button
+            const openModalBtn = row.querySelector('.openModalBtn');
+            openModalBtn.addEventListener('click', function () {
+                const productImage = row.querySelector('img').src;
+                const productCode = row.cells[1].textContent;
+                const productDesc = row.cells[2].textContent;
+                const productPrice1 = row.cells[4].textContent;
+                const productPrice2 = row.cells[6].textContent;
 
-
-
-
-
-            
-// Add event listener for the "View Details" button
-const openModalBtn = row.querySelector('.openModalBtn');
-openModalBtn.addEventListener('click', function() {
-    const productName = row.cells[1].textContent; // Product description
-    const productDesc = row.cells[2].textContent; // Detailed description
-    const productPrice1 = row.cells[4].textContent; // Price 1
-    const productPrice2 = row.cells[6].textContent; // Price 2
-    const productImage = row.querySelector('img').src; // Product image
-
-    openModal(productName, productDesc, productPrice1, productPrice2, productImage);
-});
-});
-} else {
-// If no products found, show a message
-tableBody.innerHTML = '<tr><td colspan="7">No products available.</td></tr>';
-}
+                openModal(productCode, productDesc, productPrice1, productPrice2, productImage);
+            });
+        });
+    } else {
+        // No products available message
+        tableBody.innerHTML = '<tr><td colspan="7">No products available.</td></tr>';
+    }
 }
 
-// Function to update and show modal with product details
-const modal = document.getElementById('myModal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const quantityInput = document.getElementById('quantity');
-const addButton = document.getElementById('addButton');
-const errorMessage = document.createElement("span");
-const successMessage = document.createElement("span");
+// Function to open the modal with product details
+function openModal(productCode, productDesc, productPrice1, productPrice2, productImage) {
+    const modal = document.getElementById('myModal');
+    const productInfo = modal.querySelector('.product-info');
+    const priceInfo1 = modal.querySelector('.price1-info');
+    const priceInfo2 = modal.querySelector('.price2-info');
+    const productImageElement = modal.querySelector('img');
 
+    // Populate modal with product details
+    productInfo.querySelector('h3').textContent = productCode;
+    productInfo.querySelector('p').textContent = productDesc;
+    priceInfo1.querySelector('p').textContent = `Price 1: ${productPrice1}`;
+    priceInfo2.querySelector('p').textContent = `Price 2: ${productPrice2}`;
+    productImageElement.src = productImage;
 
-
-// Function to open modal
-function openModal(productName, productDesc, productPrice1, productPrice2, productImage) {
-const productInfo = modal.querySelector('.modal-stage-one .product-info');
-const priceInfo1 = modal.querySelector('.modal-stage-one .price1-info');
-const priceInfo2 = modal.querySelector('.modal-stage-one .price2-info');
-const productImageElement = modal.querySelector('.modal-stage-one img');
-
-productInfo.querySelector('h3').textContent = productName;
-productInfo.querySelector('p').textContent = productDesc;
-priceInfo1.querySelector('p').innerHTML = `<strong>Price1: ${productPrice1}</strong>`;
-priceInfo2.querySelector('p').innerHTML = `<strong>Price2: ${productPrice2}</strong>`;
-
-// Adjust image size in modal
-productImageElement.src = productImage;
-
-modal.style.display = 'block'; // Show modal 
+    modal.style.display = 'block'; // Show modal
 }
 
-// Close modal functionality
-closeModalBtn.addEventListener('click', function() {
-modal.style.display = 'none'; // Close the modal
+// Event listener to close modal
+document.getElementById('closeModalBtn').addEventListener('click', function () {
+    document.getElementById('myModal').style.display = 'none';
 });
 
-// Close modal if clicked outside modal content
-window.addEventListener('click', function(event) {
-if (event.target === modal) {
-modal.style.display = 'none'; // Close modal
-}
+
+// Event listener to close modal
+document.getElementById('cancelButton').addEventListener('click', function () {
+    document.getElementById('myModal').style.display = 'none';
 });
 
-// Validate quantity and show appropriate message when "Add Quantity" is clicked
-addButton.addEventListener('click', function() {
-// Clear previous messages
-errorMessage.style.display = "none";
-successMessage.style.display = "none";
 
-let quantity = quantityInput.value;
-
-// Check if quantity is a valid positive number
-if (quantity <= 0 || isNaN(quantity) || quantity === "") {
-// Show error message
-errorMessage.style.display = "inline";
-} else {
-// Show success message
-successMessage.style.display = "inline";
-// Add product to order or perform necessary action here
-}
+// Close modal when clicking outside of it
+window.addEventListener('click', function (event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
 });
+
+
+
+
+
+
+
 
 
 
@@ -185,7 +151,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
         });
 
         if (!cadastroResponse.ok) {
-            alert('Error checking cadastro');
+            alert('Favor preencher seu Cadastro.');
             console.error('Error checking cadastro:', cadastroResponse);
             return;
         }
@@ -253,6 +219,8 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 if (addResponse.ok) {
                     alert(addResult.message); // "Product added to existing draft order" or "New draft order created"
                     console.log('Product successfully added to order');
+                    const modal = document.getElementById('myModal');
+                    modal.style.display = 'none'; 
                     // Optionally clear the form fields
                     document.getElementById('quantity').value = '';  // Clear quantity field
                 } else {
@@ -273,6 +241,113 @@ document.getElementById('addButton').addEventListener('click', async () => {
         alert('Something went wrong, please try again later');
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+// Handle the "Add Quantity" button click
+document.getElementById('addButton').addEventListener('click', async () => {
+    const username = localStorage.getItem('username');
+    if (!username) {
+        alert('User not logged in');
+        return;
+    }
+
+    const quantity = parseInt(document.getElementById('quantity').value);
+    if (!quantity || quantity <= 0) {
+        alert('Invalid quantity. Please enter a valid number.');
+        return;
+    }
+
+    try {
+        const productData = {
+            username,
+            productCode: document.querySelector('.product-info h3').textContent,
+            productDesc: document.querySelector('.product-info p').textContent,
+            quantity,
+        };
+
+        const response = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(productData),
+        });
+
+        const result = await response.json();
+        alert(result.message || 'Product added successfully!');
+
+        const modal = document.getElementById('myModal');
+        modal.style.display = 'none'; 
+        
+    } catch (error) {
+        console.error('Error adding product to order:', error);
+        alert('Failed to add product to order.');
+    }
+});
+
+
+
+*/
+
+// Fetch products when the page loads
+window.onload = fetchProductData;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -349,3 +424,6 @@ async function handleLogin(username, password) {
         alert(data.message); // Show error message if login failed
     }
 }
+
+
+

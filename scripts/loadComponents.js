@@ -9,7 +9,7 @@ async function loadComponent(elementId, filePath) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadComponent("navbar", "components/navbar.html");
+    
 
     // Carrega a tabela de produtos na página de Lista de Produtos
     if (document.getElementById("productTable")) {
