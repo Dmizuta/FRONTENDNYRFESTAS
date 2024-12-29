@@ -27,8 +27,6 @@
     <section class="pagina">
         <h2>Cadastro de Cliente REPRESENTANTE</h2>
 
-       
-
         <!-- Form for New Customer Entry or Editing -->
         <form id="cadastroForm" class="cadastro-form">
             <label for="representante">Representante:</label>
@@ -49,14 +47,10 @@
             <button type="submit" id="cadastroButton">Cadastrar</button>
         </form>
 
-
-
- <!-- Search Tool -->
- <div id="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar por Razão Social ou CNPJ" />
-</div>
-
-
+        <!-- Search Tool -->
+        <div id="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por Razão Social ou CNPJ" />
+        </div>
 
         <!-- Customer List -->
         <div id="customer-list-container">
@@ -173,45 +167,24 @@
             window.location.href = '/';
         });
 
-
-
-
-
-
-
-
-
-
-  // Fetch the user's role from localStorage
-  const userRole = localStorage.getItem('role'); // Ensure this is set at login
-  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-  // Dynamically assign the correct href based on the user's role
-  if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
-
-
-
-
-
-
-
-
-
-
-
-
+        // Fetch the user's role from localStorage
+        const userRole = localStorage.getItem('role'); // Ensure this is set at login
+        const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+        const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+        // Dynamically assign the correct href based on the user's role
+        if (userRole === 'USER') {
+            pedidosLink.href = 'pedidos.html';
+            cadastroLink.href = 'cadastro.html';
+        } else if (userRole === 'SELLER') {
+            pedidosLink.href = 'pedidosrep.html';
+            cadastroLink.href = 'cadastrorep.html';
+        } else if (userRole === 'ADMIN') {
+            pedidosLink.href = 'pedidosadmin.html';
+            cadastroLink.href = 'cadastroadmin.html';
+        } else {
+            pedidosLink.href = '#'; // Default action for unknown or missing roles
+            console.warn('Role not defined or invalid.');
+        }
     </script>
 </body>
 </html>
