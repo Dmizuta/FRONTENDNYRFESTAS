@@ -47,10 +47,12 @@
             <button type="submit" id="cadastroButton">Cadastrar</button>
         </form>
 
-        <!-- Search Tool -->
-        <div id="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar por Razão Social ou CNPJ" />
+        <div>
+            <input type="text" id="search-bar" placeholder="Search by name or CNPJ">
+            <button onclick="searchCustomers()">Search</button>
         </div>
+        <ul id="customer-list"></ul>
+        
 
         <!-- Customer List -->
         <div id="customer-list-container">
