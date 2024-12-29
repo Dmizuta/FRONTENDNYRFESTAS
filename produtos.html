@@ -35,10 +35,24 @@
         <ul>
             <li><a href="cadastro.html">Cadastro</a></li>
             <li><a href="produtos.html">Lista de Produtos</a></li>
+          <li id="pedidos-link"><a href="#">Pedidos</a></li>
+                  </ul>
+      </nav>
+      
+   
+
+
+
+
+<!--
+    <nav>
+        <ul>
+            <li><a href="cadastro.html">Cadastro</a></li>
+            <li><a href="produtos.html">Lista de Produtos</a></li>
             <li><a href="pedidos.html">Pedidos</a></li>
         </ul>
     </nav>
-
+-->
 
 
     <h1>Lista de Produtos</h1>
@@ -100,7 +114,51 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
     <script>
+
+
+
+
+
+
+  // Fetch the user's role from localStorage
+  const userRole = localStorage.getItem('role'); // Ensure this is set at login
+  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+
+  // Dynamically assign the correct href based on the user's role
+  if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+  } else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+  } else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+  } else {
+    pedidosLink.href = '#'; // Default action for unknown or missing roles
+    console.warn('Role not defined or invalid.');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
              // Handle login status
              const username = localStorage.getItem('username');
         if (username) {
