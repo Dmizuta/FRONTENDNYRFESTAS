@@ -59,6 +59,7 @@
             <h3>Lista de Clientes</h3>
             <ul id="customer-list"></ul>
         </div>
+
     </section>
 
     <script>
@@ -78,6 +79,27 @@
                 populateCustomerList(result.data);
             }
         });
+
+
+
+
+ // Handle login status
+ const usuario = localStorage.getItem('username');
+        if (usuario) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${usuario}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
+
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('username');
+            window.location.href = '/';
+        });
+
+
+
 
         // Function to display the customer list
         function populateCustomerList(customers) {
@@ -171,20 +193,7 @@
             }
         });
 
-        // Handle login status
-        const usuario = localStorage.getItem('username');
-        if (usuario) {
-            document.getElementById('username-display').textContent = `Bem-vindo, ${usuario}`;
-        } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
-        }
-
-        // Handle logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('username');
-            window.location.href = '/';
-        });
+       
     </script>
 </body>
 </html>
