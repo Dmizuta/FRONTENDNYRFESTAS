@@ -125,8 +125,8 @@ window.addEventListener('click', function (event) {
 // ADD PRODUCT FUNCTION
 
 document.getElementById('addButton').addEventListener('click', async () => {
-    const customerId = document.getElementById('cadastroForm').dataset.customerId;  // Get the customerId from the form dataset
-    
+   // const customerId = document.getElementById('cadastroForm').dataset.customerId;  // Get the customerId from the form dataset
+    const customerId = localStorage.getItem("customerId")
     if (!customerId) {
         alert('No customer selected');
         return;
@@ -171,7 +171,7 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 const quantity = parseInt(document.getElementById('quantity').value);
 
                 const productData = {
-                    customerId: customerId,  // Send customerId instead of username
+                    //customerId: customerId,  // Send customerId instead of username
                     razaosocial: razaosocial,
                     codproduto: productName,  // Assuming the product code is productName (can be changed if needed)
                     descricao: productDesc,
