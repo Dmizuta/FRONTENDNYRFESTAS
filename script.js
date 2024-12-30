@@ -186,7 +186,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const quantity = parseInt(document.getElementById("quantity").value);
 
         const productData = {
-          //customerId: customerId,  // Send customerId instead of username
+          customerId: customerId,  // Send customerId instead of username
           razaosocial: razaosocial,
           codproduto: productName, // Assuming the product code is productName (can be changed if needed)
           descricao: productDesc,
