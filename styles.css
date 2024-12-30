@@ -6,6 +6,11 @@
     font-family: 'Poppins', sans-serif; /* Modern, rounded font */
 }
 
+h1{
+    padding-top: 20px ;
+    text-align: center;
+}*
+
 /* Body */
 body {
     background-color: #F9F7F1; /* Soft off-white */
