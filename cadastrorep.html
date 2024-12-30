@@ -130,7 +130,7 @@
 
 
 
-        
+
         // Handle search input event
         document.getElementById('searchInput').addEventListener('input', async (e) => {
             const searchTerm = e.target.value.toLowerCase();
@@ -148,6 +148,63 @@
             }
         });
 
+
+
+// Handle form submission (Create or Update)
+const form = document.getElementById('cadastroForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
+
+            const formData = {
+                representante: document.getElementById('representante').value,
+                razaosocial: document.getElementById('razaosocial').value,
+                cnpj: document.getElementById('cnpj').value,
+                telefone: document.getElementById('telefone').value,
+                email: document.getElementById('email').value,
+                username: loggedInUsername,
+            };
+
+            const customerId = form.dataset.customerId; // Check if we are updating an existing customer
+
+            try {
+                let response;
+                if (customerId) {
+                    // Update existing customer
+                    response = await fetch(`https://backendnyrfestas.vercel.app/cadastro/${customerId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData),
+                    });
+                } else {
+                    // Create new customer
+                    response = await fetch('https://backendnyrfestas.vercel.app/cadastrorep', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData),
+                    });
+                }
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message); // Shows a dynamic message like "Cadastro created successfully."
+                    form.reset();
+                    form.dataset.customerId = ''; // Clear stored customer ID
+                    document.getElementById('cadastroButton').textContent = 'Cadastrar'; // Reset button text
+                } else {
+                    alert('Erro: ' + (result.error || 'Falha no cadastro.'));
+                }
+            } catch (error) {
+                console.error('Erro ao enviar o formulário:', error);
+                alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
+            }
+        });
+
+
+
+
+/*
         // Handle form submission (Create or Update)
         const form = document.getElementById('cadastroForm');
         form.addEventListener('submit', async (e) => {
@@ -199,7 +256,7 @@
             }
         });
 
-       
+       */
     </script>
 </body>
 </html>
