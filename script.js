@@ -129,6 +129,8 @@ window.addEventListener("click", function (event) {
   }
 });
 
+
+
 // ADD PRODUCT FUNCTION
 
 document.getElementById("addButton").addEventListener("click", async () => {
@@ -142,6 +144,18 @@ document.getElementById("addButton").addEventListener("click", async () => {
   }
 
   try {
+
+
+ // First, check if the user has a completed cadastro
+ console.log('Checking cadastro for username:', username);
+ const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ username: username })
+ });
+
+
+/*
     // First, check if the customer has a completed cadastro
     console.log("Checking cadastro for customerId:", customerId);
     const cadastroResponse = await fetch(
@@ -151,7 +165,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ customerId: customerId }), // Sending customerId instead of username
       }
-    );
+    );*/
 
     if (!cadastroResponse.ok) {
       alert("Favor preencher seu Cadastro.");
