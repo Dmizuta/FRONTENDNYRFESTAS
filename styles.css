@@ -333,6 +333,8 @@ th {
 
 
 #logoutBtn {
+    width: 100px;
+    padding: 12px;
     margin-left: 10px;
 }
 
