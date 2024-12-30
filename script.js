@@ -127,6 +127,7 @@ window.addEventListener('click', function (event) {
 document.getElementById('addButton').addEventListener('click', async () => {
    // const customerId = document.getElementById('cadastroForm').dataset.customerId;  // Get the customerId from the form dataset
     const customerId = localStorage.getItem("customerId")
+    
     if (!customerId) {
         alert('No customer selected');
         return;
