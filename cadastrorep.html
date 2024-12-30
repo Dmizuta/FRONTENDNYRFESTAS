@@ -7,6 +7,115 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
 </head>
+</html><style>
+    /* Styling for the Cadastro form */
+.cadastro-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cadastro-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.cadastro-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.cadastro-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cadastro-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the customer list container */
+#customer-list-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#customer-list-container h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#customer-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#customer-list li {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#customer-list li:hover {
+    background-color: #e6f7ff;
+}
+
+/* Styling for the search bar */
+#searchInput {
+    width: calc(100% - 110px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+button[onclick="searchCustomers()"] {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[onclick="searchCustomers()"]:hover {
+    background-color: #218838;
+}
+
+</style>
 <body>
     <header>
         <h1>NYR Festas</h1>
