@@ -134,6 +134,7 @@ window.addEventListener("click", function (event) {
 document.getElementById("addButton").addEventListener("click", async () => {
   // const customerId = document.getElementById('cadastroForm').dataset.customerId;  // Get the customerId from the form dataset
   const customerId = localStorage.getItem("customerId");
+  const username = localStorage.getItem("username");
 
   if (!customerId) {
     alert("No customer selected");
@@ -186,6 +187,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const quantity = parseInt(document.getElementById("quantity").value);
 
         const productData = {
+          username: username,
           customerId: customerId,  // Send customerId instead of username
           razaosocial: razaosocial,
           codproduto: productName, // Assuming the product code is productName (can be changed if needed)
