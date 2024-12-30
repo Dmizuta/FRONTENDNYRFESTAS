@@ -131,10 +131,11 @@ window.addEventListener('click', function (event) {
 
 
 
-
+// ADD PRODUCT FUNCTION
 
 document.getElementById('addButton').addEventListener('click', async () => {
     const username = localStorage.getItem("username");  // Get the username from localStorage
+    
 
     if (!username) {
         alert('User not logged in');
@@ -178,22 +179,6 @@ document.getElementById('addButton').addEventListener('click', async () => {
                 const productPrice = document.querySelector('#preco1').textContent;//replace('Price: ', '').trim());
                 
                 const quantity = parseInt(document.getElementById('quantity').value);
-
-
-                
-                    
-
-
-
-
-/*
-                // Basic validation
-                console.log('Product details:', { productName, productDesc, productPrice, quantity });
-                if (!productName || !productDesc || isNaN(quantity) || isNaN(productPrice) || quantity <= 0 || productPrice <= 0) {
-                    alert('Please fill in valid product details');
-                    console.error('Invalid product details');
-                    return;
-                }*/
 
                 const productData = {
                     username: username,
@@ -246,65 +231,6 @@ document.getElementById('addButton').addEventListener('click', async () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-// Handle the "Add Quantity" button click
-document.getElementById('addButton').addEventListener('click', async () => {
-    const username = localStorage.getItem('username');
-    if (!username) {
-        alert('User not logged in');
-        return;
-    }
-
-    const quantity = parseInt(document.getElementById('quantity').value);
-    if (!quantity || quantity <= 0) {
-        alert('Invalid quantity. Please enter a valid number.');
-        return;
-    }
-
-    try {
-        const productData = {
-            username,
-            productCode: document.querySelector('.product-info h3').textContent,
-            productDesc: document.querySelector('.product-info p').textContent,
-            quantity,
-        };
-
-        const response = await fetch('https://backendnyrfestas.vercel.app/add-to-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(productData),
-        });
-
-        const result = await response.json();
-        alert(result.message || 'Product added successfully!');
-
-        const modal = document.getElementById('myModal');
-        modal.style.display = 'none'; 
-        
-    } catch (error) {
-        console.error('Error adding product to order:', error);
-        alert('Failed to add product to order.');
-    }
-});
-
-
-
-*/
 
 // Fetch products when the page loads
 window.onload = fetchProductData;
