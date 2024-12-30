@@ -241,13 +241,7 @@ button[onclick="searchCustomers()"]:hover {
 
 
 
-
-
-
-
-        
-
-        // Handle form submission (Create or Update)
+// Handle form submission (Create or Update)
 const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -263,20 +257,21 @@ form.addEventListener('submit', async (e) => {
         username: loggedInUsername,
     };
 
-    const cnpj = formData.cnpj;  // Using cnpj as the unique identifier for the customer
-    const customerId = form.dataset.customerId; // Check if we are updating an existing customer
+    // Retrieve the customer ID from the form's data attribute (if it's an existing customer)
+    const customerId = form.dataset.customerId;
 
     try {
         let response;
+
         if (customerId) {
             // Update existing customer
-            response = await fetch(`https://backendnyrfestas.vercel.app/updatecadastro/${cnpj}`, {
+            response = await fetch(`https://backendnyrfestas.vercel.app/updatecadastro/${customerId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
         } else {
-            // Create new customer
+            // Create new customer (assuming the backend has this route)
             response = await fetch('https://backendnyrfestas.vercel.app/cadastrorep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -285,19 +280,25 @@ form.addEventListener('submit', async (e) => {
         }
 
         const result = await response.json();
+        
         if (response.ok) {
-            alert(result.message); // Shows a dynamic message like "Cadastro created successfully."
+            alert(result.message);  // Shows a dynamic message like "Customer created successfully."
             form.reset();
-            form.dataset.customerId = ''; // Clear stored customer ID
-            document.getElementById('cadastroButton').textContent = 'Cadastrar'; // Reset button text
+            form.dataset.customerId = '';  // Clear stored customer ID after submission
+            document.getElementById('cadastroButton').textContent = 'Cadastrar';  // Reset button text
         } else {
-            alert('Erro: ' + (result.error || 'Falha no cadastro.'));
+            alert('Error: ' + (result.error || 'Failed to process the request.'));
         }
     } catch (error) {
-        console.error('Erro ao enviar o formulário:', error);
-        alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
+        console.error('Error submitting the form:', error);
+        alert('Error processing the form. Please try again later.');
     }
 });
+
+
+
+
+        
 
 
        
