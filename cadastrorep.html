@@ -54,6 +54,19 @@
 }
 
 /* Styling for the search bar */
+#searchBox {
+    width:100%;
+    padding-top: 20px;
+    margin-right: 10px;
+   
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+
+
 #searchInput {
     width:100%;
     padding: 10px;
@@ -63,6 +76,8 @@
     box-sizing: border-box;
     font-size: 14px;
 }
+
+
 
 button[onclick="searchCustomers()"] {
     padding: 10px 15px;
@@ -119,7 +134,7 @@ button[onclick="searchCustomers()"]:hover {
             <button type="submit" id="cadastroButton">Cadastrar</button>
         </form>
 
-        <div>
+        <div id="searchBox">
             <input type="text" id="searchInput" placeholder="Search by name or CNPJ">
             
         </div>
