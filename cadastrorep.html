@@ -178,7 +178,7 @@
                 let response;
                 if (customerId) {
                     // Update existing customer
-                    response = await fetch(`https://backendnyrfestas.vercel.app/customers/${customerId}`, {
+                    response = await fetch(`https://backendnyrfestas.vercel.app/updatecadastro/${customerId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData),
