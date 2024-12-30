@@ -93,7 +93,7 @@ nav a:hover {
 }
 
 .pagina:hover {
-    transform: scale(1.01); /* Slight zoom effect on hover */
+    transform: scale(1.5); /* Slight zoom effect on hover */
 }
 
 /* Headings */
