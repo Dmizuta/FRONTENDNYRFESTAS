@@ -160,17 +160,15 @@ button[onclick="searchCustomers()"]:hover {
     </section>
 
     <script>
+
         window.addEventListener('DOMContentLoaded', async () => {
             const loggedInUsername = localStorage.getItem('username');
             
             if (!loggedInUsername) {
                 console.error("No username found in localStorage.");
                 return;
-            }}
-        )
-
-
-
+            }
+        
 
 
              // Handle login status
@@ -203,7 +201,11 @@ const result = await response.json();
 
 if (result.success && result.data) {
     populateCustomerList(result.data);
-}
+}}
+)
+
+
+
 
 // Function to display the customer list
 function populateCustomerList(customers) {
