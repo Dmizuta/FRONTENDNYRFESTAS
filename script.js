@@ -233,8 +233,16 @@ document.getElementById("addButton").addEventListener("click", async () => {
           // Optionally clear the form fields
           document.getElementById("quantity").value = ""; // Clear quantity field
         } else {
-          console.error("Failed to add product to order:", addResult.error);
-          alert("Failed to add product to order");
+            if (!addResponse.ok) {
+                const errorResult = await addResponse.json();
+                console.error("Failed to add product to order:", errorResult.error);
+                
+                // Display the error message sent by the backend
+                alert(errorResult.message || "Failed to add product to order.");
+              }
+              
+          //console.error("Failed to add product to order:", addResult.error);
+          //alert("Failed to add product to order");
         }
       } else {
         console.error("Failed to fetch customer info:", customerResponse);
