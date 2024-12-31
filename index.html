@@ -118,18 +118,14 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
           // Store username and role in localStorage
           localStorage.setItem('username', username);
-          localStorage.setItem('customerId', customerId);
+          localStorage.setItem('role', role);  // Store the role
+          
+          if (customerId) {
+            localStorage.setItem('customerId', customerId);
+          }
 
-          if (role) {
-  localStorage.setItem('role', role);  // Store the role
-
-  
-
-
-
-
-} else {
-  console.error('Role is undefined in the token!');
+           else {
+  console.error('customerId is undefined!');
 }
 
 
