@@ -114,11 +114,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
           const decodedToken = jwt_decode(token);
           console.log('Decoded Token:', decodedToken); // Log the decoded token
           const role = decodedToken.role;
-          const id = decodedToken.id;
+          const id = decodedToken.customerId;
 
           // Store username and role in localStorage
           localStorage.setItem('username', username);
-          localStorage.setItem('id', id);
+          localStorage.setItem('customerId', customerId);
 
           if (role) {
   localStorage.setItem('role', role);  // Store the role
