@@ -315,6 +315,8 @@ form.addEventListener('submit', async (e) => {
 
     // Retrieve the customer ID from the form's data attribute (if it's an existing customer)
     const customerId = form.dataset.customerId;
+    localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
+
 
     try {
         let response;
