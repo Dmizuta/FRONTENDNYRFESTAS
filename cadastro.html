@@ -99,6 +99,49 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 
+// Handle form submission
+const form = document.getElementById('cadastroForm');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Get the logged-in username from localStorage
+    const loggedInUsername = localStorage.getItem('username');  // assuming the username is saved here
+
+    // Get form data
+    const formData = {
+        representante: document.getElementById('representante').value,
+        razaosocial: document.getElementById('razaosocial').value,
+        cnpj: document.getElementById('cnpj').value,
+        telefone: document.getElementById('telefone').value,
+        email: document.getElementById('email').value,
+        username: loggedInUsername,  // Add username to the form data
+    };
+
+    try {
+        const response = await fetch('https://backendnyrfestas.vercel.app/cadastro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(result.message); // Shows the dynamic message like "Cadastro created successfully." or "Cadastro updated successfully."
+            
+            // Store the customerId in localStorage
+            localStorage.setItem('customerId', result.customerId);  // Store the customerId from the response
+
+            // Optionally, redirect to a different page or clear the form
+            form.reset();  // Reset the form after successful submission
+            
+        } else {
+            alert('Erro: ' + (result.error || 'Falha no cadastro.'));
+        }
+    } catch (error) {
+        console.error('Erro ao enviar o formulário:', error);
+        alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
+    }
+});
 
 
 
@@ -106,8 +149,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
-
+/*
 
 
 // Handle form submission
@@ -152,7 +194,7 @@ form.addEventListener('submit', async (e) => {
 
 
 
-
+*/
 
 
     
