@@ -87,9 +87,6 @@
   <script>
 
 
-
-
-
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
   event.preventDefault(); // Prevent form submission
 
@@ -124,6 +121,12 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
           if (role) {
   localStorage.setItem('role', role);  // Store the role
+
+
+  setNewUserId(userId);
+
+
+  
 } else {
   console.error('Role is undefined in the token!');
 }
@@ -148,6 +151,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     errorMessage.textContent = 'Please enter both username and password.';
   }
 });
+
+
+
+
+
 
 // When the user logs in or changes user, update the localStorage:
 function setNewUserId(userId) {
