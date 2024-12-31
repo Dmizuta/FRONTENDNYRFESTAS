@@ -472,7 +472,7 @@ function searchProducts() {
     }
   });
 }
-
+/*
 async function handleLogin(username, password) {
   const response = await fetch("/login", {
     method: "POST",
@@ -494,4 +494,4 @@ async function handleLogin(username, password) {
   } else {
     alert(data.message); // Show error message if login failed
   }
-}
+}*/
