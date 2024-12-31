@@ -138,7 +138,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
     const customerId = localStorage.getItem("customerId");
     const username = localStorage.getItem("username");
   
-    if (!customerId) {
+    if (!username) {
       alert("No customer selected");
       return;
     }
