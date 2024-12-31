@@ -64,8 +64,12 @@
 
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const loggedInUsername = localStorage.getItem('username'); // Fetch the username from localStorage
+
+
   localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
+
+
+  const loggedInUsername = localStorage.getItem('username'); // Fetch the username from localStorage
   if (!loggedInUsername) {
     console.error("No username found in localStorage.");
     return;

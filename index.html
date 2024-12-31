@@ -149,6 +149,22 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   }
 });
 
+// When the user logs in or changes user, update the localStorage:
+function setNewUserId(userId) {
+  // Clear any previous user data (optional but useful for resetting everything)
+  localStorage.removeItem("customerId");
+
+  // Store the new user's ID
+  localStorage.setItem("customerId", userId);
+
+  console.log("User ID updated in localStorage:", userId);
+}
+
+// Example usage when the user logs in or switches accounts:
+const newUserId = "newUserId123"; // Replace this with the actual ID
+setNewUserId(newUserId);
+
+// After setting the new ID, you can continue with other logic
 
   </script>
   
