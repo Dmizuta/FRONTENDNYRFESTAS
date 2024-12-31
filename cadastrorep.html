@@ -228,10 +228,10 @@ function loadCustomerData(customer) {
     document.getElementById('telefone').value = customer.telefone || '';
     document.getElementById('email').value = customer.email || '';
     document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
-    document.getElementById('cadastroForm').dataset.customerId = customer.id; // Store customer ID
+    document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
 
     // Store customerId in localStorage
-    localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
+    localStorage.setItem('id', customer.id);  // Set customerId in localStorage
 }
 
 
