@@ -285,7 +285,7 @@ function loadCustomerData(customer) {
             const searchTerm = e.target.value.toLowerCase();
             const loggedInUsername = localStorage.getItem('username');
 
-            const response = await fetch(`https://backendnyrfestas.vercel.app/customers?username=${loggedInUsername}`);
+            const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers?username=${loggedInUsername}`);
             const result = await response.json();
 
             if (result.success && result.data) {
