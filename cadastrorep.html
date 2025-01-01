@@ -163,6 +163,8 @@ button[onclick="searchCustomers()"]:hover {
 
         window.addEventListener('DOMContentLoaded', async () => {
             const loggedInUsername = localStorage.getItem('username');
+            localStorage.setItem('keyName', null); // If you want to explicitly set it to null
+
             
             if (!loggedInUsername) {
                 console.error("No username found in localStorage.");
@@ -317,8 +319,7 @@ form.addEventListener('submit', async (e) => {
     const customerId = localStorage.getItem('customerId');
 
 
-    // Retrieve the customer ID from the form's data attribute (if it's an existing customer)
-   // const customerId = form.dataset.customerId;
+  
     
 
 
