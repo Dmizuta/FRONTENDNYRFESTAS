@@ -198,7 +198,7 @@ button[onclick="searchCustomers()"]:hover {
 
 
 // Fetch customers linked to the logged-in user (seller)
-const response = await fetch(`https://backendnyrfestas.vercel.app/customers?username=${loggedInUsername}`);
+const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers`);
 const result = await response.json();
 
 if (result.success && result.data) {
