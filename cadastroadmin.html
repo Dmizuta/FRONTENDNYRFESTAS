@@ -287,7 +287,7 @@ function loadCustomerData(customer) {
             const result = await response.json();
 
             if (result.success && result.data) {
-                const filteredCustomers = result.data.filter(customer => 
+                const filteredCustomers = result.data.filter(customer => customer.username.toLowerCase().includes(searchTerm) ||
                     customer.razaosocial.toLowerCase().includes(searchTerm) || 
                     customer.cnpj.toLowerCase().includes(searchTerm)
                 );
