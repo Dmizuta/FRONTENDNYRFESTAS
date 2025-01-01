@@ -278,13 +278,12 @@ function loadCustomerData(customer) {
 
 */
 
-
-
-        // Handle search input event
-        document.getElementById('searchInput').addEventListener('input', async (e) => {
+    // Handle search input event
+    document.getElementById('searchInput').addEventListener('input', async (e) => {
+            const searchTerm = e.target.value.toLowerCase();
             
 
-            const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers?username=${loggedInUsername}`);
+            const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers`);
             const result = await response.json();
 
             if (result.success && result.data) {
@@ -296,6 +295,7 @@ function loadCustomerData(customer) {
             }
         });
 
+     
 
 
 // Handle form submission (Create or Update)
