@@ -283,7 +283,7 @@ function loadCustomerData(customer) {
 async function fetchAllCustomers(searchTerm = '') {
     try {
         const query = searchTerm ? `?searchTerm=${encodeURIComponent(searchTerm)}` : '';
-        const response = await fetch(`/allcustomers${query}`); // Use the all-customers endpoint
+        const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers${query}`); // Use the all-customers endpoint
 
         if (!response.ok) throw new Error('Failed to fetch customer data');
 
