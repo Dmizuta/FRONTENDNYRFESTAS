@@ -192,11 +192,50 @@ button[onclick="searchCustomers()"]:hover {
 
 
 
+     
+// This part needs to be inside an async function
+async function fetchCustomers() {
+    const url = 'https://backendnyrfestas.vercel.app/allcustomers';  // Admin fetches all customers
+
+    try {
+        const response = await fetch(url);
+        const result = await response.json();
+
+        if (result.success && result.data) {
+            populateCustomerList(result.data);
+        } else {
+            console.error('Error fetching customers:', result.error);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+        })
+// Function to populate the customer list for admin
+function populateCustomerList(customers) {
+    const customerListContainer = document.getElementById('customerListContainer');
+    customerListContainer.innerHTML = ''; // Clear any existing data
+
+    customers.forEach(customer => {
+        const customerItem = document.createElement('div');
+        customerItem.classList.add('customer-item');
+        customerItem.innerHTML = `
+            <p>Razão Social: ${customer.razaosocial}</p>
+            <p>CNPJ: ${customer.cnpj}</p>
+            <p>Username: ${customer.username}</p>
+            <p>Assigned Seller: ${customer.seller_username || 'No seller assigned'}</p>
+        `;
+        customerListContainer.appendChild(customerItem);
+    });
+}
+
+// Call the function to fetch the customers
+fetchCustomers();
 
 
 
 
-
+/*
 // Fetch customers linked to the logged-in user (seller)
 const response = await fetch(`https://backendnyrfestas.vercel.app/customers?username=${loggedInUsername}`);
 const result = await response.json();
@@ -204,6 +243,8 @@ const result = await response.json();
 if (result.success && result.data) {
     populateCustomerList(result.data);
 }}
+
+
 )
 
 
@@ -221,6 +262,12 @@ function populateCustomerList(customers) {
         customerListContainer.appendChild(listItem);
     });
 }
+
+
+*/
+
+
+
 
 // Function to load customer data into the form when clicked
 function loadCustomerData(customer) {
@@ -280,23 +327,23 @@ function loadCustomerData(customer) {
 
 
 
-async function fetchAllCustomers(searchTerm = '') {
-    try {
-        const query = searchTerm ? `?searchTerm=${encodeURIComponent(searchTerm)}` : '';
-        const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers${query}`); // Use the all-customers endpoint
+        // Handle search input event
+        document.getElementById('searchInput').addEventListener('input', async (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const loggedInUsername = localStorage.getItem('username');
 
-        if (!response.ok) throw new Error('Failed to fetch customer data');
+            const response = await fetch(`https://backendnyrfestas.vercel.app/customers?username=${loggedInUsername}`);
+            const result = await response.json();
 
-        const data = await response.json();
-        if (data.success) {
-            renderCustomerList(data.data);
-        } else {
-            console.error('Error fetching customers:', data.error);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+            if (result.success && result.data) {
+                const filteredCustomers = result.data.filter(customer => 
+                    customer.razaosocial.toLowerCase().includes(searchTerm) || 
+                    customer.cnpj.toLowerCase().includes(searchTerm)
+                );
+                populateCustomerList(filteredCustomers);
+            }
+        });
+
 
 
 // Handle form submission (Create or Update)
@@ -388,7 +435,7 @@ form.addEventListener('submit', async (e) => {
     pedidosLink.href = '#'; // Default action for unknown or missing roles
     console.warn('Role not defined or invalid.');
   }
-
+        
 
 
     </script>
