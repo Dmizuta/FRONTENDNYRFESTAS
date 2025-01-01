@@ -153,7 +153,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
       });
   
       if (!cadastroResponse.ok) {
-        alert("Favor preencher seu Cadastro.");
+        alert("Por favor preencha seu Cadastro.");
         console.error("Error checking cadastro:", cadastroResponse);
         return;
       }
