@@ -228,6 +228,7 @@ function populateCustomerList(customers) {
 
 // Function to load customer data into the form when clicked
 function loadCustomerData(customer) {
+    document.getElementById('username').value = customer.username || '';
     document.getElementById('representante').value = customer.representante || '';
     document.getElementById('razaosocial').value = customer.razaosocial || '';
     document.getElementById('cnpj').value = customer.cnpj || '';
