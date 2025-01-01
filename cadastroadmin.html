@@ -308,15 +308,16 @@ const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
+    
 
     const formData = {
+
         representante: document.getElementById('representante').value,
         razaosocial: document.getElementById('razaosocial').value,
         cnpj: document.getElementById('cnpj').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        username: loggedInUsername,
+        username: document.getElementById('username').value,
     };
 
 
