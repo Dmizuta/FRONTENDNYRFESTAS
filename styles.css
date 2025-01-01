@@ -98,7 +98,7 @@ nav a:hover {
 }
 
 .pagina:hover {
-    transform: scale(1.0); /* Slight zoom effect on hover */
+    transform: scale(1.5); /* Slight zoom effect on hover */
 }
 
 /* Headings */
@@ -215,7 +215,7 @@ th {
 }
 
 .modal-content:hover {
-    transform: scale(1.00); /* Slight zoom effect on modal */
+    transform: scale(1.5); /* Slight zoom effect on modal */
 }
 
 /* Modal Image */
