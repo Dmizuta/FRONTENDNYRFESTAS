@@ -216,7 +216,7 @@ function populateCustomerList(customers) {
 
     customers.forEach(customer => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${customer.username} - ${customer.razaosocial} - (${customer.cnpj})`;
+        listItem.textContent = `${customer.username} - ${customer.representante} -${customer.razaosocial} - (${customer.cnpj})`;
         listItem.addEventListener('click', () => loadCustomerData(customer));
         customerListContainer.appendChild(listItem);
     });
