@@ -243,7 +243,7 @@ const productPrice = document.querySelector('#preco1').textContent;//replace('Pr
 const quantity = parseInt(document.getElementById('quantity').value);
 
 const productData = {
-    username: username,
+    username: customername,
     razaosocial: razaosocial,
     codproduto: productName,  // Assuming the product code is productName (can be changed if needed)
     descricao: productDesc,
@@ -271,11 +271,11 @@ const productData = {
           quantidade: quantity,
           preco: productPrice,*/
 
-          
+
         };
 
         const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/admin-add-to-order-admin",  // Updated endpoint for admin
+          "https://backendnyrfestas.vercel.app/add-to-order-admin",  // Updated endpoint for admin
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
