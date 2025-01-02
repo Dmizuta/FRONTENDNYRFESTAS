@@ -10,8 +10,231 @@
 </head>
 
 <style>
-/* The CSS code remains the same as your original code */
+
+/* Orders container */
+#orders-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Order row layout */
+.order-row {
+    display: flex;
+    justify-content: space-between; /* Ensure spacing between items */
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.order-details {
+    display: flex;
+    flex: 1; /* Allow it to fill available space */
+    justify-content: space-between; /* Distribute space between columns */
+}
+
+.order-details div {
+    margin: 0 10px; /* Spacing between order details */
+    font-size: 1em;
+    color: #333; /* Slightly darker text for better readability */
+}
+
+/* Status styling */
+.status {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* View button */
+.view-button {
+    width: 10%;
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.view-button:hover {
+    background-color: #218838;
+}
+
+.order-row:hover {
+    background-color: #eef2f5;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+    .order-row {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: flex-start; /* Align left on small screens */
+    }
+
+    .order-details {
+        flex-direction: column; /* Stack the details vertically in smaller space */
+    }
+
+    .view-button {
+        margin-top: 10px;
+        width: 100%; /* Make the button full width on mobile */
+    }
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    padding-top: 60px;
+}
+
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+    overflow: auto;
+}
+
+/* Optional: Add a fade-in transition for the modal */
+.modal-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#logo-image {
+    width: 20%;
+    padding: 10px;
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    cursor: pointer;
+}
+
+
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#order-details-content {
+    padding: 10px;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* Modal - Initially Hidden */
+
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}
+
+#close-modal-btn {
+    background-color: #dc3545;
+}
+
+#close-modal-btn:hover {
+    background-color: #c82333;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-info {
+    flex: 1;
+}
+
+.order-info-row {
+    margin: 5px 0;
+}
+
+/* Modal table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#order-items-body tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#total-value {
+    font-weight: bold;
+}
+
+/* When modal is open, make it visible */
+.modal.show {
+    display: flex;
+}
+
+
+
+
+
+/* Responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
+    }
+
+    .order-info {
+        margin-top: 20px;
+    }
+}
 </style>
+
+
 
 <body>
 
@@ -123,6 +346,90 @@
 
         // Load orders when the page is loaded
         loadOrders();
+
+
+
+// Get the modal element
+const modal = document.getElementById("order-modal");
+const closeModalBtn = document.getElementById("close-modal");
+
+// Event listener for opening the modal
+document.getElementById("orders-container").addEventListener("click", function(event) {
+    // Check if the clicked element is the "Ver Detalhes" button
+    if (event.target && event.target.classList.contains("view-button")) {
+        // Here you can also pass the specific order ID to dynamically fetch the order data
+        const orderId = event.target.getAttribute("data-order-id");
+        console.log("Clicked order ID:", orderId);
+        
+        // Show the modal
+        modal.style.display = "block";
+        
+        // You can add code here to fetch order details based on the orderId
+        // and populate the modal with data.
+    }
+});
+
+// Event listener for closing the modal
+closeModalBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+
+
+
+    // Handle login status
+    const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
+
+        // Logout function
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('username');  // Remove login data
+            window.location.href = '/';  // Redirect to login page
+        });
+
+
+
+
+
+
+
+
+
+
+
+  // Fetch the user's role from localStorage
+  const userRole = localStorage.getItem('role'); // Ensure this is set at login
+  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+  // Dynamically assign the correct href based on the user's role
+  if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+    cadastroLink.href = 'cadastro.html';
+  } else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+    cadastroLink.href = 'cadastrorep.html';
+  } else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+    cadastroLink.href = 'cadastroadmin.html';
+  } else {
+    pedidosLink.href = '#'; // Default action for unknown or missing roles
+    console.warn('Role not defined or invalid.');
+  }
+
+
+
     </script>
 </body>
 </html>
