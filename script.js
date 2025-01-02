@@ -179,7 +179,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         if (customerResponse.ok) {
           const customerData = await customerResponse.json();
           console.log("Customer info fetched:", customerData);
-          const { razaosocial, customername } = customerData;
+          const { razaosocial, username } = customerData;
 
           // Fetch product details from modal
           const productName = document.querySelector("#codprod")?.textContent;
@@ -238,7 +238,12 @@ document.getElementById("addButton").addEventListener("click", async () => {
       console.error("Error:", error);
       alert("Something went wrong, please try again later");
     }
-  } else {
+  } 
+  
+  
+  
+  
+  else {
     // Admin logic (no cadastro check)
     try {
       console.log('Admin adding product for username:', username);
