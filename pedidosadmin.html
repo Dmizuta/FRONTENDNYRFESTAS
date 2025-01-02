@@ -264,7 +264,7 @@ table th, table td {
 
 
 
-    <h1>Meus Pedidos ADMIN</h1>
+    <h1>Meus Pedidos REPRESENTANTE</h1>
 
     <div id="orders-container">
         <!-- Orders will be inserted here dynamically -->
@@ -504,8 +504,6 @@ window.addEventListener("click", function(event) {
 
 
 
-
-
   // Fetch the user's role from localStorage
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
   const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
@@ -524,6 +522,12 @@ window.addEventListener("click", function(event) {
     pedidosLink.href = '#'; // Default action for unknown or missing roles
     console.warn('Role not defined or invalid.');
   }
+
+
+
+
+
+
 
 
 
