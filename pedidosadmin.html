@@ -104,6 +104,7 @@
                 if (!response.ok) throw new Error('Failed to fetch orders.');
 
                 const orders = await response.json();
+                console.log("Orders fetched: ", orders);  // Debugging line to check the response
                 displayOrders(orders);
             } catch (error) {
                 console.error('Error:', error);
@@ -114,6 +115,11 @@
         function displayOrders(orders) {
             const container = document.getElementById('orders-container');
             container.innerHTML = '';  // Clear existing content before adding new orders
+            if (orders.length === 0) {
+                container.innerHTML = '<p>No orders available.</p>';
+                return;
+            }
+
             orders.forEach(order => {
                 const orderRow = document.createElement('div');
                 orderRow.className = 'order-row';
@@ -147,7 +153,9 @@
         });
 
         // Load all orders when the page is ready
-        loadOrders();
+        window.onload = function() {
+            loadOrders();
+        };
     </script>
 </body>
 </html>
