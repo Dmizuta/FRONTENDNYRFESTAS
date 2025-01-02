@@ -302,7 +302,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         }
       } else {
         console.error("Failed to fetch customer info:", customerResponse);
-        alert("FAVOR PREENCHER O CADASTRO");
+        alert("SELECIONE UM CLIENTE PARA ADICIONAR O PRODUTO.");
       }
     } catch (error) {
       console.error("Error:", error);

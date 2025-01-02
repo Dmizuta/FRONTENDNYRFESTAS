@@ -264,7 +264,7 @@ table th, table td {
 
 
 
-    <h1>Meus Pedidos ADMIN</h1>
+    <h1>Meus Pedidos REPRESENTANTE</h1>
 
     <div id="orders-container">
         <!-- Orders will be inserted here dynamically -->
@@ -354,7 +354,7 @@ table th, table td {
 
             try {
                 console.log('Sending request to backend...');
-                const response = await fetch('https://backendnyrfestas.vercel.app/orders-admin' , {
+                const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username, {
                     method: 'GET'
                 });
 
