@@ -175,7 +175,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const quantity = parseInt(document.getElementById("quantity").value);
 
         const productData = {
-          username: customername,
+          username: username,
           customerId: customerId,
           razaosocial: razaosocial,
           codproduto: productName,
