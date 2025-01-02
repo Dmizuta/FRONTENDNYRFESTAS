@@ -163,7 +163,7 @@ button[onclick="searchCustomers()"]:hover {
 
         window.addEventListener('DOMContentLoaded', async () => {
             const loggedInUsername = localStorage.getItem('username');
-            //localStorage.setItem('customerId', "" ); // If you want to explicitly set it to null
+            localStorage.setItem('customerId', "" ); // If you want to explicitly set it to null
 
             
             if (!loggedInUsername) {
