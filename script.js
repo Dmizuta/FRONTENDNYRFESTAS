@@ -227,7 +227,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
             alert(addResult.error || "Failed to add product to order.");
           }
         } else {
-          console.error("Failed to fetch customer info:", customerResponse);
+          console.error("FAVOR SELECIONAR UM CADASTRO", customerResponse);
           alert("Failed to fetch customer info");
         }
       } else {
