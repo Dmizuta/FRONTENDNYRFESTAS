@@ -135,8 +135,7 @@ window.addEventListener("click", function (event) {
 
 
 
-// ADD PRODUCT FUNCTION
-
+/// ADD PRODUCT FUNCTION
 document.getElementById("addButton").addEventListener("click", async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
@@ -150,79 +149,97 @@ document.getElementById("addButton").addEventListener("click", async () => {
   if (userRole !== "ADMIN") {
     // Non-admin users should be checked for cadastro status
     try {
-      // Fetch customer info (e.g., razaosocial)
-      console.log("Fetching customer info for customerId:", customerId);
-      const customerResponse = await fetch(
-        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
-      );
+      // Check if the user has a completed cadastro
+      console.log('Checking cadastro for username:', username);
+      const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username })
+      });
 
-      if (customerResponse.ok) {
-        const customerData = await customerResponse.json();
-        console.log("Customer info fetched:", customerData);
-        const { razaosocial, customername } = customerData;
+      if (!cadastroResponse.ok) {
+        alert('Favor preencher seu Cadastro.');
+        console.error('Error checking cadastro:', cadastroResponse);
+        return;
+      }
 
-        // Fetch product details from modal
-        const productName = document.querySelector("#codprod")?.textContent;
-        const productDesc = document.querySelector("#descrip")?.textContent;
-        const productPrice = document.querySelector("#preco1")?.textContent;
+      const cadastroResult = await cadastroResponse.json();
+      console.log('Cadastro check result:', cadastroResult);
 
-        // Check if product details are available
-        if (!productName || !productDesc || !productPrice) {
-          alert("Product details are missing or incorrect.");
-          return;
-        }
+      if (cadastroResult.cadastroFilled) {
+        // Cadastro is complete, proceed with adding the product to the order
+        console.log('Cadastro is complete, proceeding with adding product to order');
 
-        const quantity = parseInt(document.getElementById("quantity").value);
-
-        const productData = {
-          username: username,
-          customerId: customerId,
-          razaosocial: razaosocial,
-          codproduto: productName,
-          descricao: productDesc,
-          quantidade: quantity,
-          preco: productPrice,
-        };
-
-        // Log the product data to be sent
-        console.log("Sending product data to add to order:", productData);
-
-        const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order",  // Admin endpoint should not be here for non-admin users
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(productData),
-          }
+        // Fetch customer info
+        console.log("Fetching customer info for customerId:", customerId);
+        const customerResponse = await fetch(
+          `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
         );
 
-        const addResult = await addResponse.json();
+        if (customerResponse.ok) {
+          const customerData = await customerResponse.json();
+          console.log("Customer info fetched:", customerData);
+          const { razaosocial, customername } = customerData;
 
-        if (addResponse.ok) {
-          alert(addResult.message || "Product added to existing draft order");
-          console.log("Product successfully added to order");
-          const modal = document.getElementById("myModal");
-          modal.style.display = "none";
-          document.getElementById("quantity").value = ""; // Clear quantity field
+          // Fetch product details from modal
+          const productName = document.querySelector("#codprod")?.textContent;
+          const productDesc = document.querySelector("#descrip")?.textContent;
+          const productPrice = document.querySelector("#preco1")?.textContent;
+
+          // Check if product details are available
+          if (!productName || !productDesc || !productPrice) {
+            alert("Product details are missing or incorrect.");
+            return;
+          }
+
+          const quantity = parseInt(document.getElementById("quantity").value);
+
+          const productData = {
+            username: username,
+            customerId: customerId,
+            razaosocial: razaosocial,
+            codproduto: productName,
+            descricao: productDesc,
+            quantidade: quantity,
+            preco: productPrice,
+          };
+
+          console.log("Sending product data to add to order:", productData);
+
+          const addResponse = await fetch(
+            "https://backendnyrfestas.vercel.app/add-to-order",  // Non-admin endpoint
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(productData),
+            }
+          );
+
+          const addResult = await addResponse.json();
+
+          if (addResponse.ok) {
+            alert(addResult.message || "Product added to existing draft order");
+            console.log("Product successfully added to order");
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+            document.getElementById("quantity").value = ""; // Clear quantity field
+          } else {
+            console.error("Failed to add product to order:", addResult.error);
+            alert(addResult.error || "Failed to add product to order.");
+          }
         } else {
-          console.error("Failed to add product to order:", addResult.error);
-          alert(addResult.error || "Failed to add product to order.");
+          console.error("Failed to fetch customer info:", customerResponse);
+          alert("Failed to fetch customer info");
         }
       } else {
-        console.error("Failed to fetch customer info:", customerResponse);
-        alert("Failed to fetch customer info");
+        alert('Cadastro not filled, cannot add product.');
       }
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong, please try again later");
     }
-
-
-
-
-
   } else {
-    // Admin logic (removed cadastro check)
+    // Admin logic (no cadastro check)
     try {
       console.log('Admin adding product for username:', username);
       const customerResponse = await fetch(
@@ -234,48 +251,24 @@ document.getElementById("addButton").addEventListener("click", async () => {
         console.log("Customer info fetched:", customerData);
         const { customername, razaosocial } = customerData;
 
+        // Fetch product details from modal
+        const productName = document.querySelector('#codprod').textContent;
+        const productDesc = document.querySelector('#descrip').textContent;
+        const productPrice = document.querySelector('#preco1').textContent;
 
-// Fetch product details from modal
-const productName = document.querySelector('#codprod').textContent;
-const productDesc = document.querySelector('#descrip').textContent;
-const productPrice = document.querySelector('#preco1').textContent;//replace('Price: ', '').trim());
-
-const quantity = parseInt(document.getElementById('quantity').value);
-
-const productData = {
-    username: customername,
-    razaosocial: razaosocial,
-    codproduto: productName,  // Assuming the product code is productName (can be changed if needed)
-    descricao: productDesc,
-    quantidade: quantity,
-    preco: productPrice
-
-/*
-        const productName = document.querySelector("#codprod")?.textContent;
-        const productDesc = document.querySelector("#descrip")?.textContent;
-        const productPrice = document.querySelector("#preco1")?.textContent;
-
-        if (!productName || !productDesc || !productPrice) {
-          alert("Product details are missing or incorrect.");
-          return;
-        }
-
-        const quantity = parseInt(document.getElementById("quantity").value);
+        const quantity = parseInt(document.getElementById('quantity').value);
 
         const productData = {
           username: customername,
-          customerId: customerId,
           razaosocial: razaosocial,
           codproduto: productName,
           descricao: productDesc,
           quantidade: quantity,
-          preco: productPrice,*/
-
-
+          preco: productPrice
         };
 
         const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",  // Updated endpoint for admin
+          "https://backendnyrfestas.vercel.app/add-to-order-admin",  // Admin endpoint
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
