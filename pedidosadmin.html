@@ -48,110 +48,81 @@
     </div>
 
     <script>
-       // Function to dynamically display orders
-function displayOrders(orders) {
-    console.log('displayOrders function called with:', orders); // Log the input to this function
-    const container = document.getElementById('orders-container');
-    container.innerHTML = ''; // Clear existing content
+        // Function to load orders from the backend
+        async function loadOrders() {
+            console.log('loadOrders function started');
+            try {
+                console.log('Sending request to backend...');
+                const response = await fetch('https://backendnyrfestas.vercel.app/orders-admin', {
+                    method: 'GET'
+                });
 
-    if (orders.length === 0) {
-        console.log('No orders found'); // Log if no orders exist
-        container.innerHTML = '<p>No orders found.</p>';
-        return;
-    }
+                if (!response.ok) {
+                    console.log('Failed to fetch orders. Status:', response.status);
+                    document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+                    return;
+                }
 
-    orders.forEach(order => {
-        console.log('Processing order:', order); // Log each order being processed
-
-        // Ensure the total is a valid number and handle non-numeric values
-        const total = parseFloat(order.total);
-        if (isNaN(total)) {
-            console.error('Invalid total value:', order.total);  // Log if total is invalid
+                const orders = await response.json();
+                displayOrders(orders);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+            }
         }
 
-        const statusText = order.status === 1 ? 'Submitted' : 'Draft';
-        const orderRow = `
-            <div class="order-row">
-                <div class="order-details">
-                    <div><strong>ID:</strong> ${order.id}</div>
-                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
-                    <div class="status"><strong>Status:</strong> ${statusText}</div>
-                </div>
-                <button class="view-button" data-order-id="${order.id}">Ver Detalhes</button>
-            </div>
-        `;
-        
-        container.innerHTML += orderRow;
-    });
+        // Function to dynamically display orders
+        function displayOrders(orders) {
+            const container = document.getElementById('orders-container');
+            container.innerHTML = ''; // Clear existing content
 
-    // Add event listeners to the "View Details" buttons
-    const viewButtons = document.querySelectorAll('.view-button');
-    viewButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const orderId = event.target.getAttribute('data-order-id');
-            console.log('View details for order:', orderId);
-            openOrderModal(orderId);
-        });
-    });
+            if (orders.length === 0) {
+                container.innerHTML = '<p>No orders found.</p>';
+                return;
+            }
 
-    console.log('All orders displayed'); // Log when all orders are displayed
-}
+            orders.forEach(order => {
+                const total = parseFloat(order.total);
+                if (isNaN(total)) {
+                    console.error('Invalid total value:', order.total);
+                }
 
-// Function to open the modal and load order details
-async function openOrderModal(orderId) {
-    console.log('Opening modal for order ID:', orderId);
-
-    // Fetch order details from the backend (you might need to adjust this depending on your API)
-    try {
-        const response = await fetch(`https://backendnyrfestas.vercel.app/orders/${orderId}`, {
-            method: 'GET'
-        });
-
-        if (!response.ok) {
-            console.error('Failed to fetch order details');
-            alert('Failed to load order details.');
-            return;
+                const statusText = order.status === 1 ? 'Submitted' : 'Draft';
+                const orderRow = `
+                    <div class="order-row" data-id="${order.id}" data-razaosocial="${order.razaosocial}">
+                        <div class="order-details">
+                            <div><strong>ID:</strong> ${order.id}</div>
+                            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+                            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                            <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+                            <div class="status"><strong>Status:</strong> ${statusText}</div>
+                        </div>
+                        <button class="view-button">Ver Detalhes</button>
+                    </div>
+                `;
+                container.innerHTML += orderRow;
+            });
         }
 
-        const order = await response.json();
-        console.log('Order details fetched:', order);
+        // Function to handle search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const orders = document.querySelectorAll('.order-row');
 
-        // Populate the modal with order data
-        document.getElementById('order-id').textContent = order.id;
-        document.getElementById('razao-social').textContent = order.razaosocial;
-        document.getElementById('cnpj').textContent = order.cnpj;
-        document.getElementById('total-value').textContent = `R$ ${parseFloat(order.total).toFixed(2)}`;
+            orders.forEach(order => {
+                const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
+                const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
 
-        // Populate the table with items
-        const orderItemsBody = document.getElementById('order-items-content');
-        orderItemsBody.innerHTML = ''; // Clear existing rows
-
-        order.items.forEach(item => {
-            const row = `
-                <tr>
-                    <td>${item.name}</td>
-                    <td>${item.code}</td>
-                    <td>${item.description}</td>
-                    <td>${item.quantity}</td>
-                    <td>R$ ${parseFloat(item.price).toFixed(2)}</td>
-                    <td>R$ ${parseFloat(item.total).toFixed(2)}</td>
-                </tr>
-            `;
-            orderItemsBody.innerHTML += row;
+                if (orderId.includes(searchTerm) || razaoSocial.includes(searchTerm)) {
+                    order.style.display = 'flex'; // Show the order
+                } else {
+                    order.style.display = 'none'; // Hide the order
+                }
+            });
         });
 
-        // Show the modal
-        const modal = document.getElementById('order-modal');
-        modal.classList.add('show');
-    } catch (error) {
-        console.error('Error opening order modal:', error);
-    }
-}
-
-// Close modal event listener
-document.getElementById('close-modal').addEventListener('click', () => {
-    const modal = document.getElementById('order-modal');
-    modal.classList.remove('show');
-});
+        // Load orders when the page is loaded
+        loadOrders();
+    </script>
+</body>
+</html>
