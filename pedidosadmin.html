@@ -1,202 +1,106 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos - NYR Festas</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts/loadComponents.js" defer></script>
-    <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+    <title>All Orders</title>
     <style>
-        /* The CSS code for your page */
-
-        /* General page styling */
+        /* Keep your existing styles for layout and aesthetics here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #f4f4f4;
         }
-
-        header {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .order-row {
+            background: #fff;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background-color: #007BFF;
-            color: white;
         }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        /* Orders container */
-        #orders-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .order-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-
         .order-details {
-            display: flex;
             flex: 1;
+            display: flex;
             justify-content: space-between;
         }
-
-        .order-details div {
-            margin: 0 10px;
-            font-size: 1em;
-        }
-
         .status {
             font-weight: bold;
             color: #007BFF;
         }
-
         .view-button {
-            width: 10%;
             background-color: #28a745;
             color: white;
-            padding: 8px 16px;
             border: none;
+            padding: 8px 16px;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s;
         }
-
         .view-button:hover {
             background-color: #218838;
         }
 
-        .order-row:hover {
-            background-color: #eef2f5;
-        }
-
-        /* Responsive layout */
-        @media (max-width: 768px) {
-            .order-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .order-details {
-                flex-direction: column;
-            }
-
-            .view-button {
-                margin-top: 10px;
-                width: 100%;
-            }
-        }
-
-        /* Modal Styling */
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
-            left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding-top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
-
+        .modal.show {
+            display: flex;
+        }
         .modal-content {
-            background-color: white;
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 900px;
-            margin: auto;
+            border-radius: 5px;
+            width: 60%;
+            max-height: 80%;
+            overflow-y: auto;
         }
-
-        .close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
+        .close-modal {
+            cursor: pointer;
+            font-size: 20px;
+            color: #999;
             position: absolute;
             top: 10px;
-            right: 25px;
-            cursor: pointer;
-        }
-
-        .close-btn:hover {
-            color: black;
+            right: 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>NYR Festas</h1>
-        <div id="user-info">
-            <span id="username-display"></span>
-            <button id="logoutBtn" aria-label="Logout do usuário">Logout</button>
-        </div>
-    </header>
-    <nav>
-        <ul>
-            <li id="cadastro-link"><a href="#">Cadastro</a></li>
-            <li><a href="produtos.html">Lista de Produtos</a></li>
-            <li id="pedidos-link"><a href="#">Pedidos</a></li>
-        </ul>
-    </nav>
-    <h1>Meus Pedidos REPRESENTANTE</h1>
-    <div id="orders-container"></div>
+    <div class="container">
+        <h1>All Orders</h1>
+        <div id="orders-container"></div>
+    </div>
+
+    <!-- Modal for order details -->
     <div id="order-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="close-modal">&times;</span>
+            <span id="close-modal" class="close-modal">&times;</span>
             <h2>Order Details</h2>
             <div id="order-details-content"></div>
         </div>
     </div>
-    <script>
-        // JavaScript to load and display orders
-        async function loadOrders() {
-            const username = localStorage.getItem('username');
-            if (!username) {
-                document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
-                return;
-            }
 
+    <script>
+        // Fetch all orders from the backend (no user filter)
+        async function loadOrders() {
             try {
-                const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username);
+                const response = await fetch('https://backendnyrfestas.vercel.app/orders');
                 if (!response.ok) throw new Error('Failed to fetch orders.');
 
                 const orders = await response.json();
@@ -206,17 +110,18 @@
             }
         }
 
+        // Function to display the orders
         function displayOrders(orders) {
             const container = document.getElementById('orders-container');
-            container.innerHTML = '';
+            container.innerHTML = '';  // Clear existing content before adding new orders
             orders.forEach(order => {
                 const orderRow = document.createElement('div');
                 orderRow.className = 'order-row';
 
                 const details = `
                     <div class="order-details">
-                        <div>${order.id}</div>
-                        <div>${order.status}</div>
+                        <div>Order ID: ${order.id}</div>
+                        <div class="status">${order.status === 1 ? 'Submitted' : 'Draft'}</div>
                     </div>
                 `;
 
@@ -229,16 +134,19 @@
             });
         }
 
+        // Function to view order details (you can modify this as needed)
         function viewOrder(orderId) {
             const modal = document.getElementById('order-modal');
             modal.classList.add('show');
             document.getElementById('order-details-content').innerHTML = `Details for order ${orderId}`;
         }
 
+        // Close the modal when clicking the close button
         document.getElementById('close-modal').addEventListener('click', () => {
             document.getElementById('order-modal').classList.remove('show');
         });
 
+        // Load all orders when the page is ready
         loadOrders();
     </script>
 </body>
