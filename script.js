@@ -275,7 +275,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         console.log("Admin product data being sent:", productData);
 
         const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order",
+          "https://backendnyrfestas.vercel.app/add-to-order-admin",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
