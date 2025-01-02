@@ -237,7 +237,12 @@ document.getElementById("addButton").addEventListener("click", async () => {
       console.error("Error:", error);
       alert("Something went wrong, please try again later");
     }
-  } else {
+  } 
+  
+  
+  
+  
+  else {
     // Admin logic (no cadastro check)
     try {
       console.log('Admin adding product for username:', username);
@@ -248,7 +253,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
-        const { customername, razaosocial } = customerData;
+        const { username, razaosocial } = customerData;
 
         const productName = document.querySelector('#codprod').textContent;
         const productDesc = document.querySelector('#descrip').textContent;
@@ -263,7 +268,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const quantity = parseInt(document.getElementById('quantity').value);
 
         const productData = {
-          username: customername,
+          username: username,
           customerId: customerId,
           razaosocial: razaosocial,
           codproduto: productName,
