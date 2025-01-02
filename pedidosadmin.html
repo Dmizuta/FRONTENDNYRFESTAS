@@ -540,34 +540,35 @@ window.addEventListener("click", function(event) {
 document.getElementById('searchInput').addEventListener('input', async (e) => {
     const searchTerm = e.target.value.toLowerCase();
 
-    // Fetch orders from the backend
-    const response = await fetch('https://backendnyrfestas.vercel.app/orders');
+    // Fetch all orders from the backend
+    const response = await fetch('https://backendnyrfestas.vercel.app/orders'); 
     const result = await response.json();
 
     if (result.success && result.data) {
-        // Filter orders based on search criteria
-        const filteredOrders = result.data.filter(order =>
-            order.id.toString().includes(searchTerm) || 
-            order.customerName.toLowerCase().includes(searchTerm) ||
+        // Filter orders based on the search term
+        const filteredOrders = result.data.filter(order => 
+            order.customerName.toLowerCase().includes(searchTerm) || 
+            order.id.toString().includes(searchTerm) ||
             order.status.toLowerCase().includes(searchTerm)
         );
 
-        // Update the UI with filtered orders
+        // Populate the filtered orders in the UI
         populateOrderList(filteredOrders);
     }
 });
 
-// Function to populate orders list
+// Function to populate the orders in the UI
 function populateOrderList(orders) {
     const ordersContainer = document.getElementById('ordersContainer');
-    ordersContainer.innerHTML = ''; // Clear existing orders
+    ordersContainer.innerHTML = ''; // Clear current list
 
     orders.forEach(order => {
-        const orderItem = document.createElement('div');
-        orderItem.textContent = `Order ID: ${order.id}, Customer: ${order.customerName}, Status: ${order.status}`;
-        ordersContainer.appendChild(orderItem);
+        const orderElement = document.createElement('div');
+        orderElement.textContent = `Order ID: ${order.id}, Customer: ${order.customerName}, Status: ${order.status}`;
+        ordersContainer.appendChild(orderElement);
     });
 }
+
 
 
 
