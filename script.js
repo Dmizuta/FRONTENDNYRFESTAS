@@ -275,7 +275,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         };
 
         const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",  // Admin endpoint
+          "https://backendnyrfestas.vercel.app/add-to-order",  // Admin endpoint
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
