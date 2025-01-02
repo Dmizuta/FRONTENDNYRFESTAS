@@ -232,7 +232,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
-        const { razaosocial, customername } = customerData;
+        const { customername, razaosocial } = customerData;
 
 
 // Fetch product details from modal
