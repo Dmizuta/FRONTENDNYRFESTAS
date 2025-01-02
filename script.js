@@ -240,6 +240,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
     }
   } 
   
+
   
   
   
@@ -265,6 +266,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
         const productData = {
           username: customername,
+          customerId: customerId,
           razaosocial: razaosocial,
           codproduto: productName,
           descricao: productDesc,
