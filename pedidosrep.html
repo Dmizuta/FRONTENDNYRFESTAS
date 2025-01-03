@@ -29,7 +29,7 @@
     margin-bottom: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
-    cursor: pointer; /* Make the row clickable */
+    cursor: pointer;
 }
 
 .order-details {
@@ -196,6 +196,19 @@ table th, table td {
         margin-top: 20px;
     }
 }
+
+#searchInput {
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+    width: 58%;
+    margin: 30px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
 </style>
 
 <body>
@@ -217,6 +230,9 @@ table th, table td {
 </nav>
 
 <h1>Meus Pedidos REPRESENTANTE</h1>
+
+<!-- Search input to filter orders -->
+<input type="text" id="searchInput" placeholder="Search orders...">
 
 <div id="orders-container">
     <!-- Orders will be inserted here dynamically -->
@@ -248,7 +264,7 @@ table th, table td {
         <table id="order-items-table">
             <thead>
                 <tr>
-                    <th>Item</th>   
+                    <th>Item</th>
                     <th>Código do Produto</th>
                     <th>Descrição</th>
                     <th>Quantidade</th>
@@ -398,6 +414,32 @@ function displayOrders(orders) {
     });
     console.log('All orders displayed');
 }
+
+// Search functionality
+const searchBox = document.getElementById('searchInput');
+
+searchBox.addEventListener('input', function() {
+    const searchTerm = searchBox.value.toLowerCase().trim();
+
+    const orders = document.querySelectorAll('.order-row');
+    orders.forEach(order => {
+        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
+        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
+        const data = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
+        const status = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
+
+        if (
+            orderId.includes(searchTerm) || 
+            razaoSocial.includes(searchTerm) || 
+            data.includes(searchTerm) || 
+            status.includes(searchTerm)
+        ) {
+            order.style.display = 'block';
+        } else {
+            order.style.display = 'none';
+        }
+    });
+});
 
 // Load orders when the page is ready
 document.addEventListener('DOMContentLoaded', () => {
