@@ -496,6 +496,46 @@ window.onload = function() {
     loadOrders();
     displayUserName();
 };
+
+
+
+
+
+// Get the modal element
+const modal = document.getElementById("order-modal");
+const closeModalBtn = document.getElementById("close-modal");
+
+// Event listener for opening the modal
+document.getElementById("orders-container").addEventListener("click", function(event) {
+    // Check if the clicked element is the "Ver Detalhes" button
+    if (event.target && event.target.classList.contains("view-button")) {
+        // Here you can also pass the specific order ID to dynamically fetch the order data
+        const orderId = event.target.getAttribute("data-order-id");
+        console.log("Clicked order ID:", orderId);
+        
+        // Show the modal
+        modal.style.display = "block";
+        
+        // You can add code here to fetch order details based on the orderId
+        // and populate the modal with data.
+    }
+});
+
+// Event listener for closing the modal
+closeModalBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+
+
+
 </script>
 
 </body>
