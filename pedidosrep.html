@@ -496,7 +496,7 @@ function displayOrders(orders) {
             loadOrders();
         });
 
-    
+    /*
 
 // Get the modal element
 const modal = document.getElementById("order-modal");
@@ -516,7 +516,7 @@ document.getElementById("orders-container").addEventListener("click", function(e
         // You can add code here to fetch order details based on the orderId
         // and populate the modal with data.
     }
-});
+});*/
 
 // Event listener for closing the modal
 closeModalBtn.addEventListener("click", function() {
@@ -553,69 +553,23 @@ window.addEventListener("click", function(event) {
 
 
 
-/*
 
 
-// Fetch the user's role from localStorage
-const userRole = localStorage.getItem('role'); // Ensure this is set at login
 
-// Get the link elements
-const pedidosLinkElement = document.getElementById('pedidos-link');
-const cadastroLinkElement = document.getElementById('cadastro-link');
 
-// Check if elements exist
-if (pedidosLinkElement && cadastroLinkElement) {
-    const pedidosLink = pedidosLinkElement.querySelector('a');
-    const cadastroLink = cadastroLinkElement.querySelector('a');
-
-    // Dynamically assign the correct href based on the user's role
-    if (userRole === 'USER') {
-        pedidosLink.href = 'pedidos.html';
-        cadastroLink.href = 'cadastro.html';
-    } else if (userRole === 'SELLER') {
-        pedidosLink.href = 'pedidosrep.html';
-        cadastroLink.href = 'cadastrorep.html';
-    } else if (userRole === 'ADMIN') {
-        pedidosLink.href = 'pedidosadmin.html';
-        cadastroLink.href = 'cadastroadmin.html';
-    } else {
-        pedidosLink.href = '#'; // Default action for unknown or missing roles
-        cadastroLink.href = '#';
-        console.warn('Role not defined or invalid.');
+// Event listener for opening the modal
+document.getElementById("orders-container").addEventListener("click", function(event) {
+    if (event.target && event.target.closest(".order-row")) {
+        const orderRow = event.target.closest(".order-row");
+        const orderId = orderRow.getAttribute("data-id");
+        console.log("Clicked order ID:", orderId);
+        
+        modal.style.display = "block";
+        
+        // You can add code here to fetch order details based on the orderId
+        // and populate the modal with data.
     }
-} else {
-    console.error('Link elements not found in the DOM.');
-}
-
-*/
-/*
-    // Fetch the user's role from localStorage
-    const userRole = localStorage.getItem('role'); // Ensure this is set at login
-    const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-    const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-    // Dynamically assign the correct href based on the user's role
-    if (userRole === 'USER') {
-        pedidosLink.href = 'pedidos.html';
-        cadastroLink.href = 'cadastro.html';
-    } else if (userRole === 'SELLER') {
-        pedidosLink.href = 'pedidosrep.html';
-        cadastroLink.href = 'cadastrorep.html';
-    } else if (userRole === 'ADMIN') {
-        pedidosLink.href = 'pedidosadmin.html';
-        cadastroLink.href = 'cadastroadmin.html';
-    } else {
-        pedidosLink.href = '#'; // Default action for unknown or missing roles
-        console.warn('Role not defined or invalid.');
-    }
-
-*/
-
-
-
-
-
-
-
+});
 
 
 
