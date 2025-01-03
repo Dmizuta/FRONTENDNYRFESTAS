@@ -8,6 +8,199 @@
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
 </head>
+<style>
+    /* Orders container */
+    #orders-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Order row layout */
+    .order-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        cursor: pointer; /* Make the row clickable */
+    }
+    
+    .order-details {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+    }
+    
+    .order-details div {
+        margin: 0 10px;
+        font-size: 1em;
+        color: #333;
+    }
+    
+    /* Status styling */
+    .status {
+        font-weight: bold;
+        color: #007BFF;
+    }
+    
+    .order-row:hover {
+        background-color: #eef2f5;
+    }
+    
+    /* Responsive layout for mobile */
+    @media (max-width: 768px) {
+        .order-row {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    
+        .order-details {
+            flex-direction: column;
+        }
+    }
+    
+    /* Modal Styling */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+    
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 900px;
+        overflow: auto;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    #logo-image {
+        width: 20%;
+        padding: 10px;
+    }
+    
+    .close-btn {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        cursor: pointer;
+    }
+    
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    #order-details-content {
+        padding: 10px;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .modal-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .action-btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .action-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    #close-modal-btn {
+        background-color: #dc3545;
+    }
+    
+    #close-modal-btn:hover {
+        background-color: #c82333;
+    }
+    
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .order-info {
+        flex: 1;
+    }
+    
+    .order-info-row {
+        margin: 5px 0;
+    }
+    
+    /* Modal table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    table th, table td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    
+    #order-items-body tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    #total-value {
+        font-weight: bold;
+    }
+    
+    /* When modal is open, make it visible */
+    .modal.show {
+        display: flex;
+    }
+    
+    #searchInput {
+        display: flex;
+        justify-content: center; 
+        align-items: center;  
+        width: 58%;
+        margin: 30px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    
+    </style>
+    
+
 <body>
 
 <header>
