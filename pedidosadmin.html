@@ -315,6 +315,7 @@ table th, table td {
                     <div class="order-row" data-id="${order.id}" data-razaosocial="${order.razaosocial}">
                         <div class="order-details">
                             <div><strong>ID:</strong> ${order.id}</div>
+                            <div><strong>Representante:</strong> ${order.representante}</div> <!-- Display Representante -->
                             <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                             <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
                             <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
