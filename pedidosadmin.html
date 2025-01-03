@@ -323,7 +323,7 @@ const searchBox = document.getElementById('searchInput'); // Changed to 'searchI
 searchBox.addEventListener('input', function() {
     const searchTerm = searchBox.value.toLowerCase().trim();
 
-    const orders = document.querySelectorAll('.order'); // Assuming each order has a class 'order'
+    const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
     orders.forEach(order => {
         const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
         const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
