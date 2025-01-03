@@ -8,6 +8,8 @@
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
 </head>
+
+
 <style>
     /* Orders container */
     #orders-container {
@@ -200,7 +202,6 @@
     
     </style>
     
-
 <body>
 
 <header>
@@ -332,11 +333,13 @@ function displayOrders(orders) {
 // Function to fetch and display order details in the modal
 async function fetchOrderDetails(orderId) {
     try {
+        console.log(`Fetching details for order ID: ${orderId}`);
         const response = await fetch(`https://backendnyrfestas.vercel.app/api/order-details/${orderId}`);
         if (!response.ok) {
             throw new Error('Failed to fetch order details');
         }
         const orderDetails = await response.json();
+        console.log('Order details received:', orderDetails);
         populateModal(orderDetails);
     } catch (error) {
         console.error('Error fetching order details:', error);
