@@ -87,9 +87,6 @@
   <script>
 
 
-
-
-
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
   event.preventDefault(); // Prevent form submission
 
@@ -117,15 +114,18 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
           const decodedToken = jwt_decode(token);
           console.log('Decoded Token:', decodedToken); // Log the decoded token
           const role = decodedToken.role;
+          const customerId = decodedToken.customerId;
 
           // Store username and role in localStorage
           localStorage.setItem('username', username);
+          localStorage.setItem('role', role);  // Store the role
           
+          if (customerId) {
+            localStorage.setItem('customerId', customerId);
+          }
 
-          if (role) {
-  localStorage.setItem('role', role);  // Store the role
-} else {
-  console.error('Role is undefined in the token!');
+           else {
+  console.error('customerId is undefined!');
 }
 
 
@@ -133,7 +133,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
          
 
           // Redirect to the products page (produtos.html)
-          window.location.href = 'produtos.html';  
+         window.location.href = 'produtos.html';  
         } else {
           console.error('No token received from the server.');
         }
@@ -148,6 +148,12 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     errorMessage.textContent = 'Please enter both username and password.';
   }
 });
+
+
+
+
+
+
 
 
   </script>

@@ -10,10 +10,6 @@
 </head>
 
 <style>
-/* The CSS code I provided earlier goes here */
-
-/* General page styling */
-
 
 
 /* Orders container */
@@ -299,7 +295,7 @@ table th, table td {
         <table id="order-items-table">
             <thead>
                 <tr>
-                    <th>Item</th>
+                    <th>Item</th>   
                     <th>Código do Produto</th>
                     <th>Descrição</th>
                     <th>Quantidade</th>
@@ -337,6 +333,64 @@ table th, table td {
 
 
     <script>
+
+
+
+
+
+
+
+
+// Fetch the user's role from localStorage
+const userRole = localStorage.getItem('role'); // Ensure this is set at login
+
+// Get link elements
+const pedidosLinkContainer = document.getElementById('pedidos-link');
+const cadastroLinkContainer = document.getElementById('cadastro-link');
+
+// Check if the link containers exist
+if (pedidosLinkContainer && cadastroLinkContainer) {
+  const pedidosLink = pedidosLinkContainer.querySelector('a');
+  const cadastroLink = cadastroLinkContainer.querySelector('a');
+
+  // Check if the links exist
+  if (pedidosLink && cadastroLink) {
+    // Dynamically assign the correct href based on the user's role
+    switch (userRole) {
+      case 'USER':
+        pedidosLink.href = 'pedidos.html';
+        cadastroLink.href = 'cadastro.html';
+        break;
+      case 'SELLER':
+        pedidosLink.href = 'pedidosrep.html';
+        cadastroLink.href = 'cadastrorep.html';
+        break;
+      case 'ADMIN':
+        pedidosLink.href = 'pedidosadmin.html';
+        cadastroLink.href = 'cadastroadmin.html';
+        break;
+      default:
+        pedidosLink.href = '#'; // Default action for unknown or missing roles
+        cadastroLink.href = '#';
+        console.warn('Role not defined or invalid:', userRole);
+    }
+  } else {
+    console.error('Links not found in the link containers.');
+  }
+} else {
+  console.error('Link containers not found in the DOM.');
+}
+
+
+
+
+
+
+
+
+
+
+
         // Function to load orders from the backend
         async function loadOrders() {
             console.log('loadOrders function started'); // Log function entry
@@ -499,31 +553,62 @@ window.addEventListener("click", function(event) {
 
 
 
+/*
 
 
+// Fetch the user's role from localStorage
+const userRole = localStorage.getItem('role'); // Ensure this is set at login
 
+// Get the link elements
+const pedidosLinkElement = document.getElementById('pedidos-link');
+const cadastroLinkElement = document.getElementById('cadastro-link');
 
+// Check if elements exist
+if (pedidosLinkElement && cadastroLinkElement) {
+    const pedidosLink = pedidosLinkElement.querySelector('a');
+    const cadastroLink = cadastroLinkElement.querySelector('a');
 
-  // Fetch the user's role from localStorage
-  const userRole = localStorage.getItem('role'); // Ensure this is set at login
-  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-  // Dynamically assign the correct href based on the user's role
-  if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
+    // Dynamically assign the correct href based on the user's role
+    if (userRole === 'USER') {
+        pedidosLink.href = 'pedidos.html';
+        cadastroLink.href = 'cadastro.html';
+    } else if (userRole === 'SELLER') {
+        pedidosLink.href = 'pedidosrep.html';
+        cadastroLink.href = 'cadastrorep.html';
+    } else if (userRole === 'ADMIN') {
+        pedidosLink.href = 'pedidosadmin.html';
+        cadastroLink.href = 'cadastroadmin.html';
+    } else {
+        pedidosLink.href = '#'; // Default action for unknown or missing roles
+        cadastroLink.href = '#';
+        console.warn('Role not defined or invalid.');
+    }
+} else {
+    console.error('Link elements not found in the DOM.');
+}
 
+*/
+/*
+    // Fetch the user's role from localStorage
+    const userRole = localStorage.getItem('role'); // Ensure this is set at login
+    const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+    const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+    // Dynamically assign the correct href based on the user's role
+    if (userRole === 'USER') {
+        pedidosLink.href = 'pedidos.html';
+        cadastroLink.href = 'cadastro.html';
+    } else if (userRole === 'SELLER') {
+        pedidosLink.href = 'pedidosrep.html';
+        cadastroLink.href = 'cadastrorep.html';
+    } else if (userRole === 'ADMIN') {
+        pedidosLink.href = 'pedidosadmin.html';
+        cadastroLink.href = 'cadastroadmin.html';
+    } else {
+        pedidosLink.href = '#'; // Default action for unknown or missing roles
+        console.warn('Role not defined or invalid.');
+    }
 
+*/
 
 
 
