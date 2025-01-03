@@ -220,15 +220,7 @@ table th, table td {
         margin-top: 20px;
     }
 }
-#searchBox {
-    width:100%;
-    padding-top: 20px;
-    margin-right: 10px;
-   
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
+
 </style>
 
 <body>
@@ -253,7 +245,7 @@ table th, table td {
 
 <!-- Search input to filter orders -->
 
- <div class="searchBox">
+ <div class="search-wrapper">
    <input  type="text" id="searchInput" placeholder="Search orders...">
  </div>
 
@@ -296,7 +288,7 @@ async function loadOrders() {
 function displayOrders(orders) {
     const container = document.getElementById('orders-container');
     container.innerHTML = ''; // Clear existing content
-s
+
     if (orders.length === 0) {
         container.innerHTML = '<p>No orders found.</p>';
         return;
