@@ -321,7 +321,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
     orders.forEach(order => {
         const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
+        const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
 
         if (orderId.includes(searchTerm) || razaoSocial.includes(searchTerm)) {
             order.style.display = 'block';
