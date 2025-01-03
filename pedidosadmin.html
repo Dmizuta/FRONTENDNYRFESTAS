@@ -263,10 +263,60 @@ table th, table td {
 <!-- Modal Structure (Initially hidden) -->
 <div id="order-modal" class="modal">
     <div class="modal-content">
-        <!-- Modal content remains the same as your original code -->
+        <!-- Header Section with Order Information -->
+        <div class="order-header">
+            <div class="order-info">
+                <div class="order-info-row">
+                    <span>Numero do Pedido:</span>
+                    <span id="order-id"></span> <!-- Dynamically set order ID -->
+                </div>
+                <div class="order-info-row">
+                    <span>Razao Social:</span>
+                    <span id="razao-social"></span> <!-- Dynamically set Razao Social -->
+                </div>
+                <div class="order-info-row">
+                    <span>CNPJ:</span>
+                    <span id="cnpj"></span> <!-- Dynamically set CNPJ -->
+                </div>
+            </div>
+            <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image"> <!-- Logo -->
+        </div>
+
+        <!-- Table with Product Details -->
+        <table id="order-items-table">
+            <thead>
+                <tr>
+                    <th>Item</th>   
+                    <th>Código do Produto</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody id="order-details-content">
+                <!-- Product rows will be dynamically populated here -->
+            </tbody>
+        </table>
+
+        <!-- Total Order Section -->
+        <div class="order-total">
+            <div>
+                <span>Total do Pedido:</span>
+                <span id="total-value">R$ 0,00</span> <!-- Dynamically calculate the total -->
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="modal-actions">
+            <button id="submit-order-btn" class="action-btn">Submit</button>
+            <button id="delete-order-btn" class="action-btn">Delete</button>
+        </div>
+
+        <!-- Close Modal Button -->
+        <button id="close-modal" class="action-btn">Close</button>
     </div>
 </div>
-
 
 
 
