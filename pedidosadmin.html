@@ -277,6 +277,8 @@ table th, table td {
 </div>
 
 <script>
+
+
 // Function to load orders from the backend
 async function loadOrders() {
     console.log('loadOrders function started');
@@ -366,28 +368,7 @@ searchBox.addEventListener('input', function() {
     });
 });
 
-/*
-// Function to handle search functionality
-document.getElementById('searchInput').addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
 
-    const orders = document.querySelectorAll('.order-row');
-
-    orders.forEach(order => {
-        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-        const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-        const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-        const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-        const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
-
-        if (orderId.includes(searchTerm) || razaoSocial.includes(searchTerm)) {
-            order.style.display = 'block';
-        } else {
-            order.style.display = 'none';
-        }
-    });
-});
-*/
 
 
 
