@@ -10,7 +10,6 @@
 </head>
 
 <style>
-
 /* Orders container */
 #orders-container {
     max-width: 1200px;
@@ -101,7 +100,6 @@
     padding-top: 60px;
 }
 
-
 .modal-content {
     background-color: white;
     padding: 20px;
@@ -131,7 +129,6 @@
     cursor: pointer;
 }
 
-
 .close-btn:focus {
     color: black;
     text-decoration: none;
@@ -142,15 +139,10 @@
     padding: 10px;
 }
 
-
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
-
-/* Modal - Initially Hidden */
-
 
 .modal-actions {
     display: flex;
@@ -218,10 +210,6 @@ table th, table td {
     display: flex;
 }
 
-
-
-
-
 /* Responsiveness for smaller screens */
 @media (max-width: 768px) {
     .order-header {
@@ -234,203 +222,138 @@ table th, table td {
 }
 </style>
 
-
-
 <body>
 
-    <header>
-        <h1>NYR Festas</h1>
-        <div id="user-info">
-            <span id="username-display"></span>
-            <button id="logoutBtn" aria-label="Logout do usuário">Logout</button>
-        </div>
-    </header>
-
-    <nav>
-        <ul>
-            <li id="cadastro-link"><a href="#">Cadastro</a></li>
-            <li><a href="produtos.html">Lista de Produtos</a></li>
-            <li id="pedidos-link"><a href="#">Pedidos</a></li>
-        </ul>
-    </nav>
-
-    <h1>Meus Pedidos REPRESENTANTE</h1>
-
-    <!-- Search input to filter orders -->
-    <input type="text" id="searchInput" placeholder="Search orders...">
-
-    <div id="orders-container">
-        <!-- Orders will be inserted here dynamically -->
+<header>
+    <h1>NYR Festas</h1>
+    <div id="user-info">
+        <span id="username-display"></span>
+        <button id="logoutBtn" aria-label="Logout do usuário">Logout</button>
     </div>
+</header>
 
-    <!-- Modal Structure (Initially hidden) -->
-    <div id="order-modal" class="modal">
-        <div class="modal-content">
-            <!-- Modal content remains the same as your original code -->
-        </div>
+<nav>
+    <ul>
+        <li id="cadastro-link"><a href="#">Cadastro</a></li>
+        <li><a href="produtos.html">Lista de Produtos</a></li>
+        <li id="pedidos-link"><a href="#">Pedidos</a></li>
+    </ul>
+</nav>
+
+<h1>Meus Pedidos REPRESENTANTE</h1>
+
+<!-- Search input to filter orders -->
+<input type="text" id="searchInput" placeholder="Search orders...">
+
+<div id="orders-container">
+    <!-- Orders will be inserted here dynamically -->
+</div>
+
+<!-- Modal Structure (Initially hidden) -->
+<div id="order-modal" class="modal">
+    <div class="modal-content">
+        <!-- Modal content remains the same as your original code -->
     </div>
+</div>
 
-    <script>
-        // Function to load orders from the backend
-        async function loadOrders() {
-            console.log('loadOrders function started');
-            try {
-                console.log('Sending request to backend...');
-                const response = await fetch('https://backendnyrfestas.vercel.app/orders-admin', {
-                    method: 'GET'
-                });
-
-                if (!response.ok) {
-                    console.log('Failed to fetch orders. Status:', response.status);
-                    document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
-                    return;
-                }
-
-                const orders = await response.json();
-                displayOrders(orders);
-            } catch (error) {
-                console.error('Error fetching orders:', error);
-                document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
-            }
-        }
-
-        // Function to dynamically display orders
-        function displayOrders(orders) {
-            const container = document.getElementById('orders-container');
-            container.innerHTML = ''; // Clear existing content
-
-            if (orders.length === 0) {
-                container.innerHTML = '<p>No orders found.</p>';
-                return;
-            }
-
-            orders.forEach(order => {
-                const total = parseFloat(order.total);
-                if (isNaN(total)) {
-                    console.error('Invalid total value:', order.total);
-                }
-
-                const statusText = order.status === 1 ? 'Submitted' : 'Draft';
-                const orderRow = `
-                    <div class="order-row" data-id="${order.id}" data-razaosocial="${order.razaosocial}">
-                        <div class="order-details">
-                            <div><strong>ID:</strong> ${order.id}</div>
-                            <div><strong>Representante:</strong> ${order.representante}</div> <!-- Display Representante -->
-                            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                            <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
-                            <div class="status"><strong>Status:</strong> ${statusText}</div>
-                        </div>
-                        <button class="view-button">Ver Detalhes</button>
-                    </div>
-                `;
-                container.innerHTML += orderRow;
-            });
-        }
-
-        // Function to handle search functionality
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const orders = document.querySelectorAll('.order-row');
-
-            orders.forEach(order => {
-                const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-                const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-
-                if (orderId.includes(searchTerm) || razaoSocial.includes(searchTerm)) {
-                    order.style.display = 'flex'; // Show the order
-                } else {
-                    order.style.display = 'none'; // Hide the order
-                }
-            });
+<script>
+// Function to load orders from the backend
+async function loadOrders() {
+    console.log('loadOrders function started');
+    try {
+        console.log('Sending request to backend...');
+        const response = await fetch('https://backendnyrfestas.vercel.app/orders-admin', {
+            method: 'GET'
         });
 
-        // Load orders when the page is loaded
-        loadOrders();
+        if (!response.ok) {
+            console.log('Failed to fetch orders. Status:', response.status);
+            document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+            return;
+        }
 
-
-
-// Get the modal element
-const modal = document.getElementById("order-modal");
-const closeModalBtn = document.getElementById("close-modal");
-
-// Event listener for opening the modal
-document.getElementById("orders-container").addEventListener("click", function(event) {
-    // Check if the clicked element is the "Ver Detalhes" button
-    if (event.target && event.target.classList.contains("view-button")) {
-        // Here you can also pass the specific order ID to dynamically fetch the order data
-        const orderId = event.target.getAttribute("data-order-id");
-        console.log("Clicked order ID:", orderId);
-        
-        // Show the modal
-        modal.style.display = "block";
-        
-        // You can add code here to fetch order details based on the orderId
-        // and populate the modal with data.
+        const orders = await response.json();
+        displayOrders(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
     }
-});
+}
 
-// Event listener for closing the modal
-closeModalBtn.addEventListener("click", function() {
-    modal.style.display = "none";
-});
+// Function to dynamically display orders
+function displayOrders(orders) {
+    const container = document.getElementById('orders-container');
+    container.innerHTML = ''; // Clear existing content
 
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
+    if (orders.length === 0) {
+        container.innerHTML = '<p>No orders found.</p>';
+        return;
     }
-});
 
+    orders.forEach(order => {
+        const total = parseFloat(order.total);
+        if (isNaN(total)) {
+            console.error('Invalid total value:', order.total);
+        }
 
+        const statusText = order.status === 1 ? 'Submitted' : 'Draft';
+        const orderRow = `
+            <div class="order-row" data-id="${order.id}" data-razaosocial="${order.razaosocial}">
+                <div class="order-details">
+                    <div><strong>ID:</strong> ${order.id}</div>
+                    <div><strong>Representante:</strong> ${order.representante}</div> <!-- Display Representante -->
+                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                    <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+                    <div class="status"><strong>Status:</strong> ${statusText}</div>
+                </div>
+                <button class="view-button">Ver Detalhes</button>
+            </div>
+        `;
+        container.innerHTML += orderRow;
+    });
+}
 
+// Function to handle search functionality
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const orders = document.querySelectorAll('.order-row');
 
-    // Handle login status
-    const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+    orders.forEach(order => {
+        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
+        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
+
+        if (orderId.includes(searchTerm) || razaoSocial.includes(searchTerm)) {
+            order.style.display = 'block';
         } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
+            order.style.display = 'none';
         }
+    });
+});
 
-        // Logout function
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            localStorage.removeItem('username');  // Remove login data
-            window.location.href = '/';  // Redirect to login page
-        });
+// Function to handle login state and display username
+function displayUserName() {
+    const username = localStorage.getItem('username');
+    if (username) {
+        document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+    }
+}
 
+// Function to handle logout
+function handleLogout() {
+    localStorage.removeItem('username');
+    window.location.href = '/login.html'; // Redirect to login page after logout
+}
 
+// Event listener for logout button
+document.getElementById('logoutBtn').addEventListener('click', handleLogout);
 
+// Load orders and user info when page loads
+window.onload = function() {
+    loadOrders();
+    displayUserName();
+};
+</script>
 
-
-
-
-
-
-
-
-// Fetch the user's role from localStorage
-const userRole = localStorage.getItem('role'); // Ensure this is set at login
-  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-  // Dynamically assign the correct href based on the user's role
-  if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
-
-
-
-    </script>
 </body>
 </html>
