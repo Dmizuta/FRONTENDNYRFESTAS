@@ -228,7 +228,7 @@ th {
 }
 
 .modal-stage-one img:hover {
-    transform: scale(1.8); /* Slight zoom effect on modal */
+    transform: scale(1.5); /* Slight zoom effect on modal */
     transition: transform 0.3s ease;
 }
 
