@@ -439,6 +439,7 @@ document.getElementById("orders-container").addEventListener("click", function(e
     if (event.target && event.target.closest(".order-row")) {
         const orderRow = event.target.closest(".order-row");
         const orderId = orderRow.getAttribute("data-id");
+
         console.log("Clicked order ID:", orderId);
         
         modal.style.display = "block";
@@ -461,6 +462,15 @@ window.addEventListener("click", function(event) {
     }
 });
 
+// Event listener for opening the modal
+document.getElementById("orders-container").addEventListener("click", function(event) {
+    if (event.target && event.target.closest(".order-row")) {
+        const orderRow = event.target.closest(".order-row");
+        const orderId = orderRow.getAttribute("data-id");
+        fetchOrderDetails(orderId);
+        document.getElementById("order-modal").style.display = "block";
+    }
+});
 
 
 
