@@ -334,7 +334,7 @@ function displayOrders(orders) {
 async function fetchOrderDetails(orderId) {
     try {
         console.log(`Fetching details for order ID: ${orderId}`);
-        const response = await fetch(`https://backendnyrfestas.vercel.app/api/order-details/${orderId}`);
+        const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
         if (!response.ok) {
             throw new Error('Failed to fetch order details');
         }
