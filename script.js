@@ -279,10 +279,12 @@ document.getElementById("addButton").addEventListener("click", async () => {
             console.log("AQUI!", productBuyData);
 
             
+            
+            const productDesc = productBuyData.descricao
+            const productPrice = productBuyData.precofechada
 
 
-
-        if (!productName || !productDesc || !productPrice) {
+        if (!productCode || !productDesc || !productPrice) {
           alert("Product details are missing or incorrect.");
           console.log("Product details missing:", { productName, productDesc, productPrice });
           return;
