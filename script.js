@@ -184,9 +184,9 @@ document.getElementById("addButton").addEventListener("click", async () => {
           const productName = document.querySelector("#codprod")?.textContent;
           const productDesc = document.querySelector("#descrip")?.textContent;
           const productPrice = document.querySelector("#preco1")?.textContent;
-          console.log("aqui!", {productPrice});
+         
 
-        
+          
 
 
 
@@ -207,6 +207,10 @@ document.getElementById("addButton").addEventListener("click", async () => {
             quantidade: quantity,
             preco: productPrice,
           };
+          console.log("aqui!", productData.preco);
+
+
+
 
           console.log("Sending product data to add to order:", productData);
 
