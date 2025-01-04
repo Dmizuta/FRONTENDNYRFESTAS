@@ -442,13 +442,13 @@ function populateModal(orderDetails) {
     orderDetailsContent.innerHTML = ''; // Clear existing content
 
     orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.codigo); // Ensure price is a number
+        const price = parseFloat(product.preco); // Ensure price is a number
         const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
 
         const row = `
             <tr>
                 <td>${index + 1}</td>
-                <td>${product.codigo}</td>
+                <td>${product.codproduto}</td>
                 <td>${product.descricao}</td>
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
