@@ -384,7 +384,46 @@ function populateModal(orderDetails) {
 
 */
 
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
 
+    const orderDetailsContent = document.getElementById('order-details-content');
+    orderDetailsContent.innerHTML = '';
+
+    orderDetails.products.forEach((product, index) => {
+        // Convert precoUnitario to a number if it's a string (for example, "R$ 3.20")
+        const price = parseFloat(product.precoUnitario.replace(/[^\d.-]/g, ''));
+
+        // Check if price is valid
+        if (isNaN(price)) {
+            console.error(`Invalid price for product ${index + 1}:`, product.precoUnitario);
+        }
+
+        const row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${product.codigo}</td>
+                <td>${product.descricao}</td>
+                <td>${product.quantidade}</td>
+                <td>R$ ${price.toFixed(2)}</td>
+                <td>R$ ${(product.quantidade * price).toFixed(2)}</td>
+            </tr>
+        `;
+        orderDetailsContent.innerHTML += row;
+    });
+
+    // For total value, ensure it's treated as a number too
+    const total = parseFloat(orderDetails.total.replace(/[^\d.-]/g, ''));
+    if (!isNaN(total)) {
+        document.getElementById('total-value').textContent = `R$ ${total.toFixed(2)}`;
+    } else {
+        console.error('Invalid total value:', orderDetails.total);
+    }
+}
+/*
 
 
 // Function to populate the modal with order details
@@ -415,7 +454,7 @@ function populateModal(orderDetails) {
 
 
 
-
+*/
 
 
 
