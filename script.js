@@ -268,6 +268,12 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const productCode = document.querySelector('#codprod').textContent;
 
         
+
+
+
+
+
+
           // Fetch product details from the API using the product code
 try {
   const productBuyResponse = await fetch(
@@ -291,11 +297,11 @@ try {
   console.log("Product Description:", productDesc, "Product Price:", productPrice);
 
   // Validate product details
-  if (!productCode || !productDesc || !productPrice) {
+ /* if (!productCode || !productDesc || !productPrice) {
       alert("Product details are missing or incorrect.");
       console.log("Product details missing:",  productCode, productDesc, productPrice );
       return;
-  }
+  }*/
 
   // Proceed with further logic using productDesc and productPrice
 
