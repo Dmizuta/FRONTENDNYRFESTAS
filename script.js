@@ -351,7 +351,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
           }
         } else {
           console.error("Failed to fetch customer info:", customerResponse);
-          alert("SELECIONE UM CADASTRO PARA ADICIONAR UM PRODUTO.");
+          alert("SELECIONE UM CADASTRO PARA ADICIONAR O PRODUTO.");
         }
       } else {
         alert('Cadastro not filled, cannot add product.');
