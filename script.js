@@ -269,6 +269,8 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const productDesc = document.querySelector('#descrip').textContent;
         const productPrice = document.querySelector('#preco1').textContent;
 
+        console.log("aqui!", productData.preco);
+
         if (!productName || !productDesc || !productPrice) {
           alert("Product details are missing or incorrect.");
           console.log("Product details missing:", { productName, productDesc, productPrice });
@@ -288,8 +290,8 @@ document.getElementById("addButton").addEventListener("click", async () => {
         };
 
         console.log("Admin product data being sent:", productData);
-        console.log("aqui!", productData.preco);
         
+
         const addResponse = await fetch(
           "https://backendnyrfestas.vercel.app/add-to-order-admin",
           {
