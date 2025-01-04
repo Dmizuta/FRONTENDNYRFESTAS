@@ -338,6 +338,19 @@ th {
     margin-left: 10px;
 }
 
+.produtos-moldura{
+  
+    padding: 20px;
+    
+    background-color: #f5eacd; /* White background to maintain brightness */
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
+    margin: 30px auto;
+   
+    max-width: 95%
+  
+}
+
 
 
 
