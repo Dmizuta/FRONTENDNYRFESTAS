@@ -274,7 +274,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-            const productBuyData = await customerResponse.json();
+            const productBuyData = await productBuy.json();
             
             console.log("AQUI!", productBuyData);
 
