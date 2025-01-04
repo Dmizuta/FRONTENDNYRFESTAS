@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const modal = document.getElementById("order-modal");
 const closeModalBtn = document.getElementById("close-modal");
 
-// Event listener for opening the modal
+/*// Event listener for opening the modal
 document.getElementById("orders-container").addEventListener("click", function(event) {
     if (event.target && event.target.closest(".order-row")) {
         const orderRow = event.target.closest(".order-row");
@@ -442,8 +442,33 @@ document.getElementById("orders-container").addEventListener("click", function(e
 
         console.log("Clicked order ID:", orderId);
         
-        modal.style.display = "block";
+        modal.style.display = "block";*/
         
+        // Event listener for opening the modal
+document.getElementById("orders-container").addEventListener("click", function(event) {
+    if (event.target && event.target.closest(".order-row")) {
+        const orderRow = event.target.closest(".order-row");
+        const orderId = orderRow.getAttribute("data-id");
+        fetchOrderDetails(orderId);
+        document.getElementById("order-modal").style.display = "block";
+        console.log("CHECK HERE 01", orderId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         // You can add code here to fetch order details based on the orderId
         // and populate the modal with data.
@@ -462,15 +487,7 @@ window.addEventListener("click", function(event) {
     }
 });
 
-// Event listener for opening the modal
-document.getElementById("orders-container").addEventListener("click", function(event) {
-    if (event.target && event.target.closest(".order-row")) {
-        const orderRow = event.target.closest(".order-row");
-        const orderId = orderRow.getAttribute("data-id");
-        fetchOrderDetails(orderId);
-        document.getElementById("order-modal").style.display = "block";
-    }
-});
+
 
 
 
@@ -482,7 +499,7 @@ document.getElementById("orders-container").addEventListener("click", function(e
 
 // Function to fetch and display order details in the modal
 async function fetchOrderDetails(orderId) {
-    console.log("CHECK HERE", orderId);
+    console.log("CHECK HERE 02", orderId);
     try {
         console.log(`Fetching details for order ID: ${orderId}`);
         const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
