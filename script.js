@@ -158,7 +158,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-
+// FOR NON ADMIN USERS
     try {
       console.log('Checking cadastro for username:', username);
       const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
@@ -221,10 +221,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-console.log("Product Description:", productDesc);
-for (let i = 0; i < productDesc.length; i++) {
-  console.log(`Index ${i}: '${productDesc[i]}' (Code: ${productDesc.charCodeAt(i)})`);
-}
+
 
 
 
