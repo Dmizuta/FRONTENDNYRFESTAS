@@ -270,7 +270,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         
           console.log('Fetching data from pedidoitens table');
           const productBuy = await fetch(
-            `https://backendnyrfestas.vercel.app/product-buy/${productCode}`)
+            `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, {headers: { "Content-Type": "application/json" }})
 
 
 
@@ -282,6 +282,8 @@ document.getElementById("addButton").addEventListener("click", async () => {
             
             const productDesc = productBuyData.descricao;
             const productPrice = productBuyData.precofechada;
+
+            console.log("XXXX", productDesc, productPrice);
 
 
         if (!productCode || !productDesc || !productPrice) {
