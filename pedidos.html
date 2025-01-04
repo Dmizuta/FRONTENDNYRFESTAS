@@ -471,7 +471,7 @@ window.addEventListener("click", function(event) {
 
 // Function to fetch and display order details in the modal
 async function fetchOrderDetails(orderId) {
-    console.log(orderId);
+    console.log("CHECK HERE", orderId);
     try {
         console.log(`Fetching details for order ID: ${orderId}`);
         const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
