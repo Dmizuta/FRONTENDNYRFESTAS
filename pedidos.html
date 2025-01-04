@@ -379,6 +379,51 @@ function displayOrders(orders) {
 
 
 
+
+
+// Handle login status
+const username = localStorage.getItem('username');
+if (username) {
+    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+} else {
+    alert("Você precisa estar logado para acessar esta página!");
+    window.location.href = '/';
+}
+
+// Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');
+    window.location.href = '/';
+});
+
+// Fetch the user's role from localStorage
+const userRole = localStorage.getItem('role');
+const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+
+// Dynamically assign the correct href based on the user's role
+if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+    cadastroLink.href = 'cadastro.html';
+} else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+    cadastroLink.href = 'cadastrorep.html';
+} else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+    cadastroLink.href = 'cadastroadmin.html';
+} else {
+    pedidosLink.href = '#';
+    console.warn('Role not defined or invalid.');
+}
+
+
+
+
+
+
+
+
+
 // Load orders when the page is ready
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed');
@@ -415,40 +460,104 @@ window.addEventListener("click", function(event) {
     }
 });
 
-// Handle login status
-const username = localStorage.getItem('username');
-if (username) {
-    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-} else {
-    alert("Você precisa estar logado para acessar esta página!");
-    window.location.href = '/';
+
+
+
+
+
+
+
+
+
+// Function to fetch and display order details in the modal
+async function fetchOrderDetails(orderId) {
+    console.log(orderId);
+    try {
+        console.log(`Fetching details for order ID: ${orderId}`);
+        const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch order details');
+        }
+        const orderDetails = await response.json();
+        console.log('Order details received:', orderDetails);
+        populateModal(orderDetails);
+    } catch (error) {
+        console.error('Error fetching order details:', error);
+    }
 }
 
-// Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');
-    window.location.href = '/';
+
+
+//Function to format currency (BRL)
+function formatCurrency(value) {
+    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
+}
+
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    // Update general order information in the modal
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
+
+    // Update products table
+    const orderDetailsContent = document.getElementById('order-details-content');
+    orderDetailsContent.innerHTML = ''; // Clear existing content
+
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+
+        const row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td>${quantity}</td>
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(quantity * price)}</td>
+            </tr>
+        `;
+        orderDetailsContent.innerHTML += row; // Add row to table
+    });
+
+    // Update total price in the modal
+    const total = parseFloat(orderDetails.total); // Ensure total is a number
+    document.getElementById('total-value').textContent = formatCurrency(total);
+}
+
+// Show modal with order details
+function openModal(orderId) {
+    fetchOrderDetails(orderId)
+        .then(orderDetails => {
+            populateModal(orderDetails); // Populate modal with fetched details
+            document.getElementById('order-modal').classList.add('show'); // Show modal
+        })
+        .catch(error => console.error('Error fetching order details:', error));
+}
+
+// Event listener for order rows
+document.querySelectorAll('.order-row').forEach(row => {
+    row.addEventListener('click', () => {
+        const orderId = row.getAttribute('data-id');
+        openModal(orderId); // Open modal with clicked order details
+    });
 });
 
-// Fetch the user's role from localStorage
-const userRole = localStorage.getItem('role');
-const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+// Close modal functionality
+document.getElementById('close-modal').addEventListener('click', () => {
+    document.getElementById('order-modal').classList.remove('show'); // Hide modal
+});
 
-// Dynamically assign the correct href based on the user's role
-if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-} else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-} else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-} else {
-    pedidosLink.href = '#';
-    console.warn('Role not defined or invalid.');
-}
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
