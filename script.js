@@ -254,6 +254,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
   
   else {
     // Admin logic (no cadastro check)
+    
     try {
       console.log('Admin adding product for username:', username);
       const customerResponse = await fetch(
