@@ -265,11 +265,19 @@ document.getElementById("addButton").addEventListener("click", async () => {
         console.log("Customer info fetched:", customerData);
         const { username, razaosocial } = customerData;
 
-        const productName = document.querySelector('#codprod').textContent;
-        const productDesc = document.querySelector('#descrip').textContent;
-        const productPrice = document.querySelector('#preco1').textContent;
+        const productCode = document.querySelector('#codprod').textContent;
 
-        console.log("aqui!", productPrice);
+        
+          console.log('Fetching data from pedidoitens table');
+          const productBuy = await fetch(
+            `https://backendnyrfestas.vercel.app/product-buy?codeProduct=${productCode}`)
+
+            console.log("AQUI!", productCode);
+
+        /*const productDesc = document.querySelector('#descrip').textContent;
+        const productPrice = document.querySelector('#preco1').textContent;
+*/
+       
 
         if (!productName || !productDesc || !productPrice) {
           alert("Product details are missing or incorrect.");
