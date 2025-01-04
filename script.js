@@ -272,7 +272,13 @@ document.getElementById("addButton").addEventListener("click", async () => {
           const productBuy = await fetch(
             `https://backendnyrfestas.vercel.app/product-buy/${productCode}`)
 
-            console.log("AQUI!", productBuy);
+
+
+            const productBuyData = await customerResponse.json();
+            
+            console.log("AQUI!", productBuyData);
+
+            
 
 
 
