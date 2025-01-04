@@ -207,7 +207,8 @@ document.getElementById("addButton").addEventListener("click", async () => {
             quantidade: quantity,
             preco: productPrice,
           };
-          console.log("aqui!", productData.preco);
+          
+        
 
 
 
@@ -287,7 +288,8 @@ document.getElementById("addButton").addEventListener("click", async () => {
         };
 
         console.log("Admin product data being sent:", productData);
-
+        console.log("aqui!", productData.preco);
+        
         const addResponse = await fetch(
           "https://backendnyrfestas.vercel.app/add-to-order-admin",
           {
