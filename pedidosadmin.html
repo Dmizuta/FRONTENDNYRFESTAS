@@ -348,21 +348,25 @@ async function fetchOrderDetails(orderId) {
 
 
 
+// Function to format currency (BRL)
+function formatCurrency(value) {
+    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
+}
 
-
-/*
-
+// Function to populate the modal with order details
 function populateModal(orderDetails) {
+    // Update general order information in the modal
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
 
+    // Update products table
     const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = '';
+    orderDetailsContent.innerHTML = ''; // Clear existing content
 
     orderDetails.products.forEach((product, index) => {
-        const price = product.precoUnitario;
-        const quantity = product.quantidade;
+        const price = parseFloat(product.precoUnitario); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
 
         const row = `
             <tr>
@@ -374,15 +378,42 @@ function populateModal(orderDetails) {
                 <td>${formatCurrency(quantity * price)}</td>
             </tr>
         `;
-        orderDetailsContent.innerHTML += row;
+        orderDetailsContent.innerHTML += row; // Add row to table
     });
 
-    const total = orderDetails.total;
+    // Update total price in the modal
+    const total = parseFloat(orderDetails.total); // Ensure total is a number
     document.getElementById('total-value').textContent = formatCurrency(total);
 }
 
+// Show modal with order details
+function openModal(orderId) {
+    fetchOrderDetails(orderId)
+        .then(orderDetails => {
+            populateModal(orderDetails); // Populate modal with fetched details
+            document.getElementById('order-modal').classList.add('show'); // Show modal
+        })
+        .catch(error => console.error('Error fetching order details:', error));
+}
 
-*/
+// Event listener for order rows
+document.querySelectorAll('.order-row').forEach(row => {
+    row.addEventListener('click', () => {
+        const orderId = row.getAttribute('data-id');
+        openModal(orderId); // Open modal with clicked order details
+    });
+});
+
+// Close modal functionality
+document.getElementById('close-modal').addEventListener('click', () => {
+    document.getElementById('order-modal').classList.remove('show'); // Hide modal
+});
+
+
+
+
+
+/*
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -423,35 +454,6 @@ function populateModal(orderDetails) {
         console.error('Invalid total value:', orderDetails.total);
     }
 }
-/*
-
-
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-
-    const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = '';
-
-    orderDetails.products.forEach((product, index) => {
-        const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${product.codigo}</td>
-                <td>${product.descricao}</td>
-                <td>${product.quantidade}</td>
-                <td>R$ ${product.precoUnitario.toFixed(2)}</td>
-                <td>R$ ${(product.quantidade * product.precoUnitario).toFixed(2)}</td>
-            </tr>
-        `;
-        orderDetailsContent.innerHTML += row;
-    });
-
-    document.getElementById('total-value').textContent = `R$ ${orderDetails.total.toFixed(2)}`;
-}
-
 
 
 */
