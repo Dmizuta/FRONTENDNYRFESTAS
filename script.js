@@ -280,8 +280,8 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
             
             
-            const productDesc = productBuyData.descricao
-            const productPrice = productBuyData.precofechada
+            const productDesc = productBuyData.descricao;
+            const productPrice = productBuyData.precofechada;
 
 
         if (!productCode || !productDesc || !productPrice) {
