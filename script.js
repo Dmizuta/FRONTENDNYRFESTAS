@@ -296,12 +296,12 @@ try {
 
   console.log("Product Description:", productDesc, "Product Price:", productPrice);
 
-  // Validate product details
- /* if (!productCode || !productDesc || !productPrice) {
+  //Validate product details
+ if (!productCode || !productDesc || !productPrice) {
       alert("Product details are missing or incorrect.");
       console.log("Product details missing:",  productCode, productDesc, productPrice );
       return;
-  }*/
+  }
 
   // Proceed with further logic using productDesc and productPrice
 
