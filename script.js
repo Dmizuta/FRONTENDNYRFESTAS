@@ -269,7 +269,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const productDesc = document.querySelector('#descrip').textContent;
         const productPrice = document.querySelector('#preco1').textContent;
 
-        console.log("aqui!", productData.preco);
+        console.log("aqui!", productPrice);
 
         if (!productName || !productDesc || !productPrice) {
           alert("Product details are missing or incorrect.");
