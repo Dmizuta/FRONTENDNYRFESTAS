@@ -254,7 +254,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
   
   else {
     // Admin logic (no cadastro check)
-    
+
     try {
       console.log('Admin adding product for username:', username);
       const customerResponse = await fetch(
@@ -276,16 +276,13 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
           // Fetch product details from the API using the product code
-try {
+
   const productBuyResponse = await fetch(
       `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
       { headers: { "Content-Type": "application/json" } }
   );
 
-  // Check if the response is ok (status in the range 200-299)
-  if (!productBuyResponse.ok) {
-      throw new Error(`Error fetching product: ${productBuyResponse.statusText}`);
-  }
+
 
   // Parse the JSON response
   const productBuyData = await productBuyResponse.json();
@@ -306,11 +303,6 @@ try {
 
   // Proceed with further logic using productDesc and productPrice
 
-} catch (error) {
-  // Handle any errors that occurred during the fetch
-  console.error("An error occurred:", error);
-  alert("Failed to fetch product details. Please try again later.");
-}
 
 
 
