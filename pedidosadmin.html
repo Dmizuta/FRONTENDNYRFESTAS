@@ -191,7 +191,7 @@
         display: flex;
         justify-content: center; 
         align-items: center;  
-        width: 58%;
+        width:100%;
         margin: 30px auto;
         padding: 10px;
         border: 1px solid #ccc;
@@ -200,6 +200,16 @@
         font-size: 14px;
     }
     
+.box{
+    max-width: 1300px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
     </style>
     
 <body>
@@ -222,11 +232,16 @@
 
 <h1>Meus Pedidos admin</h1>
 
+<div class="box">
 <input type="text" id="searchInput" placeholder="Search orders...">
-
 <div id="orders-container">
+
+
+    
     <!-- Orders will be inserted here dynamically -->
 </div>
+</div>
+
 
 <div id="order-modal" class="modal">
     <div class="modal-content">
