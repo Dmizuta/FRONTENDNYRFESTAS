@@ -286,7 +286,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
         if (!productCode || !productDesc || !productPrice) {
           alert("Product details are missing or incorrect.");
-          console.log("Product details missing:", { productName, productDesc, productPrice });
+          console.log("Product details missing:", { productCode, productDesc, productPrice });
           return;
         }
 
