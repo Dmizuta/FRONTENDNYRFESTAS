@@ -150,6 +150,122 @@ document.getElementById("addButton").addEventListener("click", async () => {
   }
 
   if (userRole !== "ADMIN") {
+
+
+
+
+
+
+
+
+
+    try {
+      console.log('Checking cadastro for username:', username);
+      const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username })
+      });
+
+      if (!cadastroResponse.ok) {
+        alert('Favor preencher seu Cadastro.');
+        console.error('Error checking cadastro:', cadastroResponse);
+        return;
+      }
+
+      const cadastroResult = await cadastroResponse.json();
+      console.log('Cadastro check result:', cadastroResult);
+
+      if (cadastroResult.cadastroFilled) {
+        console.log('Cadastro is complete, proceeding with adding product to order');
+      console.log('Admin adding product for username:', username);
+      const customerResponse = await fetch(
+        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
+      );
+
+      if (customerResponse.ok) {
+        const customerData = await customerResponse.json();
+        console.log("Customer info fetched:", customerData);
+        const { username, razaosocial } = customerData;
+
+        const productCode = document.querySelector('#codprod').textContent;
+
+          // Fetch product details from the API using the product code
+
+  const productBuyResponse = await fetch(
+      `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
+      { headers: { "Content-Type": "application/json" } }
+  );
+
+
+
+  // Parse the JSON response
+  const productBuyData = await productBuyResponse.json();
+  console.log("Product Data:", productBuyData);
+
+  // Extract product description and price
+  const productDesc = productBuyData.descricao;
+  const productPrice = productBuyData.precofechada;
+
+  console.log("Product Description:", productDesc, "Product Price:", productPrice);
+
+  //Validate product details
+ if (!productCode || !productDesc || !productPrice) {
+      alert("Product details are missing or incorrect.");
+      console.log("Product details missing:",  productCode, productDesc, productPrice );
+      return;
+  }
+
+  // Proceed with further logic using productDesc and productPrice
+
+
+
+
+console.log("Product Description:", productDesc);
+for (let i = 0; i < productDesc.length; i++) {
+  console.log(`Index ${i}: '${productDesc[i]}' (Code: ${productDesc.charCodeAt(i)})`);
+}
+
+
+
+        const quantity = parseInt(document.getElementById('quantity').value);
+
+        const productData = {
+          username: username,
+          customerId: customerId,
+          razaosocial: razaosocial,
+          codproduto: productCode,
+          descricao: productDesc,
+          quantidade: quantity,
+          preco: productPrice
+        };
+
+        console.log("Admin product data being sent:", productData);
+        
+
+        const addResponse = await fetch(
+          "https://backendnyrfestas.vercel.app/add-to-order-admin",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(productData),
+          }
+        );
+
+        const addResult = await addResponse.json();
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     // Non-admin users should be checked for cadastro status
     try {
       console.log('Checking cadastro for username:', username);
@@ -225,7 +341,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
           );
 
           const addResult = await addResponse.json();
-
+*/
           if (addResponse.ok) {
             alert(addResult.message || "Product added to existing draft order");
             console.log("Product successfully added to order");
@@ -305,11 +421,11 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-
+/*
 console.log("Product Description:", productDesc);
 for (let i = 0; i < productDesc.length; i++) {
   console.log(`Index ${i}: '${productDesc[i]}' (Code: ${productDesc.charCodeAt(i)})`);
-}
+}*/
 
 
 
