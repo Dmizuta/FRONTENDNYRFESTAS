@@ -418,12 +418,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-/*
-console.log("Product Description:", productDesc);
-for (let i = 0; i < productDesc.length; i++) {
-  console.log(`Index ${i}: '${productDesc[i]}' (Code: ${productDesc.charCodeAt(i)})`);
-}*/
-
 
 
         const quantity = parseInt(document.getElementById('quantity').value);
