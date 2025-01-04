@@ -151,13 +151,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
   if (userRole !== "ADMIN") {
 
-
-
-
-
-
-
-
 // FOR NON ADMIN USERS
     try {
       console.log('Checking cadastro for username:', username);
@@ -218,13 +211,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
   // Proceed with further logic using productDesc and productPrice
 
-
-
-
-
-
-
-
         const quantity = parseInt(document.getElementById('quantity').value);
 
         const productData = {
@@ -253,92 +239,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-
-
-
-
-
-
-
-
-
-    /*
-    // Non-admin users should be checked for cadastro status
-    try {
-      console.log('Checking cadastro for username:', username);
-      const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username })
-      });
-
-      if (!cadastroResponse.ok) {
-        alert('Favor preencher seu Cadastro.');
-        console.error('Error checking cadastro:', cadastroResponse);
-        return;
-      }
-
-      const cadastroResult = await cadastroResponse.json();
-      console.log('Cadastro check result:', cadastroResult);
-
-      if (cadastroResult.cadastroFilled) {
-        console.log('Cadastro is complete, proceeding with adding product to order');
-
-        console.log("Fetching customer info for customerId:", customerId);
-        const customerResponse = await fetch(
-          `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
-        );
-
-        if (customerResponse.ok) {
-          const customerData = await customerResponse.json();
-          console.log("Customer info fetched:", customerData);
-          const { razaosocial, username } = customerData;
-
-          const productName = document.querySelector("#codprod")?.textContent;
-          const productDesc = document.querySelector("#descrip")?.textContent;
-          const productPrice = document.querySelector("#preco1")?.textContent;
-         
-
-          
-
-
-
-          if (!productName || !productDesc || !productPrice) {
-            alert("Product details are missing or incorrect.");
-            console.log("Product details missing:", { productName, productDesc, productPrice });
-            return;
-          }
-
-          const quantity = parseInt(document.getElementById("quantity").value);
-
-          const productData = {
-            username: username,
-            customerId: customerId,
-            razaosocial: razaosocial,
-            codproduto: productName,
-            descricao: productDesc,
-            quantidade: quantity,
-            preco: productPrice,
-          };
-          
-        
-
-
-
-
-          console.log("Sending product data to add to order:", productData);
-
-          const addResponse = await fetch(
-            "https://backendnyrfestas.vercel.app/add-to-order",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(productData),
-            }
-          );
-
-          const addResult = await addResponse.json();
-*/
           if (addResponse.ok) {
             alert(addResult.message || "Product added to existing draft order");
             console.log("Product successfully added to order");
@@ -366,7 +266,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
   
   
   else {
-    // Admin logic (no cadastro check)
+    // FOR ADMIN USERS (no cadastro check)
 
     try {
       console.log('Admin adding product for username:', username);
@@ -382,12 +282,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const productCode = document.querySelector('#codprod').textContent;
 
         
-
-
-
-
-
-
           // Fetch product details from the API using the product code
 
   const productBuyResponse = await fetch(
