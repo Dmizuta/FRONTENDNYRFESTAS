@@ -442,7 +442,7 @@ function populateModal(orderDetails) {
     orderDetailsContent.innerHTML = ''; // Clear existing content
 
     orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.precoUnitario); // Ensure price is a number
+        const price = parseFloat(product.codigo); // Ensure price is a number
         const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
 
         const row = `
