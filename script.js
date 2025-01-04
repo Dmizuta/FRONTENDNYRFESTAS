@@ -268,29 +268,47 @@ document.getElementById("addButton").addEventListener("click", async () => {
         const productCode = document.querySelector('#codprod').textContent;
 
         
-          console.log('Fetching data from pedidoitens table');
-          const productBuy = await fetch(
-            `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, {headers: { "Content-Type": "application/json" }})
+          // Fetch product details from the API using the product code
+try {
+  const productBuyResponse = await fetch(
+      `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
+      { headers: { "Content-Type": "application/json" } }
+  );
+
+  // Check if the response is ok (status in the range 200-299)
+  if (!productBuyResponse.ok) {
+      throw new Error(`Error fetching product: ${productBuyResponse.statusText}`);
+  }
+
+  // Parse the JSON response
+  const productBuyData = await productBuyResponse.json();
+  console.log("Product Data:", productBuyData);
+
+  // Extract product description and price
+  const productDesc = productBuyData.descricao;
+  const productPrice = productBuyData.precofechada;
+
+  console.log("Product Description:", productDesc, "Product Price:", productPrice);
+
+  // Validate product details
+  if (!productCode || !productDesc || !productPrice) {
+      alert("Product details are missing or incorrect.");
+      console.log("Product details missing:", { productCode, productDesc, productPrice });
+      return;
+  }
+
+  // Proceed with further logic using productDesc and productPrice
+
+} catch (error) {
+  // Handle any errors that occurred during the fetch
+  console.error("An error occurred:", error);
+  alert("Failed to fetch product details. Please try again later.");
+}
 
 
 
-            const productBuyData = await productBuy.json();
-            
-            console.log("AQUI!", productBuyData);
-
-            
-            
-            const productDesc = productBuyData.descricao;
-            const productPrice = productBuyData.precofechada;
-
-            console.log("XXXX", productDesc, productPrice);
 
 
-        if (!productCode || !productDesc || !productPrice) {
-          alert("Product details are missing or incorrect.");
-          console.log("Product details missing:", { productCode, productDesc, productPrice });
-          return;
-        }
 
         const quantity = parseInt(document.getElementById('quantity').value);
 
@@ -298,7 +316,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
           username: username,
           customerId: customerId,
           razaosocial: razaosocial,
-          codproduto: productName,
+          codproduto: productCode,
           descricao: productDesc,
           quantidade: quantity,
           preco: productPrice
