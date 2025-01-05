@@ -190,7 +190,7 @@ th {
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: #ffffff;
     margin: 8% auto;
     padding: 35px;
     width: 50%;
@@ -202,7 +202,7 @@ th {
 
 /* Modal Hover Effect */
 .modal-content:hover {
-    transform: scale(1.02); /* Slight zoom effect on modal */
+    transform: scale(1.0); /* Slight zoom effect on modal */
 }
 
 /* Modal Image */
@@ -215,7 +215,7 @@ th {
 }
 
 .modal-stage-one img:hover {
-    transform: scale(1.2); /* Slight zoom effect on image */
+    transform: scale(1.6); /* Slight zoom effect on image */
     transition: transform 0.35s ease;
 }
 
