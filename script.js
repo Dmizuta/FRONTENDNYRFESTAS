@@ -75,13 +75,11 @@ function populateProductTable(products) {
         const productCode = row.cells[1].textContent;
         const productDesc = row.cells[2].textContent;
         const cxFechada = row.cells[3].textContent;
-
         const priceFechada = row.cells[4].textContent;
         const cxFracionada = row.cells[5].textContent;
-
         const priceFracionada = row.cells[6].textContent;
 
-       /* openModal(
+       openModal(
           productCode,
           productDesc,
           cxFechada,
@@ -89,7 +87,7 @@ function populateProductTable(products) {
           priceFracionada,
           cxFracionada,
           productImage
-        );*/
+        );
       });
     });
   } else {
@@ -103,28 +101,28 @@ function populateProductTable(products) {
 function openModal(
   productCode,
   productDesc,
-  cxFechada,
   priceFechada,
   priceFracionada,
+  cxFechada,
   cxFracionada,
   productImage
 )
  {
   const modal = document.getElementById("myModal");
   const productInfo = modal.querySelector(".product-info");
-  const cxFechadaInfo = modal.querySelector(".price1-info");
-  const priceInfoFechada = modal.querySelector(".cxfechada-info");
-  const cxFracioandaInfo = modal.querySelector(".cxfracioanda-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
   const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracioandaInfo = modal.querySelector(".cxfracionada-info");
   const productImageElement = modal.querySelector("img");
 
   // Populate modal with product details
   productInfo.querySelector("h3").textContent = productCode;
   productInfo.querySelector("p").textContent = productDesc;
-  cxFechadaInfo.querySelector("p").textContent = cxFechada;
   priceInfoFechada.querySelector("p").textContent = `Preço Cx Fechada: ${priceFechada}`;
-  cxFracioandaInfo.querySelector("p").textContent = cxFracionada;
   priceInfoFracionada.querySelector("p").textContent = `Preço Cx Fracionada: ${priceFracionada}`;
+  cxFechadaInfo.querySelector("p").textContent = cxFechada;
+  cxFracioandaInfo.querySelector("p").textContent = cxFracionada;
   productImageElement.src = productImage;
 
   modal.style.display = "block"; // Show modal
