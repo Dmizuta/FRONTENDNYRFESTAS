@@ -67,7 +67,7 @@ function populateProductTable(products) {
 
 
 
-
+      
       // Add event listener for "Add" button
       const openModalBtn = row.querySelector(".openModalBtn");
       openModalBtn.addEventListener("click", function () {
@@ -81,7 +81,7 @@ function populateProductTable(products) {
 
         const priceFracionada = row.cells[6].textContent;
 
-        openModal(
+       /* openModal(
           productCode,
           productDesc,
           cxFechada,
@@ -89,7 +89,7 @@ function populateProductTable(products) {
           priceFracionada,
           cxFracionada,
           productImage
-        );
+        );*/
       });
     });
   } else {
@@ -122,9 +122,9 @@ function openModal(
   productInfo.querySelector("h3").textContent = productCode;
   productInfo.querySelector("p").textContent = productDesc;
   cxFechadaInfo.querySelector("p").textContent = cxFechada;
-  priceInfo1.querySelector("p").textContent = `Preço Cx Fechada: ${priceFechada}`;
+  priceInfoFechada.querySelector("p").textContent = `Preço Cx Fechada: ${priceFechada}`;
   cxFracioandaInfo.querySelector("p").textContent = cxFracionada;
-  priceInfo2.querySelector("p").textContent = `Preço Cx Fracionada: ${priceFracionada}`;
+  priceInfoFracionada.querySelector("p").textContent = `Preço Cx Fracionada: ${priceFracionada}`;
   productImageElement.src = productImage;
 
   modal.style.display = "block"; // Show modal
