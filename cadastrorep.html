@@ -79,7 +79,7 @@
 
 
 
-    
+
     <section class="pagina">
         <h2>Cadastro de Cliente REPRESENTANTE</h2>
 
@@ -143,6 +143,30 @@
             localStorage.removeItem('username');
             window.location.href = '/';
         });
+
+
+
+  // Fetch the user's role from localStorage
+  const userRole = localStorage.getItem('role'); // Ensure this is set at login
+  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+
+
+  
+  // Dynamically assign the correct href based on the user's role
+  if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+    cadastroLink.href = 'cadastro.html';
+  } else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+    cadastroLink.href = 'cadastrorep.html';
+  } else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+    cadastroLink.href = 'cadastroadmin.html';
+  } else {
+    pedidosLink.href = '#'; // Default action for unknown or missing roles
+    console.warn('Role not defined or invalid.');
+  }
 
 
 
