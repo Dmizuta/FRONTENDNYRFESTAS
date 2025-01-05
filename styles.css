@@ -48,9 +48,19 @@ header h1 {
 
 /* Search Input */
 #searchInput {
-    width: 300px; /* You can adjust the width as per your preference */
-    padding: 10px;
-    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+
+        width:90%;
+
+        padding-top: 20px;
+        margin: 10px;
+       
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    
 }
 
 
