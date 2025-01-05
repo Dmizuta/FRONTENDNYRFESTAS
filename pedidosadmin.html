@@ -13,12 +13,18 @@
 <style>
     /* Orders container */
     #orders-container {
-        max-width: 1200px;
+        max-width: 95%;
         margin: 30px auto;
         padding: 20px;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        
+   
+
+
+
     }
     
     /* Order row layout */
@@ -188,7 +194,17 @@
     .modal.show {
         display: flex;
     }
+    .totalOrderBox {
     
+    padding: 20px 20px;
+    margin: 20px auto;
+    background-color: #13273d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+
+}
     /* Responsiveness for smaller screens */
     @media (max-width: 768px) {
         .order-header {
@@ -200,17 +216,7 @@
         }
     }
     
-    .totalOrderBox {
-    
-        padding: 20px 20px;
-        margin: 20px auto;
-        background-color: #13273d;
-        color: white;
-        border: none;
-        border-radius: 5px;
-    
-    
-    }
+   
     </style>
     
     
@@ -235,7 +241,11 @@
 <h1>Meus Pedidos admin</h1>
 
 <div class="box">
+
+<div class="search-wrapper">
 <input type="text" id="searchInput" placeholder="Search orders...">
+</div>
+
 <div id="orders-container">
 
 
