@@ -61,6 +61,13 @@ function populateProductTable(products) {
       cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
       cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
 
+
+
+
+
+
+
+
       // Add event listener for "Add" button
       const openModalBtn = row.querySelector(".openModalBtn");
       openModalBtn.addEventListener("click", function () {
@@ -74,7 +81,7 @@ function populateProductTable(products) {
 
         const priceFracionada = row.cells[6].textContent;
 
-       /* openModal(
+        openModal(
           productCode,
           productDesc,
           cxFechada,
@@ -82,7 +89,7 @@ function populateProductTable(products) {
           priceFracionada,
           cxFracionada,
           productImage
-        );*/
+        );
       });
     });
   } else {
