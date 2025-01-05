@@ -22,7 +22,7 @@ header {
     background-color: #F1C40F; /* Gold for a festive yet classy feel */
     color: #fff;
     text-align: center;
-    padding: 30px; /* Increased padding for more space */
+    padding: 20px; /* Increased padding for more space */
     border-radius: 8px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
@@ -44,7 +44,7 @@ header h1 {
 /* Navigation */
 nav {
     background-color: #E74C3C; /* Elegant yet vibrant red */
-    padding: 18px 0;
+    padding: 15px 0;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
