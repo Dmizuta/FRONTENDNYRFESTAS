@@ -196,6 +196,17 @@ table th, table td {
         margin-top: 20px;
     }
 }
+
+.totalOrderBox {
+
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+
+}
 </style>
 
 <body>
@@ -260,7 +271,7 @@ table th, table td {
                 <!-- Product rows will be dynamically populated here -->
             </tbody>
         </table>
-
+<div class="totalOrderBox">
         <!-- Total Order Section -->
         <div class="order-total">
             <div>
@@ -268,7 +279,7 @@ table th, table td {
                 <span id="total-value">R$ 0,00</span>
             </div>
         </div>
-
+    </div>
         <!-- Action Buttons -->
         <div class="modal-actions">
             <button id="submit-order-btn" class="action-btn">Submit</button>
