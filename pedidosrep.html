@@ -10,16 +10,21 @@
 </head>
 
 <style>
-    /* Orders container */
-    #orders-container {
+/* Orders container */
+#orders-container {
         max-width: 95%;
         margin: 30px auto;
         padding: 20px;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        
+   
+
+
+
     }
-    
     /* Order row layout */
     .order-row {
         display: flex;
@@ -232,15 +237,23 @@
     </ul>
 </nav>
 
+
+
+
 <h1>Meus Pedidos REPRESENTANTE</h1>
 
-<!-- Search input to filter orders -->
-<input type="text" id="searchInput" placeholder="Search orders...">
+
+<div class="box">
+
+<div class="search-wrapper">
+    <input type="text" id="searchInput" placeholder="Search orders...">
+    </div>
+
 
 <div id="orders-container">
     <!-- Orders will be inserted here dynamically -->
 </div>
-
+</div>
 <!-- Modal Structure (Initially hidden) -->
 <div id="order-modal" class="modal">
     <div class="modal-content">
