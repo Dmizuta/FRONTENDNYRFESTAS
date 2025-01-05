@@ -11,9 +11,9 @@
 
 
 <style>
-   /*Orders container*/ 
+    /* Orders container */
     #orders-container {
-        max-width: 90%;
+        max-width: 1200px;
         margin: 30px auto;
         padding: 20px;
         background-color: white;
@@ -103,6 +103,7 @@
         position: absolute;
         top: 10px;
         right: 25px;
+        border-color: #aaa;
         cursor: pointer;
     }
     
@@ -130,7 +131,8 @@
         padding: 10px 20px;
         background-color: #007bff;
         color: white;
-        border: none;
+        border: 1px;
+        
         border-radius: 5px;
         cursor: pointer;
     }
@@ -187,33 +189,30 @@
         display: flex;
     }
     
-    #searchInput {
-        display: flex;
-        justify-content: center;
-      width: 90%;
-        margin: 30px auto;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: px;
-        font-size: 18px;
-
-    }
-
-   
+    /* Responsiveness for smaller screens */
+    @media (max-width: 768px) {
+        .order-header {
+            flex-direction: column;
+        }
     
-
-
-.box{
-    width: 90%;
+        .order-info {
+            margin-top: 20px;
+        }
+    }
+    
+    .totalOrderBox {
+    
+        padding: 20px 20px;
         margin: 20px auto;
-        padding: 10px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-}
-
+        background-color: #13273d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    
+    
+    }
     </style>
+    
     
 <body>
 
@@ -281,13 +280,16 @@
                 <!-- Product rows will be dynamically populated here -->
             </tbody>
         </table>
-
-        <div class="order-total">
-            <div>
-                <span>Total do Pedido:</span>
-                <span id="total-value">R$ 0,00</span>
+        <div class="totalOrderBox">
+            <!-- Total Order Section -->
+            <div class="order-total">
+                <div>
+                    <span>Total do Pedido:</span>
+                    <span id="total-value">R$ 0,00</span>
+                </div>
             </div>
         </div>
+        
 
         <div class="modal-actions">
             <button id="submit-order-btn" class="action-btn">Submit</button>
