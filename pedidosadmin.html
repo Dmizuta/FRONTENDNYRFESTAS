@@ -440,6 +440,7 @@ function populateModal(orderDetails) {
     // Update products table
     const orderDetailsContent = document.getElementById('order-details-content');
     orderDetailsContent.innerHTML = ''; // Clear existing content
+    let total = 0; // Variable to accumulate the total price
 
     orderDetails.products.forEach((product, index) => {
         const price = parseFloat(product.preco); // Ensure price is a number
@@ -459,8 +460,10 @@ function populateModal(orderDetails) {
     });
 
     // Update total price in the modal
+    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
+/*
     const total = parseFloat(orderDetails.total); // Ensure total is a number
-    document.getElementById('total-value').textContent = formatCurrency(total);
+    document.getElementById('total-value').textContent = formatCurrency(total);*/
 }
 
 // Show modal with order details
