@@ -423,18 +423,61 @@ async function fetchOrderDetails(orderId) {
     }
 }
 
-//Function to format currency (BRL)
+
+
+
+
+// Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
-    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
+    return `R$ ${value.toFixed(2).replace('.', ',')}`;
+}
+
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    // Update general order information in the modal
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
+
+    // Update products table and calculate total
+    const orderDetailsContent = document.getElementById('order-details-content');
+    orderDetailsContent.innerHTML = ''; // Clear existing content
+    let total = 0; // Variable to accumulate the total price
+
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const productTotal = price * quantity; // Calculate product total
+
+        const row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td>${quantity}</td>
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(productTotal)}</td>
+            </tr>
+        `;
+        orderDetailsContent.innerHTML += row; // Add row to table
+
+        total += productTotal; // Accumulate the product total to the overall total
+    });
+
+    // Update total price in the modal
+    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
 }
 
 
 
+/*
+//Function to format currency (BRL)
+function formatCurrency(value) {
+    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
+}*/
 
 
-
-
-
+/*
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -467,9 +510,8 @@ function populateModal(orderDetails) {
     // Update total price in the modal
     document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
 
-    const total = parseFloat(orderDetails.total); // Ensure total is a number
-    document.getElementById('total-value').textContent = formatCurrency(total);
-}
+  
+}*/
 
 // Show modal with order details
 function openModal(orderId) {
