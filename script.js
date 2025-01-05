@@ -41,8 +41,7 @@ function populateProductTable(products) {
       const cell5 = row.insertCell(4); // Price Closed
       const cell6 = row.insertCell(5); // Quantity Fractioned
       const cell7 = row.insertCell(6); // Price Fractioned
-      const cell8 = row.insertCell(7); // View Details Button
-
+      const cell8 = row.insertCell(7); // ADD BUTTON
       // Populate cells with product data
       cell1.innerHTML = `
                 <img src="${
@@ -68,16 +67,22 @@ function populateProductTable(products) {
         const productImage = row.querySelector("img").src;
         const productCode = row.cells[1].textContent;
         const productDesc = row.cells[2].textContent;
-        const productPrice1 = row.cells[4].textContent;
-        const productPrice2 = row.cells[6].textContent;
+        const cxFechada = row.cells[3].textContent;
 
-        openModal(
+        const priceFechada = row.cells[4].textContent;
+        const cxFracionada = row.cells[5].textContent;
+
+        const priceFracionada = row.cells[6].textContent;
+
+       /* openModal(
           productCode,
           productDesc,
-          productPrice1,
-          productPrice2,
+          cxFechada,
+          priceFechada,
+          priceFracionada,
+          cxFracionada,
           productImage
-        );
+        );*/
       });
     });
   } else {
@@ -91,21 +96,28 @@ function populateProductTable(products) {
 function openModal(
   productCode,
   productDesc,
-  productPrice1,
-  productPrice2,
+  cxFechada,
+  priceFechada,
+  priceFracionada,
+  cxFracionada,
   productImage
-) {
+)
+ {
   const modal = document.getElementById("myModal");
   const productInfo = modal.querySelector(".product-info");
-  const priceInfo1 = modal.querySelector(".price1-info");
-  const priceInfo2 = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".price1-info");
+  const priceInfoFechada = modal.querySelector(".cxfechada-info");
+  const cxFracioandaInfo = modal.querySelector(".cxfracioanda-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
   const productImageElement = modal.querySelector("img");
 
   // Populate modal with product details
   productInfo.querySelector("h3").textContent = productCode;
   productInfo.querySelector("p").textContent = productDesc;
-  priceInfo1.querySelector("p").textContent = `Price 1: ${productPrice1}`;
-  priceInfo2.querySelector("p").textContent = `Price 2: ${productPrice2}`;
+  cxFechadaInfo.querySelector("p").textContent = cxFechada;
+  priceInfo1.querySelector("p").textContent = `Preço Cx Fechada: ${priceFechada}`;
+  cxFracioandaInfo.querySelector("p").textContent = cxFracionada;
+  priceInfo2.querySelector("p").textContent = `Preço Cx Fracionada: ${priceFracionada}`;
   productImageElement.src = productImage;
 
   modal.style.display = "block"; // Show modal
