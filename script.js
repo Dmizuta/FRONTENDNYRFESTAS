@@ -183,8 +183,20 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
         const productCode = document.querySelector('#codprod').textContent;
 
-          // Fetch product details from the API using the product code
-
+         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // Fetch product details from the API using the product code
+        
   const productBuyResponse = await fetch(
       `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
       { headers: { "Content-Type": "application/json" } }
