@@ -132,7 +132,7 @@ button {
     color: #fff;
     padding: 18px;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
     font-size: 1em; /* Larger button font */
@@ -348,22 +348,45 @@ th {
   
 }
 
+/* Styling for the search bar in CADASTRO page*/
+#searchBox {
+    
+    
+    align-items: normal;  
+    width: 100%;
+    padding: 10px;
+   margin: 10px auto;
+ background-color: #ebe421;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
 /* Search Input */
 #searchInput {
 
     
-        width:50%;
+        
 
-        padding-top: 20px;
         margin-left: 0px;
        
-        border-radius: 5px;
+        border-radius: 8px;
         box-sizing: border-box;
         font-size: 16px;
     
+    
+
+
+    
+    padding: 10px;
+    width: 60%;
+   
+    border: 1px solid #ccc;
+   
+  
+   
 }
-
-
 
 
 
