@@ -458,37 +458,6 @@ searchBox.addEventListener('input', function() {
 
 
 
-/*
-// Search functionality
-const searchBox = document.getElementById('searchInput');
-
-searchBox.addEventListener('input', function() {
-    const searchTerm = searchBox.value.toLowerCase().trim();
-
-    const orders = document.querySelectorAll('.order-row');
-    orders.forEach(order => {
-        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-        const data = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-        const status = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-
-        if (
-            orderId.includes(searchTerm) || 
-            razaoSocial.includes(searchTerm) || 
-            data.includes(searchTerm) || 
-            status.includes(searchTerm)
-        ) {
-            order.style.display = 'block';
-        } else {
-            order.style.display = 'none';
-        }
-    });
-});
-
-*/
-
-
-
 
 
 // Load orders when the page is ready
@@ -506,12 +475,10 @@ document.getElementById("orders-container").addEventListener("click", function(e
     if (event.target && event.target.closest(".order-row")) {
         const orderRow = event.target.closest(".order-row");
         const orderId = orderRow.getAttribute("data-id");
-        console.log("Clicked order ID:", orderId);
-        
-        modal.style.display = "block";
-        
-        // You can add code here to fetch order details based on the orderId
-        // and populate the modal with data.
+        fetchOrderDetails(orderId);
+        document.getElementById("order-modal").style.display = "block";
+        console.log("CHECK HERE 01", orderId);
+    
     }
 });
 
@@ -541,6 +508,100 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');
     window.location.href = '/';
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to fetch and display order details in the modal
+async function fetchOrderDetails(orderId) {
+    console.log("CHECK HERE 02", orderId);
+    try {
+        console.log(`Fetching details for order ID: ${orderId}`);
+        const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch order details');
+        }
+        const orderDetails = await response.json();
+        console.log('Order details received:', orderDetails);
+        populateModal(orderDetails);
+    } catch (error) {
+        console.error('Error fetching order details:', error);
+    }
+}
+
+
+
+//Function to format currency (BRL)
+function formatCurrency(value) {
+    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
+}
+
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    // Update general order information in the modal
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
+
+    // Update products table
+    const orderDetailsContent = document.getElementById('order-details-content');
+    orderDetailsContent.innerHTML = ''; // Clear existing content
+
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+
+        const row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td>${quantity}</td>
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(quantity * price)}</td>
+            </tr>
+        `;
+        orderDetailsContent.innerHTML += row; // Add row to table
+    });
+
+    // Update total price in the modal
+    const total = parseFloat(orderDetails.total); // Ensure total is a number
+    document.getElementById('total-value').textContent = formatCurrency(total);
+}
+
+// Show modal with order details
+function openModal(orderId) {
+    fetchOrderDetails(orderId)
+        .then(orderDetails => {
+            populateModal(orderDetails); // Populate modal with fetched details
+            document.getElementById('order-modal').classList.add('show'); // Show modal
+        })
+        .catch(error => console.error('Error fetching order details:', error));
+}
+
+// Event listener for order rows
+document.querySelectorAll('.order-row').forEach(row => {
+    row.addEventListener('click', () => {
+        const orderId = row.getAttribute('data-id');
+        openModal(orderId); // Open modal with clicked order details
+    });
+});
+
+// Close modal functionality
+document.getElementById('close-modal').addEventListener('click', () => {
+    document.getElementById('order-modal').classList.remove('show'); // Hide modal
+});
+
+
+
 </script>
 </body>
 </html>
