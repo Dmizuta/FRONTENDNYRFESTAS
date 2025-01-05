@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
 </head>
+
 <body>
     <header>
         <h1>NYR Festas</h1>
@@ -50,23 +51,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
     <script>
 
 
-
 window.addEventListener('DOMContentLoaded', async () => {
-
-
-
 
 
   const loggedInUsername = localStorage.getItem('username'); // Fetch the username from localStorage
@@ -74,6 +62,49 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.error("No username found in localStorage.");
     return;
   }
+
+        // Handle login status
+        const usuario = localStorage.getItem('username');
+        if (usuario) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${usuario}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
+
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('username');
+            window.location.href = '/';
+        });
+
+  // Fetch the user's role from localStorage
+  const userRole = localStorage.getItem('role'); // Ensure this is set at login
+  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+
+
+  
+  // Dynamically assign the correct href based on the user's role
+  if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+    cadastroLink.href = 'cadastro.html';
+  } else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+    cadastroLink.href = 'cadastrorep.html';
+  } else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+    cadastroLink.href = 'cadastroadmin.html';
+  } else {
+    pedidosLink.href = '#'; // Default action for unknown or missing roles
+    console.warn('Role not defined or invalid.');
+  }
+
+
+
+
+
+
 
   try {
     // Sending the username to the backend via query string
@@ -142,110 +173,6 @@ form.addEventListener('submit', async (e) => {
         alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
     }
 });
-
-
-
-
-
-
-
-/*
-
-
-// Handle form submission
-const form = document.getElementById('cadastroForm');
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Get the logged-in username from localStorage
-    const loggedInUsername = localStorage.getItem('username');  // assuming the username is saved here
-
-    // Get form data
-    const formData = {
-        representante: document.getElementById('representante').value,
-        razaosocial: document.getElementById('razaosocial').value,
-        cnpj: document.getElementById('cnpj').value,
-        telefone: document.getElementById('telefone').value,
-        email: document.getElementById('email').value,
-        username: loggedInUsername,  // Add username to the form data
-    };
-
-    try {
-        const response = await fetch('https://backendnyrfestas.vercel.app/cadastro', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
-
-
-        const result = await response.json();
-        if (response.ok) {
-            alert(result.message); // Shows the dynamic message like "Cadastro created successfully." or "Cadastro updated successfully."
-      form.reset();
-        } else {
-            alert('Erro: ' + (result.error || 'Falha no cadastro.'));
-        }
-    } catch (error) {
-        console.error('Erro ao enviar o formulário:', error);
-        alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
-    }
-});
-
-
-
-
-*/
-
-
-    
-  
-
-
-        // Handle login status
-         const usuario = localStorage.getItem('username');
-        if (usuario) {
-            document.getElementById('username-display').textContent = `Bem-vindo, ${usuario}`;
-        } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
-        }
-
-        // Handle logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('username');
-            window.location.href = '/';
-        });
-
-
-
-  // Fetch the user's role from localStorage
-  const userRole = localStorage.getItem('role'); // Ensure this is set at login
-  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-
-
-  
-  // Dynamically assign the correct href based on the user's role
-  if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
-
-
-
-
-
-
-
 
 
 
