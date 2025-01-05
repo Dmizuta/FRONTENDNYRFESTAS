@@ -541,36 +541,45 @@ if (userRole !== "ADMIN") {
   const productBuyData = await productBuyResponse.json();
   console.log("Product Data:", productBuyData);
 
-  // Extract product description and price
-  const productDesc = productBuyData.descricao;
-  const productPrice = productBuyData.precofechada;
-
-  console.log("Product Description:", productDesc, "Product Price:", productPrice);
-
-  //Validate product details
- if (!productCode || !productDesc || !productPrice) {
-      alert("Product details are missing or incorrect.");
-      console.log("Product details missing:",  productCode, productDesc, productPrice );
-      return;
-  }
-
-  // Proceed with further logic using productDesc and productPrice
 
 
 
 
 
-        const quantity = parseInt(document.getElementById('quantity').value);
 
-        const productData = {
-          username: username,
-          customerId: customerId,
-          razaosocial: razaosocial,
-          codproduto: productCode,
-          descricao: productDesc,
-          quantidade: quantity,
-          preco: productPrice
-        };
+
+
+// Extract product description and prices
+const productDesc = productBuyData.descricao;
+const precofechada = productBuyData.precofechada;
+const precofrac = productBuyData.precofrac;
+const cxfechada = productBuyData.cxfechada;
+
+console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
+
+// Validate product details
+if (!productCode || !productDesc || !precofechada || !precofrac|| !cxfechada) {
+  alert("Product details are missing or incorrect.");
+  console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
+  return;
+}
+
+const quantity = parseInt(document.getElementById('quantity').value);
+
+// Choose the correct price based on the quantity
+const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
+
+       
+const productData = {
+  username: username,
+  customerId: customerId,
+  razaosocial: razaosocial,
+  codproduto: productCode,
+  descricao: productDesc,
+  quantidade: quantity,
+  preco: chosenPrice
+};
+     
 
         console.log("Admin product data being sent:", productData);
         
