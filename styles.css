@@ -23,7 +23,7 @@ header {
     color: #fff;
     text-align: center;
     padding: 20px; /* Increased padding for more space */
-    border-radius: 8px;
+    
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
@@ -45,7 +45,7 @@ header h1 {
 nav {
     background-color: #E74C3C; /* Elegant yet vibrant red */
     padding: 15px 0;
-    border-radius: 8px;
+    
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
