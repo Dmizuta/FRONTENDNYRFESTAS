@@ -66,7 +66,6 @@ function populateProductTable(products) {
       cell4.textContent = product.cxfechada || "N/A"; // Quantity Closed
       cell5.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
      //cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
-
       cell6.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
       cell7.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
