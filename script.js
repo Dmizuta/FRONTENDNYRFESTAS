@@ -23,7 +23,7 @@ async function fetchProductData() {
 }
 
 // Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
+function precofechada(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
