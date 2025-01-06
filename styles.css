@@ -194,7 +194,7 @@ th {
     margin: 8% auto;
     padding: 35px;
     width: 50%;
-    max-width: 800px; /* Ensures modal doesn't get too wide */
+    max-width: 1200px; /* Ensures modal doesn't get too wide */
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease-in-out;
@@ -387,15 +387,3 @@ th {
   
    
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -22,10 +22,18 @@ async function fetchProductData() {
   }
 }
 
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+  return `R$ ${value.toFixed(2).replace('.', ',')}`;
+}
+
 // Function to populate the product table dynamically
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
 
+
+
+  
   // Clear any existing rows
   tableBody.innerHTML = "";
 
@@ -41,8 +49,7 @@ function populateProductTable(products) {
       const cell5 = row.insertCell(4); // Price Closed
       const cell6 = row.insertCell(5); // Quantity Fractioned
       const cell7 = row.insertCell(6); // Price Fractioned
-      const cell8 = row.insertCell(7); // View Details Button
-
+      const cell8 = row.insertCell(7); // ADD BUTTON
       // Populate cells with product data
       cell1.innerHTML = `
                 <img src="${
@@ -57,26 +64,35 @@ function populateProductTable(products) {
       cell2.textContent = product.codproduto || "N/A"; // Product Code
       cell3.textContent = product.descricao || "N/A"; // Description
       cell4.textContent = product.cxfechada || "N/A"; // Quantity Closed
-      cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
+      cell5.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
+     //cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
       cell6.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
-      cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
+      cell7.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
+      //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
       cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
 
+
+
+      
       // Add event listener for "Add" button
       const openModalBtn = row.querySelector(".openModalBtn");
       openModalBtn.addEventListener("click", function () {
         const productImage = row.querySelector("img").src;
         const productCode = row.cells[1].textContent;
         const productDesc = row.cells[2].textContent;
-        const productPrice1 = row.cells[4].textContent;
-        const productPrice2 = row.cells[6].textContent;
+        const cxFechada = row.cells[3].textContent;
+        const priceFechada = row.cells[4].textContent;
+        const cxFracionada = row.cells[5].textContent;
+        const priceFracionada = row.cells[6].textContent;
 
-        openModal(
+       openModal(
+          productImage,
           productCode,
           productDesc,
-          productPrice1,
-          productPrice2,
-          productImage
+          cxFechada,
+          priceFechada,
+          cxFracionada,
+          priceFracionada
         );
       });
     });
@@ -89,24 +105,32 @@ function populateProductTable(products) {
 
 // Function to open the modal with product details
 function openModal(
+  productImage,
   productCode,
   productDesc,
-  productPrice1,
-  productPrice2,
-  productImage
-) {
+  cxFechada,
+  priceFechada,
+  cxFracionada,
+  priceFracionada
+)
+ {
   const modal = document.getElementById("myModal");
   const productInfo = modal.querySelector(".product-info");
-  const priceInfo1 = modal.querySelector(".price1-info");
-  const priceInfo2 = modal.querySelector(".price2-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
   const productImageElement = modal.querySelector("img");
-
+  
   // Populate modal with product details
   productInfo.querySelector("h3").textContent = productCode;
   productInfo.querySelector("p").textContent = productDesc;
-  priceInfo1.querySelector("p").textContent = `Price 1: ${productPrice1}`;
-  priceInfo2.querySelector("p").textContent = `Price 2: ${productPrice2}`;
+  priceInfoFechada.querySelector("p").textContent = `Preço Caixa Fechada: ${priceFechada}`;
+  priceInfoFracionada.querySelector("p").textContent = `Preço Caixa Fracionada: ${priceFracionada}`;
+  cxFechadaInfo.querySelector("p").textContent = `Caixa Fechada: ${cxFechada}`; // Corrected
+  cxFracionadaInfo.querySelector("p").textContent = `Caixa Fracionada: ${cxFracionada}`; // Corrected
   productImageElement.src = productImage;
+  
 
   modal.style.display = "block"; // Show modal
 }
@@ -156,7 +180,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-
+  console.log("HERE!!!", userRole);
 
 // FOR NON ADMIN USERS
 if (userRole !== "ADMIN") {
@@ -187,7 +211,7 @@ if (userRole !== "ADMIN") {
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
-        const { username, razaosocial } = customerData;
+        const { username, razaosocial, representante, cnpj } = customerData;
 
         const productCode = document.querySelector('#codprod').textContent;
 
@@ -223,6 +247,8 @@ if (userRole !== "ADMIN") {
 
         const productData = {
           username: username,
+          representante: representante,
+          cnpj: cnpj,
           customerId: customerId,
           razaosocial: razaosocial,
           codproduto: productCode,
@@ -234,7 +260,7 @@ if (userRole !== "ADMIN") {
         console.log("Admin product data being sent:", productData);
 
         const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",
+          "https://backendnyrfestas.vercel.app/add-to-order",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -266,250 +292,7 @@ if (userRole !== "ADMIN") {
     alert("Something went wrong, please try again later");
   }
 }
-/*
-// FOR NON ADMIN USERS
-if (userRole !== "ADMIN") {
-  try {
-    console.log('Checking cadastro for username:', username);
-    const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username })
-    });
 
-    if (!cadastroResponse.ok) {
-      alert('Favor preencher seu Cadastro.');
-      console.error('Error checking cadastro:', cadastroResponse);
-      return;
-    }
-
-    const cadastroResult = await cadastroResponse.json();
-    console.log('Cadastro check result:', cadastroResult);
-
-    if (cadastroResult.cadastroFilled) {
-      console.log('Cadastro is complete, proceeding with adding product to order');
-      console.log('Admin adding product for username:', username);
-      const customerResponse = await fetch(
-        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
-      );
-
-      if (customerResponse.ok) {
-        const customerData = await customerResponse.json();
-        console.log("Customer info fetched:", customerData);
-        const { username, razaosocial } = customerData;
-
-        const productCode = document.querySelector('#codprod').textContent;
-
-        // Fetch product details from the API using the product code
-        const productBuyResponse = await fetch(
-          `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
-          { headers: { "Content-Type": "application/json" } }
-        );
-
-        // Parse the JSON response
-        const productBuyData = await productBuyResponse.json();
-        console.log("Product Data:", productBuyData);
-
-        // Extract product description and prices
-        const productDesc = productBuyData.descricao;
-        const precoFechada = productBuyData.precofechada;
-        const precoFrac = productBuyData.precofrac;
-        const cxfechada = productBuyData.cxfechada;
-
-        console.log("Product Description:", productDesc, "Preco Fechada:", precoFechada, "Preco Frac:", precoFrac);
-
-        // Validate product details
-        if (!productCode || !productDesc || (precoFechada === undefined && precoFrac === undefined)) {
-          alert("Product details are missing or incorrect.");
-          console.log("Product details missing:", productCode, productDesc, precoFechada, precoFrac);
-          return;
-        }
-
-        const quantity = parseInt(document.getElementById('quantity').value);
-
-        // Determine the price based on the quantity
-        const productPrice = quantity >= precoFechada ? precoFechada : precoFrac;
-
-        const productData = {
-          username: username,
-          customerId: customerId,
-          razaosocial: razaosocial,
-          codproduto: productCode,
-          descricao: productDesc,
-          quantidade: quantity,
-          preco: productPrice
-        };
-
-        console.log("Admin product data being sent:", productData);
-
-        const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(productData),
-          }
-        );
-
-        const addResult = await addResponse.json();
-
-        if (addResponse.ok) {
-          alert(addResult.message || "Product added to existing draft order");
-          console.log("Product successfully added to order");
-          const modal = document.getElementById("myModal");
-          modal.style.display = "none";
-          document.getElementById("quantity").value = ""; // Clear quantity field
-        } else {
-          console.error("Failed to add product to order:", addResult.error);
-          alert(addResult.error || "Failed to add product to order.");
-        }
-      } else {
-        console.error("Failed to fetch customer info:", customerResponse);
-        alert("SELECIONE UM CADASTRO PARA ADICIONAR O PRODUTO.");
-      }
-    } else {
-      alert('Cadastro not filled, cannot add product.');
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Something went wrong, please try again later");
-  }
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-// FOR NON ADMIN USERS
-  if (userRole !== "ADMIN") {
-
-    try {
-      console.log('Checking cadastro for username:', username);
-      const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username })
-      });
-
-      if (!cadastroResponse.ok) {
-        alert('Favor preencher seu Cadastro.');
-        console.error('Error checking cadastro:', cadastroResponse);
-        return;
-      }
-
-      const cadastroResult = await cadastroResponse.json();
-      console.log('Cadastro check result:', cadastroResult);
-
-      if (cadastroResult.cadastroFilled) {
-        console.log('Cadastro is complete, proceeding with adding product to order');
-      console.log('Admin adding product for username:', username);
-      const customerResponse = await fetch(
-        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
-      );
-
-      if (customerResponse.ok) {
-        const customerData = await customerResponse.json();
-        console.log("Customer info fetched:", customerData);
-        const { username, razaosocial } = customerData;
-
-        const productCode = document.querySelector('#codprod').textContent;
-
-
-
-
-        // Fetch product details from the API using the product code
-  const productBuyResponse = await fetch(
-      ` ${productCode}`, 
-      { headers: { "Content-Type": "application/json" } }
-  );
-
-  // Parse the JSON response
-  const productBuyData = await productBuyResponse.json();
-  console.log("Product Data:", productBuyData);
-
-  // Extract product description and price
-  const productDesc = productBuyData.descricao;
-  const productPrice = productBuyData.precofechada;
-
-  console.log("Product Description:", productDesc, "Product Price:", productPrice);
-
-  //Validate product details
- if (!productCode || !productDesc || !productPrice) {
-      alert("Product details are missing or incorrect.");
-      console.log("Product details missing:",  productCode, productDesc, productPrice );
-      return;
-  }
-
-  // Proceed with further logic using productDesc and productPrice
-
-
-
-        const quantity = parseInt(document.getElementById('quantity').value);
-
-        const productData = {
-          username: username,
-          customerId: customerId,
-          razaosocial: razaosocial,
-          codproduto: productCode,
-          descricao: productDesc,
-          quantidade: quantity,
-          preco: productPrice
-        };
-
-        console.log("Admin product data being sent:", productData);
-        
-
-        const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(productData),
-          }
-        );
-
-        const addResult = await addResponse.json();
-
-
-
-          if (addResponse.ok) {
-            alert(addResult.message || "Product added to existing draft order");
-            console.log("Product successfully added to order");
-            const modal = document.getElementById("myModal");
-            modal.style.display = "none";
-            document.getElementById("quantity").value = ""; // Clear quantity field
-          } else {
-            console.error("Failed to add product to order:", addResult.error);
-            alert(addResult.error || "Failed to add product to order.");
-          }
-        } else {
-          console.error("Failed to fetch customer info:", customerResponse);
-          alert("SELECIONE UM CADASTRO PARA ADICIONAR O PRODUTO.");
-        }
-      } else {
-        alert('Cadastro not filled, cannot add product.');
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Something went wrong, please try again later");
-    }
-  } 
-  */
-  
-  
   
   else {
     // FOR ADMIN USERS (no cadastro check)
@@ -523,7 +306,7 @@ if (userRole !== "ADMIN") {
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
-        const { username, razaosocial } = customerData;
+        const { username, razaosocial, representante, cnpj } = customerData;
 
         const productCode = document.querySelector('#codprod').textContent;
 
@@ -572,6 +355,8 @@ const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
        
 const productData = {
   username: username,
+  representante: representante,
+  cnpj: cnpj,
   customerId: customerId,
   razaosocial: razaosocial,
   codproduto: productCode,
