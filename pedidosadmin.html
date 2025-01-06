@@ -450,6 +450,7 @@ function populateModal(orderDetails) {
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('representante').textContent = orderDetails.representante;
 
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
