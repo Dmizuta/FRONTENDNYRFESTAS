@@ -22,10 +22,18 @@ async function fetchProductData() {
   }
 }
 
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+  return `R$ ${value.toFixed(2).replace('.', ',')}`;
+}
+
 // Function to populate the product table dynamically
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
 
+
+
+  
   // Clear any existing rows
   tableBody.innerHTML = "";
 
