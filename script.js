@@ -300,7 +300,7 @@ if (userRole !== "ADMIN") {
       if (customerResponse.ok) {
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
-        const { username, razaosocial } = customerData;
+        const { username, razaosocial, representante, cnpj } = customerData;
 
         const productCode = document.querySelector('#codprod').textContent;
 
@@ -349,6 +349,8 @@ const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
        
 const productData = {
   username: username,
+  representante: representante,
+  cnpj: cnpj,
   customerId: customerId,
   razaosocial: razaosocial,
   codproduto: productCode,
