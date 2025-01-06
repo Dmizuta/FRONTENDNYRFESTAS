@@ -23,7 +23,7 @@ async function fetchProductData() {
 }
 
 // Function to format numbers as currency (Brazilian Real - R$)
-function precofechada(value) {
+function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
@@ -66,12 +66,11 @@ function populateProductTable(products) {
       cell4.textContent = product.cxfechada || "N/A"; // Quantity Closed
       cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
       cell6.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
-      cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
+
+      cell7.textContent = `${formatCurrency(precofechada)}`; // Price Fractioned
+
+      //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
       cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
-
-
-
-
 
 
 
