@@ -1,174 +1,147 @@
+/* Importando a fonte Roboto do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* Universal Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif; /* Modern, rounded font */
+    font-family: 'Roboto', sans-serif; /* Fonte atualizada */
 }
 
-h1{
-    padding-top: 15px ;
-    text-align: center;
-}*
-
-/* Body */
 body {
-    background-color: #F9F7F1; /* Soft off-white */
-    color: #333; /* Dark gray for readability */
+    background-color: #F2F2F2; /* Light gray background for a soft look */
+    color: #066873; /* Dark teal for readability */
 }
 
 /* Header */
 header {
-    background-color: #F1C40F; /* Gold for a festive yet classy feel */
+    background-color: #066873; /* Dark teal for header */
     color: #fff;
     text-align: center;
-    padding: 20px; /* Increased padding for more space */
-    
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 30px; /* Aumentado para mais espaçamento */
+    border-bottom: 5px solid #F2B680; /* Adicionando uma borda inferior */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 header h1 {
-    font-size: 2.5em; /* Larger size for the header */
+    font-size: 2.5em; /* Aumentado para um destaque maior */
     margin: 0;
-    letter-spacing: 4px; /* Increased letter spacing for a more elegant feel */
-    font-weight: 600;
+    font-weight: 700; /* Negrito */
 }
-
 
 /* Navigation */
 nav {
-    background-color: #E74C3C; /* Elegant yet vibrant red */
-    padding: 15px 0;
-    
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #65A6A6; /* Light teal for navigation */
+    padding: 15px 0; /* Aumentado para mais espaçamento */
 }
 
 nav ul {
     display: flex;
     justify-content: center;
     list-style-type: none;
-    gap: 30px; /* Increased gap for balance */
+    gap: 30px; /* Aumentado para mais espaçamento */
 }
 
 nav a {
-    color: white;
+    color: #fff;
     text-decoration: none;
     font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 1.4em; /* Larger font size */
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    padding: 12px 25px; /* Aumentado para botões mais largos */
+    border-radius: 25px; /* Bordas mais arredondadas */
+    font-size: 1.1em; /* Aumentado para um tamanho maior */
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 nav a:hover {
-    background-color: #F1C40F; /* Highlight with gold on hover */
-    transform: scale(1.01); /* Slight scaling effect for modern feel */
+    background-color: #F2B680; /* Yellow-orange highlight on hover */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
 }
 
 /* Page Content */
 .pagina {
-    padding: 50px;
-    background-color: #fff; /* White background to maintain brightness */
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
-    margin: 30px auto;
+    padding: 40px; /* Aumentado para mais espaço interno */
+    background-color: #fff; /* White background for contrast */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais profunda */
+    margin: 40px auto; /* Aumentado para mais espaço externo */
     width: 90%;
-    max-width: 1100px;
-    transition: transform 0.3s ease;
-}
-
-.pagina:hover {
-    transform: scale(1.00); /* Slight zoom effect on hover */
+    max-width: 1200px; /* Aumentado para um layout mais amplo */
 }
 
 /* Headings */
 h2 {
-    color: #E74C3C; /* Red for a pop of color */
-    padding: 25px;
-    margin: 30px 0;
+    color: #BF6734; /* Dark orange for headings */
+    padding: 20px;
+    margin: 30px 0; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.8em; /* Larger size */
-    border-bottom: 3px solid #F1C40F;
-    font-weight: 600;
+    font-size: 2em; /* Aumentado para um tamanho maior */
+    border-bottom: 3px solid #C7A88C; /* Borda inferior mais espessa */
+    font-weight: 700; /* Negrito */
 }
 
 /* Form */
 form label, form input {
     display: block;
-    margin-bottom: 18px; /* Increased margin for spacing */
+    margin-bottom: 20px; /* Aumentado para mais espaço */
 }
 
 .cadastro-form label {
-    font-weight: 600;
+    font-weight: 700; /* Negrito */
     color: #333;
-    font-size: 1.1em; /* Larger label font */
 }
 
 .cadastro-form input {
     width: 100%;
-    padding: 18px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    padding: 15px; /* Aumentado para mais espaço */
+    border: 2px solid #ccc; /* Borda mais espessa */
+    border-radius: 10px; /* Bordas arredondadas */
     outline: none;
-    font-size: 1em; /* Larger input font */
-    transition: border-color 0.3s, box-shadow 0.2s ease;
+    font-size: 1em; /* Tamanho padrão */
+    transition: border-color 0.3s;
 }
 
 .cadastro-form input:focus {
-    border-color: #E74C3C; /* Red focus for input field */
-    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+    border-color: #BF6734; /* Dark orange focus for input field */
 }
 
 /* Buttons */
 button {
-    background-color: #E74C3C; /* Red to match navigation */
+    background-color: #BF6734; /* Dark orange button color */
     color: #fff;
-    padding: 18px;
+    padding: 15px; /* Aumentado para mais espaço */
     border: none;
-    border-radius: 10px;
+    border-radius: 10px; /* Bordas arredondadas */
     cursor: pointer;
     width: 100%;
-    font-size: 1em; /* Larger button font */
-    font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    font-size: 1.1em; /* Aumentado para um tamanho maior */
+    font-weight: 700; /* Negrito */
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover, button:active {
-    background-color: #F1C40F; /* Gold hover for a celebratory vibe */
-    transform: translateY(-2px); /* Button lift effect */
+button:hover {
+    background-color: #FCC585; /* Light yellow-orange hover color */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
 }
 
 /* Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 25px;
+    margin-top: 30px; /* Aumentado para mais espaço */
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle table shadow */
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 15px; /* Larger padding for balance */
+    padding: 15px; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.1em; /* Larger font size */
-    font-weight: 500;
+    font-size: 1em; /* Tamanho padrão */
 }
 
 th {
-    background-color: #E74C3C; /* Red for the table headers */
+    background-color: #65A6A6; /* Light teal for table headers */
     color: #fff;
-}
-
-.valor-total {
-    background-color: #E74C3C;
-    color: #fff;
-    padding: 18px; /* Larger padding */
-    font-size: 1.2em; /* Larger font size */
-    font-weight: 600;
-    border-radius: 10px;
 }
 
 /* Modal Styles */
@@ -180,82 +153,17 @@ th {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5); /* Darker overlay */
 }
 
 .modal-content {
     background-color: #fff;
-    margin: 8% auto;
-    padding: 35px;
-    width: 50%;
-    max-width: 1200px; /* Ensures modal doesn't get too wide */
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease-in-out;
-}
-
-.modal-content:hover {
-    transform: scale(1.0); /* Slight zoom effect on modal */
-}
-
-/* Modal Image */
-.modal-stage-one img {
-    max-width: 35%; /* Ensure image is responsive and fits inside */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain; /* Makes sure the image is contained without distortion */
-    margin-bottom: 20px; /* Adds space below the image */
-    border-radius: 10px; /* Rounded corners for a polished look */
-}
-
-.modal-stage-one img:hover {
-    transform: scale(1.6); /* Slight zoom effect on modal */
-    transition: transform 0.35s ease;
-}
-
-/* Modal Text */
-.modal-stage-one .product-info h3 {
-    font-size: 1.8em;
-    color: #E74C3C;
-    margin-bottom: 10px;
-}
-
-.modal-stage-one .product-info p {
-    font-size: 1.3em;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Price Info */
-.modal-stage-one .price-info p {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #E74C3C;
-    margin-top: 10px;
-}
-
-/* Modal Buttons */
-.modal-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.modal-buttons button {
-    padding: 16px 35px;
-    margin: 0 15px;
-    font-size: 1em;
-    font-weight: 600;
-    background-color: #E74C3C;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
-}
-
-.modal-buttons button:hover {
-    background-color: #F1C40F;
-    transform: translateY(-2px);
+    margin: 10% auto;
+    padding: 30px; /* Aumentado para mais espaço */
+    width: 40%;
+    max-width: 800px;
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Close Button */
@@ -263,89 +171,30 @@ th {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 20px; /* Larger close button */
+    font-size: 20px; /* Tamanho aumentado */
     font-weight: bold;
     cursor: pointer;
-    color: #E74C3C;
-    transition: color 0.3s;
+    color: #BF6734; /* Dark orange color for close button */
 }
 
 .close:hover {
-    color: #F1C40F;
+    color: #F2B680; /* Yellow-orange hover color */
 }
 
-
+/* User Info */
 #user-info {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 16px;
-    padding: 15px;
-}
-
-#username-display{
-
-    margin-left: 10px;
-    font-size: 18px;
-}
-
-
-
-#logoutBtn {
-    width: 100px;
-    padding: 12px;
-    margin-left: 10px;
-}
-
-.produtos-moldura{
-  
-    padding: 20px;
-    
-    background-color: #ffffff; /* White background to maintain brightness */
-    border-radius: 5px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
-    margin: 30px auto;
-   
-    max-width: 95%;
-  
-}
-  /* Search Produtos */
-  .search-wrapper {
-
-    max-width: 95%;
-    background-color: rgb(248, 86, 68);
-    border-radius: 8px;
-    margin: 30px auto;
-   padding: 15px;
-   max-width: 95%;
-  
-}
-
-/* Styling for the search bar in CADASTRO page*/
-#searchBox {
-    
-    
-    align-items: normal;  
-    width: 100%;
+    font-size: 16px; /* Tamanho padrão */
     padding: 10px;
-   margin: 10px auto;
- background-color: #ebe421;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 14px;
 }
-
 
 /* Search Input */
 #searchInput {
-
-        margin-left: 0px;
-       
-        border-radius: 8px;
-        box-sizing: border-box;
-        font-size: 16px;
-        padding: 10px;
-    width: 60%;
-       border: 1px solid #ccc;
-     
+    width: 100%;
+    padding: 15px; /* Aumentado para mais espaço */
+    border-radius: 10px; /* Bordas arredondadas */
+    border: 2px solid #ccc; /* Borda mais espessa */
+    font-size: 16px; /* Tamanho padrão */
 }
