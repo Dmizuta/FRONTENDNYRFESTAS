@@ -16,6 +16,11 @@ body {
 
 /* Header */
 header {
+    position: fixed ;
+    top: 0;
+    left:0;
+    width: 100%;
+
     background-color: #066873; /* Dark teal for header */
     color: #fff;
     text-align: center;
@@ -32,6 +37,11 @@ header h1 {
 
 /* Navigation */
 nav {
+    position: fixed;
+    top:113px
+;
+    left:0;
+    width: 100%;
     background-color: #65A6A6; /* Light teal for navigation */
     padding: 15px 0; /* Aumentado para mais espaçamento */
 }
@@ -198,4 +208,8 @@ th {
     border-radius: 10px; /* Bordas arredondadas */
     border: 2px solid #ccc; /* Borda mais espessa */
     font-size: 16px; /* Tamanho padrão */
+}
+
+.PAGE{
+   margin-top: 200px;
 }
