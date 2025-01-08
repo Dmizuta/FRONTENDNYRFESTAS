@@ -245,5 +245,5 @@ th {
 
 /* Efeito de zoom ao passar o mouse */
 .image:hover {
-    transform: scale(1.5); /* Aumenta o tamanho do elemento em 10% */
+    transform: scale(1.3); /* Aumenta o tamanho do elemento em 10% */
 }
