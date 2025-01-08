@@ -222,5 +222,28 @@ th {
 
     margin-top: 5px;
     padding:8px;
+    
+    border-width: 1px;
+    border-color: #022327;
+    border-radius: 8px;
+    
 
+}
+.quantity{
+    padding:10px;
+   
+
+}
+.image{transition: transform 0.3s ease;
+
+}
+.image:hover {
+    color: #F2B680; /* Yellow-orange hover color */
+}
+
+
+
+/* Efeito de zoom ao passar o mouse */
+.image:hover {
+    transform: scale(1.5); /* Aumenta o tamanho do elemento em 10% */
 }
