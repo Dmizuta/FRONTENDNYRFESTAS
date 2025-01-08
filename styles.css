@@ -109,7 +109,8 @@ form label, form input {
 button {
     background-color: #BF6734; /* Dark orange button color */
     color: #fff;
-    padding: 15px; /* Aumentado para mais espaço */
+    padding: 7px; /* Aumentado para mais espaço */
+    margin-top: 10px;
     border: none;
     border-radius: 10px; /* Bordas arredondadas */
     cursor: pointer;
