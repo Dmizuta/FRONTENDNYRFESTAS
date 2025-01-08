@@ -11,7 +11,7 @@
 
 body {
     background-color: #F2F2F2; /* Light gray background for a soft look */
-    color: #066873; /* Dark teal for readability */
+    color: #022327; /* Dark teal for readability */
 }
 
 /* Header */
@@ -21,7 +21,7 @@ header {
     left:0;
     width: 100%;
 
-    background-color: #066873; /* Dark teal for header */
+    background-color: #024850; /* Dark teal for header */
     color: #fff;
     text-align: center;
     padding: 30px; /* Aumentado para mais espaçamento */
@@ -42,7 +42,7 @@ nav {
 ;
     left:0;
     width: 100%;
-    background-color: #65A6A6; /* Light teal for navigation */
+    background-color: #6f7e7e; /* Light teal for navigation */
     padding: 15px 0; /* Aumentado para mais espaçamento */
 }
 
@@ -151,7 +151,7 @@ th, td {
 }
 
 th {
-    background-color: #65A6A6; /* Light teal for table headers */
+    background-color: #03646e; /* Light teal for table headers */
     color: #fff;
 }
 
@@ -212,4 +212,9 @@ th {
 
 .PAGE{
    margin-top: 200px;
+}
+
+#quantity{
+    padding:8px;
+
 }
