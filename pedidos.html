@@ -526,11 +526,14 @@ async function fetchOrderDetails(orderId) {
     }
 }
 
-
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}/*
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return `R$ ${value.toFixed(2).replace('.', ',')}`;
-}
+}*/
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -558,6 +561,8 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
+
+
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
