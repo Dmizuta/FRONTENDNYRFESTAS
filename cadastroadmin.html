@@ -210,12 +210,20 @@ function loadCustomerData(customer) {
     // Store customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
 
+
+    window.scrollTo({
+    top: 0,      // Vertical position (in pixels)
+    left: 0,     // Horizontal position (in pixels)
+    behavior: "smooth" // Smooth scrolling animation
+  });
+
+/*
     // Scroll to the form
     const formElement = document.getElementById('cadastroForm');
     formElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
-    });
+    });*/
 }
 
 
