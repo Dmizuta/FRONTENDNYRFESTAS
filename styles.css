@@ -325,24 +325,24 @@ th {
    }
 
    #junino{
-    width: 5%;
+    width: 4%;
     float: left;
     padding: 5px;
 }
    
    #hlwn{
-    width: 5%;
+    width: 4%;
   float: left;
   padding: 5px;
    }
    
    #carnaval{
-    width: 5%;
+    width: 4%;
     float: left;
     padding: 5px;
    }
    
    .icons{
     position: fixed;
-    top: 4%;
+    top: 3%;
    }
