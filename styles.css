@@ -132,7 +132,7 @@ button {
 
 button:hover {
     background-color: #FCC585; /* Light yellow-orange hover color */
-    transform: scale(1.02); /* Efeito de aumento ao passar o mouse */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
 }
 
 /* Table */
