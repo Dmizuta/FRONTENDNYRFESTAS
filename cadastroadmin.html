@@ -183,9 +183,43 @@ if (result.success && result.data) {
 }}
 )
 
+// Function to display the customer list
+function populateCustomerList(customers) {
+    const customerListContainer = document.getElementById('customer-list');
+    customerListContainer.innerHTML = ''; // Clear any previous results
+
+    customers.forEach(customer => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${customer.username} - ${customer.representante} - ${customer.razaosocial} - (${customer.cnpj})`;
+        listItem.addEventListener('click', () => loadCustomerData(customer));
+        customerListContainer.appendChild(listItem);
+    });
+}
+
+// Function to load customer data into the form when clicked
+function loadCustomerData(customer) {
+    document.getElementById('username').value = customer.username || '';
+    document.getElementById('representante').value = customer.representante || '';
+    document.getElementById('razaosocial').value = customer.razaosocial || '';
+    document.getElementById('cnpj').value = customer.cnpj || '';
+    document.getElementById('telefone').value = customer.telefone || '';
+    document.getElementById('email').value = customer.email || '';
+    document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
+    document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
+
+    // Store customerId in localStorage
+    localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
+
+    // Scroll to the form
+    const formElement = document.getElementById('cadastroForm');
+    formElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+}
 
 
-
+/*
 // Function to display the customer list
 function populateCustomerList(customers) {
     const customerListContainer = document.getElementById('customer-list');
@@ -215,7 +249,7 @@ function loadCustomerData(customer) {
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
 
 }
-
+*/
 
     // Handle search input event
     document.getElementById('searchBox').addEventListener('input', async (e) => {
