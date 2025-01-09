@@ -371,10 +371,14 @@ function displayOrders(orders) {
         if (isNaN(total)) {
             console.error('Invalid total value:', order.total);
         }
+
+
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
+
+
 
         const statusText = order.status === 1 ? 'Submitted' : 'Draft';
         const orderRow = `
@@ -383,7 +387,7 @@ function formatCurrency(value) {
                     <div><strong>ID:</strong> ${order.id}</div>
                     <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${formatCurrency(total.toFixed(2))}</div>
+                    <div><strong>Total:</strong> R$ ${formatCurrency(total)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
             </div>
@@ -392,9 +396,11 @@ function formatCurrency(value) {
     });
     console.log('All orders displayed');
 }
+/*
+<td>${formatCurrency(total.toFixed(2))}</td>
 
-
-
+<div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+*/
 
 
 
