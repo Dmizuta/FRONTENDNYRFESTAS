@@ -360,6 +360,13 @@ function displayOrders(orders) {
         return;
     }
 
+
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+
     orders.forEach(order => {
         const total = parseFloat(order.total);
         const statusText = order.status === 1 ? 'Submitted' : 'Draft';
@@ -370,7 +377,7 @@ function displayOrders(orders) {
                     <div><strong>Representante:</strong> ${order.representante}</div>
                     <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
             </div>
@@ -443,14 +450,17 @@ async function fetchOrderDetails(orderId) {
 }
 
 
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
 
-
-
+/*
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
-
+*/
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
