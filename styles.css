@@ -348,3 +348,22 @@ th {
     position: fixed;
     top: 2%;
    }
+
+   #carnaval{transition: transform 0.3s ease;
+   }
+ 
+   #carnaval:hover {
+       transform: scale(1.3); 
+   }
+   #junino{transition: transform 0.3s ease;
+   }
+ 
+   #junino:hover {
+       transform: scale(1.3); 
+   }
+   #hlwn{transition: transform 0.3s ease;
+   }
+ 
+   #hlwn:hover {
+       transform: scale(1.3); 
+   }
