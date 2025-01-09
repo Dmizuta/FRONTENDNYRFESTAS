@@ -213,8 +213,13 @@ function loadCustomerData(customer) {
     //localStorage.setItem('id', customer.id);  // Set customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
 
-}
 
+window.scrollTo({
+    top: 100,      // Vertical position (in pixels)
+    left: 0,     // Horizontal position (in pixels)
+    behavior: "smooth" // Smooth scrolling animation
+  });
+}
         // Handle search input event
         document.getElementById('searchInput').addEventListener('input', async (e) => {
             const searchTerm = e.target.value.toLowerCase();
