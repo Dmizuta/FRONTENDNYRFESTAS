@@ -173,15 +173,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
     return;
   }
 
-
-
-
-
-
-
-
-  console.log("HERE!!!", userRole);
-
 // FOR NON ADMIN USERS
 if (userRole !== "ADMIN") {
   try {
