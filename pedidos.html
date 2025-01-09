@@ -375,8 +375,9 @@ function displayOrders(orders) {
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
-    return `R$ ${value.toFixed(2).replace('.', ',')}`;
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
+
 
 
 
@@ -387,7 +388,7 @@ function formatCurrency(value) {
                     <div><strong>ID:</strong> ${order.id}</div>
                     <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${formatCurrency(total)}</div>
+                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
             </div>
