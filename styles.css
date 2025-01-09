@@ -68,6 +68,16 @@ nav a:hover {
     transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
 }
 
+
+h1{
+    color: #011a1f;
+    
+    margin: 30px auto;
+   
+    max-width: 95%;
+  
+}
+
 /* Page Content */
 .pagina {
     padding: 40px; /* Aumentado para mais espaço interno */
