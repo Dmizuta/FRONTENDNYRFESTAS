@@ -323,3 +323,26 @@ th {
        width: 60%;
        border: 1px solid #ccc;
    }
+
+   #junino{
+    width: 5%;
+    float: left;
+    padding: 5px;
+}
+   
+   #hlwn{
+    width: 5%;
+  float: left;
+  padding: 5px;
+   }
+   
+   #carnaval{
+    width: 5%;
+    float: left;
+    padding: 5px;
+   }
+   
+   .icons{
+    position: fixed;
+    top: 4%;
+   }
