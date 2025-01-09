@@ -119,7 +119,7 @@ form label, form input {
 button {
     background-color: #BF6734; /* Dark orange button color */
     color: #fff;
-    padding: 7px; /* Aumentado para mais espaço */
+    padding: 10px; /* Aumentado para mais espaço */
     margin-top: 10px;
     border: none;
     border-radius: 10px; /* Bordas arredondadas */
@@ -247,3 +247,69 @@ th {
 .image:hover {
     transform: scale(1.3); /* Aumenta o tamanho do elemento em 10% */
 }
+
+
+
+/* Search Input */
+#searchInput {
+    width: 100%;
+    padding: 15px; /* Aumentado para mais espaço */
+    border-radius: 10px; /* Bordas arredondadas */
+    border: 2px solid #ccc; /* Borda mais espessa */
+    font-size: 16px; /* Tamanho padrão */
+}
+
+.PAGE{
+   margin-top: 200px;
+}
+
+
+
+.produtos-moldura{
+  
+    padding: 20px;
+    
+    background-color: #e0e0e0; /* White background to maintain brightness */
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
+    margin: 30px auto;
+   
+    max-width: 95%;
+  
+}
+  /* Search Produtos */
+  .search-wrapper {
+
+    max-width: 95%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin: 30px auto;
+   padding: 15px;
+   max-width: 95%;
+  
+}
+
+/* Styling for the search bar in CADASTRO page*/
+#searchBox {
+        
+    align-items: normal;  
+    width: 100%;
+    padding: 10px;
+   margin: 10px auto;
+ background-color: #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Search Input */
+#searchInput {
+
+       margin-left: 0px;
+       border-radius: 8px;
+       box-sizing: border-box;
+       font-size: 16px;
+       padding: 10px;
+       width: 60%;
+       border: 1px solid #ccc;
+   }
