@@ -264,11 +264,7 @@ th {
     transform: scale(1.2); /* Aumenta o tamanho do elemento em 10% */
 }
 
-.modal-stage-one {
-    max-width: 150px; /* Constrain the image container */
-    max-height: 150px; /* Constrain height as well */
-    margin: 0 auto; /* Center the image container if needed */
-}
+
 
 
 
