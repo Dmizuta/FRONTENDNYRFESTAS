@@ -376,3 +376,12 @@ th {
     width: 30px; /* Adjust size as needed */
     height: auto;
   }
+
+   #preco1{
+    font-weight: bold;
+  }
+  #preco2{
+    font-weight: bold;
+  }
+
+  
