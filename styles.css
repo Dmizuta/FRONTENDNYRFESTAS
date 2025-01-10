@@ -377,11 +377,28 @@ th {
     height: auto;
   }
 
+#codprod{
+    padding:8px;
+}
+#descrip{
+    margin:3px;
+}
+
    #preco1{
     font-weight: bold;
+    margin:3px;
   }
   #preco2{
     font-weight: bold;
+    margin:3px;
+  }
+  #CxFechada{
+    margin:3px;
+  }
+
+
+  #CxFracionada{
+    margin:3px;
   }
 
   
