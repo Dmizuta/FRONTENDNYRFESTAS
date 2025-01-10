@@ -29,12 +29,21 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-header h1 {
+#nyrfestas {
+    color: #fff;
     font-size: 2.5em; /* Aumentado para um destaque maior */
     margin: 0;
     font-weight: 700; /* Negrito */
+    max-width: 100%;
 }
-
+h1{
+    color: #011a1f;
+    
+    margin: 30px auto;
+   
+    max-width: 95%;
+  
+}
 /* Navigation */
 nav {
     position: fixed;
@@ -69,14 +78,7 @@ nav a:hover {
 }
 
 
-h1{
-    color: #011a1f;
-    
-    margin: 30px auto;
-   
-    max-width: 95%;
-  
-}
+
 
 /* Page Content */
 .pagina {
@@ -325,19 +327,20 @@ th {
    }
 
    #carnaval{
-    width: 4%;
+    
+    width: 3.8rem;
     float: left;
     padding: 5px;
    }
 
    #junino{
-    width: 4%;
+    width: 3.8rem;
     float: left;
     padding: 5px;
 }
    
    #hlwn{
-    width: 4%;
+    width: 3.8rem;
   float: left;
   padding: 5px;
    }
@@ -345,11 +348,13 @@ th {
  
    
    .icons{
+    
     position: fixed;
     top: 2%;
    }
 
    #carnaval{transition: transform 0.3s ease;
+    
    }
  
    #carnaval:hover {
