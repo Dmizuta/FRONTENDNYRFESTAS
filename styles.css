@@ -245,23 +245,17 @@ th {
     padding:10px;
    
 
-}
-.image{transition: transform 0.3s ease;
-
-}
-.image:hover {
-    color: #F2B680; /* Yellow-orange hover color */
-}
-
-
-
-/* Efeito de zoom ao passar o mouse */
-.image:hover {
-    transform: scale(1.2); /* Aumenta o tamanho do elemento em 10% */
-}
-.image{
-max-width: 150px;
-}
+    .image {
+        transition: transform 0.3s ease;
+        max-width: 150px;
+        max-height: 150px; /* Ensures the image height is also limited */
+    }
+    
+    .image:hover {
+        color: #F2B680; /* Yellow-orange hover color */
+        transform: scale(1.2); /* Aumenta o tamanho do elemento em 20% */
+    }
+    
 
 
 /* Search Input */
