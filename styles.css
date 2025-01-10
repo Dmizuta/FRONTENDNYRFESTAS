@@ -198,7 +198,7 @@ th {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 20px; /* Tamanho aumentado */
+    font-size: 40px; /* Tamanho aumentado */
     font-weight: bold;
     cursor: pointer;
     color: #BF6734; /* Dark orange color for close button */
