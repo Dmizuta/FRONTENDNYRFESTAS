@@ -42,7 +42,7 @@
     </div>
         <div id="user-info">
             <span id="username-display"></span>
-            <button id="logoutBtn">Logout</button>
+            <button id="logoutBtn">Sair</button>
         </div>
 
     </header>
@@ -69,7 +69,7 @@
 
 <!-- Search Wrapper -->
 <div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder=" Enter product code..." oninput="searchProducts()">
+    <input type="text" id="searchInput" placeholder=" Procure por..." oninput="searchProducts()">
 </div>
 
 
@@ -79,14 +79,14 @@
     <table id="productTable">
         <thead>
             <tr>
-                <th>Product Image</th>
-                <th>Product Code</th>
-                <th>Product Description</th>
-                <th>Quantity 1</th>
-                <th>Price 1</th>
-                <th>Quantity 2</th>
-                <th>Price 2</th>
-                <th>Add Product</th>
+                <th>Foto do produto</th>
+                <th>Código do produto</th>
+                <th>Descrição do produto</th>
+                <th>Quantidade cx fechada</th>
+                <th>Preço de cx fechada</th>
+                <th>Quantidade cx fracionada</th>
+                <th>Preço cx fracionada</th>
+                <th>Adicionar ao pedido</th>
             </tr>
         </thead>
         <tbody>
@@ -132,8 +132,8 @@
                <div class="quantity">
                <input type="number" id="quantity" name="quantity" min="1" value="1">
                </div> 
-               <button id="addButton">Add Quantity</button>
-                <button id="cancelButton">Cancel</button>
+               <button id="addButton">Adicionar</button>
+                <button id="cancelButton">Cancelar</button>
             </div>
         </div>
         
