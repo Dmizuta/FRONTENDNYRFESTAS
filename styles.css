@@ -182,22 +182,17 @@ th {
 
 
 .modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px; /* Reduce padding */
-    width: auto; /* Let it fit the content */
-    max-width: 800px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Keeps content vertically aligned */
+    position: absolute; /* Posiciona o conteúdo do modal */
+    top: 50%; /* Posiciona o topo no meio da tela */
+    left: 50%; /* Posiciona a esquerda no meio da tela */
+    transform: translate(-50%, -50%); /* Centraliza o conteúdo */
+    background-color: #fff; /* Cor de fundo */
+    padding: 30px; /* Espaçamento interno */
+    width: 40%; /* Largura do conteúdo do modal */
+    max-width: 800px; /* Largura máxima do conteúdo do modal */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra do conteúdo */
 }
-
 
 
 
