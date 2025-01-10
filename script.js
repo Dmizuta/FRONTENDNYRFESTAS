@@ -145,13 +145,13 @@ document.getElementById("cancelButton").addEventListener("click", function () {
   document.getElementById("myModal").style.display = "none";
 });
 
-/*// Close modal when clicking outside of it
+// Close modal when clicking outside of it
 window.addEventListener("click", function (event) {
   const modal = document.getElementById("myModal");
   if (event.target === modal) {
     modal.style.display = "none";
   }
-});*/
+});
 
 
 
