@@ -10,29 +10,24 @@
 
 </head>
 
-<style>
-
-  
 
 
-
-</style>
 
 <body>
 
 
 
-
-
-
-
     <header>
-        <h1>NYR Festas</h1>
-
-
+        <h1 id="nyrfestas">NYR Festas</h1>
+<div class="icons">
+    <img id=carnaval src="/carnaval.png" alt="image" style="cursor: pointer;">
+        <img id=junino src="/junino1.png" alt="image" style="cursor: pointer;">
+        <img id=hlwn src="/halloween.png" alt="image" style="cursor: pointer;">
+        
+    </div>
         <div id="user-info">
             <span id="username-display"></span>
-            <button id="logoutBtn">Logout</button>
+            <button id="logoutBtn">Sair</button>
         </div>
 
     </header>
@@ -48,18 +43,15 @@
         </ul>
     </nav>
       
-   
-
-
-
-
-
+    <div class="PAGE">
     <h1>Lista de Produtos</h1>
+
+
 
 
 <!-- Search Wrapper -->
 <div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder=" Enter product code..." oninput="searchProducts()">
+    <input type="text" id="searchInput" placeholder=" Procurar por..." oninput="searchProducts()">
 </div>
 
 
@@ -69,14 +61,14 @@
     <table id="productTable">
         <thead>
             <tr>
-                <th>Product Image</th>
-                <th>Product Code</th>
-                <th>Product Description</th>
-                <th>Quantity 1</th>
-                <th>Price 1</th>
-                <th>Quantity 2</th>
-                <th>Price 2</th>
-                <th>Add Product</th>
+                <th>Foto do produto</th>
+                <th>Código do produto</th>
+                <th>Descrição do produto</th>
+                <th>Quantidade cx fechada</th>
+                <th>Preço de cx fechada</th>
+                <th>Quantidade cx fracionada</th>
+                <th>Preço cx fracionada</th>
+                <th>Adicionar ao pedido</th>
             </tr>
         </thead>
         <tbody>
@@ -92,9 +84,9 @@
         <span class="close" id="closeModalBtn">&times;</span>
         
         <div class="modal-stage-one">
-            
+            <div class="prodimage">
             <img src="https://via.placeholder.com/150" alt="Product Image">
-            
+            </div>
             <div class="product-info">
                 <h3 id="codprod">Product Name</h3>
                 <p id="descrip">This is a brief description of the product. It is very useful and high quality!</p>
@@ -109,18 +101,21 @@
             </div>
 
             <div  class="cxfechada-info">
-                <p id="Cx Fechada"><strong></strong></p>
+                <p id="CxFechada"><strong></strong></p>
             </div>
                 
             <div  class="cxfracionada-info">
-                <p id="Cx Fracionada"><strong></strong></p>
+                <p id="CxFracionada"><strong></strong></p>
             </div>
 
             <div class="modal-buttons">
                <!-- <label for="quantity">Quantity:</label> -->
-                <input type="number" id="quantity" name="quantity" min="1" value="1">
-                <button id="addButton">Add Quantity</button>
-                <button id="cancelButton">Cancel</button>
+                
+               <div class="quantity">
+               <input type="number" id="quantity" name="quantity" min="1" value="1">
+               </div> 
+               <button id="addButton">Adicionar</button>
+                <button id="cancelButton">Cancelar</button>
             </div>
         </div>
         
@@ -129,7 +124,7 @@
 
 
 
-
+</div>
 
 
 
@@ -189,6 +184,10 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
     window.location.href = '/';  // Redirect to login page
 });
+
+
+
+
 
      </script>
     <script src="script.js"></script>

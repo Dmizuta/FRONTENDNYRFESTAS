@@ -121,6 +121,7 @@
     
     #order-details-content {
         padding: 10px;
+        text-align: center;
     }
     
     @keyframes fadeIn {
@@ -187,8 +188,10 @@
     }
     
     #total-value {
-        font-weight: bold;
-    }
+    font-weight: bold;
+    float: right;
+    
+}
     
     /* When modal is open, make it visible */
     .modal.show {
@@ -223,10 +226,10 @@
 <body>
 
 <header>
-    <h1>NYR Festas</h1>
+    <h1 id="nyrfestas">NYR Festas</h1>
     <div id="user-info">
         <span id="username-display"></span>
-        <button id="logoutBtn" aria-label="Logout do usuário">Logout</button>
+        <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
     </div>
 </header>
 
@@ -238,12 +241,14 @@
     </ul>
 </nav>
 
+<div class="PAGE">
+
 <h1>Meus Pedidos admin</h1>
 
 <div class="box">
 
 <div class="search-wrapper">
-<input type="text" id="searchInput" placeholder="Search orders...">
+<input type="text" id="searchInput" placeholder="Procurar por...">
 </div>
 
 <div id="orders-container">
@@ -283,11 +288,11 @@
             <thead>
                 <tr>
                     <th>Item</th>   
-                    <th>Código do Produto</th>
+                    <th>Código</th>
                     <th>Descrição</th>
                     <th>Quantidade</th>
                     <th>Preço Unitário</th>
-                    <th>Valor</th>
+                    <th>Subtotal</th>
                 </tr>
             </thead>
             <tbody id="order-details-content">
@@ -314,6 +319,7 @@
     </div>
 </div>
 
+</div>
 
 
 
@@ -357,6 +363,13 @@ function displayOrders(orders) {
         return;
     }
 
+
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+
     orders.forEach(order => {
         const total = parseFloat(order.total);
         const statusText = order.status === 1 ? 'Submitted' : 'Draft';
@@ -367,7 +380,7 @@ function displayOrders(orders) {
                     <div><strong>Representante:</strong> ${order.representante}</div>
                     <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
             </div>
@@ -440,14 +453,17 @@ async function fetchOrderDetails(orderId) {
 }
 
 
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
 
-
-
+/*
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
-
+*/
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal

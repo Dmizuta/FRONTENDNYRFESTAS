@@ -69,7 +69,7 @@ function populateProductTable(products) {
       cell6.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
       cell7.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
-      cell8.innerHTML = `<button class="openModalBtn">Add</button>`;
+      cell8.innerHTML = `<button class="openModalBtn"><img src="/shoppingcart.png" alt="Adicionar"></button>`;
 
 
 
@@ -145,13 +145,13 @@ document.getElementById("cancelButton").addEventListener("click", function () {
   document.getElementById("myModal").style.display = "none";
 });
 
-/*// Close modal when clicking outside of it
+// Close modal when clicking outside of it
 window.addEventListener("click", function (event) {
   const modal = document.getElementById("myModal");
   if (event.target === modal) {
     modal.style.display = "none";
   }
-});*/
+});
 
 
 
@@ -172,15 +172,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
     console.log("No username found in localStorage.");
     return;
   }
-
-
-
-
-
-
-
-
-  console.log("HERE!!!", userRole);
 
 // FOR NON ADMIN USERS
 if (userRole !== "ADMIN") {

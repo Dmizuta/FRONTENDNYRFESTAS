@@ -62,10 +62,10 @@
 </style>
 <body>
     <header>
-        <h1>NYR Festas</h1>
+        <h1 id="nyrfestas">NYR Festas</h1>
         <div id="user-info">
             <span id="username-display"></span>
-            <button id="logoutBtn" aria-label="Logout do usuário">Logout</button>
+            <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
         </div>
     </header>
 
@@ -79,7 +79,7 @@
 
 
 
-
+    <div class="PAGE">
     <section class="pagina">
         <h2>Cadastro de Cliente REPRESENTANTE</h2>
 
@@ -104,7 +104,7 @@
         </form>
 
         <div id="searchBox">
-            <input type="text" id="searchInput" placeholder="Search by name or CNPJ">
+            <input type="text" id="searchInput" placeholder="Procurar por...">
             
         </div>
 
@@ -121,6 +121,8 @@
         
 
     </section>
+
+</div>
 
     <script>
 
@@ -211,8 +213,13 @@ function loadCustomerData(customer) {
     //localStorage.setItem('id', customer.id);  // Set customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
 
-}
 
+window.scrollTo({
+    top: 100,      // Vertical position (in pixels)
+    left: 0,     // Horizontal position (in pixels)
+    behavior: "smooth" // Smooth scrolling animation
+  });
+}
         // Handle search input event
         document.getElementById('searchInput').addEventListener('input', async (e) => {
             const searchTerm = e.target.value.toLowerCase();

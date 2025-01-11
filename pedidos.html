@@ -115,8 +115,14 @@
     cursor: pointer;
 }
 
+
+
+
 #order-details-content {
     padding: 10px;
+    text-align: center;
+    align-items: center;
+   
 }
 
 @keyframes fadeIn {
@@ -182,8 +188,12 @@ table th, table td {
     background-color: #f9f9f9;
 }
 
+
+
 #total-value {
     font-weight: bold;
+    float: right;
+    
 }
 
 /* When modal is open, make it visible */
@@ -212,19 +222,31 @@ border-radius: 5px;
         margin-top: 20px;
     }
 }
-
+  /* Style the table headers */
+  .modal table th {
+    text-align: center; /* Center align the header text */
+    
+   
+    border: 1px solid #ddd; /* Optional: Add border for clarity */
+    
+  }
 
 </style>
 
 <body>
 
+   
 <header>
-    <h1>NYR Festas</h1>
+    <h1 id="nyrfestas">NYR Festas</h1>
     <div id="user-info">
         <span id="username-display"></span>
-        <button id="logoutBtn" aria-label="Logout do usuário">Logout</button>
+        <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
     </div>
 </header>
+
+<div class="PAGE">
+
+
 
 <nav>
     <ul>
@@ -272,11 +294,11 @@ border-radius: 5px;
             <thead>
                 <tr>
                     <th>Item</th>
-                    <th>Código do Produto</th>
+                    <th>Código</th>
                     <th>Descrição</th>
                     <th>Quantidade</th>
                     <th>Preço Unitário</th>
-                    <th>Valor</th>
+                    <th>Subtotal</th>
                 </tr>
             </thead>
             <tbody id="order-details-content">
@@ -301,6 +323,8 @@ border-radius: 5px;
         <!-- Close Modal Button -->
         <button id="close-modal" class="action-btn">Close</button>
     </div>
+</div>
+
 </div>
 
 <script>
@@ -365,6 +389,15 @@ function displayOrders(orders) {
             console.error('Invalid total value:', order.total);
         }
 
+
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+
+
+
         const statusText = order.status === 1 ? 'Submitted' : 'Draft';
         const orderRow = `
             <div class="order-row" data-id="${order.id}">
@@ -372,7 +405,7 @@ function displayOrders(orders) {
                     <div><strong>ID:</strong> ${order.id}</div>
                     <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
                 </div>
             </div>
@@ -381,9 +414,11 @@ function displayOrders(orders) {
     });
     console.log('All orders displayed');
 }
+/*
+<td>${formatCurrency(total.toFixed(2))}</td>
 
-
-
+<div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
+*/
 
 
 
@@ -508,11 +543,14 @@ async function fetchOrderDetails(orderId) {
     }
 }
 
-
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}/*
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return `R$ ${value.toFixed(2).replace('.', ',')}`;
-}
+}*/
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -540,6 +578,8 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
+
+
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
