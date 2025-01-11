@@ -412,3 +412,14 @@ th {
 .close:hover {
     color: #F2B680; /* Yellow-orange hover effect */
 }
+
+
+  /* Style the table headers */
+  .modal table th {
+    text-align: center; /* Center align the header text */
+    
+   
+    border: 1px solid #ddd; /* Optional: Add border for clarity */
+    
+  }
+  
