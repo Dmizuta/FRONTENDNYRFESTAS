@@ -76,33 +76,8 @@
     
 /* Modal Styling */
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 60px 20px; /* Adiciona um padding horizontal e vertical para evitar conteúdo colado nas bordas */
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 900px;
-    max-height: 80vh; /* Limita a altura do modal a 80% da altura da janela */
-    overflow-y: auto; /* Ativa rolagem vertical para o conteúdo que ultrapassar a altura */
-    animation: fadeIn 0.3s ease-in-out;
-    margin: auto; /* Centraliza o modal no viewport */
-}
 
 
-    /* Modal Styling 
     .modal {
         display: none;
         position: fixed;
@@ -125,7 +100,7 @@
         overflow: auto;
         animation: fadeIn 0.3s ease-in-out;
     }
-    */
+    
     #logo-image {
         width: 20%;
         padding: 10px;
@@ -487,12 +462,7 @@ function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
 
-/*
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return `R$ ${value.toFixed(2).replace('.', ',')}`;
-}
-*/
+
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -532,49 +502,6 @@ function populateModal(orderDetails) {
 
 
 
-/*
-//Function to format currency (BRL)
-function formatCurrency(value) {
-    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
-}*/
-
-
-/*
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    // Update general order information in the modal
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-
-    // Update products table
-    const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = ''; // Clear existing content
-   
-
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco); // Ensure price is a number
-        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
-
-        const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td>${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(quantity * price)}</td>
-            </tr>
-        `;
-        orderDetailsContent.innerHTML += row; // Add row to table
-    });
-
-    // Update total price in the modal
-    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
-
-  
-}*/
-
 // Show modal with order details
 function openModal(orderId) {
     fetchOrderDetails(orderId)
@@ -598,54 +525,6 @@ document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('order-modal').classList.remove('show'); // Hide modal
 });
 
-
-
-
-
-/*
-
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-
-    const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = '';
-
-    orderDetails.products.forEach((product, index) => {
-        // Convert precoUnitario to a number if it's a string (for example, "R$ 3.20")
-        const price = parseFloat(product.precoUnitario.replace(/[^\d.-]/g, ''));
-
-        // Check if price is valid
-        if (isNaN(price)) {
-            console.error(`Invalid price for product ${index + 1}:`, product.precoUnitario);
-        }
-
-        const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${product.codigo}</td>
-                <td>${product.descricao}</td>
-                <td>${product.quantidade}</td>
-                <td>R$ ${price.toFixed(2)}</td>
-                <td>R$ ${(product.quantidade * price).toFixed(2)}</td>
-            </tr>
-        `;
-        orderDetailsContent.innerHTML += row;
-    });
-
-    // For total value, ensure it's treated as a number too
-    const total = parseFloat(orderDetails.total.replace(/[^\d.-]/g, ''));
-    if (!isNaN(total)) {
-        document.getElementById('total-value').textContent = `R$ ${total.toFixed(2)}`;
-    } else {
-        console.error('Invalid total value:', orderDetails.total);
-    }
-}
-
-
-*/
 
 
 
@@ -697,15 +576,6 @@ document.getElementById('logoutBtn').addEventListener('click', handleLogout);
 
 
 
-
-
-
-
-
-
-
-
-
 const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
 
 searchBox.addEventListener('input', function() {
@@ -734,42 +604,6 @@ searchBox.addEventListener('input', function() {
     });
 });
 
-
-
-
-
-
-
-
-
-/*
-// Search functionality
-const searchBox = document.getElementById('searchInput');
-
-searchBox.addEventListener('input', function() {
-    const searchTerm = searchBox.value.toLowerCase().trim();
-
-    const orders = document.querySelectorAll('.order-row');
-    orders.forEach(order => {
-        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-        const data = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-        const status = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-
-        if (
-            orderId.includes(searchTerm) || 
-            razaoSocial.includes(searchTerm) || 
-            data.includes(searchTerm) || 
-            status.includes(searchTerm)
-        ) {
-            order.style.display = 'block';
-        } else {
-            order.style.display = 'none';
-        }
-    });
-});
-
-*/
 
 
 
