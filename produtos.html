@@ -60,10 +60,10 @@
       
    
 
-    <div id="warningModal" class="wmodal">
+    <div id="wmodal" class="wmodal">
         <div class="wmodal-content">
-          <span id="close" class="close">&times;</span>
-          <p>Important announcement: We will have a maintenance window on January 15th from 2 AM to 4 AM.</p>
+          <span id="wclose" class="wclose">&times;</span>
+          <p>Important announcement: We will     have a maintenance window on January 15th from 2 AM to 4 AM.</p>
         </div>
       </div>
       
@@ -219,8 +219,8 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
 
 
 window.onload = function () {
-  const modal = document.getElementById('warningModal');
-  const closeBtn = document.getElementById('close');
+  const modal = document.getElementById('wmodal');
+  const closeBtn = document.getElementById('wclose');
 
   // Show the modal
   modal.style.display = 'block';
