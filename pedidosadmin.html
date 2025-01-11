@@ -72,7 +72,7 @@
             flex-direction: column;
         }
     }
-    
+
     
 /* Modal Styling */
 
@@ -371,7 +371,7 @@ async function loadOrders() {
         });
 
         if (!response.ok) {
-            document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+            document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
             return;
         }
 
@@ -379,7 +379,7 @@ async function loadOrders() {
         displayOrders(orders);
     } catch (error) {
         console.error('Error fetching orders:', error);
-        document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+        document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
     }
 }
 
