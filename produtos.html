@@ -60,7 +60,13 @@
       
    
 
-
+    <div id="warningModal" class="wmodal">
+        <div class="wmodal-content">
+          <span id="close" class="close">&times;</span>
+          <p>Important announcement: We will have a maintenance window on January 15th from 2 AM to 4 AM.</p>
+        </div>
+      </div>
+      
 
 
     <div class="PAGE">
@@ -202,6 +208,35 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
     window.location.href = '/';  // Redirect to login page
 });
+
+
+
+
+
+
+
+
+
+
+window.onload = function () {
+  const modal = document.getElementById('warningModal');
+  const closeBtn = document.getElementById('close');
+
+  // Show the modal
+  modal.style.display = 'block';
+
+  // Close the modal when the user clicks the "x"
+  closeBtn.onclick = function () {
+    modal.style.display = 'none';
+  };
+
+  // Close the modal when the user clicks anywhere outside of it
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+};
 
      </script>
     <script src="script.js"></script>
