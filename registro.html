@@ -53,16 +53,14 @@
       text-align: center;
       font-size: 14px;
     }
+    #login {
+      margin-top: 7px;
+    }
   </style>
-
 </head>
 <body>
-
-
-
-
   <div class="register-container">
-        <h2>Registro</h2>
+    <h2>Registro</h2>
     <form id="registerForm">
       <input type="text" id="username" placeholder="Usuário" required>
       <input type="password" id="password" placeholder="Senha" required>
@@ -72,6 +70,7 @@
         <option value="SELLER">Representante</option>
       </select>
       <button type="submit">Registre-se</button>
+      <button id="login" type="button">Login</button>
     </form> 
     <p class="error" id="errorMessage"></p>
   </div>
@@ -111,7 +110,11 @@
         errorMessage.textContent = 'Please fill in all fields.';
       }
     });
-  </script>
 
+    // Handle login button click to redirect to index.html
+    document.getElementById('login').addEventListener('click', function() {
+      window.location.href = 'index.html'; // Redirect to index.html
+    });
+  </script>
 </body>
 </html>
