@@ -18,7 +18,7 @@ async function fetchProductData() {
     // Handle errors and show a user-friendly message in the table
     const tableBody = document.querySelector("#productTable tbody");
     tableBody.innerHTML =
-      '<tr><td colspan="7">Unable to load products at the moment. Please try again later.</td></tr>';
+      '<tr><td colspan="7">Não foi possível carregar os produtos, entre em contato com o suporte técnico.</td></tr>';
   }
 }
 
@@ -99,7 +99,7 @@ function populateProductTable(products) {
   } else {
     // No products available message
     tableBody.innerHTML =
-      '<tr><td colspan="7">No products available.</td></tr>';
+      '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
   }
 }
 
@@ -168,7 +168,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
   console.log("Button clicked. User role:", userRole);
 
   if (!username) {
-    alert("No customer selected");
+    alert("NENHUM CADASTRO SELECIONADO.");
     console.log("No username found in localStorage.");
     return;
   }
@@ -184,7 +184,7 @@ if (userRole !== "ADMIN") {
     });
 
     if (!cadastroResponse.ok) {
-      alert('Favor preencher seu Cadastro.');
+      alert('PREENCHA SEU CADATRO.');
       console.error('Error checking cadastro:', cadastroResponse);
       return;
     }
@@ -226,7 +226,7 @@ if (userRole !== "ADMIN") {
 
         // Validate product details
         if (!productCode || !productDesc || !precofechada || !precofrac|| !cxfechada) {
-          alert("Product details are missing or incorrect.");
+          alert("DETALHES DO PEDIDO FALTANDO.");
           console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
           return;
         }
@@ -262,25 +262,25 @@ if (userRole !== "ADMIN") {
         const addResult = await addResponse.json();
 
         if (addResponse.ok) {
-          alert(addResult.message || "Product added to existing draft order");
+          alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
           console.log("Product successfully added to order");
           const modal = document.getElementById("myModal");
           modal.style.display = "none";
           document.getElementById("quantity").value = ""; // Clear quantity field
         } else {
           console.error("Failed to add product to order:", addResult.error);
-          alert(addResult.error || "Failed to add product to order.");
+          alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
         }
       } else {
         console.error("Failed to fetch customer info:", customerResponse);
         alert("SELECIONE UM CADASTRO PARA ADICIONAR O PRODUTO.");
       }
     } else {
-      alert('Cadastro not filled, cannot add product.');
+      alert('CADASTRO NÃO PREENCHIDO, NÃO É POSSÍVEL ADICIONAR UM PRODUTO.');
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("Something went wrong, please try again later");
+    alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
   }
 }
 
@@ -327,7 +327,7 @@ console.log("Product Description:", productDesc, "Preco Fechada:", precofechada,
 
 // Validate product details
 if (!productCode || !productDesc || !precofechada || !precofrac|| !cxfechada) {
-  alert("Product details are missing or incorrect.");
+  alert("DETALHES DO PRODUTO FALTANDO.");
   console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
   return;
 }
@@ -366,14 +366,14 @@ const productData = {
         const addResult = await addResponse.json();
 
         if (addResponse.ok) {
-          alert(addResult.message || "Product added to existing draft order");
+          alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
           console.log("Product successfully added to order");
           const modal = document.getElementById("myModal");
           modal.style.display = "none";
           document.getElementById("quantity").value = ""; // Clear quantity field
         } else {
           console.error("Failed to add product to order:", addResult.error);
-          alert(addResult.error || "Failed to add product to order.");
+          alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
         }
       } else {
         console.error("Failed to fetch customer info:", customerResponse);
@@ -381,7 +381,7 @@ const productData = {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong, please try again later");
+      alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
   }
 });

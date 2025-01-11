@@ -331,11 +331,11 @@ form.addEventListener('submit', async (e) => {
             form.dataset.customerId = '';  // Clear stored customer ID after submission
             document.getElementById('cadastroButton').textContent = 'Cadastrar';  // Reset button text
         } else {
-            alert('Error: ' + (result.error || 'Failed to process the request.'));
+            alert('Error: ' + (result.error || 'FALHA NO CADASTRO.'));
         }
     } catch (error) {
         console.error('Error submitting the form:', error);
-        alert('Error processing the form. Please try again later.');
+        alert('ERRO AO REALIZAR O CADASTRO.');
     }
 });
 

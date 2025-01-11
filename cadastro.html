@@ -172,11 +172,11 @@ form.addEventListener('submit', async (e) => {
             form.reset();  // Reset the form after successful submission
             
         } else {
-            alert('Erro: ' + (result.error || 'Falha no cadastro.'));
+            alert('Erro: ' + (result.error || 'FALHA NO CADASTRO.'));
         }
     } catch (error) {
         console.error('Erro ao enviar o formulário:', error);
-        alert('Erro ao realizar o cadastro. Por favor, tente novamente mais tarde.');
+        alert('ERRO AO REALIZAR O CADASTRO.');
     }
 });
 
