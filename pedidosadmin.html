@@ -76,7 +76,36 @@
     
 /* Modal Styling */
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 60px 20px; /* Adiciona um padding horizontal e vertical para evitar conteúdo colado nas bordas */
+}
 
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 80vh; /* Limita a altura do modal a 80% da altura da janela */
+    overflow-y: auto; /* Ativa rolagem vertical para o conteúdo que ultrapassar a altura */
+    animation: fadeIn 0.3s ease-in-out;
+    margin: auto; /* Centraliza o modal no viewport */
+}
+
+
+
+
+
+/*
 
     .modal {
         display: none;
@@ -100,7 +129,7 @@
         overflow: auto;
         animation: fadeIn 0.3s ease-in-out;
     }
-    
+    */
     #logo-image {
         width: 20%;
         padding: 10px;
