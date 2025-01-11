@@ -268,7 +268,7 @@ if (userRole !== "ADMIN") {
           modal.style.display = "none";
           document.getElementById("quantity").value = ""; // Clear quantity field
         } else {
-          console.error("Failed to add product to order:", addResult.error);
+          console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
           alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
         }
       } else {
