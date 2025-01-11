@@ -317,12 +317,6 @@ if (userRole !== "ADMIN") {
 
 
 
-
-
-
-
-
-
 // Extract product description and prices
 const productDesc = productBuyData.descricao;
 const precofechada = productBuyData.precofechada;
