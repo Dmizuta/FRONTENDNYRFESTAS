@@ -125,10 +125,10 @@ function openModal(
   // Populate modal with product details
   productInfo.querySelector("h3").textContent = productCode;
   productInfo.querySelector("p").textContent = productDesc;
-  priceInfoFechada.querySelector("p").textContent = `Preço Caixa Fechada: ${priceFechada}`;
-  priceInfoFracionada.querySelector("p").textContent = `Preço Caixa Fracionada: ${priceFracionada}`;
-  cxFechadaInfo.querySelector("p").textContent = `Caixa Fechada: ${cxFechada}`; // Corrected
-  cxFracionadaInfo.querySelector("p").textContent = `Caixa Fracionada: ${cxFracionada}`; // Corrected
+  priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${priceFechada}</span>`;
+  priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${priceFracionada}</span>`;
+  cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${cxFechada}</span>`;
+  cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${cxFracionada}</span>`;
   productImageElement.src = productImage;
   
 
