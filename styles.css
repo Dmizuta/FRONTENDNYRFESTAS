@@ -421,7 +421,7 @@ th {
 }
 
 .value1 {
-    font-weight: normal;
+    font-weight: bold;
     color: #e61717; /* Highlighted text for the value */
 }
 .label2 {
@@ -430,6 +430,6 @@ th {
 }
 
 .value2 {
-    font-weight: normal;
+    font-weight: bold;
     color: #e61717; /* Highlighted text for the value */
 }
