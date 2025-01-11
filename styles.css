@@ -448,38 +448,3 @@ th {
 
 
 
-.wmodal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000; /* Ensure it’s on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-  }
-  
-  .wmodal-content {
-    background-color: #fff;
-    margin: 15% auto; /* Center the modal */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    border-radius: 8px;
-  }
-  
-  .wclose {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .wclose:hover,
-  .wclose:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
