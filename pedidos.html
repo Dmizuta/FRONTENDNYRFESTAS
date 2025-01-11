@@ -261,6 +261,22 @@ border-radius: 5px;
     border: 1px solid #ddd; /* Optional: Add border for clarity */
     
   }
+  .obs-row {
+    padding: 10px;
+    background-color: #aaa;
+    border-radius: 10px;
+  }
+
+
+textarea {
+  width: 100%; /* Make the textarea span the full width of the parent container */
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding is included in the element’s width and height */
+  resize: none; /* Disable manual resizing (optional, if you want it only grow via JS) */
+}
 
 </style>
 
@@ -316,6 +332,8 @@ border-radius: 5px;
                     <span id="representante"></span>
                 </div>
                 
+               
+
             </div>
             <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
         </div>
@@ -344,7 +362,19 @@ border-radius: 5px;
                 <span id="total-value">R$ 0,00</span>
             </div>
         </div>
+
+
+
     </div>
+
+
+
+    <div class="obs-row">
+        <span>Observações:</span>
+        <textarea type="text" id="obs"></textarea>
+    </div>
+
+
         <!-- Action Buttons -->
         <div class="modal-actions">
             <button id="submit-order-btn" class="action-btn">Submit</button>
@@ -445,28 +475,6 @@ function formatCurrency(value) {
     });
     console.log('All orders displayed');
 }
-/*
-<td>${formatCurrency(total.toFixed(2))}</td>
-
-<div><strong>Total:</strong> R$ ${total.toFixed(2)}</div>
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -590,6 +598,7 @@ function populateModal(orderDetails) {
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
     document.getElementById('representante').textContent = orderDetails.representante;
+    document.getElementById('obs').textContent = orderDetails.observacoes;
 
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
@@ -654,6 +663,14 @@ document.getElementById('close-modal').addEventListener('click', () => {
 
 
 
+const textarea = document.getElementById('obs');
+
+textarea.addEventListener('input', () => {
+  // Reset height to shrink if text is deleted
+  textarea.style.height = 'auto';
+  // Set height based on scrollHeight to expand as needed
+  textarea.style.height = `${textarea.scrollHeight}px`;
+});
 
 
 
