@@ -643,10 +643,6 @@ function populateModal(orderDetails) {
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
 
-    const orderId = document.getElementById("order-id").value;
-  localStorage.setItem("orderId", orderId); // Save to localStorage
-  console.log("Order ID saved to localStorage:", orderId); // Debugging
-
 
 
     // Update products table and calculate total
@@ -694,6 +690,9 @@ document.querySelectorAll('.order-row').forEach(row => {
     row.addEventListener('click', () => {
         const orderId = row.getAttribute('data-id');
         openModal(orderId); // Open modal with clicked order details
+        
+  localStorage.setItem("orderId", orderId); // Save to localStorage
+  console.log("Order ID saved to localStorage:", orderId); // Debugging
     });
 });
 
