@@ -254,8 +254,14 @@ table th, table td {
   max-height: 120px; /* Limit to 3 rows (3 * 24px) */
   overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
-
-.modalOrderButton {
+.modalOrderDeleteButton {
+  
+  width: 40px;                /* Defina a largura desejada para os botões */
+  height: 40px;               /* Defina a altura desejada para os botões */
+ 
+  cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+}
+.modalOrderEditButton {
   
     width: 40px;                /* Defina a largura desejada para os botões */
     height: 40px;               /* Defina a altura desejada para os botões */
@@ -264,12 +270,16 @@ table th, table td {
 }
 
 
-.modalOrderButton img {
+.modalOrderEditButton img {
     
     width: 20px; /* Adjust size as needed */
     height: auto;
   }
-
+  .modalOrderDeleteButton img {
+    
+    width: 20px; /* Adjust size as needed */
+    height: auto;
+  }
   
 </style>
 
@@ -619,8 +629,8 @@ function populateModal(orderDetails) {
                 <td>${formatCurrency(productTotal)}</td>
 
 
-                <td><button class="modalOrderButton" id="editButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderButton" id="deleteButton"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
+                <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
 
 
             </tr>
@@ -637,16 +647,19 @@ function populateModal(orderDetails) {
 
 
 
-
-// Add event listeners for delete buttons
-document.querySelectorAll('.deleteButton').forEach(button => {
-    button.addEventListener('click', async (event) => {
-        event.stopPropagation(); // Prevent the row click event
-        const productId = button.closest('tr').getAttribute('data-product-id');
-        await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
-        console.log(productId, orderDetails.id);
+    // Add event listeners for delete buttons
+    document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation(); // Prevent the row click event
+            const productId = button.getAttribute('data-product-id');
+            await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
+        });
     });
-});
+
+
+
+
+
 // Function to delete a product
 async function deleteProduct(productId, orderId) {
     try {
@@ -659,7 +672,7 @@ async function deleteProduct(productId, orderId) {
         }
 
         console.log(`Product with ID ${productId} deleted successfully.`);
-        // Optionally, refresh the order details after deletion
+        // Refresh order details to reflect changes
         fetchOrderDetails(orderId); // Refresh order details to reflect changes
     } catch (error) {
         console.error('Error deleting product:', error);
