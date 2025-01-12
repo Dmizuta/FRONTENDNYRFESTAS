@@ -267,16 +267,19 @@ border-radius: 5px;
     border-radius: 10px;
   }
 
-
-textarea {
-  width: 100%; /* Make the textarea span the full width of the parent container */
+  textarea {
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  box-sizing: border-box; /* Ensure padding is included in the element’s width and height */
-  resize: none; /* Disable manual resizing (optional, if you want it only grow via JS) */
+  box-sizing: border-box;
+  resize: none;
+  line-height: 24px; /* Set line height to calculate row height */
+  max-height: 120px; /* Limit to 3 rows (3 * 24px) */
+  overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
+
 
 </style>
 
