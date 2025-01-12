@@ -677,6 +677,48 @@ textarea.addEventListener('input', () => {
 
 
 
+
+
+
+
+
+document.getElementById("submit-order-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    const orderId = localStorage.getItem('currentOrderId');
+
+    // Prepare data to send
+    const requestData = {
+      orderId: orderId, // Use the same key as in the backend
+      observation: observation, // Use the same key as in the backend
+    };
+console.log(orderId, observation);
+    try {
+      // Send a POST request to update the order
+      const response = await fetch('https://backendnyrfestas.vercel.app/submit-order', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+
+      if (response.ok) {
+
+        alert('Order has been submitted and updated successfully!');
+
+      // Refresh the page
+      window.location.reload();
+        console.log("Order successfully submitted!");
+      } else {
+        console.error("Failed to submit the order.");
+        alert('An error occurred. Please try again later.');
+      }
+    } catch (error) {
+      console.error("Error submitting the order:", error);
+    }
+});
+
 </script>
 </body>
 </html>
