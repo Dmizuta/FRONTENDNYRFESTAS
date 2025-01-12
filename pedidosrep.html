@@ -689,11 +689,10 @@ function openModal(orderId) {
 document.querySelectorAll('.order-row').forEach(row => {
     row.addEventListener('click', () => {
         const orderId = row.getAttribute('data-id');
-        console.log("data-id:", orderId); // Debugging
+        localStorage.setItem('currentOrderId', orderId);
         openModal(orderId); // Open modal with clicked order details
         
-  localStorage.setItem("orderID", orderId); // Save to localStorage
-  console.log("Order ID saved to localStorage:", orderId); // Debugging
+
   
     });
 });
@@ -724,7 +723,7 @@ textarea.addEventListener('input', () => {
 
 document.getElementById("submit-order-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
-    const orderId = localStorage.getItem("orderId");
+    const orderId = localStorage.getItem('currentOrderId');
 
     // Prepare data to send
     const requestData = {
