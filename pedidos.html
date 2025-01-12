@@ -641,6 +641,8 @@ function populateModal(orderDetails) {
             event.stopPropagation(); // Prevent the row click event
             const productId = button.getAttribute('data-product-id');
             await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
+        console.log(productId, orderDetails.id);
+        
         });
     });
 }
