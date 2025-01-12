@@ -547,6 +547,9 @@ searchBox.addEventListener('input', function() {
 
 // Load orders when the page is ready
 document.addEventListener('DOMContentLoaded', () => {
+    const orderId = document.getElementById("order-id").value;
+  localStorage.setItem("orderId", orderId); // Save to localStorage
+  console.log("Order ID saved to localStorage:", orderId); // Debugging
     console.log('DOM fully loaded and parsed');
     loadOrders();
 });
@@ -715,7 +718,7 @@ textarea.addEventListener('input', () => {
 
 document.getElementById("submit-order-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
-    const orderId = document.getElementById("order-id").value; // Get the orderId value
+    const orderId = localStorage.getItem("orderId");
 
     // Prepare data to send
     const requestData = {
