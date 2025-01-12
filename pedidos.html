@@ -578,6 +578,10 @@ async function fetchOrderDetails(orderId) {
             throw new Error('Failed to fetch order details');
         }
         const orderDetails = await response.json();
+
+        const orderID = orderDetails.id;
+        localStorage.setItem('currentOrderId', orderID);
+
         console.log('Order details received:', orderDetails);
         populateModal(orderDetails);
     } catch (error) {
