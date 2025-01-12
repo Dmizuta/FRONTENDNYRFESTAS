@@ -704,6 +704,60 @@ textarea.addEventListener('input', () => {
   textarea.style.height = `${textarea.scrollHeight}px`;
 });
 
+
+
+
+
+
+
+<!-- Textarea for observations -->
+<textarea id="observation-field" rows="3" placeholder="Write your observations here..."></textarea>
+
+
+  document.getElementById("submit-order-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim();
+    const orderId = document.getElementById("order-id").value;
+
+
+    
+
+    // Prepare data to send
+    const requestData = {
+      order_id: orderId,
+      status: 1, // Submitted
+      obs: observation,
+    };
+
+    try {
+      // Send a POST request to update the order
+      const response = await fetch("https://your-backend-url.com/submit-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        console.log("Order successfully submitted!");
+      } else {
+        console.error("Failed to submit the order.");
+      }
+    } catch (error) {
+      console.error("Error submitting the order:", error);
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
