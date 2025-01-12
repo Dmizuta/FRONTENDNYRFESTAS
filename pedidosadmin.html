@@ -72,31 +72,35 @@
             flex-direction: column;
         }
     }
+
     
-    /* Modal Styling */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-    
-    .modal-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 80%;
-        max-width: 900px;
-        overflow: auto;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    
+/* Modal Styling */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 60px 20px; /* Adiciona um padding horizontal e vertical para evitar conteúdo colado nas bordas */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1300px;
+    max-height: 80vh; /* Limit height to 80% of viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+    animation: fadeIn 0.3s ease-in-out;
+    margin: auto; /* Center modal on screen */
+}
+
     #logo-image {
         width: 20%;
         padding: 10px;
@@ -179,7 +183,7 @@
     
     table th, table td {
         padding: 8px;
-        text-align: left;
+        text-align: center;
         border: 1px solid #ddd;
     }
     
@@ -218,8 +222,42 @@
             margin-top: 20px;
         }
     }
-    
-   
+    .obs-row {
+    padding: 10px;
+    background-color: #aaa;
+    border-radius: 10px;
+  }
+
+
+  textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: none;
+  line-height: 24px; /* Set line height to calculate row height */
+  max-height: 120px; /* Limit to 3 rows (3 * 24px) */
+  overflow-y: auto; /* Enable scrolling when the content exceeds max height */
+}
+
+.modalOrderButton {
+  
+  width: 40px;                /* Defina a largura desejada para os botões */
+  height: 40px;               /* Defina a altura desejada para os botões */
+ 
+  cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+}
+
+
+.modalOrderButton img {
+  
+  width: 20px; /* Adjust size as needed */
+  height: auto;
+}
+
+
     </style>
     
     
@@ -287,12 +325,14 @@
         <table id="order-items-table">
             <thead>
                 <tr>
-                    <th>Item</th>   
+                    <th>-</th>   
                     <th>Código</th>
                     <th>Descrição</th>
-                    <th>Quantidade</th>
+                    <th>Qtde</th>
                     <th>Preço Unitário</th>
                     <th>Subtotal</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
                 </tr>
             </thead>
             <tbody id="order-details-content">
@@ -309,6 +349,12 @@
             </div>
         </div>
         
+
+        <div class="obs-row">
+            <span>Observações:</span>
+            <textarea type="text" id="obs"></textarea>
+        </div>
+
 
         <div class="modal-actions">
             <button id="submit-order-btn" class="action-btn">Submit</button>
@@ -341,7 +387,7 @@ async function loadOrders() {
         });
 
         if (!response.ok) {
-            document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+            document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
             return;
         }
 
@@ -349,7 +395,7 @@ async function loadOrders() {
         displayOrders(orders);
     } catch (error) {
         console.error('Error fetching orders:', error);
-        document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+        document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
     }
 }
 
@@ -445,6 +491,10 @@ async function fetchOrderDetails(orderId) {
             throw new Error('Failed to fetch order details');
         }
         const orderDetails = await response.json();
+
+        const orderID = orderDetails.id;
+        localStorage.setItem('currentOrderId', orderID);
+
         console.log('Order details received:', orderDetails);
         populateModal(orderDetails);
     } catch (error) {
@@ -458,12 +508,7 @@ function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
 
-/*
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return `R$ ${value.toFixed(2).replace('.', ',')}`;
-}
-*/
+
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -471,6 +516,8 @@ function populateModal(orderDetails) {
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
     document.getElementById('representante').textContent = orderDetails.representante;
+    document.getElementById('obs').textContent = orderDetails.observacoes;
+    
 
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
@@ -490,6 +537,8 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderButton"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
@@ -502,49 +551,6 @@ function populateModal(orderDetails) {
 }
 
 
-
-/*
-//Function to format currency (BRL)
-function formatCurrency(value) {
-    return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`;
-}*/
-
-
-/*
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    // Update general order information in the modal
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-
-    // Update products table
-    const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = ''; // Clear existing content
-   
-
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco); // Ensure price is a number
-        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
-
-        const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td>${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(quantity * price)}</td>
-            </tr>
-        `;
-        orderDetailsContent.innerHTML += row; // Add row to table
-    });
-
-    // Update total price in the modal
-    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
-
-  
-}*/
 
 // Show modal with order details
 function openModal(orderId) {
@@ -569,54 +575,6 @@ document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('order-modal').classList.remove('show'); // Hide modal
 });
 
-
-
-
-
-/*
-
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-
-    const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = '';
-
-    orderDetails.products.forEach((product, index) => {
-        // Convert precoUnitario to a number if it's a string (for example, "R$ 3.20")
-        const price = parseFloat(product.precoUnitario.replace(/[^\d.-]/g, ''));
-
-        // Check if price is valid
-        if (isNaN(price)) {
-            console.error(`Invalid price for product ${index + 1}:`, product.precoUnitario);
-        }
-
-        const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${product.codigo}</td>
-                <td>${product.descricao}</td>
-                <td>${product.quantidade}</td>
-                <td>R$ ${price.toFixed(2)}</td>
-                <td>R$ ${(product.quantidade * price).toFixed(2)}</td>
-            </tr>
-        `;
-        orderDetailsContent.innerHTML += row;
-    });
-
-    // For total value, ensure it's treated as a number too
-    const total = parseFloat(orderDetails.total.replace(/[^\d.-]/g, ''));
-    if (!isNaN(total)) {
-        document.getElementById('total-value').textContent = `R$ ${total.toFixed(2)}`;
-    } else {
-        console.error('Invalid total value:', orderDetails.total);
-    }
-}
-
-
-*/
 
 
 
@@ -668,15 +626,6 @@ document.getElementById('logoutBtn').addEventListener('click', handleLogout);
 
 
 
-
-
-
-
-
-
-
-
-
 const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
 
 searchBox.addEventListener('input', function() {
@@ -705,45 +654,53 @@ searchBox.addEventListener('input', function() {
     });
 });
 
+const textarea = document.getElementById('obs');
 
-
-
-
-
-
-
-
-/*
-// Search functionality
-const searchBox = document.getElementById('searchInput');
-
-searchBox.addEventListener('input', function() {
-    const searchTerm = searchBox.value.toLowerCase().trim();
-
-    const orders = document.querySelectorAll('.order-row');
-    orders.forEach(order => {
-        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-        const data = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-        const status = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-
-        if (
-            orderId.includes(searchTerm) || 
-            razaoSocial.includes(searchTerm) || 
-            data.includes(searchTerm) || 
-            status.includes(searchTerm)
-        ) {
-            order.style.display = 'block';
-        } else {
-            order.style.display = 'none';
-        }
-    });
+textarea.addEventListener('input', () => {
+  // Reset height to shrink if text is deleted
+  textarea.style.height = 'auto';
+  // Set height based on scrollHeight to expand as needed
+  textarea.style.height = `${textarea.scrollHeight}px`;
 });
 
-*/
 
 
+document.getElementById("submit-order-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    const orderId = localStorage.getItem('currentOrderId');
 
+    // Prepare data to send
+    const requestData = {
+      orderId: orderId, // Use the same key as in the backend
+      observation: observation, // Use the same key as in the backend
+    };
+console.log(orderId, observation);
+    try {
+      // Send a POST request to update the order
+      const response = await fetch('https://backendnyrfestas.vercel.app/submit-order', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+
+      if (response.ok) {
+
+        alert('Order has been submitted and updated successfully!');
+
+      // Refresh the page
+      window.location.reload();
+        console.log("Order successfully submitted!");
+      } else {
+        console.error("Failed to submit the order.");
+        alert('An error occurred. Please try again later.');
+      }
+    } catch (error) {
+      console.error("Error submitting the order:", error);
+    }
+});
 </script>
 
 

@@ -340,6 +340,8 @@ th {
     height: auto;
   }
 
+
+
 #codprod{
     padding:8px;
 }
@@ -415,4 +417,21 @@ th {
 
 
 
-  
+.label1 {
+    font-weight: bold;
+    color: #333; /* Darker text for the label */
+}
+
+.value1 {
+    font-weight: bold;
+    color: #e61717; /* Highlighted text for the value */
+}
+.label2 {
+    font-weight: normal;
+    color: #333; /* Darker text for the label */
+}
+
+.value2 {
+    font-weight: normal;
+    color: #e61717; /* Highlighted text for the value */
+}
