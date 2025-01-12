@@ -271,6 +271,12 @@
   overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
 
+.modalOrderButton img {
+    
+    width: 30px; /* Adjust size as needed */
+    height: auto;
+  }
+
     </style>
     
     
@@ -344,6 +350,8 @@
                     <th>Quantidade</th>
                     <th>Preço Unitário</th>
                     <th>Subtotal</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
                 </tr>
             </thead>
             <tbody id="order-details-content">
@@ -528,6 +536,7 @@ function populateModal(orderDetails) {
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
+    
 
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
@@ -547,6 +556,8 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderButton"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
