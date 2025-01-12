@@ -689,6 +689,7 @@ function openModal(orderId) {
 document.querySelectorAll('.order-row').forEach(row => {
     row.addEventListener('click', () => {
         const orderId = row.getAttribute('data-id');
+        console.log("data-id:", orderId); // Debugging
         openModal(orderId); // Open modal with clicked order details
         
   localStorage.setItem("orderID", orderId); // Save to localStorage
