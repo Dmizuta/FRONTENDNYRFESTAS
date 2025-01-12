@@ -691,7 +691,7 @@ document.querySelectorAll('.order-row').forEach(row => {
         const orderId = row.getAttribute('data-id');
         openModal(orderId); // Open modal with clicked order details
         
-  localStorage.setItem("orderId", orderId); // Save to localStorage
+  localStorage.setItem("orderID", orderId); // Save to localStorage
   console.log("Order ID saved to localStorage:", orderId); // Debugging
   
     });
