@@ -594,11 +594,7 @@ async function fetchOrderDetails(orderId) {
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}/*
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return `R$ ${value.toFixed(2).replace('.', ',')}`;
-}*/
+}
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -627,12 +623,8 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
-
-
                 <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
-
-
+                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
@@ -642,10 +634,6 @@ function populateModal(orderDetails) {
 
     // Update total price in the modal
     document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
-}
-
-
-
 
     // Add event listeners for delete buttons
     document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
@@ -655,10 +643,7 @@ function populateModal(orderDetails) {
             await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
         });
     });
-
-
-
-
+}
 
 // Function to delete a product
 async function deleteProduct(productId, orderId) {
@@ -678,20 +663,6 @@ async function deleteProduct(productId, orderId) {
         console.error('Error deleting product:', error);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
