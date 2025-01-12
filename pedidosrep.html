@@ -743,10 +743,17 @@ console.log(orderId, observation);
         body: JSON.stringify(requestData),
       });
 
+
       if (response.ok) {
+
+        alert('Order has been submitted and updated successfully!');
+
+      // Refresh the page
+      window.location.reload();
         console.log("Order successfully submitted!");
       } else {
         console.error("Failed to submit the order.");
+        alert('An error occurred. Please try again later.');
       }
     } catch (error) {
       console.error("Error submitting the order:", error);
