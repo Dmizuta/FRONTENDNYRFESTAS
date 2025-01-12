@@ -280,7 +280,13 @@ border-radius: 5px;
   overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
 
+.modalOrderButton img {
+    
+    width: 30px; /* Adjust size as needed */
+    height: auto;
+  }
 
+  
 </style>
 
 <body>
@@ -627,6 +633,10 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
+
+
+                <td><button class="modalOrderButton"><img src="/imagens/pencil2.png" alt="Editar"></button></td>
+                <td><button class="modalOrderButton"><img src="/imagens/trashcan2.png" alt="Editar"></button></td>
 
 
             </tr>
