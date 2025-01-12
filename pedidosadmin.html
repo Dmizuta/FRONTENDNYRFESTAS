@@ -537,8 +537,8 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderButton"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
+                <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
