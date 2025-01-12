@@ -616,6 +616,8 @@ async function fetchOrderDetails(orderId) {
             throw new Error('Failed to fetch order details');
         }
         const orderDetails = await response.json();
+        const orderId = orderDetails.id;
+        localStorage.setItem('currentOrderId', orderId);
         console.log('Order details received:', orderDetails);
         populateModal(orderDetails);
     } catch (error) {
@@ -689,7 +691,7 @@ function openModal(orderId) {
 document.querySelectorAll('.order-row').forEach(row => {
     row.addEventListener('click', () => {
         const orderId = row.getAttribute('data-id');
-        localStorage.setItem('currentOrderId', orderId);
+        
         openModal(orderId); // Open modal with clicked order details
         
 
