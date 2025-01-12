@@ -722,7 +722,7 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
       orderId: orderId, // Use the same key as in the backend
       observation: observation, // Use the same key as in the backend
     };
-
+console.log(orderId, observation);
     try {
       // Send a POST request to update the order
       const response = await fetch('https://backendnyrfestas.vercel.app/submit-order', {
