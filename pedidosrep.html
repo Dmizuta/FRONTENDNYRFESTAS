@@ -547,9 +547,7 @@ searchBox.addEventListener('input', function() {
 
 // Load orders when the page is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const orderId = document.getElementById("order-id").value;
-  localStorage.setItem("orderId", orderId); // Save to localStorage
-  console.log("Order ID saved to localStorage:", orderId); // Debugging
+  
     console.log('DOM fully loaded and parsed');
     loadOrders();
 });
@@ -643,6 +641,13 @@ function populateModal(orderDetails) {
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
+
+
+    const orderId = document.getElementById("order-id").value;
+  localStorage.setItem("orderId", orderId); // Save to localStorage
+  console.log("Order ID saved to localStorage:", orderId); // Debugging
+
+
 
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
