@@ -204,7 +204,7 @@
     
     table th, table td {
         padding: 8px;
-        text-align: left;
+        text-align: center;
         border: 1px solid #ddd;
     }
     
@@ -264,6 +264,12 @@
   max-height: 120px; /* Limit to 3 rows (3 * 24px) */
   overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
+
+.modalOrderButton img {
+    
+    width: 30px; /* Adjust size as needed */
+    height: auto;
+  }
 
     </style>
     
@@ -332,12 +338,14 @@
         <table id="order-items-table">
             <thead>
                 <tr>
-                    <th>Item</th>
+                    <th>-</th>
                     <th>Código</th>
                     <th>Descrição</th>
-                    <th>Quantidade</th>
+                    <th>Qtde</th>
                     <th>Preço Unitário</th>
                     <th>Subtotal</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
                 </tr>
             </thead>
             <tbody id="order-details-content">
@@ -501,7 +509,9 @@ function formatCurrency(value) {
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
                     <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
                     <div class="status"><strong>Status:</strong> ${statusText}</div>
-                </div>
+                
+                
+                    </div>
             </div>
         `;
         container.innerHTML += orderRow;
@@ -619,7 +629,7 @@ async function fetchOrderDetails(orderId) {
 
         const orderID = orderDetails.id;
         localStorage.setItem('currentOrderId', orderID);
-        
+
         console.log('Order details received:', orderDetails);
         populateModal(orderDetails);
     } catch (error) {
@@ -667,6 +677,9 @@ function populateModal(orderDetails) {
                 <td>${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderButton"><img src="/imagens/trashcan.png" alt="Editar"></button></td>
+            </tr>
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
