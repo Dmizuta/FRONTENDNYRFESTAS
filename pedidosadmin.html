@@ -251,7 +251,22 @@
             margin-top: 20px;
         }
     }
-    
+    .obs-row {
+    padding: 10px;
+    background-color: #aaa;
+    border-radius: 10px;
+  }
+
+
+textarea {
+  width: 100%; /* Make the textarea span the full width of the parent container */
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding is included in the element’s width and height */
+  resize: none; /* Disable manual resizing (optional, if you want it only grow via JS) */
+}
    
     </style>
     
@@ -342,6 +357,12 @@
             </div>
         </div>
         
+
+        <div class="obs-row">
+            <span>Observações:</span>
+            <textarea type="text" id="obs"></textarea>
+        </div>
+
 
         <div class="modal-actions">
             <button id="submit-order-btn" class="action-btn">Submit</button>
@@ -631,6 +652,15 @@ searchBox.addEventListener('input', function() {
             order.style.display = 'none'; // Hide the order if it doesn't match
         }
     });
+});
+
+const textarea = document.getElementById('obs');
+
+textarea.addEventListener('input', () => {
+  // Reset height to shrink if text is deleted
+  textarea.style.height = 'auto';
+  // Set height based on scrollHeight to expand as needed
+  textarea.style.height = `${textarea.scrollHeight}px`;
 });
 
 
