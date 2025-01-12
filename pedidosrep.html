@@ -679,6 +679,48 @@ function populateModal(orderDetails) {
 }
 
 
+// Add event listeners for delete buttons
+document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation(); // Prevent the row click event
+            const productId = button.getAttribute('data-product-id');
+            await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
+        console.log(productId, orderDetails.id);
+        
+        });
+    });
+
+
+// Function to delete a product
+async function deleteProduct(productId, orderId) {
+    try {
+        const response = await fetch('https://backendnyrfestas.vercel.app/delete-product', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
+            },
+            body: JSON.stringify({ productId, orderId }) // Envia os dados no corpo da requisição
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete product');
+        }
+
+        console.log(`Product with ID ${productId} deleted successfully.`);
+        // Refresh order details to reflect changes
+        fetchOrderDetails(orderId); // Refresh order details to reflect changes
+    } catch (error) {
+        console.error('Error deleting product:', error);
+    }
+}
+
+
+
+
+
+
+
+
 // Show modal with order details
 function openModal(orderId) {
     fetchOrderDetails(orderId)
