@@ -10,54 +10,74 @@
 
 </head>
 
-<style>
-     #carnaval{
-    
-    width: 3.8rem;
-    float: right;
-    padding: 5px;
-   }
+    <style>
 
-   #junino{
-    width: 3.8rem;
-    float: right;
-    padding: 5px;
+.icons {
+    position: fixed; /* Keeps the icons fixed during scroll */
+    top: 7rem; /* Adjust this to position below the logout button */
+    right: 1rem; /* Aligns the icons to the right of the page */
+    display: flex; /* Makes the icons line up side by side */
+    gap: 0.5rem; /* Adds spacing between the icons */
 }
-   
-   #hlwn{
-    width: 3.8rem;
-  float: right;
-  padding: 5px;
-   }
-   
- 
-   
-   .icons{
-    
-    position: fixed;
-    top: 2%;
-   }
 
-   #carnaval{transition: transform 0.3s ease;
+.icons img {
+    width: 3.8rem; /* Set uniform width for all icons */
+    transition: transform 0.3s ease; /* Smooth scaling effect */
+    cursor: pointer; /* Makes it clear the icons are interactive */
+}
+
+.icons img:hover {
+    transform: scale(1.3); /* Enlarges icons on hover */
+}
+
+/*
+        #carnaval{
+        
+        width: 3.8rem;
+        float: right;
+        padding: 5px;
+    }
+
+    #junino{
+        width: 3.8rem;
+        float: right;
+        padding: 5px;
+    }
     
-   }
- 
-   #carnaval:hover {
-       transform: scale(1.3); 
-   }
-   #junino{transition: transform 0.3s ease;
-   }
- 
-   #junino:hover {
-       transform: scale(1.3); 
-   }
-   #hlwn{transition: transform 0.3s ease;
-   }
- 
-   #hlwn:hover {
-       transform: scale(1.3); 
-   }
-</style>
+    #hlwn{
+        width: 3.8rem;
+    float: right;
+    padding: 5px;
+    }
+    
+    
+    
+    .icons{
+        
+        position: fixed;
+        top: 2%;
+    }
+
+    #carnaval{transition: transform 0.3s ease;
+        
+    }
+    
+    #carnaval:hover {
+        transform: scale(1.3); 
+    }
+    #junino{transition: transform 0.3s ease;
+    }
+    
+    #junino:hover {
+        transform: scale(1.3); 
+    }
+    #hlwn{transition: transform 0.3s ease;
+    }
+    
+    #hlwn:hover {
+        transform: scale(1.3); 
+    }*/
+    </style>
 
 
 <body>
@@ -66,12 +86,7 @@
 
     <header>
         <h1 id="nyrfestas">NYR Festas</h1>
-<div class="icons">
-    <img id=carnaval src="/imagens/carnaval.png" alt="image" style="cursor: pointer;">
-        <img id=junino src="/imagens/junino1.png" alt="image" style="cursor: pointer;">
-        <img id=hlwn src="/imagens/halloween.png" alt="image" style="cursor: pointer;">
-        
-    </div>
+
         <div id="user-info">
             <span id="username-display"></span>
             <button id="logoutBtn">Sair</button>
@@ -88,6 +103,12 @@
             <li><a href="produtos.html">Lista de Produtos</a></li>
             <li id="pedidos-link"><a href="#">Pedidos</a></li>
         </ul>
+        <div class="icons">
+            <img id=carnaval src="/imagens/carnaval.png" alt="image" style="cursor: pointer;">
+                <img id=junino src="/imagens/junino1.png" alt="image" style="cursor: pointer;">
+                <img id=hlwn src="/imagens/halloween.png" alt="image" style="cursor: pointer;">
+                
+            </div>
     </nav>
       
     <div class="PAGE">
