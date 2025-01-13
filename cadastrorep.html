@@ -8,6 +8,7 @@
     <title>Cadastro - NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
 </head>
 
 </html>
@@ -298,6 +299,11 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
+new Cleave('#cnpj', {
+    delimiters: ['.', '.', '/', '-'],
+    blocks: [2, 3, 3, 4, 2],
+    numericOnly: true,
+  });
 
     </script>
 </body>
