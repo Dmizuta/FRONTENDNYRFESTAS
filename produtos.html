@@ -12,71 +12,51 @@
 
     <style>
 
+
 .icons {
-    position: fixed; /* Keeps the icons fixed during scroll */
-    top: 7.5rem; /* Adjust this to position below the logout button */
-    right: 1rem; /* Aligns the icons to the right of the page */
-    display: flex; /* Makes the icons line up side by side */
-    gap: 0.5rem; /* Adds spacing between the icons */
+    position: fixed;
+    top: calc(2rem + 90px); /* Adjust this to your desired height */
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center; /* Aligns icons properly */
 }
 
 .icons img {
-    width: 2rem; /* Set uniform width for all icons */
-    transition: transform 0.3s ease; /* Smooth scaling effect */
-    cursor: pointer; /* Makes it clear the icons are interactive */
+    width: 2rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative; /* Ensures the tooltip is positioned relative to the icon */
 }
 
 .icons img:hover {
-    transform: scale(1.3); /* Enlarges icons on hover */
+    transform: scale(1.3);
 }
 
-/*
-        #carnaval{
-        
-        width: 3.8rem;
-        float: right;
-        padding: 5px;
-    }
+.icons img::after {
+    content: attr(data-tooltip); /* Displays the text in the tooltip */
+    position: absolute;
+    bottom: 100%; /* Positions the tooltip above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for the tooltip */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    visibility: hidden; /* Hide the tooltip by default */
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Smooth fade-in effect */
+    white-space: nowrap;
+}
 
-    #junino{
-        width: 3.8rem;
-        float: right;
-        padding: 5px;
-    }
-    
-    #hlwn{
-        width: 3.8rem;
-    float: right;
-    padding: 5px;
-    }
-    
-    
-    
-    .icons{
-        
-        position: fixed;
-        top: 2%;
-    }
+.icons img:hover::after {
+    visibility: visible;
+    opacity: 1; /* Show tooltip on hover */
+}
 
-    #carnaval{transition: transform 0.3s ease;
-        
-    }
-    
-    #carnaval:hover {
-        transform: scale(1.3); 
-    }
-    #junino{transition: transform 0.3s ease;
-    }
-    
-    #junino:hover {
-        transform: scale(1.3); 
-    }
-    #hlwn{transition: transform 0.3s ease;
-    }
-    
-    #hlwn:hover {
-        transform: scale(1.3); 
-    }*/
+
+
+
     </style>
 
 
@@ -85,7 +65,7 @@
 
 
     <header>
-        <h1 id="nyrfestas">NYR Festas</h1>
+        <h1 id="nyrfestas">NYR</h1>
 
         <div id="user-info">
             <span id="username-display"></span>
@@ -104,9 +84,9 @@
             <li id="pedidos-link"><a href="#">Pedidos</a></li>
         </ul>
         <div class="icons">
-            <img id=carnaval src="/imagens/carnaval.png" alt="image" style="cursor: pointer;">
-                <img id=junino src="/imagens/junino1.png" alt="image" style="cursor: pointer;">
-                <img id=hlwn src="/imagens/halloween.png" alt="image" style="cursor: pointer;">
+            <img id=carnaval src="/imagens/carnaval.png" alt="image" style="cursor: pointer;"data-tooltip="Carnaval">
+                <img id=junino src="/imagens/junino1.png" alt="image" style="cursor: pointer;"data-tooltip="Junino">
+                <img id=hlwn src="/imagens/halloween.png" alt="image" style="cursor: pointer;"data-tooltip="Halloween">
                 
             </div>
     </nav>
