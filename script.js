@@ -82,12 +82,12 @@ function populateProductTable(products) {
       openModalBtn.addEventListener("click", function () {
         //const productId = row.cells[0].textContent;
         const productImage = row.querySelector("img").src;
-        const productCode = row.cells[1].textContent;
-        const productDesc = row.cells[2].textContent;
-        const cxFechada = row.cells[3].textContent;
-        const priceFechada = row.cells[4].textContent;
-        const cxFracionada = row.cells[5].textContent;
-        const priceFracionada = row.cells[6].textContent;
+        const productCode = row.cells[2].textContent;
+        const productDesc = row.cells[3].textContent;
+        const cxFechada = row.cells[4].textContent;
+        const priceFechada = row.cells[5].textContent;
+        const cxFracionada = row.cells[6].textContent;
+        const priceFracionada = row.cells[7].textContent;
 
        openModal(
           //productId,
