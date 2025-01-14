@@ -13,8 +13,6 @@
 
 <style>
 
-
-
 .icon-wrapper {
     position: relative;
     display: inline-block;
@@ -41,15 +39,7 @@
     opacity: 1;
 }
 
-
-
-
-
-
-
-
-
-    /* Estilo para o contêiner de ícones */
+/* Estilo para o contêiner de ícones */
     .icons {
         position: fixed;
         top: calc(2rem + 87px); /* Ajuste para a altura desejada */
@@ -72,15 +62,10 @@
     .icons img:hover {
         transform: scale(1.3);
     }
-
     
 </style>
 
-
-
 <body>
-
-
     <div class="icons">
         <div class="icon-wrapper">
             <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
@@ -96,8 +81,7 @@
         </div>
     </div>
     
-    
-    <header>
+        <header>
         <h1 id="nyrfestas">NYR Festas</h1>
 
         <div id="user-info">
@@ -106,9 +90,6 @@
         </div>
 
     </header>
-
-    
-  
 
     <nav>
         <ul>
@@ -123,15 +104,10 @@
     <h1 id="teste" data-tooltip="Carnaval">Lista de Produtos</h1>
 
 
-
-
 <!-- Search Wrapper -->
 <div class="search-wrapper">
     <input type="text" id="searchInput" placeholder=" Procurar por..." oninput="searchProducts()">
 </div>
-
-
-
  
 <div class="produtos-moldura">
     <table id="productTable">
@@ -202,20 +178,7 @@
 
 </div>
 
-
-
-
-
-
-
-
-
     <script>
-
-
-
-
-
 
   // Fetch the user's role from localStorage
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
@@ -236,17 +199,6 @@
     console.warn('Role not defined or invalid.');
   }
 
-
-
-
-
-
-
-
-
-
-
-
              // Handle login status
              const username = localStorage.getItem('username');
         if (username) {
@@ -261,13 +213,8 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     window.location.href = '/';  // Redirect to login page
 });
 
-
-
-
-
      </script>
     <script src="script.js"></script>
-
   
 </body>
 </html>
