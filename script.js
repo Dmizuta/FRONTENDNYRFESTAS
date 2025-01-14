@@ -42,16 +42,19 @@ function populateProductTable(products) {
       const row = tableBody.insertRow();
 
       // Insert cells for each product detail
-      const cell1 = row.insertCell(0); // Image
-      const cell2 = row.insertCell(1); // Product Code
-      const cell3 = row.insertCell(2); // Description
-      const cell4 = row.insertCell(3); // Quantity Closed
-      const cell5 = row.insertCell(4); // Price Closed
-      const cell6 = row.insertCell(5); // Quantity Fractioned
-      const cell7 = row.insertCell(6); // Price Fractioned
-      const cell8 = row.insertCell(7); // ADD BUTTON
+
+      const cell1 = row.insertCell(0); // Id
+      const cell2 = row.insertCell(1); // Image
+      const cell3 = row.insertCell(2); // Product Code
+      const cell4 = row.insertCell(3); // Description
+      const cell5 = row.insertCell(4); // Quantity Closed
+      const cell6 = row.insertCell(5); // Price Closed
+      const cell7 = row.insertCell(6); // Quantity Fractioned
+      const cell8 = row.insertCell(7); // Price Fractioned
+      const cell9 = row.insertCell(8); // ADD BUTTON 
       // Populate cells with product data
-      cell1.innerHTML = `
+      cell1.textContent = product.idprod || "N/A"; // Product Id
+      cell2.innerHTML = ` 
                 <img src="${
                   product.imagem || "https://via.placeholder.com/50"
                 }" 
@@ -61,15 +64,15 @@ function populateProductTable(products) {
                      onmouseout="this.style.transform='scale(1)'">
             `;
 
-      cell2.textContent = product.codproduto || "N/A"; // Product Code
-      cell3.textContent = product.descricao || "N/A"; // Description
-      cell4.textContent = product.cxfechada || "N/A"; // Quantity Closed
-      cell5.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
+      cell3.textContent = product.codproduto || "N/A"; // Product Code
+      cell4.textContent = product.descricao || "N/A"; // Description
+      cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
+      cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
      //cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
-      cell6.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
-      cell7.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
+      cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
+      cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
-      cell8.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
+      cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
 
 
 
@@ -77,6 +80,7 @@ function populateProductTable(products) {
       // Add event listener for "Add" button
       const openModalBtn = row.querySelector(".openModalBtn");
       openModalBtn.addEventListener("click", function () {
+        const productId = row.cells[0].textContent;
         const productImage = row.querySelector("img").src;
         const productCode = row.cells[1].textContent;
         const productDesc = row.cells[2].textContent;
@@ -86,6 +90,7 @@ function populateProductTable(products) {
         const priceFracionada = row.cells[6].textContent;
 
        openModal(
+          productId,
           productImage,
           productCode,
           productDesc,
@@ -102,6 +107,15 @@ function populateProductTable(products) {
       '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
   }
 }
+
+
+
+
+
+
+
+
+
 
 // Function to open the modal with product details
 function openModal(
