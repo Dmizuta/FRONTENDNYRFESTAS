@@ -12,11 +12,48 @@
 
 
 <style>
+
+
+
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%; /* Place above the image */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    visibility: hidden;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+}
+
+.icon-wrapper:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
     /* Estilo para o contêiner de ícones */
     .icons {
         position: fixed;
         top: calc(2rem + 87px); /* Ajuste para a altura desejada */
-        right: 1.5rem;
+        right: 2rem;
         display: flex;
         gap: 0.6rem;
         align-items: center;
@@ -36,31 +73,7 @@
         transform: scale(1.3);
     }
 
-    /* Estilo do tooltip */
-    .icons img::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: calc(100% + 5px);
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 5px 8px;
-        border-radius: 4px;
-        font-size: 0.85rem;
-        visibility: hidden;
-        opacity: 0;
-        white-space: nowrap;
-        transition: opacity 0.3s ease;
-        z-index: 1000;
-    }
-
-    /* Exibir o tooltip ao passar o mouse */
-    .icons img:hover::after {
-        z-index: 1000;
-        visibility: visible;
-        opacity: 1;
-    }
+    
 </style>
 
 
@@ -68,12 +81,21 @@
 <body>
 
 
-<div class="icons">
-    <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval" data-tooltip="Carnaval">
-    <img id="junino" src="/imagens/junino1.png" alt="Junino" data-tooltip="Junino">
-    <img id="hlwn" src="/imagens/halloween.png" alt="Halloween" data-tooltip="Halloween">
-</div>
-
+    <div class="icons">
+        <div class="icon-wrapper">
+            <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
+            <span class="tooltip">Carnaval</span>
+        </div>
+        <div class="icon-wrapper">
+            <img id="junino" src="/imagens/junino1.png" alt="Junino">
+            <span class="tooltip">Junino</span>
+        </div>
+        <div class="icon-wrapper">
+            <img id="hlwn" src="/imagens/halloween.png" alt="Halloween">
+            <span class="tooltip">Halloween</span>
+        </div>
+    </div>
+    
     
     <header>
         <h1 id="nyrfestas">NYR Festas</h1>
