@@ -8,6 +8,7 @@
     <title>Cadastro - NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
 </head>
 
 </html>
@@ -67,6 +68,12 @@
             <span id="username-display"></span>
             <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
         </div>
+
+        <div class="logoNyr">
+            <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+        </div>
+
+
     </header>
 
     <nav>
@@ -93,6 +100,9 @@
 
             <label for="cnpj">CNPJ:</label>
             <input type="text" id="cnpj" name="cnpj" placeholder="xx.xxx.xxx/xxxx-xx" required>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" placeholder="Rua /Bairro /CEP /Cidade /UF" required>
 
             <label for="telefone">Telefone:</label>
             <input type="text" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" required>
@@ -204,6 +214,7 @@ function loadCustomerData(customer) {
     document.getElementById('representante').value = customer.representante || '';
     document.getElementById('razaosocial').value = customer.razaosocial || '';
     document.getElementById('cnpj').value = customer.cnpj || '';
+    document.getElementById('endereco').value = customer.endereco || '';
     document.getElementById('telefone').value = customer.telefone || '';
     document.getElementById('email').value = customer.email || '';
     document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
@@ -250,6 +261,7 @@ form.addEventListener('submit', async (e) => {
         representante: document.getElementById('representante').value,
         razaosocial: document.getElementById('razaosocial').value,
         cnpj: document.getElementById('cnpj').value,
+        endereco: document.getElementById('endereco').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
         username: loggedInUsername,
@@ -298,6 +310,11 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
+new Cleave('#cnpj', {
+    delimiters: ['.', '.', '/', '-'],
+    blocks: [2, 3, 3, 4, 2],
+    numericOnly: true,
+  });
 
     </script>
 </body>

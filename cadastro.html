@@ -16,6 +16,12 @@
             <span id="username-display"></span>
             <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
         </div>
+
+        <div class="logoNyr">
+          <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+      </div>
+
+
     </header>
 
     <nav>
@@ -38,6 +44,9 @@
 
             <label for="cnpj">CNPJ:</label>
             <input type="text" id="cnpj" name="cnpj" placeholder="xx.xxx.xxx/xxxx-xx" required>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" placeholder="Rua /Bairro /CEP /Cidade /UF" required>
 
             
             <label for="telefone">Telefone:</label>
@@ -77,6 +86,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('representante').value = result.data.representante || '';
       document.getElementById('razaosocial').value = result.data.razaosocial || '';
       document.getElementById('cnpj').value = result.data.cnpj || '';
+      document.getElementById('endereco').value = result.data.endereco || '';
       document.getElementById('telefone').value = result.data.telefone || '';
       document.getElementById('email').value = result.data.email || '';
     }
@@ -150,6 +160,7 @@ form.addEventListener('submit', async (e) => {
         representante: document.getElementById('representante').value,
         razaosocial: document.getElementById('razaosocial').value,
         cnpj: document.getElementById('cnpj').value,
+        endereco: document.getElementById('endereco').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
         username: loggedInUsername,  // Add username to the form data
