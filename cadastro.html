@@ -51,6 +51,7 @@
             
             <label for="telefone">Telefone:</label>
             <input type="text" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" required>
+            
 
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="E-mail" required>
@@ -201,9 +202,11 @@ new Cleave('#cnpj', {
 
 
 
-
-
-
+  new Cleave('#telefone', {
+    delimiters: ['(', ') ', '-', '-'],
+    blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
+    numericOnly: true, // Ensure only numbers are entered
+});
 
 
     </script>
