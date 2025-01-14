@@ -1,6 +1,19 @@
 /* Importando a fonte Roboto do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+
+
+
+.logoNyr{
+    position:fixed;
+    top: 10px; /* Ajuste para a altura desejada */
+}
+#logo{
+    left: 0.5rem;
+    width: 6rem;
+}
+
+
 /* Universal Styles */
 * {
     box-sizing: border-box;
