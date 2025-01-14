@@ -27,6 +27,131 @@ function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
+
+
+
+
+
+
+
+// Function to populate the product table dynamically
+function populateProductTable(products) {
+  const tableBody = document.querySelector("#productTable tbody");
+
+  // Clear any existing rows
+  tableBody.innerHTML = "";
+
+  if (products && products.length > 0) {
+    products.forEach((product) => {
+      const row = tableBody.insertRow();
+
+      // Insert cells for each product detail, including the new idprod column
+      const cell1 = row.insertCell(0); // Id
+      const cell2 = row.insertCell(1); // Image
+      const cell3 = row.insertCell(2); // Product Code
+      const cell4 = row.insertCell(3); // Description
+      const cell5 = row.insertCell(4); // Quantity Closed
+      const cell6 = row.insertCell(5); // Price Closed
+      const cell7 = row.insertCell(6); // Quantity Fractioned
+      const cell8 = row.insertCell(7); // Price Fractioned
+      const cell9 = row.insertCell(8); // ADD BUTTON 
+      const cell10 = row.insertCell(9); // New column for Product ID (idprod)
+
+
+
+      // Populate cells with product data
+      cell1.textContent = product.idprod || "N/A"; // Product Id (new column)
+      cell2.innerHTML = ` 
+                <img src="${
+                  product.imagem || "https://via.placeholder.com/50"
+                }" 
+                     alt="Product Image" 
+                     style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                     onmouseover="this.style.transform='scale(3)'" 
+                     onmouseout="this.style.transform='scale(1)'">
+            `;
+      cell3.textContent = product.codproduto || "N/A"; // Product Code
+      cell4.textContent = product.descricao || "N/A"; // Description
+      cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
+      cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
+      cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
+      cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
+      cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
+
+      
+
+      // Add event listener for "Add" button
+      const openModalBtn = row.querySelector(".openModalBtn");
+      openModalBtn.addEventListener("click", function () {
+        // Pass the productId (idprod) and other details to the modal
+        const productId = row.cells[0].textContent; // idprod from the new column
+        const productImage = row.querySelector("img").src;
+        const productCode = row.cells[2].textContent;
+        const productDesc = row.cells[3].textContent;
+        const cxFechada = row.cells[4].textContent;
+        const priceFechada = row.cells[5].textContent;
+        const cxFracionada = row.cells[6].textContent;
+        const priceFracionada = row.cells[7].textContent;
+
+        openModal(
+          productId, // Pass the idprod to the modal
+          productImage,
+          productCode,
+          productDesc,
+          cxFechada,
+          priceFechada,
+          cxFracionada,
+          priceFracionada
+        );
+      });
+    });
+  } else {
+    // No products available message
+    tableBody.innerHTML =
+      '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
+  }
+}
+// Function to open the modal with product details
+function openModal(
+  productId, // idprod
+  productImage,
+  productCode,
+  productDesc,
+  cxFechada,
+  priceFechada,
+  cxFracionada,
+  priceFracionada
+) {
+  const modal = document.getElementById("myModal");
+  const productInfo = modal.querySelector(".product-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
+  const productImageElement = modal.querySelector("img");
+  const productIdElement = modal.querySelector(".product-id"); // We’ll need a new place to show the idprod
+
+  // Populate modal with product details
+  productInfo.querySelector("h3").textContent = productCode;
+  productInfo.querySelector("p").textContent = productDesc;
+  priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${priceFechada}</span>`;
+  priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${priceFracionada}</span>`;
+  cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${cxFechada}</span>`;
+  cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${cxFracionada}</span>`;
+  productImageElement.src = productImage;
+
+  // Show the product ID (idprod) in the modal
+  productIdElement.textContent = `ID Produto: ${productId}`;
+
+  modal.style.display = "block"; // Show modal
+}
+
+
+
+
+
+
+/*
 // Function to populate the product table dynamically
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
@@ -52,19 +177,19 @@ function populateProductTable(products) {
       const cell7 = row.insertCell(6); // Quantity Fractioned
       const cell8 = row.insertCell(7); // Price Fractioned
       const cell9 = row.insertCell(8); // ADD BUTTON 
+      
       // Populate cells with product data
       cell1.textContent = product.idprod || "N/A"; // Product Id
       cell2.innerHTML = ` 
                 <img src="${
                   product.imagem || "https://via.placeholder.com/50"
                 }" 
-                     alt="Product Image" 
+                     alt="Product Image"  
                      style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
                      onmouseover="this.style.transform='scale(3)'" 
-                     onmouseout="this.style.transform='scale(1)'">
+                     onmouseout="this.style.transform='scale(1)'">    
             `;
-
-      cell3.textContent = product.codproduto || "N/A"; // Product Code
+          cell3.textContent = product.codproduto || "N/A"; // Product Code
       cell4.textContent = product.descricao || "N/A"; // Description
       cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
       cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
@@ -168,7 +293,7 @@ window.addEventListener("click", function (event) {
 });
 
 
-
+*/
 
 
 
