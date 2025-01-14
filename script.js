@@ -80,7 +80,7 @@ function populateProductTable(products) {
       // Add event listener for "Add" button
       const openModalBtn = row.querySelector(".openModalBtn");
       openModalBtn.addEventListener("click", function () {
-        const productId = row.cells[0].textContent;
+        //const productId = row.cells[0].textContent;
         const productImage = row.querySelector("img").src;
         const productCode = row.cells[1].textContent;
         const productDesc = row.cells[2].textContent;
@@ -90,7 +90,7 @@ function populateProductTable(products) {
         const priceFracionada = row.cells[6].textContent;
 
        openModal(
-          productId,
+          //productId,
           productImage,
           productCode,
           productDesc,
