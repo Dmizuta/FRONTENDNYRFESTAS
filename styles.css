@@ -224,7 +224,9 @@ th {
     
 
 }
-.prodimage{transition: transform 0.3s ease;
+.prodimage{
+    border-radius: 15px;
+    transition: transform 0.3s ease;
     max-width: 100%;
 
 }
