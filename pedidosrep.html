@@ -299,97 +299,91 @@
 </nav>
 
 
-<div class="PAGE"></div>
+<div class="PAGE">
 
-<h1>Meus Pedidos REPRESENTANTE</h1>
-
-
-<div class="box">
-
-<div class="search-wrapper">
+    <h1>Meus Pedidos admin</h1>
+    
+    <div class="box">
+    
+    <div class="search-wrapper">
     <input type="text" id="searchInput" placeholder="Procurar por...">
     </div>
-
-
-<div id="orders-container">
-    <!-- Orders will be inserted here dynamically -->
-</div>
-</div>
-<!-- Modal Structure (Initially hidden) -->
-<div id="order-modal" class="modal">
-    <div class="modal-content">
-        <!-- Header Section with Order Information -->
-        <div class="order-header">
-            <div class="order-info">
-                <div class="order-info-row">
-                    <span>Numero do Pedido:</span>
-                    <span id="order-id"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Razao Social:</span>
-                    <span id="razao-social"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>CNPJ:</span>
-                    <span id="cnpj"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Representante:</span>
-                    <span id="representante"></span>
-                </div>
-            </div>
-            <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
-        </div>
-
-        <!-- Table with Product Details -->
-        <table id="order-items-table">
-            <thead>
-                <tr>
-                    <th>-</th>
-                    <th>Código</th>
-                    <th>Descrição</th>
-                    <th>Qtde</th>
-                    <th>Preço Unitário</th>
-                    <th>Subtotal</th>
-                    <th>Editar</th>
-                    <th>Apagar</th>
-                </tr>
-            </thead>
-            <tbody id="order-details-content">
-                <!-- Product rows will be dynamically populated here -->
-            </tbody>
-        </table>
-        <div class="totalOrderBox">
-            <!-- Total Order Section -->
-            <div class="order-total">
-                <div>
-                    <span>Total do Pedido:</span>
-                    <span id="total-value">R$ 0,00</span>
-                </div>
-            </div>
-        </div>
-      
-
-
-        <div class="obs-row">
-            <span>Observações:</span>
-            <textarea type="text" id="obs"></textarea>
-        </div>
-
-
-
-        <!-- Action Buttons -->
-        <div class="modal-actions">
-            <button id="submit-order-btn" class="action-btn">Submit</button>
-            <button id="delete-order-btn" class="action-btn">Delete</button>
-        </div>
-
-        <!-- Close Modal Button -->
-        <button id="close-modal" class="action-btn">Close</button>
+    
+    <div id="orders-container">
+    
+    
+        
+        <!-- Orders will be inserted here dynamically -->
     </div>
-</div>
-</div>
-
+    </div>
+    
+    
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <div class="order-header">
+                <div class="order-info">
+                    <div class="order-info-row">
+                        <span>Numero do Pedido:</span>
+                        <span id="order-id"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Razao Social:</span>
+                        <span id="razao-social"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>CNPJ:</span>
+                        <span id="cnpj"></span>
+                    </div>
+                   
+                </div>
+                <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
+            </div>
+    
+            <table id="order-items-table">
+                <thead>
+                    <tr>
+                        <th>-</th>   
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Qtde</th>
+                        <th>Preço Unitário</th>
+                        <th>Subtotal</th>
+                        <th>Editar</th>
+                        <th>Apagar</th>
+                    </tr>
+                </thead>
+                <tbody id="order-details-content">
+                    <!-- Product rows will be dynamically populated here -->
+                </tbody>
+            </table>
+            <div class="totalOrderBox">
+                <!-- Total Order Section -->
+                <div class="order-total">
+                    <div>
+                        <span>Total do Pedido:</span>
+                        <span id="total-value">R$ 0,00</span>
+                    </div>
+                </div>
+            </div>
+            
+    
+            <div class="obs-row">
+                <span>Observações:</span>
+                <textarea type="text" id="obs"></textarea>
+            </div>
+    
+    
+            <div class="modal-actions">
+                <button id="submit-order-btn" class="action-btn">Submit</button>
+                <button id="delete-order-btn" class="action-btn">Delete</button>
+            </div>
+    
+            <button id="close-modal" class="action-btn">Close</button>
+        </div>
+    </div>
+    
+    </div>
+    
 
 
 
@@ -528,6 +522,49 @@ function formatCurrency(value) {
 
 
 
+
+
+
+
+
+
+
+const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
+
+searchBox.addEventListener('input', function() {
+    const searchTerm = searchBox.value.toLowerCase().trim();
+
+    const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
+    orders.forEach(order => {
+        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
+        
+        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
+        const data = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
+        const status = order.querySelector('.order-details div:nth-child(5)').textContent.toLowerCase();
+
+        // Check if the search term matches any of these fields
+        if (
+            orderId.includes(searchTerm) || 
+            
+            razaoSocial.includes(searchTerm) || 
+            data.includes(searchTerm) || 
+            status.includes(searchTerm)
+        ) {
+            order.style.display = 'block'; // Show the order if it matches
+        } else {
+            order.style.display = 'none'; // Hide the order if it doesn't match
+        }
+    });
+});
+
+
+
+
+
+
+
+
+/*
 const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
 
 searchBox.addEventListener('input', function() {
@@ -556,7 +593,7 @@ searchBox.addEventListener('input', function() {
     });
 });
 
-
+*/
 
 
 
