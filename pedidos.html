@@ -777,10 +777,42 @@ console.log(orderId, observation);
 
 
 
+function saveOrderAsPDF() {
+    const modal = document.getElementById('order-modal'); // Get the modal element
+
+    // Use html2canvas to capture the modal
+    html2canvas(modal).then(canvas => {
+        const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
+        const pdf = new jsPDF('p', 'pt', 'a4'); // Create a new jsPDF instance
+
+        // Calculate image dimensions and position
+        const imgWidth = 190; // Width of the image in mm
+        const pageHeight = pdf.internal.pageSize.height; // Height of the PDF page
+        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Calculate height based on aspect ratio
+        let heightLeft = imgHeight;
+
+        let position = 0;
+
+        // Add the image to the PDF
+        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        // If the image height exceeds the page height, add a new page
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        // Save the PDF
+        pdf.save(`order_${document.getElementById('order-id').innerText}.pdf`);
+    });
+}
 
 
 
-
+/*
 function saveOrderAsPDF() {
     // Gather order information
     const orderId = document.getElementById('order-id').innerText;
@@ -881,7 +913,7 @@ function saveOrderAsPDF() {
     doc.save(`order_${orderId}.pdf`);
 }
 
-
+*/
 
 
 
@@ -945,6 +977,9 @@ document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF
 
 */
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF);
+});
 
 
 </script>
