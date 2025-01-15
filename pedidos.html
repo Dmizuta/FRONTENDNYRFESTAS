@@ -10,6 +10,9 @@
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.3/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    
 
 
 </head>
@@ -771,31 +774,175 @@ console.log(orderId, observation);
 });
 
 
-document.getElementById('saveToPdfBtn').addEventListener('click', function () {
-  const { jsPDF } = window.jspdf;
-  console.log('Button clicked, initializing jsPDF...');
-  
-  const doc = new jsPDF();
-  const modalContent = document.querySelector('#order-modal .modal-content');
-  
-  if (!modalContent) {
-    console.error('Modal content not found!');
-    return;
-  }
-  
-  console.log('Modal content found, rendering to PDF...');
-  
-  doc.html(modalContent, {
-    callback: function (doc) {
-      console.log('PDF rendered successfully.');
-      doc.save('order-details.pdf');
-    },
-    x: 10,
-    y: 10
-  });
-});
 
 
+
+
+
+
+function saveOrderAsPDF() {
+    // Gather order information
+    const orderId = document.getElementById('order-id').innerText;
+    const razaoSocial = document.getElementById('razao-social').innerText;
+    const cnpj = document.getElementById('cnpj').innerText;
+    const representante = document.getElementById('representante').innerText;
+    const totalValue = document.getElementById('total-value').innerText;
+
+    // Gather observations
+    const observacoes = document.getElementById('obs').value;
+
+    // Gather product details
+    const orderDetails = [];
+    const orderItems = document.querySelectorAll('#order-details-content tr');
+
+    orderItems.forEach(row => {
+        const columns = row.querySelectorAll('td');
+        const item = {
+            codigo: columns[1].innerText,
+            descricao: columns[2].innerText,
+            quantidade: columns[3].innerText,
+            precoUnitario: columns[4].innerText,
+            subtotal: columns[5].innerText
+        };
+        orderDetails.push(item);
+    });
+
+    // Creating PDF document
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'pt', 'a4'); // Portrait, points, A4 size
+
+    // Set margins
+    const margin = 20;
+    let startY = margin;
+
+    // Title
+    doc.setFontSize(24);
+    doc.text("Resumo da Ordem", margin, startY);
+    startY += 30; // Space after title
+
+    // Order Information
+    doc.setFontSize(12);
+    doc.text(`Numero do Pedido: ${orderId}`, margin, startY);
+    startY += 15;
+    doc.text(`Razao Social: ${razaoSocial}`, margin, startY);
+    startY += 15;
+    doc.text(`CNPJ: ${cnpj}`, margin, startY);
+    startY += 15;
+    doc.text(`Representante: ${representante}`, margin, startY);
+    startY += 15;
+    doc.text(`Total do Pedido: ${totalValue}`, margin, startY);
+    startY += 30; // Space before observations
+
+    // Adding Observations
+    doc.setFontSize(14);
+    doc.text("Observações:", margin, startY);
+    startY += 15;
+    doc.setFontSize(12);
+    const obsLines = doc.splitTextToSize(observacoes, 500); // Split text to fit the page width
+    obsLines.forEach(line => {
+        doc.text(line, margin, startY);
+        startY += 10; // Space between lines
+    });
+    startY += 20; // Space before product details
+
+    // Adding product details header
+    doc.setFontSize(14);
+    doc.text("Detalhes do Pedido:", margin, startY);
+    startY += 20;
+
+    // Table Header
+    doc.setFontSize(12);
+    const headers = ["Código", "Descrição", "Qtde", "Preço Unitário", "Subtotal"];
+    const columnWidths = [40, 100, 30, 40, 40];
+    
+    // Draw header
+    headers.forEach((header, index) => {
+        doc.text(header, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
+    });
+    startY += 10; // Space after header
+
+    // Adding product details
+    orderDetails.forEach(item => {
+        const row = [
+            item.codigo,
+            item.descricao,
+            item.quantidade,
+            item.precoUnitario,
+            item.subtotal
+        ];
+        row.forEach((text, index) => {
+            doc.text(text, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
+        });
+        startY += 15; // Space between rows
+    });
+
+    // Save the PDF
+    doc.save(`order_${orderId}.pdf`);
+}
+
+
+
+
+
+
+
+
+/*
+// Function to gather order data from the modal and save it as a PDF
+function saveOrderAsPDF() {
+    // Gather order information
+    const orderId = document.getElementById('order-id').innerText;
+    const razaoSocial = document.getElementById('razao-social').innerText;
+    const cnpj = document.getElementById('cnpj').innerText;
+    const representante = document.getElementById('representante').innerText;
+    const totalValue = document.getElementById('total-value').innerText;
+    
+    // Gather product details
+    const orderDetails = [];
+    const orderItems = document.querySelectorAll('#order-details-content tr');
+    
+    orderItems.forEach(row => {
+        const columns = row.querySelectorAll('td');
+        const item = {
+            codigo: columns[1].innerText,
+            descricao: columns[2].innerText,
+            quantidade: columns[3].innerText,
+            precoUnitario: columns[4].innerText,
+            subtotal: columns[5].innerText
+        };
+        orderDetails.push(item);
+    });
+
+    // Creating PDF document
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    doc.setFontSize(20);
+    doc.text("Resumo da Ordem", 10, 10);
+    doc.setFontSize(12);
+    doc.text(`Numero do Pedido: ${orderId}`, 10, 20);
+    doc.text(`Razao Social: ${razaoSocial}`, 10, 30);
+    doc.text(`CNPJ: ${cnpj}`, 10, 40);
+    doc.text(`Representante: ${representante}`, 10, 50);
+    doc.text(`Total do Pedido: ${totalValue}`, 10, 60);
+
+    // Adding product details
+    let startY = 70; // Starting Y position for product details
+    orderDetails.forEach((item, index) => {
+        const text = `${index + 1}. Código: ${item.codigo}, Descrição: ${item.descricao}, Qtde: ${item.quantidade}, Preço Unitário: ${item.precoUnitario}, Subtotal: ${item.subtotal}`;
+        doc.text(text, 10, startY);
+        startY += 10; // Increment Y position for next line
+    });
+
+    // Save the PDF
+    doc.save(`order_${orderId}.pdf`);
+}
+
+// Adding event listener for the save button
+document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF);
+
+
+*/
 
 
 
