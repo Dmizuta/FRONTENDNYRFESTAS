@@ -772,7 +772,7 @@ document.getElementById('saveToPdfBtn').addEventListener('click', function() {
   const doc = new jsPDF();
   
   // Create content for the PDF (e.g., order details)
-  const orderContent = document.getElementById('orderDetails').innerHTML; // Assuming you have an element with this ID to show order details
+  const orderContent = document.getElementById('modal-content').innerHTML; // Assuming you have an element with this ID to show order details
   
   // Add the content to the PDF
   doc.html(orderContent, {
