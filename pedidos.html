@@ -767,10 +767,22 @@ console.log(orderId, observation);
     }
 });
 
+
+
+
+
 document.getElementById('saveToPdfBtn').addEventListener('click', function() {
-  const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+doc.text('Test PDF', 10, 10);
+doc.save('test.pdf');
+});
+
+
+/*
+    const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  
+
   // Create content for the PDF (e.g., order details)
   const orderContent = document.getElementById('modal-content').innerHTML; // Assuming you have an element with this ID to show order details
   
@@ -781,7 +793,10 @@ document.getElementById('saveToPdfBtn').addEventListener('click', function() {
       doc.save('order-details.pdf');
     }
   });
-});
+});*/
+
+
+
 
 </script>
 </body>
