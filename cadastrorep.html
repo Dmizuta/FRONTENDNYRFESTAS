@@ -315,6 +315,11 @@ new Cleave('#cnpj', {
     blocks: [2, 3, 3, 4, 2],
     numericOnly: true,
   });
+  new Cleave('#telefone', {
+    delimiters: ['(', ') ', '-', '-'],
+    blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
+    numericOnly: true, // Ensure only numbers are entered
+});
 
     </script>
 </body>
