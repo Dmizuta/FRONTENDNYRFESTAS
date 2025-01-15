@@ -422,8 +422,8 @@ function searchProducts() {
   const tableRows = document.querySelectorAll("#productTable tbody tr");
 
   tableRows.forEach((row) => {
-    const productCode = row.cells[1].textContent.toLowerCase(); // Assuming column 1 is the product code
-    const productDescription = row.cells[2].textContent.toLowerCase(); // Assuming column 2 is the product description
+    const productCode = row.cells[2].textContent.toLowerCase(); // Assuming column 1 is the product code
+    const productDescription = row.cells[3].textContent.toLowerCase(); // Assuming column 2 is the product description
 
     // Check if either the product code or description includes the search query
     if (
