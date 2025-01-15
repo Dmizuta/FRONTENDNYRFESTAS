@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 
 <style>
@@ -389,6 +391,7 @@ table th, table td {
 
         <!-- Action Buttons -->
         <div class="modal-actions">
+            <button id="saveToPdfBtn">Save to PDF</button>
             <button id="submit-order-btn" class="action-btn">Salvar</button>
             <button id="delete-order-btn" class="action-btn">Apagar</button>
         </div>
@@ -762,6 +765,22 @@ console.log(orderId, observation);
     } catch (error) {
       console.error("Error submitting the order:", error);
     }
+});
+
+document.getElementById('saveToPdfBtn').addEventListener('click', function() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  // Create content for the PDF (e.g., order details)
+  const orderContent = document.getElementById('orderDetails').innerHTML; // Assuming you have an element with this ID to show order details
+  
+  // Add the content to the PDF
+  doc.html(orderContent, {
+    callback: function (doc) {
+      // Save the PDF as a file
+      doc.save('order-details.pdf');
+    }
+  });
 });
 
 </script>
