@@ -769,35 +769,19 @@ console.log(orderId, observation);
 
 
 
-
-
-document.getElementById('saveToPdfBtn').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;
-const doc = new jsPDF();
-doc.text('Test PDF', 10, 10);
-doc.save('test.pdf');
-});
-
-
-/*
-    const { jsPDF } = window.jspdf;
+document.getElementById('saveToPdfBtn').addEventListener('click', function () {
+  const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  // Create content for the PDF (e.g., order details)
-  const orderContent = document.getElementById('modal-content').innerHTML; // Assuming you have an element with this ID to show order details
-  
-  // Add the content to the PDF
-  doc.html(orderContent, {
+  // Capture modal content
+  const modalContent = document.querySelector('#order-modal .modal-content').innerHTML;
+
+  // Render content in the PDF
+  doc.html(modalContent, {
     callback: function (doc) {
-      // Save the PDF as a file
-      doc.save('order-details.pdf');
-    }
+      doc.save('order-details.pdf'); // Save the file
+    },
+    x: 10,
+    y: 10
   });
-});*/
-
-
-
-
-</script>
-</body>
-</html>
+});
