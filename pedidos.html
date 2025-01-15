@@ -770,20 +770,28 @@ console.log(orderId, observation);
 
 document.getElementById('saveToPdfBtn').addEventListener('click', function () {
   const { jsPDF } = window.jspdf;
+  console.log('Button clicked, initializing jsPDF...');
+  
   const doc = new jsPDF();
-
-  // Capture modal content
-  const modalContent = document.querySelector('#order-modal .modal-content').innerHTML;
-
-  // Render content in the PDF
+  const modalContent = document.querySelector('#order-modal .modal-content');
+  
+  if (!modalContent) {
+    console.error('Modal content not found!');
+    return;
+  }
+  
+  console.log('Modal content found, rendering to PDF...');
+  
   doc.html(modalContent, {
     callback: function (doc) {
-      doc.save('order-details.pdf'); // Save the file
+      console.log('PDF rendered successfully.');
+      doc.save('order-details.pdf');
     },
     x: 10,
     y: 10
   });
 });
+
 
 
 
