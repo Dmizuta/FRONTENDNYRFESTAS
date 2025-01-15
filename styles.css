@@ -406,3 +406,21 @@ th {
     font-weight: normal;
     color: #e61717; /* Highlighted text for the value */
 }
+#closeModalBtn {
+    position: absolute; /* Position relative to the modal */
+    top: -20px; /* Move it above the modal */
+    right: -20px; /* Move it to the right, outside the modal */
+    z-index: 1000; /* Ensure it stays on top */
+    font-size: 20px; /* Make the "×" visible */
+    cursor: pointer; /* Change cursor to indicate clickability */
+    background: red; /* Optional: Add a background for visibility */
+    color: white; /* Optional: Make the "×" color contrast with the background */
+    border: none;
+    border-radius: 50%; /* Optional: Make it circular */
+    width: 30px; /* Optional: Set width */
+    height: 30px; /* Optional: Set height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
