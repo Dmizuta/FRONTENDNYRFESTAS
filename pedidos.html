@@ -776,39 +776,117 @@ console.log(orderId, observation);
 
 
 
-
 function saveOrderAsPDF() {
-    const modal = document.getElementById('order-modal'); // Get the modal element
+    // Gather order information
+    const orderId = document.getElementById('order-id').innerText;
+    const razaoSocial = document.getElementById('razao-social').innerText;
+    const cnpj = document.getElementById('cnpj').innerText;
+    const representante = document.getElementById('representante').innerText;
+    const totalValue = document.getElementById('total-value').innerText;
 
-    // Use html2canvas to capture the modal
-    html2canvas(modal).then(canvas => {
-        const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
-        const pdf = new jsPDF('p', 'pt', 'a4'); // Create a new jsPDF instance
+    // Gather observations
+    const observacoes = document.getElementById('obs').value;
 
-        // Calculate image dimensions and position
-        const imgWidth = 190; // Width of the image in mm
-        const pageHeight = pdf.internal.pageSize.height; // Height of the PDF page
-        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Calculate height based on aspect ratio
-        let heightLeft = imgHeight;
+    // Gather product details
+    const orderDetails = [];
+    const orderItems = document.querySelectorAll('#order-details-content tr');
 
-        let position = 0;
-
-        // Add the image to the PDF
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        // If the image height exceeds the page height, add a new page
-        while (heightLeft >= 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
-
-        // Save the PDF
-        pdf.save(`order_${document.getElementById('order-id').innerText}.pdf`);
+    orderItems.forEach(row => {
+        const columns = row.querySelectorAll('td');
+        const item = {
+            codigo: columns[1].innerText,
+            descricao: columns[2].innerText,
+            quantidade: columns[3].innerText,
+            precoUnitario: columns[4].innerText,
+            subtotal: columns[5].innerText
+        };
+        orderDetails.push(item);
     });
+
+    // Creating PDF document
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'pt', 'a4'); // Portrait, points, A4 size
+
+    // Set margins
+    const margin = 20;
+    let startY = margin;
+
+    // Title
+    pdf.setFontSize(24);
+    pdf.text("Resumo da Ordem", margin, startY);
+    startY += 30; // Space after title
+
+    // Order Information
+    pdf.setFontSize(12);
+    pdf.text(`Numero do Pedido: ${orderId}`, margin, startY);
+    startY += 15;
+    pdf.text(`Razao Social: ${razaoSocial}`, margin, startY);
+    startY += 15;
+    pdf.text(`CNPJ: ${cnpj}`, margin, startY);
+    startY += 15;
+    pdf.text(`Representante: ${representante}`, margin, startY);
+    startY += 15;
+    pdf.text(`Total do Pedido: ${totalValue}`, margin, startY);
+    startY += 30; // Space before observations
+
+    // Adding Observations
+    if (observacoes) {
+        pdf.setFontSize(14);
+        pdf.text("Observações:", margin, startY);
+        startY += 15;
+        pdf.setFontSize(12);
+        const obsLines = pdf.splitTextToSize(observacoes, 500); // Split text to fit the page width
+        obsLines.forEach(line => {
+            pdf.text(line, margin, startY);
+            startY += 10; // Space between lines
+        });
+        startY += 20; // Space before product details
+    }
+
+    // Adding product details header
+    pdf.setFontSize(14);
+    pdf.text("Detalhes do Pedido:", margin, startY);
+    startY += 20;
+
+    // Table Header
+    const headers = ["Código", "Descrição", "Qtde", "Preço Unitário", "Subtotal"];
+    const columnWidths = [40, 100, 30, 40, 40];
+
+    // Draw header
+    pdf.setFontSize(12);
+    headers.forEach((header, index) => {
+        pdf.text(header, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
+    });
+    startY += 10; // Space after header
+
+    // Adding product details in a structured format
+    orderDetails.forEach(item => {
+        const row = [
+            item.codigo,
+            item.descricao,
+            item.quantidade,
+            item.precoUnitario,
+            item.subtotal
+        ];
+
+        // Adjust the description to break lines if too long
+        const descriptionLines = pdf.splitTextToSize(item.descricao, columnWidths[1]); // Split description
+
+        // Add each part of the row
+        pdf.text(item.codigo, margin, startY);
+        pdf.text(descriptionLines, margin + columnWidths[0], startY); // Adjust position for description
+        pdf.text(item.quantidade, margin + columnWidths[0] + columnWidths[1], startY);
+        pdf.text(item.precoUnitario, margin + columnWidths[0] + columnWidths[1] + columnWidths[2], startY);
+        pdf.text(item.subtotal, margin + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], startY);
+
+        // Move down for the next row, ensuring enough space for description lines
+        startY += Math.max(15, descriptionLines.length * 10); // Adjust height based on number of lines in description
+    });
+
+    // Save the PDF
+    pdf.save(`order_${orderId}.pdf`);
 }
+
 
 
 
@@ -842,59 +920,61 @@ function saveOrderAsPDF() {
 
     // Creating PDF document
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'pt', 'a4'); // Portrait, points, A4 size
+    const pdf = new jsPDF('p', 'pt', 'a4'); // Portrait, points, A4 size
 
     // Set margins
     const margin = 20;
     let startY = margin;
 
     // Title
-    doc.setFontSize(24);
-    doc.text("Resumo da Ordem", margin, startY);
+    pdf.setFontSize(24);
+    pdf.text("Resumo da Ordem", margin, startY);
     startY += 30; // Space after title
 
     // Order Information
-    doc.setFontSize(12);
-    doc.text(`Numero do Pedido: ${orderId}`, margin, startY);
+    pdf.setFontSize(12);
+    pdf.text(`Numero do Pedido: ${orderId}`, margin, startY);
     startY += 15;
-    doc.text(`Razao Social: ${razaoSocial}`, margin, startY);
+    pdf.text(`Razao Social: ${razaoSocial}`, margin, startY);
     startY += 15;
-    doc.text(`CNPJ: ${cnpj}`, margin, startY);
+    pdf.text(`CNPJ: ${cnpj}`, margin, startY);
     startY += 15;
-    doc.text(`Representante: ${representante}`, margin, startY);
+    pdf.text(`Representante: ${representante}`, margin, startY);
     startY += 15;
-    doc.text(`Total do Pedido: ${totalValue}`, margin, startY);
+    pdf.text(`Total do Pedido: ${totalValue}`, margin, startY);
     startY += 30; // Space before observations
 
     // Adding Observations
-    doc.setFontSize(14);
-    doc.text("Observações:", margin, startY);
-    startY += 15;
-    doc.setFontSize(12);
-    const obsLines = doc.splitTextToSize(observacoes, 500); // Split text to fit the page width
-    obsLines.forEach(line => {
-        doc.text(line, margin, startY);
-        startY += 10; // Space between lines
-    });
-    startY += 20; // Space before product details
+    if (observacoes) {
+        pdf.setFontSize(14);
+        pdf.text("Observações:", margin, startY);
+        startY += 15;
+        pdf.setFontSize(12);
+        const obsLines = pdf.splitTextToSize(observacoes, 500); // Split text to fit the page width
+        obsLines.forEach(line => {
+            pdf.text(line, margin, startY);
+            startY += 10; // Space between lines
+        });
+        startY += 20; // Space before product details
+    }
 
     // Adding product details header
-    doc.setFontSize(14);
-    doc.text("Detalhes do Pedido:", margin, startY);
+    pdf.setFontSize(14);
+    pdf.text("Detalhes do Pedido:", margin, startY);
     startY += 20;
 
     // Table Header
-    doc.setFontSize(12);
     const headers = ["Código", "Descrição", "Qtde", "Preço Unitário", "Subtotal"];
     const columnWidths = [40, 100, 30, 40, 40];
-    
+
     // Draw header
+    pdf.setFontSize(12);
     headers.forEach((header, index) => {
-        doc.text(header, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
+        pdf.text(header, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
     });
     startY += 10; // Space after header
 
-    // Adding product details
+    // Adding product details in a structured format
     orderDetails.forEach(item => {
         const row = [
             item.codigo,
@@ -903,14 +983,24 @@ function saveOrderAsPDF() {
             item.precoUnitario,
             item.subtotal
         ];
-        row.forEach((text, index) => {
-            doc.text(text, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
-        });
-        startY += 15; // Space between rows
+
+        // Adjust the description to break lines if too long
+        const descriptionLines = pdf.splitTextToSize(item.descricao, columnWidths[1]); // Split description
+        const maxLines = Math.max(descriptionLines.length, 1); // Get the maximum lines for the row
+
+        // Add each part of the row
+        pdf.text(item.codigo, margin, startY);
+        pdf.text(descriptionLines, margin + columnWidths[0], startY); // Adjust position for description
+        pdf.text(item.quantidade, margin + columnWidths[0] + columnWidths[1], startY);
+        pdf.text(item.precoUnitario, margin + columnWidths[0] + columnWidths[1] + columnWidths[2], startY);
+        pdf.text(item.subtotal, margin + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], startY);
+
+        // Move down for the next row
+        startY += Math.max(15, maxLines * 10); // Adjust height based on number of lines in description
     });
 
     // Save the PDF
-    doc.save(`order_${orderId}.pdf`);
+    pdf.save(`order_${orderId}.pdf`);
 }
 
 */
@@ -920,8 +1010,8 @@ function saveOrderAsPDF() {
 
 
 
+
 /*
-// Function to gather order data from the modal and save it as a PDF
 function saveOrderAsPDF() {
     // Gather order information
     const orderId = document.getElementById('order-id').innerText;
@@ -929,11 +1019,14 @@ function saveOrderAsPDF() {
     const cnpj = document.getElementById('cnpj').innerText;
     const representante = document.getElementById('representante').innerText;
     const totalValue = document.getElementById('total-value').innerText;
-    
+
+    // Gather observations
+    const observacoes = document.getElementById('obs').value;
+
     // Gather product details
     const orderDetails = [];
     const orderItems = document.querySelectorAll('#order-details-content tr');
-    
+
     orderItems.forEach(row => {
         const columns = row.querySelectorAll('td');
         const item = {
@@ -948,35 +1041,80 @@ function saveOrderAsPDF() {
 
     // Creating PDF document
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    
-    doc.setFontSize(20);
-    doc.text("Resumo da Ordem", 10, 10);
-    doc.setFontSize(12);
-    doc.text(`Numero do Pedido: ${orderId}`, 10, 20);
-    doc.text(`Razao Social: ${razaoSocial}`, 10, 30);
-    doc.text(`CNPJ: ${cnpj}`, 10, 40);
-    doc.text(`Representante: ${representante}`, 10, 50);
-    doc.text(`Total do Pedido: ${totalValue}`, 10, 60);
+    const pdf = new jsPDF('p', 'pt', 'a4'); // Portrait, points, A4 size
 
-    // Adding product details
-    let startY = 70; // Starting Y position for product details
-    orderDetails.forEach((item, index) => {
-        const text = `${index + 1}. Código: ${item.codigo}, Descrição: ${item.descricao}, Qtde: ${item.quantidade}, Preço Unitário: ${item.precoUnitario}, Subtotal: ${item.subtotal}`;
-        doc.text(text, 10, startY);
-        startY += 10; // Increment Y position for next line
+    // Set margins
+    const margin = 20;
+    let startY = margin;
+
+    // Title
+    pdf.setFontSize(24);
+    pdf.text("Resumo da Ordem", margin, startY);
+    startY += 30; // Space after title
+
+    // Order Information
+    pdf.setFontSize(12);
+    pdf.text(`Numero do Pedido: ${orderId}`, margin, startY);
+    startY += 15;
+    pdf.text(`Razao Social: ${razaoSocial}`, margin, startY);
+    startY += 15;
+    pdf.text(`CNPJ: ${cnpj}`, margin, startY);
+    startY += 15;
+    pdf.text(`Representante: ${representante}`, margin, startY);
+    startY += 15;
+    pdf.text(`Total do Pedido: ${totalValue}`, margin, startY);
+    startY += 30; // Space before observations
+
+    // Adding Observations
+    if (observacoes) {
+        pdf.setFontSize(14);
+        pdf.text("Observações:", margin, startY);
+        startY += 15;
+        pdf.setFontSize(12);
+        const obsLines = pdf.splitTextToSize(observacoes, 500); // Split text to fit the page width
+        obsLines.forEach(line => {
+            pdf.text(line, margin, startY);
+            startY += 10; // Space between lines
+        });
+        startY += 20; // Space before product details
+    }
+
+    // Adding product details header
+    pdf.setFontSize(14);
+    pdf.text("Detalhes do Pedido:", margin, startY);
+    startY += 20;
+
+    // Table Header
+    const headers = ["Código", "Descrição", "Qtde", "Preço Unitário", "Subtotal"];
+    const columnWidths = [40, 100, 30, 40, 40];
+
+    // Draw header
+    pdf.setFontSize(12);
+    headers.forEach((header, index) => {
+        pdf.text(header, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
+    });
+    startY += 10; // Space after header
+
+    // Adding product details in a structured format
+    orderDetails.forEach(item => {
+        const row = [
+            item.codigo,
+            item.descricao,
+            item.quantidade,
+            item.precoUnitario,
+            item.subtotal
+        ];
+        row.forEach((text, index) => {
+            pdf.text(text, margin + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
+        });
+        startY += 15; // Space between rows
     });
 
     // Save the PDF
-    doc.save(`order_${orderId}.pdf`);
+    pdf.save(`order_${orderId}.pdf`);
 }
 
-// Adding event listener for the save button
-document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF);
-
-
 */
-
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF);
 });
