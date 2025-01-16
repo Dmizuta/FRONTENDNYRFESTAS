@@ -939,7 +939,7 @@ async function saveOrderAsPDF() {
             pdf.text(header, 20 + columnWidths.slice(0, index).reduce((a, b) => a + b, 0), startY);
         });
         startY += 10;
-
+/*
         // Adicionando detalhes dos produtos
         orderItems.forEach(item => {
             // Verificação para garantir que os dados são válidos
@@ -953,7 +953,24 @@ async function saveOrderAsPDF() {
             } else {
                 console.error('Dados do item inválidos:', item);
             }
-        });
+        });*/
+
+// Adicionando detalhes dos produtos
+orderItems.forEach(item => {
+    // Verificação para garantir que os dados são válidos
+    if (item.codigo && item.descricao && item.quantidade && item.precoUnitario && item.subtotal) {
+        pdf.text(item.codigo, 20, startY);
+        pdf.text(item.descricao, 20 + columnWidths[0], startY);
+        pdf.text(item.quantidade.toString(), 20 + columnWidths[0] + columnWidths[1], startY);
+        pdf.text(item.precoUnitario.toString(), 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], startY);
+        pdf.text(item.subtotal.toString(), 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], startY);
+        startY += 10; // Incrementa a posição Y para a próxima linha
+    } else {
+        console.error('Dados do item inválidos:', item);
+    }
+});
+
+
 
         // Salva o PDF
         pdf.save(`order_${orderId}.pdf`);
