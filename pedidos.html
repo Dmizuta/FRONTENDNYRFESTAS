@@ -19,6 +19,87 @@
 </head>
 
 <style>
+
+
+
+
+
+
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .modal {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .order-info {
+            flex-grow: 1;
+        }
+        #logo-image {
+            width: 100px; /* Adjust as needed */
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .modal-actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+        /* Print-specific styles */
+        @media print {
+            .print-btn, .modal-actions button:not(#close-modal) {
+                display: none;
+            }
+            .modal {
+                border: none;
+                padding: 0;
+            }
+            img:not(#logo-image) {
+                display: none;
+            }
+            #logo-image {
+                display: block;
+                margin: 0 auto 20px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Orders container */
 #orders-container {
     max-width: 95%;
@@ -328,88 +409,88 @@ table th, table td {
     <!-- Orders will be inserted here dynamically -->
 </div>
 
-<!-- Modal Structure (Initially hidden) -->
+
+
+
+
+
+
+
+
 <div id="order-modal" class="modal">
-    <div class="modal-content">
-        <!-- Header Section with Order Information -->
-        <div class="order-header">
-            <div class="order-info">
-                <div class="order-info-row">
-                    <span>Numero do Pedido:</span>
-                    <span id="order-id"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Razao Social:</span>
-                    <span id="razao-social"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>CNPJ:</span>
-                    <span id="cnpj"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Representante:</span>
-                    <span id="representante"></span>
-                </div>
-                
-               
-
+    <div class="order-header">
+        <div class="order-info">
+            <div class="order-info-row">
+                <span>Numero do Pedido:</span>
+                <span id="order-id">12345</span>
             </div>
-            <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
+            <div class="order-info-row">
+                <span>Razao Social:</span>
+                <span id="razao-social">Empresa XYZ</span>
+            </div>
+            <div class="order-info-row">
+                <span>CNPJ:</span>
+                <span id="cnpj">12.345.678/0001-90</span>
+            </div>
+            <div class="order-info-row">
+                <span>Representante:</span>
+                <span id="representante">João Silva</span>
+            </div>
         </div>
-
-        <!-- Table with Product Details -->
-        <table id="order-items-table">
-            <thead>
-                <tr>
-                    <th>-</th>
-                    <th>Código</th>
-                    <th>Descrição</th>
-                    <th>Qtde</th>
-                    <th>Preço Unitário</th>
-                    <th>Subtotal</th>
-                    <th>Editar</th>
-                    <th>Apagar</th>
-                </tr>
-            </thead>
-            <tbody id="order-details-content">
-                <!-- Product rows will be dynamically populated here -->
-            </tbody>
-        </table>
-<div class="totalOrderBox">
-        <!-- Total Order Section -->
+        <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
+    </div>
+    <table id="order-items-table">
+        <thead>
+            <tr>
+                <th>-</th>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Qtde</th>
+                <th>Preço Unitário</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="order-details-content">
+            <tr>
+                <td>1</td>
+                <td>001</td>
+                <td>Produto A</td>
+                <td>10</td>
+                <td>R$ 10,00</td>
+                <td>R$ 100,00</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>002</td>
+                <td>Produto B</td>
+                <td>5</td>
+                <td>R$ 20,00</td>
+                <td>R$ 100,00</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="totalOrderBox">
         <div class="order-total">
-            <div>
-                <span>Total do Pedido:</span>
-                <span id="total-value">R$ 0,00</span>
-            </div>
+            <span>Total do Pedido:</span>
+            <span id="total-value">R$ 200,00</span>
         </div>
-
-
-
     </div>
-
-
-
-    <div class="obs-row">
-        <span>Observações:</span>
-        <textarea type="text" id="obs"></textarea>
-    </div>
-
-
-        <!-- Action Buttons -->
-        <div class="modal-actions">
-            <button class="print-btn" onclick="printOrder()">Print Order</button>
-            <button id="saveToPdfBtn">Save to PDF</button>
-            <button id="submit-order-btn" class="action-btn">Salvar</button>
-            <button id="delete-order-btn" class="action-btn">Apagar</button>
-        </div>
-
-        <!-- Close Modal Button -->
-        <button id="close-modal" class="action-btn">Fechar</button>
+    <div class="modal-actions">
+        <button class="print-btn" onclick="printOrder()">Print Order</button>
     </div>
 </div>
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 // Function to load orders from the backend
