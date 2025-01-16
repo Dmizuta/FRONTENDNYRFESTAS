@@ -317,26 +317,7 @@
             height: auto;
           }
           
-        
-            @media print {
-                /* Hide the 7th and 8th columns (Editar, Apagar) */
-                #order-items-table th:nth-child(7),
-                #order-items-table td:nth-child(7),
-                #order-items-table th:nth-child(8),
-                #order-items-table td:nth-child(8) {
-                    display: none !important;
-                }
-        
-                /* Hide the buttons */
-                .modal-actions button {
-                    display: none !important;
-                }
-        
-                /* Hide the logo image (optional) */
-                #logo-image {
-                    display: none !important;
-                }
-            }
+     
         </style>
 </head>
 
@@ -855,9 +836,38 @@ console.log(orderId, observation);
 });
 
 
+function printOrder() {
+    const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
+    const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
+
+    // Inject the necessary print styles directly into the print window
+    printWindow.document.write('<html><head><title>Print Order</title>');
+    printWindow.document.write('<style>');
+    printWindow.document.write(`
+        @media print {
+            #order-items-table th:nth-child(7),
+            #order-items-table td:nth-child(7),
+            #order-items-table th:nth-child(8),
+            #order-items-table td:nth-child(8) {
+                display: none !important;
+            }
+            .modal-actions button {
+                display: none !important;
+            }
+            #logo-image {
+                display: none !important;
+            }
+        }
+    `);
+    printWindow.document.write('</style></head><body>');
+    printWindow.document.write(modalContent); // Insert modal content into the print window
+    printWindow.document.write('</body></html>');
+    printWindow.document.close(); // Close the document to ensure all content is loaded
+    printWindow.print(); // Trigger the print dialog
+}
 
 
-
+/*
 function printOrder() {
     const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
     const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
@@ -868,7 +878,7 @@ function printOrder() {
     printWindow.print(); // Trigger the print dialog
   }
 
-
+*/
 
 
 </script>
