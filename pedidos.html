@@ -916,15 +916,17 @@ function printOrder() {
         page-break-inside: auto; /* Prevent breaks in the observation area */
     }
 .obs-row textarea {
-    width: 100%;
-    min-height: 80px; /* Set a minimum height */
-    font-size: 11pt;
-    border: 1px solid #ddd;
-    padding: 5px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Allow vertical scrolling if content exceeds the height */
-    resize: vertical; /* Allow the user to resize the textarea vertically */
-}
+        width: 100%;
+        font-size: 11pt;
+        border: 1px solid #ddd;
+        padding: 5px;
+        box-sizing: border-box;
+        resize: none; /* Disable resizing during print */
+        white-space: pre-wrap; /* Ensure text wraps within the textarea */
+        overflow: visible; /* Allow for overflow in the print view */
+        min-height: auto; /* Allow the field to grow with content */
+        height: auto !important; /* Ensure it can expand to fit the content */
+    }
 
     
 
