@@ -382,6 +382,7 @@
                 <!-- Product rows will be dynamically populated here -->
             </tbody>
         </table>
+
 <div class="totalOrderBox">
         <!-- Total Order Section -->
         <div class="order-total">
@@ -403,12 +404,26 @@
     </div>
 
 
+
+
+  
+
+
+
         <!-- Action Buttons -->
          <div class="allbtns">
         <div class="modal-actions">
             <button class="print-btn" onclick="printOrder()">Print Order</button>
-            
-            <button id="submit-order-btn" class="action-btn">Salvar</button>
+            <button id="save-notes-btn" class="action-btn">Salvar</button>
+            <button id="submit-order-btn" class="action-btn">Enviar</button>
+
+
+
+
+
+            <!-- <button id="submit-order-btn" class="action-btn">Salvar</button>-->
+
+
             <button id="delete-order-btn" class="action-btn">Apagar</button>
         </div>
 
@@ -763,6 +778,54 @@ textarea.addEventListener('input', () => {
 
 
 
+// Save Notes Button
+document.getElementById("save-notes-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
+
+    if (!orderId) {
+        alert("No draft order found to save notes.");
+        return;
+    }
+
+    const requestData = {
+        orderId: orderId,
+        observation: observation,
+    };
+
+    try {
+        const response = await fetch('https://backendnyrfestas.vercel.app/save-notes', {
+            method: "PATCH", // Use PATCH to indicate partial update
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+            alert('Notes saved successfully!');
+        } else {
+            console.error("Failed to save notes.");
+            alert('An error occurred. Please try again later.');
+        }
+    } catch (error) {
+        console.error("Error saving notes:", error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.getElementById("submit-order-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
@@ -947,18 +1010,7 @@ function printOrder() {
 }
 
 
-/*
-function printOrder() {
-    const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
-    const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
-    printWindow.document.write('<html><head><title>Print Order</title></head><body>');
-    printWindow.document.write(modalContent); // Insert modal content into the print window
-    printWindow.document.write('</body></html>');
-    printWindow.document.close(); // Close the document to ensure all content is loaded
-    printWindow.print(); // Trigger the print dialog
-  }
 
-*/
 
 
 </script>
