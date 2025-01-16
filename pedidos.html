@@ -887,7 +887,6 @@ function saveOrderAsPDF() {
     pdf.save(`order_${orderId}.pdf`);
 }
 */
-
 async function saveOrderAsPDF() {
     // Coletar informações do HTML
     const orderId = document.getElementById('order-id').innerText; // Número do Pedido
@@ -943,12 +942,17 @@ async function saveOrderAsPDF() {
 
         // Adicionando detalhes dos produtos
         orderItems.forEach(item => {
-            pdf.text(item.codigo, 20, startY);
-            pdf.text(item.descricao, 20 + columnWidths[0], startY);
-            pdf.text(item.quantidade, 20 + columnWidths[0] + columnWidths[1], startY);
-            pdf.text(item.precoUnitario, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], startY);
-            pdf.text(item.subtotal, 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], startY);
-            startY += 10;
+            // Verificação para garantir que os dados são válidos
+            if (item.codigo && item.descricao && item.quantidade && item.precoUnitario && item.subtotal) {
+                pdf.text(item.codigo, 20, startY);
+                pdf.text(item.descricao, 20 + columnWidths[0], startY);
+                pdf.text(item.quantidade.toString(), 20 + columnWidths[0] + columnWidths[1], startY);
+                pdf.text(item.precoUnitario.toString(), 20 + columnWidths[0] + columnWidths[1] + columnWidths[2], startY);
+                pdf.text(item.subtotal.toString(), 20 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], startY);
+                startY += 10;
+            } else {
+                console.error('Dados do item inválidos:', item);
+            }
         });
 
         // Salva o PDF
@@ -958,6 +962,7 @@ async function saveOrderAsPDF() {
         alert('Não foi possível gerar o PDF.');
     }
 }
+
 
 // Adiciona o listener para o botão de salvar como PDF
 document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF);
