@@ -15,10 +15,331 @@
 
     
 
+    <style>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Orders container */
+        #orders-container {
+            max-width: 95%;
+                margin: 30px auto;
+                padding: 20px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+        }
+        
+        
+        
+        /* Order row layout */
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer; /* Make the row clickable */
+        }
+        
+        .order-details {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+        }
+        
+        .order-details div {
+            margin: 0 10px;
+            font-size: 1em;
+            color: #333;
+        }
+        
+        /* Status styling */
+        .status {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        
+        .order-row:hover {
+            background-color: #eef2f5;
+        }
+        
+        /* Responsive layout for mobile */
+        @media (max-width: 768px) {
+            .order-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .order-details {
+                flex-direction: column;
+            }
+        }
+        
+        
+        
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 60px 20px; /* Add padding to prevent content from touching edges */
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 1300px;
+            max-height: 90vh; /* Limit height to 80% of viewport */
+            overflow-y: auto; /* Enable vertical scrolling */
+            animation: fadeIn 0.3s ease-in-out;
+            margin: auto; /* Center modal on screen */
+        }
+        
+        
+        #logo-image {
+            width: 20%;
+            padding: 10px;
+        }
+        
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            border-color: #aaa;
+            cursor: pointer;
+        }
+        
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        
+        
+        
+        #order-details-content {
+            padding: 10px;
+            text-align: center;
+            align-items: center;
+           
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .action-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: 1px;
+            
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        #close-modal-btn {
+            background-color: #dc3545;
+        }
+        
+        #close-modal-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-info {
+            flex: 1;
+        }
+        
+        .order-info-row {
+            margin: 5px 0;
+        }
+        
+        /* Modal table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table th, table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        #order-items-body tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        
+        
+        #total-value {
+            font-weight: bold;
+            float: right;
+            
+        }
+        
+        /* When modal is open, make it visible */
+        .modal.show {
+            display: flex;
+        }
+        
+        .totalOrderBox {
+        
+        padding: 20px 20px;
+        margin: 20px auto;
+        background-color: #13273d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        
+        
+        }
+        /* Responsiveness for smaller screens */
+        @media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+            }
+        
+            .order-info {
+                margin-top: 20px;
+            }
+        }
+        
+        
+        table th, table td {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+          /* Style the table headers */
+         
+          .obs-row {
+            padding: 10px;
+            background-color: #aaa;
+            border-radius: 10px;
+          }
+        
+          textarea {
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          resize: none;
+          line-height: 24px; /* Set line height to calculate row height */
+          max-height: 120px; /* Limit to 3 rows (3 * 24px) */
+          overflow-y: auto; /* Enable scrolling when the content exceeds max height */
+        }
+        .modalOrderDeleteButton {
+          
+          width: 40px;                /* Defina a largura desejada para os botões */
+          height: 40px;               /* Defina a altura desejada para os botões */
+         
+          cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+        }
+        .modalOrderEditButton {
+          
+            width: 40px;                /* Defina a largura desejada para os botões */
+            height: 40px;               /* Defina a altura desejada para os botões */
+           
+            cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+        }
+        
+        
+        .modalOrderEditButton img {
+            
+            width: 20px; /* Adjust size as needed */
+            height: auto;
+          }
+          .modalOrderDeleteButton img {
+            
+            width: 20px; /* Adjust size as needed */
+            height: auto;
+          }
+          
+        
+            @media print {
+                /* Hide the 7th and 8th columns (Editar, Apagar) */
+                #order-items-table th:nth-child(7),
+                #order-items-table td:nth-child(7),
+                #order-items-table th:nth-child(8),
+                #order-items-table td:nth-child(8) {
+                    display: none !important;
+                }
+        
+                /* Hide the buttons */
+                .modal-actions button {
+                    display: none !important;
+                }
+        
+                /* Hide the logo image (optional) */
+                #logo-image {
+                    display: none !important;
+                }
+            }
+        </style>
 </head>
 
-<style>
 
 
 
@@ -28,318 +349,6 @@
 
 
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-/* Orders container */
-#orders-container {
-    max-width: 95%;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-}
-
-
-
-/* Order row layout */
-.order-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    cursor: pointer; /* Make the row clickable */
-}
-
-.order-details {
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
-}
-
-.order-details div {
-    margin: 0 10px;
-    font-size: 1em;
-    color: #333;
-}
-
-/* Status styling */
-.status {
-    font-weight: bold;
-    color: #007BFF;
-}
-
-.order-row:hover {
-    background-color: #eef2f5;
-}
-
-/* Responsive layout for mobile */
-@media (max-width: 768px) {
-    .order-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .order-details {
-        flex-direction: column;
-    }
-}
-
-
-
-/* Modal Styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 60px 20px; /* Add padding to prevent content from touching edges */
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 1300px;
-    max-height: 90vh; /* Limit height to 80% of viewport */
-    overflow-y: auto; /* Enable vertical scrolling */
-    animation: fadeIn 0.3s ease-in-out;
-    margin: auto; /* Center modal on screen */
-}
-
-
-#logo-image {
-    width: 20%;
-    padding: 10px;
-}
-
-.close-btn {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    border-color: #aaa;
-    cursor: pointer;
-}
-
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-
-
-
-#order-details-content {
-    padding: 10px;
-    text-align: center;
-    align-items: center;
-   
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: space-between;
-}
-
-.action-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: 1px;
-    
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.action-btn:hover {
-    background-color: #0056b3;
-}
-
-#close-modal-btn {
-    background-color: #dc3545;
-}
-
-#close-modal-btn:hover {
-    background-color: #c82333;
-}
-
-.order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.order-info {
-    flex: 1;
-}
-
-.order-info-row {
-    margin: 5px 0;
-}
-
-/* Modal table styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-#order-items-body tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-
-
-#total-value {
-    font-weight: bold;
-    float: right;
-    
-}
-
-/* When modal is open, make it visible */
-.modal.show {
-    display: flex;
-}
-
-.totalOrderBox {
-
-padding: 20px 20px;
-margin: 20px auto;
-background-color: #13273d;
-color: white;
-border: none;
-border-radius: 5px;
-
-
-}
-/* Responsiveness for smaller screens */
-@media (max-width: 768px) {
-    .order-header {
-        flex-direction: column;
-    }
-
-    .order-info {
-        margin-top: 20px;
-    }
-}
-
-
-table th, table td {
-        padding: 8px;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
-  /* Style the table headers */
- 
-  .obs-row {
-    padding: 10px;
-    background-color: #aaa;
-    border-radius: 10px;
-  }
-
-  textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  resize: none;
-  line-height: 24px; /* Set line height to calculate row height */
-  max-height: 120px; /* Limit to 3 rows (3 * 24px) */
-  overflow-y: auto; /* Enable scrolling when the content exceeds max height */
-}
-.modalOrderDeleteButton {
-  
-  width: 40px;                /* Defina a largura desejada para os botões */
-  height: 40px;               /* Defina a altura desejada para os botões */
- 
-  cursor: pointer;             /* Muda o cursor para indicar que é clicável */
-}
-.modalOrderEditButton {
-  
-    width: 40px;                /* Defina a largura desejada para os botões */
-    height: 40px;               /* Defina a altura desejada para os botões */
-   
-    cursor: pointer;             /* Muda o cursor para indicar que é clicável */
-}
-
-
-.modalOrderEditButton img {
-    
-    width: 20px; /* Adjust size as needed */
-    height: auto;
-  }
-  .modalOrderDeleteButton img {
-    
-    width: 20px; /* Adjust size as needed */
-    height: auto;
-  }
-  
-  @media print {
-        #order-items-table th:nth-child(7),
-        #order-items-table th:nth-child(8),
-        #order-items-table td:nth-child(7),
-        #order-items-table td:nth-child(8) {
-            display: none;
-        }
-
-        .modal-actions button {
-            display: none;
-        }
-    }
-
-
-
-
-
-
-
-</style>
 
 <body>
 
