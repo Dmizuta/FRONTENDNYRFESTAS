@@ -888,7 +888,7 @@ function printOrder() {
         border-collapse: collapse;
         width: 100%;
         margin-top: 20px;
-        page-break-inside: auto; /* Prevent breaks inside the table */
+        page-break-inside: avoid; /* Prevent breaks inside the table */
     }
 
     #order-items-table th, #order-items-table td {
@@ -904,7 +904,7 @@ function printOrder() {
         font-weight: bold;
         border-top: 2px solid #000;
         padding-top: 10px;
-        page-break-inside: auto; /* Ensure the section stays together */
+        page-break-inside: avoid; /* Ensure the section stays together */
     }
 
     /* Observations Section */
@@ -913,9 +913,10 @@ function printOrder() {
         margin-top: 20px;
         padding: 10px;
         background-color: #f9f9f9;
-        page-break-inside: auto; /* Prevent breaks in the observation area */
+        page-break-inside: avoid; /* Prevent breaks in the observation area */
     }
-.obs-row textarea {
+
+    .obs-row textarea {
         width: 100%;
         font-size: 11pt;
         border: 1px solid #ddd;
@@ -924,16 +925,14 @@ function printOrder() {
         resize: none; /* Disable resizing during print */
         white-space: pre-wrap; /* Ensure text wraps within the textarea */
         overflow: visible; /* Allow for overflow in the print view */
-        min-height: auto; /* Allow the field to grow with content */
-        height: auto !important; /* Ensure it can expand to fit the content */
+        min-height: 100px; /* Set a reasonable minimum height */
+        height: auto !important; /* Allow it to expand to fit content */
     }
-
-    
 
     /* Section Spacing */
     .order-header {
         margin-bottom: 20px;
-        page-break-inside: auto; /* Prevent break inside header */
+        page-break-inside: avoid; /* Prevent break inside header */
     }
 
     /* Ensure good readability */
@@ -971,6 +970,7 @@ function printOrder() {
         width: 15%;
     }
 }
+
 
 
     `);
