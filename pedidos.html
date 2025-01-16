@@ -803,13 +803,13 @@ document.getElementById("save-notes-btn").addEventListener("click", async () => 
         });
 
         if (response.ok) {
-            alert('Notes saved successfully!');
+            alert('Pedidos salvo com sucesso!');
         } else {
-            console.error("Failed to save notes.");
-            alert('An error occurred. Please try again later.');
+            console.error("Falha ao salvar pedido.");
+            alert('Ocorreu um erro, tente novamente.');
         }
     } catch (error) {
-        console.error("Error saving notes:", error);
+        console.error("Erro:", error);
     }
 });
 
