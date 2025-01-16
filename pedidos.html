@@ -838,6 +838,16 @@ console.log(orderId, observation);
 });
 
 
+
+
+
+
+
+
+
+
+
+
 function printOrder() {
     const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
     const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
@@ -846,20 +856,112 @@ function printOrder() {
     printWindow.document.write('<html><head><title>Print Order</title>');
     printWindow.document.write('<style>');
     printWindow.document.write(`
-        @media print {
-            #order-items-table th:nth-child(7),
-            #order-items-table td:nth-child(7),
-            #order-items-table th:nth-child(8),
-            #order-items-table td:nth-child(8) {
-                display: none !important;
-            }
-            .allbtns button {
-                display: none !important;
-            }
-            #logo-image {
-                display: none !important;
-            }
-        }
+     @media print {
+    /* General Page Style */
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    /* Logo styling */
+    #logo-image {
+        display: block;
+        margin: 0 auto 20px;
+        max-width: 200px;
+    }
+
+    /* Hide unnecessary columns and buttons */
+    #order-items-table th:nth-child(7),
+    #order-items-table td:nth-child(7),
+    #order-items-table th:nth-child(8),
+    #order-items-table td:nth-child(8),
+    .modal-actions,
+    #submit-order-btn,
+    #delete-order-btn {
+        display: none !important;
+    }
+
+    /* Table Style */
+    #order-items-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #order-items-table th, #order-items-table td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    /* Make the total order section distinct */
+    .totalOrderBox {
+        margin-top: 20px;
+        font-size: 14pt;
+        font-weight: bold;
+        border-top: 2px solid #000;
+        padding-top: 10px;
+    }
+
+    /* Observations Section */
+    .obs-row {
+        font-size: 11pt;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .obs-row textarea {
+        width: 100%;
+        height: 80px;
+        font-size: 11pt;
+        border: 1px solid #ddd;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    /* Section Spacing */
+    .order-header {
+        margin-bottom: 20px;
+    }
+
+    /* Ensure good readability */
+    .order-info-row span {
+        font-weight: bold;
+    }
+
+    table {
+        font-size: 10pt;
+    }
+
+    /* Page Breaks */
+    .order-info, .order-total {
+        page-break-after: always;
+    }
+
+    /* Adjust table column width */
+    #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
+        width: 15%;
+    }
+
+    #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
+        width: 40%;
+    }
+
+    #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
+        width: 10%;
+    }
+
+    #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
+        width: 15%;
+    }
+
+    #order-items-table th:nth-child(6), #order-items-table td:nth   -child(6) {
+        width: 15%;
+    }
+}
+
     `);
     printWindow.document.write('</style></head><body>');
     printWindow.document.write(modalContent); // Insert modal content into the print window
