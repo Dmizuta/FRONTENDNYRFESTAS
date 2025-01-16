@@ -398,6 +398,7 @@ table th, table td {
 
         <!-- Action Buttons -->
         <div class="modal-actions">
+            <button class="print-btn" onclick="printOrder()">Print Order</button>
             <button id="saveToPdfBtn">Save to PDF</button>
             <button id="submit-order-btn" class="action-btn">Salvar</button>
             <button id="delete-order-btn" class="action-btn">Apagar</button>
@@ -996,7 +997,14 @@ orderItems.forEach(item => {
 document.getElementById('saveToPdfBtn').addEventListener('click', saveOrderAsPDF);
 
 
-
+function printOrder() {
+      const printContent = document.getElementById('orderDetails').outerHTML;
+      const printWindow = window.open('', '', 'width=800,height=600');
+      printWindow.document.write('<html><head><title>Print Order</title></head><body>');
+      printWindow.document.write(printContent);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();}
 </script>
 </body>
 </html>
