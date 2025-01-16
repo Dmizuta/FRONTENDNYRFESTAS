@@ -887,6 +887,7 @@ function printOrder() {
         border-collapse: collapse;
         width: 100%;
         margin-top: 20px;
+        page-break-inside: auto; /* Prevent breaks inside the table */
     }
 
     #order-items-table th, #order-items-table td {
@@ -902,6 +903,7 @@ function printOrder() {
         font-weight: bold;
         border-top: 2px solid #000;
         padding-top: 10px;
+        page-break-inside: auto; /* Ensure the section stays together */
     }
 
     /* Observations Section */
@@ -910,6 +912,7 @@ function printOrder() {
         margin-top: 20px;
         padding: 10px;
         background-color: #f9f9f9;
+        page-break-inside: auto; /* Prevent breaks in the observation area */
     }
 
     .obs-row textarea {
@@ -924,6 +927,7 @@ function printOrder() {
     /* Section Spacing */
     .order-header {
         margin-bottom: 20px;
+        page-break-inside: auto; /* Prevent break inside header */
     }
 
     /* Ensure good readability */
@@ -935,9 +939,9 @@ function printOrder() {
         font-size: 10pt;
     }
 
-    /* Page Breaks */
+    /* Remove block-style page breaks, allow natural flow */
     .order-info, .order-total {
-        page-break-after: always;
+        page-break-after: auto; /* Let content flow naturally */
     }
 
     /* Adjust table column width */
@@ -957,10 +961,11 @@ function printOrder() {
         width: 15%;
     }
 
-    #order-items-table th:nth-child(6), #order-items-table td:nth   -child(6) {
+    #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
         width: 15%;
     }
 }
+
 
     `);
     printWindow.document.write('</style></head><body>');
