@@ -7,281 +7,293 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.3/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+    
+
+    <style>
+
+        /* Orders container */
+        #orders-container {
+            max-width: 95%;
+                margin: 30px auto;
+                padding: 20px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+        }
+        
+        
+        
+        /* Order row layout */
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer; /* Make the row clickable */
+        }
+        
+        .order-details {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+        }
+        
+        .order-details div {
+            margin: 0 10px;
+            font-size: 1em;
+            color: #333;
+        }
+        
+        /* Status styling */
+        .status {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        
+        .order-row:hover {
+            background-color: #eef2f5;
+        }
+        
+        /* Responsive layout for mobile */
+        @media (max-width: 768px) {
+            .order-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .order-details {
+                flex-direction: column;
+            }
+        }
+        
+        
+        
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 60px 20px; /* Add padding to prevent content from touching edges */
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 1300px;
+            max-height: 90vh; /* Limit height to 80% of viewport */
+            overflow-y: auto; /* Enable vertical scrolling */
+            animation: fadeIn 0.3s ease-in-out;
+            margin: auto; /* Center modal on screen */
+        }
+        
+        
+        #logo-image {
+            width: 20%;
+            padding: 10px;
+        }
+        
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            border-color: #aaa;
+            cursor: pointer;
+        }
+        
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        
+        
+        
+        #order-details-content {
+            padding: 10px;
+            text-align: center;
+            align-items: center;
+           
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .action-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: 1px;
+            
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        #close-modal-btn {
+            background-color: #dc3545;
+        }
+        
+        #close-modal-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-info {
+            flex: 1;
+        }
+        
+        .order-info-row {
+            margin: 5px 0;
+        }
+        
+        /* Modal table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table th, table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        #order-items-body tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        
+        
+        #total-value {
+            font-weight: bold;
+            float: right;
+            
+        }
+        
+        /* When modal is open, make it visible */
+        .modal.show {
+            display: flex;
+        }
+        
+        .totalOrderBox {
+        
+        padding: 20px 20px;
+        margin: 20px auto;
+        background-color: #13273d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        
+        
+        }
+        /* Responsiveness for smaller screens */
+        @media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+            }
+        
+            .order-info {
+                margin-top: 20px;
+            }
+        }
+        
+        
+        table th, table td {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+          /* Style the table headers */
+         
+          .obs-row {
+            padding: 10px;
+            background-color: #aaa;
+            border-radius: 10px;
+          }
+        
+          textarea {
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          resize: none;
+          line-height: 24px; /* Set line height to calculate row height */
+          max-height: 240px; /* Limit to 3 rows (3 * 24px) */
+          overflow-y: auto; /* Enable scrolling when the content exceeds max height */
+        }
+        .modalOrderDeleteButton {
+          
+          width: 40px;                /* Defina a largura desejada para os botões */
+          height: 40px;               /* Defina a altura desejada para os botões */
+         
+          cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+        }
+        .modalOrderEditButton {
+          
+            width: 40px;                /* Defina a largura desejada para os botões */
+            height: 40px;               /* Defina a altura desejada para os botões */
+           
+            cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+        }
+        
+        
+        .modalOrderEditButton img {
+            
+            width: 20px; /* Adjust size as needed */
+            height: auto;
+          }
+          .modalOrderDeleteButton img {
+            
+            width: 20px; /* Adjust size as needed */
+            height: auto;
+          }
+          
+     
+        </style>
 </head>
 
-<style>
-/* Orders container */
-#orders-container {
-    max-width: 95%;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-}
 
 
-
-/* Order row layout */
-.order-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    cursor: pointer; /* Make the row clickable */
-}
-
-.order-details {
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
-}
-
-.order-details div {
-    margin: 0 10px;
-    font-size: 1em;
-    color: #333;
-}
-
-/* Status styling */
-.status {
-    font-weight: bold;
-    color: #007BFF;
-}
-
-.order-row:hover {
-    background-color: #eef2f5;
-}
-
-/* Responsive layout for mobile */
-@media (max-width: 768px) {
-    .order-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .order-details {
-        flex-direction: column;
-    }
-}
-
-
-
-/* Modal Styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 60px 20px; /* Add padding to prevent content from touching edges */
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 1300px;
-    max-height: 90vh; /* Limit height to 80% of viewport */
-    overflow-y: auto; /* Enable vertical scrolling */
-    animation: fadeIn 0.3s ease-in-out;
-    margin: auto; /* Center modal on screen */
-}
-
-
-#logo-image {
-    width: 20%;
-    padding: 10px;
-}
-
-.close-btn {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    border-color: #aaa;
-    cursor: pointer;
-}
-
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-
-
-
-#order-details-content {
-    padding: 10px;
-    text-align: center;
-    align-items: center;
-   
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: space-between;
-}
-
-.action-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: 1px;
-    
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.action-btn:hover {
-    background-color: #0056b3;
-}
-
-#close-modal-btn {
-    background-color: #dc3545;
-}
-
-#close-modal-btn:hover {
-    background-color: #c82333;
-}
-
-.order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.order-info {
-    flex: 1;
-}
-
-.order-info-row {
-    margin: 5px 0;
-}
-
-/* Modal table styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-#order-items-body tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-
-
-#total-value {
-    font-weight: bold;
-    float: right;
-    
-}
-
-/* When modal is open, make it visible */
-.modal.show {
-    display: flex;
-}
-
-.totalOrderBox {
-
-padding: 20px 20px;
-margin: 20px auto;
-background-color: #13273d;
-color: white;
-border: none;
-border-radius: 5px;
-
-
-}
-/* Responsiveness for smaller screens */
-@media (max-width: 768px) {
-    .order-header {
-        flex-direction: column;
-    }
-
-    .order-info {
-        margin-top: 20px;
-    }
-}
-
-
-table th, table td {
-        padding: 8px;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
-  /* Style the table headers */
- 
-  .obs-row {
-    padding: 10px;
-    background-color: #aaa;
-    border-radius: 10px;
-  }
-
-  textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  resize: none;
-  line-height: 24px; /* Set line height to calculate row height */
-  max-height: 120px; /* Limit to 3 rows (3 * 24px) */
-  overflow-y: auto; /* Enable scrolling when the content exceeds max height */
-}
-.modalOrderDeleteButton {
-  
-  width: 40px;                /* Defina a largura desejada para os botões */
-  height: 40px;               /* Defina a altura desejada para os botões */
- 
-  cursor: pointer;             /* Muda o cursor para indicar que é clicável */
-}
-.modalOrderEditButton {
-  
-    width: 40px;                /* Defina a largura desejada para os botões */
-    height: 40px;               /* Defina a altura desejada para os botões */
-   
-    cursor: pointer;             /* Muda o cursor para indicar que é clicável */
-}
-
-
-.modalOrderEditButton img {
-    
-    width: 20px; /* Adjust size as needed */
-    height: auto;
-  }
-  .modalOrderDeleteButton img {
-    
-    width: 20px; /* Adjust size as needed */
-    height: auto;
-  }
-  
-</style>
 
 <body>
 
@@ -318,6 +330,10 @@ table th, table td {
 <div id="orders-container">
     <!-- Orders will be inserted here dynamically -->
 </div>
+
+
+
+
 
 <!-- Modal Structure (Initially hidden) -->
 <div id="order-modal" class="modal">
@@ -366,6 +382,7 @@ table th, table td {
                 <!-- Product rows will be dynamically populated here -->
             </tbody>
         </table>
+
 <div class="totalOrderBox">
         <!-- Total Order Section -->
         <div class="order-total">
@@ -387,18 +404,53 @@ table th, table td {
     </div>
 
 
+
+
+  
+
+
+
         <!-- Action Buttons -->
+         <div class="allbtns">
         <div class="modal-actions">
-            <button id="submit-order-btn" class="action-btn">Submit</button>
-            <button id="delete-order-btn" class="action-btn">Delete</button>
+            <button class="action-btn" onclick="printOrder()">Imprimir</button>
+            <button id="save-notes-btn" class="action-btn">Salvar</button>
+            <button id="submit-order-btn" class="action-btn">Enviar</button>
+
+
+
+
+
+            <!-- <button id="submit-order-btn" class="action-btn">Salvar</button>-->
+
+
+            <button id="delete-order-btn" class="action-btn">Apagar</button>
         </div>
 
         <!-- Close Modal Button -->
-        <button id="close-modal" class="action-btn">Close</button>
+        <button id="close-modal" class="action-btn">Fechar</button>
     </div>
+</div>
 </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 // Function to load orders from the backend
@@ -471,7 +523,7 @@ function formatCurrency(value) {
 
 
 
-        const statusText = order.status === 1 ? 'Submitted' : 'Draft';
+        const statusText = order.status === 1 ? 'Enviado' : 'Aberto';
         const orderRow = `
             <div class="order-row" data-id="${order.id}">
                 <div class="order-details">
@@ -603,6 +655,115 @@ function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
 
+
+
+
+
+
+
+
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    // Update general order information in the modal
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('representante').textContent = orderDetails.representante;
+    document.getElementById('obs').textContent = orderDetails.observacoes;
+
+    // Update products table and calculate total
+    const orderDetailsContent = document.getElementById('order-details-content');
+    orderDetailsContent.innerHTML = ''; // Clear existing content
+    let total = 0; // Variable to accumulate the total price    
+
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const productTotal = price * quantity; // Calculate product total
+
+        const row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+            </tr>
+        `;
+        orderDetailsContent.innerHTML += row; // Add row to table
+
+        total += productTotal; // Accumulate the product total to the overall total
+    });
+
+    // Update total price in the modal
+    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
+
+    // Add event listeners to dynamically created Edit buttons
+    const editButtons = document.querySelectorAll('.modalOrderEditButton');
+    editButtons.forEach((button) => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            const row = this.closest('tr');
+            const quantityCell = row.querySelector('.quantity'); // Find the quantity cell
+
+            // Get the current quantity
+            const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+
+            // Create input field for editing quantity
+            const inputField = document.createElement('input');
+            inputField.type = 'number';
+            inputField.value = currentQuantity;
+            inputField.classList.add('edit-quantity'); // Optional: style the input field
+
+            // Replace the current quantity with the input field
+            quantityCell.innerHTML = '';
+            quantityCell.appendChild(inputField);
+
+            // Add Save button
+            const saveButton = document.createElement('button');
+            saveButton.textContent = 'Salvar';
+            saveButton.classList.add('save-quantity-btn');
+            quantityCell.appendChild(saveButton);
+
+            // Save button event listener
+            saveButton.addEventListener('click', function() {
+                const newQuantity = inputField.value;
+                if (newQuantity && newQuantity > 0) {
+                    // Update the table with the new quantity value
+                    quantityCell.innerHTML = newQuantity;
+
+                    // Optionally: Send the updated quantity to the backend or perform other actions here
+                } else {
+                    alert('Please enter a valid quantity');
+                }
+            });
+        });
+    });
+
+    // Add event listeners for delete buttons
+    document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation(); // Prevent the row click event
+            const productId = button.getAttribute('data-product-id');
+            await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
+            console.log(productId, orderDetails.id);
+        });
+    });
+}
+
+
+
+
+
+
+
+
+
+
+/*
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -656,6 +817,14 @@ function populateModal(orderDetails) {
         });
     });
 }
+*/
+
+
+
+
+
+
+
 
 // Function to delete a product
 async function deleteProduct(productId, orderId) {
@@ -726,7 +895,149 @@ textarea.addEventListener('input', () => {
 
 
 
+// Save Notes Button
+document.getElementById("save-notes-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
 
+    if (!orderId) {
+        alert("No draft order found to save notes.");
+        return;
+    }
+
+    const requestData = {
+        orderId: orderId,
+        observation: observation,
+    };
+
+    try {
+        const response = await fetch('https://backendnyrfestas.vercel.app/save-notes', {
+            method: "PATCH", // Use PATCH to indicate partial update
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+            alert('Pedido salvo com sucesso!');
+        } else {
+            console.error("Falha ao salvar pedido.");
+            alert('Ocorreu um erro, tente novamente.');
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+    }
+});
+
+
+
+document.getElementById("delete-order-btn").addEventListener("click", async () => {
+    
+    const orderId = localStorage.getItem('currentOrderId');
+
+    // Confirmation dialog
+    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO NÃO PODERÁ SER DESFEITA.");
+    if (!confirmDelete) {
+        // If the user cancels, stop the function
+        return;
+    }
+
+    // Prepare data to send
+    const requestData = {
+        orderId: orderId, // Use the same key as in the backend
+    };
+
+    try {
+        // Send a DELETE request to delete the order
+        const response = await fetch('https://backendnyrfestas.vercel.app/delete-order', {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+            alert('PEDIDO DELETADO COM SUCESSO!');
+
+            // Refresh the page
+            window.location.reload();
+            console.log("Order successfully deleted!");
+        } else {
+            console.error("Falha ao deletar o pedido.");
+            alert('An error occurred. Please try again later.');
+        }
+    } catch (error) {
+        console.error("Error submitting the order:", error);
+    }
+});
+
+
+
+
+
+
+
+document.getElementById("submit-order-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    const orderId = localStorage.getItem('currentOrderId');
+
+    // Validate if orderId exists and observation is not empty
+    if (!orderId) {
+        alert('Order ID is missing. Please try again.');
+        return; // Stop further execution if orderId is not found
+    }
+
+    if (!observation) {
+        alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES".');
+        return; // Stop further execution if observation is empty
+    }
+
+    // Ask for user confirmation before submitting
+    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ENVIAR ESTE PEDIDO, ESTA AÇÃO BLOQUEARÁ FUTURAS ALTERAÇÕES?');
+
+    if (!userConfirmed) {
+        return; // If user cancels, stop the submission
+    }
+
+    // Prepare data to send
+    const requestData = {
+      orderId: orderId, // Use the same key as in the backend
+      observation: observation, // Use the same key as in the backend
+    };
+
+    console.log(orderId, observation);
+
+    try {
+      // Send a POST request to update the order
+      const response = await fetch('https://backendnyrfestas.vercel.app/submit-order', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        alert('PEDIDO FOI ENVIADO COM SUCESSO!');
+        // Refresh the page
+        window.location.reload();
+        console.log("Order successfully submitted!");
+      } else {
+        console.error("Failed to submit the order.");
+        alert('An error occurred. Please try again later.');
+      }
+    } catch (error) {
+      console.error("Error submitting the order:", error);
+    }
+});
+
+
+
+
+
+/*
 document.getElementById("submit-order-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
     const orderId = localStorage.getItem('currentOrderId');
@@ -750,7 +1061,7 @@ console.log(orderId, observation);
 
       if (response.ok) {
 
-        alert('Order has been submitted and updated successfully!');
+        alert('PEDIDO FOI ENVIADO COM SUCESSO!');
 
       // Refresh the page
       window.location.reload();
@@ -763,6 +1074,155 @@ console.log(orderId, observation);
       console.error("Error submitting the order:", error);
     }
 });
+
+
+*/
+
+
+
+
+
+
+
+
+
+function printOrder() {
+    const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
+    const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
+
+    // Inject the necessary print styles directly into the print window
+    printWindow.document.write('<html><head><title>Print Order</title>');
+    printWindow.document.write('<style>');
+    printWindow.document.write(`
+     @media print {
+    /* General Page Style */
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    /* Logo styling */
+    #logo-image {
+        display: block;
+        margin: 0 auto 20px;
+        max-width: 200px;
+    }
+
+    /* Hide unnecessary columns and buttons */
+    #order-items-table th:nth-child(7),
+    #order-items-table td:nth-child(7),
+    #order-items-table th:nth-child(8),
+    #order-items-table td:nth-child(8),
+    .allbtns,
+    #submit-order-btn,
+    #delete-order-btn,
+    #close-modal {
+        display: none !important;
+    }
+
+    /* Table Style */
+    #order-items-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+        page-break-inside: avoid; /* Prevent breaks inside the table */
+    }
+
+    #order-items-table th, #order-items-table td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    /* Make the total order section distinct */
+    .totalOrderBox {
+        margin-top: 20px;
+        font-size: 14pt;
+        font-weight: bold;
+        border-top: 2px solid #000;
+        padding-top: 10px;
+        page-break-inside: avoid; /* Ensure the section stays together */
+    }
+
+    /* Observations Section */
+    .obs-row {
+        font-size: 11pt;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        page-break-inside: avoid; /* Prevent breaks in the observation area */
+    }
+
+    .obs-row textarea {
+        width: 100%;
+        font-size: 11pt;
+        border: 1px solid #ddd;
+        padding: 5px;
+        box-sizing: border-box;
+        resize: none; /* Disable resizing during print */
+        white-space: pre-wrap; /* Ensure text wraps within the textarea */
+        overflow: visible; /* Allow for overflow in the print view */
+        min-height: 160px; /* Set a reasonable minimum height */
+        height: auto !important; /* Allow it to expand to fit content */
+        
+    }
+
+    /* Section Spacing */
+    .order-header {
+        margin-bottom: 20px;
+        page-break-inside: avoid; /* Prevent break inside header */
+    }
+
+    /* Ensure good readability */
+    .order-info-row span {
+        font-weight: bold;
+    }
+
+    table {
+        font-size: 10pt;
+    }
+
+    /* Remove block-style page breaks, allow natural flow */
+    .order-info, .order-total {
+        page-break-after: auto; /* Let content flow naturally */
+    }
+
+    /* Adjust table column width */
+    #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
+        width: 15%;
+    }
+
+    #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
+        width: 40%;
+    }
+
+    #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
+        width: 10%;
+    }
+
+    #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
+        width: 15%;
+    }
+
+    #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
+        width: 15%;
+    }
+}
+
+
+
+    `);
+    printWindow.document.write('</style></head><body>');
+    printWindow.document.write(modalContent); // Insert modal content into the print window
+    printWindow.document.write('</body></html>');
+    printWindow.document.close(); // Close the document to ensure all content is loaded
+    printWindow.print(); // Trigger the print dialog
+}
+
+
+
+
 
 </script>
 </body>

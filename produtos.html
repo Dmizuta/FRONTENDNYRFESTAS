@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +12,6 @@
 
 
 <style>
-
-
-
 
 .icon-wrapper {
     position: relative;
@@ -69,20 +66,7 @@
 </style>
 
 <body>
-    <div class="icons">
-        <div class="icon-wrapper">
-            <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
-            <span class="tooltip">Carnaval</span>
-        </div>
-        <div class="icon-wrapper">
-            <img id="junino" src="/imagens/junino1.png" alt="Junino">
-            <span class="tooltip">Junino</span>
-        </div>
-        <div class="icon-wrapper">
-            <img id="hlwn" src="/imagens/halloween.png" alt="Halloween">
-            <span class="tooltip">Halloween</span>
-        </div>
-    </div>
+   
     
         <header>
         <h1 id="nyrfestas">NYR Festas</h1>
@@ -107,9 +91,27 @@
      
     </nav>
       
-    <div class="PAGE">
-    <h1 id="teste" data-tooltip="Carnaval">Lista de Produtos</h1>
+    <div class="icons">
+        <div class="icon-wrapper">
+            <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
+            <span class="tooltip">Carnaval</span>
+        </div>
+        <div class="icon-wrapper">
+            <img id="junino" src="/imagens/junino1.png" alt="Junino">
+            <span class="tooltip">Junino</span>
+        </div>
+        <div class="icon-wrapper">
+            <img id="hlwn" src="/imagens/halloween.png" alt="Halloween">
+            <span class="tooltip">Halloween</span>
+        </div>
+    </div>
 
+
+    <div class="PAGE">
+
+
+
+        <h1 id="teste" data-tooltip="Carnaval">Lista de Produtos</h1>
 
 <!-- Search Wrapper -->
 <div class="search-wrapper">
@@ -120,6 +122,7 @@
     <table id="productTable">
         <thead>
             <tr>
+                <th>Item</th>
                 <th>Foto do produto</th>
                 <th>Código do produto</th>
                 <th>Descrição do produto</th>
@@ -143,9 +146,11 @@
         <span class="close" id="closeModalBtn">&times;</span>
         
         <div class="modal-stage-one">
+
             <div class="prodimage">
             <img src="https://via.placeholder.com/150" alt="Product Image">
             </div>
+            
             <div class="product-info">
                 <h3 id="codprod">Product Name</h3>
                 <p id="descrip">This is a brief description of the product. It is very useful and high quality!</p>

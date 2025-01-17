@@ -3,7 +3,6 @@
 
 
 
-
 .logoNyr{
     position:fixed;
     top: 10px; /* Ajuste para a altura desejada */
@@ -48,6 +47,9 @@ header {
     margin: 0;
     font-weight: 700; /* Negrito */
     max-width: 100%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+
 }
 h1{
     color: #011a1f;
@@ -222,10 +224,13 @@ th {
     
 
 }
-.prodimage{transition: transform 0.3s ease;
-    max-width: 100%;
 
+.prodimage {
+    transition: transform 0.3s ease;
+    max-width: 100%;
+    
 }
+
 .prodimage:hover {
     color: #F2B680; /* Yellow-orange hover color */
     transform: scale(1.2); /* Aumenta o tamanho do elemento em 10% */
@@ -269,7 +274,7 @@ th {
   .search-wrapper {
 
     max-width: 95%;
-    background-color: #e0e0e0;
+    background-color: #e7e5e5;
     border-radius: 8px;
     margin: 30px auto;
    padding: 15px;
@@ -284,8 +289,9 @@ th {
     width: 100%;
     padding: 10px;
    margin: 10px auto;
- background-color: #e0e0e0;
+ background-color: #eeeeee;
     border-radius: 8px;
+    border: #011a1f;
     box-sizing: border-box;
     font-size: 14px;
 }
@@ -403,3 +409,21 @@ th {
     font-weight: normal;
     color: #e61717; /* Highlighted text for the value */
 }
+#closeModalBtn {
+    position: absolute; /* Position relative to the modal */
+    top: -20px; /* Move it above the modal */
+    right: -20px; /* Move it to the right, outside the modal */
+    z-index: 1000; /* Ensure it stays on top */
+    font-size: 20px; /* Make the "×" visible */
+    cursor: pointer; /* Change cursor to indicate clickability */
+    background: red; /* Optional: Add a background for visibility */
+    color: white; /* Optional: Make the "×" color contrast with the background */
+    border: none;
+    border-radius: 50%; /* Optional: Make it circular */
+    width: 30px; /* Optional: Set width */
+    height: 30px; /* Optional: Set height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
