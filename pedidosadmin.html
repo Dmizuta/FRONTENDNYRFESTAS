@@ -452,7 +452,7 @@ function formatCurrency(value) {
 
     orders.forEach(order => {
         const total = parseFloat(order.total);
-        const statusText = order.status === 1 ? 'Submitted' : 'Draft';
+        const statusText = order.status === 1 ? 'Enviado' : 'Aberto';
         const orderRow = `
             <div class="order-row" data-id="${order.id}" data-razaosocial="${order.razaosocial}">
                 <div class="order-details">
