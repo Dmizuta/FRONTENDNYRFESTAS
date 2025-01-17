@@ -828,6 +828,42 @@ textarea.addEventListener('input', () => {
 
 
 
+// Save Notes Button
+document.getElementById("save-notes-btn").addEventListener("click", async () => {
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
+
+    if (!orderId) {
+        alert("No draft order found to save notes.");
+        return;
+    }
+
+    const requestData = {
+        orderId: orderId,
+        observation: observation,
+    };
+
+    try {
+        const response = await fetch('https://backendnyrfestas.vercel.app/save-notes', {
+            method: "PATCH", // Use PATCH to indicate partial update
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (response.ok) {
+            alert('PEDIDO SALVO COM SUCESSO!');
+        } else {
+            console.error("Falha ao salvar pedido.");
+            alert('Ocorreu um erro, tente novamente.');
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+    }
+});
+
+
 
 
 
