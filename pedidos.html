@@ -662,6 +662,165 @@ function formatCurrency(value) {
 
 
 
+
+
+
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    // Update general order information in the modal
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('representante').textContent = orderDetails.representante;
+    document.getElementById('obs').textContent = orderDetails.observacoes;
+
+    // Update products table and calculate total
+    const orderDetailsContent = document.getElementById('order-details-content');
+    orderDetailsContent.innerHTML = ''; // Clear existing content
+    let total = 0; // Variable to accumulate the total price    
+
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const productTotal = price * quantity; // Calculate product total
+
+        const row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+            </tr>
+        `;
+        orderDetailsContent.innerHTML += row; // Add row to table
+
+        total += productTotal; // Accumulate the product total to the overall total
+    });
+
+    // Update total price in the modal
+    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
+
+    // Add event listeners to dynamically created Edit buttons
+    const editButtons = document.querySelectorAll('.modalOrderEditButton');
+    editButtons.forEach((button) => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            const row = this.closest('tr');
+            const quantityCell = row.querySelector('.quantity'); // Find the quantity cell
+
+            // Get the current quantity
+            const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+
+            // Create input field for editing quantity
+            const inputField = document.createElement('input');
+            inputField.type = 'number';
+            inputField.value = currentQuantity;
+            inputField.classList.add('edit-quantity'); // Optional: style the input field
+
+            // Replace the current quantity with the input field
+            quantityCell.innerHTML = '';
+            quantityCell.appendChild(inputField);
+
+            // Add Save button
+            const saveButton = document.createElement('button');
+            saveButton.textContent = 'Salvar';
+            saveButton.classList.add('save-quantity-btn');
+            quantityCell.appendChild(saveButton);
+
+            // Save button event listener
+            saveButton.addEventListener('click', async function() {
+                const newQuantity = inputField.value;
+                if (newQuantity && newQuantity > 0) {
+                    // Call the backend API to update the quantity
+                    const productUpdated = await updateProductQuantity(orderDetails.id, productId, newQuantity);
+
+                    if (productUpdated) {
+                        // Update the table row with the new quantity
+                        quantityCell.innerHTML = newQuantity;
+
+                        // Update the total for this product
+                        const price = parseFloat(row.querySelector('td:nth-child(5)').textContent.replace('R$', '').trim());
+                        const newTotal = price * newQuantity;
+                        row.querySelector('td:nth-child(6)').textContent = formatCurrency(newTotal);
+
+                        // Optionally: Recalculate the overall order total here
+                        updateOrderTotal(orderDetails.id);
+                    } else {
+                        alert('Failed to update the quantity.');
+                    }
+                } else {
+                    alert('Please enter a valid quantity');
+                }
+            });
+        });
+    });
+
+    // Add event listeners for delete buttons
+    document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation(); // Prevent the row click event
+            const productId = button.getAttribute('data-product-id');
+            await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
+            console.log(productId, orderDetails.id);
+        });
+    });
+}
+
+// Function to update the product quantity in the backend
+async function updateProductQuantity(orderId, productId, newQuantity) {
+    try {
+        const response = await fetch(`/orders/${orderId}/products/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ quantity: newQuantity }),
+        });
+
+        if (response.ok) {
+            return true;
+        } else {
+            console.error('Failed to update product quantity');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error updating product quantity:', error);
+        return false;
+    }
+}
+
+// Function to update the order's total after product quantity is updated
+async function updateOrderTotal(orderId) {
+    try {
+        const response = await fetch(`/orders/${orderId}/total`);
+        const data = await response.json();
+
+        if (response.ok) {
+            document.getElementById('total-value').textContent = formatCurrency(data.total); // Update total in the modal
+        } else {
+            console.error('Failed to update order total');
+        }
+    } catch (error) {
+        console.error('Error updating order total:', error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -756,7 +915,7 @@ function populateModal(orderDetails) {
 
 
 
-
+*/
 
 
 
