@@ -862,9 +862,6 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
 
 
 
-
-
-
 document.getElementById("submit-order-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
     const orderId = localStorage.getItem('currentOrderId');
@@ -878,6 +875,13 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
     if (!observation) {
         alert('Please add an observation before submitting the order.');
         return; // Stop further execution if observation is empty
+    }
+
+    // Ask for user confirmation before submitting
+    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ENVIAR ESTE PEDIDO, ESTA AÇÃO BLOQUEARÁ FUTURAS ALTERAÇÕES?');
+
+    if (!userConfirmed) {
+        return; // If user cancels, stop the submission
     }
 
     // Prepare data to send
@@ -911,6 +915,9 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
       console.error("Error submitting the order:", error);
     }
 });
+
+
+
 
 
 /*
