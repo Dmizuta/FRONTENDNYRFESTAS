@@ -289,7 +289,7 @@
 
           .save-quantity-btn {
     background-color: #28a745;
-    width: 4rem;
+    width: 5rem;
     display: block; 
     margin: 0.5rem auto 0; /* Top margin, center ali
     gnment, no bottom margin */
@@ -776,6 +776,11 @@ function populateModal(orderDetails) {
             quantityCell.innerHTML = '';
             quantityCell.appendChild(inputField);
             quantityCell.appendChild(saveButton);
+
+            // Automatically focus the input field
+inputField.focus();
+
+quantityCell.appendChild(saveButton);
 
             // Add 'Enter' key support
             inputField.addEventListener('keypress', function (event) {
