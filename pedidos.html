@@ -754,11 +754,11 @@ function populateModal(orderDetails) {
             quantityCell.appendChild(inputField);
 
 
-  // Add Save button
-  const saveButton = document.createElement('button');
-            saveButton.textContent = 'Salvar';
-            saveButton.classList.add('save-quantity-btn');
-            quantityCell.appendChild(saveButton);
+    // Add Save button
+    const saveButton = document.createElement('button');
+                saveButton.textContent = 'Salvar';
+                saveButton.classList.add('save-quantity-btn');
+                quantityCell.appendChild(saveButton);
 
 
 
@@ -770,37 +770,37 @@ function populateModal(orderDetails) {
 
 
 
-            saveButton.addEventListener('click', async function() {
-    const newQuantity = inputField.value;
-    if (newQuantity && newQuantity > 0) {
-        // Send updated quantity to the backend
-        try {
-            const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ quantity: newQuantity })
-            });
+                saveButton.addEventListener('click', async function() {
+        const newQuantity = inputField.value;
+        if (newQuantity && newQuantity > 0) {
+            // Send updated quantity to the backend
+            try {
+                const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ quantity: newQuantity })
+                });
 
-            if (!response.ok) {
-                throw new Error('Failed to update quantity');
+                if (!response.ok) {
+                    throw new Error('Failed to update quantity');
+                }
+
+                // After the update, fetch the updated order details to recalculate the total
+                await fetchOrderDetails(orderDetails.id);  // This will refresh the modal with updated details
+
+                // Optionally, update the table directly if you don't want to reload the entire order
+                quantityCell.innerHTML = newQuantity; // Update the quantity in the table
+
+            } catch (error) {
+                alert('Error updating quantity');
+                console.error('Error updating quantity:', error);
             }
-
-            // After the update, fetch the updated order details to recalculate the total
-            await fetchOrderDetails(orderDetails.id);  // This will refresh the modal with updated details
-
-            // Optionally, update the table directly if you don't want to reload the entire order
-            quantityCell.innerHTML = newQuantity; // Update the quantity in the table
-
-        } catch (error) {
-            alert('Error updating quantity');
-            console.error('Error updating quantity:', error);
+        } else {
+            alert('Please enter a valid quantity');
         }
-    } else {
-        alert('Please enter a valid quantity');
-    }
-});
+    });
 
 
 
