@@ -754,7 +754,7 @@ function populateModal(orderDetails) {
     if (newQuantity && newQuantity > 0) {
         // Send updated quantity to the backend
         try {
-            const response = await fetch(`https://backendnyrfestas.vercel.app/update-product-quantity/${productId}`, {
+            const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
