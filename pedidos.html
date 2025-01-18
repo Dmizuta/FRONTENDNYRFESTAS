@@ -754,21 +754,15 @@ function populateModal(orderDetails) {
             quantityCell.appendChild(inputField);
 
 
+
+
+
+
     // Add Save button
     const saveButton = document.createElement('button');
                 saveButton.textContent = 'Salvar';
                 saveButton.classList.add('save-quantity-btn');
                 quantityCell.appendChild(saveButton);
-
-
-
-
-
-
-
-
-
-
 
                 saveButton.addEventListener('click', async function() {
         const newQuantity = inputField.value;
@@ -801,29 +795,6 @@ function populateModal(orderDetails) {
             alert('Please enter a valid quantity');
         }
     });
-
-
-
-
-
-
-
-
-
-
-          /*
-            // Save button event listener
-            saveButton.addEventListener('click', function() {
-                const newQuantity = inputField.value;
-                if (newQuantity && newQuantity > 0) {
-                    // Update the table with the new quantity value
-                    quantityCell.innerHTML = newQuantity;
-
-                    // Optionally: Send the updated quantity to the backend or perform other actions here
-                } else {
-                    alert('Please enter a valid quantity');
-                }
-            });*/
         });
     });
 
