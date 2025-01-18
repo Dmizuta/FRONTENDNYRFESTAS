@@ -285,7 +285,18 @@
             height: auto;
           }
           
-     
+          .save-quantity-btn {
+    /* background-color: #28a745; /* A nice green color */
+    width: 4rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
         </style>
 </head>
 
@@ -763,6 +774,14 @@ function populateModal(orderDetails) {
                 saveButton.textContent = 'Salvar';
                 saveButton.classList.add('save-quantity-btn');
                 quantityCell.appendChild(saveButton);
+
+// Add 'Enter' key functionality
+inputField.addEventListener('keypress', async function (event) {
+    if (event.key === 'Enter') {
+        saveButton.click();
+    }
+});
+
 
                 saveButton.addEventListener('click', async function() {
         const newQuantity = inputField.value;
