@@ -269,7 +269,12 @@
     height: auto;
   }
   
-
+  .save-quantity-btn {
+    background-color: #28a745;
+    width: 4rem;
+    display: block; 
+    margin: 0.5rem auto 0; /* Top margin, center alignment, no bottom margin */
+}
 
     </style>
     
@@ -612,7 +617,12 @@ function populateModal(orderDetails) {
 
 
 
-
+// Add 'Enter' key functionality
+inputField.addEventListener('keypress', async function (event) {
+    if (event.key === 'Enter') {
+        saveButton.click();
+    }
+});
 
 
     // Add Save button
