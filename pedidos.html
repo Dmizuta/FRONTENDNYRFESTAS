@@ -816,7 +816,7 @@ function populateModal(orderDetails) {
 
 // Optionally, you can re-calculate the total if necessary
 const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters (including R$, commas, etc.)
-const productTotal = price * newQuantity;
+const productTotal = price * newQuantity/100;
 
 // Update the total for this row
 row.cells[5].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
