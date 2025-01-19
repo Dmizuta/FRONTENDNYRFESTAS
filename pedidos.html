@@ -852,7 +852,7 @@ updateTotalPrice();
 // Function to update the total price in the modal
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
-    let total = 0;
+    let total = 1000;
     rows.forEach(row => {
         const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim());
         total += productTotal;
