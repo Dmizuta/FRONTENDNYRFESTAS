@@ -847,10 +847,16 @@ function populateModal(orderDetails) {
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
     let total = 0;
+
     rows.forEach(row => {
-        const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim());
+        // Parse the numeric value from the product total cell directly
+        const productTotal = parseFloat(row.cells[5].textContent.replace(/[^0-9.-]+/g, '')); // Remove currency symbols and any non-numeric characters
+
+        // Add the parsed product total to the overall total
         total += productTotal;
     });
+
+    // Update the total price in the modal with formatted value
     document.getElementById('total-value').textContent = formatCurrency(total);
 }
 
