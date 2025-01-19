@@ -777,8 +777,8 @@ function populateModal(orderDetails) {
             inputField.type = 'number';
             inputField.value = currentQuantity;
             inputField.classList.add('edit-quantity');
-            inputField.focus(); // Automatically focus the input field
 
+            // Add save button
             const saveButton = document.createElement('button');
             saveButton.textContent = 'Salvar';
             saveButton.classList.add('save-quantity-btn');
@@ -787,6 +787,9 @@ function populateModal(orderDetails) {
             quantityCell.innerHTML = '';
             quantityCell.appendChild(inputField);
             quantityCell.appendChild(saveButton);
+
+            // Focus the input field immediately after it is appended
+            inputField.focus();
 
             // Add 'Enter' key support
             inputField.addEventListener('keypress', function (event) {
@@ -850,6 +853,7 @@ function updateTotalPrice() {
     });
     document.getElementById('total-value').textContent = formatCurrency(total);
 }
+
 
 
 
