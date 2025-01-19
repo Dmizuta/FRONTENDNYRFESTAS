@@ -857,7 +857,8 @@ function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
     let total = 0; // Starting with an initial value of 1000
     rows.forEach(row => {
-        const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim());
+        const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim().replace(',', '.'));
+
         total += productTotal;
     });
     
