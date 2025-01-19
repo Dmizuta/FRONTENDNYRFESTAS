@@ -715,6 +715,7 @@ function formatCurrency(value) {
 
 
 
+// Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
     document.getElementById('order-id').textContent = orderDetails.id;
@@ -739,7 +740,7 @@ function populateModal(orderDetails) {
                 <td>${product.codproduto}</td>
                 <td>${product.descricao}</td>
                 <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
-                <td class="product-price">${formatCurrency(price)}</td> <!-- Add 'product-price' class -->
+                <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
                 <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
                 <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
@@ -753,159 +754,56 @@ function populateModal(orderDetails) {
     // Update total price in the modal
     document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
 
-
-
-
-
-/*
-// Add event listeners for edit buttons
-document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-    button.addEventListener('click', function () {
-        const productId = this.getAttribute('data-product-id');
-        const row = this.closest('tr');
-        const quantityCell = row.querySelector('.quantity');
-        const priceCell = row.querySelector('.product-price'); // Assuming the product price is in a column
-        
-        const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-        const price = parseFloat(priceCell.textContent.replace('R$', '').trim()); // Assuming price format as 'R$ xx.xx'
-
-        // Replace quantity with an editable input
-        const inputField = document.createElement('input');
-        inputField.type = 'number';
-        inputField.value = currentQuantity;
-        inputField.classList.add('edit-quantity');
-        inputField.setAttribute('min', 1); // Optional: Set min value for the input
-
-        const saveButton = document.createElement('button');
-        saveButton.textContent = 'Salvar';
-        saveButton.classList.add('save-quantity-btn');
-
-        // Clear current quantity cell content and append new input and save button
-        quantityCell.innerHTML = '';
-        quantityCell.appendChild(inputField);
-        quantityCell.appendChild(saveButton);
-
-        // Focus the input field
-        inputField.focus();
-
-        // Add 'Enter' key support
-        inputField.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') saveButton.click();
-        });
-
-        // Save quantity after clicking 'Salvar'
-        saveButton.addEventListener('click', async function () {
-            const newQuantity = parseInt(inputField.value, 10);
-            if (newQuantity && newQuantity > 0) {
-                // Send updated quantity to the backend
-                try {
-                    const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ quantity: newQuantity }),
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Failed to update quantity');
-                    }
-
-                    // After the update, fetch the updated order details to recalculate the total
-                    const updatedProduct = await response.json();
-                    const updatedTotal = updatedProduct.updatedProduct.total; // Assuming the updated total is returned
-
-                    // Update the quantity and product total in the table (without reordering the rows)
-                    quantityCell.innerHTML = newQuantity; // Update the quantity in the table
-                    const productTotal = updatedTotal; // Get the updated total for this product (assuming you get the total)
-
-                    // If you want to update the total for the order as well:
-                    document.getElementById('total-value').textContent = `R$ ${updatedTotal.toFixed(2)}`; // Update order total
-
-                } catch (error) {
-                    alert('Error updating quantity');
-                    console.error('Error updating quantity:', error);
-                }
-            } else {
-                alert('Please enter a valid quantity');
-            }
-        });
-    });
-});
-
-
-
-
-
-
-
-*/
-
-    
     // Add event listeners for edit buttons
     document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         button.addEventListener('click', function () {
             const productId = this.getAttribute('data-product-id');
             const row = this.closest('tr');
             const quantityCell = row.querySelector('.quantity');
-            const priceCell = row.querySelector('.product-price'); // Assuming the product price is in a column
-            
+
             const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-            const price = parseFloat(priceCell.textContent.replace('R$', '').trim()); // Assuming price format as 'R$ xx.xx'
 
             // Replace quantity with an editable input
             const inputField = document.createElement('input');
             inputField.type = 'number';
             inputField.value = currentQuantity;
             inputField.classList.add('edit-quantity');
-            inputField.setAttribute('min', 1); // Optional: Set min value for the input
 
             const saveButton = document.createElement('button');
             saveButton.textContent = 'Salvar';
             saveButton.classList.add('save-quantity-btn');
 
-            // Clear current quantity cell content and append new input and save button
             quantityCell.innerHTML = '';
             quantityCell.appendChild(inputField);
             quantityCell.appendChild(saveButton);
 
-            // Focus the input field
-            inputField.focus();
+            // Automatically focus the input field
+inputField.focus();
+
+quantityCell.appendChild(saveButton);
 
             // Add 'Enter' key support
             inputField.addEventListener('keypress', function (event) {
                 if (event.key === 'Enter') saveButton.click();
             });
 
-            // Save quantity after clicking 'Salvar'
             saveButton.addEventListener('click', async function () {
                 const newQuantity = parseInt(inputField.value, 10);
                 if (newQuantity && newQuantity > 0) {
-                    // Send updated quantity to the backend
                     try {
                         const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
                             method: 'PATCH',
                             headers: {
-                                'Content-Type': 'application/json',
+                                'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ quantity: newQuantity }),
+                            body: JSON.stringify({ quantity: newQuantity })
                         });
 
-                        if (!response.ok) {
-                            throw new Error('Failed to update quantity');
-                        }
+                        if (!response.ok) throw new Error('Failed to update quantity');
 
-                        // After the update, fetch the updated order details to recalculate the total
-                        const updatedProduct = await response.json();
-                        const updatedTotal = updatedProduct.updatedProduct.total; // Assuming the updated total is returned
+                        // Refresh modal with updated order details
+                        await fetchOrderDetails(orderDetails.id);
 
-                        // Update the quantity and product total in the table (without reordering the rows)
-                        quantityCell.innerHTML = newQuantity; // Update the quantity in the table
-                        const productTotal = updatedTotal; // Get the updated total for this product (assuming you get the total)
-
-                        // If you want to update the total for the order as well:
-                        document.getElementById('total-value').textContent = `R$ ${updatedTotal.toFixed(2)}`; // Update order total
-                        
                     } catch (error) {
                         alert('Error updating quantity');
                         console.error('Error updating quantity:', error);
