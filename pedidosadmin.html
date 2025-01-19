@@ -572,6 +572,8 @@ function formatCurrency(value) {
 
 
 
+
+
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -583,24 +585,25 @@ function populateModal(orderDetails) {
 
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = ''; // Clear existing content
     let total = 0; // Variable to accumulate the total price    
 
+    // Clear existing content and rebuild the table
+    orderDetailsContent.innerHTML = ''; // Clear content initially
     orderDetails.products.forEach((product, index) => {
         const price = parseFloat(product.preco); // Ensure price is a number
         const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
         const productTotal = price * quantity; // Calculate product total
 
         const row = `
-            <tr>
+            <tr data-product-id="${product.id}">
                 <td>${index + 1}</td>
                 <td>${product.codproduto}</td>
                 <td>${product.descricao}</td>
                 <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
             </tr>
         `;
         orderDetailsContent.innerHTML += row; // Add row to table
@@ -614,10 +617,9 @@ function populateModal(orderDetails) {
     // Add event listeners for edit buttons
     document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         button.addEventListener('click', function () {
-            const productId = this.getAttribute('data-product-id');
             const row = this.closest('tr');
             const quantityCell = row.querySelector('.quantity');
-
+            const productId = row.getAttribute('data-product-id');
             const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
 
             // Replace quantity with an editable input
@@ -626,18 +628,18 @@ function populateModal(orderDetails) {
             inputField.value = currentQuantity;
             inputField.classList.add('edit-quantity');
 
+            // Add save button
             const saveButton = document.createElement('button');
             saveButton.textContent = 'Salvar';
             saveButton.classList.add('save-quantity-btn');
 
+            // Clear the quantity cell and append input and save button
             quantityCell.innerHTML = '';
             quantityCell.appendChild(inputField);
             quantityCell.appendChild(saveButton);
 
-          // Automatically focus the input field
-inputField.focus();
-
-quantityCell.appendChild(saveButton);
+            // Focus the input field immediately after it is appended
+            inputField.focus();
 
             // Add 'Enter' key support
             inputField.addEventListener('keypress', function (event) {
@@ -658,8 +660,28 @@ quantityCell.appendChild(saveButton);
 
                         if (!response.ok) throw new Error('Failed to update quantity');
 
-                        // Refresh modal with updated order details
-                        await fetchOrderDetails(orderDetails.id);
+                        // Update the quantity directly in the table after success
+                        quantityCell.textContent = newQuantity;
+
+
+// Optionally, you can re-calculate the total if necessary
+const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters (including R$, commas, etc.)
+const productTotal = price * newQuantity/100;
+
+// Update the total for this row
+row.cells[5].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
+
+// Update the total price in the modal
+updateTotalPrice();
+
+/*
+                        // Optionally, you can re-calculate the total if necessary
+                        const price = parseFloat(row.cells[4].textContent.replace('R$', '').trim());
+                        const productTotal = price * newQuantity;
+                        row.cells[5].textContent = formatCurrency(productTotal); // Update the total for this row
+
+                        // Update the total price in the modal
+                        updateTotalPrice();*/
 
                     } catch (error) {
                         alert('Error updating quantity');
@@ -676,12 +698,23 @@ quantityCell.appendChild(saveButton);
     document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
         button.addEventListener('click', async (event) => {
             event.stopPropagation(); // Prevent row click interference
-            const productId = button.getAttribute('data-product-id');
+            const row = button.closest('tr');
+            const productId = row.getAttribute('data-product-id');
             await deleteProduct(productId, orderDetails.id);
         });
     });
 }
 
+// Function to update the total price in the modal
+function updateTotalPrice() {
+    const rows = document.querySelectorAll('#order-details-content tr');
+    let total = 0;
+    rows.forEach(row => {
+        const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim());
+        total += productTotal;
+    });
+    document.getElementById('total-value').textContent = formatCurrency(total);
+}
 
 
 
