@@ -298,15 +298,25 @@
     background-color: #6aa277; /* Yellow-orange hover color */
     transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
 }
-
+/*
 .edit-quantity {
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #007BFF; /* Optional: blue border */
+    border: 2px solid #007BFF; 
     border-radius: 8px;
-    width: 5rem; /* Adjust width if necessary */
+    width: 4rem; 
     text-align: center;
 }
+*/
+.edit-quantity {
+    width: auto;                /* Default width, will auto-expand based on content */
+    min-width: 3ch;             /* Minimum width based on the width of 3 characters */
+    max-width: 10ch;            /* Optional: Maximum width, prevent it from becoming too wide */
+    padding: 5px;
+    font-size: 1rem;
+    text-align: center;         /* Center text for better readability */
+}
+
 
         </style>
 </head>
