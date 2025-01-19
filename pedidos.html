@@ -849,6 +849,27 @@ updateTotalPrice();
     });
 }
 
+
+
+
+// Function to update the total price in the modal
+function updateTotalPrice() {
+    const rows = document.querySelectorAll('#order-details-content tr');
+    let total = 1000; // Starting with an initial value of 1000
+    rows.forEach(row => {
+        const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim());
+        total += productTotal;
+    });
+    
+    // Round the total to 2 decimal places
+    total = total.toFixed(2); // This will convert it to a string with 2 decimals
+    
+    document.getElementById('total-value').textContent = formatCurrency(total);
+}
+
+
+
+/*
 // Function to update the total price in the modal
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
@@ -858,7 +879,7 @@ function updateTotalPrice() {
         total += productTotal;
     });
     document.getElementById('total-value').textContent = formatCurrency(total);
-}
+}*/
 
 
 
