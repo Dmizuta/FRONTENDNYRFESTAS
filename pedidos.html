@@ -757,7 +757,7 @@ function populateModal(orderDetails) {
 
 
 
-
+/*
 // Add event listeners for edit buttons
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', function () {
@@ -839,9 +839,9 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
 
+*/
 
-
-    /*
+    
     // Add event listeners for edit buttons
     document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         button.addEventListener('click', function () {
@@ -905,7 +905,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
                         // If you want to update the total for the order as well:
                         document.getElementById('total-value').textContent = `R$ ${updatedTotal.toFixed(2)}`; // Update order total
-
+                        
                     } catch (error) {
                         alert('Error updating quantity');
                         console.error('Error updating quantity:', error);
@@ -916,7 +916,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             });
         });
     });
-*/
+
     // Add event listeners for delete buttons
     document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
         button.addEventListener('click', async (event) => {
