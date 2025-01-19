@@ -634,7 +634,7 @@ function populateModal(orderDetails) {
             quantityCell.appendChild(inputField);
             quantityCell.appendChild(saveButton);
 
-            // Automatically focus the input field
+          /* // Automatically focus the input field
 inputField.focus();
 
 quantityCell.appendChild(saveButton);
@@ -642,7 +642,7 @@ quantityCell.appendChild(saveButton);
             // Add 'Enter' key support
             inputField.addEventListener('keypress', function (event) {
                 if (event.key === 'Enter') saveButton.click();
-            });
+            });*/
 
             saveButton.addEventListener('click', async function () {
                 const newQuantity = parseInt(inputField.value, 10);
@@ -681,80 +681,6 @@ quantityCell.appendChild(saveButton);
         });
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    // Update general order information in the modal
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-    document.getElementById('representante').textContent = orderDetails.representante;
-    document.getElementById('obs').textContent = orderDetails.observacoes;
-    
-
-    // Update products table and calculate total
-    const orderDetailsContent = document.getElementById('order-details-content');
-    orderDetailsContent.innerHTML = ''; // Clear existing content
-    let total = 0; // Variable to accumulate the total price
-
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco); // Ensure price is a number
-        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
-        const productTotal = price * quantity; // Calculate product total
-
-        const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td>${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderEditButton" data-product-id="${product.id}"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton" data-product-id="${product.id}"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-            </tr>
-        `;
-        orderDetailsContent.innerHTML += row; // Add row to table
-
-        total += productTotal; // Accumulate the product total to the overall total
-    });
-
-    // Update total price in the modal
-    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
-    
-    
-    // Add event listeners for delete buttons
-    document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
-        button.addEventListener('click', async (event) => {
-            event.stopPropagation(); // Prevent the row click event
-            const productId = button.getAttribute('data-product-id');
-            await deleteProduct(productId, orderDetails.id); // Pass the product ID and order ID
-        console.log(productId, orderDetails.id);
-        
-        });
-    });
-}
-*/
-
-
-
 
 
 
