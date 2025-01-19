@@ -824,14 +824,8 @@ row.cells[5].textContent = formatCurrency(productTotal); // Ensure it's formatte
 // Update the total price in the modal
 updateTotalPrice();
 
-/*
-                        // Optionally, you can re-calculate the total if necessary
-                        const price = parseFloat(row.cells[4].textContent.replace('R$', '').trim());
-                        const productTotal = price * newQuantity;
-                        row.cells[5].textContent = formatCurrency(productTotal); // Update the total for this row
 
-                        // Update the total price in the modal
-                        updateTotalPrice();*/
+
 
                     } catch (error) {
                         alert('Error updating quantity');
@@ -854,7 +848,7 @@ updateTotalPrice();
         });
     });
 }
-
+/*
 // Function to update the total price in the modal
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
@@ -865,8 +859,7 @@ function updateTotalPrice() {
     });
     document.getElementById('total-value').textContent = formatCurrency(total);
 }
-
-
+*/
 
 
 
