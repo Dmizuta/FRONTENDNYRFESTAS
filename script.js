@@ -175,16 +175,19 @@ window.addEventListener("click", function (event) {
 
 //ADD PRODUCT TO ORDER
 document.getElementById("addButton").addEventListener("click", async () => {
-  const customerId = localStorage.getItem("customerId");
-  const username = localStorage.getItem("username");
-  const userRole = localStorage.getItem("role");
-  
+
      // Add 'Enter' key support
      inputField.addEventListener('keypress', function (event) {
       if (event.key === 'Enter') saveButton.click();
   });
 
+  const customerId = localStorage.getItem("customerId");
+  const username = localStorage.getItem("username");
+  const userRole = localStorage.getItem("role");
   
+  
+
+
   console.log("Button clicked. User role:", userRole);
 
   if (!username) {
