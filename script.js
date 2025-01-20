@@ -304,7 +304,7 @@ if (userRole !== "ADMIN") {
         }
       } else {
         console.error("Failed to fetch customer info:", customerResponse);
-        alert("SELECIONE UM CADASTRO PARA ADICIONAR O PRODUTO.");
+        alert("SELECIONE UM CLIENTE PARA ADICIONAR O PRODUTO.");
       }
     } else {
       alert('CADASTRO NÃO PREENCHIDO, NÃO É POSSÍVEL ADICIONAR UM PRODUTO.');
