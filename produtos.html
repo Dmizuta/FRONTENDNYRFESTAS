@@ -262,9 +262,7 @@ function loadCustomerName() {
       .catch(error => {
           console.error('Error fetching customer name:', error);
 
-          // Fallback: Try getting the name from Cadastro page (if available)
-          const fallbackName = document.querySelector('#cadastro-page input[name="razaoSocial"]')?.value;
-          document.getElementById('customerSelected').textContent = `Customer: ${fallbackName || 'Unavailable'}`;
+          
       });
 }
 
