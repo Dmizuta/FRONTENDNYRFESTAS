@@ -247,7 +247,7 @@ function loadCustomerName() {
   }
 
   // Fetch customer name from backend
-  fetch(`https://www.mm88.com.br/displayName/${customerId}`)
+  fetch('https://backendnyrfestas.vercel.app/displayName/${customerId}')
       .then(response => {
           if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
