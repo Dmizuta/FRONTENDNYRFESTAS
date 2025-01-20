@@ -179,11 +179,14 @@ document.getElementById("addButton").addEventListener("click", async () => {
   
 
  // Listen for the Enter key press and trigger the button click
- document.addEventListener("keypress", (event) => {
+ document.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     addButton.click(); // Trigger click event on the addButton
   }
 });
+
+
+
 
 
   const customerId = localStorage.getItem("customerId");
