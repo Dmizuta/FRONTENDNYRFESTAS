@@ -176,10 +176,15 @@ window.addEventListener("click", function (event) {
 //ADD PRODUCT TO ORDER
 document.getElementById("addButton").addEventListener("click", async () => {
 
-     // Add 'Enter' key support
-     inputField.addEventListener('keypress', function (event) {
-      if (event.key === 'Enter') saveButton.click();
-  });
+  
+
+ // Listen for the Enter key press and trigger the button click
+ document.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    addButton.click(); // Trigger click event on the addButton
+  }
+});
+
 
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
