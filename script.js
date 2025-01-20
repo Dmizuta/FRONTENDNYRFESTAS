@@ -173,30 +173,10 @@ window.addEventListener("click", function (event) {
 
 
 
+//ADD PRODUCT TO ORDER
+document.getElementById("addButton").addEventListener("click", async () => {
 
 
-
-
-
-// ADD PRODUCT TO ORDER
-const addProductToOrder = async () => {
-  const customerId = localStorage.getItem("customerId");
-  const username = localStorage.getItem("username");
-  const userRole = localStorage.getItem("role");
-
-  console.log("Action triggered. User role:", userRole);
-
-  if (!username) {
-      alert("NENHUM CADASTRO SELECIONADO.");
-      console.log("No username found in localStorage.");
-      return;
-  }
-
-  // Continue com a lógica de adicionar o produto ao pedido...
-};
-
-// Adiciona o evento de clique no botão
-document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
@@ -204,14 +184,6 @@ document.addEventListener("keydown", (event) => {
       addProductToOrder();
   }
 });
-
-/*
-//ADD PRODUCT TO ORDER
-document.getElementById("addButton").addEventListener("click", async () => {
-
-
-
-
 
 
 
@@ -223,9 +195,6 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
   console.log("Button clicked. User role:", userRole);
-*/
-
-
 
   if (!username) {
     alert("NENHUM CADASTRO SELECIONADO.");
