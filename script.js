@@ -173,17 +173,43 @@ window.addEventListener("click", function (event) {
 
 
 
+
+
+
+
+
+// ADD PRODUCT TO ORDER
+const addProductToOrder = async () => {
+  const customerId = localStorage.getItem("customerId");
+  const username = localStorage.getItem("username");
+  const userRole = localStorage.getItem("role");
+
+  console.log("Action triggered. User role:", userRole);
+
+  if (!username) {
+      alert("NENHUM CADASTRO SELECIONADO.");
+      console.log("No username found in localStorage.");
+      return;
+  }
+
+  // Continue com a lógica de adicionar o produto ao pedido...
+};
+
+// Adiciona o evento de clique no botão
+document.getElementById("addButton").addEventListener("click", addProductToOrder);
+
+// Adiciona o evento de pressionar a tecla "Enter"
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+      addProductToOrder();
+  }
+});
+
+/*
 //ADD PRODUCT TO ORDER
 document.getElementById("addButton").addEventListener("click", async () => {
 
-  
 
- // Listen for the Enter key press and trigger the button click
- document.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    addButton.click(); // Trigger click event on the addButton
-  }
-});
 
 
 
@@ -197,6 +223,9 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
 
   console.log("Button clicked. User role:", userRole);
+*/
+
+
 
   if (!username) {
     alert("NENHUM CADASTRO SELECIONADO.");
