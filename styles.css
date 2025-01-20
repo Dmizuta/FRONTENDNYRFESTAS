@@ -45,7 +45,7 @@ header {
 
 #nyrfestas {
     color: #fff;
-    font-size: 2.5em; /* Aumentado para um destaque maior */
+    font-size: 2.5Rem; /* Aumentado para um destaque maior */
     margin: 0;
     font-weight: 700; /* Negrito */
     max-width: 100%;
@@ -85,7 +85,7 @@ nav a {
     font-weight: 500;
     padding: 12px 25px; /* Aumentado para botões mais largos */
     border-radius: 25px; /* Bordas mais arredondadas */
-    font-size: 1.1em; /* Aumentado para um tamanho maior */
+    font-size: 1.8rem; /* Aumentado para um tamanho maior */
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -114,7 +114,7 @@ h2 {
     padding: 20px;
     margin: 30px 0; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 2em; /* Aumentado para um tamanho maior */
+    font-size: 1.8rem; /* Aumentado para um tamanho maior */
     border-bottom: 3px solid #C7A88C; /* Borda inferior mais espessa */
     font-weight: 700; /* Negrito */
 }
@@ -136,7 +136,7 @@ form label, form input {
     border: 2px solid #ccc; /* Borda mais espessa */
     border-radius: 10px; /* Bordas arredondadas */
     outline: none;
-    font-size: 1em; /* Tamanho padrão */
+    font-size: 1.2em; /* Tamanho padrão */
     transition: border-color 0.3s;
 }
 
@@ -154,7 +154,7 @@ button {
     border-radius: 10px; /* Bordas arredondadas */
     cursor: pointer;
     width: 100%;
-    font-size: 1.1em; /* Aumentado para um tamanho maior */
+    font-size: 1.2em; /* Aumentado para um tamanho maior */
     font-weight: 700; /* Negrito */
     transition: background-color 0.3s, transform 0.2s;
 }
@@ -176,7 +176,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 15px; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1em; /* Tamanho padrão */
+    font-size: 1.2em; /* Tamanho padrão */
 }
 
 th {
@@ -191,7 +191,7 @@ th {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 16px; /* Tamanho padrão */
+    font-size: 1rem; /* Tamanho padrão */
     padding: 10px;
 }
 
@@ -201,7 +201,7 @@ th {
     padding: 15px; /* Aumentado para mais espaço */
     border-radius: 10px; /* Bordas arredondadas */
     border: 2px solid #ccc; /* Borda mais espessa */
-    font-size: 16px; /* Tamanho padrão */
+    font-size: 1rem; /* Tamanho padrão */
 }
 
 .PAGE{
@@ -212,7 +212,7 @@ th {
 
     margin-top: 5px;
     padding:8px;
-    font-size: medium;
+    font-size: larger;
     border-width: 1px;
     border-color: #022327;
     border-radius: 8px;
@@ -251,7 +251,7 @@ th {
     padding: 15px; /* Aumentado para mais espaço */
     border-radius: 10px; /* Bordas arredondadas */
     border: 2px solid #ccc; /* Borda mais espessa */
-    font-size: 16px; /* Tamanho padrão */
+    font-size: 1rem; /* Tamanho padrão */
 }
 
 .PAGE{
@@ -295,7 +295,7 @@ th {
     border-radius: 8px;
     border: #011a1f;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 /* Search Input */
@@ -304,7 +304,7 @@ th {
        margin-left: 0px;
        border-radius: 8px;
        box-sizing: border-box;
-       font-size: 16px;
+       font-size: 1rem;
        padding: 10px;
        width: 60%;
        border: 1px solid #ccc;
