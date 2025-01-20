@@ -178,7 +178,13 @@ document.getElementById("addButton").addEventListener("click", async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
   const userRole = localStorage.getItem("role");
+  
+     // Add 'Enter' key support
+     inputField.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') saveButton.click();
+  });
 
+  
   console.log("Button clicked. User role:", userRole);
 
   if (!username) {
