@@ -171,42 +171,20 @@ window.addEventListener("click", function (event) {
 
 
 
-
-
-
-
-
-
-// Function to add product to order
-async function addProductToOrder() {
+const addProductToOrder = async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
   const userRole = localStorage.getItem("role");
 
-  console.log("Function triggered. User role:", userRole);
+  console.log("Action triggered. User role:", userRole);
 
   if (!username) {
-    alert("NENHUM CADASTRO SELECIONADO.");
-    console.log("No username found in localStorage.");
-    return;
+      alert("NENHUM CADASTRO SELECIONADO.");
+      console.log("No username found in localStorage.");
+      return;
   }
-
-  // Your logic for adding the product...
-  console.log("Add product to order logic executed.");
-}
-
-// Add event listener for the button click
-document.getElementById("addButton").addEventListener("click", addProductToOrder);
-
-// Add event listener for the "Enter" key globally
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    addProductToOrder();
-  }
-});
-
-
 /*
+
 //ADD PRODUCT TO ORDER
 document.getElementById("addButton").addEventListener("click", async () => {
 
@@ -234,8 +212,8 @@ document.addEventListener("keydown", (event) => {
     alert("NENHUM CADASTRO SELECIONADO.");
     console.log("No username found in localStorage.");
     return;
-  }*/
-
+  }
+*/
 // FOR NON ADMIN USERS
 if (userRole !== "ADMIN") {
   try {
@@ -447,7 +425,29 @@ const productData = {
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
   }
-;
+};
+
+
+
+
+// Adiciona o evento de clique no botão
+document.getElementById("addButton").addEventListener("click", addProductToOrder);
+
+// Adiciona o evento de pressionar a tecla "Enter"
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        addProductToOrder();
+    }
+});
+
+
+
+
+
+
+
+
+
 
 
 
