@@ -447,7 +447,7 @@ const productData = {
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
   }
-});
+;
 
 
 
