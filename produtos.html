@@ -254,7 +254,7 @@ function loadCustomerName() {
   
   if (!customerId) {
       console.error('Customer ID not found in localStorage!');
-      document.getElementById('customerSelected').textContent = 'Customer: bug1';
+      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE.';
       return;
   }
 
@@ -279,7 +279,7 @@ function loadCustomerName() {
   })
   .catch(error => {
       console.error('Error fetching customer name:', error);
-      document.getElementById('customerSelected').textContent = 'Customer: BUG 2';
+      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
   });
 }
 
