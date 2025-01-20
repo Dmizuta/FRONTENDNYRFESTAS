@@ -177,9 +177,6 @@ window.addEventListener("click", function (event) {
 
 
 
-
-
-
 // Function to add product to order
 async function addProductToOrder() {
   const customerId = localStorage.getItem("customerId");
