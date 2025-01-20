@@ -171,31 +171,14 @@ window.addEventListener("click", function (event) {
 
 
 
-const addProductToOrder = async () => {
-  const customerId = localStorage.getItem("customerId");
-  const username = localStorage.getItem("username");
-  const userRole = localStorage.getItem("role");
 
-  console.log("Action triggered. User role:", userRole);
-
-  if (!username) {
-      alert("NENHUM CADASTRO SELECIONADO.");
-      console.log("No username found in localStorage.");
-      return;
-  }
-/*
 
 //ADD PRODUCT TO ORDER
 document.getElementById("addButton").addEventListener("click", async () => {
 
 
 
-// Adiciona o evento de pressionar a tecla "Enter"
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-      addProductToOrder();
-  }
-});
+
 
 
 
@@ -213,7 +196,7 @@ document.addEventListener("keydown", (event) => {
     console.log("No username found in localStorage.");
     return;
   }
-*/
+
 // FOR NON ADMIN USERS
 if (userRole !== "ADMIN") {
   try {
@@ -425,29 +408,7 @@ const productData = {
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
   }
-};
-
-
-
-
-// Adiciona o evento de clique no botão
-document.getElementById("addButton").addEventListener("click", addProductToOrder);
-
-// Adiciona o evento de pressionar a tecla "Enter"
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        addProductToOrder();
-    }
 });
-
-
-
-
-
-
-
-
-
 
 
 
