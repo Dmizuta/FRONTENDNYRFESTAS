@@ -194,7 +194,16 @@
 </div>
 
     <script>
-        
+        const cors = require('cors');
+        app.use(cors());
+
+
+
+
+
+
+
+
 
   // Fetch the user's role from localStorage
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
