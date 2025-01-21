@@ -12,71 +12,67 @@
 
     
 
+ 
     <style>
-
         /* Orders container */
         #orders-container {
-            max-width: 95%;
+                max-width: 95%;
                 margin: 30px auto;
                 padding: 20px;
                 background-color: white;
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        
-        }
-        
-        
-        
-        /* Order row layout */
-        .order-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            cursor: pointer; /* Make the row clickable */
-        }
-        
-        .order-details {
-            display: flex;
-            flex: 1;
-            justify-content: space-between;
-        }
-        
-        .order-details div {
-            margin: 0 10px;
-            font-size: 1em;
-            color: #333;
-        }
-        
-        /* Status styling */
-        .status {
-            font-weight: bold;
-            color: #007BFF;
-        }
-        
-        .order-row:hover {
-            background-color: #eef2f5;
-        }
-        
-        /* Responsive layout for mobile */
-        @media (max-width: 768px) {
+            }
+            /* Order row layout */
             .order-row {
-                flex-direction: column;
-                align-items: flex-start;
+                display: flex;
+                justify-content: space-between;
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 10px;
+                background-color: #f9f9f9;
+                border-radius: 5px;
+                font-size: 1.2rem;
+                cursor: pointer; /* Make the row clickable */
             }
-        
+            
             .order-details {
-                flex-direction: column;
+                display: flex;
+                flex: 1;
+                justify-content: space-between;
             }
-        }
+            
+            .order-details div {
+                margin: 0 10px;
+                font-size: 1em;
+                color: #333;
+            }
+            
+            /* Status styling */
+            .status {
+                font-weight: bold;
+                color: #007BFF;
+            }
+            
+            .order-row:hover {
+                background-color: #eef2f5;
+            }
+            
+            /* Responsive layout for mobile */
+            @media (max-width: 768px) {
+                .order-row {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            
+                .order-details {
+                    flex-direction: column;
+                }
+            }
+            
+            /* Modal Styling */
         
-        
-        
-        /* Modal Styling */
-        .modal {
+            .modal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -87,6 +83,7 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
             padding: 60px 20px; /* Add padding to prevent content from touching edges */
+        font-size: 1rem;
         }
         
         .modal-content {
@@ -101,165 +98,153 @@
             margin: auto; /* Center modal on screen */
         }
         
-        
-        #logo-image {
-            width: 20%;
-            padding: 10px;
-        }
-        
-        .close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            border-color: #aaa;
-            cursor: pointer;
-        }
-        
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        
-        
-        
-        #order-details-content {
-            padding: 10px;
-            text-align: center;
-            align-items: center;
-           
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .action-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: 1px;
             
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        .action-btn:hover {
-            background-color: #0056b3;
-        }
-        
-        #close-modal-btn {
-            background-color: #dc3545;
-        }
-        
-        #close-modal-btn:hover {
-            background-color: #c82333;
-        }
-        
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .order-info {
-            flex: 1;
-        }
-        
-        .order-info-row {
-            margin: 5px 0;
-        }
-        
-        /* Modal table styling */
-        table {
-            
-            
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        table th, table td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        
-        #order-items-body tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        
-        
-        #total-value {
-            font-weight: bold;
-            float: right;
-            
-        }
-        
-        /* When modal is open, make it visible */
-        .modal.show {
-            display: flex;
-        }
-        
-        .totalOrderBox {
-        
-        padding: 20px 20px;
-        margin: 20px auto;
-        background-color: #13273d;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        
-        
-        }
-        /* Responsiveness for smaller screens */
-        @media (max-width: 768px) {
-            .order-header {
-                flex-direction: column;
+            #logo-image {
+                width: 20%;
+                padding: 10px;
             }
-        
+            
+            .close-btn {
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+                position: absolute;
+                top: 10px;
+                right: 25px;
+                border-color: #aaa;
+                cursor: pointer;
+            }
+            
+            .close-btn:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            
+            #order-details-content {
+                padding: 10px;
+                text-align: center;
+              
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            .modal-actions {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .action-btn {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                border: 1px;
+                
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .action-btn:hover {
+                background-color: #0056b3;
+            }
+            
+            #close-modal-btn {
+                background-color: #dc3545;
+            }
+            
+            #close-modal-btn:hover {
+                background-color: #c82333;
+            }
+            
+            .order-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 1.3rem;
+            }
+            
             .order-info {
+                flex: 1;
+            }
+            
+            .order-info-row {
+                margin: 5px 0;
+            }
+            
+            /* Modal table styling */
+            table {
+                width: 100%;
+                border-collapse: collapse;
                 margin-top: 20px;
             }
-        }
-        
-        
-        table th, table td {
+            
+            table th, table td {
                 padding: 8px;
                 text-align: center;
                 border: 1px solid #ddd;
             }
-          /* Style the table headers */
-         
-          .obs-row {
+            
+            #order-items-body tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            
+            #total-value {
+            font-weight: bold;
+            float: right;
+            
+        }
+            /* When modal is open, make it visible */
+            .modal.show {
+                display: flex;
+            }
+            
+            .totalOrderBox {
+            
+            padding: 20px 20px;
+            margin: 20px auto;
+            background-color: #13273d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        
+        
+        }
+        
+            /* Responsiveness for smaller screens */
+            @media (max-width: 768px) {
+                .order-header {
+                    flex-direction: column;
+                }
+            
+                .order-info {
+                    margin-top: 20px;
+                }
+            }
+            
+            .obs-row {
             padding: 10px;
             background-color: #aaa;
             border-radius: 10px;
+            font-size: 1.1rem;
           }
+        
         
           textarea {
           width: 100%;
           padding: 10px;
-          font-size: 16px;
+          font-size: 1.1rem;
           border-radius: 4px;
           border: 1px solid #ccc;
           box-sizing: border-box;
           resize: none;
           line-height: 24px; /* Set line height to calculate row height */
-          max-height: 240px; /* Limit to 3 rows (3 * 24px) */
+          max-height: 120px; /* Limit to 3 rows (3 * 24px) */
           overflow-y: auto; /* Enable scrolling when the content exceeds max height */
         }
+        
         .modalOrderDeleteButton {
           
           width: 40px;                /* Defina a largura desejada para os botões */
@@ -287,32 +272,35 @@
             height: auto;
           }
           
-
-
           .save-quantity-btn {
-    background-color: #28a745;
-    width: 5rem;
-    display: block; 
-    margin: 0.5rem auto 0; /* Top margin, center ali
-    gnment, no bottom margin */
-}
-.save-quantity-btn:hover {
-    background-color: #6aa277; /* Yellow-orange hover color */
-    transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
-}
+            background-color: #28a745;
+            width: 5rem;
+            display: block; 
+            margin: 0.5rem auto 0; /* Top margin, center ali
+            gnment, no bottom margin */
+        }
+        .save-quantity-btn:hover {
+            background-color: #6aa277; /* Yellow-orange hover color */
+            transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
+        }
+        
+        .edit-quantity {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #007BFF; /* Optional: blue border */
+            border-radius: 8px;
+            width: 5rem; /* Adjust width if necessary */
+            text-align: center;
+        }
+        
+        .order-total{
+            font-size: 1.2rem;
+        }
+            </style>
 
-.edit-quantity {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #007BFF; /* Optional: blue border */
-    border-radius: 8px;
-    width: 5rem; /* Adjust width if necessary */
-    text-align: center;
-}
 
 
 
-        </style>
 </head>
 
 
