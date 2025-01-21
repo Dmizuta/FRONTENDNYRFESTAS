@@ -11,7 +11,7 @@
 }
 #logo{
     left: 0.5rem;
-    width: 6rem;
+    width: 5.8rem;
 }
 
 
@@ -45,9 +45,9 @@ header {
 
 #nyrfestas {
     color: #fff;
-    font-size: 2.5Rem; /* Aumentado para um destaque maior */
+    font-size: 2.45Rem; /* Aumentado para um destaque maior */
     margin: 0;
-    font-weight: 700; /* Negrito */
+    font-weight: 1000; /* Negrito */
     max-width: 100%;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
@@ -76,7 +76,7 @@ nav ul {
     display: flex;
     justify-content: center;
     list-style-type: none;
-    gap: 30px; /* Aumentado para mais espaçamento */
+    gap: 37px; /* Aumentado para mais espaçamento */
 }
 
 nav a {
@@ -85,7 +85,7 @@ nav a {
     font-weight: 500;
     padding: 12px 25px; /* Aumentado para botões mais largos */
     border-radius: 25px; /* Bordas mais arredondadas */
-    font-size: 1.8rem; /* Aumentado para um tamanho maior */
+    font-size: 1.7rem; /* Aumentado para um tamanho maior */
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -114,9 +114,9 @@ h2 {
     padding: 20px;
     margin: 30px 0; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.8rem; /* Aumentado para um tamanho maior */
+    font-size: 1.7rem; /* Aumentado para um tamanho maior */
     border-bottom: 3px solid #C7A88C; /* Borda inferior mais espessa */
-    font-weight: 700; /* Negrito */
+    font-weight: 600; /* Negrito */
 }
 
 /* Form */
@@ -126,7 +126,7 @@ form label, form input {
 }
 
 .cadastro-form label {
-    font-weight: 700; /* Negrito */
+    font-weight: 600; /* Negrito */
     color: #333;
 }
 
@@ -136,7 +136,7 @@ form label, form input {
     border: 2px solid #ccc; /* Borda mais espessa */
     border-radius: 10px; /* Bordas arredondadas */
     outline: none;
-    font-size: 1.2em; /* Tamanho padrão */
+    font-size: 1.3rem; /* Tamanho padrão */
     transition: border-color 0.3s;
 }
 
@@ -154,13 +154,13 @@ button {
     border-radius: 10px; /* Bordas arredondadas */
     cursor: pointer;
     width: 100%;
-    font-size: 1.2em; /* Aumentado para um tamanho maior */
-    font-weight: 700; /* Negrito */
+    font-size: 1.25em; /* Aumentado para um tamanho maior */
+    font-weight: 600; /* Negrito */
     transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-    background-color: #FCC585; /* Light yellow-orange hover color */
+    background-color: #ecac61; /* Light yellow-orange hover color */
     transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
 }
 
@@ -176,7 +176,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 15px; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.2em; /* Tamanho padrão */
+    font-size: 1.3em; /* Tamanho padrão */
 }
 
 th {
@@ -191,18 +191,18 @@ th {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1rem; /* Tamanho padrão */
-    padding: 10px;
+    font-size: 1.1em; /* Tamanho padrão */
+    padding: 5px;
 }
 
-/* Search Input */
+/* Search Input 
 #searchInput {
     width: 100%;
-    padding: 15px; /* Aumentado para mais espaço */
-    border-radius: 10px; /* Bordas arredondadas */
-    border: 2px solid #ccc; /* Borda mais espessa */
-    font-size: 1rem; /* Tamanho padrão */
-}
+    padding: 15px; 
+    border-radius: 10px; 
+    border: 2px solid #ccc; 
+    font-size: 1.9rem; 
+}*/
 
 .PAGE{
    margin-top: 200px;
@@ -212,7 +212,7 @@ th {
 
     margin-top: 5px;
     padding:8px;
-    font-size: larger;
+    font-size: large;
     border-width: 1px;
     border-color: #022327;
     border-radius: 8px;
@@ -245,19 +245,6 @@ th {
 
 
 
-/* Search Input */
-#searchInput {
-    width: 100%;
-    padding: 15px; /* Aumentado para mais espaço */
-    border-radius: 10px; /* Bordas arredondadas */
-    border: 2px solid #ccc; /* Borda mais espessa */
-    font-size: 1rem; /* Tamanho padrão */
-}
-
-.PAGE{
-   margin-top: 200px;
-}
-
 
 
 .produtos-moldura{
@@ -281,7 +268,7 @@ th {
     margin: 30px auto;
    padding: 15px;
    max-width: 95%;
-  
+ 
 }
 
 /* Styling for the search bar in CADASTRO page*/
@@ -295,7 +282,7 @@ th {
     border-radius: 8px;
     border: #011a1f;
     box-sizing: border-box;
-    font-size: 1rem;
+  
 }
 
 /* Search Input */
@@ -308,6 +295,7 @@ th {
        padding: 10px;
        width: 60%;
        border: 1px solid #ccc;
+       font-size: 1.25rem;
    }
 
   
@@ -320,26 +308,34 @@ th {
 
 #codprod{
     padding:8px;
+ 
+    font-size: 1.5rem;
 }
 #descrip{
     margin:3px;
+    font-size: 1.2rem;
 }
 
    #preco1{
-    font-weight: bold;
+    
     margin:3px;
+    font-size: 1.3rem;
+    
   }
   #preco2{
-    font-weight: bold;
+    
     margin:3px;
+    font-size: 1.3rem;
   }
   #CxFechada{
     margin:3px;
+    font-size: 1.3rem;
   }
 
 
   #CxFracionada{
     margin:3px;
+    font-size: 1.3rem;
   }
 
 
@@ -376,16 +372,15 @@ th {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
-/* Close Button */
+/* Close Button 
 .close {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 40px; /* Larger font size */
-    font-weight: bold;
+    font-size: 400px; 
     cursor: pointer;
-    color: #BF6734; /* Dark orange color */
-}
+    color: #46ac16;  
+}*/
 
 .close:hover {
     color: #F2B680; /* Yellow-orange hover effect */
