@@ -6,6 +6,12 @@
     <title>Produtos - NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
 
 
 </head>
@@ -62,6 +68,16 @@
     .icons img:hover {
         transform: scale(1.3);
     }
+
+    #customerSelected{
+        font-family: Arial, Helvetica, sans-serif;
+        color:rgb(255, 255, 255);
+      margin-left: 15px;
+        position: fixed;
+        top:120px;
+        font-size: 0.98rem;
+        
+    }
     
 </style>
 
@@ -83,6 +99,9 @@
     </header>
 
     <nav>
+       
+
+       
         <ul>
             <li id="cadastro-link"><a href="#">Cadastro</a></li>
             <li><a href="produtos.html">Lista de Produtos</a></li>
@@ -91,6 +110,8 @@
      
     </nav>
       
+    <div id="customerSelected">No customer selected</div>
+
     <div class="icons">
         <div class="icon-wrapper">
             <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
@@ -191,6 +212,14 @@
 </div>
 
     <script>
+    
+
+
+
+
+
+
+
 
   // Fetch the user's role from localStorage
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
@@ -224,6 +253,60 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');  // Remove login data
     window.location.href = '/';  // Redirect to login page
 });
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadCustomerName();
+});
+
+function loadCustomerName() {
+  const customerId = localStorage.getItem('customerId');
+  console.log(customerId);
+  
+  if (!customerId) {
+      console.error('Customer ID not found in localStorage!');
+      document.getElementById('customerSelected').textContent = 'NENHUM CLIENTE SELECIONADO';
+      return;
+  }
+
+  // Fetch customer name from backend (sending customerId in the request body)
+  fetch('https://backendnyrfestas.vercel.app/displayName', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ customerId }) // Sending customerId in the request body
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(data => {
+      // Display customer name from backend
+      const customerName = data.razaosocial || 'Unknown';
+      document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+  })
+  .catch(error => {
+      console.error('Error fetching customer name:', error);
+      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+  });
+}
+
+
+
+
+
+
+
 
      </script>
     <script src="script.js"></script>
