@@ -423,4 +423,6 @@ th {
     align-items: center;
     justify-content: center;
   }
-  
+  label{
+    font-size: 1.3rem;
+}
