@@ -251,6 +251,10 @@ if (userRole !== "ADMIN") {
         }
 
         const quantity = parseInt(document.getElementById('quantity').value);
+        
+        const quantityField = document.getElementById("quantity");
+        quantityField.focus();
+        
 
         // Choose the correct price based on the quantity
         const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
@@ -267,7 +271,7 @@ if (userRole !== "ADMIN") {
           preco: chosenPrice
         };
 
-        quantity.focus();
+        
 
         console.log("Admin product data being sent:", productData);
 
