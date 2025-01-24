@@ -171,7 +171,7 @@ window.addEventListener("click", function (event) {
 
 
 
-inputField.focus();
+
 
 
 
@@ -266,6 +266,8 @@ if (userRole !== "ADMIN") {
           quantidade: quantity,
           preco: chosenPrice
         };
+
+        quantity.focus();
 
         console.log("Admin product data being sent:", productData);
 
@@ -427,7 +429,7 @@ const productData = {
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
 
-addButton.focus();
+
 
 
 
