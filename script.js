@@ -282,8 +282,10 @@ const addProductToOrder = async () => {
             modal.style.display = "none"; // Close modal
             document.getElementById("quantity").value = ""; // Clear quantity field
 
-            // Focus the quantity field when opening the modal
-            document.getElementById("quantity").focus(); // This will set the focus to the quantity field
+            // Focus the quantity field immediately after closing the modal
+            setTimeout(() => {
+              document.getElementById("quantity").focus(); // This will set the focus to the quantity field
+            }, 100); // Small delay to ensure modal closes before focus is applied
           } else {
             console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
             alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
@@ -300,6 +302,8 @@ const addProductToOrder = async () => {
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
   }
+
+
 
 
 
