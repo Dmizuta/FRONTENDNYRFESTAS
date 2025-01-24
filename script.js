@@ -252,8 +252,7 @@ if (userRole !== "ADMIN") {
 
         const quantity = parseInt(document.getElementById('quantity').value);
         
-        const quantityField = document.getElementById("quantity");
-        quantityField.focus();
+      
         
 
         // Choose the correct price based on the quantity
