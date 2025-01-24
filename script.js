@@ -300,7 +300,6 @@ const addProductToOrder = async () => {
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
   }
-};
 
 
 
