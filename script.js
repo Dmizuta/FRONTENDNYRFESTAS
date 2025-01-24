@@ -171,7 +171,7 @@ window.addEventListener("click", function (event) {
 
 
 
-
+inputField.focus();
 
 
 
@@ -425,6 +425,11 @@ const productData = {
 
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
+
+
+addButton.focus();
+
+
 
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
