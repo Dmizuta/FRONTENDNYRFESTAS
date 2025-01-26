@@ -796,17 +796,16 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             if (data && data.length > 0) {
                 const orderStatus = data[0].status;  // Assuming status is in the first object of the array
                 console.log("Order Status:", orderStatus);
-                alert(`The current order status is: ${orderStatus === 0 ? 'Draft' : orderStatus === 1 ? 'Submitted' : 'Processed'}`);
-
+                
                 // Block editing if order is 'enviado' (1) or 'processado' (2)
                 if (orderStatus === 1 || orderStatus === 2) {
                     alert("You cannot edit this order because it has been submitted or processed.");
                     return; // Prevent further execution
                 }
             } else {
+                console.log("Order Status:", orderStatus);
                 alert('Order status not founddddd.');
-                alert(`The current order status is: ${orderStatus === 0 ? 'Draft' : orderStatus === 1 ? 'Submitted' : 'Processed'}`);
-                return;
+                  return;
             }
 
             // If order is editable, proceed with making the quantity editable
