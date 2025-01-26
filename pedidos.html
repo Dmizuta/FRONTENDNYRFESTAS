@@ -1034,7 +1034,7 @@ async function deleteProduct(productId, orderId) {
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === 1 || orderStatus === 2) {
-            alert("NÃO É POSSÍVEL EDITAR OU DELETAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
             return; // Stop further execution if status doesn't allow editing
         }
 
@@ -1052,7 +1052,7 @@ async function deleteProduct(productId, orderId) {
         }
 
         console.log(`Product with ID ${productId} deleted successfully.`);
-        alert('Produto deletado com sucesso.');
+        alert('PRODUTO DELETADO COM SUCESSO.');
 
         // Refresh order details to reflect changes
         fetchOrderDetails(orderId);
