@@ -1296,7 +1296,7 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
                     alert ("STATUS DA ORDEM REVERTIDO COM SUCESSO!")
                 } else {
                     console.log("ORDEM NÃO PODE SER ALTERADA, EXISTE OUTRA ORDEM EM 'Aberto'.");
-                    alert(("ORDEM NÃO PODE SER ALTERADA, EXISTE OUTRA ORDEM EM 'Aberto'."));
+                    alert(("STATUS NÃO PODE SER REVERTIDO, EXISTE OUTRA ORDEM EM 'ABERTO'."));
                 }
             } else if (orderStatus === 2) {
                 // If the status is 2 (processed), no revert is allowed
