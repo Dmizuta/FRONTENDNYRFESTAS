@@ -250,7 +250,7 @@ if (userRole !== "ADMIN") {
           return;
         }
 
-       // const quantity = parseInt(document.getElementById('quantity').value);
+       const quantity = parseInt(document.getElementById('quantity').value);
         
       //quantity.focus();
         
