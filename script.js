@@ -250,9 +250,9 @@ if (userRole !== "ADMIN") {
           return;
         }
 
-        const quantity = parseInt(document.getElementById('quantity').value);
+       // const quantity = parseInt(document.getElementById('quantity').value);
         
-      quantity.focus();
+      //quantity.focus();
         
 
         // Choose the correct price based on the quantity
