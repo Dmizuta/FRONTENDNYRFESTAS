@@ -802,7 +802,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             console.log("Order Status:", orderStatus);
 
             if (orderStatus === 1 || orderStatus === 2) {
-                alert("You cannot edit this order because it has been submitted or processed.");
+                alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
                 return; // Prevent further execution
             }
 
@@ -1438,7 +1438,7 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
                     alert ("STATUS DA ORDEM REVERTIDO COM SUCESSO!")
                 } else {
                     console.log("ORDEM NÃO PODE SER ALTERADA, EXISTE OUTRA ORDEM EM 'Aberto'.");
-                    alert(("STATUS NÃO PODE SER REVERTIDO, EXISTE OUTRA ORDEM EM 'ABERTO'."));
+                    alert(("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'"));
                 }
             } else if (orderStatus === 2) {
                 // If the status is 2 (processed), no revert is allowed
