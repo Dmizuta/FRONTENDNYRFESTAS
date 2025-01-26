@@ -262,9 +262,6 @@ function loadCustomerData(customer) {
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-    loadCustomerName();
-});
 
 function loadCustomerName() {
   const customerId = localStorage.getItem('customerId');
@@ -272,7 +269,7 @@ function loadCustomerName() {
   
   if (!customerId) {
       console.error('Customer ID not found in localStorage!');
-      document.getElementById('customerSelected').textContent = 'NENHUM CLIENTE SELECIONADO';
+      document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
       return;
   }
 
