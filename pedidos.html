@@ -772,7 +772,8 @@ function populateModal(orderDetails) {
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', async function () {
         const row = this.closest('tr');
-        const orderId = document.getElementById('order-id').textContent; // Ensure you have the correct order ID here
+        
+        const username = localStorage.getItem('currentOrderId');
         const quantityCell = row.querySelector('.quantity');
         const productId = row.getAttribute('data-product-id');
         const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
