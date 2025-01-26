@@ -182,7 +182,7 @@ window.addEventListener("click", function (event) {
 
 
 
-
+/*
 const addProductToOrder = async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
@@ -416,7 +416,7 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-
+*/
 
 
 
