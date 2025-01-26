@@ -196,6 +196,18 @@ const addProductToOrder = async () => {
       return;
   }
 
+  // Exibe o modal
+  const modal = document.getElementById("myModal");
+  modal.style.display = "block"; // Certifique-se de que o modal está visível
+
+  // Foca no campo de quantidade após um pequeno atraso
+  setTimeout(() => {
+    const quantityInput = document.getElementById('quantity');
+    if (quantityInput) {
+      quantityInput.focus();
+    }
+  }, 100); // Atraso de 100ms
+
   // FOR NON ADMIN USERS
   if (userRole !== "ADMIN") {
     try {
@@ -255,15 +267,6 @@ const addProductToOrder = async () => {
           }
 
           const quantity = parseInt(document.getElementById('quantity').value);
-          
-          // Exibe o modal
-          const modal = document.getElementById("myModal");
-          modal.style.display = "block"; // Certifique-se de que o modal está visível
-
-          // Foca no campo de quantidade após um pequeno atraso
-          setTimeout(() => {
-            document.getElementById('quantity').focus();
-          }, 100); // Atraso de 100ms
 
           // Choose the correct price based on the quantity
           const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
@@ -355,15 +358,6 @@ const addProductToOrder = async () => {
 
         const quantity = parseInt(document.getElementById('quantity').value);
 
-        // Exibe o modal
-        const modal = document.getElementById("myModal");
-        modal.style.display = "block"; // Certifique-se de que o modal está visível
-
-        // Foca no campo de quantidade após um pequeno atraso
-        setTimeout(() => {
-          document.getElementById('quantity').focus();
-        }, 100); // Atraso de 100ms
-
         // Choose the correct price based on the quantity
         const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
 
@@ -421,6 +415,20 @@ document.addEventListener("keydown", (event) => {
         addProductToOrder();
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
