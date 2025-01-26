@@ -1169,6 +1169,83 @@ document.getElementById("save-notes-btn").addEventListener("click", async () => 
 
 
 
+
+
+
+document.getElementById("delete-order-btn").addEventListener("click", async () => {
+    const orderId = localStorage.getItem('currentOrderId');
+
+    // Fetch the current order status to determine if it's deletable
+    const requestData = { orderId };
+    console.log("currentOrderId:", orderId);
+
+    try {
+        const statusResponse = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (!statusResponse.ok) {
+            throw new Error(`Failed to fetch order status: ${statusResponse.statusText}`);
+        }
+
+        const statusData = await statusResponse.json();
+
+        // Check the order status
+        const orderStatus = statusData.status; // Adjust based on backend response format
+        console.log("Order Status:", orderStatus);
+
+        if (orderStatus === 1 || orderStatus === 2) {
+            alert("NÃO É POSSÍVEL DELETAR O PEDIDO, POIS ELE FOI ENVIADO OU PROCESSADO.");
+            return; // Stop further execution if status doesn't allow deletion
+        }
+
+        // Confirmation dialog
+        const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO NÃO PODERÁ SER DESFEITA.");
+        if (!confirmDelete) {
+            // If the user cancels, stop the function
+            return;
+        }
+
+        // Prepare data to send
+        const deleteRequestData = {
+            orderId: orderId, // Use the same key as in the backend
+        };
+
+        // Send a DELETE request to delete the order
+        const deleteResponse = await fetch('https://backendnyrfestas.vercel.app/delete-order', {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(deleteRequestData),
+        });
+
+        if (deleteResponse.ok) {
+            alert('PEDIDO DELETADO COM SUCESSO!');
+
+            // Refresh the page
+            window.location.reload();
+            console.log("Order successfully deleted!");
+        } else {
+            console.error("Falha ao deletar o pedido.");
+            alert('An error occurred. Please try again later.');
+        }
+    } catch (error) {
+        console.error("Error handling the delete order action:", error);
+    }
+});
+
+
+
+
+
+
+
+/*
 document.getElementById("delete-order-btn").addEventListener("click", async () => {
     
     const orderId = localStorage.getItem('currentOrderId');
@@ -1210,7 +1287,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
     }
 });
 
-
+*/
 
 
 
