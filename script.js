@@ -155,11 +155,13 @@ function openModal(
 
   modal.style.display = "block"; // Show modal
   
-const quantityInput = (document.getElementById(quantity));
 
-  setTimeout(() => {
-    quantityInput.focus();  // Focus on the quantity input field
-  }, 100);
+  const quantity = parseInt(document.getElementById('quantity').value);
+        
+  quantity.focus();
+
+
+
 
 }
 
@@ -214,13 +216,6 @@ const addProductToOrder = async () => {
   const modal = document.getElementById("myModal");
   modal.style.display = "block"; // Certifique-se de que o modal está visível
 
-  /* Foca no campo de quantidade após um pequeno atraso
-  setTimeout(() => {
-    const quantityInput = document.getElementById('quantity');
-    if (quantityInput) {
-      quantityInput.focus();
-    }
-  }, 100); // Atraso de 100ms*/
 
   // FOR NON ADMIN USERS
   if (userRole !== "ADMIN") {
