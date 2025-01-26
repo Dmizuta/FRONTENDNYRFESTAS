@@ -193,7 +193,7 @@ window.addEventListener("click", function (event) {
 
 
 
-/*
+
 const addProductToOrder = async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
@@ -211,13 +211,13 @@ const addProductToOrder = async () => {
   const modal = document.getElementById("myModal");
   modal.style.display = "block"; // Certifique-se de que o modal está visível
 
-  // Foca no campo de quantidade após um pequeno atraso
+  /* Foca no campo de quantidade após um pequeno atraso
   setTimeout(() => {
     const quantityInput = document.getElementById('quantity');
     if (quantityInput) {
       quantityInput.focus();
     }
-  }, 100); // Atraso de 100ms
+  }, 100); // Atraso de 100ms*/
 
   // FOR NON ADMIN USERS
   if (userRole !== "ADMIN") {
@@ -427,7 +427,6 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-*/
 
 
 
