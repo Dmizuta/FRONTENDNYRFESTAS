@@ -156,14 +156,19 @@ function openModal(
   modal.style.display = "block"; // Show modal
   
 
-  const quantity = parseInt(document.getElementById('quantity').value);
+  const quantityInput = parseInt(document.getElementById('quantity').value);
         
-  quantity.focus();
-
-
-
-
+  setTimeout(() => {
+    quantityInput.focus();  // Focus on the quantity input field
+  }, 100); // Optional: delay slightly to ensure modal is fully displayed before focusing
 }
+
+ ;
+
+
+
+
+
 
 // Event listener to close modal
 document.getElementById("closeModalBtn").addEventListener("click", function () {
