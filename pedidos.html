@@ -1306,7 +1306,9 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
         }
     } catch (error) {
         console.error("Error fetching order status:", error);
+    
     }
+    window.location.reload();
 });
 
 
