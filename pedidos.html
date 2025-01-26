@@ -1174,7 +1174,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
     const orderId = localStorage.getItem('currentOrderId');
 
     // Confirmation dialog
-    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO NÃO PODERÁ SER DESFEITA.");
+    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO?");
     if (!confirmDelete) {
         // If the user cancels, stop the function
         return;
