@@ -154,6 +154,8 @@ function openModal(
   
 
   modal.style.display = "block"; // Show modal
+  
+const quantityInput = (document.getElementById(quantity));
 
   setTimeout(() => {
     quantityInput.focus();  // Focus on the quantity input field
