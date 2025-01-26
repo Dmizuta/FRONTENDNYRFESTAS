@@ -173,6 +173,16 @@ window.addEventListener("click", function (event) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 const addProductToOrder = async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
@@ -246,8 +256,14 @@ const addProductToOrder = async () => {
 
           const quantity = parseInt(document.getElementById('quantity').value);
           
-          // Foca no campo de quantidade
-          document.getElementById('quantity').focus();
+          // Exibe o modal
+          const modal = document.getElementById("myModal");
+          modal.style.display = "block"; // Certifique-se de que o modal está visível
+
+          // Foca no campo de quantidade após um pequeno atraso
+          setTimeout(() => {
+            document.getElementById('quantity').focus();
+          }, 100); // Atraso de 100ms
 
           // Choose the correct price based on the quantity
           const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
@@ -280,8 +296,7 @@ const addProductToOrder = async () => {
           if (addResponse.ok) {
             alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
             console.log("Product successfully added to order");
-            const modal = document.getElementById("myModal");
-            modal.style.display = "none";
+            modal.style.display = "none"; // Oculta o modal
             document.getElementById("quantity").value = ""; // Clear quantity field
           } else {
             console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
@@ -340,8 +355,14 @@ const addProductToOrder = async () => {
 
         const quantity = parseInt(document.getElementById('quantity').value);
 
-        // Foca no campo de quantidade
-        document.getElementById('quantity').focus();
+        // Exibe o modal
+        const modal = document.getElementById("myModal");
+        modal.style.display = "block"; // Certifique-se de que o modal está visível
+
+        // Foca no campo de quantidade após um pequeno atraso
+        setTimeout(() => {
+          document.getElementById('quantity').focus();
+        }, 100); // Atraso de 100ms
 
         // Choose the correct price based on the quantity
         const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
@@ -374,8 +395,7 @@ const addProductToOrder = async () => {
         if (addResponse.ok) {
           alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
           console.log("Product successfully added to order");
-          const modal = document.getElementById("myModal");
-          modal.style.display = "none";
+          modal.style.display = "none"; // Oculta o modal
           document.getElementById("quantity").value = ""; // Clear quantity field
         } else {
           console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
@@ -401,8 +421,6 @@ document.addEventListener("keydown", (event) => {
         addProductToOrder();
     }
 });
-
-
 
 
 
