@@ -780,7 +780,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
         // Fetch the current order status to determine if it's editable
         const requestData = { orderId };
-        console.log("currentOrderId");
+        console.log("currentOrderId", orderId);
 
         try {
             const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
