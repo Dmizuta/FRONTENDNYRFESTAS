@@ -772,7 +772,7 @@ function populateModal(orderDetails) {
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', async function () {
         const row = this.closest('tr');
-        
+
         const orderId = localStorage.getItem('currentOrderId');
         const quantityCell = row.querySelector('.quantity');
         const productId = row.getAttribute('data-product-id');
@@ -780,7 +780,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
         // Fetch the current order status to determine if it's editable
         const requestData = { orderId };
-        console.log("currentOrderId", orderId);
+        console.log("currentOrderId:", orderId);
 
         try {
             const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
@@ -791,22 +791,19 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                 body: JSON.stringify(requestData),
             });
 
+            if (!response.ok) {
+                throw new Error(`Failed to fetch order status: ${response.statusText}`);
+            }
+
             const data = await response.json();
 
             // Check if the order status is fetched properly
-            if (data && data.length > 0) {
-                const orderStatus = data[0].status;  // Assuming status is in the first object of the array
-                console.log("Order Status:", orderStatus);
-                
-                // Block editing if order is 'enviado' (1) or 'processado' (2)
-                if (orderStatus === 1 || orderStatus === 2) {
-                    alert("You cannot edit this order because it has been submitted or processed.");
-                    return; // Prevent further execution
-                }
-            } else {
-                console.log("Order Status:", orderStatus);
-                alert('Order status not founddddd.');
-                  return;
+            const orderStatus = data.status; // Adjust based on backend response format
+            console.log("Order Status:", orderStatus);
+
+            if (orderStatus === 1 || orderStatus === 2) {
+                alert("You cannot edit this order because it has been submitted or processed.");
+                return; // Prevent further execution
             }
 
             // If order is editable, proceed with making the quantity editable
@@ -851,7 +848,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         quantityCell.textContent = newQuantity;
 
                         // Optionally, you can re-calculate the total if necessary
-                        const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters (including R$, commas, etc.)
+                        const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                         const productTotal = price * newQuantity / 100;
 
                         // Update the total for this row
@@ -869,12 +866,12 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                 }
             });
         } catch (error) {
-            console.error('ErroRRRRRRRr fetching order status:', error);
-            console.log("Order Status:", orderStatus);
-            
+            console.error('Error fetching order status:', error);
+            alert('An error occurred while checking the order status. Please try again later.');
         }
     });
 });
+
 
 
 
