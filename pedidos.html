@@ -760,11 +760,19 @@ function populateModal(orderDetails) {
 
 
 
+
+
+
+
+
+
+
+
 // Add event listeners for edit buttons
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', async function () {
         const row = this.closest('tr');
-        const orderId = row.getAttribute('data-order-id'); // Ensure you have the correct order ID here
+        const orderId = document.getElementById('order-id').textContent; // Ensure you have the correct order ID here
         const quantityCell = row.querySelector('.quantity');
         const productId = row.getAttribute('data-product-id');
         const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
