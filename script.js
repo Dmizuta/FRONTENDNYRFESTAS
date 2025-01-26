@@ -104,11 +104,7 @@ function populateProductTable(products) {
 
   // Foca no campo de quantidade após um pequeno atraso
  
-    const quantityInput = document.getElementById('quantity');
-    if (quantityInput) {
-      quantityInput.focus();
-    }
-  ; 
+  
 
 
 
@@ -158,6 +154,11 @@ function openModal(
   
 
   modal.style.display = "block"; // Show modal
+
+  setTimeout(() => {
+    quantityInput.focus();  // Focus on the quantity input field
+  }, 100);
+
 }
 
 // Event listener to close modal
