@@ -1525,9 +1525,58 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
                 // If the status is already 0 (draft), no need to revert
                 console.log("ESTA ORDEM JÁ ESTÁ ABERTA.");
                 alert ("ESTA ORDEM JÁ ESTÁ ABERTA.");
+
+
+
+
+
+
+            }else if (orderStatus !== 0) {
+    // Get the orderId from localStorage
+    const orderId = localStorage.getItem('currentOrderId');
+    
+    // Send the orderId to the backend to get the corresponding username
+    const usernameResponse = await fetch('https://backendnyrfestas.vercel.app/getUsernameByOrderId', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ orderId: orderId }), // Send the orderId to the backend
+    });
+
+    if (!usernameResponse.ok) {
+        console.error('Failed to fetch username');
+        return; // Exit if username fetch fails
+    }
+
+    const usernameData = await usernameResponse.json();
+    const username = usernameData.username; // Assuming the backend returns the username
+
+    // Now, you can use the username to check for other "Aberto" orders
+    const checkResponse = await fetch('https://backendnyrfestas.vercel.app/checkOtherOpenedOrders', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username }), // Now using the fetched username
+    });
+
+    const checkData = await checkResponse.json();
+    // Continue with your logic here
+
+
+
+
+
+
+
+
+
+
+/*
             } else if (orderStatus !== 0) {
                 // If the status is 1 (submitted), check if the user has other "Aberto" orders
-                const checkResponse = await fetch('https://backendnyrfestas.vercel.app/checkOtherOpenedOrders', {
+                const checkResponse = await fetch('https://backendnyrfestas.vercel.app/checkOtherOpenedOrdersadmin', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -1535,7 +1584,7 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
                     body: JSON.stringify({ username: localStorage.getItem('username') }), // or fetch username from session
                 });
 
-                const checkData = await checkResponse.json();
+                const checkData = await checkResponse.json();*/
 
                 // If no other opened orders, allow reverting
                 if (checkData && checkData.canRevert) {
