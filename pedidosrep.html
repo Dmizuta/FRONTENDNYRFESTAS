@@ -1221,6 +1221,67 @@ document.querySelectorAll('.modalOrderDeleteButton').forEach(button => {
 
 
 
+
+
+
+
+
+
+
+// Function to delete a product
+async function deleteProduct(productId, orderId) {
+    // Fetch the current order status to determine if it's editable
+    const requestData = { orderId };
+    console.log("currentOrderId:", orderId);
+
+    try {
+        const statusResponse = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (!statusResponse.ok) {
+            throw new Error(`Failed to fetch order status: ${statusResponse.statusText}`);
+        }
+
+        const statusData = await statusResponse.json();
+
+        // Check the order status
+        const orderStatus = statusData.status; // Adjust based on backend response format
+        console.log("Order Status:", orderStatus);
+
+        if (orderStatus === 1 || orderStatus === 2) {
+            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+            return; // Stop further execution if status doesn't allow editing
+        }
+
+        // If status allows, proceed with deletion
+        const response = await fetch('https://backendnyrfestas.vercel.app/delete-product', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json', // Define content type as JSON
+            },
+            body: JSON.stringify({ productId, orderId }), // Send product and order ID in request body
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete product');
+        }
+
+        console.log(`Product with ID ${productId} deleted successfully.`);
+        alert('PRODUTO DELETADO COM SUCESSO.');
+
+        // Refresh order details to reflect changes
+        fetchOrderDetails(orderId);
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        alert('An error occurred. Please try again.');
+    }
+}
+/*
 // Function to delete a product
 async function deleteProduct(productId, orderId) {
     try {
@@ -1244,7 +1305,7 @@ async function deleteProduct(productId, orderId) {
     }
 }
 
-
+*/
 
 
 
