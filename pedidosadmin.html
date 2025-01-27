@@ -1586,6 +1586,9 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
 
                 const checkData = await checkResponse.json();*/
 
+
+                
+
                 // If no other opened orders, allow reverting
                 if (checkData && checkData.canRevert) {
                     console.log("No other 'Aberto' orders. Proceeding with revert.");
