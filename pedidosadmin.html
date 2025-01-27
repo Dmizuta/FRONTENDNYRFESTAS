@@ -404,6 +404,7 @@
                 <button class="action-btn" onclick="printOrder()">Imprimir</button>
                 <button id="save-notes-btn" class="action-btn">Salvar</button>
                 <button id="submit-order-btn" class="action-btn">Enviar</button>
+                <button id="revert-order-btn" class="action-btn">Reverter</button>
     
     
     
@@ -1492,6 +1493,81 @@ function printOrder() {
 
 
 
+document.getElementById("revert-order-btn").addEventListener("click", async function () {
+    const orderId = localStorage.getItem('currentOrderId');
+
+    // Get the current order's status
+    const requestData = { orderId };
+
+    try {
+        // Fetch the order status from the backend
+        const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        const data = await response.json();
+
+        // Log the fetched data to see its structure
+        console.log(data);
+
+        // Ensure that data has a valid structure and contains a status field
+        if (data && data.status !== undefined) {
+            const orderStatus = data.status;  // Get the status of the order
+
+            console.log("Order Status:", orderStatus);
+
+            // Logic based on the order status
+            if (orderStatus === 0) {
+                // If the status is already 0 (draft), no need to revert
+                console.log("ESTA ORDEM JÁ ESTÁ ABERTA.");
+                alert ("ESTA ORDEM JÁ ESTÁ ABERTA.");
+            } else if (orderStatus === 1) {
+                // If the status is 1 (submitted), check if the user has other "Aberto" orders
+                const checkResponse = await fetch('https://backendnyrfestas.vercel.app/checkOtherOpenedOrders', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username: localStorage.getItem('username') }), // or fetch username from session
+                });
+
+                const checkData = await checkResponse.json();
+
+                // If no other opened orders, allow reverting
+                if (checkData && checkData.canRevert) {
+                    console.log("No other 'Aberto' orders. Proceeding with revert.");
+                    // Call your backend API to revert the order
+                    await fetch('https://backendnyrfestas.vercel.app/revertOrder', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ orderId }),
+                    });
+
+                    console.log("Order reverted to 'Aberto' state.");
+                    alert ("STATUS DA ORDEM REVERTIDO COM SUCESSO!")
+                } else {
+                    console.log("ORDEM NÃO PODE SER ALTERADA, EXISTE OUTRA ORDEM EM 'Aberto'.");
+                    alert(("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'"));
+                }
+            } else if (orderStatus === 2) {
+                // If the status is 2 (processed), no revert is allowed
+                console.log("Order has been processed. Reverting is not allowed.");
+            }
+        } else {
+            console.error("Invalid data returned:", data);
+        }
+    } catch (error) {
+        console.error("Error fetching order status:", error);
+    
+    }
+    window.location.reload();
+});
 
 
 </script>
