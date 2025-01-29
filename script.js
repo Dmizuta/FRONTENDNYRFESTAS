@@ -353,11 +353,7 @@ const addProductToOrder = async () => {
       );
 
       if (customerResponse.ok) {
-        setTimeout(() => {
-          let searchInput = document.getElementById('searchInput');
-        
-          searchInput.focus();      // Refocus on the input
-        }, 10);
+       
 
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
@@ -421,6 +417,13 @@ const addProductToOrder = async () => {
         const addResult = await addResponse.json();
 
         if (addResponse.ok) {
+
+          setTimeout(() => {
+            let searchInput = document.getElementById('searchInput');
+          
+            searchInput.focus();      // Refocus on the input
+          }, 10);
+
           alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
           console.log("Product successfully added to order");
           modal.style.display = "none"; // Oculta o modal
