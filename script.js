@@ -427,7 +427,7 @@ document.getElementById("addButton").addEventListener("click", addProductToOrder
 
 setTimeout(() => {
   let searchInput = document.getElementById('searchInput');
-  searchInput.value = '';  // Clear the input
+
   searchInput.focus();      // Refocus on the input
 }, 10);
 
