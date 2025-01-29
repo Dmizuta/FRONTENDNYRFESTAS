@@ -220,6 +220,9 @@ const addProductToOrder = async () => {
   modal.style.display = "block"; // Certifique-se de que o modal está visível
 
 
+
+
+
   // FOR NON ADMIN USERS
   if (userRole !== "ADMIN") {
     try {
@@ -421,11 +424,23 @@ const addProductToOrder = async () => {
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
+
+
+// Focus on the search input after adding
+setTimeout(() => {
+  document.getElementById('search-input').focus();
+}, 100); // Small delay to ensure smooth focus transition
+
+
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         addProductToOrder();
     }
+
+
+
+    
 });
 
 
