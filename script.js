@@ -316,6 +316,18 @@ const addProductToOrder = async () => {
             console.log("Product successfully added to order");
             modal.style.display = "none"; // Oculta o modal
             document.getElementById("quantity").value = ""; // Clear quantity field
+
+
+
+            setTimeout(() => {
+              let searchInput = document.getElementById('searchInput');
+            
+              searchInput.focus();      // Refocus on the input
+            }, 10);
+
+
+            
+            
           } else {
             console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
             alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
