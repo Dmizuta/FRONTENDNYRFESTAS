@@ -353,6 +353,12 @@ const addProductToOrder = async () => {
       );
 
       if (customerResponse.ok) {
+        setTimeout(() => {
+          let searchInput = document.getElementById('searchInput');
+        
+          searchInput.focus();      // Refocus on the input
+        }, 10);
+
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
         const { username, razaosocial, representante, cnpj } = customerData;
