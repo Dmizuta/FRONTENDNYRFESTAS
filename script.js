@@ -425,12 +425,12 @@ const addProductToOrder = async () => {
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
 
-/*
+
 setTimeout(() => {
   let searchInput = document.getElementById('search-input');
   searchInput.value = '';  // Clear the input
   searchInput.focus();      // Refocus on the input
-}, 100);*/
+}, 100);
 
 
 // Adiciona o evento de pressionar a tecla "Enter"
