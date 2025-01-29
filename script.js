@@ -18,7 +18,7 @@ async function fetchProductData() {
     // Handle errors and show a user-friendly message in the table
     const tableBody = document.querySelector("#productTable tbody");
     tableBody.innerHTML =
-      '<tr><td colspan="7">Não foi possível carregar os produtos, entre em contato com o suporte técnico.</td></tr>';
+      '<tr><td colspan="7">Não foi possível carregar os produtos, entre em contato com o suporte.</td></tr>';
   }
 }
 
@@ -101,6 +101,13 @@ function populateProductTable(products) {
         );
       });
     });
+
+  // Foca no campo de quantidade após um pequeno atraso
+ 
+  
+
+
+
   } else {
     // No products available message
     tableBody.innerHTML =
@@ -147,7 +154,19 @@ function openModal(
   
 
   modal.style.display = "block"; // Show modal
-}
+  
+
+  const quantityInput = (document.getElementById('quantity'));
+        
+  setTimeout(() => {
+    quantityInput.focus();  // Focus on the quantity input field
+  }, 100); // Optional: delay slightly to ensure modal is fully displayed before focusing
+};
+
+
+
+
+
 
 // Event listener to close modal
 document.getElementById("closeModalBtn").addEventListener("click", function () {
@@ -175,6 +194,256 @@ window.addEventListener("click", function (event) {
 
 
 
+
+
+
+
+
+
+
+
+const addProductToOrder = async () => {
+  const customerId = localStorage.getItem("customerId");
+  const username = localStorage.getItem("username");
+  const userRole = localStorage.getItem("role");
+
+  console.log("Action triggered. User role:", userRole);
+
+  if (!username) {
+      alert("NENHUM CADASTRO SELECIONADO.");
+      console.log("No username found in localStorage.");
+      return;
+  }
+
+  // Exibe o modal
+  const modal = document.getElementById("myModal");
+  modal.style.display = "block"; // Certifique-se de que o modal está visível
+
+
+  // FOR NON ADMIN USERS
+  if (userRole !== "ADMIN") {
+    try {
+      console.log('Checking cadastro for username:', username);
+      const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username })
+      });
+
+      if (!cadastroResponse.ok) {
+        alert('PREENCHA SEU CADATRO.');
+        console.error('Error checking cadastro:', cadastroResponse);
+        return;
+      }
+
+      const cadastroResult = await cadastroResponse.json();
+      console.log('Cadastro check result:', cadastroResult);
+
+      if (cadastroResult.cadastroFilled) {
+        console.log('Cadastro is complete, proceeding with adding product to order');
+        console.log('Admin adding product for username:', username);
+        const customerResponse = await fetch(
+          `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
+        );
+
+        if (customerResponse.ok) {
+          const customerData = await customerResponse.json();
+          console.log("Customer info fetched:", customerData);
+          const { username, razaosocial, representante, cnpj } = customerData;
+
+          const productCode = document.querySelector('#codprod').textContent;
+
+          // Fetch product details from the API using the product code
+          const productBuyResponse = await fetch(
+            `https://backendnyrfestas.vercel.app/product-buy/${productCode}`,
+            { headers: { "Content-Type": "application/json" } }
+          );
+
+          // Parse the JSON response
+          const productBuyData = await productBuyResponse.json();
+          console.log("Product Data:", productBuyData);
+
+          // Extract product description and prices
+          const productDesc = productBuyData.descricao;
+          const precofechada = productBuyData.precofechada;
+          const precofrac = productBuyData.precofrac;
+          const cxfechada = productBuyData.cxfechada;
+
+          console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
+
+          // Validate product details
+          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
+            alert("DETALHES DO PEDIDO FALTANDO.");
+            console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
+            return;
+          }
+
+          const quantity = parseInt(document.getElementById('quantity').value);
+
+          // Choose the correct price based on the quantity
+          const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
+
+          const productData = {
+            username: username,
+            representante: representante,
+            cnpj: cnpj,
+            customerId: customerId,
+            razaosocial: razaosocial,
+            codproduto: productCode,
+            descricao: productDesc,
+            quantidade: quantity,
+            preco: chosenPrice
+          };
+
+          console.log("Admin product data being sent:", productData);
+
+          const addResponse = await fetch(
+            "https://backendnyrfestas.vercel.app/add-to-order",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(productData),
+            }
+          );
+
+          const addResult = await addResponse.json();
+
+          if (addResponse.ok) {
+            alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
+            console.log("Product successfully added to order");
+            modal.style.display = "none"; // Oculta o modal
+            document.getElementById("quantity").value = ""; // Clear quantity field
+          } else {
+            console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
+            alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
+          }
+        } else {
+          console.error("Failed to fetch customer info:", customerResponse);
+          alert("SELECIONE UM CLIENTE PARA ADICIONAR O PRODUTO.");
+        }
+      } else {
+        alert('CADASTRO NÃO PREENCHIDO, NÃO É POSSÍVEL ADICIONAR UM PRODUTO.');
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
+    }
+  } else {
+    // FOR ADMIN USERS (no cadastro check)
+    try {
+      console.log('Admin adding product for username:', username);
+      const customerResponse = await fetch(
+        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
+      );
+
+      if (customerResponse.ok) {
+        const customerData = await customerResponse.json();
+        console.log("Customer info fetched:", customerData);
+        const { username, razaosocial, representante, cnpj } = customerData;
+
+        const productCode = document.querySelector('#codprod').textContent;
+
+        // Fetch product details from the API using the product code
+        const productBuyResponse = await fetch(
+          `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        // Parse the JSON response
+        const productBuyData = await productBuyResponse.json();
+        console.log("Product Data:", productBuyData);
+
+        // Extract product description and prices
+        const productDesc = productBuyData.descricao;
+        const precofechada = productBuyData.precofechada;
+        const precofrac = productBuyData.precofrac;
+        const cxfechada = productBuyData.cxfechada;
+
+        console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
+
+        // Validate product details
+        if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
+          alert("DETALHES DO PRODUTO FALTANDO.");
+          console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
+          return;
+        }
+
+        const quantity = parseInt(document.getElementById('quantity').value);
+
+        // Choose the correct price based on the quantity
+        const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
+
+        const productData = {
+          username: username,
+          representante: representante,
+          cnpj: cnpj,
+          customerId: customerId,
+          razaosocial: razaosocial,
+          codproduto: productCode,
+          descricao: productDesc,
+          quantidade: quantity,
+          preco: chosenPrice
+        };
+
+        console.log("Admin product data being sent:", productData);
+
+        const addResponse = await fetch(
+          "https://backendnyrfestas.vercel.app/add-to-order-admin",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(productData),
+          }
+        );
+
+        const addResult = await addResponse.json();
+
+        if (addResponse.ok) {
+          alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
+          console.log("Product successfully added to order");
+          modal.style.display = "none"; // Oculta o modal
+          document.getElementById("quantity").value = ""; // Clear quantity field
+        } else {
+          console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
+          alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
+        }
+      } else {
+        console.error("Failed to fetch customer info:", customerResponse);
+        alert("SELECIONE UM CLIENTE PARA ADICIONAR O PRODUTO.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
+    }
+  }
+};
+
+// Adiciona o evento de clique no botão
+document.getElementById("addButton").addEventListener("click", addProductToOrder);
+
+// Adiciona o evento de pressionar a tecla "Enter"
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        addProductToOrder();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 const addProductToOrder = async () => {
   const customerId = localStorage.getItem("customerId");
   const username = localStorage.getItem("username");
@@ -246,7 +515,10 @@ if (userRole !== "ADMIN") {
           return;
         }
 
-        const quantity = parseInt(document.getElementById('quantity').value);
+       const quantity = parseInt(document.getElementById('quantity').value);
+        
+      //quantity.focus();
+        
 
         // Choose the correct price based on the quantity
         const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
@@ -262,6 +534,8 @@ if (userRole !== "ADMIN") {
           quantidade: quantity,
           preco: chosenPrice
         };
+
+        
 
         console.log("Admin product data being sent:", productData);
 
@@ -300,6 +574,24 @@ if (userRole !== "ADMIN") {
 }
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   else {
     // FOR ADMIN USERS (no cadastro check)
 
@@ -404,6 +696,11 @@ const productData = {
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
+
+
+
+
+
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
@@ -411,243 +708,11 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-
-
-
-
-
-
-
-
-/*
-//ADD PRODUCT TO ORDER
-document.getElementById("addButton").addEventListener("click", async () => {
-
-  const customerId = localStorage.getItem("customerId");
-  const username = localStorage.getItem("username");
-  const userRole = localStorage.getItem("role");
-  
-  console.log("Button clicked. User role:", userRole);
-
-  if (!username) {
-    alert("NENHUM CADASTRO SELECIONADO.");
-    console.log("No username found in localStorage.");
-    return;
-  }
-
-// FOR NON ADMIN USERS
-if (userRole !== "ADMIN") {
-  try {
-    console.log('Checking cadastro for username:', username);
-    const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username })
-    });
-
-    if (!cadastroResponse.ok) {
-      alert('PREENCHA SEU CADATRO.');
-      console.error('Error checking cadastro:', cadastroResponse);
-      return;
-    }
-
-    const cadastroResult = await cadastroResponse.json();
-    console.log('Cadastro check result:', cadastroResult);
-
-    if (cadastroResult.cadastroFilled) {
-      console.log('Cadastro is complete, proceeding with adding product to order');
-      console.log('Admin adding product for username:', username);
-      const customerResponse = await fetch(
-        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
-      );
-
-      if (customerResponse.ok) {
-        const customerData = await customerResponse.json();
-        console.log("Customer info fetched:", customerData);
-        const { username, razaosocial, representante, cnpj } = customerData;
-
-        const productCode = document.querySelector('#codprod').textContent;
-
-        // Fetch product details from the API using the product code
-        const productBuyResponse = await fetch(
-          `https://backendnyrfestas.vercel.app/product-buy/${productCode}`,
-          { headers: { "Content-Type": "application/json" } }
-        );
-
-        // Parse the JSON response
-        const productBuyData = await productBuyResponse.json();
-        console.log("Product Data:", productBuyData);
-
-        // Extract product description and prices
-        const productDesc = productBuyData.descricao;
-        const precofechada = productBuyData.precofechada;
-        const precofrac = productBuyData.precofrac;
-        const cxfechada = productBuyData.cxfechada;
-
-        console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
-
-        // Validate product details
-        if (!productCode || !productDesc || !precofechada || !precofrac|| !cxfechada) {
-          alert("DETALHES DO PEDIDO FALTANDO.");
-          console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
-          return;
-        }
-
-        const quantity = parseInt(document.getElementById('quantity').value);
-
-        // Choose the correct price based on the quantity
-        const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
-
-        const productData = {
-          username: username,
-          representante: representante,
-          cnpj: cnpj,
-          customerId: customerId,
-          razaosocial: razaosocial,
-          codproduto: productCode,
-          descricao: productDesc,
-          quantidade: quantity,
-          preco: chosenPrice
-        };
-
-        console.log("Admin product data being sent:", productData);
-
-        const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(productData),
-          }
-        );
-
-        const addResult = await addResponse.json();
-
-        if (addResponse.ok) {
-          alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
-          console.log("Product successfully added to order");
-          const modal = document.getElementById("myModal");
-          modal.style.display = "none";
-          document.getElementById("quantity").value = ""; // Clear quantity field
-        } else {
-          console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
-          alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
-        }
-      } else {
-        console.error("Failed to fetch customer info:", customerResponse);
-        alert("SELECIONE UM CLIENTE PARA ADICIONAR O PRODUTO.");
-      }
-    } else {
-      alert('CADASTRO NÃO PREENCHIDO, NÃO É POSSÍVEL ADICIONAR UM PRODUTO.');
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
-  }
-}
-
-  
-  else {
-    // FOR ADMIN USERS (no cadastro check)
-
-    try {
-      console.log('Admin adding product for username:', username);
-      const customerResponse = await fetch(
-        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
-      );
-
-      if (customerResponse.ok) {
-        const customerData = await customerResponse.json();
-        console.log("Customer info fetched:", customerData);
-        const { username, razaosocial, representante, cnpj } = customerData;
-
-        const productCode = document.querySelector('#codprod').textContent;
-
-        
-          // Fetch product details from the API using the product code
-
-  const productBuyResponse = await fetch(
-      `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
-      { headers: { "Content-Type": "application/json" } }
-  );
-
-
-
-  // Parse the JSON response
-  const productBuyData = await productBuyResponse.json();
-  console.log("Product Data:", productBuyData);
-
-
-
-// Extract product description and prices
-const productDesc = productBuyData.descricao;
-const precofechada = productBuyData.precofechada;
-const precofrac = productBuyData.precofrac;
-const cxfechada = productBuyData.cxfechada;
-
-console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
-
-// Validate product details
-if (!productCode || !productDesc || !precofechada || !precofrac|| !cxfechada) {
-  alert("DETALHES DO PRODUTO FALTANDO.");
-  console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
-  return;
-}
-
-const quantity = parseInt(document.getElementById('quantity').value);
-
-// Choose the correct price based on the quantity
-const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
-
-       
-const productData = {
-  username: username,
-  representante: representante,
-  cnpj: cnpj,
-  customerId: customerId,
-  razaosocial: razaosocial,
-  codproduto: productCode,
-  descricao: productDesc,
-  quantidade: quantity,
-  preco: chosenPrice
-};
-     
-
-        console.log("Admin product data being sent:", productData);
-        
-
-        const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(productData),
-          }
-        );
-
-        const addResult = await addResponse.json();
-
-        if (addResponse.ok) {
-          alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
-          console.log("Product successfully added to order");
-          const modal = document.getElementById("myModal");
-          modal.style.display = "none";
-          document.getElementById("quantity").value = ""; // Clear quantity field
-        } else {
-          console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
-          alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
-        }
-      } else {
-        console.error("Failed to fetch customer info:", customerResponse);
-        alert("SELECIONE UM CLIENTE PARA ADICIONAR O PRODUTO.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
-    }
-  }
-});
 */
+
+
+
+
 
 
 
