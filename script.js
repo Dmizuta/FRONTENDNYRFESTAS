@@ -312,6 +312,12 @@ const addProductToOrder = async () => {
           const addResult = await addResponse.json();
 
           if (addResponse.ok) {
+            setTimeout(() => {
+              let searchInput = document.getElementById('searchInput');
+            
+              searchInput.focus();      // Refocus on the input
+            }, 10);
+
             alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
             console.log("Product successfully added to order");
             modal.style.display = "none"; // Oculta o modal
@@ -319,14 +325,9 @@ const addProductToOrder = async () => {
 
 
 
-            setTimeout(() => {
-              let searchInput = document.getElementById('searchInput');
             
-              searchInput.focus();      // Refocus on the input
-            }, 10);
 
 
-            
             
           } else {
             console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
