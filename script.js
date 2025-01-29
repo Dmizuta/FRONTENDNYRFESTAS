@@ -428,7 +428,7 @@ document.getElementById("addButton").addEventListener("click", addProductToOrder
 
 // Focus on the search input after adding
 setTimeout(() => {
-  document.getElementById('search-input').focus();
+  document.getElementById('searchInput').focus();
 }, 100); // Small delay to ensure smooth focus transition
 
 
