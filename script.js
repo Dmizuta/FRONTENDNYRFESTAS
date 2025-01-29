@@ -438,7 +438,7 @@ document.addEventListener("keydown", (event) => {
       let searchInput = document.getElementById('searchInput');
       searchInput.value = '';  // Clear the input
       searchInput.focus();      // Refocus on the input
-    }, 100);
+    }, 10);
     
 
     
