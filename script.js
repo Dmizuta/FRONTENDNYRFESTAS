@@ -425,7 +425,11 @@ const addProductToOrder = async () => {
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
 
-
+setTimeout(() => {
+  let searchInput = document.getElementById('searchInput');
+  searchInput.value = '';  // Clear the input
+  searchInput.focus();      // Refocus on the input
+}, 10);
 
 
 // Adiciona o evento de pressionar a tecla "Enter"
@@ -434,11 +438,7 @@ document.addEventListener("keydown", (event) => {
         addProductToOrder();
     }
 
-    setTimeout(() => {
-      let searchInput = document.getElementById('searchInput');
-      searchInput.value = '';  // Clear the input
-      searchInput.focus();      // Refocus on the input
-    }, 10);
+
     
 
     
