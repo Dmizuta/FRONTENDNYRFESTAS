@@ -159,6 +159,14 @@ button {
     font-size: 1em; /* Aumentado para um tamanho maior */
     font-weight: 600; /* Negrito */
     transition: background-color 0.3s, transform 0.2s;
+    button:active {
+    transform: scale(0.95); /* Shrinks button a little */
+    background-color: #ddd; /* Temporary color change */
+}
+button:active {
+    transform: scale(0.95); /* Shrinks button a little */
+    background-color: #a35c33; /* Temporary color change */
+}
 }
 
 button:hover {

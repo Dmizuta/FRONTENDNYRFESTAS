@@ -220,6 +220,9 @@ const addProductToOrder = async () => {
   modal.style.display = "block"; // Certifique-se de que o modal está visível
 
 
+
+
+
   // FOR NON ADMIN USERS
   if (userRole !== "ADMIN") {
     try {
@@ -309,10 +312,23 @@ const addProductToOrder = async () => {
           const addResult = await addResponse.json();
 
           if (addResponse.ok) {
+            setTimeout(() => {
+              let searchInput = document.getElementById('searchInput');
+            
+              searchInput.focus();      // Refocus on the input
+            }, 10);
+
             alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
             console.log("Product successfully added to order");
             modal.style.display = "none"; // Oculta o modal
             document.getElementById("quantity").value = ""; // Clear quantity field
+
+
+
+            
+
+
+            
           } else {
             console.error("FALHA AO ADICIONAR O PRODUTO:", addResult.error);
             alert(addResult.error || "FALHA AO ADICIONAR O PRODUTO.");
@@ -337,6 +353,8 @@ const addProductToOrder = async () => {
       );
 
       if (customerResponse.ok) {
+       
+
         const customerData = await customerResponse.json();
         console.log("Customer info fetched:", customerData);
         const { username, razaosocial, representante, cnpj } = customerData;
@@ -399,6 +417,13 @@ const addProductToOrder = async () => {
         const addResult = await addResponse.json();
 
         if (addResponse.ok) {
+
+          setTimeout(() => {
+            let searchInput = document.getElementById('searchInput');
+          
+            searchInput.focus();      // Refocus on the input
+          }, 10);
+
           alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
           console.log("Product successfully added to order");
           modal.style.display = "none"; // Oculta o modal
@@ -421,11 +446,24 @@ const addProductToOrder = async () => {
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
+
+setTimeout(() => {
+  let searchInput = document.getElementById('searchInput');
+
+  searchInput.focus();      // Refocus on the input
+}, 10);
+
+
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         addProductToOrder();
     }
+
+
+    
+
+    
 });
 
 
