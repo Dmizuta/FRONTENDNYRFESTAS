@@ -436,7 +436,7 @@ document.addEventListener("keydown", (event) => {
 
     setTimeout(() => {
       let searchInput = document.getElementById('search-input');
-      searchInput.value = '';  // Clear the input
+      
       searchInput.focus();      // Refocus on the input
     }, 100);
     
