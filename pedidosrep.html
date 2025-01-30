@@ -697,37 +697,6 @@ searchBox.addEventListener('input', function() {
 
 
 
-/*
-const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
-
-searchBox.addEventListener('input', function() {
-    const searchTerm = searchBox.value.toLowerCase().trim();
-
-    const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
-    orders.forEach(order => {
-        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-        const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-        const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-        const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-        const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
-
-        // Check if the search term matches any of these fields
-        if (
-            orderId.includes(searchTerm) || 
-            representate.includes(searchTerm) || 
-            razaoSocial.includes(searchTerm) || 
-            data.includes(searchTerm) || 
-            status.includes(searchTerm)
-        ) {
-            order.style.display = 'block'; // Show the order if it matches
-        } else {
-            order.style.display = 'none'; // Hide the order if it doesn't match
-        }
-    });
-});
-
-*/
-
 
 
 
@@ -874,6 +843,18 @@ function populateModal(orderDetails) {
 
 
 
+    // Check the status of the order and set the toggle button position
+    const toggleButton = document.getElementById('toggle-order-btn'); // Your toggle button
+    if (orderDetails.status === 0) {
+        // If status is 0 (Aberto), set button to the left
+        toggleButton.classList.remove('toggled');
+        toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
+    } else if (orderDetails.status === 1) {
+        // If status is 1 (Orçamento), set button to the right
+        toggleButton.classList.add('toggled');
+        toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
+    }
+}
 
 
 
