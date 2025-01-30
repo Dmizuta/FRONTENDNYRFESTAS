@@ -241,7 +241,7 @@ th {
     transition: transform 0.3s ease;
    
     max-width: 100%;   /* Ensures the image never exceeds the width of the modal */
-    max-height: 50px; /* Adjust this value to suit your design */
+  
 
     
 }
