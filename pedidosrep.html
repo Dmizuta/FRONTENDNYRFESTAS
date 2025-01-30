@@ -1262,7 +1262,7 @@ async function deleteProduct(productId, orderId) {
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === 1 || orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO EM ORÇAMENTO OU FINALIZADO.");
             return; // Stop further execution if status doesn't allow editing
         }
 
@@ -1430,12 +1430,12 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === 1 || orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PEDIDO, POIS ELE FOI ENVIADO OU PROCESSADO.");
+            alert("NÃO É POSSÍVEL DELETAR O PEDIDO COM STATUS EM ORÇAMENTO OU FINALIZADO.");
             return; // Stop further execution if status doesn't allow deletion
         }
 
         // Confirmation dialog
-        const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO NÃO PODERÁ SER DESFEITA.");
+        const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.");
         if (!confirmDelete) {
             // If the user cancels, stop the function
             return;
@@ -1820,12 +1820,12 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
 
     // Check if observation is filled
     if (!observation) {
-        alert('O campo "Observações" deve ser preenchido antes de finalizar o pedido.');
+        alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES"');
         return; // Stop if observation is empty
     }
 
     // Confirmation before proceeding with the status change
-    const userConfirmed = window.confirm('Tem certeza que deseja finalizar este pedido? Esta ação é irreversível.');
+    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FINALIZAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
 
     if (!userConfirmed) {
         return; // Stop if the user cancels
@@ -1857,17 +1857,17 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
             });
 
             if (finishResponse.ok) {
-                alert('O pedido foi finalizado com sucesso!');
+                alert('PEDIDO FINALIZADO COM SUCESSO!');
             } else {
-                alert('Ocorreu um erro ao finalizar o pedido.');
+                alert('OCORREU UM ERRO.');
             }
         } else {
-            alert('A ordem já foi finalizada ou não pode ser finalizada.');
+            alert('O PEDIDO JÁ FOI FINALIZADO.');
         }
 
     } catch (error) {
         console.error("Error:", error);
-        alert("Ocorreu um erro ao processar a solicitação.");
+        alert("OCORREU UM ERRO.");
     }
 
     window.location.reload();
