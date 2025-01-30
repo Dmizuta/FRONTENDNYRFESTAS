@@ -440,8 +440,9 @@ font-size: 1rem;
                         <th>Apagar</th>
                     </tr>
 
-<label class="switch">
-    <input type="checkbox" id="order-toggle" />
+ <!-- Toggle Switch Button -->
+ <label class="switch">
+    <input type="checkbox" id="toggleButton">
     <span class="slider"></span>
 </label>
 
@@ -836,7 +837,7 @@ function populateModal(orderDetails) {
     document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
 
     // Check the status of the order and set the toggle button position
-    const toggleButton = document.getElementById('toggle-order-btn'); // Your toggle button
+    const toggleButton = document.getElementById('toggleButton'); // Your toggle button
     if (orderDetails.status === 0) {
         // If status is 0 (Aberto), set button to the left
         toggleButton.classList.remove('toggled');
