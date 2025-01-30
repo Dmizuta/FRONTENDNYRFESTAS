@@ -836,13 +836,13 @@ function populateModal(orderDetails) {
         if (orderDetails.status === 0) {
             // If status is 0 (Aberto), set button to the left
             //toggleButton.classList.remove('toggled');
-            toggleButton.checked = false; 
+            toggleButton.checked = true; 
             toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
         } else if (orderDetails.status === 1) {
             // If status is 1 (Orçamento), set button to the right
             console.log('status:', orderDetails.status);
            // toggleButton.classList.add('toggled');
-           toggleButton.checked = true;
+           toggleButton.checked = false;
             toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
         }
     }
