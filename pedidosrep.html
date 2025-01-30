@@ -442,7 +442,7 @@ font-size: 1rem;
 
  <!-- Toggle Switch Button -->
  <label class="switch">
-    <input type="checkbox" id="toggle-order-btn">
+    <input type="checkbox" id="toggleButton">
     <span class="slider"></span>
 </label>
 
@@ -1793,7 +1793,7 @@ function printOrder() {
 
 
 
-document.getElementById("toggle-order-btn").addEventListener("change", async (event) => {
+document.getElementById("toggleButton").addEventListener("change", async (event) => {
     const orderId = localStorage.getItem('currentOrderId');
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
 
