@@ -164,7 +164,7 @@ button {
     background-color: #ddd; /* Temporary color change */
 }
 button:active {
-    transform: scale(0.95); /* Shrinks button a little */
+    transform: scale(0.90); /* Shrinks button a little */
     background-color: #a35c33; /* Temporary color change */
 }
 }
