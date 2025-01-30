@@ -240,7 +240,17 @@ th {
 .prodimage {
     transition: transform 0.3s ease;
    
-    max-width: 100%;   /* Ensures the image never exceeds the width of the modal */
+    
+    
+        max-width: 100%;  
+        max-height: 500px;  /* Adjust based on your modal size */
+        object-fit: contain;  
+        width: auto;  /* Ensures the image keeps its aspect ratio */
+        height: auto;  
+        display: block;  
+        margin: 0 auto;  /* Centers the image */
+   
+    
   
 
     
