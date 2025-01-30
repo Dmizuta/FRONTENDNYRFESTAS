@@ -1711,6 +1711,7 @@ function printOrder() {
 
 document.getElementById("toggle-order-btn").addEventListener("click", async () => {
     const orderId = localStorage.getItem('currentOrderId');
+    const observation = document.getElementById("obs").value.trim(); // Get the observation value
 
     if (!orderId) {
         alert('Order ID is missing. Please try again.');
@@ -1731,6 +1732,14 @@ document.getElementById("toggle-order-btn").addEventListener("click", async () =
             return;
         }
 
+
+// Prepare data to send
+const requestData = {
+      orderId: orderId, // Use the same key as in the backend
+      observation: observation, // Use the same key as in the backend
+    };
+
+
         const currentStatus = data.status;
 
         if (currentStatus === 0) {
@@ -1738,7 +1747,7 @@ document.getElementById("toggle-order-btn").addEventListener("click", async () =
             const submitResponse = await fetch('https://backendnyrfestas.vercel.app/submit-order', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ orderId }),
+                body: JSON.stringify({ requestData }),
             });
 
             if (submitResponse.ok) {
