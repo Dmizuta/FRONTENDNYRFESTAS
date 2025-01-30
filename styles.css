@@ -171,7 +171,7 @@ button:active {
 
 button:hover {
     background-color: #ecac61; /* Light yellow-orange hover color */
-    transform: scale(1.0); /* Efeito de aumento ao passar o mouse */
+    transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
 }
 
 /* Table */
