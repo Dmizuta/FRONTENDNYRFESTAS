@@ -761,7 +761,6 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
 
 
 
-
 // Function to fetch and display order details in the modal
 async function fetchOrderDetails(orderId) {
     console.log("CHECK HERE", orderId);
@@ -782,19 +781,11 @@ async function fetchOrderDetails(orderId) {
         console.error('Error fetching order details:', error);
     }
 }
+
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
-
-
-
-
-
-
-
-
-
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -838,17 +829,20 @@ function populateModal(orderDetails) {
 
     // Check the status of the order and set the toggle button position
     const toggleButton = document.getElementById('toggleButton'); // Your toggle button
-    console.log( 'status:', orderDetails.status );
-    if (orderDetails.status === 0) {
-        // If status is 0 (Aberto), set button to the left
-        toggleButton.classList.remove('toggled');
-        toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
-    } else if (orderDetails.status === 1) {
-        // If status is 1 (Orçamento), set button to the right
-        console.log( 'status:', orderDetails.status );
-        toggleButton.classList.add('toggled');
-        toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
+    console.log('status:', orderDetails.status);
+    if (toggleButton) {  // Ensure toggleButton exists before manipulating it
+        if (orderDetails.status === 0) {
+            // If status is 0 (Aberto), set button to the left
+            toggleButton.classList.remove('toggled');
+            toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
+        } else if (orderDetails.status === 1) {
+            // If status is 1 (Orçamento), set button to the right
+            console.log('status:', orderDetails.status);
+            toggleButton.classList.add('toggled');
+            toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
+        }
     }
+}  // <-- Here is the missing closing bracket
 
 
 /*
@@ -1108,7 +1102,7 @@ updateTotalPrice();
             await deleteProduct(productId, orderDetails.id);
         });
     });
-}
+
 
 
 
