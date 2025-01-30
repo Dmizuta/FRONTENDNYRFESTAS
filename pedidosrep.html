@@ -1810,11 +1810,18 @@ document.getElementById("toggle-order-btn").addEventListener("click", async () =
 
 document.getElementById("finish-order-btn").addEventListener("click", async () => {
     const orderId = localStorage.getItem('currentOrderId');
+    const observation = document.getElementById("obs").value.trim(); // Get the observation field value
 
     // Validate if orderId exists
     if (!orderId) {
         alert('Order ID is missing. Please try again.');
         return;
+    }
+
+    // Check if observation is filled
+    if (!observation) {
+        alert('O campo "Observações" deve ser preenchido antes de finalizar o pedido.');
+        return; // Stop if observation is empty
     }
 
     // Confirmation before proceeding with the status change
@@ -1846,7 +1853,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
             const finishResponse = await fetch('https://backendnyrfestas.vercel.app/finishOrder', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ orderId }),
+                body: JSON.stringify({ orderId, observation }), // Send the observation with the request
             });
 
             if (finishResponse.ok) {
@@ -1865,6 +1872,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
 
     window.location.reload();
 });
+
 
 
 /*
