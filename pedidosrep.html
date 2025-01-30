@@ -847,10 +847,13 @@ function populateModal(orderDetails) {
     const toggleButton = document.getElementById('toggleButton'); // Your toggle button
     if (orderDetails.status === 0) {
         // If status is 0 (Aberto), set button to the left
+        console.log(orderDetails.status);
         toggleButton.classList.remove('toggled');
         toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
+        
     } else if (orderDetails.status === 1) {
         // If status is 1 (Orçamento), set button to the right
+        console.log(orderDetails.status);
         toggleButton.classList.add('toggled');
         toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
     }
