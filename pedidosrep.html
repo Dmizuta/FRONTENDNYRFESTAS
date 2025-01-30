@@ -1544,13 +1544,13 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
         event.target.checked = false; // Reset the toggle switch if observation is empty
         return; // Stop further execution if observation is empty
     }
-/*
+
     // Confirm before toggling
     const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ALTERAR O STATUS DO PEDIDO?');
     if (!userConfirmed) {
         event.target.checked = false; // Reset the toggle switch if not confirmed
         return;
-    }*/
+    }
 
     try {
         // Fetch the current status of the order
