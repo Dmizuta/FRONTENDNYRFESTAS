@@ -476,7 +476,7 @@ font-size: 1rem;
                     <div class="container">
                         <div class="switch-container">
                             <!-- Left label -->
-                            <span class="switch-label left-label active">Orçamento</span>
+                            <span class="switch-label left-label active">Aberto</span>
                 
                             <label class="switch">
                                 <input type="checkbox" id="toggleButton">
@@ -484,7 +484,7 @@ font-size: 1rem;
                             </label>
                 
                             <!-- Right label -->
-                            <span class="switch-label right-label">Aberto</span>
+                            <span class="switch-label right-label">Orçamento</span>
                         </div>
                     </div>
 
@@ -897,13 +897,13 @@ function populateModal(orderDetails) {
         if (orderDetails.status === 0) {
             // If status is 0 (Aberto), set button to the left
             //toggleButton.classList.remove('toggled');
-            toggleButton.checked = true; 
+            toggleButton.checked = false; 
             toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
         } else if (orderDetails.status === 1) {
             // If status is 1 (Orçamento), set button to the right
             console.log('status:', orderDetails.status);
            // toggleButton.classList.add('toggled');
-           toggleButton.checked = false;
+           toggleButton.checked = true;
             toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
         }
     }
