@@ -258,7 +258,7 @@ th {
 
 .prodimage:hover {
    
-    transform: scale(1.2); /* Aumenta o tamanho do elemento em 10% */
+    transform: scale(5); /* Aumenta o tamanho do elemento em 10% */
 }
 
 
