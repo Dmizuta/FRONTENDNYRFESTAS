@@ -440,8 +440,6 @@ font-size: 1rem;
                         <th>Apagar</th>
                     </tr>
 
-
-
 <label class="switch">
     <input type="checkbox" id="order-toggle" />
     <span class="slider"></span>
@@ -795,28 +793,8 @@ function formatCurrency(value) {
 
 
 
-function populateModal(orderDetails) {
-    // Get the checkbox input element
-    const orderToggle = document.getElementById('order-toggle');
 
-    // Check the status and set the checkbox accordingly
-    if (orderDetails.status === 0) {
-        orderToggle.checked = false;
-    } else if (orderDetails.status === 1) {
-        orderToggle.checked = true;
-    }
 
-    // Update the other modal content...
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-    document.getElementById('representante').textContent = orderDetails.representante;
-    document.getElementById('obs').textContent = orderDetails.observacoes;
-    
-    // Continue populating products and totals...
-}
-
-/*
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -825,7 +803,7 @@ function populateModal(orderDetails) {
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
-*/
+
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0; // Variable to accumulate the total price    
@@ -1127,7 +1105,7 @@ updateTotalPrice();
             await deleteProduct(productId, orderDetails.id);
         });
     });
-
+}
 
 
 
