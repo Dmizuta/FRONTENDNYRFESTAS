@@ -1592,7 +1592,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
         if (currentStatus === 0 || currentStatus === 1) {
             // Proceed to change status to 2 (Fechado)
             const finishResponse = await fetch('https://backendnyrfestas.vercel.app/finishOrder', {
-                method: "POST",
+                method: "patch",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, observation }), // Send the observation with the request
             });
