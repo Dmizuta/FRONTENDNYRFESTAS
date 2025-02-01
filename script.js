@@ -265,7 +265,7 @@ const addProductToOrder = async () => {
           console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
 
           // Validate product details
-          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada || !ipi) {
+          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
             alert("DETALHES DO PEDIDO FALTANDO.");
             console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada, ipi);
             return;
