@@ -715,7 +715,7 @@ function populateModal(orderDetails) {
         const price = parseFloat(product.preco); // Ensure price is a number
         const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
         const factor = parseInt(product.ipi);
-        console.log(product.ipi);
+        console.log('IPI FACTOR:', product.ipi);
         const ipi = factor * 0.13 * price * quantity;
         const productTotal = (price * quantity) + ipi; // Calculate product total
 
