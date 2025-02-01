@@ -1517,6 +1517,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 document.getElementById("finish-order-btn").addEventListener("click", async () => {
     const orderId = localStorage.getItem('currentOrderId');
     const observation = document.getElementById("obs").value.trim(); // Get the observation field value
+    console.log('finalizar botao apertado!')
 
     // Validate if orderId exists
     if (!orderId) {
