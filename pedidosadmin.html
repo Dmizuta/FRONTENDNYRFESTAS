@@ -677,6 +677,7 @@ const statusText = order.status === 0 ? 'Aberto' :
             <div class="order-row" data-id="${order.id}">
                 <div class="order-details">
                     <div><strong>ID:</strong> ${order.id}</div>
+                    <div><strong>Representante:</strong> ${order.representante}</div>
                     <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
                     <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
                     <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
