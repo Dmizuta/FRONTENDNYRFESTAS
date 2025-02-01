@@ -234,7 +234,7 @@ const addProductToOrder = async () => {
       });
 
       if (!cadastroResponse.ok) {
-        alert('PREENCHA SEU CADATRO.');
+        alert('POR FAVOR, CADASTRE UM CLIENTE.');
         console.error('Error checking cadastro:', cadastroResponse);
         return;
       }
