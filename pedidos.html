@@ -717,7 +717,7 @@ function populateModal(orderDetails) {
         const factor = parseInt(product.ipi);
 
        
-        const ipi = factor * 0.13 * quantity;
+        const ipi = factor * 0.13 * price * quantity;
         
         const productTotal = (price * quantity) + ipi; // Calculate product total
 
