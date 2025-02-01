@@ -260,13 +260,14 @@ const addProductToOrder = async () => {
           const precofechada = productBuyData.precofechada;
           const precofrac = productBuyData.precofrac;
           const cxfechada = productBuyData.cxfechada;
+          const ipi = productBuyData.ipi;
 
           console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
 
           // Validate product details
-          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
+          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada || !ipi) {
             alert("DETALHES DO PEDIDO FALTANDO.");
-            console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada);
+            console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada, ipi);
             return;
           }
 
@@ -284,7 +285,8 @@ const addProductToOrder = async () => {
             codproduto: productCode,
             descricao: productDesc,
             quantidade: quantity,
-            preco: chosenPrice
+            preco: chosenPrice,
+            ipi: ipi
           };
 
           console.log("Admin product data being sent:", productData);
