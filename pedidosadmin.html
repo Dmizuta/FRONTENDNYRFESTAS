@@ -11,6 +11,108 @@
 
 
 <style>
+
+/* Center content */
+.container {
+        display: flex;
+        flex-direction: column;
+        align-items: self-start;
+        gap: 10px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Flexbox layout for labels and switch */
+    .switch-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .switch-label {
+        font-size: 16px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    /* Style for the toggle switch */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+    
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #4CAF50;
+        transition: 0.4s;
+        border-radius: 34px;
+    }
+    
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;    
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+    }
+    
+    input:checked + .slider {
+        background-color: #ccc;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /* Orders container */
     #orders-container {
             max-width: 95%;
@@ -376,6 +478,24 @@
                     <th>Editar</th>
                     <th>Apagar</th>
                 </tr>
+
+                <div class="container">
+                    <div class="switch-container">
+                        <!-- Left label -->
+                        <span class="switch-label left-label active">Aberto</span>
+            
+                        <label class="switch">
+                            <input type="checkbox" id="toggleButton">
+                            <span class="slider"></span>
+                        </label>
+            
+                        <!-- Right label -->
+                        <span class="switch-label right-label">Orçamento</span>
+                    </div>
+                </div>
+
+
+
             </thead>
             <tbody id="order-details-content">
                 <!-- Product rows will be dynamically populated here -->
@@ -402,23 +522,18 @@
 
 
         <!-- Action Buttons -->
+       
         <div class="allbtns">
             <div class="modal-actions">
                 <button class="action-btn" onclick="printOrder()">Imprimir</button>
                 <button id="save-notes-btn" class="action-btn">Salvar</button>
-                <button id="submit-order-btn" class="action-btn">Enviar</button>
-                <button id="revert-order-btn" class="action-btn">Reverter</button>
-    
-    
-    
-    
-    
-                <!-- <button id="submit-order-btn" class="action-btn">Salvar</button>-->
-    
-    
+                
+               
+                
+                <button id="finish-order-btn" class="action-btn">Finalizar</button>
                 <button id="delete-order-btn" class="action-btn">Apagar</button>
             </div>
-    
+        
             <!-- Close Modal Button -->
             <button id="close-modal" class="action-btn">Fechar</button>
         </div>
