@@ -1484,46 +1484,60 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-app.patch("/revertOrder", async (req, res) => {
-    const { orderId } = req.body;
 
+document.getElementById("revert-order-btn").addEventListener("click", async () => {
+    const orderId = localStorage.getItem('currentOrderId');
+    const observation = document.getElementById("obs").value.trim(); // Get the observation field value
+    console.log('finalizar botao apertado!')
+
+    // Validate if orderId exists
     if (!orderId) {
-        return res.status(400).json({ error: "Order ID is required." });
+        alert('Order ID is missing. Please try again.');
+        return;
     }
+
+ 
 
     try {
-        // Get the current order status
-        const checkQuery = "SELECT status FROM pedidos WHERE id = $1";
-        const result = await pool.query(checkQuery, [orderId]);
+        // Fetch the current status of the order
+        const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId }),
+        });
 
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Order not found." });
+        const data = await response.json();
+        if (!data || data.status === undefined) {
+            console.error("Invalid response:", data);
+            return;
         }
 
-        const currentStatus = result.rows[0].status;
+        const currentStatus = data.status;
 
-        // If the status is already 0 or 1, no need to revert
-        if (currentStatus === 0 || currentStatus === 1) {
-            return res.status(400).json({ message: "Order is already in an allowed state. No action needed." });
-        }
+        // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
+        if (currentStatus === 2) {
+            // Proceed to change status to 2 (Fechado)
+            const finishResponse = await fetch('https://backendnyrfestas.vercel.app/revertOrder', {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId, observation }), // Send the observation with the request
+            });
 
-        // Perform the update only if the status is 2
-        const updateQuery = `
-            UPDATE pedidos SET status = 0 WHERE id = $1
-            RETURNING *;
-        `;
-
-        const updateResult = await pool.query(updateQuery, [orderId]);
-
-        if (updateResult.rows.length > 0) {
-            return res.status(200).json({ message: "Order successfully reverted to status 0." });
+            if (finishResponse.ok) {
+                alert('PEDIDO FINALIZADO COM SUCESSO!');
+            } else {
+                alert('OCORREU UM ERRO.');
+            }
         } else {
-            return res.status(500).json({ error: "Failed to update order." });
+            alert('PEDIDO JÁ ESTÁ ABERTO OU EM ORÇAMENTO.');
         }
+
     } catch (error) {
-        console.error("Error updating order:", error);
-        return res.status(500).json({ error: "Internal server error." });
+        console.error("Error:", error);
+        alert("OCORREU UM ERRO.");
     }
+
+    window.location.reload();
 });
 
 
