@@ -1333,16 +1333,16 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
 
         // Block function if status is 2
         if (currentStatus === 2) {
-            alert('O PEDIDO JÁ FOI FINALIZADO E NÃO PODE SER ENVIADO NOVAMENTE.');
+            alert('O PEDIDO JÁ FOI FINALIZADO E NÃO PODE SER ALTERADO.');
             return; // Stop execution
         }
 
-        // Ask for user confirmation before submitting
+        /*// Ask for user confirmation before submitting
         const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ENVIAR ESTE PEDIDO?');
 
         if (!userConfirmed) {
             return; // If user cancels, stop the submission
-        }
+        }*/
 
         // Prepare data to send
         const requestData = {
