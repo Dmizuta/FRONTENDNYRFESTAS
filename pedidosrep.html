@@ -494,22 +494,6 @@ font-size: 1rem;
 
 
 
- <!--
-                    <label class="switch-label">Enviar para Orçamento</label>
-
-                    <label class="switch">
-                        <input type="checkbox" id="toggleButton">
-                        <span class="slider"></span>
-                    </label>
-
-
- Toggle Switch Button 
- <label class="switch">
-    <input type="checkbox" id="toggleButton">
-    <span class="slider"></span>
-</label>
--->
-
                 </thead>
                 <tbody id="order-details-content">
                     <!-- Product rows will be dynamically populated here -->
@@ -672,10 +656,6 @@ async function loadOrders() {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 // Function to dynamically display orders
 function displayOrders(orders) {
     console.log('displayOrders function called with:', orders);
@@ -684,7 +664,7 @@ function displayOrders(orders) {
 
     if (orders.length === 0) {
         console.log('No orders found');
-        container.innerHTML = '<p>No orders found.</p>';
+        container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
         return;
     }
 
