@@ -567,7 +567,26 @@ font-size: 1rem;
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Handle login status
+const username = localStorage.getItem('username');
+if (username) {
+    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+} else {
+    alert("Você precisa estar logado para acessar esta página!");
+    window.location.href = '/';
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');
+    window.location.href = '/';
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Fetch the user's role from localStorage
 const userRole = localStorage.getItem('role');
@@ -706,10 +725,6 @@ const statusText = order.status === 0 ? 'Aberto' :
 }
 
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -744,11 +759,6 @@ searchBox.addEventListener('input', function() {
 
 
 
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -761,11 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -796,39 +802,6 @@ window.addEventListener("click", function(event) {
         modal.style.display = "none";
     }
 });
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-// Handle login status
-const username = localStorage.getItem('username');
-if (username) {
-    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-} else {
-    alert("Você precisa estar logado para acessar esta página!");
-    window.location.href = '/';
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');
-    window.location.href = '/';
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
 
 
 
@@ -920,10 +893,7 @@ function populateModal(orderDetails) {
     }
  
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 // Add event listeners for edit buttons
@@ -1031,10 +1001,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 });
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -1070,16 +1037,8 @@ function updateTotalPrice() {
  document.getElementById('total-value').textContent = formatCurrency(total);}
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
 
 
 // Function to delete a product
@@ -1135,9 +1094,6 @@ async function deleteProduct(productId, orderId) {
         alert('An error occurred. Please try again.');
     }
 }
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1220,10 +1176,8 @@ document.getElementById("save-notes-btn").addEventListener("click", async () => 
     }
 });
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 
@@ -1449,17 +1403,6 @@ function printOrder() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 document.getElementById("toggleButton").addEventListener("change", async (event) => {
     const orderId = localStorage.getItem('currentOrderId');
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
@@ -1468,19 +1411,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
         alert('Order ID is missing. Please try again.');
         return;
     }
-/*
-    if (!observation) {
-        alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES".');
-        event.target.checked = false; // Reset the toggle switch if observation is empty
-        return; // Stop further execution if observation is empty
-    }*/
 
-    /*// Confirm before toggling
-    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ALTERAR O STATUS DO PEDIDO?');
-    if (!userConfirmed) {
-        event.target.checked = false; // Reset the toggle switch if not confirmed
-        return;
-    }*/
 
     try {
         // Fetch the current status of the order
