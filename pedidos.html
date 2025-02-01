@@ -714,7 +714,8 @@ function populateModal(orderDetails) {
     orderDetails.products.forEach((product, index) => {
         const price = parseFloat(product.preco); // Ensure price is a number
         const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
-        const factor = parseFloat(product.ipi);
+        const factor = parseFloat(product.ipi.value) || 0;
+
         console.log("Product IPI:", product.ipi, "Type:", typeof product.ipi);
         const ipi = 1;
         alert ("Product IPI:", product.ipi, "Type:", typeof product.ipi);
