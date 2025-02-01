@@ -11,6 +11,10 @@
 
 <style>
 
+
+
+
+
  /* Center content */
  .container {
         display: flex;
@@ -411,7 +415,7 @@ font-size: 1rem;
 
 <div class="PAGE">
 
-    <h1>Meus Pedidos admin</h1>
+    <h1>Meus Pedidos (Representante)</h1>
     
     <div class="box">
     
@@ -466,6 +470,11 @@ font-size: 1rem;
                     </tr>
 
 
+
+
+
+
+
                     <div class="container">
                         <div class="switch-container">
                             <!-- Left label -->
@@ -484,22 +493,6 @@ font-size: 1rem;
 
 
 
-
- <!--
-                    <label class="switch-label">Enviar para Orçamento</label>
-
-                    <label class="switch">
-                        <input type="checkbox" id="toggleButton">
-                        <span class="slider"></span>
-                    </label>
-
-
- Toggle Switch Button 
- <label class="switch">
-    <input type="checkbox" id="toggleButton">
-    <span class="slider"></span>
-</label>
--->
 
                 </thead>
                 <tbody id="order-details-content">
@@ -526,7 +519,7 @@ font-size: 1rem;
             </div>
     
 
-
+<!-- Action Buttons -->
 
             <div class="allbtns">
                 <div class="modal-actions">
@@ -545,25 +538,6 @@ font-size: 1rem;
             
 
 
-
-
-
-
-
-   <!-- Action Buttons
-   <div class="allbtns">
-    <div class="modal-actions">
-
-        <button class="action-btn" onclick="printOrder()">Imprimir</button>
-        <button id="save-notes-btn" class="action-btn">Salvar</button>
-        <button id="toggle-order-btn" class="action-btn">toggle</button>
-        <button id="finish-order-btn" class="action-btn">Finalizar</button>
-        <button id="delete-order-btn" class="action-btn">Apagar</button>
-    </div>
-
-    
-    <button id="close-modal" class="action-btn">Fechar</button>
-</div> -->
 </div>
 </div>
 
@@ -577,7 +551,26 @@ font-size: 1rem;
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Handle login status
+const username = localStorage.getItem('username');
+if (username) {
+    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+} else {
+    alert("Você precisa estar logado para acessar esta página!");
+    window.location.href = '/';
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');
+    window.location.href = '/';
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Fetch the user's role from localStorage
 const userRole = localStorage.getItem('role');
@@ -618,6 +611,10 @@ if (pedidosLinkContainer && cadastroLinkContainer) {
 } else {
   console.error('Link containers not found in the DOM.');
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 // Function to load orders from the backend
 async function loadOrders() {
@@ -667,7 +664,7 @@ function displayOrders(orders) {
 
     if (orders.length === 0) {
         console.log('No orders found');
-        container.innerHTML = '<p>No orders found.</p>';
+        container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
         return;
     }
 
@@ -708,11 +705,7 @@ const statusText = order.status === 0 ? 'Aberto' :
 }
 
 
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -746,12 +739,7 @@ searchBox.addEventListener('input', function() {
 
 
 
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -761,6 +749,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed');
     loadOrders();
 });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 // Get the modal element
 const modal = document.getElementById("order-modal");
@@ -790,31 +783,9 @@ window.addEventListener("click", function(event) {
     }
 });
 
-// Handle login status
-const username = localStorage.getItem('username');
-if (username) {
-    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-} else {
-    alert("Você precisa estar logado para acessar esta página!");
-    window.location.href = '/';
-}
-
-// Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');
-    window.location.href = '/';
-});
 
 
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Function to fetch and display order details in the modal
@@ -902,10 +873,7 @@ function populateModal(orderDetails) {
     }
  
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Add event listeners for edit buttons
@@ -1013,10 +981,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 });
 
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1032,7 +997,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 }
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to update the total price in the modal
 function updateTotalPrice() {
@@ -1053,15 +1018,7 @@ function updateTotalPrice() {
 
 
 
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Function to delete a product
@@ -1118,10 +1075,7 @@ async function deleteProduct(productId, orderId) {
     }
 }
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Show modal with order details
 function openModal(orderId) {
@@ -1145,12 +1099,15 @@ document.querySelectorAll('.order-row').forEach(row => {
     });
 });
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Close modal functionality
 document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('order-modal').classList.remove('show'); // Hide modal
 });
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const textarea = document.getElementById('obs');
 
@@ -1162,7 +1119,7 @@ textarea.addEventListener('input', () => {
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Save Notes Button
 document.getElementById("save-notes-btn").addEventListener("click", async () => {
@@ -1200,9 +1157,7 @@ document.getElementById("save-notes-btn").addEventListener("click", async () => 
 });
 
 
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1274,7 +1229,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1404,6 +1359,11 @@ function printOrder() {
     }
 }
 
+@media print {
+    .switch-container {
+        display: none;
+    }
+}
 
 
     `);
@@ -1418,12 +1378,7 @@ function printOrder() {
 
 
 
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1437,18 +1392,6 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
         return;
     }
 
-    if (!observation) {
-        alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES".');
-        event.target.checked = false; // Reset the toggle switch if observation is empty
-        return; // Stop further execution if observation is empty
-    }
-
-    // Confirm before toggling
-    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ALTERAR O STATUS DO PEDIDO?');
-    if (!userConfirmed) {
-        event.target.checked = false; // Reset the toggle switch if not confirmed
-        return;
-    }
 
     try {
         // Fetch the current status of the order
@@ -1520,7 +1463,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 });
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1572,7 +1515,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
         if (currentStatus === 0 || currentStatus === 1) {
             // Proceed to change status to 2 (Fechado)
             const finishResponse = await fetch('https://backendnyrfestas.vercel.app/finishOrder', {
-                method: "POST",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, observation }), // Send the observation with the request
             });
@@ -1594,7 +1537,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
     window.location.reload();
 });
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 </script>
 </body>

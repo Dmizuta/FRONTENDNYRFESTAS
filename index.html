@@ -8,6 +8,24 @@
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 
   <style>
+
+#logo{
+    
+    width: 370px;;
+    padding-bottom: 40px;
+
+    }
+    .mainContainer {
+      display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: flex-start; /* Alinha os itens no topo */
+    height: 100vh; /* Altura total da tela */
+    max-width: 800px; /* Largura máxima do contêiner */
+    margin: 0 auto; /* Centraliza o contêiner horizontalmente */
+    padding-bottom: 30px; /* Adiciona espaço no topo */
+     
+    }
     body {
       font-family: Arial, sans-serif;
       display: flex;
@@ -16,8 +34,11 @@
       height: 100vh;
       margin: 0;
       background-color: #f0f0f0;
+ 
     }
     .login-container {
+      
+      align-content: center;
       background-color: white;
       padding: 20px;
       border-radius: 8px;
@@ -68,9 +89,16 @@
     .register-btn:hover {
       background-color: #e0e0e0; /* Slightly darker gray on hover */
     }
+
+    
   </style>
 </head>
 <body>
+
+<div class="mainContainer">
+  <div class="logoNyr">
+    <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+</div>
 
   <div class="login-container">
     <h2>Login</h2>
@@ -83,7 +111,7 @@
     <!-- Subtle Registration Button -->
     <button class="register-btn" onclick="window.location.href='registro.html'">Registrar</button> 
   </div>
-
+</div>
   <script>
 
 
