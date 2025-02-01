@@ -528,7 +528,7 @@ font-size: 1rem;
                     
                    
                     
-                    <button id="finish-order-btn" class="action-btn">Finalizar</button>
+                    <button id="finish-order-btn" class="action-btn">Fechar</button>
                     <button id="delete-order-btn" class="action-btn">Apagar</button>
                 </div>
             
@@ -1489,7 +1489,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
     }
 
     // Confirmation before proceeding with the status change
-    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FINALIZAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
+    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FECHAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
 
     if (!userConfirmed) {
         return; // Stop if the user cancels
