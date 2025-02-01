@@ -716,6 +716,7 @@ function populateModal(orderDetails) {
         const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
         const factor = parseFloat(product.ipi);
         const ipi = 1;
+        alert (ipi);
         const productTotal = (price * quantity) + ipi; // Calculate product total
 
         const row = `
