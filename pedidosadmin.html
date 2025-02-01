@@ -1579,16 +1579,18 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
     window.location.reload();
 });
 
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
-
-
-
-
+/*
 document.getElementById("revert-order-btn").addEventListener("click", async function () {
     const orderId = localStorage.getItem('currentOrderId');
 
@@ -1658,32 +1660,8 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
     });
 
     const checkData = await checkResponse.json();
-    // Continue with your logic here
+  
 
-
-
-
-
-
-
-
-
-
-/*
-            } else if (orderStatus !== 0) {
-                // If the status is 1 (submitted), check if the user has other "Aberto" orders
-                const checkResponse = await fetch('https://backendnyrfestas.vercel.app/checkOtherOpenedOrdersadmin', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ username: localStorage.getItem('username') }), // or fetch username from session
-                });
-
-                const checkData = await checkResponse.json();*/
-
-
-                
 
                 // If no other opened orders, allow reverting
                 if (checkData && checkData.canRevert) {
@@ -1716,7 +1694,7 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
     }
     window.location.reload();
 });
-
+*/
 
 
 
