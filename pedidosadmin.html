@@ -1565,6 +1565,7 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
 document.getElementById("toggleButton").addEventListener("change", async (event) => {
     const orderId = localStorage.getItem('currentOrderId');
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
+    console.log('toggleButton clicked by ADMIN')
 
     if (!orderId) {
         alert('Order ID is missing. Please try again.');
