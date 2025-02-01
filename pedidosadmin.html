@@ -638,6 +638,59 @@ async function loadOrders() {
     }
 }
 
+
+
+
+
+
+// Function to dynamically display orders
+function displayOrders(orders) {
+    console.log('displayOrders function called with:', orders);
+    const container = document.getElementById('orders-container');
+    container.innerHTML = ''; // Clear existing content
+
+    if (orders.length === 0) {
+        console.log('No orders found');
+        container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
+        return;
+    }
+
+    orders.forEach(order => {
+        console.log('Processing order:', order);
+
+        // Ensure the total is a valid number and handle non-numeric values
+        const total = parseFloat(order.total);
+        if (isNaN(total)) {
+            console.error('Invalid total value:', order.total);
+        }
+
+        // Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+const statusText = order.status === 0 ? 'Aberto' :
+                   order.status === 1 ? 'Orçamento' :
+                   order.status === 2 ? 'Fechado' :
+                   'Unknown'; 
+        const orderRow = `
+            <div class="order-row" data-id="${order.id}">
+                <div class="order-details">
+                    <div><strong>ID:</strong> ${order.id}</div>
+                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
+                    <div class="status"><strong>Status:</strong> ${statusText}</div>
+                
+                
+                    </div>
+            </div>
+        `;
+        container.innerHTML += orderRow;
+    });
+    console.log('All orders displayed');
+}
+/*
 // Function to dynamically display orders
 function displayOrders(orders) {
     const container = document.getElementById('orders-container');
@@ -673,7 +726,7 @@ function formatCurrency(value) {
         container.innerHTML += orderRow;
     });
 }
-
+*/
 
 
 
