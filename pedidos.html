@@ -854,7 +854,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         const productTotal = price / 100 * newQuantity + ipiValue ;
 
                         // Update the total for this row
-                        row.cells[5].textContent = ipiValue;
+                        row.cells[5].textContent = 10000;
                         row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
 
                         // Update the total price in the modal
