@@ -468,7 +468,7 @@ window.onload = function () {
 };
 
 // Fetch and populate products when the page loads
-//window.onload = fetchProductData;
+window.onload = fetchProductData;
 
 
 
