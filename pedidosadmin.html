@@ -856,7 +856,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         const requestData = { orderId };
         console.log("currentOrderId:", orderId);
 
-        try {/*
+        try {
             const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
                 method: "POST",
                 headers: {
@@ -879,7 +879,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                 alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
                 return; // Prevent further execution
             }
-*/
+
             // If order is editable, proceed with making the quantity editable
             const inputField = document.createElement('input');
             inputField.type = 'number';
