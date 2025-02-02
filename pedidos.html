@@ -854,7 +854,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         // Optionally, you can re-calculate the total if necessary
                         const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                         
-                        const productTotal = price * newQuantity * (1 + (ipi === 1 ? 0.5 : 0));
+                        const productTotal = 1000 * newQuantity//price * newQuantity * (1 + (ipi === 1 ? 0.5 : 0));
 
                         // Update the total for this row
                         row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
@@ -882,24 +882,6 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-    // Add event listeners for delete buttons
-    document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
-        button.addEventListener('click', async (event) => {
-            event.stopPropagation(); // Prevent row click interference
-            const row = button.closest('tr');
-            const productId = row.getAttribute('data-product-id');
-            await deleteProduct(productId, orderDetails.id);
-        });
-    });
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 // Function to update the total price in the modal
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
@@ -921,6 +903,24 @@ function updateTotalPrice() {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Add event listeners for delete buttons
+    document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation(); // Prevent row click interference
+            const row = button.closest('tr');
+            const productId = row.getAttribute('data-product-id');
+            await deleteProduct(productId, orderDetails.id);
+        });
+    });
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
