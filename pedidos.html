@@ -890,7 +890,7 @@ function updateTotalPrice() {
     let total = 0; // Starting with an initial value of 1000
     console.log('entrada total', total)
     rows.forEach(row => {
-        const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
+        const productTotal = parseFloat(row.cells[3].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
         console.log('resultado total', productTotal)
 
         total += productTotal;
