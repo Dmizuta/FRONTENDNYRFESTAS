@@ -835,15 +835,35 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
 
-                        const data = await response.json();
-        console.log(data.message); // Success message
+                        
 
+
+        
+
+// Assume 'data' is the response object you received from the server
+const data = response.data;
+
+// Retrieve the ipi value and total from the response
+const ipi = data.updatedProduct.ipi;  // ipi value
+const updatedTotal = data.updatedProduct.total;  // New total value
+
+console.log('IPI value:', ipi);
+console.log('Updated total:', updatedTotal);
+
+
+
+/*
+const data = await response.json();
+        console.log(data.message); // Success message
                         // Retrieve the ipi value and total from the response
                         const ipi = data.ipi;  // ipi value
                         const updatedTotal = data.total;  // New total value
 
                         console.log('IPI:', ipi);  // Print the ipi value
                         console.log('Updated Total:', updatedTotal);  // Print the updated total
+*/
+
+
   
                         // Update the quantity directly in the table after success
                         quantityCell.textContent = newQuantity;
