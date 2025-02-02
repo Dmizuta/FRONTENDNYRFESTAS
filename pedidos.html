@@ -839,9 +839,9 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
         
-
+                        const data = await response.json();
 // Assume 'data' is the response object you received from the server
-const data = response.data;
+// const data = response.data;
 
 // Retrieve the ipi value and total from the response
 const ipi = data.updatedProduct.ipi;  // ipi value
