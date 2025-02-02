@@ -854,7 +854,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         // Optionally, you can re-calculate the total if necessary
                         const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                         
-                        const productTotal = price / 100 //* newQuantity * (1 + (ipi === 1 ? 0.5 : 0));
+                        const productTotal = price / 100 * newQuantity //* (1 + (ipi === 1 ? 0.5 : 0));
 
                         // Update the total for this row
                         row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
