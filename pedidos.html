@@ -833,12 +833,29 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
                         if (!response.ok) throw new Error('Failed to update quantity');
 
+
+
+
+
+
+                        const data = await response.json();
+        console.log(data.message); // Success message
+
+        // Retrieve the ipi value and total from the response
+        const ipi = data.updatedProduct.ipi;  // ipi value
+        const updatedTotal = data.total;  // New total value
+
+        console.log('IPI:', ipi);  // Print the ipi value
+        console.log('Updated Total:', updatedTotal);  // Print the updated total
+
+  
+
                         // Update the quantity directly in the table after success
                         quantityCell.textContent = newQuantity;
 
                         // Optionally, you can re-calculate the total if necessary
                         const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
-                        const productTotal = price * newQuantity / 100;
+                        const productTotal = price * newQuantity * ipi/ 100;
 
                         // Update the total for this row
                         row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
