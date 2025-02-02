@@ -871,10 +871,10 @@ const data = await response.json();
                         // Optionally, you can re-calculate the total if necessary
                         const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                         const ipiValue = ipi * 0.13 * price / 100 * newQuantity; 
-                        const productTotal = updatedTotal;    //price / 100 * newQuantity + ipiValue ;
+                        const productTotal = price / 100 * newQuantity + ipiValue ;
 
                         // Update the total for this row
-                        row.cells[5].textContent = 10000;
+                        //row.cells[5].textContent = 10000;
                         row.cells[6].textContent =  formatCurrency(productTotal); // Ensure it's formatted properly
 
                         // Update the total price in the modal
