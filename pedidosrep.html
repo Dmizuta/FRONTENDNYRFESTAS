@@ -464,6 +464,7 @@ font-size: 1rem;
                         <th>Descrição</th>
                         <th>Qtde</th>
                         <th>Preço Unitário</th>
+                        <th>Ipi</th>
                         <th>Subtotal</th>
                         <th>Editar</th>
                         <th>Apagar</th>
@@ -827,6 +828,41 @@ function populateModal(orderDetails) {
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0; // Variable to accumulate the total price    
 
+
+
+
+
+
+
+
+    // Clear existing content and rebuild the table
+    orderDetailsContent.innerHTML = ''; // Clear content initially
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const factor = parseInt(product.ipi);
+
+       
+        const ipi = factor * 0.13 * price * quantity;
+        
+        const productTotal = (price * quantity) + ipi; // Calculate product total
+
+        const row = `
+            <tr data-product-id="${product.id}">
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(ipi)}</td>
+                <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+            </tr>
+        `;  
+
+
+/*
     // Clear existing content and rebuild the table
     orderDetailsContent.innerHTML = ''; // Clear content initially
     orderDetails.products.forEach((product, index) => {
@@ -845,7 +881,7 @@ function populateModal(orderDetails) {
                 <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
                 <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
             </tr>
-        `;
+        `;*/
         orderDetailsContent.innerHTML += row; // Add row to table
 
         total += productTotal; // Accumulate the product total to the overall total
