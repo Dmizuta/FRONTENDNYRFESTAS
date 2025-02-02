@@ -841,7 +841,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         const productTotal = price * newQuantity / 100;
 
                         // Update the total for this row
-                        row.cells[5].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
+                        row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
 
                         // Update the total price in the modal
                         updateTotalPrice();
