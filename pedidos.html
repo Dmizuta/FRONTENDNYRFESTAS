@@ -888,7 +888,9 @@ function updateTotalPrice() {
         const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
         console.log('resultado total', productTotal)
 
-        total += productTotal;
+        
+total = 55;
+       // total += productTotal;
     });
 
     // Round the total to 2 decimal places
