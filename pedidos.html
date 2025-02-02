@@ -878,7 +878,7 @@ const data = await response.json();
                         row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
 
                         // Update the total price in the modal
-                        updateIpiValue();
+                        update();
                         updateTotalPrice();
 
                        
@@ -899,30 +899,7 @@ const data = await response.json();
 });
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-// Function to update the total price in the modal
-function updateIpiValue() {
-    const rows = document.querySelectorAll('#order-details-content tr');
-    let total = 0; // Starting with an initial value of 1000
-    
-    rows.forEach(row => {
-        const ipiValueRow = parseFloat(row.cells[5].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
-        console.log('resultado total', ipiValueRow)
 
-
-total =  ipiValueRow;
-    });*/
-}
-    // Round the total to 2 decimal places
-   //total = total.toFixed(2); // This will convert it to a string with 2 decimals
-    
- //document.getElementById('total-value').textContent = formatCurrency(total);}
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
