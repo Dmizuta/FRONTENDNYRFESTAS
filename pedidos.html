@@ -851,7 +851,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         // Optionally, you can re-calculate the total if necessary
                         const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                         const ipiValue = ipi * 0.13 * price / 100 * newQuantity; 
-                        const productTotal = price / 100 * newQuantity + ipiValue ;
+                        const productTotal = 5555555    //price / 100 * newQuantity + ipiValue ;
 
                         // Update the total for this row
                         row.cells[5].textContent = 10000;
@@ -888,7 +888,7 @@ function updateTotalPrice() {
     let total = 0; // Starting with an initial value of 1000
     console.log('entrada total', total)
     rows.forEach(row => {
-        const productTotal = parseFloat(row.cells[7].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
+        const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
         console.log('resultado total', productTotal)
 
 
