@@ -1437,110 +1437,9 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function printOrder() {
-    const modalContent = document.querySelector("#order-modal .print-content").innerHTML; // Target only relevant content
-    const printWindow = window.open("", "", "width=800,height=600"); // Open print window
-
-    // Ensure document structure and styles are fully applied
-    printWindow.document.write(`
-        <html>
-        <head>
-            <title>Print Order</title>
-            <style>
-                @media print {
-                    /* General Page Style */
-                    body {
-                        font-family: Arial, sans-serif;
-                        font-size: 12pt;
-                        line-height: 1.5;
-                    }
-
-                    /* Logo styling */
-                    #logo-image {
-                        display: block;
-                        margin: 0 auto 20px;
-                        max-width: 200px;
-                    }
-
-                    /* Hide unnecessary elements */
-                    .allbtns, #submit-order-btn, #delete-order-btn, #close-modal, .switch-container {
-                        display: none !important;
-                    }
-
-                    /* Table Style */
-                    #order-items-table {
-                        border-collapse: collapse;
-                        width: 100%;
-                        margin-top: 20px;
-                        page-break-inside: avoid; /* Prevent breaks inside the table */
-                    }
-
-                    #order-items-table th, #order-items-table td {
-                        padding: 8px;
-                        text-align: left;
-                        border: 1px solid #ddd;
-                    }
-
-                    /* Order total box */
-                    .totalOrderBox {
-                        margin-top: 20px;
-                        font-size: 14pt;
-                        font-weight: bold;
-                        border-top: 2px solid #000;
-                        padding-top: 10px;
-                        page-break-inside: avoid;
-                    }
-
-                    /* Observations Section */
-                    .obs-row {
-                        font-size: 11pt;
-                        margin-top: 20px;
-                        padding: 10px;
-                        background-color: #f9f9f9;
-                        page-break-inside: avoid;
-                    }
-
-                    .obs-row textarea {
-                        width: 100%;
-                        font-size: 11pt;
-                        border: 1px solid #ddd;
-                        padding: 5px;
-                        box-sizing: border-box;
-                        resize: none;
-                        white-space: pre-wrap;
-                        overflow: visible;
-                        min-height: 160px;
-                        height: auto !important;
-                    }
-
-                    /* Ensure good readability */
-                    .order-info-row span {
-                        font-weight: bold;
-                    }
-
-                    table {
-                        font-size: 10pt;
-                    }
-                }
-            </style>
-        </head>
-        <body>
-            ${modalContent} <!-- Insert extracted content -->
-        </body>
-        </html>
-    `);
-
-    printWindow.document.close();
-
-    // Add delay to ensure content loads fully before triggering print
-    printWindow.onload = function () {
-        printWindow.print();
-        printWindow.close(); // Close after printing
-    };
-}
 
 
-/*
+
 
 
 function printOrder() {
@@ -1552,21 +1451,21 @@ function printOrder() {
     printWindow.document.write('<style>');
     printWindow.document.write(`
      @media print {
-    // General Page Style 
+    /* General Page Style */
     body {
         font-family: Arial, sans-serif;
         font-size: 12pt;
         line-height: 1.5;
     }
 
-    // Logo styling 
+    /* Logo styling */
     #logo-image {
         display: block;
         margin: 0 auto 20px;
         max-width: 200px;
     }
 
-    //Hide unnecessary columns and buttons 
+    /* Hide unnecessary columns and buttons */
     #order-items-table th:nth-child(8),
     #order-items-table td:nth-child(8),
     #order-items-table th:nth-child(9),
@@ -1578,12 +1477,12 @@ function printOrder() {
         display: none !important;
     }
 
-    // Table Style 
+    /* Table Style */
     #order-items-table {
         border-collapse: collapse;
         width: 100%;
         margin-top: 20px;
-        page-break-inside: avoid; // Prevent breaks inside the table 
+        page-break-inside: avoid; /* Prevent breaks inside the table */
     }
 
     #order-items-table th, #order-items-table td {
@@ -1592,23 +1491,23 @@ function printOrder() {
         border: 1px solid #ddd;
     }
 
-    // Make the total order section distinct 
+    /* Make the total order section distinct */
     .totalOrderBox {
         margin-top: 20px;
         font-size: 14pt;
         font-weight: bold;
         border-top: 2px solid #000;
         padding-top: 10px;
-        page-break-inside: avoid; // Ensure the section stays together 
+        page-break-inside: avoid; /* Ensure the section stays together */
     }
 
-    // Observations Section 
+    /* Observations Section */
     .obs-row {
         font-size: 11pt;
         margin-top: 20px;
         padding: 10px;
         background-color: #f9f9f9;
-        page-break-inside: avoid; // Prevent breaks in the observation area 
+        page-break-inside: avoid; /* Prevent breaks in the observation area */
     }
 
     .obs-row textarea {
@@ -1617,21 +1516,21 @@ function printOrder() {
         border: 1px solid #ddd;
         padding: 5px;
         box-sizing: border-box;
-        resize: none; // Disable resizing during print 
-        white-space: pre-wrap; // Ensure text wraps within the textarea 
-        overflow: visible; // Allow for overflow in the print view 
-        min-height: 160px; // Set a reasonable minimum height 
-        height: auto !important; // Allow it to expand to fit content 
+        resize: none; /* Disable resizing during print */
+        white-space: pre-wrap; /* Ensure text wraps within the textarea */
+        overflow: visible; /* Allow for overflow in the print view */
+        min-height: 160px; /* Set a reasonable minimum height */
+        height: auto !important; /* Allow it to expand to fit content */
         
     }
 
-    // Section Spacing 
+    /* Section Spacing */
     .order-header {
         margin-bottom: 20px;
-        page-break-inside: avoid; // Prevent break inside header 
+        page-break-inside: avoid; /* Prevent break inside header */
     }
 
-    // Ensure good readability 
+    /* Ensure good readability */
     .order-info-row span {
         font-weight: bold;
     }
@@ -1640,12 +1539,12 @@ function printOrder() {
         font-size: 10pt;
     }
 
-    // Remove block-style page breaks, allow natural flow 
+    /* Remove block-style page breaks, allow natural flow */
     .order-info, .order-total {
-        page-break-after: auto; // Let content flow naturally 
+        page-break-after: auto; /* Let content flow naturally */
     }
 
-    // Adjust table column width 
+    /* Adjust table column width */
     #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
         width: 15%;
     }
@@ -1683,7 +1582,7 @@ function printOrder() {
 }
 
 
-*/
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
