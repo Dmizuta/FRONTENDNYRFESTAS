@@ -839,8 +839,8 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         console.log(data.message); // Success message
 
                         // Retrieve the ipi value and total from the response
-                        const ipi = data.updatedProduct.ipi;  // ipi value
-                        const updatedTotal = data.updatedProduct.total;  // New total value
+                        const ipi = data.ipi;  // ipi value
+                        const updatedTotal = data.total;  // New total value
 
                         console.log('IPI:', ipi);  // Print the ipi value
                         console.log('Updated Total:', updatedTotal);  // Print the updated total
