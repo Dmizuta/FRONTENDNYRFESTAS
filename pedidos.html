@@ -906,9 +906,9 @@ const data = await response.json();
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
     let total = 0; // Starting with an initial value of 1000
-    console.log('entrada total', total)
+    
     rows.forEach(row => {
-        const productTotal = parseFloat(row.cells[7].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
+        const productTotal = parseFloat(row.cells[5].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
         console.log('resultado total', productTotal)
 
 
