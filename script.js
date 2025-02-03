@@ -262,7 +262,7 @@ const addProductToOrder = async () => {
           const cxfechada = productBuyData.cxfechada;
           const ipi = productBuyData.ipi;
 
-          console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
+          console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "IPI:", ipi);
 
           // Validate product details
           if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
@@ -365,8 +365,9 @@ const addProductToOrder = async () => {
         const precofechada = productBuyData.precofechada;
         const precofrac = productBuyData.precofrac;
         const cxfechada = productBuyData.cxfechada;
+        const ipi = productBuyData.ipi;
 
-        console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada);
+        console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "Ipi:", ipi);
 
         // Validate product details
         if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
@@ -389,7 +390,8 @@ const addProductToOrder = async () => {
           codproduto: productCode,
           descricao: productDesc,
           quantidade: quantity,
-          preco: chosenPrice
+          preco: chosenPrice,
+          ipi: ipi
         };
 
         console.log("Admin product data being sent:", productData);
