@@ -124,6 +124,7 @@
             <input type="email" id="email" name="email" placeholder="E-mail" required>
 
             <button type="submit" id="cadastroButton">Cadastrar</button>
+            <button id="specialButton" style="display: none;">Apagar</button>
         </form>
 
         <div id="searchBox">
@@ -243,6 +244,7 @@ function loadCustomerData(customer) {
     document.getElementById('email').value = customer.email || '';
     document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
     document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
+    document.getElementById("specialButton").style.display = "block";
 
     // Store customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
