@@ -513,6 +513,33 @@ new Cleave('#cnpj', {
 
 
 
+    function deleteCustomer() {
+        // Get customer ID (you might have it stored somewhere, adjust as needed)
+        const loggedInUsername = localStorage.getItem('customerId').value; 
+       // const customerId = document.getElementById("customerId").value; // Assuming you have an input with the customer ID
+
+        if (!customerId) {
+            alert("No customer selected!");
+            return;
+        }
+
+        // Send DELETE request to backend
+        fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
+            method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Customer deleted successfully!");
+                // Optionally, clear the form or refresh the list
+            } else {
+                alert("Failed to delete customer!");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+
+
 
 
 
