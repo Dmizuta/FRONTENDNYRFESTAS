@@ -529,7 +529,7 @@ font-size: 1rem;
                     
                    
                     
-                    <button id="finish-order-btn" class="action-btn">Finalizar</button>
+                    <button id="finish-order-btn" class="action-btn">Enviar</button>
                     <button id="delete-order-btn" class="action-btn">Apagar</button>
                 </div>
             
@@ -685,7 +685,8 @@ function formatCurrency(value) {
 
 const statusText = order.status === 0 ? 'Aberto' :
                    order.status === 1 ? 'Orçamento' :
-                   order.status === 2 ? 'Fechado' :
+                   order.status === 2 ? 'Enviado' :
+                   order.status === 3 ? 'Recebido':
                    'Unknown'; 
         const orderRow = `
             <div class="order-row" data-id="${order.id}">
