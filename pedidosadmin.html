@@ -1836,6 +1836,7 @@ document.getElementById("receive-order-btn").addEventListener("click", async () 
         if (!finishResponse.ok) {
             throw new Error(`Failed to finish order: ${finishResponse.status}`);
         }
+        alert('PEDIDO RECEBIDO COM SUCESSO!');
 
         window.location.reload();
     } catch (error) {
