@@ -674,7 +674,8 @@ function formatCurrency(value) {
 
 const statusText = order.status === 0 ? 'Aberto' :
                    order.status === 1 ? 'Orçamento' :
-                   order.status === 2 ? 'Fechado' :
+                   order.status === 2 ? 'Enviado' :
+                   order.status === 3 ? 'Recebido' :
                    'Unknown'; 
         const orderRow = `
             <div class="order-row" data-id="${order.id}">
