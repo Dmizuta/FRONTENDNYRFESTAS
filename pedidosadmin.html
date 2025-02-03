@@ -533,6 +533,7 @@
                
                 
                 <button id="finish-order-btn" class="action-btn">Finalizar</button>
+                <button id="receive-order-btn" class="action-btn">Receber</button>
                 <button id="revert-order-btn" class="action-btn">Recuperar</button>
                 <button id="delete-order-btn" class="action-btn">Apagar</button>
             </div>
@@ -1804,6 +1805,47 @@ document.getElementById("revert-order-btn").addEventListener("click", async () =
 });
 
 
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+document.getElementById("receive-order-btn").addEventListener("click", async () => {
+    const orderId = localStorage.getItem('currentOrderId');
+       console.log('Finalizar botão apertado!');
+
+    try {
+        const finishResponse = await fetch('https://backendnyrfestas.vercel.app/receiveOrder', {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId, observation }), // Send the observation with the request
+        });
+
+        if (!finishResponse.ok) {
+            throw new Error(`Failed to finish order: ${finishResponse.status}`);
+        }
+
+        window.location.reload();
+    } catch (error) {
+        console.error("Error finishing order:", error);
+        alert("Erro ao finalizar pedido. Tente novamente!");
+    }
+});
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
