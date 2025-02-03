@@ -1817,17 +1817,20 @@ document.getElementById("revert-order-btn").addEventListener("click", async () =
 
 
 
-
-
 document.getElementById("receive-order-btn").addEventListener("click", async () => {
     const orderId = localStorage.getItem('currentOrderId');
-       console.log('Finalizar botão apertado!');
+    if (!orderId) {
+        alert("No order ID found.");
+        return;
+    }
+
+    console.log('Finalizar botão apertado!', orderId);
 
     try {
         const finishResponse = await fetch('https://backendnyrfestas.vercel.app/receiveOrder', {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ orderId, observation }), // Send the observation with the request
+            body: JSON.stringify({ orderId: Number(orderId) }), // Ensure orderId is a number
         });
 
         if (!finishResponse.ok) {
@@ -1841,11 +1844,6 @@ document.getElementById("receive-order-btn").addEventListener("click", async () 
     }
 });
 
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
