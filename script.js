@@ -382,7 +382,7 @@ const addProductToOrder = async () => {
         }
 
         const quantity = parseInt(document.getElementById('quantity').value);
-        const ipiValue = document.getElementById('ipi').value;
+       
 
 
         // Choose the correct price based on the quantity
@@ -399,7 +399,7 @@ const addProductToOrder = async () => {
           quantidade: quantity,
           preco: chosenPrice,
           ipi: ipi,
-          ipiValue: ipiValue
+          
         };
 
         console.log("Admin product data being sent:", productData);
