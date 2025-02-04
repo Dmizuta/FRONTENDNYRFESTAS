@@ -67,6 +67,12 @@
         
     }
 
+    .button-container {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+}
+
+
 
 
 </style>
@@ -122,9 +128,11 @@
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="E-mail" required>
 
-
-            <button type="submit" id="cadastroButton">Cadastrar</button>
-            <button type="button" id="specialButton" style="display: none;">Apagar</button>
+            <div class="button-container">
+                <button type="submit" id="cadastroButton">Cadastrar</button>
+                <button type="button" id="specialButton" style="display: none;">Apagar</button>
+            </div>
+            
 
 <!-- 
             <button type="submit" id="cadastroButton">Cadastrar</button>
