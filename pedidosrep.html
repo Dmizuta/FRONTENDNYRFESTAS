@@ -153,24 +153,6 @@
    
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Orders container */
 #orders-container {
         max-width: 95%;
@@ -288,32 +270,7 @@ font-size: 1rem;
         to { opacity: 1; }
     }
     
-    .modal-actions {
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .action-btn {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: 1px;
-        
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    .action-btn:hover {
-        background-color: #0056b3;
-    }
-    
-    #close-modal-btn {
-        background-color: #dc3545;
-    }
-    
-    #close-modal-btn:hover {
-        background-color: #c82333;
-    }
+   
     
     .order-header {
         display: flex;
@@ -401,33 +358,45 @@ font-size: 1rem;
   overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
 
-.modalOrderDeleteButton {
-  
-  width: 40px;                /* Defina a largura desejada para os botões */
-  height: 40px;               /* Defina a altura desejada para os botões */
- 
-  cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+
+
+
+
+
+
+/* Base styles for both buttons */
+.modalOrderDeleteButton, .modalOrderEditButton {
+  width: 40px;                /* Set desired width */
+  height: 40px;               /* Set desired height */
+  cursor: pointer;           /* Indicate the buttons are clickable */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
 }
-.modalOrderEditButton {
-  
-    width: 40px;                /* Defina a largura desejada para os botões */
-    height: 40px;               /* Defina a altura desejada para os botões */
-   
-    cursor: pointer;             /* Muda o cursor para indicar que é clicável */
+
+.modalOrderEditButton img, .modalOrderDeleteButton img {
+  vertical-align: middle;     /* Align image properly */
+  width: 20px;                /* Set image size */
+  height: auto;               /* Keep aspect ratio */
+}
+
+/* Hover state for both buttons */
+.modalOrderDeleteButton:hover, .modalOrderEditButton:hover {
+  transform: scale(1.1);  /* Slightly grow the button on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow for depth */
+}
+
+/* Optional: active state to shrink the button slightly when clicked */
+.modalOrderDeleteButton:active, .modalOrderEditButton:active {
+  transform: scale(0.95);  /* Shrink the button a bit when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
 }
 
 
-.modalOrderEditButton img {
-            vertical-align: super;
-            width: 20px; /* Adjust size as needed */
-            height: auto;
-          }
-          .modalOrderDeleteButton img {
-            vertical-align: super;
-            width: 20px; /* Adjust size as needed */
-            height: auto;
-          }
-  
+
+
+
+
+
+
   .save-quantity-btn {
     background-color: #28a745;
     width: 5rem;
