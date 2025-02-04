@@ -12,12 +12,7 @@
 <style>
 
 
-
-
-
- /* Center content */
-
- .allbtns {
+.allbtns {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,53 +22,58 @@
 .modal-actions {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Space between buttons */
+    gap: 20px; /* Space between buttons */
 }
 
 .action-btn {
-    padding: 12px 20px;
+    padding: 12px 25px;
     font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px; /* Rounded corners */
+    font-weight: 500;
+    border: 2px solid transparent; /* Default border */
+    border-radius: 8px; /* Soft rounded corners */
     cursor: pointer;
-    transition: all 0.3s ease-in-out; /* Smooth animation */
-    width: 150px; /* Consistent width for buttons */
-}
-
-#save-notes-btn {
-    background-color: #17a2b8; /* Yellow for "Salvar" */
+    transition: all 0.3s ease;
+    width: 160px; /* Uniform width */
+    text-transform: uppercase; /* Uppercase for consistency */
+    background-color: #007bff; /* Main blue color */
     color: white;
-}
-
-#printOrder-btn {
-    background-color: #17a2b8; /* Blue for "Imprimir" */
-    color: white;
-}
-
-#finish-order-btn {
-    background-color: #17a2b8; /* Green for "Finalizar" */
-    color: white;
-}
-
-#delete-order-btn {
-    background-color: #0e6f7e; /* Red for "Apagar" */
-    color: white;
-}
-
-#close-modal {
-    background-color: #6c757d; /* Grey for "Fechar" */
-    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
 .action-btn:hover {
-    filter: brightness(1.2); /* Lightens the button on hover */
-    transform: scale(1.05); /* Slightly enlarges button */
+    background-color: #0069d9; /* Darker blue on hover */
+    border-color: #0056b3; /* Darker border for contrast */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
 .action-btn:active {
-    transform: scale(0.95); /* Press effect */
+    transform: scale(0.98); /* Slight shrink on click */
+    background-color: #0056b3; /* Even darker blue when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
 }
+
+#close-modal {
+    background-color: #f8f9fa; /* Light grey for "Fechar" */
+    color: #333; /* Dark text */
+    border: 2px solid #ccc; /* Light grey border */
+    font-size: 14px; /* Smaller text for close button */
+    padding: 8px 18px; /* Smaller padding */
+    width: 120px; /* Smaller width */
+    box-shadow: none; /* No shadow for close button */
+}
+
+#close-modal:hover {
+    background-color: #e2e6ea; /* Light grey on hover */
+    border-color: #ddd; /* Slightly darker border on hover */
+}
+
+
+
+
+
+
+
+
 
 
 
