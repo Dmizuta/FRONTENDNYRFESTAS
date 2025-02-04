@@ -2130,7 +2130,30 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
 */
 
 
+document.getElementById("ipi").addEventListener("change", function () {
+    let novoIPI = parseFloat(this.value); // Captura o IPI escolhido pelo usuário
+    atualizarPedidoComIPI(novoIPI); // Atualiza todos os itens e o total
+});
 
+function atualizarPedidoComIPI(novoIPI) {
+    let linhasPedido = document.querySelectorAll(".linha-pedido"); // Seleciona todas as linhas dos itens do pedido
+    let totalPedido = 0;
+
+    linhasPedido.forEach(linha => {
+        let quantidade = parseFloat(linha.querySelector(".quantidade").textContent);
+        let preco = parseFloat(linha.querySelector(".preco").textContent);
+        
+        let ipiValor = quantidade * preco * novoIPI; // Novo valor do IPI para este item
+        let totalItem = (quantidade * preco) + ipiValor; // Novo total do item
+
+        linha.querySelector(".ipi").textContent = ipiValor.toFixed(2); // Atualiza a célula do IPI
+        linha.querySelector(".total-item").textContent = totalItem.toFixed(2); // Atualiza o total do item
+        
+        totalPedido += totalItem; // Soma ao total do pedido
+    });
+
+    document.getElementById("total-pedido").textContent = totalPedido.toFixed(2); // Atualiza o total do pedido
+}
 
 
 
