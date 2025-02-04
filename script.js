@@ -367,7 +367,7 @@ const addProductToOrder = async () => {
         const cxfechada = productBuyData.cxfechada;
         const ipi = productBuyData.ipi;
 
-        const ipiValue = document.getElementById('ipi').value;
+        
          
         
         
@@ -382,6 +382,8 @@ const addProductToOrder = async () => {
         }
 
         const quantity = parseInt(document.getElementById('quantity').value);
+        const ipiValue = document.getElementById('ipi').value;
+
 
         // Choose the correct price based on the quantity
         const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
@@ -389,7 +391,7 @@ const addProductToOrder = async () => {
         const productData = {
           username: username,
           representante: representante,
-          cnpj: cnpj,
+          cnpj: cnpj, 
           customerId: customerId,
           razaosocial: razaosocial,
           codproduto: productCode,
