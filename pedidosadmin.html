@@ -2128,34 +2128,54 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
     window.location.reload();
 });
 */
+// Seleciona o dropdown de IPI e adiciona um event listener
+const ipiDropdown = document.getElementById("ipi");
+ipiDropdown.addEventListener("change", updateIpiValues);
 
+function updateIpiValues() {
+    const selectedIpi = parseFloat(ipiDropdown.value); // Obtém o valor do dropdown
+    const orderRows = document.querySelectorAll("#order-details-content tr"); // Seleciona as linhas da tabela
+    let totalOrderValue = 0;
 
-document.getElementById("ipi").addEventListener("change", function () {
-    let novoIPI = parseFloat(this.value); // Captura o IPI escolhido pelo usuário
-    atualizarPedidoComIPI(novoIPI); // Atualiza todos os itens e o total
-});
+    orderRows.forEach(row => {
+        const quantity = parseFloat(row.querySelector(".quantity").textContent);
+        const unitPrice = parseFloat(row.querySelector(".unit-price").textContent.replace("R$", "").trim());
+        const ipiCell = row.querySelector(".ipi");
+        const subtotalCell = row.querySelector(".subtotal");
 
-function atualizarPedidoComIPI(novoIPI) {
-    let linhasPedido = document.querySelectorAll(".linha-pedido"); // Seleciona todas as linhas dos itens do pedido
-    let totalPedido = 0;
+        // Atualiza a célula do IPI
+        ipiCell.textContent = `${(selectedIpi * 100).toFixed(1)}%`;
 
-    linhasPedido.forEach(linha => {
-        let quantidade = parseFloat(linha.querySelector(".quantidade").textContent);
-        let preco = parseFloat(linha.querySelector(".preco").textContent);
-        
-        let ipiValor = quantidade * preco * novoIPI; // Novo valor do IPI para este item
-        let totalItem = (quantidade * preco) + ipiValor; // Novo total do item
+        // Calcula o novo subtotal
+        const subtotal = (quantity * unitPrice) + (quantity * unitPrice * selectedIpi);
+        subtotalCell.textContent = `R$ ${subtotal.toFixed(2)}`;
 
-        linha.querySelector(".ipi").textContent = ipiValor.toFixed(2); // Atualiza a célula do IPI
-        linha.querySelector(".total-item").textContent = totalItem.toFixed(2); // Atualiza o total do item
-        
-        totalPedido += totalItem; // Soma ao total do pedido
+        // Soma ao total do pedido
+        totalOrderValue += subtotal;
     });
 
-    document.getElementById("total-pedido").textContent = totalPedido.toFixed(2); // Atualiza o total do pedido
+    // Atualiza o valor total na interface
+    document.getElementById("total-value").textContent = `R$ ${totalOrderValue.toFixed(2)}`;
 }
 
-
+// Função para salvar os dados no backend (opcional, caso queira salvar no banco)
+async function saveOrderWithIpi(orderId) {
+    const selectedIpi = parseFloat(ipiDropdown.value);
+    try {
+        const response = await fetch("/update-order-ipi", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId, ipi: selectedIpi })
+        });
+        if (response.ok) {
+            alert("IPI atualizado com sucesso!");
+        } else {
+            alert("Erro ao atualizar o IPI.");
+        }
+    } catch (error) {
+        console.error("Erro na requisição:", error);
+    }
+}
 
 
 
