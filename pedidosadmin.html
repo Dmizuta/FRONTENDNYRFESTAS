@@ -1682,6 +1682,12 @@ function printOrder() {
     #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
         width: 15%;
     }
+
+    @media print {
+    .switch-container {
+        display: none;
+    }
+}
 }
 
 
