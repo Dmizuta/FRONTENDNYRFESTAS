@@ -367,6 +367,11 @@ const addProductToOrder = async () => {
         const cxfechada = productBuyData.cxfechada;
         const ipi = productBuyData.ipi;
 
+        const ipiValue = document.getElementById("ipi").value;
+         
+        
+        
+
         console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "Ipi:", ipi);
 
         // Validate product details
@@ -391,7 +396,8 @@ const addProductToOrder = async () => {
           descricao: productDesc,
           quantidade: quantity,
           preco: chosenPrice,
-          ipi: ipi
+          ipi: ipi,
+          ipiValue: ipiValue
         };
 
         console.log("Admin product data being sent:", productData);
