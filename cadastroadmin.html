@@ -67,6 +67,10 @@
     }
 
 
+    .button-container {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+}
 
 
 </style>
@@ -123,8 +127,11 @@
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="E-mail" required>
 
-            <button type="submit" id="cadastroButton">Cadastrar</button>
-            <button id="specialButton" style="display: none;">Apagar</button>
+            <div class="button-container">
+                <button type="submit" id="cadastroButton">Cadastrar</button>
+                <button type="button" id="specialButton" style="display: none;">Apagar</button>
+            </div>
+            
         </form>
 
         <div id="searchBox">
@@ -441,6 +448,44 @@ new Cleave('#cnpj', {
     blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
     numericOnly: true, // Ensure only numbers are entered
 });
+
+
+
+
+
+
+document.getElementById("specialButton").addEventListener("click", deleteCustomer);
+
+function deleteCustomer() {
+    const customerId = localStorage.getItem("customerId"); 
+
+    if (!customerId) {
+        alert("No customer selected!");
+        return;
+    }
+
+    fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
+        method: "DELETE",
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Customer deleted successfully!");
+            location.reload(); // Reloads the page
+        } else {
+            alert("Failed to delete customer!");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+
+
+
+
+
+
+
 
 
     </script>
