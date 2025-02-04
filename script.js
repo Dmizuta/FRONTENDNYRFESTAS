@@ -367,7 +367,7 @@ const addProductToOrder = async () => {
         const cxfechada = productBuyData.cxfechada;
         const ipi = productBuyData.ipi;
 
-        const ipiValue = document.getElementById("ipi").value;
+        const ipiValue = document.getElementById('ipi').value;
          
         
         
