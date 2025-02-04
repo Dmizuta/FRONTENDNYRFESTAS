@@ -403,6 +403,7 @@ const addProductToOrder = async () => {
         };
 
         console.log("Admin product data being sent:", productData);
+        console.log('IPI:',ipi);
 
         const addResponse = await fetch(
           "https://backendnyrfestas.vercel.app/add-to-order-admin",
