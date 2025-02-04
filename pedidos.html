@@ -431,9 +431,9 @@
         <div class="modal-actions">
             <button class="action-btn" onclick="printOrder()">Imprimir</button>
             <button id="save-notes-btn" class="action-btn">Salvar</button>
-            <button id="submit-order-btn" class="action-btn">Orçamento</button>
+           <!-- <button id="submit-order-btn" class="action-btn">Orçamento</button>-->
             <button id="finish-order-btn" class="action-btn">Finalizar</button>
-            <button id="revert-order-btn" class="action-btn">Reverter</button>
+            <!--<button id="revert-order-btn" class="action-btn">Reverter</button>-->
 
 
 
@@ -1162,7 +1162,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+/*
 document.getElementById("submit-order-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
     const orderId = localStorage.getItem('currentOrderId');
@@ -1172,11 +1172,7 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
         alert('Order ID is missing. Please try again.');
         return; // Stop further execution if orderId is not found
     }
-/*
-    if (!observation) {
-        alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES".');
-        return; // Stop further execution if observation is empty
-    }*/
+
 
     try {
         // Fetch the current status of the order
@@ -1200,12 +1196,7 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
             return; // Stop execution
         }
 
-        /*// Ask for user confirmation before submitting
-        const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA ENVIAR ESTE PEDIDO?');
-
-        if (!userConfirmed) {
-            return; // If user cancels, stop the submission
-        }*/
+      
 
         // Prepare data to send
         const requestData = {
@@ -1236,7 +1227,7 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
     } catch (error) {
         console.error("Error submitting the order:", error);
     }
-});
+});*/
 
 
 
@@ -1388,7 +1379,7 @@ function printOrder() {
 
 
 
-
+/*
 document.getElementById("revert-order-btn").addEventListener("click", async function () {
     const orderId = localStorage.getItem('currentOrderId');
 
@@ -1467,7 +1458,7 @@ document.getElementById("revert-order-btn").addEventListener("click", async func
 
     window.location.reload();
 });
-
+*/
    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
