@@ -70,30 +70,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .container {
         display: flex;
         flex-direction: column;
@@ -162,36 +138,6 @@
     }
 
    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /* Orders container */
@@ -284,22 +230,7 @@
             padding: 10px;
         }
         
-       /* .close-btn {
-            color: #aaa;
-            font-size: 5rem;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            border-color: #aaa;
-            cursor: pointer;
-        }
-        
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }*/
+      
         
         #order-details-content {
             padding: 10px;
@@ -400,11 +331,6 @@
     }
     
     
-
-
-
-
-
 /* Base styles for both buttons */
 .modalOrderDeleteButton, .modalOrderEditButton {
   width: 40px;                /* Set desired width */
@@ -432,15 +358,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
       .save-quantity-btn {
         background-color: #28a745;
         width: 5rem;
@@ -466,6 +383,10 @@
         font-size: 1.1rem;
     }
         </style>
+    
+
+
+
     
     
 <body>
@@ -640,6 +561,8 @@
 
 <script>
 
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to handle login state and display username
@@ -649,6 +572,8 @@ function displayUserName() {
         document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to handle logout
 function handleLogout() {
@@ -701,12 +626,7 @@ if (pedidosLinkContainer && cadastroLinkContainer) {
   console.error('Link containers not found in the DOM.');
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 // Function to load orders from the backend
 async function loadOrders() {
@@ -728,10 +648,7 @@ async function loadOrders() {
     }
 }
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to dynamically display orders
 function displayOrders(orders) {
@@ -755,56 +672,17 @@ function displayOrders(orders) {
         }
 
         // Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
 
-const statusText = order.status === 0 ? 'Aberto' :
-                   order.status === 1 ? 'Orçamento' :
-                   order.status === 2 ? 'Fechado' :
-                   order.status === 3 ? 'Processado' :
-                   'Unknown'; 
+        const statusText = order.status === 0 ? 'Aberto' :
+                           order.status === 1 ? 'Orçamento' :
+                           order.status === 2 ? 'Fechado' :
+                           order.status === 3 ? 'Processado' :
+                           'Unknown'; 
         const orderRow = `
             <div class="order-row" data-id="${order.id}">
-                <div class="order-details">
-                    <div><strong>ID:</strong> ${order.id}</div>
-                    <div><strong>Representante:</strong> ${order.representante}</div>
-                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-                    <div class="status"><strong>Status:</strong> ${statusText}</div>
-                
-                
-                    </div>
-            </div>
-        `;
-        container.innerHTML += orderRow;
-    });
-    console.log('All orders displayed');
-}
-/*
-// Function to dynamically display orders
-function displayOrders(orders) {
-    const container = document.getElementById('orders-container');
-    container.innerHTML = '';
-
-    if (orders.length === 0) {
-        container.innerHTML = '<p>No orders found.</p>';
-        return;
-    }
-
-
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}
-
-
-    orders.forEach(order => {
-        const total = parseFloat(order.total);
-        const statusText = order.status === 1 ? 'Enviado' : 'Aberto';
-        const orderRow = `
-            <div class="order-row" data-id="${order.id}" data-razaosocial="${order.razaosocial}">
                 <div class="order-details">
                     <div><strong>ID:</strong> ${order.id}</div>
                     <div><strong>Representante:</strong> ${order.representante}</div>
@@ -817,13 +695,10 @@ function formatCurrency(value) {
         `;
         container.innerHTML += orderRow;
     });
+    console.log('All orders displayed');
 }
-*/
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
