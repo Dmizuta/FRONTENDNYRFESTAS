@@ -526,6 +526,7 @@ new Cleave('#cnpj', {
 
 
 
+
 document.getElementById("specialButton").addEventListener("click", deleteCustomer);
 
 function deleteCustomer() {
@@ -536,20 +537,35 @@ function deleteCustomer() {
         return;
     }
 
+    // Confirm deletion with the user
+    const confirmDelete = confirm("Are you sure you want to delete this customer?");
+    if (!confirmDelete) return;
+
     fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
         method: "DELETE",
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to delete customer. Server error.");
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             alert("Customer deleted successfully!");
+            localStorage.removeItem("customerId"); // Clear stored customer ID
             location.reload(); // Reloads the page
         } else {
-            alert("Failed to delete customer!");
+            alert(`Error: ${data.message}`);
         }
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => {
+        console.error("Error:", error);
+        alert("An unexpected error occurred. Please try again.");
+    });
 }
+
+
 
 
 
