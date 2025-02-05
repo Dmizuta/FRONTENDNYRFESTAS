@@ -480,7 +480,7 @@ async function deleteCustomer() {
         const customerName = nameData.razaosocial || 'Unknown'; // Store globally
 
         // Confirm deletion with customer name
-        const confirmDelete = confirm(`Are you sure you want to delete ${customerName}?`);
+        const confirmDelete = confirm(`TEM CERTEZA QUE DESEJA APAGAR O CADASTRO ${customerName}?`);
         if (!confirmDelete) return;
 
         // Send delete request
@@ -493,7 +493,7 @@ async function deleteCustomer() {
         const deleteData = await deleteResponse.json();
 
         if (deleteData.success) {
-            alert(`CLIENTE >>> ${customerName} <<< APAGADO!`);
+            alert(`CADASTRO >>> ${customerName} <<< APAGADO!`);
             localStorage.removeItem("customerId"); // Clear stored customer ID
             location.reload(); // Reload page
         } else {
