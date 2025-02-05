@@ -67,6 +67,10 @@
     }
 
 
+    .button-container {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+}
 
 
 </style>
@@ -123,7 +127,11 @@
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="E-mail" required>
 
-            <button type="submit" id="cadastroButton">Cadastrar</button>
+            <div class="button-container">
+                <button type="submit" id="cadastroButton">Cadastrar</button>
+                <button type="button" id="specialButton" style="display: none;">Apagar</button>
+            </div>
+            
         </form>
 
         <div id="searchBox">
@@ -243,6 +251,7 @@ function loadCustomerData(customer) {
     document.getElementById('email').value = customer.email || '';
     document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
     document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
+    document.getElementById("specialButton").style.display = "block";
 
     // Store customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
@@ -439,6 +448,66 @@ new Cleave('#cnpj', {
     blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
     numericOnly: true, // Ensure only numbers are entered
 });
+
+
+
+
+
+
+
+
+document.getElementById("specialButton").addEventListener("click", deleteCustomer);
+
+async function deleteCustomer() {
+    const customerId = localStorage.getItem("customerId");
+
+    if (!customerId) {
+        alert("No customer selected!");
+        return;
+    }
+
+    try {
+        // Fetch customer name from backend
+        const nameResponse = await fetch('https://backendnyrfestas.vercel.app/displayName', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId }) 
+        });
+
+        if (!nameResponse.ok) throw new Error("Failed to fetch customer name.");
+
+        const nameData = await nameResponse.json();
+        const customerName = nameData.razaosocial || 'Unknown'; // Store globally
+
+        // Confirm deletion with customer name
+        const confirmDelete = confirm(`TEM CERTEZA QUE DESEJA APAGAR O CADASTRO ${customerName}?`);
+        if (!confirmDelete) return;
+
+        // Send delete request
+        const deleteResponse = await fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
+            method: "DELETE",
+        });
+
+        if (!deleteResponse.ok) throw new Error("Failed to delete customer. Server error.");
+
+        const deleteData = await deleteResponse.json();
+
+        if (deleteData.success) {
+            alert(`CADASTRO >>> ${customerName} <<< APAGADO!`);
+            localStorage.removeItem("customerId"); // Clear stored customer ID
+            location.reload(); // Reload page
+        } else {
+            alert(`Error: ${deleteData.message}`);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An unexpected error occurred. Please try again.");
+    }
+}
+
+
+
+
 
 
     </script>
