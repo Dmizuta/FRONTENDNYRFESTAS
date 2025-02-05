@@ -452,25 +452,19 @@ new Cleave('#cnpj', {
 
 
 
-
 document.getElementById("specialButton").addEventListener("click", deleteCustomer);
 
 function deleteCustomer() {
     const customerId = localStorage.getItem("customerId"); 
-
-    
-    const customerName = document.getElementById("customerSelected").value;
-
-
-
+    const customerName = document.getElementById("customerNameField").value; // Get the name from input field
 
     if (!customerId) {
         alert("No customer selected!");
         return;
     }
 
-    // Confirm deletion with the user
-    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA DELETAR O CLIENTE ${customerSelected}?");
+    // Confirm deletion with the customer name
+    const confirmDelete = confirm(`Are you sure you want to delete ${customerSelected}?`);
     if (!confirmDelete) return;
 
     fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
@@ -484,7 +478,7 @@ function deleteCustomer() {
     })
     .then(data => {
         if (data.success) {
-            alert("CADASTRO DELETADO!");
+            alert(`CLIENTE >>>${customerSelected}<<< APAGADO!`);
             localStorage.removeItem("customerId"); // Clear stored customer ID
             location.reload(); // Reloads the page
         } else {
@@ -496,10 +490,6 @@ function deleteCustomer() {
         alert("An unexpected error occurred. Please try again.");
     });
 }
-
-
-
-
 
 
 
