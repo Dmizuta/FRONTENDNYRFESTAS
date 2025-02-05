@@ -495,7 +495,7 @@ function deleteCustomer() {
     })
     .then(data => {
         if (data.success) {
-            alert("CLIENTE >>> " + data.razaosocial + " <<< APAGADO!");
+            alert("CLIENTE >>> " + ${customerName} + " <<< APAGADO!");
             localStorage.removeItem("customerId"); // Clear stored customer ID
             location.reload(); // Reloads the page
         } else {
