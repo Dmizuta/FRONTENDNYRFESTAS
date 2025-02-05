@@ -527,44 +527,55 @@ new Cleave('#cnpj', {
 
 
 
+
 document.getElementById("specialButton").addEventListener("click", deleteCustomer);
 
-function deleteCustomer() {
-    const customerId = localStorage.getItem("customerId"); 
+async function deleteCustomer() {
+    const customerId = localStorage.getItem("customerId");
 
     if (!customerId) {
         alert("No customer selected!");
         return;
     }
 
-    // Confirm deletion with the user
-    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA DELETAR ESTE CADASTRO?");
-    if (!confirmDelete) return;
+    try {
+        // Fetch customer name from backend
+        const nameResponse = await fetch('https://backendnyrfestas.vercel.app/displayName', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId }) 
+        });
 
-    fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
-        method: "DELETE",
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to delete customer. Server error.");
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            alert("CADASTRO APAGADO!");
+        if (!nameResponse.ok) throw new Error("Failed to fetch customer name.");
+
+        const nameData = await nameResponse.json();
+        const customerName = nameData.razaosocial || 'Unknown'; // Store globally
+
+        // Confirm deletion with customer name
+        const confirmDelete = confirm(`TEM CERTEZA QUE DESEJA APAGAR O CADASTRO ${customerName}?`);
+        if (!confirmDelete) return;
+
+        // Send delete request
+        const deleteResponse = await fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
+            method: "DELETE",
+        });
+
+        if (!deleteResponse.ok) throw new Error("Failed to delete customer. Server error.");
+
+        const deleteData = await deleteResponse.json();
+
+        if (deleteData.success) {
+            alert(`CADASTRO >>> ${customerName} <<< APAGADO!`);
             localStorage.removeItem("customerId"); // Clear stored customer ID
-            location.reload(); // Reloads the page
+            location.reload(); // Reload page
         } else {
-            alert(`Error: ${data.message}`);
+            alert(`Error: ${deleteData.message}`);
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error("Error:", error);
         alert("An unexpected error occurred. Please try again.");
-    });
+    }
 }
-
 
 
 
