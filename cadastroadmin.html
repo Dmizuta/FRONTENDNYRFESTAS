@@ -464,7 +464,7 @@ function deleteCustomer() {
     }
 
     // Confirm deletion with the customer name
-    const confirmDelete = confirm(`Are you sure you want to delete ${customerSelected}?`);
+    const confirmDelete = confirm(`Are you sure you want to delete ${customerName}?`);
     if (!confirmDelete) return;
 
     fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
@@ -478,7 +478,7 @@ function deleteCustomer() {
     })
     .then(data => {
         if (data.success) {
-            alert(`CLIENTE >>>${customerSelected}<<< APAGADO!`);
+            alert(`CLIENTE >>>${customerName}<<< APAGADO!`);
             localStorage.removeItem("customerId"); // Clear stored customer ID
             location.reload(); // Reloads the page
         } else {
