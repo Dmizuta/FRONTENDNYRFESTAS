@@ -747,10 +747,13 @@
                 const price = parseFloat(product.preco); // Ensure price is a number
                 const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
                 const factor = parseInt(product.ipi);
-        
-               
-                const ipi = factor * 0.13 * price * quantity;
+
+
+                const ipiTax = parseFloat(orderDetails.ipi_tax); // Get ipi_tax from order details
+                const ipi = factor * ipiTax * price * quantity;
+
                 
+               // const ipi = factor * 0.13 * price * quantity;
                 const productTotal = (price * quantity) + ipi; // Calculate product total
         
                 const row = `
