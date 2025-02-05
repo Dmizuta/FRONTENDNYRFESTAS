@@ -457,7 +457,8 @@ document.getElementById("specialButton").addEventListener("click", deleteCustome
 function deleteCustomer() {
     const customerId = localStorage.getItem("customerId"); 
     const customerName = document.getElementById("customerSelected").value; // Get the name from input field
-
+    console.log('cliente:', customerName)
+;
     if (!customerId) {
         alert("No customer selected!");
         return;
