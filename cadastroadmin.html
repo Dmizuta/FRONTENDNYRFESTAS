@@ -458,13 +458,19 @@ document.getElementById("specialButton").addEventListener("click", deleteCustome
 function deleteCustomer() {
     const customerId = localStorage.getItem("customerId"); 
 
+    
+    const customerName = document.getElementById("customerSelected").value;
+
+
+
+
     if (!customerId) {
         alert("No customer selected!");
         return;
     }
 
     // Confirm deletion with the user
-    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA DELETAR ESTE CADASTRO?");
+    const confirmDelete = confirm("TEM CERTEZA QUE DESEJA DELETAR O CLIENTE ${customerSelected}?");
     if (!confirmDelete) return;
 
     fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
