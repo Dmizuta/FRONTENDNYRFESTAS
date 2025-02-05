@@ -450,26 +450,42 @@ new Cleave('#cnpj', {
 });
 
 
-
-
 document.getElementById("specialButton").addEventListener("click", deleteCustomer);
 
 function deleteCustomer() {
     const customerId = localStorage.getItem("customerId"); 
-    const customerName = document.getElementById("customerSelected").value; // Get the name from input field
-    console.log('cliente:', customerName)
-;
+  
     if (!customerId) {
         alert("No customer selected!");
         return;
     }
 
-    // Confirm deletion with the customer name
-    const confirmDelete = confirm(`Are you sure you want to delete ${customerName}?`);
-    if (!confirmDelete) return;
+    // Fetch customer name from backend
+    fetch('https://backendnyrfestas.vercel.app/displayName', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const customerName = data.razaosocial || 'Unknown';
+        console.log('Customer Name:', customerName);
 
-    fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
-        method: "DELETE",
+        // Confirm deletion with the customer name
+        const confirmDelete = confirm(`Are you sure you want to delete ${customerName}?`);
+        if (!confirmDelete) return;
+
+        // Proceed with deletion
+        return fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
+            method: "DELETE",
+        });
     })
     .then(response => {
         if (!response.ok) {
@@ -479,7 +495,7 @@ function deleteCustomer() {
     })
     .then(data => {
         if (data.success) {
-            alert(`CLIENTE >>>${customerName}<<< APAGADO!`);
+            alert("CLIENTE >>> " + data.razaosocial + " <<< APAGADO!");
             localStorage.removeItem("customerId"); // Clear stored customer ID
             location.reload(); // Reloads the page
         } else {
