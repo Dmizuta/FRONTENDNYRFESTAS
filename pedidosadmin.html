@@ -435,23 +435,12 @@
     margin: 20px 0;
 }
 
-
-
-/* By default, hide the print-only span */
+/* By default, hide the print-only span 
 .ipi-print-only {
     display: none;
 }
+*/
 
-/* For printing, hide the dropdown and show the print-only span */
-@media print {
-    #ipi {
-        display: none; /* Hide dropdown during printing */
-    }
-
-    #ipi-display {
-        display: inline; /* Show span with IPI value */
-    }
-}
 
         </style>
     
@@ -1457,6 +1446,31 @@ console.log('IPITax value:', ipitax);
     printWindow.document.write('<style>');
     printWindow.document.write(`
         @media print {
+
+
+
+
+
+/* For printing, hide the dropdown and show the print-only span */
+
+    #ipi {
+        display: none; /* Hide dropdown during printing */
+    }
+
+    #ipi-display {
+        display: inline; /* Show span with IPI value */
+    }
+
+
+
+
+
+
+
+
+
+
+
             body {
                 font-family: Arial, sans-serif;
                 font-size: 12pt;
