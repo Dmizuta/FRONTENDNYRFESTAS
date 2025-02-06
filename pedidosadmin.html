@@ -735,6 +735,12 @@
             document.getElementById('cnpj').textContent = orderDetails.cnpj;
             document.getElementById('representante').textContent = orderDetails.representante;
             document.getElementById('obs').textContent = orderDetails.observacoes;
+
+            // Set IPI tax in the dropdown
+    const ipiTaxDropdown = document.getElementById('ipi');
+    if (orderDetails.ipi_tax) {
+        ipiTaxDropdown.value = orderDetails.ipi_tax; // Set the value of the dropdown
+    }
         
             // Update products table and calculate total
             const orderDetailsContent = document.getElementById('order-details-content');
@@ -748,7 +754,7 @@
                 const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
                 const factor = parseInt(product.ipi);
 
-                ipiTaxDropdown.value = orderDetails.ipi_tax; // Set the value of the dropdown
+              
 
                 const ipiTax = parseFloat(orderDetails.ipi_tax); // Get ipi_tax from order details
                 const ipi = factor * ipiTax * price * quantity;
