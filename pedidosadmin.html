@@ -896,7 +896,8 @@
                                 quantityCell.textContent = newQuantity;
         
 
-                                const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
+                                const ipitax = data.updatedProduct.ipiTax.value || 0;
+
 console.log('IPI Tax value:', ipitax);
 
 
