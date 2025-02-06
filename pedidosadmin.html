@@ -883,7 +883,7 @@
                 
                                 const data = await response.json();
 
-                                console.log('Response data:', data.updatedProduct);
+                                
         // Assume 'data' is the response object you received from the server
         // const data = response.data;
         
@@ -900,7 +900,7 @@
                               
 
 
-                               
+                                console.log('Response data:', data.updatedProduct);
                                const ipitax = data.updatedProduct.ipi_tax || 0; // Default to 0 if ipiTax is undefined
 console.log('IPI Tax value:', ipitax);
 
