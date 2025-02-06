@@ -894,11 +894,12 @@
         
                                 // Update the quantity directly in the table after success
                                 quantityCell.textContent = newQuantity;
-        
+                               // const ipiTax = pedidoData ? pedidoData.ipi_tax : 0;
 
-                                const ipitax = data.updatedProduct.ipiTax.value || 0;
 
+                                const ipitax = data.updatedProduct.ipi_tax || 0; // Default to 0 if ipiTax is undefined
 console.log('IPI Tax value:', ipitax);
+console.log('Response data:', data.updatedProduct);
 
 
                                 
