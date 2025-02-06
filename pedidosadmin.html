@@ -899,6 +899,8 @@
 
 
                                 const ipitax = data.updatedProduct.ipiTax;
+                                console.log('IPI value:', ipi);
+console.log('IPITax value:', ipitax);
                                 // Optionally, you can re-calculate the total if necessary
                                 const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                                 const ipiValue = ipi * ipitax * price / 100 * newQuantity; 
