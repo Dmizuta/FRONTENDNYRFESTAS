@@ -435,6 +435,24 @@
     margin: 20px 0;
 }
 
+
+
+/* By default, hide the print-only span */
+.ipi-print-only {
+    display: none;
+}
+
+/* For printing, hide the dropdown and show the print-only span */
+@media print {
+    #ipi {
+        display: none; /* Hide dropdown during printing */
+    }
+
+    #ipi-display {
+        display: inline; /* Show span with IPI value */
+    }
+}
+
         </style>
     
 
@@ -511,6 +529,29 @@
         </div>
 
 
+
+
+
+
+
+
+
+
+        <div class="dropdown">
+            <label for="ipi">IPI (%):</label>
+            <!-- Dropdown for user interaction -->
+            <select id="ipi">
+                <option value='0.13'>B1</option>
+                <option value='0.065'>B2</option>
+                <option value='0.039'>B3</option>
+            </select>
+        
+            <!-- Span for printing, initially hidden -->
+            <span id="ipi-display" class="ipi-print-only"></span>
+        </div>
+        
+
+        <!--
 <div class="dropdown">
 
     <label for="ipi">IPI (%):</label>
@@ -523,7 +564,7 @@
 
 </select>
     
-    </div>
+    </div>-->
         
 
 
@@ -781,6 +822,73 @@
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
+// Function to populate the modal with order details
+function populateModal(orderDetails) {
+    // Update general order information in the modal
+    document.getElementById('order-id').textContent = orderDetails.id;
+    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+    document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('representante').textContent = orderDetails.representante;
+    document.getElementById('obs').textContent = orderDetails.observacoes;
+
+    // Set IPI tax in the dropdown and hidden span
+    const ipiTaxDropdown = document.getElementById('ipi');
+    const ipiTaxSpan = document.getElementById('ipi-span'); // Hidden span for printing
+
+    if (orderDetails.ipi_tax) {
+        ipiTaxDropdown.value = orderDetails.ipi_tax; // Set the dropdown value
+        ipiTaxSpan.textContent = orderDetails.ipi_tax; // Set the span text
+    }
+
+    // Update products table and calculate total
+    const orderDetailsContent = document.getElementById('order-details-content');
+    let total = 0; // Variable to accumulate the total price    
+
+    // Clear existing content and rebuild the table
+    orderDetailsContent.innerHTML = ''; // Clear content initially
+    orderDetails.products.forEach((product, index) => {
+        const price = parseFloat(product.preco); // Ensure price is a number
+        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const factor = parseInt(product.ipi);
+
+        const ipiTax = parseFloat(orderDetails.ipi_tax); // Get ipi_tax from order details
+        const ipi = factor * ipiTax * price * quantity;
+
+        const productTotal = (price * quantity) + ipi; // Calculate product total
+
+        const row = `
+            <tr data-product-id="${product.id}">
+                <td>${index + 1}</td>
+                <td>${product.codproduto}</td>
+                <td>${product.descricao}</td>
+                <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
+                <td>${formatCurrency(price)}</td>
+                <td>${formatCurrency(ipi)}</td>
+                <td>${formatCurrency(productTotal)}</td>
+                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+            </tr>
+        `;  
+
+        orderDetailsContent.innerHTML += row; // Add row to table
+
+        total += productTotal; // Accumulate the product total to the overall total
+    });
+
+    // Update total price in the modal
+    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
+
+
+
+
+
+
+
+
+
+
+/*
+        
         // Function to populate the modal with order details
         function populateModal(orderDetails) {
             // Update general order information in the modal
@@ -840,7 +948,7 @@
             // Update total price in the modal
             document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
         
-        
+        */
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         
