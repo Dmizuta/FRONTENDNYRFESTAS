@@ -11,95 +11,321 @@
 
 <style>
 
-    /* General container for all buttons */
+
     .allbtns {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
-        padding: 20px;
+        gap: 20px; /* Adds space between buttons */
     }
     
     .modal-actions {
         display: flex;
         justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
+        gap: 20px; /* Space between buttons */
+        flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
     }
     
-    /* General button styles */
     .action-btn {
-        padding: 14px 30px; /* Increased padding for a bigger button */
-        font-size: 18px; /* Larger font size for a more sophisticated look */
-        font-weight: 600; /* Slightly bolder for emphasis */
+        padding: 12px 25px;
+        font-size: 16px;
+        font-weight: 500;
         border: 2px solid transparent; /* Default border */
-        border-radius: 12px; /* Softer rounded corners for a modern look */
+        border-radius: 8px; /* Soft rounded corners */
         cursor: pointer;
         transition: all 0.3s ease;
-        width: 180px; /* Uniform width for buttons */
-        text-transform: uppercase;
-        background-color: #007bff; /* Blue background */
+        width: 160px; /* Uniform width */
+        text-transform: uppercase; /* Uppercase for consistency */
+        background-color: #007bff; /* Main blue color */
         color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
-        font-family: 'Roboto', sans-serif; /* Clean and modern font */
-        text-align: center;
-        letter-spacing: 1px; /* Small space between letters for elegance */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     }
     
-    /* Hover effect for action buttons */
     .action-btn:hover {
-        background-color: #0069d9;
-        border-color: #0056b3;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-3px); /* Slight lift effect on hover */
+        background-color: #0069d9; /* Darker blue on hover */
+        border-color: #0056b3; /* Darker border for contrast */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
     }
     
-    /* Active effect for action buttons */
     .action-btn:active {
-        transform: scale(0.98);
-        background-color: #0056b3;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transform: scale(0.98); /* Slight shrink on click */
+        background-color: #0056b3; /* Even darker blue when clicked */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
     }
     
-    /* Style for the close modal button */
     #close-modal {
-        background-color: #f8f9fa;
-        color: #333;
-        border: 2px solid #007bff; /* Blue border to match action buttons */
-        font-size: 18px; /* Same font size as other buttons */
-        padding: 14px 30px; /* Same padding as other buttons */
-        border-radius: 12px;
-        font-family: 'Roboto', sans-serif;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        width: calc(180px * 4 + 20px * 3); /* Width of all other buttons + space between them */
-        transition: all 0.3s ease;
+        background-color: #f8f9fa; /* Light grey for "Fechar" */
+        color: #333; /* Dark text */
+        border: 2px solid #ccc; /* Light grey border */
+        font-size: 14px; /* Smaller text for close button */
+        padding: 8px 18px; /* Smaller padding */
+        width: 120px; /* Smaller width */
+        box-shadow: none; /* No shadow for close button */
     }
     
-    /* Hover effect for the close button */
     #close-modal:hover {
-        background-color: #e2e6ea;
-        border-color: #0056b3; /* Darker blue border on hover */
-        transform: translateY(-3px);
+        background-color: #e2e6ea; /* Light grey on hover */
+        border-color: #ddd; /* Slightly darker border on hover */
     }
     
-    /* Active effect for the close button */
-    #close-modal:active {
-        transform: scale(0.98);
-        background-color: #dae0e5;
-    }
     
-    /* Adding responsive styles for narrow screens */
-    @media (max-width: 768px) {
-        .modal-actions {
-            flex-direction: column; /* Stack buttons vertically on small screens */
-            gap: 15px;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        /* Orders container */
+        #orders-container {
+                max-width: 95%;
+                margin: 30px auto;
+                padding: 20px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            /* Order row layout */
+            .order-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 10px;
+                background-color: #f9f9f9;
+                border-radius: 5px;
+                font-size: 1.1rem;
+                cursor: pointer; /* Make the row clickable */
+            }
+            
+            .order-details {
+                display: flex;
+                flex: 1;
+                justify-content: space-between;
+            }
+            
+            .order-details div {
+                margin: 0 10px;
+                
+                color: #333;
+            }
+            
+            /* Status styling */
+            .status {
+                font-weight: bold;
+                color: #007BFF;
+            }
+            
+            .order-row:hover {
+                background-color: #eef2f5;
+            }
+            
+            /* Responsive layout for mobile */
+            @media (max-width: 768px) {
+                .order-row {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            
+                .order-details {
+                    flex-direction: column;
+                }
+            }
+            
+            /* Modal Styling */
+        
+            .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 60px 20px; /* Add padding to prevent content from touching edges */
+        font-size: 1rem;
         }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 1300px;
+            max-height: 90vh; /* Limit height to 80% of viewport */
+            overflow-y: auto; /* Enable vertical scrolling */
+            animation: fadeIn 0.3s ease-in-out;
+            margin: auto; /* Center modal on screen */
+        }
+        
+            
+            #logo-image {
+                width: 20%;
+                padding: 10px;
+            }
+            
+          
+            
+            #order-details-content {
+                padding: 10px;
+                text-align: center;
+              
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            
+            .order-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 1.1rem;
+            }
+            
+            .order-info {
+                flex: 1;
+            }
+            
+            .order-info-row {
+                margin: 5px 0;
+            }
+            
+            /* Modal table styling */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            
+            table th, table td {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+            
+            #order-items-body tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            
+            #total-value {
+            font-weight: bold;
+            float: right;
+            
+        }
+            /* When modal is open, make it visible */
+            .modal.show {
+                display: flex;
+            }
+            
+            .totalOrderBox {
+            
+            padding: 20px 20px;
+            margin: 20px auto;
+            background-color: #13273d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        
+        
+        }
+        
+            /* Responsiveness for smaller screens */
+            @media (max-width: 768px) {
+                .order-header {
+                    flex-direction: column;
+                }
+            
+                .order-info {
+                    margin-top: 20px;
+                }
+            }
+            
+            .obs-row {
+            padding: 10px;
+            background-color: #aaa;
+            border-radius: 10px;
+            font-size: 1rem;
+          }
+        
+        
+          textarea {
+          width: 100%;
+          padding: 10px;
+          font-size: 1.1rem;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          resize: none;
+          line-height: 24px; /* Set line height to calculate row height */
+          max-height: 120px; /* Limit to 3 rows (3 * 24px) */
+          overflow-y: auto; /* Enable scrolling when the content exceeds max height */
+        }
+        
+        
+    /* Base styles for both buttons */
+    .modalOrderDeleteButton, .modalOrderEditButton {
+      width: 40px;                /* Set desired width */
+      height: 40px;               /* Set desired height */
+      cursor: pointer;           /* Indicate the buttons are clickable */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+    }
+    
+    .modalOrderEditButton img, .modalOrderDeleteButton img {
+      vertical-align: super;     /* Align image properly */
+      width: 20px;                /* Set image size */
+      height: auto;               /* Keep aspect ratio */
+    }
+    
+    /* Hover state for both buttons */
+    .modalOrderDeleteButton:hover, .modalOrderEditButton:hover {
+      transform: scale(1.1);  /* Slightly grow the button on hover */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow for depth */
+    }
+    
+    /* Optional: active state to shrink the button slightly when clicked */
+    .modalOrderDeleteButton:active, .modalOrderEditButton:active {
+      transform: scale(0.95);  /* Shrink the button a bit when clicked */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
     }
     
     
+          .save-quantity-btn {
+            background-color: #28a745;
+            width: 5rem;
+            display: block; 
+            margin: 0.5rem auto 0; /* Top margin, center ali
+            gnment, no bottom margin */
+        }
+        .save-quantity-btn:hover {
+            background-color: #6aa277; /* Yellow-orange hover color */
+            transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
+        }
+        
+        .edit-quantity {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #007BFF; /* Optional: blue border */
+            border-radius: 8px;
+            width: 5rem; /* Adjust width if necessary */
+            text-align: center;
+        }
+        
+        .order-total{
+            font-size: 1.1rem;
+        }
     
     
     
@@ -109,18 +335,10 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     .container {
+        .container {
             display: flex;
             flex-direction: column;
+            
             align-items: self-start;
             gap: 10px;
             font-family: Arial, sans-serif;
@@ -188,241 +406,82 @@
        
     
     
-    /* Orders container */
-    #orders-container {
-            max-width: 95%;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        /* Order row layout */
-        .order-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer; /* Make the row clickable */
-        }
-        
-        .order-details {
-            display: flex;
-            flex: 1;
-            justify-content: space-between;
-        }
-        
-        .order-details div {
-            margin: 0 10px;
-            font-size: 1rem;color: #333;
-        }
-        
-        /* Status styling */
-        .status {
-            font-weight: bold;
-            color: #007BFF;
-        }
-        
-        .order-row:hover {
-            background-color: #eef2f5;
-        }
-        
-        /* Responsive layout for mobile */
-        @media (max-width: 768px) {
-            .order-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        
-            .order-details {
-                flex-direction: column;
-            }
-        }
-        
-        /* Modal Styling */
     
-        .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding: 60px 20px; /* Add padding to prevent content from touching edges */
-    font-size: 1rem;
+    
+    
+    
+        /* Style for the dropdown container */
+    .dropdown {
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
     }
     
-    .modal-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 1300px;
-        max-height: 90vh; /* Limit height to 80% of viewport */
-        overflow-y: auto; /* Enable vertical scrolling */
-        animation: fadeIn 0.3s ease-in-out;
-        margin: auto; /* Center modal on screen */
-    }
-    
-        
-        #logo-image {
-            width: 20%;
-            padding: 10px;
-        }
-        
-        /*.close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            border-color: #aaa;
-            cursor: pointer;
-        }
-        
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }*/
-        
-        #order-details-content {
-            padding: 10px;
-            text-align: center;
-          
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-       
-        
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.1rem;
-        }
-        
-        .order-info {
-            flex: 1;
-        }
-        
-        .order-info-row {
-            margin: 5px 0;
-        }
-        
-        /* Modal table styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        table th, table td {
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-        
-        #order-items-body tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        #total-value {
+    /* Style for the label */
+    .dropdown label {
+        font-size: 1rem;
         font-weight: bold;
-        float: right;
-        
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
     }
-        /* When modal is open, make it visible */
-        .modal.show {
-            display: flex;
-        }
-        
-        .totalOrderBox {
-        
-        padding: 20px 20px;
-        margin: 20px auto;
-        background-color: #13273d;
-        color: white;
-        border: none;
+    
+    /* Style for the select dropdown */
+    #ipi {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
         border-radius: 5px;
-    
-    
+        outline: none;
+        transition: border-color 0.3s ease;
     }
     
-        /* Responsiveness for smaller screens */
-        @media (max-width: 768px) {
-            .order-header {
-                flex-direction: column;
-            }
-        
-            .order-info {
-                margin-top: 20px;
-            }
-        }
-        
-        .obs-row {
+    /* Focus effect for the select input */
+    #ipi:focus {
+        border-color: #4CAF50;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #ipi option {
         padding: 10px;
-        background-color: #aaa;
-        border-radius: 10px;
-        font-size: 1rem;
-      }
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #ipi:hover {
+        border-color: #4CAF50;
+    }
+    
+    /* Style for the select box container when it's not focused */
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        
+        width: 100px;
+        margin: 20px 0;
+        padding-right: 30px;
+    }
     
     
-      textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      resize: none;
-      line-height: 24px; /* Set line height to calculate row height */
-      max-height: 120px; /* Limit to 3 rows (3 * 24px) */
-      overflow-y: auto; /* Enable scrolling when the content exceeds max height */
+    /* By default, hide the print-only span*/ 
+    .ipi-print-only {
+        display: none;
     }
     
     
     
-    
-    
-    
-    
-    /* Base styles for both buttons */
-    .modalOrderDeleteButton, .modalOrderEditButton {
-      width: 40px;                /* Set desired width */
-      height: 40px;               /* Set desired height */
-      cursor: pointer;           /* Indicate the buttons are clickable */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+    .topButtons {
+        display: flex;        /* Enables flexbox */
+        justify-content: space-between; /* Distributes space between the two divs */
+        align-items: center;  /* Aligns items vertically in the center */
+        gap: 10px;            /* Adds space between the two divs (optional) */
     }
     
-    .modalOrderEditButton img, .modalOrderDeleteButton img {
-      vertical-align: super;     /* Align image properly */
-      width: 20px;                /* Set image size */
-      height: auto;               /* Keep aspect ratio */
-    }
-    
-    /* Hover state for both buttons */
-    .modalOrderDeleteButton:hover, .modalOrderEditButton:hover {
-      transform: scale(1.1);  /* Slightly grow the button on hover */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow for depth */
-    }
-    
-    /* Optional: active state to shrink the button slightly when clicked */
-    .modalOrderDeleteButton:active, .modalOrderEditButton:active {
-      transform: scale(0.95);  /* Shrink the button a bit when clicked */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
+    .topButtons > div {
+        flex: 1; /* Makes both divs take equal space */
     }
     
     
@@ -432,31 +491,18 @@
     
     
     
-      .save-quantity-btn {
-        background-color: #28a745;
-        width: 5rem;
-        display: block; 
-        margin: 0.5rem auto 0; /* Top margin, center ali
-        gnment, no bottom margin */
-    }
-    .save-quantity-btn:hover {
-        background-color: #6aa277; /* Yellow-orange hover color */
-        transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
-    }
     
-    .edit-quantity {
-        padding: 10px;
-        font-size: 1rem;
-        border: 2px solid #007BFF; /* Optional: blue border */
-        border-radius: 8px;
-        width: 5rem; /* Adjust width if necessary */
-        text-align: center;
-    }
     
-    .order-total{
-        font-size: 1.1rem;
-    }
-        </style>
+    
+    
+    
+    
+    
+    
+    
+            </style>
+        
+    
     
 
 
