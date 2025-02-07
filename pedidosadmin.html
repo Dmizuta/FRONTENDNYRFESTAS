@@ -824,43 +824,32 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
-    // Set IPI tax value in both dropdown and print span
+    // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
     const ipiDisplay = document.getElementById('ipi-display');
 
-    let ipiValue = orderDetails.ipi_tax || '0'; // Default to '0' if missing
-    let ipiText = 'B0'; // Default category
-
-    // Assign B category based on IPI value
-    switch (ipiValue) {
-        case '0.13':
-            ipiText = 'B1';
-            break;
-        case '0.065':
-            ipiText = 'B2';
-            break;
-        case '0.039':
-            ipiText = 'B3';
-            break;
+    // Set the IPI dropdown value
+    if (orderDetails.ipi_tax) {
+        ipiDropdown.value = orderDetails.ipi_tax;
     }
 
-    // Update dropdown and display span
-    ipiDropdown.value = ipiValue;
-    ipiDisplay.textContent = ipiText;
-
+    // Directly get the selected text from the dropdown and set it as display text
+    ipiDisplay.textContent = ipiDropdown.options[ipiDropdown.selectedIndex].text;
+    
     // Update products table and calculate total
     const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0; // Variable to accumulate the total price    
+    let total = 0;
 
-    // Clear existing content and rebuild the table
-    orderDetailsContent.innerHTML = ''; // Clear content initially
+    // Clear existing content
+    orderDetailsContent.innerHTML = '';
+
     orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco); // Ensure price is a number
-        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const price = parseFloat(product.preco);
+        const quantity = parseInt(product.quantidade, 10);
         const factor = parseInt(product.ipi);
-        const ipiTax = parseFloat(orderDetails.ipi_tax); // Get ipi_tax from order details
+        const ipiTax = parseFloat(orderDetails.ipi_tax);
         const ipi = factor * ipiTax * price * quantity;
-        const productTotal = (price * quantity) + ipi; // Calculate product total
+        const productTotal = (price * quantity) + ipi;
 
         const row = `
             <tr data-product-id="${product.id}">
@@ -876,12 +865,13 @@ function populateModal(orderDetails) {
             </tr>
         `;  
 
-        orderDetailsContent.innerHTML += row; // Add row to table
-        total += productTotal; // Accumulate the product total to the overall total
+        orderDetailsContent.innerHTML += row;
+        total += productTotal;
     });
 
-    // Update total price in the modal
+    // Update total price
     document.getElementById('total-value').textContent = formatCurrency(total);
+
 
 
 
@@ -1406,7 +1396,6 @@ console.log('IPITax value:', ipitax);
     #ipi-display {
         display: inline; /* Show span with IPI value */
     }
-
 
 
 
