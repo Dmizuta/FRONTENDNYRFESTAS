@@ -1,4 +1,4 @@
-// API URL for fetching product data
+/*// API URL for fetching product data
 const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your live backend URL
 
 // Function to fetch product data from the API
@@ -115,7 +115,86 @@ function populateProductTable(products) {
   }
 }
 
+*/
+// Filter by epoca when a button is clicked
+document.getElementById("carnaval").addEventListener("click", () => filterByEpoca("Carnaval"));
+document.getElementById("junino").addEventListener("click", () => filterByEpoca("Junino"));
+document.getElementById("hlwn").addEventListener("click", () => filterByEpoca("Halloween"));
 
+// Function to filter products based on epoca
+function filterByEpoca(epoca) {
+  fetchProductData(epoca); // Fetch the products with the selected epoca
+}
+
+// Fetch product data with optional epoca filter
+async function fetchProductData(epoca = "") {
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    console.log(data);  // Check the structure of the fetched data
+
+    // Filter data based on the selected epoca
+    const filteredData = epoca
+      ? data.filter(product => product.epoca === epoca) // Filter by epoca
+      : data; // If no epoca filter, show all products
+
+    populateProductTable(filteredData);
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+    const tableBody = document.querySelector("#productTable tbody");
+    tableBody.innerHTML =
+      '<tr><td colspan="7">Não foi possível carregar os produtos, entre em contato com o suporte.</td></tr>';
+  }
+}
+
+// Function to populate the product table dynamically (same as before)
+function populateProductTable(products) {
+  const tableBody = document.querySelector("#productTable tbody");
+
+  tableBody.innerHTML = ""; // Clear any existing rows
+
+  if (products && products.length > 0) {
+    products.forEach((product) => {
+      const row = tableBody.insertRow();
+      const cell1 = row.insertCell(0); // Id
+      const cell2 = row.insertCell(1); // Image
+      const cell3 = row.insertCell(2); // Product Code
+      const cell4 = row.insertCell(3); // Description
+      const cell5 = row.insertCell(4); // Quantity Closed
+      const cell6 = row.insertCell(5); // Price Closed
+      const cell7 = row.insertCell(6); // Quantity Fractioned
+      const cell8 = row.insertCell(7); // Price Fractioned
+      const cell9 = row.insertCell(8); // ADD BUTTON 
+
+      // Populate cells with product data
+      cell1.textContent = product.idprod || "N/A"; // Product Id
+      cell2.innerHTML = `<img src="${product.imagem || "https://via.placeholder.com/50"}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(3)'" onmouseout="this.style.transform='scale(1)'">`;
+      cell3.textContent = product.codproduto || "N/A"; // Product Code
+      cell4.textContent = product.descricao || "N/A"; // Description
+      cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
+      cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
+      cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
+      cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
+      cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
+
+      // Add event listener for "Add" button
+      const openModalBtn = row.querySelector(".openModalBtn");
+      openModalBtn.addEventListener("click", function () {
+        const productImage = row.querySelector("img").src;
+        const productCode = row.cells[2].textContent;
+        const productDesc = row.cells[3].textContent;
+        const cxFechada = row.cells[4].textContent;
+        const priceFechada = row.cells[5].textContent;
+        const cxFracionada = row.cells[6].textContent;
+        const priceFracionada = row.cells[7].textContent;
+
+        openModal(productImage, productCode, productDesc, cxFechada, priceFechada, cxFracionada, priceFracionada);
+      });
+    });
+  } else {
+    tableBody.innerHTML = '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
+  }
+}
 
 
 
