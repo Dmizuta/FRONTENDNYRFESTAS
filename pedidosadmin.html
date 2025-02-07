@@ -431,15 +431,30 @@
 .dropdown {
     display: flex;
     flex-direction: column;
+   align-items: flex-end;
     width: 100px;
     margin: 20px 0;
+    padding-right: 30px;
 }
+
 
 /* By default, hide the print-only span*/ 
 .ipi-print-only {
     display: none;
 }
 
+
+
+.topButtons {
+    display: flex;        /* Enables flexbox */
+    justify-content: space-between; /* Distributes space between the two divs */
+    align-items: center;  /* Aligns items vertically in the center */
+    gap: 10px;            /* Adds space between the two divs (optional) */
+}
+
+.topButtons > div {
+    flex: 1; /* Makes both divs take equal space */
+}
 
 
         </style>
@@ -526,22 +541,6 @@
 
 
 
-        <div class="dropdown">
-            
-            <div id="ipilabel">
-            <label for="ipi">IPI:</label>
-            <!-- Dropdown for user interaction -->
-            <select id="ipi">
-                <option value='0.13'>B1</option>
-                <option value='0.065'>B2</option>
-                <option value='0.039'>B3</option>
-            </select>
-        </div>
-            <!-- Span for printing, initially hidden -->
-            <span id="ipi-display" class="ipi-print-only"></span>
-        </div>
-        
-
         <!--
 <div class="dropdown">
 
@@ -573,7 +572,7 @@
                     <th>Apagar</th>
                     
                 </tr>
-
+<div class="topButtons" >
                 <div class="container">
                     <div class="switch-container">
                         <!-- Left label -->
@@ -588,6 +587,28 @@
                         <span class="switch-label right-label">Orçamento</span>
                     </div>
                 </div>
+
+
+
+
+
+
+                <div class="dropdown">
+            
+                    <div id="ipilabel">
+                    <label for="ipi">IPI:</label>
+                    <!-- Dropdown for user interaction -->
+                    <select id="ipi">
+                        <option value='0.13'>B1</option>
+                        <option value='0.065'>B2</option>
+                        <option value='0.039'>B3</option>
+                    </select>
+                </div>
+                    <!-- Span for printing, initially hidden -->
+                    <span id="ipi-display" class="ipi-print-only"></span>
+                </div>
+                
+            </div>
 
 
 
