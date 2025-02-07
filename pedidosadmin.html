@@ -527,6 +527,8 @@
 
 
         <div class="dropdown">
+            
+            <div id="ipilabel">
             <label for="ipi">IPI:</label>
             <!-- Dropdown for user interaction -->
             <select id="ipi">
@@ -534,7 +536,7 @@
                 <option value='0.065'>B2</option>
                 <option value='0.039'>B3</option>
             </select>
-        
+        </div>
             <!-- Span for printing, initially hidden -->
             <span id="ipi-display" class="ipi-print-only"></span>
         </div>
@@ -1433,7 +1435,7 @@ console.log('IPITax value:', ipitax);
 
 
 
-            #ipi,
+            #ipilabel,
             #order-items-table th:nth-child(8),
             #order-items-table td:nth-child(8),
             #order-items-table th:nth-child(9),
@@ -1443,7 +1445,7 @@ console.log('IPITax value:', ipitax);
             #delete-order-btn,
             #close-modal
              {
-                display: block !important;
+                display: none !important;
             }
         
             #order-items-table {
