@@ -538,7 +538,7 @@
             </select>
         </div>
             <!-- Span for printing, initially hidden -->
-            <span id="ipi-display" class="ipi-print-only">IPI:</span>
+            <span id="ipi-display" class="ipi-print-only"></span>
         </div>
         
 
@@ -834,9 +834,11 @@ function populateModal(orderDetails) {
     }
 
     // Directly get the selected text from the dropdown and set it as display text
-    ipiDisplay.textContent = ipiDropdown.options[ipiDropdown.selectedIndex].text;
+   // ipiDisplay.textContent = ipiDropdown.options[ipiDropdown.selectedIndex].text;
     
     // Update products table and calculate total
+    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
 
