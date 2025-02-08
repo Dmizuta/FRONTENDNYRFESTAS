@@ -29,6 +29,8 @@ function formatCurrency(value) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
 
@@ -70,9 +72,9 @@ function populateProductTable(products) {
       cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
    
+*/
 
 
-/*
 // Function to populate the product table dynamically
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
@@ -117,7 +119,7 @@ function populateProductTable(products) {
       //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
       cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
 
-*/
+
 
 /*
 // Function to populate the product table dynamically
