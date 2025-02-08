@@ -6,6 +6,7 @@
   <title>Login - NYR Festas</title>
   <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <style>
 
@@ -91,6 +92,32 @@
     }
 
     
+
+
+
+    /* Password Field with Toggle Icon */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+  padding-right: 35px;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+#togglePassword:hover {
+  color: #000;
+}
+
   </style>
 </head>
 <body>
@@ -104,7 +131,14 @@
     <h2>Login</h2>
     <form id="loginForm">
       <input type="text" id="username" placeholder="Usuário" required>
-      <input type="password" id="password" placeholder="Senha" required>
+
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Senha" required>
+        <i id="togglePassword" class="fa-solid fa-eye"></i>
+      </div>
+
+      <!-- <input type="password" id="password" placeholder="Senha" required>-->
+
       <button type="submit">Entrar</button>
     </form>
     <p class="error" id="errorMessage"></p>
@@ -183,7 +217,15 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
 
 
+const passwordInput = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
 
+  togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    togglePassword.classList.toggle("fa-eye", isPassword);
+    togglePassword.classList.toggle("fa-eye-slash", !isPassword);
+  });
   </script>
   
   
