@@ -123,74 +123,6 @@ function populateProductTable(products) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to open the modal with product details
-async function openModal(productId) {
-  const modal = document.getElementById("myModal");
-  const productInfo = modal.querySelector(".product-info");
-  const priceInfoFechada = modal.querySelector(".price1-info");
-  const priceInfoFracionada = modal.querySelector(".price2-info");
-  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
-  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
-  const productImageElement = modal.querySelector("img");
-  const addButton = modal.querySelector("#add-button"); // Supondo que você tenha um botão com este ID
-  const stockWarning = modal.querySelector("#stock-warning"); // Elemento para mostrar aviso de estoque
-
-  try {
-      // Fetch product details from the server
-      const response = await fetch(`https://backendnyrfestas.vercel.app/produto/${productId}`);
-      const product = await response.json();
-
-      // Populate modal with product details
-      productInfo.querySelector("h3").textContent = product.codproduto;
-      productInfo.querySelector("p").textContent = product.descricao;
-      priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${product.precofechada}</span>`;
-      priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${product.precofrac}</span>`;
-      cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${product.cxfechada}</span>`;
-      cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${product.cxfracionada}</span>`;
-      productImageElement.src = product.imagem;
-
-      // Check stock status
-      if (product.estoque === 0) {
-          addButton.style.display = "none"; // Hide the add button
-          stockWarning.textContent = "Produto esgotado"; // Show out of stock warning
-      } else {
-          addButton.style.display = "block"; // Show the add button
-          stockWarning.textContent = ""; // Clear the warning
-      }
-
-      modal.style.display = "block"; // Show modal
-
-      const quantityInput = document.getElementById('quantity');
-      setTimeout(() => {
-          quantityInput.focus(); // Focus on the quantity input field
-      }, 100); // Optional: delay slightly to ensure modal is fully displayed before focusing
-
-  } catch (error) {
-      console.error('Erro ao abrir o modal do produto:', error);
-  }
-}
-
-// Event listener to close modal
-document.getElementById("closeModalBtn").addEventListener("click", function () {
-  document.getElementById("myModal").style.display = "none";
-});
-
-// Event listener to close modal
-document.getElementById("cancelButton").addEventListener("click", function () {
-  document.getElementById("myModal").style.display = "none";
-});
-
-// Close modal when clicking outside of it
-window.addEventListener("click", function (event) {
-  const modal = document.getElementById("myModal");
-  if (event.target === modal) {
-      modal.style.display = "none";
-  }
-});
-
-
-
-/*
-// Function to open the modal with product details
 function openModal(
   productImage,
   productCode,
@@ -252,7 +184,6 @@ window.addEventListener("click", function (event) {
   }
 });
 
-*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
