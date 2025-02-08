@@ -423,6 +423,97 @@ font-size: 1rem;
 .order-total{
     font-size: 1.1rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        /* Style for the dropdown container */
+        .dropdown {
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Style for the label */
+    .dropdown label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    /* Style for the select dropdown */
+    #ipi {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+    
+    /* Focus effect for the select input */
+    #ipi:focus {
+        border-color: #4CAF50;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #ipi option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #ipi:hover {
+        border-color: #4CAF50;
+    }
+    
+    /* Style for the select box container when it's not focused */
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        
+        width: 100px;
+        margin: 20px 0;
+        padding-right: 30px;
+    }
+    
+    
+    /* By default, hide the print-only span*/ 
+    .ipi-print-only {
+        display: none;
+    }
+    
+    
+    
+    .topButtons {
+        display: flex;        /* Enables flexbox */
+        justify-content: space-between; /* Distributes space between the two divs */
+        align-items: center;  /* Aligns items vertically in the center */
+        gap: 10px;            /* Adds space between the two divs (optional) */
+    }
+    
+    .topButtons > div {
+        flex: 1; /* Makes both divs take equal space */
+    }
+    
+
     </style>
     
 <body>
@@ -509,28 +600,39 @@ font-size: 1rem;
                     </tr>
 
 
-
-
-
-
-
-                    <div class="container">
-                        <div class="switch-container">
-                            <!-- Left label -->
-                            <span class="switch-label left-label active">Aberto</span>
                 
-                            <label class="switch">
-                                <input type="checkbox" id="toggleButton">
-                                <span class="slider"></span>
-                            </label>
-                
-                            <!-- Right label -->
-                            <span class="switch-label right-label">Orçamento</span>
+                    <div class="topButtons" >
+                        <div class="container">
+                            <div class="switch-container">
+                                <!-- Left label -->
+                                <span class="switch-label left-label active">Aberto</span>
+                    
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleButton">
+                                    <span class="slider"></span>
+                                </label>
+                    
+                                <!-- Right label -->
+                                <span class="switch-label right-label">Orçamento</span>
+                            </div>
                         </div>
+        
+                        <div class="dropdown">
+                    
+                            <div id="ipilabel">
+                            <label for="ipi">IPI:</label>
+                            <!-- Dropdown for user interaction -->
+                            <select id="ipi">
+                                <option value='0.13'>B1</option>
+                                <option value='0.065'>B2</option>
+                                <option value='0.039'>B3</option>
+                            </select>
+                        </div>
+                            
+                        </div>
+                        
                     </div>
-
-
-
+        
 
 
                 </thead>
@@ -852,10 +954,19 @@ async function fetchOrderDetails(orderId) {
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -866,35 +977,38 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
+    // Get IPI dropdown and display elements
+    const ipiDropdown = document.getElementById('ipi');
+    const ipiDisplay = document.getElementById('ipi-display');
+
+    // Set the IPI dropdown value
+    if (orderDetails.ipi_tax) {
+        ipiDropdown.value = orderDetails.ipi_tax;
+    }
+  
     // Update products table and calculate total
+    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+
     const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0; // Variable to accumulate the total price    
+    let total = 0;
 
+    // Clear existing content
+    orderDetailsContent.innerHTML = '';
 
-
-
-
-
-
-
-    // Clear existing content and rebuild the table
-    orderDetailsContent.innerHTML = ''; // Clear content initially
     orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco); // Ensure price is a number
-        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const price = parseFloat(product.preco);
+        const quantity = parseInt(product.quantidade, 10);
         const factor = parseInt(product.ipi);
-
-       
-        const ipi = factor * 0.13 * price * quantity;
-        
-        const productTotal = (price * quantity) + ipi; // Calculate product total
+        const ipiTax = parseFloat(orderDetails.ipi_tax);
+        const ipi = factor * ipiTax * price * quantity;
+        const productTotal = (price * quantity) + ipi;
 
         const row = `
             <tr data-product-id="${product.id}">
                 <td>${index + 1}</td>
                 <td>${product.codproduto}</td>
                 <td>${product.descricao}</td>
-                <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
+                <td class="quantity">${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(ipi)}</td>
                 <td>${formatCurrency(productTotal)}</td>
@@ -903,34 +1017,36 @@ function populateModal(orderDetails) {
             </tr>
         `;  
 
-
-
-        orderDetailsContent.innerHTML += row; // Add row to table
-
-        total += productTotal; // Accumulate the product total to the overall total
+        orderDetailsContent.innerHTML += row;
+        total += productTotal;
     });
 
-    // Update total price in the modal
-    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
+    // Update total price
+    document.getElementById('total-value').textContent = formatCurrency(total);
 
-    // Check the status of the order and set the toggle button position
-    const toggleButton = document.getElementById('toggleButton'); // Your toggle button
-    console.log('status:', orderDetails.status);
-    if (toggleButton) {  // Ensure toggleButton exists before manipulating it
-        if (orderDetails.status === 0) {
-            // If status is 0 (Aberto), set button to the left
-            //toggleButton.classList.remove('toggled');
-            toggleButton.checked = false; 
-            toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
-        } else if (orderDetails.status === 1) {
-            // If status is 1 (Orçamento), set button to the right
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        
+            // Check the status of the order and set the toggle button position
+            const toggleButton = document.getElementById('toggleButton'); // Your toggle button
             console.log('status:', orderDetails.status);
-           // toggleButton.classList.add('toggled');
-           toggleButton.checked = true;
-            toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
-        }
-    }
- 
+            if (toggleButton) {  // Ensure toggleButton exists before manipulating it
+                if (orderDetails.status === 0) {
+                    // If status is 0 (Aberto), set button to the left
+                    //toggleButton.classList.remove('toggled');
+                    toggleButton.checked = false; 
+                    toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
+                } else if (orderDetails.status === 1) {
+                    // If status is 1 (Orçamento), set button to the right
+                    console.log('status:', orderDetails.status);
+                   // toggleButton.classList.add('toggled');
+                   toggleButton.checked = true;
+                    toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
+                }
+            }
+         
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

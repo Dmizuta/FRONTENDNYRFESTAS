@@ -901,10 +901,7 @@ function populateModal(orderDetails) {
     if (orderDetails.ipi_tax) {
         ipiDropdown.value = orderDetails.ipi_tax;
     }
-
-    // Directly get the selected text from the dropdown and set it as display text
-   // ipiDisplay.textContent = ipiDropdown.options[ipiDropdown.selectedIndex].text;
-    
+  
     // Update products table and calculate total
     ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
 
@@ -944,11 +941,6 @@ function populateModal(orderDetails) {
     document.getElementById('total-value').textContent = formatCurrency(total);
 
 
-
-
-/*
-         
-        */
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         
