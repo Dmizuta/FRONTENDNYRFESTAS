@@ -64,8 +64,7 @@ if (products && products.length > 0) {
         cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
         cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
         cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
-    });
-}
+    
 
 
 /*
@@ -158,7 +157,7 @@ function populateProductTable(products) {
     tableBody.innerHTML =
       '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
   }
-}
+
 
 
 
