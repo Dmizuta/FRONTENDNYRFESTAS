@@ -1436,8 +1436,6 @@ console.log('IPITax value:', ipitax);
         
         
         
-        
-        
         function printOrder() {
     // Clone the modal content to avoid modifying the actual modal
     const modalClone = document.querySelector('#order-modal').cloneNode(true);
@@ -1457,44 +1455,74 @@ console.log('IPITax value:', ipitax);
     printWindow.document.write('<style>');
     printWindow.document.write(`
         @media print {
-
-
-
-
-
-
-    
-    #ipi-display {
-        display: inline; /* Show span with IPI value */
-    }
-
-
-
-
-
-
-
-
-
-
-            body {
+         body::after {
+        content: '';
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.1;  /* Adjust transparency */
+        background-image: url('/imagens/LOGO_NYR.png');  /* Replace with your image path */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+    }    
+        body {
                 font-family: Arial, sans-serif;
                 font-size: 12pt;
                 line-height: 1.5;
+                position: relative;
+                margin: 0;
+                padding-top: 60px; /* Space for header */
+                padding-bottom: 60px; /* Space for footer */
             }
-        
-            #logo-image {
-                display: block;
-                margin: 0 auto 20px;
-                max-width: 200px;
+
+            /* Header */
+            .header {
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 16pt;
+                font-weight: bold;
+                border-bottom: 2px solid #000;
+                padding-bottom: 10px;
             }
-        
 
+            /* Footer */
+            .footer {
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 10pt;
+                color: #555;
+                border-top: 1px solid #ddd;
+                padding-top: 10px;
+            }
 
+            /* Watermark */
+            .watermark {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                font-size: 80px;
+                color: rgba(0, 0, 0, 0.1);
+                pointer-events: none;
+                user-select: none;
+                font-weight: bold;
+                text-align: center;
+                width: 100%;
+            }
 
-
-
-
+            /* Hide certain elements */
             #ipilabel,
             #order-items-table th:nth-child(8),
             #order-items-table td:nth-child(8),
@@ -1503,24 +1531,24 @@ console.log('IPITax value:', ipitax);
             .allbtns,
             #submit-order-btn,
             #delete-order-btn,
-            #close-modal
-             {
+            #close-modal {
                 display: none !important;
             }
-        
+
+            /* Table styles */
             #order-items-table {
                 border-collapse: collapse;
                 width: 100%;
                 margin-top: 20px;
                 page-break-inside: auto;
             }
-        
+
             #order-items-table th, #order-items-table td {
                 padding: 8px;
                 text-align: left;
                 border: 1px solid #ddd;
             }
-        
+
             .totalOrderBox {
                 margin-top: 20px;
                 font-size: 14pt;
@@ -1529,7 +1557,7 @@ console.log('IPITax value:', ipitax);
                 padding-top: 10px;
                 page-break-inside: avoid;
             }
-        
+
             .obs-row {
                 font-size: 11pt;
                 margin-top: 20px;
@@ -1537,7 +1565,7 @@ console.log('IPITax value:', ipitax);
                 background-color: #f9f9f9;
                 page-break-inside: avoid;
             }
-        
+
             .obs-row textarea {
                 width: 100%;
                 font-size: 11pt;
@@ -1550,57 +1578,62 @@ console.log('IPITax value:', ipitax);
                 min-height: 160px;
                 height: auto !important;
             }
-        
+
             .order-header {
                 margin-bottom: 20px;
                 page-break-inside: avoid;
             }
-        
+
             .order-info-row span {
                 font-weight: bold;
             }
-        
+
             table {
                 font-size: 10pt;
             }
-        
+
             .order-info, .order-total {
                 page-break-after: auto;
             }
-        
+
             #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
                 width: 15%;
             }
-        
+
             #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
                 width: 40%;
             }
-        
+
             #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
                 width: 10%;
             }
-        
+
             #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
                 width: 15%;
             }
-        
+
             #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
                 width: 15%;
             }
-        
+
             .switch-container {
                 display: none;
             }
         }
     `);
     printWindow.document.write('</style></head><body>');
+    
+    // Insert the header, footer, and watermark
+    printWindow.document.write('<div class="header">Order Summary</div>');
+    printWindow.document.write('<div class="footer">Printed on ' + new Date().toLocaleString() + '</div>');
+    printWindow.document.write('<div class="watermark">CONFIDENTIAL</div>');
+    
     printWindow.document.write(modalClone.outerHTML); // Use modified modal content
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.print();
 }
 
-        
         
         
         
