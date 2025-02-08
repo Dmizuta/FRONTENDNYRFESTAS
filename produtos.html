@@ -308,6 +308,117 @@ function loadCustomerName() {
 
 
 
+function openModal(
+  productImage,
+  productCode,
+  productDesc,
+  cxFechada,
+  priceFechada,
+  cxFracionada,
+  priceFracionada,
+  estoque  // New parameter for stock status
+) {
+  const modal = document.getElementById("myModal");
+  const productInfo = modal.querySelector(".product-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
+  const productImageElement = modal.querySelector("img");
+  const addButton = document.getElementById("addButton"); // Ensure button exists
+  const stockWarning = document.getElementById("stockWarning"); // Ensure warning exists
+
+  // Populate modal with product details
+  productInfo.querySelector("h3").textContent = productCode;
+  productInfo.querySelector("p").textContent = productDesc;
+  priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${priceFechada}</span>`;
+  priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${priceFracionada}</span>`;
+  cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${cxFechada}</span>`;
+  cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${cxFracionada}</span>`;
+  productImageElement.src = productImage;
+
+  // Check stock status
+  if (estoque === 0) {
+    addButton.style.display = "none"; // Hide Add button
+    stockWarning.style.display = "block"; // Show warning
+  } else {
+    addButton.style.display = "block"; // Show Add button
+    stockWarning.style.display = "none"; // Hide warning
+  }
+
+  modal.style.display = "block"; // Show modal
+
+  const quantityInput = document.getElementById("quantity");
+
+  setTimeout(() => {
+    quantityInput.focus();
+  }, 100);
+}
+
+
+
+/*
+// Function to open the modal with product details
+function openModal(
+  productImage,
+  productCode,
+  productDesc,
+  cxFechada,
+  priceFechada,
+  cxFracionada,
+  priceFracionada
+)
+ {
+  const modal = document.getElementById("myModal");
+  const productInfo = modal.querySelector(".product-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
+  const productImageElement = modal.querySelector("img");
+  
+  // Populate modal with product details
+  productInfo.querySelector("h3").textContent = productCode;
+  productInfo.querySelector("p").textContent = productDesc;
+  priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${priceFechada}</span>`;
+  priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${priceFracionada}</span>`;
+  cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${cxFechada}</span>`;
+  cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${cxFracionada}</span>`;
+  productImageElement.src = productImage;
+  
+
+  modal.style.display = "block"; // Show modal
+  
+
+  const quantityInput = (document.getElementById('quantity'));
+        
+  setTimeout(() => {
+    quantityInput.focus();  // Focus on the quantity input field
+  }, 100); // Optional: delay slightly to ensure modal is fully displayed before focusing
+};
+
+*/
+
+
+
+
+// Event listener to close modal
+document.getElementById("closeModalBtn").addEventListener("click", function () {
+  document.getElementById("myModal").style.display = "none";
+});
+
+// Event listener to close modal
+document.getElementById("cancelButton").addEventListener("click", function () {
+  document.getElementById("myModal").style.display = "none";
+});
+
+// Close modal when clicking outside of it
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("myModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
 
 
 
