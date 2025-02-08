@@ -5,75 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro - NYR Festas</title>
   <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
-    }
-    .register-container {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 300px;
-    }
-    .register-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .register-container input,
-    .register-container select {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .register-container button {
-      width: 100%;
-      padding: 10px;
-      background-color: #18701c;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .register-container button:hover {
-      background-color: #4CAF50;
-    }
-    .error {
-      color: red;
-      text-align: center;
-      font-size: 14px;
-    }
-    #login {
-      margin-top: 7px;
-    }
+   /* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+/* Container */
+.register-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Elements */
+.register-container input,
+.register-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.register-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #18701c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.register-container button:hover {
+  background-color: #4CAF50;
+}
+
+#login {
+  margin-top: 7px;
+}
+
+/* Error Message */
+.error {
+  color: red;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Password Field with Toggle Icon */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+  padding-right: 35px;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+#togglePassword:hover {
+  color: #000;
+}
+
   </style>
 </head>
+
+
+
 <body>
   <div class="register-container">
     <h2>Registro</h2>
     <form id="registerForm">
       <input type="text" id="username" placeholder="Usuário" required>
-      <input type="password" id="password" placeholder="Senha" required>
+  
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Senha" required>
+        <i id="togglePassword" class="fa-solid fa-eye"></i>
+      </div>
+  
       <select id="role" required>
         <option value="">Selecione seu perfil</option>
         <option value="USER">Revendedor</option>
         <option value="SELLER">Representante</option>
       </select>
+  
       <button type="submit">Registrar</button>
       <button id="login" type="button">Voltar</button>
     </form> 
     <p class="error" id="errorMessage"></p>
   </div>
+  
 
   <script>
     // Handle registration form submission
@@ -115,6 +162,19 @@
     document.getElementById('login').addEventListener('click', function() {
       window.location.href = 'index.html'; // Redirect to index.html
     });
+
+
+
+
+    const passwordInput = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+
+  togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    togglePassword.classList.toggle("fa-eye", isPassword);
+    togglePassword.classList.toggle("fa-eye-slash", !isPassword);
+  });
   </script>
 </body>
 </html>
