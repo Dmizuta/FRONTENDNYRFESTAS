@@ -55,7 +55,7 @@ function populateProductTable(products) {
       const cell9 = row.insertCell(8); // ADD BUTTON 
       
       // Populate cells with product data
-      cell1.textContent = index + 1 || "N/A"; // Product Id
+      cell1.textContent = p`${index + 1}` || "N/A"; // Product Id
       cell2.innerHTML = ` 
                 <img src="${
                   product.imagem || "https://via.placeholder.com/50"
