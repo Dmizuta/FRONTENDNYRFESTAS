@@ -278,7 +278,7 @@ th {
     border-radius: 5px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
     margin: 30px auto;
-   
+    border: 1px solid #ccc;
     max-width: 95%;
   
 }
@@ -288,6 +288,7 @@ th {
     max-width: 95%;
     background-color: #e7e5e5;
     border-radius: 8px;
+    border: 1px solid #ccc;
     margin: 30px auto;
    padding: 15px;
    max-width: 95%;
@@ -303,7 +304,7 @@ th {
    margin: 10px auto;
  background-color: #e7e5e5;
     border-radius: 8px;
-    border: #011a1f;
+        border: 1px solid #ccc;
     box-sizing: border-box;
   
 }
