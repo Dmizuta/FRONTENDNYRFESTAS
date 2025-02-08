@@ -933,26 +933,26 @@ window.addEventListener("click", function(event) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Function to fetch and display order details in the modal
-async function fetchOrderDetails(orderId) {
-    console.log("CHECK HERE", orderId);
-    try {
-        console.log(`Fetching details for order ID: ${orderId}`);
-        const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch order details');
+    // Function to fetch and display order details in the modal
+    async function fetchOrderDetails(orderId) {
+            console.log("CHECK HERE", orderId);
+            try {
+                console.log(`Fetching details for order ID: ${orderId}`);
+                const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch order details');
+                }
+                const orderDetails = await response.json();
+        
+                const orderID = orderDetails.id;
+                localStorage.setItem('currentOrderId', orderID);
+        
+                console.log('Order details received:', orderDetails);
+                populateModal(orderDetails);
+            } catch (error) {
+                console.error('Error fetching order details:', error);
+            }
         }
-        const orderDetails = await response.json();
-
-        const orderID = orderDetails.id;
-        localStorage.setItem('currentOrderId', orderID);
-
-        console.log('Order details received:', orderDetails);
-        populateModal(orderDetails);
-    } catch (error) {
-        console.error('Error fetching order details:', error);
-    }
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
