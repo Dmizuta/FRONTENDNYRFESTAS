@@ -18,7 +18,7 @@ async function fetchProductData() {
     // Handle errors and show a user-friendly message in the table
     const tableBody = document.querySelector("#productTable tbody");
     tableBody.innerHTML =
-      '<tr><td colspan="7">Não foi possível carregar os produtos, entre em contato com o suporte.</td></tr>';
+      '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
   }
 }
 
