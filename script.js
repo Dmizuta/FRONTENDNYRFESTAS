@@ -30,44 +30,7 @@ function formatCurrency(value) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Clear any existing rows
-tableBody.innerHTML = "";
 
-if (products && products.length > 0) {
-    products.forEach((product, index) => { // Adicionando o índice aqui
-        const row = tableBody.insertRow();
-
-        // Insert cells for each product detail
-        const cell1 = row.insertCell(0); // Id
-        const cell2 = row.insertCell(1); // Image
-        const cell3 = row.insertCell(2); // Product Code
-        const cell4 = row.insertCell(3); // Description
-        const cell5 = row.insertCell(4); // Quantity Closed
-        const cell6 = row.insertCell(5); // Price Closed
-        const cell7 = row.insertCell(6); // Quantity Fractioned
-        const cell8 = row.insertCell(7); // Price Fractioned
-        const cell9 = row.insertCell(8); // ADD BUTTON 
-        
-        // Populate cells with product data
-        cell1.textContent = index + 1; // Substituindo o idprod pelo índice + 1
-        cell2.innerHTML = ` 
-            <img src="${product.imagem || "https://via.placeholder.com/50"}" 
-                 alt="Product Image"  
-                 style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
-                 onmouseover="this.style.transform='scale(3)'" 
-                 onmouseout="this.style.transform='scale(1)'">    
-        `;
-        cell3.textContent = product.codproduto || "N/A"; // Product Code
-        cell4.textContent = product.descricao || "N/A"; // Description
-        cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
-        cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
-        cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
-        cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
-        cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
-    
-
-
-/*
 // Function to populate the product table dynamically
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
@@ -112,7 +75,6 @@ function populateProductTable(products) {
       //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
       cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
 
-*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,7 +119,7 @@ function populateProductTable(products) {
     tableBody.innerHTML =
       '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
   }
-
+}
 
 
 
