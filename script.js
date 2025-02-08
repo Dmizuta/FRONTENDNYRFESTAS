@@ -212,7 +212,7 @@ function openModal(
   }, 100); // Optional: delay slightly to ensure modal is fully displayed before focusing
 };
 
-
+*/
 
 
 
@@ -234,7 +234,7 @@ window.addEventListener("click", function (event) {
     modal.style.display = "none";
   }
 });
-*/
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
