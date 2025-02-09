@@ -9,9 +9,17 @@
     position:fixed;
     top: 10px; /* Ajuste para a altura desejada */
 }
+
 #logo{
     left: 0.5rem;
     width: 5.8rem;
+}
+#logo {
+    transition: transform 0.3s ease-in-out;
+}
+
+#logo:hover {
+    transform: scale(1.1);
 }
 
 
@@ -309,10 +317,6 @@ th {
   
 }
 
-#searchBox:focus{
-    border-color: #BF6734;
-}
-
 
 
 /* Search Input */
@@ -328,9 +332,7 @@ th {
        
    }
 
-   #searchInput:focus{
-    border-color: #BF6734;
-}
+
   
    .openModalBtn img {
     width: 30px; /* Adjust size as needed */
