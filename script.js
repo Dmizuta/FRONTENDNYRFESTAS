@@ -68,13 +68,17 @@ async function fetchProductData() {
       '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
   }
 }
+*/
+
+
+
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
-*/
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
