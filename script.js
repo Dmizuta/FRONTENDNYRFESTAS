@@ -1,4 +1,51 @@
 // API URL for fetching product data
+const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
+
+// Função para buscar produtos da estação selecionada
+async function fetchProductData(epoca) {
+    try {
+        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
+        const data = await response.json();
+
+        // Log the fetched data to check the structure
+        console.log(data);
+
+        // Map the data into the table
+        populateProductTable(data);
+    } catch (error) {
+        console.error("Error fetching product data:", error);
+
+        // Handle errors and show a user-friendly message in the table
+        const tableBody = document.querySelector("#productTable tbody");
+        tableBody.innerHTML =
+            '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
+    }
+}
+
+// Adiciona eventos de clique aos ícones
+document.getElementById("carnaval").addEventListener("click", () => {
+    fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
+});
+
+document.getElementById("junino").addEventListener("click", () => {
+    fetchProductData('junino'); // Chama a função para buscar produtos Juninos
+});
+
+document.getElementById("hlwn").addEventListener("click", () => {
+    fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
+});
+
+
+
+
+
+
+
+
+
+
+/*
+// API URL for fetching product data
 const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your live backend URL
 
 // Function to fetch product data from the API
@@ -27,7 +74,7 @@ function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
-
+*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
