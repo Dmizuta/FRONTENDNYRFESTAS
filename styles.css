@@ -175,14 +175,14 @@ button {
 }
 
 button:active {
-    transform: scale(0.95); /* Shrinks button slightly */
+    transform: scale(0.5); /* Shrinks button slightly */
     background-color: #a35c33; /* Darker shade */
 }
 
 
 
 button:hover {
-    background-color: #ecac61; /* Light yellow-orange hover color */
+    background-color: #e2943a; /* Light yellow-orange hover color */
     transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
 }
 
