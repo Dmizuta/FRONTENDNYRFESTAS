@@ -71,6 +71,28 @@
     display: flex;
     gap: 10px; /* Adds spacing between buttons */
 }
+.button-container button {
+    background-color: #BF6734; /* Dark orange button color */
+    color: #fff;
+    padding: 10px; /* More space */
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em; /* Larger font */
+    font-weight: 600; /* Bold */
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+.button-container button:hover {
+    background-color: #e2943a; /* Light yellow-orange hover color */
+    transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
+}
+
+.button-container button:active {
+    transform: scale(0.98); /* Shrinks button slightly */
+    background-color: #a35c33; /* Darker shade */
+}
 
 
 </style>

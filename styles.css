@@ -174,10 +174,6 @@ button {
     transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
 
-button:active {
-    transform: scale(0.5); /* Shrinks button slightly */
-    background-color: #a35c33; /* Darker shade */
-}
 
 
 
@@ -185,6 +181,11 @@ button:hover {
     background-color: #e2943a; /* Light yellow-orange hover color */
     transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
 }
+
+
+
+
+
 
 /* Table */
 table {

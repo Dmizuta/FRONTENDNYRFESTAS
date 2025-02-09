@@ -70,7 +70,13 @@ function populateProductTable(products) {
       cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
       cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
       cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
-      cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
+      cell9.innerHTML = `<button class="openModalBtn" 
+        onmousedown="this.style.transform = 'scale(0.95)';" 
+        onmouseup="this.style.transform = 'scale(1)';" 
+        onmouseleave="this.style.transform = 'scale(1)';">
+  <img src="/imagens/shoppingcart.png" alt="Adicionar">
+</button>
+`;
    
 
 
