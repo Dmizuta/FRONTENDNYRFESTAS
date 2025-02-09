@@ -384,14 +384,19 @@ th {
 
 /* Modal Content */
 .modal-content {
+
+    max-width: 90vw; /* Limit width to 90% of the viewport */
+    max-height: 90vh; /* Limit height to 90% of the viewport */
+    overflow: auto;  /* Enable scrolling if content overflows */
+
     position: absolute; /* Centered using transform */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 30px;
-    width: 40%;
-    max-width: 800px;
+    /*width: 40%;
+    max-width: 800px;*/
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
