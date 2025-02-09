@@ -150,24 +150,23 @@ form label, form input {
 button {
     background-color: #BF6734; /* Dark orange button color */
     color: #fff;
-    padding: 10px; /* Aumentado para mais espaço */
+    padding: 10px; /* More space */
     margin-top: 10px;
     border: none;
-    border-radius: 10px; /* Bordas arredondadas */
+    border-radius: 10px; /* Rounded corners */
     cursor: pointer;
     width: 100%;
-    font-size: 1em; /* Aumentado para um tamanho maior */
-    font-weight: 600; /* Negrito */
+    font-size: 1em; /* Larger font */
+    font-weight: 600; /* Bold */
     transition: background-color 0.3s, transform 0.2s;
-    button:active {
-    transform: scale(0.95); /* Shrinks button a little */
-    background-color: #ddd; /* Temporary color change */
 }
+
 button:active {
-    transform: scale(0.90); /* Shrinks button a little */
-    background-color: #a35c33; /* Temporary color change */
+    transform: scale(0.90); /* Shrinks button slightly */
+    background-color: #a35c33; /* Darker shade */
 }
-}
+
+
 
 button:hover {
     background-color: #ecac61; /* Light yellow-orange hover color */
