@@ -160,7 +160,6 @@ form label, form input {
 
 
 
-
 button {
     background-color: #BF6734; /* Dark orange button color */
     color: #fff;
@@ -172,17 +171,11 @@ button {
     width: 100%;
     font-size: 1em; /* Larger font */
     font-weight: 600; /* Bold */
-   
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
-
-button {
-    transition: transform 0.2s ease-in-out;
-}
-
-
 
 button:active {
-    transform: scale(0.50); /* Shrinks button slightly */
+    transform: scale(0.95); /* Shrinks button slightly */
     background-color: #a35c33; /* Darker shade */
 }
 
