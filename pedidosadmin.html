@@ -468,6 +468,7 @@
     
     /* By default, hide the print-only span*/ 
     .ipi-print-only {
+        padding: 20px;
         display: none;
     }
     
@@ -673,6 +674,10 @@
             </div>
         </div>
         
+        <div>
+            <!-- Span for printing, initially hidden -->
+            <span id="ipi-display" class="ipi-print-only"></span>
+            </div>
 
         <div class="obs-row">
             <span>Observações:</span>
@@ -681,10 +686,7 @@
             "Transportadora / Forma de pagamento / Nf"
             ></textarea>
         </div>
-        <div>
-<!-- Span for printing, initially hidden -->
-<span id="ipi-display" class="ipi-print-only"></span>
-</div>
+        
         <!-- Action Buttons -->
        
         <div class="allbtns">
