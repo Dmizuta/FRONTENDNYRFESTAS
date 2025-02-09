@@ -3,6 +3,7 @@ const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a
 
 // Função para buscar produtos da estação selecionada
 async function fetchProductData(epoca) {
+    console.log(`Fetching products for season: ${epoca}`); // Log para verificar a estação
     try {
         const response = await fetch(`${API_URL}?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
         const data = await response.json();
