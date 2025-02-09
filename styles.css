@@ -319,6 +319,9 @@ th {
 
 
 
+
+
+
 /* Search Input */
 #searchInput {
 
@@ -329,10 +332,15 @@ th {
        padding: 10px;
        width: 60%;
        border: 1px solid #ccc;
+       outline: none; /* Removes default focus outline */
+       transition: border-color 0.3s ease-in-out;
        
    }
+   
+#searchInput:focus {
+    border-color: #BF6734; /* Change to your desired color */
 
-
+}
   
    .openModalBtn img {
     width: 30px; /* Adjust size as needed */
