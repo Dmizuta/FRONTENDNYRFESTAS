@@ -309,6 +309,12 @@ th {
   
 }
 
+#searchBox:focus{
+    border-color: #BF6734;
+}
+
+
+
 /* Search Input */
 #searchInput {
 
@@ -322,6 +328,9 @@ th {
        
    }
 
+   #searchInput:focus{
+    border-color: #BF6734;
+}
   
    .openModalBtn img {
     width: 30px; /* Adjust size as needed */
