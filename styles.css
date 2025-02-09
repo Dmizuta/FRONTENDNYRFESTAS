@@ -314,10 +314,14 @@ th {
     border-radius: 8px;
         border: 1px solid #ccc;
     box-sizing: border-box;
-  
+    outline: none; /* Removes default focus outline */
+    transition: border-color 0.3s ease-in-out;
 }
 
+#searchBox:focus {
+    border-color: #BF6734; /* Change to your desired color */
 
+}
 
 
 
