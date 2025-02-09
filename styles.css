@@ -386,7 +386,7 @@ th {
 .modal-content {
 
     max-width: 100vw; /* Limit width to 90% of the viewport */
-    max-height: 90vh; /* Limit height to 90% of the viewport */
+    max-height: 100vh; /* Limit height to 90% of the viewport */
     /*overflow: auto;   Enable scrolling if content overflows */
 
     position: absolute; /* Centered using transform */
