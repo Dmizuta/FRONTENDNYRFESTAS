@@ -19,6 +19,36 @@
 
 <style>
 
+
+/* Estilo específico para os botões de ícone */
+.icon-button {
+    background: none; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    padding: 0; /* Remove o preenchimento */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+/* Se você tiver um estilo geral para botões, pode ser assim: */
+button {
+    /* Estilos gerais para todos os botões */
+    background-color: blue; /* Exemplo de estilo geral */
+    color: white;
+}
+
+/* Para garantir que o estilo do botão de ícone tenha prioridade */
+.icon-button {
+    background: none !important; /* Remove o fundo, se necessário */
+    border: none !important; /* Remove a borda, se necessário */
+    padding: 0 !important; /* Remove o preenchimento, se necessário */
+}
+
+
+
+
+
+
+
+
 .icon-wrapper {
     position: relative;
     display: inline-block;
@@ -54,6 +84,7 @@
         gap: 0.6rem;
         align-items: center;
         z-index: 100;
+        
     }
 
     /* Estilo para as imagens dos ícones */
@@ -62,6 +93,8 @@
         transition: transform 0.3s ease;
         cursor: pointer;
         position: relative;
+        
+
     }
 
     /* Efeito de zoom ao passar o mouse sobre o ícone */
@@ -139,6 +172,30 @@
       
     <div id="customerSelected">...</div>
 
+
+
+    <div class="icons">
+        <div class="icon-wrapper">
+            <button id="carnaval" class="icon-button" aria-label="Filtrar produtos de Carnaval">
+                <img src="/imagens/carnaval.png" alt="Carnaval">
+                <span class="tooltip">Carnaval</span>
+            </button>
+        </div>
+        <div class="icon-wrapper">
+            <button id="junino" class="icon-button" aria-label="Filtrar produtos Juninos">
+                <img src="/imagens/junino1.png" alt="Junino">
+                <span class="tooltip">Junino</span>
+            </button>
+        </div>
+        <div class="icon-wrapper">
+            <button id="hlwn" class="icon-button" aria-label="Filtrar produtos de Halloween">
+                <img src="/imagens/halloween.png" alt="Halloween">
+                <span class="tooltip">Halloween</span>
+            </button>
+        </div>
+    </div>
+    
+<!--
     <div class="icons">
         <div class="icon-wrapper">
             <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
@@ -153,7 +210,7 @@
             <span class="tooltip">Halloween</span>
         </div>
     </div>
-
+-->
 
     <div class="PAGE">
 
