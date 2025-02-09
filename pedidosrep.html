@@ -388,7 +388,7 @@ font-size: 1rem;
 
 /* Optional: active state to shrink the button slightly when clicked */
 .modalOrderDeleteButton:active, .modalOrderEditButton:active {
-  transform: scale(0.95);  /* Shrink the button a bit when clicked */
+  transform: scale(0.98);  /* Shrink the button a bit when clicked */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
 }
 
@@ -423,6 +423,99 @@ font-size: 1rem;
 .order-total{
     font-size: 1.1rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        /* Style for the dropdown container */
+        .dropdown {
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Style for the label */
+    .dropdown label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    /* Style for the select dropdown */
+    #ipi {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+    
+    /* Focus effect for the select input */
+    #ipi:focus {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #ipi option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #ipi:hover {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the select box container when it's not focused */
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        
+        width: 100px;
+        margin: 20px 0;
+        padding-right: 30px;
+    }
+    
+    
+    /* By default, hide the print-only span*/ 
+    .ipi-print-only {
+        
+        display: none;
+        
+    }
+    
+    
+    
+    .topButtons {
+        display: flex;        /* Enables flexbox */
+        justify-content: space-between; /* Distributes space between the two divs */
+        align-items: center;  /* Aligns items vertically in the center */
+        gap: 10px;            /* Adds space between the two divs (optional) */
+    }
+    
+    .topButtons > div {
+        flex: 1; /* Makes both divs take equal space */
+    }
+    
+
     </style>
     
 <body>
@@ -509,28 +602,39 @@ font-size: 1rem;
                     </tr>
 
 
-
-
-
-
-
-                    <div class="container">
-                        <div class="switch-container">
-                            <!-- Left label -->
-                            <span class="switch-label left-label active">Aberto</span>
                 
-                            <label class="switch">
-                                <input type="checkbox" id="toggleButton">
-                                <span class="slider"></span>
-                            </label>
-                
-                            <!-- Right label -->
-                            <span class="switch-label right-label">Orçamento</span>
+                    <div class="topButtons" >
+                        <div class="container">
+                            <div class="switch-container">
+                                <!-- Left label -->
+                                <span class="switch-label left-label active">Aberto</span>
+                    
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleButton">
+                                    <span class="slider"></span>
+                                </label>
+                    
+                                <!-- Right label -->
+                                <span class="switch-label right-label">Orçamento</span>
+                            </div>
                         </div>
+        
+                        <div class="dropdown">
+                    
+                            <div id="ipilabel">
+                            <label for="ipi">IPI:</label>
+                            <!-- Dropdown for user interaction -->
+                            <select id="ipi">
+                                <option value='0.13'>B1</option>
+                                <option value='0.065'>B2</option>
+                                <option value='0.039'>B3</option>
+                            </select>
+                        </div>
+                            
+                        </div>
+                        
                     </div>
-
-
-
+        
 
 
                 </thead>
@@ -547,8 +651,10 @@ font-size: 1rem;
                     </div>
                 </div>
             </div>
-            
-    
+            <div>
+                <!-- Span for printing, initially hidden -->
+                <span id="ipi-display" class="ipi-print-only"></span>
+                </div>
             <div class="obs-row">
                 <span>Observações:</span>
                 <textarea type="text" id="obs"
@@ -831,31 +937,40 @@ window.addEventListener("click", function(event) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Function to fetch and display order details in the modal
-async function fetchOrderDetails(orderId) {
-    console.log("CHECK HERE", orderId);
-    try {
-        console.log(`Fetching details for order ID: ${orderId}`);
-        const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch order details');
+    // Function to fetch and display order details in the modal
+    async function fetchOrderDetails(orderId) {
+            console.log("CHECK HERE", orderId);
+            try {
+                console.log(`Fetching details for order ID: ${orderId}`);
+                const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch order details');
+                }
+                const orderDetails = await response.json();
+        
+                const orderID = orderDetails.id;
+                localStorage.setItem('currentOrderId', orderID);
+        
+                console.log('Order details received:', orderDetails);
+                populateModal(orderDetails);
+            } catch (error) {
+                console.error('Error fetching order details:', error);
+            }
         }
-        const orderDetails = await response.json();
+    
 
-        const orderID = orderDetails.id;
-        localStorage.setItem('currentOrderId', orderID);
-
-        console.log('Order details received:', orderDetails);
-        populateModal(orderDetails);
-    } catch (error) {
-        console.error('Error fetching order details:', error);
-    }
-}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
@@ -866,35 +981,38 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
+    // Get IPI dropdown and display elements
+    const ipiDropdown = document.getElementById('ipi');
+    const ipiDisplay = document.getElementById('ipi-display');
+
+    // Set the IPI dropdown value
+    if (orderDetails.ipi_tax) {
+        ipiDropdown.value = orderDetails.ipi_tax;
+    }
+  
     // Update products table and calculate total
+    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+
     const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0; // Variable to accumulate the total price    
+    let total = 0;
 
+    // Clear existing content
+    orderDetailsContent.innerHTML = '';
 
-
-
-
-
-
-
-    // Clear existing content and rebuild the table
-    orderDetailsContent.innerHTML = ''; // Clear content initially
     orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco); // Ensure price is a number
-        const quantity = parseInt(product.quantidade, 10); // Ensure quantity is an integer
+        const price = parseFloat(product.preco);
+        const quantity = parseInt(product.quantidade, 10);
         const factor = parseInt(product.ipi);
-
-       
-        const ipi = factor * 0.13 * price * quantity;
-        
-        const productTotal = (price * quantity) + ipi; // Calculate product total
+        const ipiTax = parseFloat(orderDetails.ipi_tax);
+        const ipi = factor * ipiTax * price * quantity;
+        const productTotal = (price * quantity) + ipi;
 
         const row = `
             <tr data-product-id="${product.id}">
                 <td>${index + 1}</td>
                 <td>${product.codproduto}</td>
                 <td>${product.descricao}</td>
-                <td class="quantity">${quantity}</td> <!-- Add 'quantity' class for easy selection -->
+                <td class="quantity">${quantity}</td>
                 <td>${formatCurrency(price)}</td>
                 <td>${formatCurrency(ipi)}</td>
                 <td>${formatCurrency(productTotal)}</td>
@@ -903,34 +1021,36 @@ function populateModal(orderDetails) {
             </tr>
         `;  
 
-
-
-        orderDetailsContent.innerHTML += row; // Add row to table
-
-        total += productTotal; // Accumulate the product total to the overall total
+        orderDetailsContent.innerHTML += row;
+        total += productTotal;
     });
 
-    // Update total price in the modal
-    document.getElementById('total-value').textContent = formatCurrency(total); // Display the total value
+    // Update total price
+    document.getElementById('total-value').textContent = formatCurrency(total);
 
-    // Check the status of the order and set the toggle button position
-    const toggleButton = document.getElementById('toggleButton'); // Your toggle button
-    console.log('status:', orderDetails.status);
-    if (toggleButton) {  // Ensure toggleButton exists before manipulating it
-        if (orderDetails.status === 0) {
-            // If status is 0 (Aberto), set button to the left
-            //toggleButton.classList.remove('toggled');
-            toggleButton.checked = false; 
-            toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
-        } else if (orderDetails.status === 1) {
-            // If status is 1 (Orçamento), set button to the right
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        
+            // Check the status of the order and set the toggle button position
+            const toggleButton = document.getElementById('toggleButton'); // Your toggle button
             console.log('status:', orderDetails.status);
-           // toggleButton.classList.add('toggled');
-           toggleButton.checked = true;
-            toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
-        }
-    }
- 
+            if (toggleButton) {  // Ensure toggleButton exists before manipulating it
+                if (orderDetails.status === 0) {
+                    // If status is 0 (Aberto), set button to the left
+                    //toggleButton.classList.remove('toggled');
+                    toggleButton.checked = false; 
+                    toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
+                } else if (orderDetails.status === 1) {
+                    // If status is 1 (Orçamento), set button to the right
+                    console.log('status:', orderDetails.status);
+                   // toggleButton.classList.add('toggled');
+                   toggleButton.checked = true;
+                    toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
+                }
+            }
+         
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -940,10 +1060,145 @@ function populateModal(orderDetails) {
 
 
 
+        // Add event listeners for edit buttons
+        document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
+            button.addEventListener('click', async function () {
+                const row = this.closest('tr');
+        
+                const orderId = localStorage.getItem('currentOrderId');
+                const quantityCell = row.querySelector('.quantity');
+                const productId = row.getAttribute('data-product-id');
+                const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+        
+                // Fetch the current order status to determine if it's editable
+                const requestData = { orderId };
+                console.log("currentOrderId:", orderId);
+        
+                try {
+                    const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(requestData),
+                    });
+        
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch order status: ${response.statusText}`);
+                    }
+        
+                    const data = await response.json();
+        
+                    // Check if the order status is fetched properly
+                    const orderStatus = data.status; // Adjust based on backend response format
+                    console.log("Order Status:", orderStatus);
+        
+                    if (orderStatus === 1 || orderStatus === 2) {
+                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+                        return; // Prevent further execution
+                    }
+        
+                    // If order is editable, proceed with making the quantity editable
+                    const inputField = document.createElement('input');
+                    inputField.type = 'number';
+                    inputField.value = currentQuantity;
+                    inputField.classList.add('edit-quantity');
+        
+                    // Add save button
+                    const saveButton = document.createElement('button');
+                    saveButton.textContent = 'Salvar';
+                    saveButton.classList.add('save-quantity-btn');
+        
+                    // Clear the quantity cell and append input and save button
+                    quantityCell.innerHTML = '';
+                    quantityCell.appendChild(inputField);
+                    quantityCell.appendChild(saveButton);
+        
+                    // Focus the input field immediately after it is appended
+                    inputField.focus();
+        
+                    // Add 'Enter' key support
+                    inputField.addEventListener('keypress', function (event) {
+                        if (event.key === 'Enter') saveButton.click();
+                    });
+        
+                    saveButton.addEventListener('click', async function () {
+                        const newQuantity = parseInt(inputField.value, 10);
+                        if (newQuantity && newQuantity > 0) {
+                            try {
+                                const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ quantity: newQuantity })
+                                });
+        
+                                if (!response.ok) throw new Error('Failed to update quantity');
+        
+                
+                                const data = await response.json();
+
+                                
+        // Assume 'data' is the response object you received from the server
+        // const data = response.data;
+        
+        // Retrieve the ipi value and total from the response
+        const ipi = data.updatedProduct.ipi;  // ipi value
+        const updatedTotal = data.updatedProduct.total;  // New total value
+        
+        
+        console.log('IPI value:', ipi);
+        console.log('Updated total:', updatedTotal);
+        
+                                // Update the quantity directly in the table after success
+                                quantityCell.textContent = newQuantity;
+                              
+
+
+                                console.log('Response data:', data.updatedProduct);
+                               const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
+console.log('IPI Tax value:', ipitax);
 
 
 
+                                
+                                console.log('IPI value:', ipi);
+console.log('IPITax value:', ipitax);
+                                // Optionally, you can re-calculate the total if necessary
+                                const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
+                                const ipiValue = ipi * ipitax * price / 100 * newQuantity; 
+                                const productTotal = price / 100 * newQuantity + ipiValue ;
+        
+                                // Update the total for this row
+                                row.cells[5].textContent = formatCurrency(ipiValue);
+                                row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
+        
+                                // Update the total price in the modal
+                                //update();
+                                updateTotalPrice();
+        
+                               
+        
+                            } catch (error) {
+                                alert('Error updating quantity');
+                                console.error('Error updating quantity:', error);
+                            }
+                        } else {
+                            alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error fetching order status:', error);
+                    alert('An error occurred while checking the order status. Please try again later.');
+                }
+            });
+        });
+        
 
+
+
+/*
 // Add event listeners for edit buttons
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', async function () {
@@ -1025,7 +1280,6 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         
 
 
-        
                         const data = await response.json();
 // Assume 'data' is the response object you received from the server
 // const data = response.data;
@@ -1037,18 +1291,6 @@ const updatedTotal = data.updatedProduct.total;  // New total value
 console.log('IPI value:', ipi);
 console.log('Updated total:', updatedTotal);
 
-
-
-/*
-const data = await response.json();
-        console.log(data.message); // Success message
-                        // Retrieve the ipi value and total from the response
-                        const ipi = data.ipi;  // ipi value
-                        const updatedTotal = data.total;  // New total value
-
-                        console.log('IPI:', ipi);  // Print the ipi value
-                        console.log('Updated Total:', updatedTotal);  // Print the updated total
-*/
 
 
   
@@ -1084,7 +1326,7 @@ const data = await response.json();
         }
     });
 });
-
+*/
 
 
 
@@ -1481,150 +1723,179 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
+  
 function printOrder() {
-    const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
-    const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
+    // Clone the modal content to avoid modifying the actual modal
+    const modalClone = document.querySelector('#order-modal').cloneNode(true);
 
-    // Inject the necessary print styles directly into the print window
+    // Find the dropdown and replace it with its selected text
+    const ipiDropdown = modalClone.querySelector('#ipi');
+    if (ipiDropdown) {
+        const selectedIpiText = ipiDropdown.options[ipiDropdown.selectedIndex].text; // Get selected option text
+        const ipiTextElement = document.createElement('span'); // Create a span to replace the dropdown
+        ipiTextElement.textContent = selectedIpiText;
+        ipiDropdown.replaceWith(ipiTextElement); // Replace dropdown with text
+    }
+
+    // Open new print window
+    const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write('<html><head><title>Print Order</title>');
     printWindow.document.write('<style>');
     printWindow.document.write(`
-     @media print {
-    /* General Page Style */
-    body {
-        font-family: Arial, sans-serif;
-        font-size: 12pt;
-        line-height: 1.5;
-    }
-
-    /* Logo styling */
-    #logo-image {
-        display: block;
-        margin: 0 auto 20px;
-        max-width: 200px;
-    }
-
-    /* Hide unnecessary columns and buttons */
-    #order-items-table th:nth-child(8),
-    #order-items-table td:nth-child(8),
-    #order-items-table th:nth-child(9),
-    #order-items-table td:nth-child(9),
-    .allbtns,
-    #submit-order-btn,
-    #delete-order-btn,
-    #close-modal {
-        display: none !important;
-    }
-
-    /* Table Style */
-    #order-items-table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-        page-break-inside: auto; /* Prevent breaks inside the table */
-    }
-
-    #order-items-table th, #order-items-table td {
-        padding: 8px;
-        text-align: left;
-        border: 1px solid #ddd;
-    }
-
-    /* Make the total order section distinct */
-    .totalOrderBox {
-        margin-top: 20px;
-        font-size: 14pt;
-        font-weight: bold;
-        border-top: 2px solid #000;
-        padding-top: 10px;
-        page-break-inside: avoid; /* Ensure the section stays together */
-    }
-
-    /* Observations Section */
-    .obs-row {
-        font-size: 11pt;
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        page-break-inside: avoid; /* Prevent breaks in the observation area */
-    }
-
-    .obs-row textarea {
-        width: 100%;
-        font-size: 11pt;
-        border: 1px solid #ddd;
-        padding: 5px;
-        box-sizing: border-box;
-        resize: none; /* Disable resizing during print */
-        white-space: pre-wrap; /* Ensure text wraps within the textarea */
-        overflow: visible; /* Allow for overflow in the print view */
-        min-height: 160px; /* Set a reasonable minimum height */
-        height: auto !important; /* Allow it to expand to fit content */
+        @media print {
         
-    }
+        body {
+                font-family: Arial, sans-serif;
+                font-size: 12pt;
+                line-height: 1.5;
+                position: relative;
+                margin: 0;
+                padding-top: 60px; /* Space for header */
+                padding-bottom: 60px; /* Space for footer */
+            }
 
-    /* Section Spacing */
-    .order-header {
-        margin-bottom: 20px;
-        page-break-inside: avoid; /* Prevent break inside header */
-    }
+            /* Header */
+            .header {
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 16pt;
+                font-weight: bold;
+                border-bottom: 2px solid #000;
+                padding-bottom: 10px;
+            }
 
-    /* Ensure good readability */
-    .order-info-row span {
-        font-weight: bold;
-    }
+            /* Footer */
+            .footer {
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 10pt;
+                color: #555;
+                border-top: 1px solid #ddd;
+                padding-top: 10px;
+            }
 
-    table {
-        font-size: 10pt;
-    }
+        
 
-    /* Remove block-style page breaks, allow natural flow */
-    .order-info, .order-total {
-        page-break-after: auto; /* Let content flow naturally */
-    }
+            /* Hide certain elements */
+            #ipilabel,
+            #order-items-table th:nth-child(8),
+            #order-items-table td:nth-child(8),
+            #order-items-table th:nth-child(9),
+            #order-items-table td:nth-child(9),
+            .allbtns,
+            #submit-order-btn,
+            #delete-order-btn,
+            #close-modal {
+                display: none !important;
+            }
 
-    /* Adjust table column width */
-    #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
-        width: 15%;
-    }
+            /* Table styles */
+            #order-items-table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+                page-break-inside: auto;
+            }
 
-    #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
-        width: 40%;
-    }
+            #order-items-table th, #order-items-table td {
+                padding: 8px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
 
-    #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
-        width: 10%;
-    }
+            .totalOrderBox {
+                margin-top: 20px;
+                font-size: 14pt;
+                font-weight: bold;
+                border-top: 2px solid #000;
+                padding-top: 10px;
+                page-break-inside: avoid;
+            }
 
-    #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
-        width: 15%;
-    }
+            .obs-row {
+                font-size: 11pt;
+                margin-top: 20px;
+                padding: 10px;
+                background-color: #f9f9f9;
+                page-break-inside: avoid;
+            }
 
-    #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
-        width: 15%;
-    }
-}
+            .obs-row textarea {
+                width: 100%;
+                font-size: 11pt;
+                border: 1px solid #ddd;
+                padding: 5px;
+                box-sizing: border-box;
+                resize: none;
+                white-space: pre-wrap;
+                overflow: visible;
+                min-height: 160px;
+                height: auto !important;
+            }
 
-@media print {
-    .switch-container {
-        display: none;
-    }
-}
+            .order-header {
+                margin-bottom: 20px;
+                page-break-inside: avoid;
+            }
 
+            .order-info-row span {
+                font-weight: bold;
+            }
 
+            table {
+                font-size: 10pt;
+            }
+
+            .order-info, .order-total {
+                page-break-after: auto;
+            }
+
+            #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
+                width: 15%;
+            }
+
+            #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
+                width: 40%;
+            }
+
+            #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
+                width: 10%;
+            }
+
+            #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
+                width: 15%;
+            }
+
+            #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
+                width: 15%;
+            }
+
+            .switch-container {
+                display: none;
+            }
+        }
     `);
     printWindow.document.write('</style></head><body>');
-    printWindow.document.write(modalContent); // Insert modal content into the print window
+    
+    // Insert the header, footer, and watermark
+    printWindow.document.write('<div class="header">NYR Festas</div>');
+    printWindow.document.write('<div class="footer">Phone: (11) 9 9469-8952 | Email: financeiro@mm88.com.br</div>');
+    
+    
+    printWindow.document.write(modalClone.outerHTML); // Use modified modal content
     printWindow.document.write('</body></html>');
-    printWindow.document.close(); // Close the document to ensure all content is loaded
-    printWindow.print(); // Trigger the print dialog
+    printWindow.document.close();
+    printWindow.print();
 }
 
-
-
+        
+  
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1787,6 +2058,36 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+document.getElementById("ipi").addEventListener("change", async function () {
+            const newIPI = parseFloat(this.value); // Get selected IPI value
+            const orderId = localStorage.getItem('currentOrderId');
+        
+            try {
+                const response = await fetch("https://backendnyrfestas.vercel.app/update-ipi", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ orderId, newIPI })
+                });
+        
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`IPI atualizado para ${newIPI * 100}%`);
+                } else {
+                    alert("Erro ao atualizar IPI: " + data.error);
+                }
+            } catch (error) {
+                console.error("Erro ao atualizar IPI:", error);
+                alert("Erro de conexão com o servidor.");
+            }
+            window.location.reload();
+        });
+        
+
 
 </script>
 </body>

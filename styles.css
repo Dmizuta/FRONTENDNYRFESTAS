@@ -9,9 +9,17 @@
     position:fixed;
     top: 10px; /* Ajuste para a altura desejada */
 }
+
 #logo{
     left: 0.5rem;
     width: 5.8rem;
+}
+#logo {
+    transition: transform 0.3s ease-in-out;
+}
+
+#logo:hover {
+    transform: scale(1.1);
 }
 
 
@@ -147,32 +155,37 @@ form label, form input {
 }
 
 /* Buttons */
+
+
+
+
+
 button {
     background-color: #BF6734; /* Dark orange button color */
     color: #fff;
-    padding: 10px; /* Aumentado para mais espaço */
+    padding: 10px; /* More space */
     margin-top: 10px;
     border: none;
-    border-radius: 10px; /* Bordas arredondadas */
+    border-radius: 10px; /* Rounded corners */
     cursor: pointer;
     width: 100%;
-    font-size: 1em; /* Aumentado para um tamanho maior */
-    font-weight: 600; /* Negrito */
-    transition: background-color 0.3s, transform 0.2s;
-    button:active {
-    transform: scale(0.95); /* Shrinks button a little */
-    background-color: #ddd; /* Temporary color change */
-}
-button:active {
-    transform: scale(0.90); /* Shrinks button a little */
-    background-color: #a35c33; /* Temporary color change */
-}
+    font-size: 1em; /* Larger font */
+    font-weight: 600; /* Bold */
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
 
+
+
+
 button:hover {
-    background-color: #ecac61; /* Light yellow-orange hover color */
+    background-color: #e2943a; /* Light yellow-orange hover color */
     transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
 }
+
+
+
+
+
 
 /* Table */
 table {
@@ -224,7 +237,7 @@ th {
     padding:8px;
     font-size: medium;
     border-width: 1px;
-    border-color: #022327;
+    border-color: #BF6734;
     border-radius: 8px;
     
 
@@ -249,11 +262,12 @@ th {
 
 
 .prodimage {    
-    
-    max-width: 100%;  
-    max-height: 500px;  /* Adjust based on your modal size */
+   /* max-width: 90vw;  Limit width to 90% of the viewport */
+    max-height: 50vh; /* Limit height to 90% of the viewport */
+    /*max-width: 100%;  
+    max-height: 500px; */ /* Adjust based on your modal size */
     object-fit: contain;  
-    width: auto;  /* Ensures the image keeps its aspect ratio */
+      width: auto; 
     height: auto;  
     display: block;  
     margin: 0 auto;  /* Centers the image */
@@ -306,8 +320,17 @@ th {
     border-radius: 8px;
         border: 1px solid #ccc;
     box-sizing: border-box;
-  
+    outline: none; /* Removes default focus outline */
+    transition: border-color 0.3s ease-in-out;
 }
+
+#searchBox:focus {
+    border-color: #BF6734; /* Change to your desired color */
+
+}
+
+
+
 
 /* Search Input */
 #searchInput {
@@ -319,9 +342,15 @@ th {
        padding: 10px;
        width: 60%;
        border: 1px solid #ccc;
+       outline: none; /* Removes default focus outline */
+       transition: border-color 0.3s ease-in-out;
        
    }
+   
+#searchInput:focus {
+    border-color: #BF6734; /* Change to your desired color */
 
+}
   
    .openModalBtn img {
     width: 30px; /* Adjust size as needed */
@@ -384,14 +413,19 @@ th {
 
 /* Modal Content */
 .modal-content {
+
+    max-width: 100vw; /* Limit width to 90% of the viewport */
+    max-height: 100vh; /* Limit height to 90% of the viewport */
+    /*overflow: auto;   Enable scrolling if content overflows */
+
     position: absolute; /* Centered using transform */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 30px;
-    width: 40%;
-    max-width: 800px;
+    /*width: 40%;
+    max-width: 800px;*/
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
