@@ -36,7 +36,10 @@ document.getElementById("hlwn").addEventListener("click", () => {
     fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
 });
 
-
+// Chama a função para buscar produtos da estação padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProductData('carnaval'); // Defina a estação padrão aqui
+});
 
 
 
