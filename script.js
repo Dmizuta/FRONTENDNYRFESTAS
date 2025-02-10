@@ -1,20 +1,17 @@
 // API URL for fetching product data
-const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your backend URL
+const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
 
-//let defaultSeasonLoaded = false; // Flag to prevent overwriting products on initial load
-
-// Function to fetch products for the selected season
+// Função para buscar produtos da estação selecionada
 async function fetchProductData(epoca) {
-    console.log(`Fetching products for season: ${epoca}`); // Log to check the season
+    console.log(`Fetching products for season: ${epoca}`); // Log para verificar a estação
     try {
-        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Add the season parameter to the URL
+        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
         const data = await response.json();
 
         // Log the fetched data to check the structure
-      
-        console.log("API Response:", data);
+        console.log(data);
 
-        // Populate the product table
+        // Map the data into the table
         populateProductTable(data);
     } catch (error) {
         console.error("Error fetching product data:", error);
@@ -26,30 +23,24 @@ async function fetchProductData(epoca) {
     }
 }
 
-// Call the function to fetch products for the default season on page load
-document.addEventListener("load", () => {
-   
-        fetchProductData('carnaval'); // Default season is carnaval
-        //defaultSeasonLoaded = true;   Set flag to true to prevent overwriting
-    
-});
-/*
+// Adiciona eventos de clique aos ícones
 document.getElementById("carnaval").addEventListener("click", () => {
-  console.log("Carnaval button clicked");
-  fetchProductData('carnaval');
+    fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
 });
 
 document.getElementById("junino").addEventListener("click", () => {
-  console.log("Junino button clicked");
-  fetchProductData('junino');
+    fetchProductData('junino'); // Chama a função para buscar produtos Juninos
 });
 
 document.getElementById("hlwn").addEventListener("click", () => {
-  console.log("Halloween button clicked");
-  fetchProductData('halloween');
+    fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
 });
 
-*/
+// Chama a função para buscar produtos da estação padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+    fetchProductData('carnaval'); // Defina a estação padrão aqui
+});
+
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
