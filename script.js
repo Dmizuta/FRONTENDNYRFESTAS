@@ -1,4 +1,54 @@
 // API URL for fetching product data
+const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your backend URL
+
+let defaultSeasonLoaded = false; // Flag to prevent overwriting products on initial load
+
+// Function to fetch products for the selected season
+async function fetchProductData(epoca) {
+    console.log(`Fetching products for season: ${epoca}`); // Log to check the season
+    try {
+        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Add the season parameter to the URL
+        const data = await response.json();
+
+        // Log the fetched data to check the structure
+        console.log(data);
+
+        // Populate the product table
+        populateProductTable(data);
+    } catch (error) {
+        console.error("Error fetching product data:", error);
+
+        // Handle errors and show a user-friendly message in the table
+        const tableBody = document.querySelector("#productTable tbody");
+        tableBody.innerHTML =
+            '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
+    }
+}
+
+// Call the function to fetch products for the default season on page load
+document.addEventListener("DOMContentLoaded", () => {
+    if (!defaultSeasonLoaded) {
+        fetchProductData('carnaval'); // Default season is carnaval
+        defaultSeasonLoaded = true;  // Set flag to true to prevent overwriting
+    }
+});
+
+// Add click event listeners to the buttons for other seasons
+document.getElementById("carnaval").addEventListener("click", () => {
+    fetchProductData('carnaval'); // Fetch products for Carnaval
+});
+
+document.getElementById("junino").addEventListener("click", () => {
+    fetchProductData('junino'); // Fetch products for Junino
+});
+
+document.getElementById("hlwn").addEventListener("click", () => {
+    fetchProductData('halloween'); // Fetch products for Halloween
+});
+
+
+
+/*// API URL for fetching product data
 const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
 
 // Função para buscar produtos da estação selecionada
@@ -42,45 +92,7 @@ document.getElementById("hlwn").addEventListener("click", () => {
     fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
 });
 
-
-
-
-
-
-
-
-
-
-
-/*
-// API URL for fetching product data
-const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your live backend URL
-
-// Function to fetch product data from the API
-async function fetchProductData() {
-  try {
-    const response = await fetch(API_URL);
-    const data = await response.json();
-
-    // Log the fetched data to check the structure
-    console.log(data);
-
-    // Map the data into the table
-    populateProductTable(data);
-  } catch (error) {
-    console.error("Error fetching product data:", error);
-
-    // Handle errors and show a user-friendly message in the table
-    const tableBody = document.querySelector("#productTable tbody");
-    tableBody.innerHTML =
-      '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
-  }
-}
 */
-
-
-
-
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
@@ -139,52 +151,6 @@ function populateProductTable(products) {
    
 
 
-/*
-// Function to populate the product table dynamically
-function populateProductTable(products) {
-  const tableBody = document.querySelector("#productTable tbody");
-
-  // Clear any existing rows
-  tableBody.innerHTML = "";
-
-  if (products && products.length > 0) {
-    products.forEach((product) => {
-      const row = tableBody.insertRow();
-
-      // Insert cells for each product detail
-
-      const cell1 = row.insertCell(0); // Id
-      const cell2 = row.insertCell(1); // Image
-      const cell3 = row.insertCell(2); // Product Code
-      const cell4 = row.insertCell(3); // Description
-      const cell5 = row.insertCell(4); // Quantity Closed
-      const cell6 = row.insertCell(5); // Price Closed
-      const cell7 = row.insertCell(6); // Quantity Fractioned
-      const cell8 = row.insertCell(7); // Price Fractioned
-      const cell9 = row.insertCell(8); // ADD BUTTON 
-      
-      // Populate cells with product data
-      cell1.textContent = product.idprod || "N/A"; // Product Id
-      cell2.innerHTML = ` 
-                <img src="${
-                  product.imagem || "https://via.placeholder.com/50"
-                }" 
-                     alt="Product Image"  
-                     style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
-                     onmouseover="this.style.transform='scale(3)'" 
-                     onmouseout="this.style.transform='scale(1)'">    
-            `;
-          cell3.textContent = product.codproduto || "N/A"; // Product Code
-      cell4.textContent = product.descricao || "N/A"; // Description
-      cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
-      cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
-     //cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
-      cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
-      cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
-      //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
-      cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
-
-*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
