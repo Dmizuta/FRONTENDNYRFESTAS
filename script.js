@@ -1,3 +1,9 @@
+
+// Chama a função para buscar produtos da estação padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProductData('carnaval'); // Defina a estação padrão aqui
+});
+
 // API URL for fetching product data
 const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
 
@@ -23,10 +29,7 @@ async function fetchProductData(epoca) {
     }
 }
 
-// Chama a função para buscar produtos da estação padrão ao carregar a página
-document.addEventListener("DOMContentLoaded", () => {
-  fetchProductData('carnaval'); // Defina a estação padrão aqui
-});
+
 
 
 // Adiciona eventos de clique aos ícones
