@@ -23,6 +23,11 @@ async function fetchProductData(epoca) {
     }
 }
 
+// Chama a função para buscar produtos da estação padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProductData('carnaval'); // Defina a estação padrão aqui
+});
+
 // Adiciona eventos de clique aos ícones
 document.getElementById("carnaval").addEventListener("click", () => {
     fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
@@ -36,10 +41,7 @@ document.getElementById("hlwn").addEventListener("click", () => {
     fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
 });
 
-// Chama a função para buscar produtos da estação padrão ao carregar a página
-document.addEventListener("DOMContentLoaded", () => {
-  fetchProductData('carnaval'); // Defina a estação padrão aqui
-});
+
 
 
 
