@@ -222,7 +222,7 @@ function populateProductTable(products) {
   } else {
     // No products available message
     tableBody.innerHTML =
-      '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
+      '<tr><td colspan="7">SELECIONE UMA ESTAÇÃO.</td></tr>';
   }
 }
 
