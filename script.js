@@ -27,7 +27,7 @@ async function fetchProductData(epoca) {
 }
 
 // Call the function to fetch products for the default season on page load
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("load", () => {
    
         fetchProductData('carnaval'); // Default season is carnaval
         //defaultSeasonLoaded = true;   Set flag to true to prevent overwriting
