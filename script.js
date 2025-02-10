@@ -11,7 +11,8 @@ async function fetchProductData(epoca) {
         const data = await response.json();
 
         // Log the fetched data to check the structure
-        console.log(data);
+      
+        console.log("API Response:", data);
 
         // Populate the product table
         populateProductTable(data);
