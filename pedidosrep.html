@@ -1146,13 +1146,15 @@ function populateModal(orderDetails) {
         // Retrieve the ipi value and total from the response
         const ipi = data.updatedProduct.ipi;  // ipi value
         const updatedTotal = data.updatedProduct.total;  // New total value
-        const precoinfo = data.updatedProduct.precoinfo;
+        const cxfechada = data.updatedProduct.cxfechada;
+        const precofechada = data.updatedProduct.precofechada;
+        const precofrac = data.updatedProduct.precofrac;
         
         console.log('IPI value:', ipi);
         console.log('Updated total:', updatedTotal);
-        console.log('Preco Info:', precoinfo.cxfechada);
-        onsole.log('Preco Info:', precoinfo.precofechada);
-        onsole.log('Preco Info:', precoinfo.precofrac);
+        console.log('Preco Info:', cxfechada);
+        onsole.log('Preco Info:', precofechada);
+        onsole.log('Preco Info:', precofrac);
         
                                 // Update the quantity directly in the table after success
                                 quantityCell.textContent = newQuantity;
