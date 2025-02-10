@@ -1,36 +1,208 @@
 // API URL for fetching product data
-const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your live backend URL
+const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
 
-// Function to fetch product data from the API
-async function fetchProductData() {
-  try {
-    const response = await fetch(API_URL);
-    const data = await response.json();
+// Função para buscar produtos da estação selecionada
+async function fetchProductData(epoca) {
+    console.log(`Fetching products for season: ${epoca}`); // Log para verificar a estação
+    try {
+        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
+        const data = await response.json();
 
-    // Log the fetched data to check the structure
-    console.log(data);
+        // Log the fetched data to check the structure
+        console.log(data);
 
-    // Map the data into the table
-    populateProductTable(data);
-  } catch (error) {
-    console.error("Error fetching product data:", error);
+        // Map the data into the table
+        populateProductTable(data);
+    } catch (error) {
+        console.error("Error fetching product data:", error);
 
-    // Handle errors and show a user-friendly message in the table
-    const tableBody = document.querySelector("#productTable tbody");
+        // Handle errors and show a user-friendly message in the table
+        const tableBody = document.querySelector("#productTable tbody");
+        tableBody.innerHTML =
+            '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
+    }
+}
+
+
+
+
+// Select all season icons
+const seasonIcons = document.querySelectorAll(".icon-button");
+
+// Function to fetch data and highlight selected icon
+function handleSeasonSelection(season, clickedElement) {
+    fetchProductData(season);
+
+    // Remove highlight from all icons
+    seasonIcons.forEach(icon => icon.classList.remove("selected"));
+
+    // Add highlight to the clicked icon
+    clickedElement.classList.add("selected");
+}
+
+// Add click event listeners to each icon
+document.getElementById("carnaval").addEventListener("click", function() {
+    handleSeasonSelection('carnaval', this);
+});
+
+document.getElementById("junino").addEventListener("click", function() {
+    handleSeasonSelection('junino', this);
+});
+
+document.getElementById("hlwn").addEventListener("click", function() {
+    handleSeasonSelection('halloween', this);
+});
+
+// Auto-select default season on page load
+window.addEventListener("load", () => {
+    document.getElementById("carnaval").click();
+});
+
+
+
+
+
+
+/*
+// Adiciona eventos de clique aos ícones
+document.getElementById("carnaval").addEventListener("click", () => {
+    fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
+});
+
+document.getElementById("junino").addEventListener("click", () => {
+    fetchProductData('junino'); // Chama a função para buscar produtos Juninos
+});
+
+document.getElementById("hlwn").addEventListener("click", () => {
+    fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
+});
+
+
+window.addEventListener("load", () => {
+  console.log("Everything is fully loaded, including images & styles!");
+  fetchProductData("carnaval");
+});
+
+
+// Chama a função para buscar produtos da estação padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+    fetchProductData('carnaval'); // Defina a estação padrão aqui
+});
+*/
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+  return `R$ ${value.toFixed(2).replace('.', ',')}`;
+}
+
+// Function to populate the product table with fetched data
+function populateProductTable(products) {
+  const tableBody = document.querySelector("#productTable tbody");
+
+  // Clear any existing rows
+  tableBody.innerHTML = "";
+
+  if (products && products.length > 0) {
+    products.forEach((product, index) => {
+      const row = tableBody.insertRow();
+
+      // Insert cells for each product detail
+      const cell1 = row.insertCell(0); // Ascending Index
+      const cell2 = row.insertCell(1); // Image
+      const cell3 = row.insertCell(2); // Product Code
+      const cell4 = row.insertCell(3); // Description
+      const cell5 = row.insertCell(4); // Quantity Closed
+      const cell6 = row.insertCell(5); // Price Closed
+      const cell7 = row.insertCell(6); // Quantity Fractioned
+      const cell8 = row.insertCell(7); // Price Fractioned
+      const cell9 = row.insertCell(8); // ADD BUTTON 
+
+      // Populate cells with product data
+      cell1.textContent = index + 1; // Ascending index, starting from 1
+      cell2.innerHTML = ` 
+        <img src="${product.imagem || 'https://via.placeholder.com/50'}" 
+             alt="Product Image"  
+             style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+             onmouseover="this.style.transform='scale(3)'" 
+             onmouseout="this.style.transform='scale(1)'">    
+      `;
+      cell3.textContent = product.codproduto || "N/A"; // Product Code
+      cell4.textContent = product.descricao || "N/A"; // Description
+      cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
+      cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
+      cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
+      cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
+      cell9.innerHTML = `<button class="openModalBtn" 
+        onmousedown="this.style.transform = 'scale(0.95)';" 
+        onmouseup="this.style.transform = 'scale(1)';" 
+        onmouseleave="this.style.transform = 'scale(1)';">
+          <img src="/imagens/shoppingcart.png" alt="Adicionar">
+      </button>`;
+    });
+  } else {
     tableBody.innerHTML =
-      '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
+        '<tr><td colspan="9">No products available for this season.</td></tr>';
   }
 }
+
+
+
+/*
+// API URL for fetching product data
+const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
+
+// Função para buscar produtos da estação selecionada
+async function fetchProductData(epoca) {
+    console.log(`Fetching products for season: ${epoca}`); // Log para verificar a estação
+    try {
+        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
+        const data = await response.json();
+
+        // Log the fetched data to check the structure
+        console.log(data);
+
+        // Map the data into the table
+        populateProductTable(data);
+    } catch (error) {
+        console.error("Error fetching product data:", error);
+
+        // Handle errors and show a user-friendly message in the table
+        const tableBody = document.querySelector("#productTable tbody");
+        tableBody.innerHTML =
+            '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
+    }
+}
+
+// Chama a função para buscar produtos da estação padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProductData('carnaval'); // Defina a estação padrão aqui
+});
+
+
+// Adiciona eventos de clique aos ícones
+document.getElementById("carnaval").addEventListener("click", () => {
+    fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
+});
+
+document.getElementById("junino").addEventListener("click", () => {
+    fetchProductData('junino'); // Chama a função para buscar produtos Juninos
+});
+
+document.getElementById("hlwn").addEventListener("click", () => {
+    fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
+});
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
-
+*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+// Function to populate the product table with fetched data
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
 
@@ -80,52 +252,6 @@ function populateProductTable(products) {
    
 
 
-/*
-// Function to populate the product table dynamically
-function populateProductTable(products) {
-  const tableBody = document.querySelector("#productTable tbody");
-
-  // Clear any existing rows
-  tableBody.innerHTML = "";
-
-  if (products && products.length > 0) {
-    products.forEach((product) => {
-      const row = tableBody.insertRow();
-
-      // Insert cells for each product detail
-
-      const cell1 = row.insertCell(0); // Id
-      const cell2 = row.insertCell(1); // Image
-      const cell3 = row.insertCell(2); // Product Code
-      const cell4 = row.insertCell(3); // Description
-      const cell5 = row.insertCell(4); // Quantity Closed
-      const cell6 = row.insertCell(5); // Price Closed
-      const cell7 = row.insertCell(6); // Quantity Fractioned
-      const cell8 = row.insertCell(7); // Price Fractioned
-      const cell9 = row.insertCell(8); // ADD BUTTON 
-      
-      // Populate cells with product data
-      cell1.textContent = product.idprod || "N/A"; // Product Id
-      cell2.innerHTML = ` 
-                <img src="${
-                  product.imagem || "https://via.placeholder.com/50"
-                }" 
-                     alt="Product Image"  
-                     style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
-                     onmouseover="this.style.transform='scale(3)'" 
-                     onmouseout="this.style.transform='scale(1)'">    
-            `;
-          cell3.textContent = product.codproduto || "N/A"; // Product Code
-      cell4.textContent = product.descricao || "N/A"; // Description
-      cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
-      cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
-     //cell5.textContent = `R$ ${parseFloat(product.precofechada).toFixed(2)}`; // Price Closed
-      cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
-      cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
-      //cell7.textContent = `R$ ${parseFloat(product.precofrac).toFixed(2)}`; // Price Fractioned
-      cell9.innerHTML = `<button class="openModalBtn"><img src="/imagens/shoppingcart.png" alt="Adicionar"></button>`;
-
-*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -167,7 +293,7 @@ function populateProductTable(products) {
   } else {
     // No products available message
     tableBody.innerHTML =
-      '<tr><td colspan="7">Produtos indisponíveis.</td></tr>';
+      '<tr><td colspan="7">SELECIONE UMA ESTAÇÃO.</td></tr>';
   }
 }
 
