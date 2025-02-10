@@ -33,18 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Add click event listeners to the buttons for other seasons
 document.getElementById("carnaval").addEventListener("click", () => {
-    fetchProductData('carnaval'); // Fetch products for Carnaval
+  console.log("Carnaval button clicked");
+  fetchProductData('carnaval');
 });
 
 document.getElementById("junino").addEventListener("click", () => {
-    fetchProductData('junino'); // Fetch products for Junino
+  console.log("Junino button clicked");
+  fetchProductData('junino');
 });
 
 document.getElementById("hlwn").addEventListener("click", () => {
-    fetchProductData('halloween'); // Fetch products for Halloween
+  console.log("Halloween button clicked");
+  fetchProductData('halloween');
 });
+
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
