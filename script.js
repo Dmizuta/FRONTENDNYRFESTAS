@@ -28,21 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchProductData('carnaval'); // Defina a estação padrão aqui
 });
 
-/*
-// Adiciona eventos de clique aos ícones
-document.getElementById("carnaval").addEventListener("click", () => {
-    fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
-});
 
-document.getElementById("junino").addEventListener("click", () => {
-    fetchProductData('junino'); // Chama a função para buscar produtos Juninos
-});
 
-document.getElementById("hlwn").addEventListener("click", () => {
-    fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
-});
 
-*/
 
 
 
@@ -232,7 +220,18 @@ function populateProductTable(products) {
 }
 
 
+// Adiciona eventos de clique aos ícones
+document.getElementById("carnaval").addEventListener("click", () => {
+  fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
+});
 
+document.getElementById("junino").addEventListener("click", () => {
+  fetchProductData('junino'); // Chama a função para buscar produtos Juninos
+});
+
+document.getElementById("hlwn").addEventListener("click", () => {
+  fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
+});
 
 
 
