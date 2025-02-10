@@ -36,10 +36,17 @@ document.getElementById("hlwn").addEventListener("click", () => {
     fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
 });
 
+window.addEventListener("load", () => {
+  console.log("Everything is fully loaded, including images & styles!");
+  fetchProductData("carnaval");
+});
+
+
+/*
 // Chama a função para buscar produtos da estação padrão ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
     fetchProductData('carnaval'); // Defina a estação padrão aqui
-});
+});*/
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
