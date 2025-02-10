@@ -33,7 +33,7 @@ document.addEventListener("load", () => {
         //defaultSeasonLoaded = true;   Set flag to true to prevent overwriting
     
 });
-
+/*
 document.getElementById("carnaval").addEventListener("click", () => {
   console.log("Carnaval button clicked");
   fetchProductData('carnaval');
@@ -49,7 +49,7 @@ document.getElementById("hlwn").addEventListener("click", () => {
   fetchProductData('halloween');
 });
 
-
+*/
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
