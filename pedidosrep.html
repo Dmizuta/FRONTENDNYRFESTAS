@@ -1161,6 +1161,8 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         // Choose correct price based on quantity
                         const chosenPrice = newQuantity >= cxfechada ? precofechada : precofrac;
 
+                        console.log('PREÇO ESCOLHIDO:', chosenPrice);
+
                         // Extract price from table safely
                         const priceText = row.cells[4]?.textContent?.replace(/[^\d.-]/g, '').trim();
                         const price = priceText ? parseFloat(priceText) : 0;
