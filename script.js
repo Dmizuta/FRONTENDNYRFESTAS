@@ -23,6 +23,47 @@ async function fetchProductData(epoca) {
     }
 }
 
+
+
+
+// Select all season icons
+const seasonIcons = document.querySelectorAll(".icon-button");
+
+// Function to fetch data and highlight selected icon
+function handleSeasonSelection(season, clickedElement) {
+    fetchProductData(season);
+
+    // Remove highlight from all icons
+    seasonIcons.forEach(icon => icon.classList.remove("selected"));
+
+    // Add highlight to the clicked icon
+    clickedElement.classList.add("selected");
+}
+
+// Add click event listeners to each icon
+document.getElementById("carnaval").addEventListener("click", function() {
+    handleSeasonSelection('carnaval', this);
+});
+
+document.getElementById("junino").addEventListener("click", function() {
+    handleSeasonSelection('junino', this);
+});
+
+document.getElementById("hlwn").addEventListener("click", function() {
+    handleSeasonSelection('halloween', this);
+});
+
+// Auto-select default season on page load
+window.addEventListener("load", () => {
+    document.getElementById("carnaval").click();
+});
+
+
+
+
+
+
+/*
 // Adiciona eventos de clique aos ícones
 document.getElementById("carnaval").addEventListener("click", () => {
     fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
@@ -47,7 +88,7 @@ window.addEventListener("load", () => {
 document.addEventListener("DOMContentLoaded", () => {
     fetchProductData('carnaval'); // Defina a estação padrão aqui
 });
-
+*/
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
