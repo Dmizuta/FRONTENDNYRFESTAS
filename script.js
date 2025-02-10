@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultSeasonLoaded = true;  // Set flag to true to prevent overwriting
     }
 });
-
+/*
 // Add click event listeners to the buttons for other seasons
 document.getElementById("carnaval").addEventListener("click", () => {
     fetchProductData('carnaval'); // Fetch products for Carnaval
@@ -48,7 +48,7 @@ document.getElementById("hlwn").addEventListener("click", () => {
 
 
 
-/*// API URL for fetching product data
+// API URL for fetching product data
 const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
 
 // Função para buscar produtos da estação selecionada
