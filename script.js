@@ -93,7 +93,7 @@ function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
 
   // Clear any existing rows
-  tableBody.innerHTML = "";
+  //tableBody.innerHTML = "";
 
   if (products && products.length > 0) {
     products.forEach((product, index) => {
