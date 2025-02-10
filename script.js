@@ -1,7 +1,7 @@
 // API URL for fetching product data
 const API_URL = "https://backendnyrfestas.vercel.app/products"; // Adjust to your backend URL
 
-let defaultSeasonLoaded = false; // Flag to prevent overwriting products on initial load
+//let defaultSeasonLoaded = false; // Flag to prevent overwriting products on initial load
 
 // Function to fetch products for the selected season
 async function fetchProductData(epoca) {
@@ -30,7 +30,7 @@ async function fetchProductData(epoca) {
 document.addEventListener("DOMContentLoaded", () => {
     if (!defaultSeasonLoaded) {
         fetchProductData('carnaval'); // Default season is carnaval
-        defaultSeasonLoaded = true;  // Set flag to true to prevent overwriting
+        //defaultSeasonLoaded = true;   Set flag to true to prevent overwriting
     }
 });
 
