@@ -15,8 +15,8 @@
     width: 5.8rem;
 }
 #logo {
-    transition: transform 0.2s ease-in-out;
-    transition: filter 0.1s ease-in-out;
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+    /*transition: filter 0.1s ease-in-out;*/
     
 }
 
