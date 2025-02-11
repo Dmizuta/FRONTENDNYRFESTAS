@@ -1324,9 +1324,9 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                                 console.log('IPI value:', ipi);
                                 console.log('IPITax value:', ipitax);
                                 // Optionally, you can re-calculate the total if necessary
-                                const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
-                                const ipiValue = ipi * ipitax * price / 100 * chosenPrice; 
-                                const productTotal = price / 100 * chosenPrice + ipiValue ;
+                                //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
+                                const ipiValue = ipi * ipitax * chosenPrice / 100 * newQuantity; 
+                                const productTotal = chosenPrice / 100 * newQuantity + ipiValue ;
         
                                 // Update the total for this row
                                 row.cells[5].textContent = formatCurrency(ipiValue);
