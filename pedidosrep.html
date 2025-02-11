@@ -1297,11 +1297,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         const precofechada = data.updatedProduct.precofechada;
         const precofrac = data.updatedProduct.precofrac;
         
-        console.log('IPI value:', ipi);
-        console.log('Updated total:', updatedTotal);
-        console.log('Cx Fechada:', cxfechada);
-        console.log('Preco Fechada:', precofechada);
-        console.log('Preco Fracionada:', precofrac);
+  
         
                                 // Update the quantity directly in the table after success
                                 quantityCell.textContent = newQuantity;
@@ -1314,19 +1310,15 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                               
                                
 
-                                console.log('Response data:', data.updatedProduct);
+                              
                                const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
                                console.log('IPI Tax value:', ipitax);
-
-
-
-                                
                                 console.log('IPI value:', ipi);
-                                console.log('IPITax value:', ipitax);
+                               
                                 // Optionally, you can re-calculate the total if necessary
                                 //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                                 const ipiValue = ipi * ipitax * chosenPrice / 100 * newQuantity; 
-                                const productTotal = chosenPrice / 100 * newQuantity + ipiValue ;
+                                const productTotal = chosenPrice * newQuantity + ipiValue ;
         
                                 // Update the total for this row
                                 row.cells[5].textContent = formatCurrency(ipiValue);
