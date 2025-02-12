@@ -13,6 +13,15 @@
 
 <style>
 
+.buttonsContainer {
+    background-color: #f1f1f1;
+    border: 2px solid #e2e2e2; /* Added 'solid' to define border */
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px; /* Added padding to avoid content sticking to the border */
+}
+
+
 /* General container for all buttons */
 .allbtns {
     display: flex;
@@ -64,21 +73,29 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for the close modal button */
 #close-modal {
     background-color: #f8f9fa;
     color: #333;
-    border: 2px solid #007bff; /* Blue border to match action buttons */
-    font-size: 18px; /* Same font size as other buttons */
-    padding: 14px 30px; /* Same padding as other buttons */
+    border: 2px solid #007bff;
+    font-size: 18px;
+    padding: 14px 30px;
     border-radius: 12px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
-    width: calc(180px * 4 + 20px * 3); /* Width of all other buttons + space between them */
+    width: min(90%, 4 * 180px + 3 * 20px); /* Shrinks with the container */
     transition: all 0.2s ease;
+    max-width: 100%; /* Ensures it never overflows */
 }
+
+/* On smaller screens, make sure buttons adjust correctly */
+@media (max-width: 768px) {
+    #close-modal {
+        width: 100%; /* Takes full width when space is limited */
+    }
+}
+
 
 /* Hover effect for the close button */
 #close-modal:hover {
