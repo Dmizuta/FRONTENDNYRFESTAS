@@ -13,59 +13,92 @@
 
 <style>
 
+/* General container for all buttons */
 .allbtns {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; /* Adds space between buttons */
+    gap: 20px;
+    padding: 20px;
 }
 
 .modal-actions {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Space between buttons */
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
+/* General button styles */
 .action-btn {
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: 500;
+    padding: 14px 30px; /* Increased padding for a bigger button */
+    font-size: 18px; /* Larger font size for a more sophisticated look */
+    font-weight: 600; /* Slightly bolder for emphasis */
     border: 2px solid transparent; /* Default border */
-    border-radius: 8px; /* Soft rounded corners */
+    border-radius: 12px; /* Softer rounded corners for a modern look */
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 160px; /* Uniform width */
-    text-transform: uppercase; /* Uppercase for consistency */
-    background-color: #007bff; /* Main blue color */
+    width: 180px; /* Uniform width for buttons */
+    text-transform: uppercase;
+    background-color: #007bff; /* Blue background */
     color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
+    font-family: 'Roboto', sans-serif; /* Clean and modern font */
+    text-align: center;
+    letter-spacing: 1px; /* Small space between letters for elegance */
 }
 
+/* Hover effect for action buttons */
 .action-btn:hover {
-    background-color: #0069d9; /* Darker blue on hover */
-    border-color: #0056b3; /* Darker border for contrast */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
-}   
+    background-color: #0069d9;
+    border-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px); /* Slight lift effect on hover */
+}
 
+/* Active effect for action buttons */
 .action-btn:active {
-    transform: scale(0.98); /* Slight shrink on click */
-    background-color: #0056b3; /* Even darker blue when clicked */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
+    transform: scale(0.98);
+    background-color: #0056b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Style for the close modal button */
 #close-modal {
-    background-color: #f8f9fa; /* Light grey for "Fechar" */
-    color: #333; /* Dark text */
-    border: 2px solid #ccc; /* Light grey border */
-    font-size: 14px; /* Smaller text for close button */
-    padding: 8px 18px; /* Smaller padding */
-    width: 120px; /* Smaller width */
-    box-shadow: none; /* No shadow for close button */
+    background-color: #f8f9fa;
+    color: #333;
+    border: 2px solid #007bff; /* Blue border to match action buttons */
+    font-size: 18px; /* Same font size as other buttons */
+    padding: 14px 30px; /* Same padding as other buttons */
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: calc(180px * 4 + 20px * 3); /* Width of all other buttons + space between them */
+    transition: all 0.2s ease;
 }
 
+/* Hover effect for the close button */
 #close-modal:hover {
-    background-color: #e2e6ea; /* Light grey on hover */
-    border-color: #ddd; /* Slightly darker border on hover */
+    background-color: #e2e6ea;
+    border-color: #0056b3; /* Darker blue border on hover */
+    transform: translateY(-3px);
+}
+
+/* Active effect for the close button */
+#close-modal:active {
+    transform: scale(0.98);
+    background-color: #dae0e5;
+}
+
+/* Adding responsive styles for narrow screens */
+@media (max-width: 768px) {
+    .modal-actions {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        gap: 15px;
+    }
 }
 
 
