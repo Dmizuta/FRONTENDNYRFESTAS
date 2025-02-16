@@ -117,13 +117,16 @@ function populateProductTable(products) {
 console.log('ESTOQUE:', product.estoque);
 
       if (product.estoque === 0) {
-        cell9.innerHTML = `<button class="openModalBtn" 
-        onmousedown="this.style.transform = 'scale(0.95)';" 
-        onmouseup="this.style.transform = 'scale(1)';" 
-        onmouseleave="this.style.transform = 'scale(1)';">
-  <img src="/imagens/trashcan.png" alt="Adicionar">
-</button>
+
+
+        cell9.innerHTML = `
+  <img src="/imagens/trashcan.png" alt="Adicionar" style="width: 50px; height: 50px;">
 `;
+
+/*        cell9.innerHTML = `
+  <img src="/imagens/trashcan.png" alt="Adicionar">
+
+`;*/
       //  row.classList.add("sold-out");
       } else {
         cell9.innerHTML =  `<button class="openModalBtn" 
