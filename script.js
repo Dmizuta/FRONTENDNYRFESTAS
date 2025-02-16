@@ -113,6 +113,9 @@ function populateProductTable(products) {
        cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
        cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       // Accessing `estoque` value to check stock availability
+
+console.log('ESTOQUE:', product.estoque);
+
       if (product.estoque === 0) {
         cell9.innerHTML = `<span class="soldOut">ESGOTADO!</span>`;
         row.classList.add("sold-out");
