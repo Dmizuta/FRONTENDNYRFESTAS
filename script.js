@@ -116,7 +116,7 @@ function populateProductTable(products) {
 
 console.log('ESTOQUE:', product.estoque);
 
-      if (product.estoque === 1) {
+      if (product.estoque === 0) {
         cell9.innerHTML = `<button class="openModalBtn" 
         onmousedown="this.style.transform = 'scale(0.95)';" 
         onmouseup="this.style.transform = 'scale(1)';" 
