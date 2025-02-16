@@ -129,12 +129,12 @@ console.log('ESTOQUE:', product.estoque);
 `;*/
       //  row.classList.add("sold-out");
       } else {
-        cell9.innerHTML =  `<h1 class="openModalBtn" 
+        cell9.innerHTML =  `<button class="openModalBtn" 
         onmousedown="this.style.transform = 'scale(0.95)';" 
         onmouseup="this.style.transform = 'scale(1)';" 
         onmouseleave="this.style.transform = 'scale(1)';">
   <img src="/imagens/shoppingcart.png" alt="Adicionar">
-</h1>
+</button>
 `;
       }
       
