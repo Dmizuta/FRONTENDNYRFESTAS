@@ -116,7 +116,7 @@ function populateProductTable(products) {
 
 console.log('ESTOQUE:', product.estoque);
 
-      if (product.estoque === 0) {
+      if (product.estoque === 1) {
         cell9.innerHTML = `<span class="soldOut">ESGOTADO!</span>`;
       //  row.classList.add("sold-out");
       } else {
