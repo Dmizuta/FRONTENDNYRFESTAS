@@ -167,7 +167,7 @@ function populateProductTable(products) {
        cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       // Accessing `estoque` value to check stock availability
       if (product.estoque === 0) {
-        cell9.innerHTML = `<span class="soldOut">Sold Out</span>`;
+        cell9.innerHTML = `<span class="soldOut">ESGOTADO!</span>`;
         row.classList.add("sold-out");
       } else {
         cell9.innerHTML = `
