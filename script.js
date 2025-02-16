@@ -54,7 +54,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 });
 
 // Auto-select default season on page load
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("Load", () => {
     document.getElementById("carnaval").click();
 });
 
