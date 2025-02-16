@@ -70,7 +70,7 @@ function formatCurrency(value) {
 
 
 
-/*
+
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
 
@@ -162,13 +162,13 @@ function populateProductTable(products) {
  }
 }
 
-*/
+
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 
 // Function to populate the product table with fetched data
 function populateProductTable(products) {
@@ -260,7 +260,7 @@ function populateProductTable(products) {
 
 
 
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
