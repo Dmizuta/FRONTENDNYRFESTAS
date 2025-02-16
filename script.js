@@ -67,9 +67,105 @@ function formatCurrency(value) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function populateProductTable(products) {
+  const tableBody = document.querySelector("#productTable tbody");
+
+  // Clear any existing rows
+  tableBody.innerHTML = "";
+
+  if (products && products.length > 0) {
+      products.forEach((product, index) => {
+          const row = tableBody.insertRow();
+
+          // Insert cells for each product detail
+          const cell1 = row.insertCell(0); // Ascending Index
+          const cell2 = row.insertCell(1); // Image
+          const cell3 = row.insertCell(2); // Product Code
+          const cell4 = row.insertCell(3); // Description
+          const cell5 = row.insertCell(4); // Quantity Closed
+          const cell6 = row.insertCell(5); // Price Closed
+          const cell7 = row.insertCell(6); // Quantity Fractioned
+          const cell8 = row.insertCell(7); // Price Fractioned
+          const cell9 = row.insertCell(8); // Add Button
+
+          // Populate cells with product data
+          cell1.textContent = index + 1; // Ascending index, starting from 1
+          cell2.innerHTML = `
+              <img src="${product.imagem || "https://via.placeholder.com/50"}" 
+                   alt="Product Image"  
+                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                   onmouseover="this.style.transform='scale(3)'" 
+                   onmouseout="this.style.transform='scale(1)'">
+          `;
+          cell3.textContent = product.codproduto || "N/A"; 
+          cell4.textContent = product.descricao || "N/A"; 
+          cell5.textContent = product.cxfechada || "N/A"; 
+          cell6.textContent = `${formatCurrency(product.precofechada)}`; 
+          cell7.textContent = product.cxfracionada || "N/A"; 
+          cell8.textContent = `${formatCurrency(product.precofrac)}`; 
+
+          // Accessing `estoque` value to check stock availability
+          console.log('ESTOQUE:', product.estoque);
+
+          // Handle the add button based on stock availability
+          if (product.estoque === 0) {
+              cell9.innerHTML = `
+                  <button class="openModalBtn" style="background-color: red; color: white;">ESGOTADO!</button>
+              `;
+          } else {
+              cell9.innerHTML = `
+                  <button class="openModalBtn" 
+                      onmousedown="this.style.transform='scale(0.95)';" 
+                      onmouseup="this.style.transform='scale(1)';" 
+                      onmouseleave="this.style.transform='scale(1)';">
+                      <img src="/imagens/shoppingcart.png" alt="Adicionar">
+                  </button>
+              `;
+          }
+
+          // Add event listener for "Add" button
+          const openModalBtn = row.querySelector(".openModalBtn");
+          if (openModalBtn) {
+              if (product.estoque === 0) {
+                  // If the product is out of stock, disable the button by changing its functionality
+                  openModalBtn.disabled = true; // Optionally style to show it's disabled
+                  openModalBtn.style.cursor = 'not-allowed'; // Change cursor to not-allowed
+                  // Optional: Set a click handler that shows a message instead
+                  openModalBtn.addEventListener("click", function () {
+                      alert("Este produto está esgotado!");
+                  });
+              } else {
+                  // If the product is available, enable the modal opening functionality
+                  openModalBtn.addEventListener("click", function () {
+                      const productImage = row.querySelector("img").src;
+                      const productCode = row.cells[2].textContent;
+                      const productDesc = row.cells[3].textContent;
+                      const cxFechada = row.cells[4].textContent;
+                      const priceFechada = row.cells[5].textContent;
+                      const cxFracionada = row.cells[6].textContent;
+                      const priceFracionada = row.cells[7].textContent;
+
+                      openModal(
+                          productImage,
+                          productCode,
+                          productDesc,
+                          cxFechada,
+                          priceFechada,
+                          cxFracionada,
+                          priceFracionada
+                      );
+                  });
+              }
+          }
+      });
+  } else {
+      // No products available message, ensuring colspan matches the number of columns
+      tableBody.innerHTML = '<tr><td colspan="9">SELECIONE UMA ESTAÇÃO.</td></tr>';
+  }
+}
 
 
-
+/*
 
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
@@ -123,11 +219,6 @@ console.log('ESTOQUE:', product.estoque);
         <button class="openModalBtn" style="background-color: red; color: white;">ESGOTADO!</button>
       `;
       
-
-/*        cell9.innerHTML = `
-  <img src="/imagens/trashcan.png" alt="Adicionar">
-
-`;*/
       //  row.classList.add("sold-out");
       } else {
         cell9.innerHTML =  `<button class="openModalBtn" 
@@ -141,55 +232,6 @@ console.log('ESTOQUE:', product.estoque);
       
 
 
-
-
-
-
-// Add event listener for "Add" button
-const openModalBtn = row.querySelector(".openModalBtn");
-
-if (openModalBtn) {
-    if (product.estoque === 0) {
-        // If the product is out of stock, disable the button by changing its functionality
-        openModalBtn.disabled = true; // Alternatively, you can style it to indicate it's disabled
-        openModalBtn.style.cursor = 'not-allowed'; // Change cursor to not-allowed
-        // Optional: Set a click handler that shows a message instead
-        openModalBtn.addEventListener("click", function () {
-            alert("Este produto está esgotado!");
-        });
-    } else {
-        // If the product is available, enable the modal opening functionality
-        openModalBtn.addEventListener("click", function () {
-            const productImage = row.querySelector("img").src;
-            const productCode = row.cells[2].textContent;
-            const productDesc = row.cells[3].textContent;
-            const cxFechada = row.cells[4].textContent;
-            const priceFechada = row.cells[5].textContent;
-            const cxFracionada = row.cells[6].textContent;
-            const priceFracionada = row.cells[7].textContent;
-
-            openModal(
-                productImage,
-                productCode,
-                productDesc,
-                cxFechada,
-                priceFechada,
-                cxFracionada,
-                priceFracionada
-            );
-        });
-    }
-}
-
-
-
-
-
-
-
-
-
-/*
 
      // Add event listener for "Add" button
      const openModalBtn = row.querySelector(".openModalBtn");
@@ -223,8 +265,6 @@ if (openModalBtn) {
 
  
 
-
-
  } else {
    // No products available message
    tableBody.innerHTML =
@@ -232,8 +272,8 @@ if (openModalBtn) {
  }
 }
 
-*/
 
+*/
 
 
 /////////////////////////////////////////////////////////////////////////////////////
