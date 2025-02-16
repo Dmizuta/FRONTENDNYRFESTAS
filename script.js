@@ -124,6 +124,104 @@ function populateProductTable(products) {
 
 
 
+function populateProductTable(products) {
+  const tableBody = document.querySelector("#productTable tbody");
+
+  // Clear any existing rows
+  tableBody.innerHTML = "";
+
+  if (products && products.length > 0) {
+    products.forEach((product, index) => {
+      const row = tableBody.insertRow();
+
+      // Insert cells for each product detail
+      const cell1 = row.insertCell(0); // Ascending Index
+      const cell2 = row.insertCell(1); // Image
+      const cell3 = row.insertCell(2); // Product Code
+      const cell4 = row.insertCell(3); // Description
+      const cell5 = row.insertCell(4); // Quantity Closed
+      const cell6 = row.insertCell(5); // Price Closed
+      const cell7 = row.insertCell(6); // Quantity Fractioned
+      const cell8 = row.insertCell(7); // Price Fractioned
+      const cell9 = row.insertCell(8); // ADD BUTTON 
+
+
+
+
+       // Populate cells with product data
+       cell1.textContent = index + 1; // Ascending index, starting from 1
+       cell2.innerHTML = ` 
+                 <img src="${
+                   product.imagem || "https://via.placeholder.com/50"
+                 }" 
+                      alt="Product Image"  
+                      style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                      onmouseover="this.style.transform='scale(3)'" 
+                      onmouseout="this.style.transform='scale(1)'">    
+             `;
+       cell3.textContent = product.codproduto || "N/A"; // Product Code
+       cell4.textContent = product.descricao || "N/A"; // Description
+       cell5.textContent = product.cxfechada || "N/A"; // Quantity Closed
+       cell6.textContent = `${formatCurrency(product.precofechada)}`; // Price Closed
+       cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
+       cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
+      // Accessing `estoque` value to check stock availability
+      if (product.estoque === 0) {
+        cell9.innerHTML = `<span class="soldOut">Sold Out</span>`;
+        row.classList.add("sold-out");
+      } else {
+        cell9.innerHTML = `
+          <button class="openModalBtn">
+            <img src="/imagens/shoppingcart.png" alt="Adicionar">
+          </button>
+        `;
+      }
+      
+     // Add event listener for "Add" button
+     const openModalBtn = row.querySelector(".openModalBtn");
+     openModalBtn.addEventListener("click", function () {
+       //const productId = row.cells[0].textContent;
+       const productImage = row.querySelector("img").src;
+       const productCode = row.cells[2].textContent;
+       const productDesc = row.cells[3].textContent;
+       const cxFechada = row.cells[4].textContent;
+       const priceFechada = row.cells[5].textContent;
+       const cxFracionada = row.cells[6].textContent;
+       const priceFracionada = row.cells[7].textContent;
+
+      openModal(
+         //productId,
+         productImage,
+         productCode,
+         productDesc,
+         cxFechada,
+         priceFechada,
+         cxFracionada,
+         priceFracionada
+       );
+     });
+   });
+
+ // Foca no campo de quantidade após um pequeno atraso
+
+ 
+
+
+
+ } else {
+   // No products available message
+   tableBody.innerHTML =
+     '<tr><td colspan="7">SELECIONE UMA ESTAÇÃO.</td></tr>';
+ }
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
 
 // Function to populate the product table with fetched data
 function populateProductTable(products) {
@@ -215,7 +313,7 @@ function populateProductTable(products) {
 
 
 
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
