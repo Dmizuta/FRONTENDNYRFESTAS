@@ -120,8 +120,9 @@ console.log('ESTOQUE:', product.estoque);
 
 
         cell9.innerHTML = `
-  <button class="openModalBtn">ESGOTADO!</button>
-`;
+        <button class="openModalBtn" style="background-color: red; color: white;">ESGOTADO!</button>
+      `;
+      
 
 /*        cell9.innerHTML = `
   <img src="/imagens/trashcan.png" alt="Adicionar">
