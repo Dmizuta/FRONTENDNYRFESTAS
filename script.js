@@ -90,7 +90,7 @@ function populateProductTable(products) {
       const cell6 = row.insertCell(5); // Price Closed
       const cell7 = row.insertCell(6); // Quantity Fractioned
       const cell8 = row.insertCell(7); // Price Fractioned
-      const cell9 = row.insertCell(8); // ADD BUTTON 
+    //  const cell9 = row.insertCell(8); // ADD BUTTON 
 
 
 
@@ -115,7 +115,7 @@ function populateProductTable(products) {
       // Accessing `estoque` value to check stock availability
 
 console.log('ESTOQUE:', product.estoque);
-
+/*
       if (product.estoque === 1) {
         cell9.innerHTML = `<span class="soldOut">ESGOTADO!</span>`;
       //  row.classList.add("sold-out");
@@ -125,7 +125,7 @@ console.log('ESTOQUE:', product.estoque);
             <img src="/imagens/shoppingcart.png" alt="Adicionar">
           </button>
         `;
-      }
+      }*/
       
      // Add event listener for "Add" button
      const openModalBtn = row.querySelector(".openModalBtn");
