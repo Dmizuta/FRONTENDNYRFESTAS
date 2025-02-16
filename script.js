@@ -58,42 +58,15 @@ window.addEventListener("load", () => {
     document.getElementById("carnaval").click();
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-/*
-// Adiciona eventos de clique aos ícones
-document.getElementById("carnaval").addEventListener("click", () => {
-    fetchProductData('carnaval'); // Chama a função para buscar produtos de Carnaval
-});
-
-document.getElementById("junino").addEventListener("click", () => {
-    fetchProductData('junino'); // Chama a função para buscar produtos Juninos
-});
-
-document.getElementById("hlwn").addEventListener("click", () => {
-    fetchProductData('halloween'); // Chama a função para buscar produtos de Halloween
-});
-
-
-window.addEventListener("load", () => {
-  console.log("Everything is fully loaded, including images & styles!");
-  fetchProductData("carnaval");
-});
-
-
-// Chama a função para buscar produtos da estação padrão ao carregar a página
-document.addEventListener("DOMContentLoaded", () => {
-    fetchProductData('carnaval'); // Defina a estação padrão aqui
-});
-*/
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
   return `R$ ${value.toFixed(2).replace('.', ',')}`;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 // Function to populate the product table with fetched data
 function populateProductTable(products) {
   const tableBody = document.querySelector("#productTable tbody");
@@ -145,11 +118,11 @@ function populateProductTable(products) {
 }
 
 
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
+
 
 
 // Function to populate the product table with fetched data
@@ -201,14 +174,7 @@ function populateProductTable(products) {
 `;
    
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-      
+     
       // Add event listener for "Add" button
       const openModalBtn = row.querySelector(".openModalBtn");
       openModalBtn.addEventListener("click", function () {
@@ -250,7 +216,6 @@ function populateProductTable(products) {
 
 
 
-*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
