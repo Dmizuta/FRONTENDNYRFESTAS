@@ -120,7 +120,7 @@ console.log('ESTOQUE:', product.estoque);
 
 
         cell9.innerHTML = `
-  <button class="openModalBtn"> qualquer coisa </button>
+  <button class="openModalBtn">ESGOTADO!</button>
 `;
 
 /*        cell9.innerHTML = `
