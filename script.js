@@ -139,10 +139,65 @@ console.log('ESTOQUE:', product.estoque);
 `;
       }
       
+
+
+
+
+
+
+// Add event listener for "Add" button
+const openModalBtn = row.querySelector(".openModalBtn");
+
+if (openModalBtn) {
+    if (product.estoque === 0) {
+        // If the product is out of stock, disable the button by changing its functionality
+        openModalBtn.disabled = true; // Alternatively, you can style it to indicate it's disabled
+        openModalBtn.style.cursor = 'not-allowed'; // Change cursor to not-allowed
+        // Optional: Set a click handler that shows a message instead
+        openModalBtn.addEventListener("click", function () {
+            alert("Este produto está esgotado!");
+        });
+    } else {
+        // If the product is available, enable the modal opening functionality
+        openModalBtn.addEventListener("click", function () {
+            const productImage = row.querySelector("img").src;
+            const productCode = row.cells[2].textContent;
+            const productDesc = row.cells[3].textContent;
+            const cxFechada = row.cells[4].textContent;
+            const priceFechada = row.cells[5].textContent;
+            const cxFracionada = row.cells[6].textContent;
+            const priceFracionada = row.cells[7].textContent;
+
+            openModal(
+                productImage,
+                productCode,
+                productDesc,
+                cxFechada,
+                priceFechada,
+                cxFracionada,
+                priceFracionada
+            );
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
+
      // Add event listener for "Add" button
      const openModalBtn = row.querySelector(".openModalBtn");
      openModalBtn.addEventListener("click", function () {
-       //const productId = row.cells[0].textContent;
+       
+      
+      
+      //const productId = row.cells[0].textContent;
        const productImage = row.querySelector("img").src;
        const productCode = row.cells[2].textContent;
        const productDesc = row.cells[3].textContent;
@@ -177,7 +232,7 @@ console.log('ESTOQUE:', product.estoque);
  }
 }
 
-
+*/
 
 
 
