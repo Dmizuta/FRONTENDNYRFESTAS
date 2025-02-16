@@ -120,7 +120,7 @@ console.log('ESTOQUE:', product.estoque);
 
 
         cell9.innerHTML = `
-  <button> qualquer coisa </button>
+  <button class="openModalBtn"> qualquer coisa </button>
 `;
 
 /*        cell9.innerHTML = `
