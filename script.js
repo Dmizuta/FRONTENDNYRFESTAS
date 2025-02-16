@@ -68,7 +68,7 @@ function formatCurrency(value) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+/*
 
 
 function populateProductTable(products) {
@@ -113,7 +113,7 @@ function populateProductTable(products) {
        cell7.textContent = product.cxfracionada || "N/A"; // Quantity Fractioned
        cell8.textContent = `${formatCurrency(product.precofrac)}`; // Price Fractioned
       // Accessing `estoque` value to check stock availability
-      if (product.estoque == 1) {
+      if (product.estoque === 0) {
         cell9.innerHTML = `<span class="soldOut">ESGOTADO!</span>`;
         row.classList.add("sold-out");
       } else {
@@ -161,14 +161,14 @@ function populateProductTable(products) {
      '<tr><td colspan="7">SELECIONE UMA ESTAÇÃO.</td></tr>';
  }
 }
-
+*/
 
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-/*
+
 
 // Function to populate the product table with fetched data
 function populateProductTable(products) {
@@ -260,7 +260,7 @@ function populateProductTable(products) {
 
 
 
-*/
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
