@@ -2008,7 +2008,7 @@ document.getElementById("ipi").addEventListener("change", async function () {
         
                 const data = await response.json();
                 if (response.ok) {
-                    alert(`IPI atualizado para ${newIPI * 100}%`);
+                    alert(`Aliquota atualizada para ${newIPI * 100}%  and total updated to ${newTotal}`);
                 } else {
                     alert("Erro ao atualizar IPI: " + data.error);
                 }
