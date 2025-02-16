@@ -115,8 +115,8 @@ function populateProductTable(products) {
       // Accessing `estoque` value to check stock availability
 
 console.log('ESTOQUE:', product.estoque);
-/*
-      if (product.estoque === 0) {
+
+      if (product.estoque == 0) {
         cell9.innerHTML = `<span class="soldOut">ESGOTADO!</span>`;
         row.classList.add("sold-out");
       } else {
@@ -126,7 +126,7 @@ console.log('ESTOQUE:', product.estoque);
           </button>
         `;
       }
-      */
+      
      // Add event listener for "Add" button
      const openModalBtn = row.querySelector(".openModalBtn");
      openModalBtn.addEventListener("click", function () {
