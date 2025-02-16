@@ -110,7 +110,7 @@ function populateProductTable(products) {
           // Handle the add button based on stock availability
           if (product.estoque === 0) {
               cell9.innerHTML = `
-                  <button class="openModalBtn" style="background-color: red; color: white;">ESGOTADO!</button>
+                  <button class="openModalBtn" style="background-color: red; color: white;">ESGOTADO</button>
               `;
           } else {
               cell9.innerHTML = `
