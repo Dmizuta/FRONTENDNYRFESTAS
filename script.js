@@ -120,7 +120,7 @@ console.log('ESTOQUE:', product.estoque);
 
 
         cell9.innerHTML = `
-  <img src="/imagens/trashcan.png" alt="Adicionar" style="width: 50px; height: 50px;">
+  <button> qualquer coisa </button>
 `;
 
 /*        cell9.innerHTML = `
