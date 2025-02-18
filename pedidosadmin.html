@@ -684,7 +684,7 @@
             <span>Observações:</span>
             <textarea type="text" id="obs"
             placeholder=
-            "Transportadora / Forma de pagamento / Nf"
+            "Transportadora / Forma de pagamento"
             ></textarea>
         </div>
         
@@ -970,7 +970,152 @@ function populateModal(orderDetails) {
          
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
+
+
         
+
+        // Add event listeners for edit buttons
+        document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
+            button.addEventListener('click', async function () {
+                const row = this.closest('tr');
+        
+                const orderId = localStorage.getItem('currentOrderId');
+                const quantityCell = row.querySelector('.quantity');
+                const productId = row.getAttribute('data-product-id');
+                const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+        
+                // Fetch the current order status to determine if it's editable
+                const requestData = { orderId };
+                console.log("currentOrderId:", orderId);
+        
+                try {
+                    const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(requestData),
+                    });
+        
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch order status: ${response.statusText}`);
+                    }
+        
+                    const data = await response.json();
+        
+                    // Check if the order status is fetched properly
+                    const orderStatus = data.status; // Adjust based on backend response format
+                    console.log("Order Status:", orderStatus);
+        
+                    if (orderStatus === 1 || orderStatus === 2) {
+                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+                        return; // Prevent further execution
+                    }
+        
+                    // If order is editable, proceed with making the quantity editable
+                    const inputField = document.createElement('input');
+                    inputField.type = 'number';
+                    inputField.value = currentQuantity;
+                    inputField.classList.add('edit-quantity');
+        
+                    // Add save button
+                    const saveButton = document.createElement('button');
+                    saveButton.textContent = 'Salvar';
+                    saveButton.classList.add('save-quantity-btn');
+        
+                    // Clear the quantity cell and append input and save button
+                    quantityCell.innerHTML = '';
+                    quantityCell.appendChild(inputField);
+                    quantityCell.appendChild(saveButton);
+        
+                    // Focus the input field immediately after it is appended
+                    inputField.focus();
+        
+                    // Add 'Enter' key support
+                    inputField.addEventListener('keypress', function (event) {
+                        if (event.key === 'Enter') saveButton.click();
+                    });
+        
+                    saveButton.addEventListener('click', async function () {
+                        const newQuantity = parseInt(inputField.value, 10);
+                        if (newQuantity && newQuantity > 0) {
+                            try {
+                                const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ quantity: newQuantity })
+                                });
+        
+                                if (!response.ok) throw new Error('Failed to update quantity');
+        
+                
+                                const data = await response.json();
+
+                                
+        // Assume 'data' is the response object you received from the server
+        // const data = response.data;
+        
+        // Retrieve the ipi value and total from the response
+        const ipi = data.updatedProduct.ipi;  // ipi value
+        const updatedTotal = data.updatedProduct.total;  // New total value
+        const cxfechada = data.updatedProduct.cxfechada;
+        const precofechada = data.updatedProduct.precofechada;
+        const precofrac = data.updatedProduct.precofrac;
+        
+  
+        
+                                // Update the quantity directly in the table after success
+                                quantityCell.textContent = newQuantity;
+
+
+
+                                 
+                                   const chosenPrice = (newQuantity >= cxfechada) ? precofechada : precofrac;
+
+                              
+                               
+
+                              
+                               const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
+                               console.log('IPI Tax value:', ipitax);
+                                console.log('IPI value:', ipi);
+                               
+                                // Optionally, you can re-calculate the total if necessary
+                                //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
+                                const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
+                                const productTotal = chosenPrice * newQuantity + ipiValue ;
+        
+                                // Update the total for this row
+                                row.cells[4].textContent = formatCurrency(chosenPrice);
+                                row.cells[5].textContent = formatCurrency(ipiValue);
+                                row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
+        
+                                // Update the total price in the modal
+                                //update();
+                                updateTotalPrice();
+        
+                               
+        
+                            } catch (error) {
+                                alert('Error updating quantity');
+                                console.error('Error updating quantity:', error);
+                            }
+                        } else {
+                            alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error fetching order status:', error);
+                    alert('An error occurred while checking the order status. Please try again later.');
+                }
+            });
+        });
+        
+
+
+        /*
         // Add event listeners for edit buttons
         document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             button.addEventListener('click', async function () {
@@ -1107,7 +1252,7 @@ console.log('IPITax value:', ipitax);
         });
         
         
-        
+        */
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         

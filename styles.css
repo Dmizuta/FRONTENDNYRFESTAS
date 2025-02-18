@@ -53,6 +53,7 @@ header {
     padding: 30px; /* Aumentado para mais espaçamento */
     border-bottom: 5px solid #F2B680; /* Adicionando uma borda inferior */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 100;
 }
 
 #nyrfestas {

@@ -13,59 +13,109 @@
 
 <style>
 
+.buttonsContainer {
+    background-color: #f1f1f1;
+    border: 2px solid #e2e2e2; /* Added 'solid' to define border */
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px; /* Added padding to avoid content sticking to the border */
+}
+
+
+/* General container for all buttons */
 .allbtns {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; /* Adds space between buttons */
+    gap: 20px;
+    padding: 20px;
 }
 
 .modal-actions {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Space between buttons */
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
+/* General button styles */
 .action-btn {
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: 500;
+    padding: 10px 30px; /* Increased padding for a bigger button */
+    font-size: 1rem; /* Larger font size for a more sophisticated look */
+    font-weight: 600; /* Slightly bolder for emphasis */
     border: 2px solid transparent; /* Default border */
-    border-radius: 8px; /* Soft rounded corners */
+    border-radius: 12px; /* Softer rounded corners for a modern look */
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 160px; /* Uniform width */
-    text-transform: uppercase; /* Uppercase for consistency */
-    background-color: #007bff; /* Main blue color */
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    width: 180px; /* Uniform width for buttons */
+    
+    background-color: #007bff; /* Blue background */
+    color: whitesmoke;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.274); /* Soft shadow for depth */
+    font-family: 'Roboto', sans-serif; /* Clean and modern font */
+    text-align: center;
+    letter-spacing: 1px; /* Small space between letters for elegance */
 }
 
+/* Hover effect for action buttons */
 .action-btn:hover {
-    background-color: #0069d9; /* Darker blue on hover */
-    border-color: #0056b3; /* Darker border for contrast */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
-}   
+    background-color: #0069d9;
+    border-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px); /* Slight lift effect on hover */
+}
 
+/* Active effect for action buttons */
 .action-btn:active {
-    transform: scale(0.98); /* Slight shrink on click */
-    background-color: #0056b3; /* Even darker blue when clicked */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
+    transform: scale(0.98);
+    background-color: #0056b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #close-modal {
-    background-color: #f8f9fa; /* Light grey for "Fechar" */
-    color: #333; /* Dark text */
-    border: 2px solid #ccc; /* Light grey border */
-    font-size: 14px; /* Smaller text for close button */
-    padding: 8px 18px; /* Smaller padding */
-    width: 120px; /* Smaller width */
-    box-shadow: none; /* No shadow for close button */
+    background-color: #f8f9fa;
+    color: #333;
+    border: 2px solid #007bff;
+    font-size: 18px;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: min(90%, 4 * 180px + 3 * 20px); /* Shrinks with the container */
+    transition: all 0.2s ease;
+    max-width: 100%; /* Ensures it never overflows */
 }
 
+/* On smaller screens, make sure buttons adjust correctly */
+@media (max-width: 768px) {
+    #close-modal {
+        width: 100%; /* Takes full width when space is limited */
+    }
+}
+
+
+/* Hover effect for the close button */
 #close-modal:hover {
-    background-color: #e2e6ea; /* Light grey on hover */
-    border-color: #ddd; /* Slightly darker border on hover */
+    background-color: #e2e6ea;
+    border-color: #0056b3; /* Darker blue border on hover */
+    transform: translateY(-3px);
+}
+
+/* Active effect for the close button */
+#close-modal:active {
+    transform: scale(0.98);
+    background-color: #dae0e5;
+}
+
+/* Adding responsive styles for narrow screens */
+@media (max-width: 768px) {
+    .modal-actions {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        gap: 15px;
+    }
 }
 
 
@@ -660,7 +710,7 @@ font-size: 1rem;
                 <span>Observações:</span>
                 <textarea type="text" id="obs"
                 placeholder=
-                "OBRIGATÓRIO: Transportadora / Forma de pagamento / Nf"
+                "OBRIGATÓRIO: Transportadora / Forma de pagamento"
                 ></textarea>
             </div>
     
@@ -672,13 +722,13 @@ font-size: 1rem;
 <div class="buttonsContainer">
             <div class="allbtns">
                 <div class="modal-actions">
-                    <button class="action-btn" onclick="printOrder()">Imprimir</button>
-                    <button id="save-notes-btn" class="action-btn">Salvar</button>
+                    <button class="action-btn" onclick="printOrder()">IMPRIMIR</button>
+                    <button id="save-notes-btn" class="action-btn">SALVAR</button>
                     
                    
                     
-                    <button id="finish-order-btn" class="action-btn">Finalizar</button>
-                    <button id="delete-order-btn" class="action-btn">Apagar</button>
+                    <button id="finish-order-btn" class="action-btn">FINALIZAR</button>
+                    <button id="delete-order-btn" class="action-btn">APAGAR</button>
                 </div>
             
                 <!-- Close Modal Button -->
@@ -1958,7 +2008,7 @@ document.getElementById("ipi").addEventListener("change", async function () {
         
                 const data = await response.json();
                 if (response.ok) {
-                    alert(`IPI atualizado para ${newIPI * 100}%`);
+                    alert(`Aliquota atualizada para ${newIPI * 100}%`);
                 } else {
                     alert("Erro ao atualizar IPI: " + data.error);
                 }
