@@ -846,7 +846,7 @@ async function loadOrders() {
         console.log('Parsed orders data:', orders);
 
         // Check if orders is an array and not empty
-        if (!Array.isArray(orders) {
+        if (!Array.isArray(orders)) {
             console.error('Invalid orders data:', orders);
             document.getElementById('orders-container').innerHTML = '<p>Dados inválidos recebidos.</p>';
             return;
