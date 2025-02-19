@@ -89,6 +89,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (result.success && result.data) {
       // Fill the form fields with the data returned from the backend
       document.getElementById('representante').value = result.data.representante || '';
+      document.getElementById('vendedor').value = result.data.vendedor || '';
       document.getElementById('razaosocial').value = result.data.razaosocial || '';
       document.getElementById('cnpj').value = result.data.cnpj || '';
       document.getElementById('endereco').value = result.data.endereco || '';
