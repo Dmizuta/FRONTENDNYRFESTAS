@@ -806,7 +806,7 @@ async function loadOrders() {
 
     try {
         console.log('Sending request to backend...');
-        const response = await fetch('https://backendnyrfestas.vercel.app/orders?username=' + username, {
+        const response = await fetch('https://backendnyrfestas.vercel.app/userorders?username=' + username, {
             method: 'GET'
         });
 
