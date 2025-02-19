@@ -40,8 +40,8 @@
             <label for="representante">Representante:</label>
             <input type="text" id="representante" name="representante" placeholder="Nome do Representante" required>
 
-            <label for="Vendedor">Vendedor:</label>
-            <input type="text" id="vendedor" name="vendedor" placeholder="Nome do Vendedor" required>
+          <!--  <label for="Vendedor">Vendedor:</label>
+            <input type="text" id="vendedor" name="vendedor" placeholder="Nome do Vendedor" required>-->
 
             <label for="razaosocial">Razão Social:</label>
             <input type="text" id="razaosocial" name="razaosocial" placeholder="Razão Social da empresa" required>
@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (result.success && result.data) {
       // Fill the form fields with the data returned from the backend
       document.getElementById('representante').value = result.data.representante || '';
-      document.getElementById('vendedor').value = result.data.vendedor || '';
+      //document.getElementById('vendedor').value = result.data.vendedor || '';
       document.getElementById('razaosocial').value = result.data.razaosocial || '';
       document.getElementById('cnpj').value = result.data.cnpj || '';
       document.getElementById('endereco').value = result.data.endereco || '';
