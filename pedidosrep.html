@@ -841,7 +841,7 @@ async function loadOrders() {
         // Check if the response is ok
         if (!response.ok) {
             console.log('Failed to fetch orders. Status:', response.status, response.statusText);
-            document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+            document.getElementById('orders-container').innerHTML = '<p>Falha ao carregar.</p>';
             return;
         }
 
