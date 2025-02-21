@@ -53,10 +53,14 @@ document.getElementById("hlwn").addEventListener("click", function() {
     handleSeasonSelection('halloween', this);
 });
 
-// Auto-select default season on page load
+// Auto-select default season on page load with delay
 window.addEventListener("load", () => {
-    document.getElementById("carnaval").click();
+  setTimeout(() => {
+      document.getElementById("carnaval").click();
+  }, 500); // Delay in milliseconds (500ms = 0.5s)
 });
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
