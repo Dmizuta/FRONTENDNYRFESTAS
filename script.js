@@ -54,7 +54,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 });
 
 // Auto-select default season on page load with delay
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
       document.getElementById("carnaval").click();
   }, 500); // Delay in milliseconds (500ms = 0.5s)
