@@ -1152,6 +1152,7 @@ function populateModal(orderDetails) {
         const ipiTax = parseFloat(orderDetails.ipi_tax);
         const ipi = factor * ipiTax * price * quantity;
         const productTotal = (price * quantity) + ipi;
+        console.log('Total de produtos:',productTotal);
 
         const row = `
             <tr data-product-id="${product.id}">
