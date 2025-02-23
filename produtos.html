@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
+    <script src="config.js"></script>
 
 
 </head>
@@ -268,7 +269,7 @@
         <div class="modal-stage-one">
 
             <div class="prodimage">
-            <img src="https://via.placeholder.com/150" alt="Product Image">
+            <img src="https://placehold.co/150" alt="Product Image">
             </div>
             
             <div class="product-info">
@@ -383,7 +384,7 @@ function loadCustomerName() {
   }
 
   // Fetch customer name from backend (sending customerId in the request body)
-  fetch('https://backendnyrfestas.vercel.app/displayName', {
+  fetch(`${URL_API}/displayName`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',

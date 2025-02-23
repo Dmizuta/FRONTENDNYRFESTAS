@@ -1,11 +1,10 @@
 // API URL for fetching product data
-const API_URL = "https://backendnyrfestas.vercel.app/products"; // Ajuste para a URL do seu backend
 
 // Função para buscar produtos da estação selecionada
 async function fetchProductData(epoca) {
     console.log(`Fetching products for season: ${epoca}`); // Log para verificar a estação
     try {
-        const response = await fetch(`${API_URL}?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
+        const response = await fetch(`${URL_API}/products?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
         const data = await response.json();
 
         // Log the fetched data to check the structure
@@ -471,7 +470,7 @@ const addProductToOrder = async () => {
   if (userRole !== "ADMIN") {
     try {
       console.log('Checking cadastro for username:', username);
-      const cadastroResponse = await fetch('https://backendnyrfestas.vercel.app/check-cadastro', {
+      const cadastroResponse = await fetch(`${URL_API}/check-cadastro`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: username })
@@ -490,7 +489,7 @@ const addProductToOrder = async () => {
         console.log('Cadastro is complete, proceeding with adding product to order');
         console.log('Admin adding product for username:', username);
         const customerResponse = await fetch(
-          `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
+          `${URL_API}/get-user-info?customerId=${customerId}`
         );
 
         if (customerResponse.ok) {
@@ -502,7 +501,7 @@ const addProductToOrder = async () => {
 
           // Fetch product details from the API using the product code
           const productBuyResponse = await fetch(
-            `https://backendnyrfestas.vercel.app/product-buy/${productCode}`,
+            `${URL_API}/product-buy/${productCode}`,
             { headers: { "Content-Type": "application/json" } }
           );
 
@@ -547,7 +546,7 @@ const addProductToOrder = async () => {
           console.log("Admin product data being sent:", productData);
 
           const addResponse = await fetch(
-            "https://backendnyrfestas.vercel.app/add-to-order",
+            `${URL_API}/add-to-order`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -593,7 +592,7 @@ const addProductToOrder = async () => {
     try {
       console.log('Admin adding product for username:', username);
       const customerResponse = await fetch(
-        `https://backendnyrfestas.vercel.app/get-user-info?customerId=${customerId}`
+        `${URL_API}/get-user-info?customerId=${customerId}`
       );
 
       if (customerResponse.ok) {
@@ -607,7 +606,7 @@ const addProductToOrder = async () => {
 
         // Fetch product details from the API using the product code
         const productBuyResponse = await fetch(
-          `https://backendnyrfestas.vercel.app/product-buy/${productCode}`, 
+          `${URL_API}/product-buy/${productCode}`, 
           { headers: { "Content-Type": "application/json" } }
         );
 
@@ -661,7 +660,7 @@ const addProductToOrder = async () => {
         console.log('IPI:',ipi);
 
         const addResponse = await fetch(
-          "https://backendnyrfestas.vercel.app/add-to-order-admin",
+          `${URL_API}/add-to-order-admin`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
