@@ -774,31 +774,31 @@ function searchProducts() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
-        
-        searchBox.addEventListener('input', function() {
-            const searchTerm = searchBox.value.toLowerCase().trim();
-        
-            const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
-            orders.forEach(order => {
-                const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-                const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-                const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-                const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-                const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
-        
-                // Check if the search term matches any of these fields
-                if (
-                    orderId.includes(searchTerm) || 
-                    representate.includes(searchTerm) || 
-                    razaoSocial.includes(searchTerm) || 
-                    data.includes(searchTerm) || 
-                    status.includes(searchTerm)
-                ) {
-                    order.style.display = 'block'; // Show the order if it matches
-                } else {
-                    order.style.display = 'none'; // Hide the order if it doesn't match
-                }
-            });
-        });
+document.addEventListener('DOMContentLoaded', function() {
+  const searchBox = document.getElementById('searchInput'); 
+      
+  searchBox.addEventListener('input', function() {
+      const searchTerm = searchBox.value.toLowerCase().trim();
+  
+      const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
+      orders.forEach(order => {
+          const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
+          const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
+          const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
+          const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
+          const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
+  
+          if (
+              orderId.includes(searchTerm) || 
+              representate.includes(searchTerm) || 
+              razaoSocial.includes(searchTerm) || 
+              data.includes(searchTerm) || 
+              status.includes(searchTerm)
+          ) {
+              order.style.display = 'block';
+          } else {
+              order.style.display = 'none';
+          }
+      });
+  });
+});
