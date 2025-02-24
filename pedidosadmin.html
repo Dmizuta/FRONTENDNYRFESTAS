@@ -800,6 +800,7 @@
         
                 const orders = await response.json();
                 displayOrders(orders);
+                console.log('CONTEUDO PEDIDO:', orders)
             } catch (error) {
                 console.error('Error fetching orders:', error);
                 document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
