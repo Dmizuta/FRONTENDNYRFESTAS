@@ -568,3 +568,20 @@ function searchProducts() {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Handle login status
+  const username = localStorage.getItem("username");
+  if (username) {
+      const usernameDisplay = document.getElementById("username-display");
+      if (usernameDisplay) {
+          usernameDisplay.textContent = `Bem-vindo, ${username}`;
+      }
+  } else {
+      alert("Você precisa estar logado para acessar esta página!");
+      window.location.href = "/";
+  }
+});

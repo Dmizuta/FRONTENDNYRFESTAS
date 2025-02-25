@@ -315,11 +315,27 @@
 
     <script>
     
+////////////////////////////////////////////////////////////////////////////////////////////
+
+             // Handle login status
+             const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+ // Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');  // Remove login data
+    window.location.href = '/';  // Redirect to login page
+});
 
 
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -342,25 +358,8 @@
     console.warn('Role not defined or invalid.');
   }
 
-             // Handle login status
-             const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('username-display').textContent = `Bem vindo, ${username}`;
-        } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
-        }
- // Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');  // Remove login data
-    window.location.href = '/';  // Redirect to login page
-});
 
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
