@@ -56,7 +56,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
       document.getElementById("carnaval").click();
-  }, 150); // Delay in milliseconds (500ms = 0.5s)
+  }, 180); // Delay in milliseconds (500ms = 0.5s)
 });
 
 
