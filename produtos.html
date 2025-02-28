@@ -472,20 +472,15 @@ document.getElementById('downloadButton').addEventListener('click', function() {
     spinner.style.display = 'inline-block';
     buttonText.classList.add('buttonTextHidden');
     
-    // Simulate a task (e.g., API call or download) with a timeout
+    // Trigger the download immediately
+    downloadLink.click();
+    
+    // You can simulate any task if you want the spinner to stay visible for a duration.
     setTimeout(() => {
-        // Simulating task duration (e.g., 5 seconds)
-        
-        // Log the task duration
-        console.log(`Task completed`);
-        
-        // Hide the spinner and restore text opacity
+        // Hide the spinner and restore text opacity after 5 seconds or the task duration
         spinner.style.display = 'none';
         buttonText.classList.remove('buttonTextHidden');
-        
-        // Trigger the download after the task finishes
-        downloadLink.click();
-    }, 5000); // Simulating a 5-second task
+    }, 5000); // Adjust this delay as needed
 });
 
 /*
