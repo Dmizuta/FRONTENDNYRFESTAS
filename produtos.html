@@ -162,8 +162,7 @@
 
 
 
-/* Parent container */
-#download {
+#download{
     display: flex;
     justify-content: flex-end; /* Aligns content to the right */
     max-width: 95%;
@@ -175,8 +174,10 @@
 }
 
 /* Button styling */
-.button {
+#download .button {
     display: inline-flex; /* Use inline-flex to align items horizontally */
+    justify-content: flex-end;
+    max-width: 30%;
     align-items: center; /* Vertically align text and spinner */
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -211,8 +212,6 @@
 .buttonTextHidden {
     opacity: 0.5;
 }
-
-
 
     
 </style>
@@ -281,6 +280,7 @@
 
 
     
+
         <div id="download">
             <button id="downloadButton" class="button">
                 <span id="spinner" class="spinner" style="display: none;"></span>
@@ -288,7 +288,7 @@
             </button>
             
         </div>
-
+    
 
 <!-- Search Wrapper -->
 <div class="search-wrapper">
@@ -459,6 +459,7 @@ function loadCustomerName() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 document.getElementById('downloadButton').addEventListener('click', function() {
