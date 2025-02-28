@@ -162,39 +162,56 @@
 
 
 
-
+/* Parent container */
 #download {
+    display: flex;
+    justify-content: flex-end; /* Aligns content to the right */
     max-width: 95%;
     background-color: #e7e5e5;
     border-radius: 8px;
     border: 1px solid #ccc;
     margin: 30px auto;
     padding: 15px;
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: center; /
 }
 
+/* Button styling */
+.button {
+    display: inline-flex; /* Use inline-flex to align items horizontally */
+    align-items: center; /* Vertically align text and spinner */
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
 
+/* Spinner animation */
+.spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+    display: none;
+}
 
-        a.button {
+/* Spinner keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
-        
+/* Hidden text opacity during spinner animation */
+.buttonTextHidden {
+    opacity: 0.5;
+}
 
-            display: inline-block; 
-            padding: 10px 20px; 
-            background-color: #4CAF50; 
-            color: white; 
-            text-align: center; 
-            text-decoration: none; 
-            border-radius: 5px; 
-            font-size: 16px; 
-            transition: background-color 0.3s ease; 
-        }
-
-        a.button:hover {
-            background-color: #45a049;
-        }
 
 
     
@@ -265,11 +282,12 @@
 
     
         <div id="download">
-            <a href="https://drive.google.com/uc?export=download&id=1lM2j53ZDPT6qm5VDKaJhUuF0ETEfL-mn" download class="button">
-                Baixe o Catálogo aqui
-            </a>
+            <button id="downloadButton" class="button">
+                <span id="spinner" class="spinner" style="display: none;"></span>
+                <span id="buttonText">Baixe o Catálogo aqui</span>
+            </button>
+            
         </div>
-
 
 
 <!-- Search Wrapper -->
@@ -441,6 +459,37 @@ function loadCustomerName() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+document.getElementById('downloadButton').addEventListener('click', function() {
+    // Get elements
+    const button = document.getElementById('downloadButton');
+    const spinner = document.getElementById('spinner');
+    const buttonText = document.getElementById('buttonText');
+    
+    // Show the spinner and reduce text opacity
+    spinner.style.display = 'inline-block';
+    buttonText.classList.add('buttonTextHidden');
+    
+    // Start a timer to simulate a task (e.g., API call)
+    const startTime = Date.now();
+    
+    // Simulate a task (e.g., API call or download) with a timeout
+    setTimeout(() => {
+        // Simulating task duration (5 seconds)
+        
+        // Task is done, calculate duration
+        const endTime = Date.now();
+        const duration = endTime - startTime;
+        
+        // Log the task duration
+        console.log(`Task completed in ${duration}ms`);
+
+        // Hide the spinner and restore text opacity
+        spinner.style.display = 'none';
+        buttonText.classList.remove('buttonTextHidden');
+    }, 5000); // Simulating a 5-second task
+});
 
 
 
