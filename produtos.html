@@ -182,38 +182,6 @@
 }
 
 #downloadButton {
-    display: flex; /* Ensures text and spinner align horizontally */
-    align-items: center; /* Vertically aligns text and spinner */
-    justify-content: center; /* Keeps content centered */
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    white-space: nowrap; /* Prevents text from wrapping */
-}
-
-.spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-right: 8px; /* Adds space between spinner and text */
-    display: none; /* Initially hidden */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-#downloadButton {
     display: flex; /* Ensure text and spinner align horizontally */
     align-items: center;
     justify-content: center; /* Center content inside button */
