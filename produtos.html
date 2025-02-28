@@ -162,9 +162,13 @@
 
 
 
-#download{
+
+
+
+
+#download {
     display: flex;
-    justify-content: space-between; /* Aligns content to the right */
+    align-items: center; /* Ensures proper vertical alignment */
     max-width: 95%;
     background-color: #e7e5e5;
     border-radius: 8px;
@@ -173,12 +177,15 @@
     padding: 15px;
 }
 
-/* Button styling */
+#lista {
+    margin: 0; /* Removes extra space around the heading */
+}
+
 #downloadButton {
-    display: inline-flex; /* Use inline-flex to align items horizontally */
-  /*  justify-content: flex-end;*/
+    display: flex; /* Ensure text and spinner align horizontally */
+    align-items: center;
+    justify-content: center; /* Center content inside button */
     max-width: 230px;
-    align-items: center; /* Vertically align text and spinner */
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -188,19 +195,9 @@
     border: none;
     cursor: pointer;
     position: relative;
+    margin-left: auto; /* Pushes the button to the right */
 }
 
-/* Spinner animation */
-.spinner {
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    animation: spin 1s linear infinite;
-    margin-right: 10px;
-    display: none;
-}
 
 /* Spinner keyframes */
 @keyframes spin {
@@ -213,10 +210,7 @@
     opacity: 0.5;
 }
 
-#lista{
 
-}
-    
 </style>
 
 <body>
