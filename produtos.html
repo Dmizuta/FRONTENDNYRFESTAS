@@ -213,6 +213,39 @@
     100% { transform: rotate(360deg); }
 }
 
+#downloadButton {
+    display: flex; /* Ensure text and spinner align horizontally */
+    align-items: center;
+    justify-content: center; /* Center content inside button */
+    max-width: 230px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: auto; /* Pushes the button to the right */
+}
+/* Spinner animation */
+.spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+    display: none;
+}
+
+/* Spinner keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 /* Hidden text opacity during spinner animation */
 .buttonTextHidden {
