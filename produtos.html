@@ -162,61 +162,7 @@
 
 
 
-#download {
-    max-width: 95%;
-    background-color: #e7e5e5;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin: 30px auto;
-    padding: 15px;
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: center; /
-}
 
-a.button {
-    display: inline-block; 
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    position: relative; /* Position the spinner relative to the button */
-}
-
-a.button:hover {
-    background-color: #45a049;
-}
-
-a.button .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    border: 4px solid #fff;
-    border-top: 4px solid #4CAF50;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    display: none; /* Hide the spinner by default */
-}
-
-a.button.loading .button-text {
-    visibility: hidden; /* Hide button text when loading */
-}
-
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-
-
-/*
 #download {
     max-width: 95%;
     background-color: #e7e5e5;
@@ -250,7 +196,6 @@ a.button.loading .button-text {
             background-color: #45a049;
         }
 
-*/
 
     
 </style>
@@ -318,20 +263,14 @@ a.button.loading .button-text {
         <h1>Lista de Produtos</h1>
 
 
-        <div id="download">
-        <a href="#" class="button" id="downloadButton">
-            <span class="button-text">Baixe o Catálogo aqui</span>
-            <span class="spinner"></span> <!-- Spinner element -->
-        </a>
-    </div>
-<!--
+    
         <div id="download">
             <a href="https://drive.google.com/uc?export=download&id=1lM2j53ZDPT6qm5VDKaJhUuF0ETEfL-mn" download class="button">
                 Baixe o Catálogo aqui
             </a>
         </div>
 
--->
+
 
 <!-- Search Wrapper -->
 <div class="search-wrapper">
@@ -503,16 +442,6 @@ function loadCustomerName() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-document.getElementById('downloadButton').addEventListener('click', function() {
-    // Show the spinner and hide the button text
-    this.classList.add('loading');
-    
-    // Simulate a delay (e.g., an API call)
-    setTimeout(function() {
-        // Hide the spinner and show the text again after the "loading" action is complete
-        document.getElementById('downloadButton').classList.remove('loading');
-    }, 3000); // Replace 3000 with the actual duration of your task
-});
 
 
 
