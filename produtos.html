@@ -287,9 +287,8 @@
                 <span id="buttonText">Baixe o Catálogo aqui</span>
             </button>
             
- <!-- Hidden download link -->
- <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1lM2j53ZDPT6qm5VDKaJhUuF0ETEfL-mn" download style="display: none;"></a>
-
+            <!-- Hidden download link -->
+            <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1lM2j53ZDPT6qm5VDKaJhUuF0ETEfL-mn" download style="display: none;"></a>
         </div>
     
 
@@ -464,39 +463,36 @@ function loadCustomerName() {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 document.getElementById('downloadButton').addEventListener('click', function() {
-    // Get elements
-    const button = document.getElementById('downloadButton');
-    const spinner = document.getElementById('spinner');
-    const buttonText = document.getElementById('buttonText');
-    
-    // Show the spinner and reduce text opacity
-    spinner.style.display = 'inline-block';
-    buttonText.classList.add('buttonTextHidden');
-    
-    // Start a timer to simulate a task (e.g., API call)
-    const startTime = Date.now();
-    
-    // Simulate a task (e.g., API call or download) with a timeout
-    setTimeout(() => {
-        // Simulating task duration (5 seconds)
+        // Get elements
+        const button = document.getElementById('downloadButton');
+        const spinner = document.getElementById('spinner');
+        const buttonText = document.getElementById('buttonText');
+        const downloadLink = document.getElementById('downloadLink');
         
-        // Task is done, calculate duration
-        const endTime = Date.now();
-        const duration = endTime - startTime;
+        // Show the spinner and reduce text opacity
+        spinner.style.display = 'inline-block';
+        buttonText.classList.add('buttonTextHidden');
         
-        // Log the task duration
-        console.log(`Task completed in ${duration}ms`);
+        // Simulate a task (e.g., API call or download) with a timeout
+        const startTime = Date.now();
+        
+        setTimeout(() => {
+            // Simulating task duration (5 seconds)
+            const endTime = Date.now();
+            const duration = endTime - startTime;
+            
+            // Log the task duration
+            console.log(`Task completed in ${duration}ms`);
 
-        // Hide the spinner and restore text opacity
-        spinner.style.display = 'none';
-        buttonText.classList.remove('buttonTextHidden');
-    }, 5000); // Simulating a 5-second task
-});
-
-
-
+            // Hide the spinner and restore text opacity
+            spinner.style.display = 'none';
+            buttonText.classList.remove('buttonTextHidden');
+            
+            // Trigger the download after the task finishes
+            downloadLink.click();
+        }, 5000); // Simulating a 5-second task
+    });
 
      </script>
     <script src="script.js"></script>
