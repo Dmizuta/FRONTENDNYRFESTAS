@@ -461,8 +461,34 @@ function loadCustomerName() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
+document.getElementById('downloadButton').addEventListener('click', function() {
+    // Get elements
+    const button = document.getElementById('downloadButton');
+    const spinner = document.getElementById('spinner');
+    const buttonText = document.getElementById('buttonText');
+    const downloadLink = document.getElementById('downloadLink');
+    
+    // Show the spinner and reduce text opacity immediately
+    spinner.style.display = 'inline-block';
+    buttonText.classList.add('buttonTextHidden');
+    
+    // Simulate a task (e.g., API call or download) with a timeout
+    setTimeout(() => {
+        // Simulating task duration (e.g., 5 seconds)
+        
+        // Log the task duration
+        console.log(`Task completed`);
+        
+        // Hide the spinner and restore text opacity
+        spinner.style.display = 'none';
+        buttonText.classList.remove('buttonTextHidden');
+        
+        // Trigger the download after the task finishes
+        downloadLink.click();
+    }, 5000); // Simulating a 5-second task
+});
 
-
+/*
 document.getElementById('downloadButton').addEventListener('click', function() {
         // Get elements
         const button = document.getElementById('downloadButton');
@@ -492,8 +518,7 @@ document.getElementById('downloadButton').addEventListener('click', function() {
             // Trigger the download after the task finishes
             downloadLink.click();
         },10); // Simulating a 5-second task
-    });
-
+    });*/
      </script>
     <script src="script.js"></script>
   
