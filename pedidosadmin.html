@@ -763,6 +763,18 @@
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
+         // Function to format numbers as currency (Brazilian Real - R$)
+         function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
         // Function to load orders from the backend
         async function loadOrders() {
             try {
@@ -807,11 +819,7 @@
                     console.error('Invalid total value:', order.total);
                 }
         
-                // Function to format numbers as currency (Brazilian Real - R$)
-                function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-        
+              
                 const statusText = order.status === 0 ? 'Aberto' :
                                    order.status === 1 ? 'Orçamento' :
                                    order.status === 2 ? 'Fechado' :
@@ -902,10 +910,7 @@ function populateModal(orderDetails) {
 
 
 
-        // Function to format numbers as currency (Brazilian Real - R$)
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
+       
         
 
 
@@ -1074,10 +1079,7 @@ function populateModal(orderDetails) {
                                 const productTotal = chosenPrice * newQuantity + ipiValue ;
 
 
-   // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
+ 
 
 
         
