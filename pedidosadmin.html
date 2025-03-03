@@ -696,7 +696,13 @@
 
     <script>
 
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -763,12 +769,7 @@
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-         // Function to format numbers as currency (Brazilian Real - R$)
-         function formatCurrency(value) {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         
 
 
 
@@ -820,6 +821,7 @@
                 }
         
               
+        
                 const statusText = order.status === 0 ? 'Aberto' :
                                    order.status === 1 ? 'Orçamento' :
                                    order.status === 2 ? 'Fechado' :
@@ -910,7 +912,7 @@ function populateModal(orderDetails) {
 
 
 
-       
+
         
 
 
@@ -1080,7 +1082,6 @@ function populateModal(orderDetails) {
 
 
  
-
 
         
                                 // Update the total for this row
