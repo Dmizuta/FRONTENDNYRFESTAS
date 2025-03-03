@@ -1186,7 +1186,7 @@ function formatCurrency(value) {
                     });
         
                     saveButton.addEventListener('click', async function () {
-                        const newQuantity = parseInt(inputField.value, 100);
+                        const newQuantity = parseInt(inputField.value, 10);
                         if (newQuantity && newQuantity > 0) {
                             try {
                                 const response = await fetch(`${URL_API}/editproduct/${productId}`, {
