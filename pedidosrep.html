@@ -1059,7 +1059,7 @@ function populateModal(orderDetails) {
         const productTotal = (price * quantity) + ipi;
         console.log('Total de produtos:',productTotal);
 
-        
+
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
@@ -1232,6 +1232,14 @@ function formatCurrency(value) {
                                 const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
                                 const productTotal = chosenPrice * newQuantity + ipiValue ;
         
+
+
+   // Function to format numbers as currency (Brazilian Real - R$)
+   function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+
+
                                 // Update the total for this row
                                 row.cells[4].textContent = formatCurrency(chosenPrice);
                                 row.cells[5].textContent = formatCurrency(ipiValue);
