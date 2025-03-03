@@ -1119,9 +1119,22 @@ function populateModal(orderDetails) {
             let total = 0; // Starting with an initial value of 1000
             
             rows.forEach(row => {
+
+
+                const productTotal = parseFloat(
+    row.cells[6].textContent
+        .replace('R$', '')
+        .trim()
+        .replace(/\./g, '') // Remove ALL dots
+        .replace(',', '.')  // Convert decimal separator
+);
+
+
+
+/*
                 const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
                 console.log('resultado total', productTotal)
-        
+        */
         
         total =  total += productTotal;
             });
