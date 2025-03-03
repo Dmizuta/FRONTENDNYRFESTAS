@@ -1286,11 +1286,18 @@ function updateTotalPrice() {
         console.log('resultado total', productTotal)
 
 
+
+        
+
 total =  total += productTotal;
     });
 
     // Round the total to 2 decimal places
    // total = total.toFixed(2); // This will convert it to a string with 2 decimals
+
+    // Function to format numbers as currency (Brazilian Real - R$)
+ function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
     
  document.getElementById('total-value').textContent = formatCurrency(total);}
 
