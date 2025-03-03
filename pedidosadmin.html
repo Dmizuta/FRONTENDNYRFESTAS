@@ -861,11 +861,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Function to format numbers as currency (Brazilian Real - R$)
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
-        
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
 
@@ -904,6 +899,15 @@ function populateModal(orderDetails) {
         const ipiTax = parseFloat(orderDetails.ipi_tax);
         const ipi = factor * ipiTax * price * quantity;
         const productTotal = (price * quantity) + ipi;
+
+
+
+        // Function to format numbers as currency (Brazilian Real - R$)
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
+        
+
 
         const row = `
             <tr data-product-id="${product.id}">
