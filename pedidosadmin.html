@@ -1072,6 +1072,14 @@ function populateModal(orderDetails) {
                                 //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
                                 const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
                                 const productTotal = chosenPrice * newQuantity + ipiValue ;
+
+
+   // Function to format numbers as currency (Brazilian Real - R$)
+   function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+
+
         
                                 // Update the total for this row
                                 row.cells[4].textContent = formatCurrency(chosenPrice);
