@@ -882,7 +882,7 @@ function displayOrders(orders) {
             console.error('Invalid total value:', order.total);
             return; // Skip this order if total is invalid
         }
-        
+
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
@@ -1016,12 +1016,6 @@ window.addEventListener("click", function(event) {
         }
     
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}*/
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1064,6 +1058,15 @@ function populateModal(orderDetails) {
         const ipi = factor * ipiTax * price * quantity;
         const productTotal = (price * quantity) + ipi;
         console.log('Total de produtos:',productTotal);
+
+        
+
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+
 
         const row = `
             <tr data-product-id="${product.id}">
