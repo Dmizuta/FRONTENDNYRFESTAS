@@ -323,7 +323,7 @@ const addProductToOrder = async () => {
 
           const quantity = parseInt(document.getElementById('quantity').value);
 
-          if (quantity < cxfechada){
+          if (quantity < cxfracionada){
             alert("Necessário quantidade mínima");
           }
 
