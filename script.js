@@ -55,7 +55,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 // Auto-select default season on page load with delay
 window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
-      document.getElementById("carnaval").click();
+      document.getElementById("junino").click();
   }, 300); // Delay in milliseconds (500ms = 0.5s)
 });
 
