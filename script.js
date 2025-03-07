@@ -308,19 +308,24 @@ const addProductToOrder = async () => {
           const productDesc = productBuyData.descricao;
           const precofechada = productBuyData.precofechada;
           const precofrac = productBuyData.precofrac;
+          const cxfracionada = productBuyData.cxfracionada;
           const cxfechada = productBuyData.cxfechada;
           const ipi = productBuyData.ipi;
 
           console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "IPI:", ipi);
 
           // Validate product details
-          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada) {
+          if (!productCode || !productDesc || !precofechada || !precofrac || !cxfechada || !cxfracionada) {
             alert("DETALHES DO PEDIDO FALTANDO.");
             console.log("Product details missing:", productCode, productDesc, precofechada, precofrac, cxfechada, ipi);
             return;
           }
 
           const quantity = parseInt(document.getElementById('quantity').value);
+
+          if (quantity > cxfechada){
+            alert("Necessário quantidade mínima");
+          }
 
           // Choose the correct price based on the quantity
           const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
