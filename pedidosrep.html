@@ -889,6 +889,19 @@ function formatCurrency(value) {
 }
 
 
+
+
+
+
+
+
+const statusMap = {
+    0: { text: 'Aberto', color: 'blue' },
+    1: { text: 'Orçamento', color: 'orange' },
+    2: { text: 'Fechado', color: 'red' },
+    3: { text: 'Fechado', color: 'green' }
+};
+
 // Get status text and color
 const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
 
