@@ -812,6 +812,43 @@
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 }
         
+
+
+
+
+                const statusMap = {
+    0: { text: 'Aberto', color: 'blue' },
+    1: { text: 'Orçamento', color: 'orange' },
+    2: { text: 'Fechado', color: 'red' },
+    3: { text: 'Processado', color: 'green' }
+};
+
+// Get status text and color
+const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
+
+const orderRow = `
+    <div class="order-row" data-id="${order.id}">
+        <div class="order-details">
+            <div><strong>ID:</strong> ${order.id}</div>
+            <div><strong>Representante:</strong> ${order.representante}</div>
+            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
+            <div class="status" style="color: ${status.color};">
+                <strong>Status:</strong> ${status.text}
+            </div>
+        </div>
+    </div>
+`;
+
+container.innerHTML += orderRow;
+
+
+
+
+
+
+        /*
                 const statusText = order.status === 0 ? 'Aberto' :
                                    order.status === 1 ? 'Orçamento' :
                                    order.status === 2 ? 'Fechado' :
@@ -830,7 +867,15 @@
                     </div>
                 `;
                 container.innerHTML += orderRow;
+                */
+
+                
             });
+
+
+
+
+            
             console.log('All orders displayed');
         }
         
