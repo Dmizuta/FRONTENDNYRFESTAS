@@ -148,6 +148,8 @@
     <button class="register-btn" onclick="window.location.href='registro.html'">Registrar</button> 
   </div>
 </div>
+
+
   <script>
 
 
@@ -179,6 +181,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
           console.log('Decoded Token:', decodedToken); // Log the decoded token
           const role = decodedToken.role;
           const customerId = decodedToken.customerId;
+          localStorage.setItem('Token', token);
 
           // Store username and role in localStorage
           localStorage.setItem('username', username);
