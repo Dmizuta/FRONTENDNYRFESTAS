@@ -306,9 +306,6 @@ const addProductToOrder = async () => {
           const product = Array.isArray(productBuyData) ? productBuyData[0] : productBuyData;
 
 
-          console.log("Product Data:", productBuyData);
-          console.log("Product Data:", product);
-
           
 
           // Extract product description and prices
@@ -428,8 +425,27 @@ const addProductToOrder = async () => {
 
         // Parse the JSON response
         const productBuyData = await productBuyResponse.json();
-        console.log("Product Data:", productBuyData);
 
+
+
+        const product = Array.isArray(productBuyData) ? productBuyData[0] : productBuyData;
+
+
+          
+
+        // Extract product description and prices
+
+        const productDesc = product.descricao;
+        const precofechada = product.precofechada;
+        const precofrac = product.precofrac;
+        //const cxfracionada = product.cxfracionada;
+        const cxfechada = product.cxfechada;
+        const ipi = product.ipi;
+
+
+
+        console.log("Product Data:", productBuyData);
+/*
         // Extract product description and prices
         const productDesc = productBuyData.descricao;
         const precofechada = productBuyData.precofechada;
@@ -437,7 +453,7 @@ const addProductToOrder = async () => {
         const cxfechada = productBuyData.cxfechada;
         const ipi = productBuyData.ipi;
 
-        
+        */
          
         
         
