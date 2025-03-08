@@ -941,8 +941,6 @@ function populateModal(orderDetails) {
 
 //discount 
 
-let discount = document.querySelector('#desc').value;
-console.log("DESCONTO:", discount);
 
 
 
@@ -997,6 +995,21 @@ console.log("DESCONTO:", discount);
 
         orderDetailsContent.innerHTML += row;
         total += productTotal;
+
+
+
+        const selectElement = document.querySelector('#desc');
+
+// Add an event listener to listen for changes
+selectElement.addEventListener('change', function() {
+    // Get the selected value
+    let discount = selectElement.value;
+    console.log(discount); // This will log the new selected value when changed
+});
+        
+
+
+
 
             // Update total price
     document.getElementById('total-value').textContent = formatCurrency(total);
