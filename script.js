@@ -336,10 +336,10 @@ const addProductToOrder = async () => {
 
           const quantity = parseInt(document.getElementById('quantity').value);
 
-          if (quantity < cxfracionada){
-            console.error("QUANTIDADE MINIMA:", addResult.error);
-            alert("NECESSÁRIO QUANTIDADE MÍNIMA!");
-          }
+          if (quantity < cxfracionada) {
+            alert("QUANTIDADE MÍNIMA NECESSÁRIA!"); // Alert the user
+            return; // Exit the function without adding the product
+        }
 
           // Choose the correct price based on the quantity
           const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
