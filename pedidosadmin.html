@@ -1463,6 +1463,8 @@ const totalFinal = total * (1 - discountValue);
             const observation = document.getElementById("obs").value.trim(); // Get the observation value
             const discount = document.getElementById("desc").value; // Get the selected discount value
             const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
+
+            console.log('SET DESCONTO:', discount);
         
             if (!orderId) {
                 alert("No draft order found to save notes.");
