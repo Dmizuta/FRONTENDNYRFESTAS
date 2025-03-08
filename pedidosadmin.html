@@ -1015,15 +1015,17 @@ const discount = document.querySelector('#desc');
     console.log('DESCONTO',discountValue); // This will log the new selected value when changed
 //});
 
+const discountTotal = total * discountValue;
+
 const totalFinal = total * (1 - discountValue);
 
-const discountTotal = total * discountValue;
+
 
 
 
 
             // Update total price
-            document.querySelector('discount-value').textContent = formatCurrency(discountTotal)
+            document.querySelector('discount-value').textContent = formatCurrency(discountTotal);
     document.getElementById('total-value').textContent = formatCurrency(totalFinal);
     });
 
