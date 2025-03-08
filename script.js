@@ -393,12 +393,11 @@ const addProductToOrder = async () => {
       } else {
         alert('CADASTRO NÃO PREENCHIDO, NÃO É POSSÍVEL ADICIONAR UM PRODUTO.');
       }
-      
     } catch (error) {
       console.error("Error:", error);
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
-  }
+
 
 
 
