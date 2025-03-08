@@ -998,15 +998,20 @@ function populateModal(orderDetails) {
 
 
 
-        const selectElement = document.querySelector('#desc');
+        
+// Select the dropdown element
+const discount = document.querySelector('#desc');
 
 // Add an event listener to listen for changes
-selectElement.addEventListener('change', function() {
+discount.addEventListener('change', function() {
     // Get the selected value
-    let discount = selectElement.value;
-    console.log(discount); // This will log the new selected value when changed
+    let discountValue = discount.value;
+    console.log(discountValue); // This will log the new selected value when changed
 });
-        
+
+
+
+
 
 
 
