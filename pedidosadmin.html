@@ -1465,8 +1465,7 @@ const totalFinal = total * (1 - discountValue);
            // const discount = document.getElementById("desc").value; // Get the selected discount value
             const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
 
-            const continha = discount * 100;
-console.log('RESULTADO:',continha);
+            
         
             if (!orderId) {
                 alert("No draft order found to save notes.");
@@ -1479,6 +1478,9 @@ console.log('RESULTADO:',continha);
                 discount: discount, // Include discount in the request
             };
 
+
+            const continha = discount * 100;
+            console.log('RESULTADO:',continha);
             console.log('REQ DADOS:', requestData);
         
             try {
