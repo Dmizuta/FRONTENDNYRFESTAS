@@ -302,15 +302,30 @@ const addProductToOrder = async () => {
 
           // Parse the JSON response
           const productBuyData = await productBuyResponse.json();
+
+          const product = Array.isArray(productBuyData) ? productBuyData[0] : productBuyData;
+
+
           console.log("Product Data:", productBuyData);
 
+          
+
           // Extract product description and prices
+
+          const productDesc = product.descricao;
+          const precofechada = product.precofechada;
+          const precofrac = product.precofrac;
+          const cxfracionada = product.cxfracionada;
+          const cxfechada = product.cxfechada;
+          const ipi = product.ipi;
+
+/*
           const productDesc = productBuyData.descricao;
           const precofechada = productBuyData.precofechada;
           const precofrac = productBuyData.precofrac;
           const cxfracionada = productBuyData.cxfracionada;
           const cxfechada = productBuyData.cxfechada;
-          const ipi = productBuyData.ipi;
+          const ipi = productBuyData.ipi;*/
 
           console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "IPI:", ipi);
 
