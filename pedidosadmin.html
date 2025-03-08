@@ -941,7 +941,7 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
-//discount 
+
 
 
 
@@ -995,6 +995,51 @@ function populateModal(orderDetails) {
             </tr>
         `;  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        orderDetailsContent.innerHTML += row;
+        total += productTotal;
+    });
+
+    // Select the discount dropdown element
+    const discount = document.querySelector('#desc');
+
+    // Function to update total with discount
+    function updateTotal() {
+        let discountValue = parseFloat(discount.value) || 0;
+        let discountTotal = total * discountValue;
+        let totalFinal = total * (1 - discountValue);
+
+        document.querySelector('#discount-value').textContent = formatCurrency(discountTotal);
+        document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+    }
+
+    // Initial calculation
+    updateTotal();
+
+    // Add event listener to recalculate when discount changes
+    discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
+    discount.addEventListener('change', updateTotal);
+
+
+/*
         orderDetailsContent.innerHTML += row;
         total += productTotal;
 
@@ -1027,9 +1072,8 @@ const totalFinal = total * (1 - discountValue);
             // Update total price
     document.querySelector('#discount-value').textContent = formatCurrency(discountTotal);
     document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-    });
-
-
+  */
+    ;
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1222,6 +1266,7 @@ const totalFinal = total * (1 - discountValue);
 
                 const productTotal = parseFloat(
     row.cells[6].textContent
+
         .replace('R$', '')
         .trim()
         .replace(/\./g, '') // Remove ALL dots
@@ -1248,7 +1293,8 @@ const totalFinal = total * (1 - discountValue);
             // Round the total to 2 decimal places
            // total = total.toFixed(2); // This will convert it to a string with 2 decimals
             
-         document.getElementById('total-value').textContent = formatCurrency(total);}
+         document.getElementById('total-value').textContent = formatCurrency(total);
+        }
         
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
