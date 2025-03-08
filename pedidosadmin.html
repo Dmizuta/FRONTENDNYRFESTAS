@@ -1299,32 +1299,9 @@ const totalFinal = total * (1 - discountValue);
         
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Show modal with order details
-function openModal(orderId) {
-    fetchOrderDetails(orderId)
-        .then(orderDetails => {
-            populateModal(orderDetails); // Populate modal with fetched details
-            document.getElementById('order-modal').classList.add('show'); // Show modal
-        })
-        .catch(error => console.error('Error fetching order details:', error));
-}
-
-// Single event listener for order clicks (Event Delegation)
-document.getElementById("orders-container").addEventListener("click", function(event) {
-    const orderRow = event.target.closest(".order-row");
-    if (orderRow) {
-        const orderId = orderRow.getAttribute("data-id");
-        openModal(orderId); // Open modal with clicked order details
-    }
-});
-
-// Close modal functionality (single event listener)
-document.getElementById("close-modal").addEventListener("click", () => {
-    document.getElementById("order-modal").classList.remove('show'); // Hide modal
-});
-
+  
         
-        /*
+        
         // Show modal with order details
         function openModal(orderId) {
             fetchOrderDetails(orderId)
@@ -1349,7 +1326,7 @@ document.getElementById("close-modal").addEventListener("click", () => {
         });
         
         
-        
+        /*
         
         // Event listener for opening the modal
         document.getElementById("orders-container").addEventListener("click", function(event) {
