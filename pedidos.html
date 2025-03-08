@@ -820,7 +820,7 @@ async function loadOrders() {
         }
 
         const orders = await response.json();
-        console.log('Parsed orders data:', orders);
+        console.log('DADOS DO PEDIDO:', orders);
         displayOrders(orders);
 
     } catch (error) {
