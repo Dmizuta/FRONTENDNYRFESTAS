@@ -348,7 +348,7 @@ const addProductToOrder = async () => {
             username: username,
             representante: representante,
             cnpj: cnpj,
-            customerId: customerId,
+           // customerId: customerId,
             razaosocial: razaosocial,
             codproduto: productCode,
             descricao: productDesc,
