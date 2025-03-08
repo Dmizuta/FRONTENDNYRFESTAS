@@ -1002,6 +1002,10 @@ function populateModal(orderDetails) {
 // Select the dropdown element
 const discount = document.querySelector('#desc');
 
+const totalFinal = total * (1 - discount);
+
+
+
 // Add an event listener to listen for changes
 discount.addEventListener('change', function() {
     // Get the selected value
@@ -1017,7 +1021,7 @@ discount.addEventListener('change', function() {
 
 
             // Update total price
-    document.getElementById('total-value').textContent = formatCurrency(total);
+    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
     });
 
 
