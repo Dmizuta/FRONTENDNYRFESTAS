@@ -337,7 +337,8 @@ const addProductToOrder = async () => {
           const quantity = parseInt(document.getElementById('quantity').value);
 
           if (quantity < cxfracionada){
-            alert("Necessário quantidade mínima");
+            console.error("QUANTIDADE MINIMA:", addResult.error);
+            alert("NECESSÁRIO QUANTIDADE MÍNIMA!");
           }
 
           // Choose the correct price based on the quantity
@@ -392,11 +393,12 @@ const addProductToOrder = async () => {
       } else {
         alert('CADASTRO NÃO PREENCHIDO, NÃO É POSSÍVEL ADICIONAR UM PRODUTO.');
       }
+      
     } catch (error) {
       console.error("Error:", error);
       alert("OCORREU UM ERRO, TENTE NOVAMENTE.");
     }
-
+  }
 
 
 
