@@ -307,6 +307,7 @@ const addProductToOrder = async () => {
 
 
           console.log("Product Data:", productBuyData);
+          console.log("Product Data:", product);
 
           
 
