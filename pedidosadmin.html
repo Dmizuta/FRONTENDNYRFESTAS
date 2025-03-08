@@ -1002,7 +1002,7 @@ function populateModal(orderDetails) {
 // Select the dropdown element
 const discount = document.querySelector('#desc');
 
-const totalFinal = total * (1 - discountValue);
+
 
 
 
@@ -1013,7 +1013,7 @@ discount.addEventListener('change', function() {
     console.log('DESCONTO',discountValue); // This will log the new selected value when changed
 });
 
-
+const totalFinal = total * (1 - discountValue);
 
 
 
