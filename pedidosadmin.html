@@ -1461,6 +1461,7 @@ const totalFinal = total * (1 - discountValue);
         // Save Notes Button
         document.getElementById("save-notes-btn").addEventListener("click", async () => {
             const observation = document.getElementById("obs").value.trim(); // Get the observation value
+            const discount = document.getElementById("desc").value; // Get the selected discount value
             const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
         
             if (!orderId) {
@@ -1471,6 +1472,7 @@ const totalFinal = total * (1 - discountValue);
             const requestData = {
                 orderId: orderId,
                 observation: observation,
+                discount: discount, // Include discount in the request
             };
         
             try {
