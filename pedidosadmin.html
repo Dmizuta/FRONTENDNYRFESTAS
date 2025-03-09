@@ -2168,7 +2168,7 @@ console.log('RESULTADO', discount * 100);
                 if (response.ok) {
                     alert(`Aplicado desconto de ${discount * 100}%`);
                 } else {
-                    alert("Erro ao atualizar IPI: " + data.error);
+                    alert("Não é possível aplicar o desconto, pedido com status FECHADO.");
                 }
             } catch (error) {
                 console.error("Erro ao atualizar IPI:", error);
@@ -2200,7 +2200,7 @@ console.log('RESULTADO', discount * 100);
                 if (response.ok) {
                     alert(`IPI atualizado para ${newIPI * 100}%`);
                 } else {
-                    alert("Erro ao atualizar IPI: " + data.error);
+                    alert("Não é possível atualizar o IPI, pedido com status FECHADO.");
                 }
             } catch (error) {
                 console.error("Erro ao atualizar IPI:", error);
