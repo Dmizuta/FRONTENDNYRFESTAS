@@ -1057,9 +1057,11 @@ function populateModal(orderDetails) {
         ipiDropdown.value = orderDetails.ipi_tax;
     }
 
+// Update products table and calculate total
+ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+
 
     const descDropdown = document.getElementById('desc');
-
     const descDisplay = document.getElementById('desc-display');
 
      // Set the DESC dropdown value
@@ -1067,8 +1069,7 @@ function populateModal(orderDetails) {
         descDropdown.value = orderDetails.desconto;
     }
   
-    // Update products table and calculate total
-    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+    
 
     // Update desc
     descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
