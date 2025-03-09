@@ -439,7 +439,7 @@ if (userRole !== "ADMIN") {
       const productDesc = product.descricao;
       const precofechada = product.precofechada;
       const precofrac = product.precofrac;
-      //const cxfracionada = product.cxfracionada;
+      const cxfracionada = product.cxfracionada;
       const cxfechada = product.cxfechada;
       const ipi = product.ipi;
 
@@ -471,7 +471,15 @@ if (userRole !== "ADMIN") {
       const quantity = parseInt(document.getElementById('quantity').value);
      
 
+     
 
+      if (quantity < cxfracionada) {
+        alert("QUANTIDADE MÍNIMA NECESSÁRIA!"); // Alert the user
+        return; // Exit the function without adding the product
+    }
+
+
+    
       // Choose the correct price based on the quantity
       const chosenPrice = (quantity >= cxfechada) ? precofechada : precofrac;
 
