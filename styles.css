@@ -6,7 +6,6 @@
 
 
 
-
 .logoNyr {
     position: fixed;
     top: 10px; /* Ajuste conforme necessário */
@@ -408,7 +407,7 @@ th {
 .modal {
     display: none; /* Hidden by default */
     position: fixed;
-    z-index: 1000; /* Ensure it’s on top */
+    z-index: 10000; /* Ensure it’s on top */
     left: 0;
     top: 0;
     width: 100%;

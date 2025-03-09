@@ -147,7 +147,7 @@
             .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+           
             left: 0;
             top: 0;
             width: 100%;
@@ -227,6 +227,16 @@
             float: right;
             
         }
+
+        #discount-value {
+            font-weight: bold;
+            float: right;
+            
+        }
+
+
+
+
             /* When modal is open, make it visible */
             .modal.show {
                 display: flex;
@@ -439,6 +449,8 @@
         outline: none;
         transition: border-color 0.3s ease;
     }
+
+    
     
     /* Focus effect for the select input */
     #ipi:focus {
@@ -455,6 +467,8 @@
     #ipi:hover {
         border-color: #BF6734;
     }
+
+    
     
     /* Style for the select box container when it's not focused */
     .dropdown {
@@ -473,10 +487,64 @@
     
         display: none;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Style for the select dropdown */
+        #desc {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+
+
+
+
+    /* Focus effect for the select input */
+    #desc:focus {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #desc option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #desc:hover {
+        border-color: #BF6734;
+    }
+
+
+
+
     .desc-print-only {
     
     display: none;
-}
+    }
     
     
     .topButtons {
@@ -670,10 +738,16 @@
         <div class="totalOrderBox">
             <!-- Total Order Section -->
             <div class="order-total">
+
                 <div>
-                    <span>Desconto:</span>
+                    <span>Total do desconto:</span>
                     <span id="discount-value">R$ 0,00</span>
-                    <span>Total do Pedido:</span>
+                </div>
+
+
+
+                    <div>
+                    <span>Total do pedido:</span>
                     <span id="total-value">R$ 0,00</span>
                 </div>
             </div>
@@ -682,8 +756,14 @@
         <div>
             <!-- Span for printing, initially hidden -->
             <span id="ipi-display" class="ipi-print-only"></span>
-            <span id="desc-display" class="desc-print-only"></span>
+         
             </div>
+
+            <div>
+              
+                <span id="desc-display" class="desc-print-only"></span>
+
+                </div>
 
         <div class="obs-row">
             <span>Observações:</span>
@@ -972,6 +1052,9 @@ function populateModal(orderDetails) {
   
     // Update products table and calculate total
     ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+
+    // Update desc
+    descDisplay.textContent = "Desconto: " + descDropdown.options[descDropdown.selectedIndex].text;
 
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
