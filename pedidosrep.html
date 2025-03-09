@@ -554,6 +554,54 @@ font-size: 1rem;
     }
     
     
+
+
+
+
+ /* Style for the select dropdown */
+ #desc {
+    
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    /* Focus effect for the select input */
+    #desc:focus {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #desc option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #desc:hover {
+        border-color: #BF6734;
+    }
+
+
+
+
+    .desc-print-only {
+    
+    display: none;
+    }
+    
+
+
+
+
+
+
     
     .topButtons {
         display: flex;        /* Enables flexbox */
@@ -670,20 +718,35 @@ font-size: 1rem;
                             </div>
                         </div>
         
-                        <div class="dropdown">
-                    
-                            <div id="ipilabel">
-                            <label for="ipi">IPI:</label>
-                            <!-- Dropdown for user interaction -->
-                            <select id="ipi">
-                                <option value='0'>B0</option>
-                                <option value='0.13'>B1</option>
-                                <option value='0.065'>B2</option>
-                                <option value='0.039'>B3</option>
-                            </select>
-                        </div>
-                            
-                        </div>
+                        
+                <div class="dropdown">
+            
+                    <div id="ipilabel">
+                    <label for="ipi">IPI:</label>
+                    <!-- Dropdown for user interaction -->
+                    <select id="ipi">
+                        <option value='0'>B0</option>
+                        <option value='0.13'>B1</option>
+                        <option value='0.065'>B2</option>
+                        <option value='0.039'>B3</option>
+                    </select>
+                </div>
+                </div>
+
+                <div class="dropdown">
+            
+                    <div id="desclabel">
+                    <label for="desc">Desconto:</label>
+                    <!-- Dropdown for user interaction -->
+                    <select id="desc">
+                        <option value='0'>0%</option>
+                        <option value='0.03'>3%</option>
+                        <option value='0.05'>5%</option>
+                        <option value='0.08'>8%</option>
+                        <option value='0.10'>10%</option>
+                    </select>
+                </div>               
+                </div>
                         
                     </div>
         
