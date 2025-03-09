@@ -546,6 +546,18 @@
     display: none;
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
     
     .topButtons {
         display: flex;        /* Enables flexbox */
@@ -752,7 +764,9 @@
                 </div>
             </div>
         </div>
-        
+
+
+        <div id="print-info">
         <div>
             <!-- Span for printing, initially hidden -->
             <span id="ipi-display" class="ipi-print-only"></span>
@@ -764,6 +778,8 @@
                 <span id="desc-display" class="desc-print-only"></span>
 
                 </div>
+            </div>
+
 
         <div class="obs-row">
             <span>Observações:</span>
@@ -1752,9 +1768,16 @@ console.log('RESULTADO', discount * 100);
                 page-break-inside: avoid;
             }
 
+    #print-info {
+        
+        font-size: 0.9rem;
+        padding-top: 20px;
+        
+    }
+
             .obs-row {
                 font-size: 11pt;
-                margin-top: 20px;
+                margin-top: 0px;
                 padding: 10px;
                 background-color: #f9f9f9;
                 page-break-inside: avoid;
