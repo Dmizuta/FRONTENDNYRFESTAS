@@ -767,18 +767,18 @@
 
 
         <div id="print-info">
-        <div>
+            
+            <div>
             <!-- Span for printing, initially hidden -->
             <span id="ipi-display" class="ipi-print-only"></span>
-         
             </div>
 
             <div>
-              
-                <span id="desc-display" class="desc-print-only"></span>
-
-                </div>
+            <!-- Span for printing, initially hidden -->
+            <span id="desc-display" class="desc-print-only"></span>
             </div>
+
+        </div>
 
 
         <div class="obs-row">
@@ -1072,7 +1072,9 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
     
 
     // Update desc
-    descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
+    //descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
+
+    
 
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
