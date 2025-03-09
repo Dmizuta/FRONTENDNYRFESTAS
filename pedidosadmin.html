@@ -1059,6 +1059,7 @@ function populateModal(orderDetails) {
 
 
     const descDropdown = document.getElementById('desc');
+
     const descDisplay = document.getElementById('desc-display');
 
      // Set the DESC dropdown value
@@ -1132,6 +1133,11 @@ function populateModal(orderDetails) {
         total += productTotal;
     });
 
+
+
+  
+
+
     // Select the discount dropdown element
     const discount = document.querySelector('#desc');
 
@@ -1141,7 +1147,11 @@ function populateModal(orderDetails) {
         let discountTotal = total * discountValue;
         let totalFinal = total * (1 - discountValue);
 
-        document.querySelector('#discount-value').textContent = formatCurrency(discountTotal);
+        function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                };
+        
+        document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
         document.getElementById('total-value').textContent = formatCurrency(totalFinal);
     }
 
@@ -1149,7 +1159,7 @@ function populateModal(orderDetails) {
     updateTotal();
 
     // Add event listener to recalculate when discount changes
-    discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
+   // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
     discount.addEventListener('change', updateTotal);
 
 
@@ -1374,6 +1384,9 @@ const totalFinal = total * (1 - discountValue);
         function updateTotalPrice() {
             const rows = document.querySelectorAll('#order-details-content tr');
             let total = 0; // Starting with an initial value of 1000
+            const discount = document.querySelector('#desc');
+            let discountValue = parseFloat(discount.value) || 0;
+            
             
             rows.forEach(row => {
 
@@ -1386,19 +1399,28 @@ const totalFinal = total * (1 - discountValue);
         .replace(/\./g, '') // Remove ALL dots
         .replace(',', '.')  // Convert decimal separator
 );
-
-
-
-/*
-                const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
-                console.log('resultado total', productTotal)
-        */
-        
+       
         total =  total += productTotal;
             });
 
+            
+    let discountTotal = total * discountValue;
+    let totalFinal = total * (1 - discountValue);
 
 
+    function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+
+    document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+
+
+
+
+
+   
+/*
             // Function to format numbers as currency (Brazilian Real - R$)
    function formatCurrency(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
@@ -1408,7 +1430,9 @@ const totalFinal = total * (1 - discountValue);
            // total = total.toFixed(2); // This will convert it to a string with 2 decimals
             
          document.getElementById('total-value').textContent = formatCurrency(total);
-        }
+        */
+       
+    }
         
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
