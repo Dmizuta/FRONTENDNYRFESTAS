@@ -473,7 +473,10 @@
     
         display: none;
     }
+    .desc-print-only {
     
+    display: none;
+}
     
     
     .topButtons {
@@ -636,9 +639,9 @@
                 </div>
 
 
-                <div class="dropdwonDesconto">
+                <div class="dropdown">
             
-                    <div id="desconto">
+                    <div id="desclabel">
                     <label for="desc">Desconto:</label>
                     <!-- Dropdown for user interaction -->
                     <select id="desc">
@@ -679,6 +682,7 @@
         <div>
             <!-- Span for printing, initially hidden -->
             <span id="ipi-display" class="ipi-print-only"></span>
+            <span id="desc-display" class="desc-print-only"></span>
             </div>
 
         <div class="obs-row">
@@ -950,9 +954,20 @@ function populateModal(orderDetails) {
     const ipiDropdown = document.getElementById('ipi');
     const ipiDisplay = document.getElementById('ipi-display');
 
+    
+
     // Set the IPI dropdown value
     if (orderDetails.ipi_tax) {
         ipiDropdown.value = orderDetails.ipi_tax;
+    }
+
+
+    const descDropdown = document.getElementById('desc');
+    const descDisplay = document.getElementById('desc-display');
+
+     // Set the DESC dropdown value
+     if (orderDetails.desconto) {
+        descDropdown.value = orderDetails.desconto;
     }
   
     // Update products table and calculate total
@@ -1619,6 +1634,7 @@ console.log('RESULTADO', discount * 100);
 
             /* Hide certain elements */
             #ipilabel,
+            #desclabel,
             #order-items-table th:nth-child(8),
             #order-items-table td:nth-child(8),
             #order-items-table th:nth-child(9),
