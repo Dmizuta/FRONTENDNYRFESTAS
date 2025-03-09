@@ -1028,10 +1028,7 @@ container.innerHTML += orderRow;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-
-
+       
 // Function to populate the modal with order details
 function populateModal(orderDetails) {
     // Update general order information in the modal
@@ -1041,17 +1038,11 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
-
-
-
-
-
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
     const ipiDisplay = document.getElementById('ipi-display');
 
     
-
     // Set the IPI dropdown value
     if (orderDetails.ipi_tax) {
         ipiDropdown.value = orderDetails.ipi_tax;
@@ -1069,14 +1060,15 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
         descDropdown.value = orderDetails.desconto;
     }
   
+        // Update desc
+
+
+    //********descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
+
+
     
 
-    // Update desc
-    //descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
-
-    
-
-    const orderDetailsContent = document.getElementById('order-details-content');
+        const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
 
     // Clear existing content
@@ -1090,15 +1082,11 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
         const ipi = factor * ipiTax * price * quantity;
         const productTotal = (price * quantity) + ipi;
 
-
-
         // Function to format numbers as currency (Brazilian Real - R$)
         function formatCurrency(value) {
             return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
         }
         
-
-
         const row = `
             <tr data-product-id="${product.id}">
                 <td>${index + 1}</td>
@@ -1113,32 +1101,14 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
             </tr>
         `;  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         orderDetailsContent.innerHTML += row;
         total += productTotal;
     });
 
 
 
-  
+
+
 
 
     // Select the discount dropdown element
@@ -1200,7 +1170,7 @@ const totalFinal = total * (1 - discountValue);
     document.querySelector('#discount-value').textContent = formatCurrency(discountTotal);
     document.getElementById('total-value').textContent = formatCurrency(totalFinal);
   */
-    ;
+    
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2179,9 +2149,35 @@ console.log('RESULTADO', discount * 100);
         
         
         
+        ////////////////////////////////////////////////////////////////////////////////////////////
         
+        document.getElementById("desc").addEventListener("change", async function () {
+            const discount = parseFloat(this.value); // Get selected IPI value
+            const orderId = localStorage.getItem('currentOrderId');
         
+            try {
+                const response = await fetch(`${URL_API}/update-desc`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ orderId, discount })
+                });
         
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`Aplicado desconto de ${discount * 100}%`);
+                } else {
+                    alert("Erro ao atualizar IPI: " + data.error);
+                }
+            } catch (error) {
+                console.error("Erro ao atualizar IPI:", error);
+                alert("Erro de conexão com o servidor.");
+            }
+            window.location.reload();
+        });
+        
+       //////////////////////////////////////////////////////////////////////////////////////////// 
         
         
         
