@@ -1051,6 +1051,9 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
     const descDropdown = document.getElementById('desc');
     const descDisplay = document.getElementById('desc-display');
+   // Select the discount dropdown element
+   const discount = document.querySelector('#desc');
+    
 
      // Set the DESC dropdown value
      if (orderDetails.desconto) {
@@ -1061,6 +1064,9 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
 
     //********descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
+
+    descDisplay.textContent = "DESC: " + parseFloat(discount.value);
+
 
 
     
@@ -1108,8 +1114,7 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
 
 
-    // Select the discount dropdown element
-    const discount = document.querySelector('#desc');
+ 
 
     // Function to update total with discount
     function updateTotal() {
