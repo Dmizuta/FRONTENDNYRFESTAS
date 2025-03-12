@@ -1260,7 +1260,7 @@ function formatCurrency(value) {
                     console.log("Order Status:", orderStatus);
         
                     if (orderStatus === 2) {
-                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
                         return; // Prevent further execution
                     }
         
@@ -1469,7 +1469,7 @@ async function deleteProduct(productId, orderId) {
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO EM ORÇAMENTO OU FINALIZADO.");
+            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
             return; // Stop further execution if status doesn't allow editing
         }
 
@@ -1610,7 +1610,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PEDIDO COM STATUS EM ORÇAMENTO OU FINALIZADO.");
+            alert("NÃO É POSSÍVEL DELETAR O PEDIDO ESTÁ FINALIZADO.");
             return; // Stop further execution if status doesn't allow deletion
         }
 
