@@ -1235,7 +1235,7 @@ const totalFinal = total * (1 - discountValue);
                     const orderStatus = data.status; // Adjust based on backend response format
                     console.log("Order Status:", orderStatus);
         
-                    if (orderStatus === 1 || orderStatus === 2) {
+                    if (orderStatus === 2) {
                         alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
                         return; // Prevent further execution
                     }
