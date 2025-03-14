@@ -443,7 +443,8 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     
-
+    const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
+    
     const formData = {
 
         representante: document.getElementById('representante').value,
@@ -452,7 +453,7 @@ form.addEventListener('submit', async (e) => {
         endereco: document.getElementById('endereco').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        
+        username: loggedInUsername,
     };
 
 
