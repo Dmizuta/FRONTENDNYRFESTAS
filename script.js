@@ -472,12 +472,12 @@ if (userRole !== "ADMIN") {
      
 
      
-
+/*
       if (quantity < cxfracionada) {
         alert("QUANTIDADE MÍNIMA NECESSÁRIA!"); // Alert the user
         return; // Exit the function without adding the product
     }
-
+*/
 
     
       // Choose the correct price based on the quantity
