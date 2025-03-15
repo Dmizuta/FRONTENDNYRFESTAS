@@ -6,7 +6,6 @@
 
 
 
-
 .logoNyr {
     position: fixed;
     top: 10px; /* Ajuste conforme necessário */
@@ -71,7 +70,7 @@ h1{
     font-size: 1.5rem;
     color: #011a1f;
     
-    margin: 30px auto;
+    margin: 10px auto;
    
     max-width: 95%;
   
@@ -408,7 +407,7 @@ th {
 .modal {
     display: none; /* Hidden by default */
     position: fixed;
-    z-index: 1000; /* Ensure it’s on top */
+    z-index: 10000; /* Ensure it’s on top */
     left: 0;
     top: 0;
     width: 100%;

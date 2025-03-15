@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,41 +9,134 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
     <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
-   
+
+    <script src="config.js"></script>
 </head>
 
+</html>
+
+
+<style>
+  
+
+/* MODAL STYLE*/
+#customer-list-container {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #e7e5e5;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#customer-list-container h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#customer-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#customer-list li {
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#customer-list li:hover {
+    background-color: #e6f7ff;
+}
+
+
+
+
+#customerSelected{
+        font-family: Arial, Helvetica, sans-serif;
+        color:rgb(255, 255, 255);
+      margin-left: 15px;
+        position: fixed;
+        top:120px;
+        font-size: 0.98rem;
+        
+    }
+
+    .button-container {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+}
+
+.button-container button {
+    background-color: #BF6734; /* Dark orange button color */
+    color: #fff;
+    padding: 10px; /* More space */
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em; /* Larger font */
+    font-weight: 600; /* Bold */
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+.button-container button:hover {
+    background-color: #e2943a; /* Light yellow-orange hover color */
+    transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
+}
+
+.button-container button:active {
+    transform: scale(0.98); /* Shrinks button slightly */
+    background-color: #a35c33; /* Darker shade */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+</style>
 <body>
     <header>
-      <h1 id="nyrfestas"></h1>
+        <h1 id="nyrfestas"></h1>
         <div id="user-info">
             <span id="username-display"></span>
             <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
         </div>
 
         <div class="logoNyr">
-          <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
-      </div>
+            <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+        </div>
 
 
     </header>
 
     <nav>
+
+        <div id="customerSelected">Nenhum cliente selecionado</div>
+
         <ul>
             <li id="cadastro-link"><a href="#">Cadastro</a></li>
             <li><a href="produtos.html">Lista de Produtos</a></li>
             <li id="pedidos-link"><a href="#">Pedidos</a></li>
         </ul>
     </nav>
-      
-<div class="PAGE">
+
+
+
+    <div class="PAGE">
     <section class="pagina">
         <h2>Cadastro de Cliente</h2>
+
+        <!-- Form for New Customer Entry or Editing -->
         <form id="cadastroForm" class="cadastro-form">
             <label for="representante">Representante:</label>
             <input type="text" id="representante" name="representante" placeholder="Nome do Representante" required>
-
-          <!--  <label for="Vendedor">Vendedor:</label>
-            <input type="text" id="vendedor" name="vendedor" placeholder="Nome do Vendedor" required>-->
 
             <label for="razaosocial">Razão Social:</label>
             <input type="text" id="razaosocial" name="razaosocial" placeholder="Razão Social da empresa" required>
@@ -52,61 +147,71 @@
             <label for="endereco">Endereço:</label>
             <input type="text" id="endereco" name="endereco" placeholder="Rua /Bairro /CEP /Cidade /UF" required>
 
-            
             <label for="telefone">Telefone:</label>
             <input type="text" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" required>
-            
 
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="E-mail" required>
 
+            <div class="button-container">
+                <button type="submit" id="cadastroButton">Cadastrar</button>
+                <button type="button" id="specialButton" style="display: none;">Apagar</button>
+            </div>
+            
+
+<!-- 
             <button type="submit" id="cadastroButton">Cadastrar</button>
+            <button id="specialButton" style="display: none;">Apagar</button>-->
+
+
         </form>
+
+        <div id="searchBox">
+            <input type="text" id="searchInput" placeholder="Buscar por...">
+            
+        </div>
+
+        <div id="customer-list-container">
+            <h3>Lista de Clientes</h3>
+            <ul id="customer-list"></ul>
+            <ul id="customer-list"></ul>
+
+        </div>
+        
+        
+
+        <!-- Customer List -->
+        
+
     </section>
-  </div>
 
-
+</div>
 
     <script>
 
 
-window.addEventListener('DOMContentLoaded', async () => {
-
-
-  const loggedInUsername = localStorage.getItem('username'); // Fetch the username from localStorage
-  if (!loggedInUsername) {
-    console.error("No username found in localStorage.");
-    return;
-  }
-
-  try {
-    // Sending the username to the backend via query string
-    
-    const response = await fetch(`https://backendnyrfestas.vercel.app/cadastropage?username=${loggedInUsername}`);
-
-    const result = await response.json();
-
-    if (result.success && result.data) {
-      // Fill the form fields with the data returned from the backend
-      document.getElementById('representante').value = result.data.representante || '';
-      //document.getElementById('vendedor').value = result.data.vendedor || '';
-      document.getElementById('razaosocial').value = result.data.razaosocial || '';
-      document.getElementById('cnpj').value = result.data.cnpj || '';
-      document.getElementById('endereco').value = result.data.endereco || '';
-      document.getElementById('telefone').value = result.data.telefone || '';
-      document.getElementById('email').value = result.data.email || '';
-    }
-  } catch (error) {
-    console.error('Error fetching cadastro data:', error);
-  }
-});
 
 
 
 
 
-        // Handle login status
-        const usuario = localStorage.getItem('username');
+
+
+
+
+
+
+
+
+
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            const loggedInUsername = localStorage.getItem('username');
+            localStorage.setItem('customerId', "" ); // If you want to explicitly set it to null
+
+       
+             // Handle login status
+ const usuario = localStorage.getItem('username');
         if (usuario) {
             document.getElementById('username-display').textContent = `Bem-vindo, ${usuario}`;
         } else {
@@ -119,6 +224,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             localStorage.removeItem('username');
             window.location.href = '/';
         });
+
+
 
   // Fetch the user's role from localStorage
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
@@ -146,22 +253,236 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 
+// Fetch customers linked to the logged-in user (seller)
+const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}`);
+const result = await response.json();
+
+if (result.success && result.data) {
+    populateCustomerList(result.data);
+}}
+)
 
 
- 
+
+
+// Function to display the customer list
+function populateCustomerList(customers) {
+    const customerListContainer = document.getElementById('customer-list');
+    customerListContainer.innerHTML = ''; // Clear any previous results
+
+    customers.forEach(customer => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${customer.razaosocial} - ${customer.cnpj}`;
+        listItem.addEventListener('click', () => loadCustomerData(customer));
+        customerListContainer.appendChild(listItem);
+    });
+}
 
 
 
 
-// Handle form submission
+
+
+
+// Function to load customer data into the form when clicked
+function loadCustomerData(customer) {
+    document.getElementById('representante').value = customer.representante || '';
+    document.getElementById('razaosocial').value = customer.razaosocial || '';
+    document.getElementById('cnpj').value = customer.cnpj || '';
+    document.getElementById('endereco').value = customer.endereco || '';
+    document.getElementById('telefone').value = customer.telefone || '';
+    document.getElementById('email').value = customer.email || '';
+    document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
+    document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
+
+    document.getElementById("specialButton").style.display = "block";
+    
+
+    // Store customerId in localStorage
+    localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
+
+    // Call loadCustomerName after loading customer data
+    loadCustomerName();
+
+    // Smooth scroll to a specific position
+    window.scrollTo({
+        top: 100,      // Vertical position (in pixels)
+        left: 0,     // Horizontal position (in pixels)
+        behavior: "smooth" // Smooth scrolling animation
+    });
+}
+
+// Function to load customer name based on customerId in localStorage
+function loadCustomerName() {
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
+  
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
+}
+
+// Handle search input event
+document.getElementById('searchInput').addEventListener('input', async (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const loggedInUsername = localStorage.getItem('username');
+
+    const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}`);
+    const result = await response.json();
+
+    if (result.success && result.data) {
+        const filteredCustomers = result.data.filter(customer => 
+            customer.razaosocial.toLowerCase().includes(searchTerm) || 
+            customer.cnpj.toLowerCase().includes(searchTerm)
+        );
+        populateCustomerList(filteredCustomers);
+    }
+});
+
+
+
+/*
+// Function to load customer data into the form when clicked
+function loadCustomerData(customer) {
+    document.getElementById('representante').value = customer.representante || '';
+    document.getElementById('razaosocial').value = customer.razaosocial || '';
+    document.getElementById('cnpj').value = customer.cnpj || '';
+    document.getElementById('endereco').value = customer.endereco || '';
+    document.getElementById('telefone').value = customer.telefone || '';
+    document.getElementById('email').value = customer.email || '';
+    document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
+    document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
+
+    // Store customerId in localStorage
+    //localStorage.setItem('id', customer.id);  // Set customerId in localStorage
+    localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
+
+
+
+
+
+
+
+
+
+
+
+
+function loadCustomerName() {
+  const customerId = localStorage.getItem('customerId');
+  console.log(customerId);
+  
+  if (!customerId) {
+      console.error('Customer ID not found in localStorage!');
+      document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
+      return;
+  }
+
+  // Fetch customer name from backend (sending customerId in the request body)
+  fetch(`${URL_API}/displayName`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ customerId }) // Sending customerId in the request body
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(data => {
+      // Display customer name from backend
+      const customerName = data.razaosocial || 'Unknown';
+      document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+  })
+  .catch(error => {
+      console.error('Error fetching customer name:', error);
+      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+window.scrollTo({
+    top: 100,      // Vertical position (in pixels)
+    left: 0,     // Horizontal position (in pixels)
+    behavior: "smooth" // Smooth scrolling animation
+    
+  });
+}*/
+        // Handle search input event
+        document.getElementById('searchInput').addEventListener('input', async (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const loggedInUsername = localStorage.getItem('username');
+
+            const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}`);
+            const result = await response.json();
+
+            if (result.success && result.data) {
+                const filteredCustomers = result.data.filter(customer => 
+                    customer.razaosocial.toLowerCase().includes(searchTerm) || 
+                    customer.cnpj.toLowerCase().includes(searchTerm)
+                );
+                populateCustomerList(filteredCustomers);
+            }
+        });
+
+
+
+// Handle form submission (Create or Update)
 const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Get the logged-in username from localStorage
-    const loggedInUsername = localStorage.getItem('username');  // assuming the username is saved here
+    const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
 
-    // Get form data
     const formData = {
         representante: document.getElementById('representante').value,
         razaosocial: document.getElementById('razaosocial').value,
@@ -169,49 +490,123 @@ form.addEventListener('submit', async (e) => {
         endereco: document.getElementById('endereco').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        username: loggedInUsername,  // Add username to the form data
+        username: loggedInUsername,
     };
 
+
+    const customerId = localStorage.getItem('customerId');
+
+
+  
+    
+
+
     try {
-        const response = await fetch('https://backendnyrfestas.vercel.app/cadastro', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
+        let response;
+
+        if (customerId) {
+            // Update existing customer
+            response = await fetch(`${URL_API}/updatecadastro/${customerId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        } else {
+            // Create new customer (assuming the backend has this route)
+            response = await fetch(`${URL_API}/cadastrorep`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        }
 
         const result = await response.json();
+        
         if (response.ok) {
-            alert(result.message); // Shows the dynamic message like "Cadastro created successfully." or "Cadastro updated successfully."
-            
-            // Store the customerId in localStorage
-            localStorage.setItem('customerId', result.customerId);  // Store the customerId from the response
-
-            // Optionally, redirect to a different page or clear the form
-            form.reset();  // Reset the form after successful submission
-            
+            alert(result.message);  // Shows a dynamic message like "Customer created successfully."
+            form.reset();
+            form.dataset.customerId = '';  // Clear stored customer ID after submission
+            document.getElementById('cadastroButton').textContent = 'Cadastrar';  // Reset button text
         } else {
-            alert('Erro: ' + (result.error || 'FALHA NO CADASTRO.'));
+            alert('Error: ' + (result.error || 'FALHA NO CADASTRO.'));
         }
     } catch (error) {
-        console.error('Erro ao enviar o formulário:', error);
+        console.error('Error submitting the form:', error);
         alert('ERRO AO REALIZAR O CADASTRO.');
     }
 });
-
 
 new Cleave('#cnpj', {
     delimiters: ['.', '.', '/', '-'],
     blocks: [2, 3, 3, 4, 2],
     numericOnly: true,
   });
-
-
-
   new Cleave('#telefone', {
     delimiters: ['(', ') ', '-', '-'],
     blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
     numericOnly: true, // Ensure only numbers are entered
 });
+
+
+
+
+
+
+
+document.getElementById("specialButton").addEventListener("click", deleteCustomer);
+
+async function deleteCustomer() {
+    const customerId = localStorage.getItem("customerId");
+
+    if (!customerId) {
+        alert("No customer selected!");
+        return;
+    }
+
+    try {
+        // Fetch customer name from backend
+        const nameResponse = await fetch(`${URL_API}/displayName`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId }) 
+        });
+
+        if (!nameResponse.ok) throw new Error("Failed to fetch customer name.");
+
+        const nameData = await nameResponse.json();
+        const customerName = nameData.razaosocial || 'Unknown'; // Store globally
+
+        // Confirm deletion with customer name
+        const confirmDelete = confirm(`TEM CERTEZA QUE DESEJA APAGAR O CADASTRO ${customerName}?`);
+        if (!confirmDelete) return;
+
+        // Send delete request
+        const deleteResponse = await fetch(`${URL_API}/deleteCustomer/${customerId}`, {
+            method: "DELETE",
+        });
+
+        if (!deleteResponse.ok) throw new Error("Failed to delete customer. Server error.");
+
+        const deleteData = await deleteResponse.json();
+
+        if (deleteData.success) {
+            alert(`CADASTRO >>> ${customerName} <<< APAGADO!`);
+            localStorage.removeItem("customerId"); // Clear stored customer ID
+            location.reload(); // Reload page
+        } else {
+            alert(`Error: ${deleteData.message}`);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An unexpected error occurred. Please try again.");
+    }
+}
+
+
+
+
+
+
 
 
 

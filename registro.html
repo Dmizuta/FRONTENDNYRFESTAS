@@ -6,6 +6,9 @@
   <title>Registro - NYR Festas</title>
   <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <script src="config.js"></script>
+
   <style>
    /* General Styles */
 body {
@@ -140,7 +143,7 @@ body {
       if (username && password && role) {
         try {
           // Make the API request to register
-          const response = await fetch('https://backendnyrfestas.vercel.app/register', {
+          const response = await fetch(`${URL_API}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, role }),

@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
     <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
+
+    <script src="config.js"></script>
 </head>
 
 </html>
+
+
+
 
 
 <style>
@@ -230,7 +235,7 @@
 
 
 // Fetch customers linked to the logged-in user (seller)
-const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers`);
+const response = await fetch(`${URL_API}/allcustomers`);
 const result = await response.json();
 
 if (result.success && result.data) {
@@ -302,7 +307,7 @@ function loadCustomerName() {
     }
 
     // Fetch customer name from backend (sending customerId in the request body)
-    fetch('https://backendnyrfestas.vercel.app/displayName', {
+    fetch(`${URL_API}/displayName`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -326,12 +331,43 @@ function loadCustomerName() {
     });
 }
 
+
+/*
+
+let debounceTimeout; // Variable to hold the timeout reference
+
 // Handle search input event
 document.getElementById('searchInput').addEventListener('input', async (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const loggedInUsername = localStorage.getItem('username');
 
-    const response = await fetch(`https://backendnyrfestas.vercel.app/customers?username=${loggedInUsername}`);
+    // Clear any previous timeout
+    clearTimeout(debounceTimeout);
+
+    // Set a new timeout to delay the API request
+    debounceTimeout = setTimeout(async () => {
+        const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}&searchTerm=${searchTerm}`);
+        const result = await response.json();
+
+        if (result.success && result.data) {
+            const filteredCustomers = result.data.filter(customer => 
+                customer.razaosocial.toLowerCase().includes(searchTerm) || 
+                customer.cnpj.toLowerCase().includes(searchTerm)
+            );
+            populateCustomerList(filteredCustomers); // Update the UI with filtered customers
+        }
+    }, 300); // Delay in milliseconds (300ms)
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+
+// Handle search input event
+document.getElementById('searchInput').addEventListener('input', async (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const loggedInUsername = localStorage.getItem('username');
+
+    const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}`);
     const result = await response.json();
 
     if (result.success && result.data) {
@@ -341,7 +377,7 @@ document.getElementById('searchInput').addEventListener('input', async (e) => {
         );
         populateCustomerList(filteredCustomers);
     }
-});
+});*/
 
 
 
@@ -386,7 +422,7 @@ function loadCustomerData(customer) {
             const searchTerm = e.target.value.toLowerCase();
             
 
-            const response = await fetch(`https://backendnyrfestas.vercel.app/allcustomers`);
+            const response = await fetch(`${URL_API}/allcustomers`);
             const result = await response.json();
 
             if (result.success && result.data) {
@@ -407,7 +443,8 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     
-
+    const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
+    
     const formData = {
 
         representante: document.getElementById('representante').value,
@@ -416,7 +453,7 @@ form.addEventListener('submit', async (e) => {
         endereco: document.getElementById('endereco').value,
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
-        
+        username: loggedInUsername,
     };
 
 
@@ -432,14 +469,14 @@ form.addEventListener('submit', async (e) => {
 
         if (customerId) {
             // Update existing customer
-            response = await fetch(`https://backendnyrfestas.vercel.app/updatecadastroadmin/${customerId}`, {
+            response = await fetch(`${URL_API}/updatecadastroadmin/${customerId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
         } else {
             // Create new customer (assuming the backend has this route)
-            response = await fetch('https://backendnyrfestas.vercel.app/cadastrorep', {
+            response = await fetch(`${URL_API}/cadastrorep`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -491,7 +528,7 @@ async function deleteCustomer() {
 
     try {
         // Fetch customer name from backend
-        const nameResponse = await fetch('https://backendnyrfestas.vercel.app/displayName', {
+        const nameResponse = await fetch(`${URL_API}/displayName`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ customerId }) 
@@ -507,7 +544,7 @@ async function deleteCustomer() {
         if (!confirmDelete) return;
 
         // Send delete request
-        const deleteResponse = await fetch(`https://backendnyrfestas.vercel.app/deleteCustomer/${customerId}`, {
+        const deleteResponse = await fetch(`${URL_API}/deleteCustomer/${customerId}`, {
             method: "DELETE",
         });
 

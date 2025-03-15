@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">-->
 
+    <script src="config.js"></script>
 </head>
 
 <style>
@@ -265,7 +266,7 @@
     .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    
     left: 0;
     top: 0;
     width: 100%;
@@ -553,6 +554,54 @@ font-size: 1rem;
     }
     
     
+
+
+
+
+ /* Style for the select dropdown */
+ #desc {
+    
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    /* Focus effect for the select input */
+    #desc:focus {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #desc option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #desc:hover {
+        border-color: #BF6734;
+    }
+
+
+
+
+    .desc-print-only {
+    
+    display: none;
+    }
+    
+
+
+
+
+
+
     
     .topButtons {
         display: flex;        /* Enables flexbox */
@@ -669,22 +718,39 @@ font-size: 1rem;
                             </div>
                         </div>
         
-                        <div class="dropdown">
-                    
-                            <div id="ipilabel">
-                            <label for="ipi">IPI:</label>
-                            <!-- Dropdown for user interaction -->
-                            <select id="ipi">
-                                <option value='0'>B0</option>
-                                <option value='0.13'>B1</option>
-                                <option value='0.065'>B2</option>
-                                <option value='0.039'>B3</option>
-                            </select>
-                        </div>
-                            
-                        </div>
                         
+                <div class="dropdown">
+            
+                    <div id="ipilabel">
+                    <label for="ipi">IPI:</label>
+                    <!-- Dropdown for user interaction -->
+                    <select id="ipi">
+                        <option value='0'>B0</option>
+                        <option value='0.13'>B1</option>
+                        <option value='0.065'>B2</option>
+                        <option value='0.039'>B3</option>
+                    </select>
+                </div>
+                </div>
+<!--
+                <div class="dropdown">
+            
+                    <div id="desclabel">
+                    <label for="desc">Desconto:</label>
+                    
+                    <select id="desc">
+                        <option value='0'>0%</option>
+                        <option value='0.03'>3%</option>
+                        <option value='0.05'>5%</option>
+                        <option value='0.08'>8%</option>
+                        <option value='0.10'>10%</option>
+                    </select>
+                </div>               
+                </div>
+                        -->
                     </div>
+
+             
         
 
 
@@ -830,7 +896,7 @@ async function loadOrders() {
 
     try {
         console.log('Sending request to backend...');
-        const response = await fetch('https://backendnyrfestas.vercel.app/ordersrep?username=' + username, {
+        const response = await fetch(`${URL_API}/ordersrep?username=` + username, {
             method: 'GET'
         });
 
@@ -853,10 +919,12 @@ async function loadOrders() {
     }
 }
 
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to dynamically display orders
 function displayOrders(orders) {
@@ -880,6 +948,48 @@ function displayOrders(orders) {
             return; // Skip this order if total is invalid
         }
 
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+
+
+
+
+
+
+
+const statusMap = {
+    0: { text: 'Aberto', color: '#E07A5F' },
+    1: { text: 'Orçamento', color: '#FFB200' },
+    2: { text: 'Fechado', color: '#6EC207' },
+    3: { text: 'Processado', color: '#3D8D7A' }
+};
+
+// Get status text and color
+const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
+
+const orderRow = `
+    <div class="order-row" data-id="${order.id}">
+        <div class="order-details">
+            <div><strong>ID:</strong> ${order.id}</div>
+            <div><strong>Representante:</strong> ${order.representante}</div>
+            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
+            <div class="status" style="color: ${status.color};">
+                <strong>Status:</strong> ${status.text}
+            </div>
+        </div>
+    </div>
+`;
+
+container.innerHTML += orderRow;
+/*
+
+
+
         const statusText = order.status === 0 ? 'Aberto' :
                            order.status === 1 ? 'Orçamento' :
                            order.status === 2 ? 'Fechado' :
@@ -898,141 +1008,45 @@ function displayOrders(orders) {
                 </div>
             </div>
         `;
-        container.innerHTML += orderRow;
+        container.innerHTML += orderRow;*/
     });
     console.log('All orders displayed');
 }
 
-/*
-// Function to load orders from the backend
-async function loadOrders() {
-    console.log('loadOrders function started');
 
-    // Fetch username from localStorage
-    const username = localStorage.getItem('username');
-    console.log('Username from localStorage:', username);
-
-    // Check if username exists
-    if (!username) {
-        console.log('No username found in localStorage');
-        document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
-        return;
-    }
-
-    try {
-        console.log('Sending request to backend...');
-        const response = await fetch('https://backendnyrfestas.vercel.app/ordersrep?username=' + username, {
-            method: 'GET'
-        });
-
-        console.log('Response received:', response);
-
-        // Check if the response is ok
-        if (!response.ok) {
-            console.log('Failed to fetch orders. Status:', response.status, response.statusText);
-            document.getElementById('orders-container').innerHTML = '<p>Falha ao carregar.</p>';
-            return;
-        }
-
-        const orders = await response.json();
-        console.log('Parsed orders data:', orders);
-        displayOrders(orders);
-
-    } catch (error) {
-        console.error('Error fetching orders:', error);
-        document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
-    }
-}
-*/
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*
-// Function to dynamically display orders
-function displayOrders(orders) {
-    console.log('displayOrders function called with:', orders);
-    const container = document.getElementById('orders-container');
-    container.innerHTML = ''; // Clear existing content
-
-    if (orders.length === 0) {
-        console.log('No orders found');
-        container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
-        return;
-    }
-
-    orders.forEach(order => {
-        console.log('Processing order:', order);
-
-        // Ensure the total is a valid number and handle non-numeric values
-        const total = parseFloat(order.total);
-        if (isNaN(total)) {
-            console.error('Invalid total value:', order.total);
-        }
-
-        // Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}
-
-const statusText = order.status === 0 ? 'Aberto' :
-                   order.status === 1 ? 'Orçamento' :
-                   order.status === 2 ? 'Fechado' :
-                   order.status === 3 ? 'Fechado':
-                   'Unknown'; 
-        const orderRow = `
-            <div class="order-row" data-id="${order.id}">
-                <div class="order-details">
-                    <div><strong>ID:</strong> ${order.id}</div>
-                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                    <div><strong>Representante:</strong> ${order.representante}</div>
-
-                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-                    <div class="status"><strong>Status:</strong> ${statusText}</div>
-                
-                
-                    </div>
-            </div>
-        `;
-        container.innerHTML += orderRow;
-    });
-    console.log('All orders displayed');
-}
-
-*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
-
-searchBox.addEventListener('input', function() {
-    const searchTerm = searchBox.value.toLowerCase().trim();
-
-    const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
-    orders.forEach(order => {
-        const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
         
-        const razaoSocial = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-        const data = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-        const status = order.querySelector('.order-details div:nth-child(5)').textContent.toLowerCase();
-
-        // Check if the search term matches any of these fields
-        if (
-            orderId.includes(searchTerm) || 
-            
-            razaoSocial.includes(searchTerm) || 
-            data.includes(searchTerm) || 
-            status.includes(searchTerm)
-        ) {
-            order.style.display = 'block'; // Show the order if it matches
-        } else {
-            order.style.display = 'none'; // Hide the order if it doesn't match
-        }
-    });
-});
-
-
+        searchBox.addEventListener('input', function() {
+            const searchTerm = searchBox.value.toLowerCase().trim();
+        
+            const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
+            orders.forEach(order => {
+                const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
+                const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
+                const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
+                const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
+                const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
+        
+                // Check if the search term matches any of these fields
+                if (
+                    orderId.includes(searchTerm) || 
+                    representate.includes(searchTerm) || 
+                    razaoSocial.includes(searchTerm) || 
+                    data.includes(searchTerm) || 
+                    status.includes(searchTerm)
+                ) {
+                    order.style.display = 'block'; // Show the order if it matches
+                } else {
+                    order.style.display = 'none'; // Hide the order if it doesn't match
+                }
+            });
+        });
+        
+        
+   
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1088,7 +1102,7 @@ window.addEventListener("click", function(event) {
             console.log("CHECK HERE", orderId);
             try {
                 console.log(`Fetching details for order ID: ${orderId}`);
-                const response = await fetch(`https://backendnyrfestas.vercel.app/order-details/${orderId}`);
+                const response = await fetch(`${URL_API}/order-details/${orderId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch order details');
                 }
@@ -1105,12 +1119,6 @@ window.addEventListener("click", function(event) {
         }
     
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1152,6 +1160,16 @@ function populateModal(orderDetails) {
         const ipiTax = parseFloat(orderDetails.ipi_tax);
         const ipi = factor * ipiTax * price * quantity;
         const productTotal = (price * quantity) + ipi;
+        console.log('Total de produtos:',productTotal);
+
+
+
+// Function to format numbers as currency (Brazilian Real - R$)
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+}
+
+
 
         const row = `
             <tr data-product-id="${product.id}">
@@ -1169,10 +1187,14 @@ function populateModal(orderDetails) {
 
         orderDetailsContent.innerHTML += row;
         total += productTotal;
-    });
+
 
     // Update total price
     document.getElementById('total-value').textContent = formatCurrency(total);
+
+    });
+
+
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1200,155 +1222,6 @@ function populateModal(orderDetails) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
-// Add event listeners for edit buttons
-document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-    button.addEventListener('click', async function () {
-        const row = this.closest('tr');
-
-        const orderId = localStorage.getItem('currentOrderId');
-        const quantityCell = row.querySelector('.quantity');
-        const productId = row.getAttribute('data-product-id');
-        const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-
-        // Ensure productId is valid
-        if (!productId) {
-            console.error('Error: Missing data-product-id attribute on row');
-            return;
-        }
-
-        // Fetch the current order status to determine if it's editable
-        const requestData = { orderId };
-        console.log("currentOrderId:", orderId);
-
-        try {
-            const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestData),
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to fetch order status: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-
-            // Check if the order status is fetched properly
-            const orderStatus = data.status; // Adjust based on backend response format
-            console.log("Order Status:", orderStatus);
-
-            if (orderStatus === 1 || orderStatus === 2) {
-                alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
-                return; // Prevent further execution
-            }
-
-            // If order is editable, proceed with making the quantity editable
-            const inputField = document.createElement('input');
-            inputField.type = 'number';
-            inputField.value = currentQuantity;
-            inputField.classList.add('edit-quantity');
-
-            // Add save button
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Salvar';
-            saveButton.classList.add('save-quantity-btn');
-
-            // Clear the quantity cell and append input and save button
-            quantityCell.innerHTML = '';
-            quantityCell.appendChild(inputField);
-            quantityCell.appendChild(saveButton);
-
-            // Focus the input field immediately after it is appended
-            inputField.focus();
-
-            // Add 'Enter' key support
-            inputField.addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') saveButton.click();
-            });
-
-            saveButton.addEventListener('click', async function () {
-                const newQuantity = parseInt(inputField.value, 10);
-                if (newQuantity && newQuantity > 0) {
-                    try {
-                        const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ quantity: newQuantity })
-                        });
-
-                        if (!response.ok) throw new Error('Failed to update quantity');
-
-                        const data = await response.json();
-
-                        // Ensure 'updatedProduct' exists in response
-                        if (!data.updatedProduct) {
-                            console.error('Error: updatedProduct not found in response', data);
-                            return;
-                        }
-
-                        // Retrieve values from the response
-                        const { ipi, total: updatedTotal, cxfechada, precofechada, precofrac, ipiTax = 0 } = data.updatedProduct;
-
-                        console.log('IPI value:', ipi);
-                        console.log('Updated total:', updatedTotal);
-                        console.log('Cx Fechada:', cxfechada);
-                        console.log('Preco Fechada:', precofechada);
-                        console.log('Preco Fracionada:', precofrac);
-                        console.log('IPI Tax value:', ipiTax);
-
-                        // Update the quantity directly in the table after success
-                        quantityCell.textContent = newQuantity;
-
-                        // Choose correct price based on quantity
-                        const chosenPrice = newQuantity >= cxfechada ? precofechada : precofrac;
-
-                        console.log('PREÇO ESCOLHIDO:', chosenPrice);
-
-                        // Extract price from table safely
-                        const priceText = row.cells[4]?.textContent?.replace(/[^\d.-]/g, '').trim();
-                        const price = priceText ? parseFloat(priceText) : 0;
-
-                        // Ensure price is valid before performing calculations
-                        if (isNaN(price) || price <= 0) {
-                            console.error('Invalid price value:', price);
-                            return;
-                        }
-
-                        // Calculate IPI value
-                        const ipiValue = (ipi * ipiTax * price / 100) * chosenPrice;
-                        const productTotal = (price / 100) * chosenPrice + ipiValue;
-
-                        // Update the total for this row
-                        row.cells[5].textContent = formatCurrency(ipiValue);
-                        row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
-
-                        // Update the total price in the modal
-                        if (typeof updateTotalPrice === 'function') {
-                            updateTotalPrice();
-                        } else {
-                            console.error('updateTotalPrice function is not defined.');
-                        }
-
-                    } catch (error) {
-                        alert('Error updating quantity');
-                        console.error('Error updating quantity:', error);
-                    }
-                } else {
-                    alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
-                }
-            });
-        } catch (error) {
-            console.error('Error fetching order status:', error);
-            alert('An error occurred while checking the order status. Please try again later.');
-        }
-    });
-});
-*/
 
 
 
@@ -1368,7 +1241,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                 console.log("currentOrderId:", orderId);
         
                 try {
-                    const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+                    const response = await fetch(`${URL_API}/orderStatus`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -1386,8 +1259,8 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                     const orderStatus = data.status; // Adjust based on backend response format
                     console.log("Order Status:", orderStatus);
         
-                    if (orderStatus === 1 || orderStatus === 2) {
-                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
+                    if (orderStatus === 2) {
+                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
                         return; // Prevent further execution
                     }
         
@@ -1419,7 +1292,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                         const newQuantity = parseInt(inputField.value, 10);
                         if (newQuantity && newQuantity > 0) {
                             try {
-                                const response = await fetch(`https://backendnyrfestas.vercel.app/editproduct/${productId}`, {
+                                const response = await fetch(`${URL_API}/editproduct/${productId}`, {
                                     method: 'PATCH',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -1466,6 +1339,14 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                                 const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
                                 const productTotal = chosenPrice * newQuantity + ipiValue ;
         
+
+
+   // Function to format numbers as currency (Brazilian Real - R$)
+   function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+
+
                                 // Update the total for this row
                                 row.cells[4].textContent = formatCurrency(chosenPrice);
                                 row.cells[5].textContent = formatCurrency(ipiValue);
@@ -1504,15 +1385,38 @@ function updateTotalPrice() {
     let total = 0; // Starting with an initial value of 1000
     
     rows.forEach(row => {
+
+
+        const productTotal = parseFloat(
+    row.cells[6].textContent
+        .replace('R$', '')
+        .trim()
+        .replace(/\./g, '') // Remove ALL dots
+        .replace(',', '.')  // Convert decimal separator
+);
+/*
         const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
         console.log('resultado total', productTotal)
+*/
 
+
+        
 
 total =  total += productTotal;
+
+
+
+
+
     });
 
     // Round the total to 2 decimal places
    // total = total.toFixed(2); // This will convert it to a string with 2 decimals
+
+   // Function to format numbers as currency (Brazilian Real - R$)
+   function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
     
  document.getElementById('total-value').textContent = formatCurrency(total);}
 
@@ -1546,7 +1450,7 @@ async function deleteProduct(productId, orderId) {
     console.log("currentOrderId:", orderId);
 
     try {
-        const statusResponse = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+        const statusResponse = await fetch(`${URL_API}/orderStatus`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -1564,13 +1468,13 @@ async function deleteProduct(productId, orderId) {
         const orderStatus = statusData.status; // Adjust based on backend response format
         console.log("Order Status:", orderStatus);
 
-        if (orderStatus === 1 || orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO EM ORÇAMENTO OU FINALIZADO.");
+        if (orderStatus === 2) {
+            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
             return; // Stop further execution if status doesn't allow editing
         }
 
         // If status allows, proceed with deletion
-        const response = await fetch('https://backendnyrfestas.vercel.app/delete-product', {
+        const response = await fetch(`${URL_API}/delete-product`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json', // Define content type as JSON
@@ -1655,7 +1559,7 @@ document.getElementById("save-notes-btn").addEventListener("click", async () => 
     };
 
     try {
-        const response = await fetch('https://backendnyrfestas.vercel.app/save-notes', {
+        const response = await fetch(`${URL_API}/save-notes`, {
             method: "PATCH", // Use PATCH to indicate partial update
             headers: {
                 "Content-Type": "application/json",
@@ -1687,7 +1591,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
     console.log("currentOrderId:", orderId);
 
     try {
-        const statusResponse = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+        const statusResponse = await fetch(`${URL_API}/orderStatus`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -1705,8 +1609,8 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
         const orderStatus = statusData.status; // Adjust based on backend response format
         console.log("Order Status:", orderStatus);
 
-        if (orderStatus === 1 || orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PEDIDO COM STATUS EM ORÇAMENTO OU FINALIZADO.");
+        if (orderStatus === 2) {
+            alert("NÃO É POSSÍVEL DELETAR O PEDIDO ESTÁ FINALIZADO.");
             return; // Stop further execution if status doesn't allow deletion
         }
 
@@ -1723,7 +1627,7 @@ document.getElementById("delete-order-btn").addEventListener("click", async () =
         };
 
         // Send a DELETE request to delete the order
-        const deleteResponse = await fetch('https://backendnyrfestas.vercel.app/delete-order', {
+        const deleteResponse = await fetch(`${URL_API}/delete-order`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -1916,7 +1820,6 @@ function printOrder() {
     
     
     printWindow.document.write(modalClone.outerHTML); // Use modified modal content
-    printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.print();
 }
@@ -1942,7 +1845,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 
     try {
         // Fetch the current status of the order
-        const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+        const response = await fetch(`${URL_API}/orderStatus`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ orderId }),
@@ -1958,7 +1861,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 
         if (currentStatus === 0) {
             // Order is 'Aberto', proceed to submit (change to 'Orçamento')
-            const submitResponse = await fetch('https://backendnyrfestas.vercel.app/submit-order', {
+            const submitResponse = await fetch(`${URL_API}/submit-order`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, observation }), // Send both orderId and observation
@@ -1974,7 +1877,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
         
         else if (currentStatus === 1) {
             // Order is 'Orçamento', check if revert is allowed
-            const checkResponse = await fetch('https://backendnyrfestas.vercel.app/checkOtherOpenedOrders', {
+            const checkResponse = await fetch(`${URL_API}/checkOtherOpenedOrders`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: localStorage.getItem('username') }),
@@ -1982,7 +1885,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 
             const checkData = await checkResponse.json();
             if (checkData && checkData.canRevert) {
-                await fetch('https://backendnyrfestas.vercel.app/revertOrder', {
+                await fetch(`${URL_API}/revertOrder`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ orderId }),
@@ -2044,7 +1947,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
 
     try {
         // Fetch the current status of the order
-        const response = await fetch('https://backendnyrfestas.vercel.app/orderStatus', {
+        const response = await fetch(`${URL_API}/orderStatus`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ orderId }),
@@ -2061,7 +1964,7 @@ document.getElementById("finish-order-btn").addEventListener("click", async () =
         // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
         if (currentStatus === 0 || currentStatus === 1) {
             // Proceed to change status to 2 (Fechado)
-            const finishResponse = await fetch('https://backendnyrfestas.vercel.app/finishOrder', {
+            const finishResponse = await fetch(`${URL_API}/finishOrder`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, observation }), // Send the observation with the request
@@ -2093,7 +1996,7 @@ document.getElementById("ipi").addEventListener("change", async function () {
             const orderId = localStorage.getItem('currentOrderId');
         
             try {
-                const response = await fetch("https://backendnyrfestas.vercel.app/update-ipi", {
+                const response = await fetch(`${URL_API}/update-ipi`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -2117,5 +2020,8 @@ document.getElementById("ipi").addEventListener("change", async function () {
 
 
 </script>
+
+<script src="script.js"></script>
+
 </body>
 </html>

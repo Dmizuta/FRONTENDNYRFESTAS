@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
     
-
+<!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-
+-->
+    <script src="config.js"></script>
 
 
 </head>
@@ -46,7 +47,10 @@
 
 
 .selected img {
-    filter: drop-shadow(0 0 10px #ffffff);
+    
+   
+    filter: drop-shadow(0 0 10px #ffb050);
+    /*filter: drop-shadow( 0 0 15px #ffffff);*/
     transition: filter 0.3s ease-in-out;
 }
 
@@ -89,7 +93,7 @@
         top: calc(2rem + 87px); /* Ajuste para a altura desejada */
         right: 2rem;
         display: flex;
-        gap: 0.6rem;
+        gap: 0.9rem;
         align-items: center;
         z-index: 100;
         
@@ -153,7 +157,74 @@
 }
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+#download {
+    display: flex;
+    align-items: center; /* Ensures proper vertical alignment */
+    max-width: 95%;
+    background-color: #e7e5e5;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 25px auto;
+    padding: 33px;
+    max-height: 45px;
+}
+
+#lista {
+    margin: 0; /* Removes extra space around the heading */
+}
+
+#downloadButton {
+    display: flex; /* Ensure text and spinner align horizontally */
+    align-items: center;
+    justify-content: center; /* Center content inside button */
+    max-width: 230px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: auto; /* Pushes the button to the right */
+}
+/* Spinner animation */
+.spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+    display: none;
+}
+
+/* Spinner keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hidden text opacity during spinner animation */
+.buttonTextHidden {
+    opacity: 0.5;
+}
+
+
 </style>
 
 <body>
@@ -210,28 +281,36 @@
         </div>
     </div>
     
-<!--
-    <div class="icons">
-        <div class="icon-wrapper">
-            <img id="carnaval" src="/imagens/carnaval.png" alt="Carnaval">
-            <span class="tooltip">Carnaval</span>
-        </div>
-        <div class="icon-wrapper">
-            <img id="junino" src="/imagens/junino1.png" alt="Junino">
-            <span class="tooltip">Junino</span>
-        </div>
-        <div class="icon-wrapper">
-            <img id="hlwn" src="/imagens/halloween.png" alt="Halloween">
-            <span class="tooltip">Halloween</span>
-        </div>
-    </div>
--->
+
 
     <div class="PAGE">
 
 
 
-        <h1>Lista de Produtos</h1>
+     
+
+
+    
+
+        <div id="download">
+
+            <h1 id="lista">Lista de Produtos</h1>
+
+            <button id="downloadButton" class="button">
+                <span id="spinner" class="spinner" style="display: none;"></span>
+                <span id="buttonText">Baixe o Catálogo aqui!</span>
+            </button>
+            
+            <!-- Hidden download link -->
+            <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1baF4UZifBlhm-G6hx3K4mG0vUMNYAngk" download style="display: none;"></a>
+
+
+
+            
+
+            <!--<a id="downloadLink" href="https://drive.google.com/file/d/1RWS0QGo4tARfx2T3qfDUwQ7hlbA4Jj0k" download style="display: none;"></a>-->
+        </div>
+    
 
 <!-- Search Wrapper -->
 <div class="search-wrapper">
@@ -268,7 +347,7 @@
         <div class="modal-stage-one">
 
             <div class="prodimage">
-            <img src="https://via.placeholder.com/150" alt="Product Image">
+            <img src="https://placehold.co/150" alt="Product Image">
             </div>
             
             <div class="product-info">
@@ -314,11 +393,27 @@
 
     <script>
     
+////////////////////////////////////////////////////////////////////////////////////////////
+
+             // Handle login status
+             const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+ // Logout function
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('username');  // Remove login data
+    window.location.href = '/';  // Redirect to login page
+});
 
 
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -341,25 +436,8 @@
     console.warn('Role not defined or invalid.');
   }
 
-             // Handle login status
-             const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('username-display').textContent = `Bem vindo, ${username}`;
-        } else {
-            alert("Você precisa estar logado para acessar esta página!");
-            window.location.href = '/';
-        }
- // Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');  // Remove login data
-    window.location.href = '/';  // Redirect to login page
-});
 
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -378,7 +456,7 @@ function loadCustomerName() {
   }
 
   // Fetch customer name from backend (sending customerId in the request body)
-  fetch('https://backendnyrfestas.vercel.app/displayName', {
+  fetch(`${URL_API}/displayName`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -402,11 +480,60 @@ function loadCustomerName() {
   });
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////
+document.getElementById('downloadButton').addEventListener('click', function() {
+    // Get elements
+    const button = document.getElementById('downloadButton');
+    const spinner = document.getElementById('spinner');
+    const buttonText = document.getElementById('buttonText');
+    const downloadLink = document.getElementById('downloadLink');
+    
+    // Show the spinner and reduce text opacity immediately
+    spinner.style.display = 'inline-block';
+    buttonText.classList.add('buttonTextHidden');
+    
+    // Trigger the download immediately
+    downloadLink.click();
+    
+    // You can simulate any task if you want the spinner to stay visible for a duration.
+    setTimeout(() => {
+        // Hide the spinner and restore text opacity after 5 seconds or the task duration
+        spinner.style.display = 'none';
+        buttonText.classList.remove('buttonTextHidden');
+    }, 4000); // Adjust this delay as needed
+});
 
+/*
+document.getElementById('downloadButton').addEventListener('click', function() {
+        // Get elements
+        const button = document.getElementById('downloadButton');
+        const spinner = document.getElementById('spinner');
+        const buttonText = document.getElementById('buttonText');
+        const downloadLink = document.getElementById('downloadLink');
+        
+        // Show the spinner and reduce text opacity
+        spinner.style.display = 'inline-block';
+        buttonText.classList.add('buttonTextHidden');
+        
+        // Simulate a task (e.g., API call or download) with a timeout
+        const startTime = Date.now();
+        
+        setTimeout(() => {
+            // Simulating task duration (5 seconds)
+            const endTime = Date.now();
+            const duration = endTime - startTime;
+            
+            // Log the task duration
+            console.log(`Task completed in ${duration}ms`);
 
-
-
-
+            // Hide the spinner and restore text opacity
+            spinner.style.display = 'none';
+            buttonText.classList.remove('buttonTextHidden');
+            
+            // Trigger the download after the task finishes
+            downloadLink.click();
+        },10); // Simulating a 5-second task
+    });*/
      </script>
     <script src="script.js"></script>
   
