@@ -2088,7 +2088,7 @@ console.log('RESULTADO', discount * 100);
                 // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
                 if (currentStatus === 2 || currentStatus === 3) {
                     // Proceed to change status to 2 (Fechado)
-                    const finishResponse = await fetch(`${URL_API}/revertOrder`, {
+                    const finishResponse = await fetch(`${URL_API}/revertOrderadmin`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ orderId, observation }), // Send the observation with the request
