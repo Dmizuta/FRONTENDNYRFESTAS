@@ -474,8 +474,74 @@ window.scrollTo({
             }
         });
 
+        ////////////////////////////////////////////////////////////////////
+
+        const form = document.getElementById('cadastroForm');
 
 
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const loggedInUsername = localStorage.getItem('username');  
+
+    const formData = {
+        representante: document.getElementById('representante').value,
+        razaosocial: document.getElementById('razaosocial').value,
+        cnpj: document.getElementById('cnpj').value,
+        endereco: document.getElementById('endereco').value,
+        telefone: document.getElementById('telefone').value,
+        email: document.getElementById('email').value,
+        username: loggedInUsername,
+    };
+
+    const customerId = localStorage.getItem('customerId');
+
+    try {
+        let response;
+
+        if (customerId) {
+            response = await fetch(`${URL_API}/updatecadastro/${customerId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        } else {
+            response = await fetch(`${URL_API}/cadastrorep`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        }
+
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(result.message);
+            form.reset();
+            localStorage.removeItem('customerId'); // Reset properly
+            document.getElementById('cadastroButton').textContent = 'Cadastrar';  
+            
+            // Reload the page after submission
+            window.location.reload();
+        } else {
+            alert('Error: ' + (result.error || 'FALHA NO CADASTRO.'));
+        }
+    } catch (error) {
+        console.error('Error submitting the form:', error);
+        alert('ERRO AO REALIZAR O CADASTRO.');
+    }
+});
+
+// Apply Cleave.js only if elements exist
+if (document.getElementById('cnpj')) {
+    new Cleave('#cnpj', { delimiters: ['.', '.', '/', '-'], blocks: [2, 3, 3, 4, 2], numericOnly: true });
+}
+if (document.getElementById('telefone')) {
+    new Cleave('#telefone', { delimiters: ['(', ') ', '-', '-'], blocks: [0, 2, 5, 4], numericOnly: true });
+}
+
+
+/*
 // Handle form submission (Create or Update)
 const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
@@ -547,10 +613,10 @@ new Cleave('#cnpj', {
     numericOnly: true, // Ensure only numbers are entered
 });
 
+*/
 
 
-
-
+////////////////////////////////////////////////////////////////////
 
 
 document.getElementById("specialButton").addEventListener("click", deleteCustomer);

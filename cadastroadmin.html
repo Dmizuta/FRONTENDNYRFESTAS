@@ -490,6 +490,8 @@ form.addEventListener('submit', async (e) => {
             form.reset();
             form.dataset.customerId = '';  // Clear stored customer ID after submission
             document.getElementById('cadastroButton').textContent = 'Cadastrar';  // Reset button text
+            // Reload the page after submission
+            window.location.reload();
         } else {
             alert('Error: ' + (result.error || 'FALHA NO CADASTRO.'));
         }

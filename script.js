@@ -56,7 +56,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 window.addEventListener("DOMContentLoaded", () => {
 setTimeout(() => {
     document.getElementById("junino").click();
-}, 300); // Delay in milliseconds (500ms = 0.5s)
+}, 200); // Delay in milliseconds (500ms = 0.5s)
 });
 
 
