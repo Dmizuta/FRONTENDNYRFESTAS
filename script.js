@@ -1,3 +1,73 @@
+
+
+// Function to fetch product data for the selected season
+async function fetchProductData(epoca) {
+  console.log(`Fetching products for season: ${epoca}`);
+
+  try {
+      const response = await fetch(`${URL_API}/products?epoca=${epoca}`);
+      if (!response.ok) throw new Error("Failed to fetch");
+
+      const data = await response.json();
+      console.log("Fetched data:", data);
+
+      const tableBody = document.querySelector("#productTable tbody");
+
+      if (Array.isArray(data) && data.length > 0) {
+          populateProductTable(data);
+      } else {
+          console.warn("No products found for this season.");
+          tableBody.innerHTML =
+              '<tr><td colspan="7">Nenhum produto encontrado para esta estação.</td></tr>';
+      }
+  } catch (error) {
+      console.error("Error fetching product data:", error);
+      document.querySelector("#productTable tbody").innerHTML =
+          '<tr><td colspan="7">Erro ao carregar os produtos. Tente novamente mais tarde.</td></tr>';
+  }
+}
+
+// Select all season icons
+const seasonIcons = document.querySelectorAll(".icon-button");
+
+// Function to fetch data and highlight selected icon
+function handleSeasonSelection(season, clickedElement) {
+  fetchProductData(season);
+
+  // Remove highlight from all icons
+  seasonIcons.forEach(icon => icon.classList.remove("selected"));
+
+  // Add highlight to the clicked icon
+  clickedElement.classList.add("selected");
+}
+
+// Add click event listeners to each icon
+document.getElementById("carnaval").addEventListener("click", function() {
+  handleSeasonSelection('carnaval', this);
+});
+
+document.getElementById("junino").addEventListener("click", function() {
+  handleSeasonSelection('junino', this);
+});
+
+document.getElementById("hlwn").addEventListener("click", function() {
+  handleSeasonSelection('halloween', this);
+});
+
+// Auto-select default season on page load with delay
+window.addEventListener("load", () => {
+  setTimeout(() => {
+      const juninoButton = document.getElementById("junino");
+      if (juninoButton) {
+          juninoButton.click();
+      } else {
+          console.error("Junino button not found!");
+      }
+  }, 200);
+});
+
+
+/*
 // API URL for fetching product data
 
 // Função para buscar produtos da estação selecionada
@@ -60,7 +130,7 @@ setTimeout(() => {
 });
 
 
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to format numbers as currency (Brazilian Real - R$)
