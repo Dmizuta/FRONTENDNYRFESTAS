@@ -362,6 +362,19 @@ font-size: 1rem;
     float: right;
     
 }
+
+
+
+        #discount-value {
+            font-weight: bold;
+            float: right;
+            
+        }
+
+
+
+
+
     /* When modal is open, make it visible */
     .modal.show {
         display: flex;
@@ -517,6 +530,8 @@ font-size: 1rem;
         outline: none;
         transition: border-color 0.3s ease;
     }
+
+    
     
     /* Focus effect for the select input */
     #ipi:focus {
@@ -533,6 +548,8 @@ font-size: 1rem;
     #ipi:hover {
         border-color: #BF6734;
     }
+
+    
     
     /* Style for the select box container when it's not focused */
     .dropdown {
@@ -548,11 +565,10 @@ font-size: 1rem;
     
     /* By default, hide the print-only span*/ 
     .ipi-print-only {
-        
-        display: none;
-        
-    }
     
+        display: none;
+    }
+
     
 
 
@@ -614,6 +630,54 @@ font-size: 1rem;
         flex: 1; /* Makes both divs take equal space */
     }
     
+
+
+
+        /* Style for the select dropdown */
+        #desc {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+
+
+
+
+    /* Focus effect for the select input */
+    #desc:focus {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #desc option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #desc:hover {
+        border-color: #BF6734;
+    }
+
+
+
+
+    .desc-print-only {
+    
+    display: none;
+    }
+
+
+
+
+
 
     </style>
     
@@ -732,7 +796,8 @@ font-size: 1rem;
                     </select>
                 </div>
                 </div>
-<!--
+
+
                 <div class="dropdown">
             
                     <div id="desclabel">
@@ -747,7 +812,7 @@ font-size: 1rem;
                     </select>
                 </div>               
                 </div>
-                        -->
+                        
                     </div>
 
              
@@ -762,16 +827,29 @@ font-size: 1rem;
             <div class="totalOrderBox">
                 <!-- Total Order Section -->
                 <div class="order-total">
+
+                    <div>
+                        <span>Total do desconto:</span>
+                        <span id="discount-value">R$ 0,00</span>
+                    </div>
+
                     <div>
                         <span>Total do Pedido:</span>
                         <span id="total-value">R$ 0,00</span>
                     </div>
+
                 </div>
             </div>
             <div>
                 <!-- Span for printing, initially hidden -->
                 <span id="ipi-display" class="ipi-print-only"></span>
                 </div>
+
+                <div>
+                    <!-- Span for printing, initially hidden -->
+                    <span id="desc-display" class="desc-print-only"></span>
+                    </div>
+
             <div class="obs-row">
                 <span>Observações:</span>
                 <textarea type="text" id="obs"
@@ -920,9 +998,6 @@ async function loadOrders() {
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -953,13 +1028,6 @@ function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
 
-
-
-
-
-
-
-
 const statusMap = {
     0: { text: 'Aberto', color: '#E07A5F' },
     1: { text: 'Orçamento', color: '#FFB200' },
@@ -986,29 +1054,7 @@ const orderRow = `
 `;
 
 container.innerHTML += orderRow;
-/*
 
-
-
-        const statusText = order.status === 0 ? 'Aberto' :
-                           order.status === 1 ? 'Orçamento' :
-                           order.status === 2 ? 'Fechado' :
-                           order.status === 3 ? 'Fechado' : // Consider differentiating these if needed
-                           'Unknown'; 
-
-        const orderRow = `
-            <div class="order-row" data-id="${order.id}">
-                <div class="order-details">
-                    <div><strong>ID:</strong> ${order.id}</div>
-                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                    <div><strong>Representante:</strong> ${order.representante}</div>
-                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> ${formatCurrency(total)}</div>
-                    <div class="status"><strong>Status:</strong> ${statusText}</div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += orderRow;*/
     });
     console.log('All orders displayed');
 }
@@ -1147,6 +1193,32 @@ function populateModal(orderDetails) {
     // Update products table and calculate total
     ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
 
+
+
+
+
+    const descDropdown = document.getElementById('desc');
+    const descDisplay = document.getElementById('desc-display');
+   // Select the discount dropdown element
+   const discount = document.querySelector('#desc');
+    
+
+     // Set the DESC dropdown value
+     if (orderDetails.desconto) {
+        descDropdown.value = orderDetails.desconto;
+    }
+  
+        // Update desc
+
+
+
+    descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
+
+
+
+
+
+
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
 
@@ -1194,8 +1266,26 @@ function formatCurrency(value) {
 
     });
 
+// Function to update total with discount
+function updateTotal() {
+        let discountValue = parseFloat(discount.value) || 0;
+        let discountTotal = total * discountValue;
+        let totalFinal = total * (1 - discountValue);
 
+        function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                };
+        
+        document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+        document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+    }
 
+    // Initial calculation
+    updateTotal();
+
+    // Add event listener to recalculate when discount changes
+   // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
+    discount.addEventListener('change', updateTotal);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -1379,6 +1469,55 @@ function formatCurrency(value) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+// Function to update the total price in the modal
+function updateTotalPrice() {
+            const rows = document.querySelectorAll('#order-details-content tr');
+            let total = 0; // Starting with an initial value of 1000
+            const discount = document.querySelector('#desc');
+            let discountValue = parseFloat(discount.value) || 0;
+            
+            
+            rows.forEach(row => {
+
+
+                const productTotal = parseFloat(
+    row.cells[6].textContent
+
+        .replace('R$', '')
+        .trim()
+        .replace(/\./g, '') // Remove ALL dots
+        .replace(',', '.')  // Convert decimal separator
+);
+       
+        total =  total += productTotal;
+            });
+
+            
+    let discountTotal = total * discountValue;
+    let totalFinal = total * (1 - discountValue);
+
+
+    function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+
+    document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+
+
+
+       
+    }
+
+
+
+
+
+/*
 // Function to update the total price in the modal
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
@@ -1394,33 +1533,28 @@ function updateTotalPrice() {
         .replace(/\./g, '') // Remove ALL dots
         .replace(',', '.')  // Convert decimal separator
 );
-/*
-        const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
-        console.log('resultado total', productTotal)
-*/
-
-
-        
+   
 
 total =  total += productTotal;
 
-
-
-
-
     });
 
-    // Round the total to 2 decimal places
-   // total = total.toFixed(2); // This will convert it to a string with 2 decimals
+    let discountTotal = total * discountValue;
+let totalFinal = total * (1 - discountValue);
+
+
 
    // Function to format numbers as currency (Brazilian Real - R$)
    function formatCurrency(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 }
-    
- document.getElementById('total-value').textContent = formatCurrency(total);}
+ 
+                
+document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+ document.getElementById('total-value').textContent = formatCurrency(total);
+}
 
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1714,7 +1848,9 @@ function printOrder() {
         
 
             /* Hide certain elements */
+            #logo-image,
             #ipilabel,
+            #desclabel,
             #order-items-table th:nth-child(8),
             #order-items-table td:nth-child(8),
             #order-items-table th:nth-child(9),
@@ -2016,8 +2152,38 @@ document.getElementById("ipi").addEventListener("change", async function () {
             }
             window.location.reload();
         });
-        
 
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        document.getElementById("desc").addEventListener("change", async function () {
+            const discount = parseFloat(this.value); // Get selected IPI value
+            const orderId = localStorage.getItem('currentOrderId');
+        
+            try {
+                const response = await fetch(`${URL_API}/update-desc`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ orderId, discount })
+                });
+        
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`Aplicado desconto de ${discount * 100}%`);
+                    console.log("DESCONTO:", discount);
+                } else {
+                    alert("Não é possível aplicar o desconto, pedido com status FECHADO.");
+                }
+            } catch (error) {
+                console.error("Erro ao atualizar IPI:", error);
+                alert("Erro de conexão com o servidor.");
+            }
+            window.location.reload();
+        });
+        
+       //////////////////////////////////////////////////////////////////////////////////////////// 
 
 </script>
 

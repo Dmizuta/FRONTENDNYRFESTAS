@@ -753,12 +753,12 @@
                     <span id="discount-value">R$ 0,00</span>
                 </div>
 
-
-
                     <div>
                     <span>Total do pedido:</span>
                     <span id="total-value">R$ 0,00</span>
                 </div>
+
+
             </div>
         </div>
 
@@ -931,10 +931,6 @@
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 }
         
-
-
-
-
                 const statusMap = {
     0: { text: 'Aberto', color: '#E07A5F' },
     1: { text: 'Orçamento', color: '#FFB200' },
@@ -961,40 +957,9 @@ const orderRow = `
 `;
 
 container.innerHTML += orderRow;
-
-
-
-
-
-
-        /*
-                const statusText = order.status === 0 ? 'Aberto' :
-                                   order.status === 1 ? 'Orçamento' :
-                                   order.status === 2 ? 'Fechado' :
-                                   order.status === 3 ? 'Processado' :
-                                   'Unknown'; 
-                const orderRow = `
-                    <div class="order-row" data-id="${order.id}">
-                        <div class="order-details">
-                            <div><strong>ID:</strong> ${order.id}</div>
-                            <div><strong>Representante:</strong> ${order.representante}</div>
-                            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-                            <div class="status"><strong>Status:</strong> ${statusText}</div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += orderRow;
-                */
-
-                
+    
             });
 
-
-
-
-            
             console.log('All orders displayed');
         }
         
@@ -1110,12 +1075,6 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
 
 
-
-
-
-
- 
-
     // Function to update total with discount
     function updateTotal() {
         let discountValue = parseFloat(discount.value) || 0;
@@ -1136,43 +1095,6 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
     // Add event listener to recalculate when discount changes
    // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
     discount.addEventListener('change', updateTotal);
-
-
-/*
-        orderDetailsContent.innerHTML += row;
-        total += productTotal;
-
-
-
-        
-// Select the dropdown element
-const discount = document.querySelector('#desc');
-
-
-
-
-
-// Add an event listener to listen for changes
-//discount.addEventListener('change', function() {
-    // Get the selected value
-    let discountValue = discount.value;
-    console.log('DESCONTO',discountValue); // This will log the new selected value when changed
-//});
-
-const discountTotal = total * discountValue;
-
-const totalFinal = total * (1 - discountValue);
-
-
-
-
-
-
-            // Update total price
-    document.querySelector('#discount-value').textContent = formatCurrency(discountTotal);
-    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-  */
-    
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1197,6 +1119,7 @@ const totalFinal = total * (1 - discountValue);
             }
          
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         // Add event listeners for edit buttons
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', async function () {
@@ -1281,158 +1204,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
 
-        /*
-
-        // Add event listeners for edit buttons
-        document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-            button.addEventListener('click', async function () {
-                const row = this.closest('tr');
-        
-                const orderId = localStorage.getItem('currentOrderId');
-                const quantityCell = row.querySelector('.quantity');
-                const productId = row.getAttribute('data-product-id');
-                const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-        
-                // Fetch the current order status to determine if it's editable
-                const requestData = { orderId };
-                console.log("currentOrderId:", orderId);
-        
-                try {
-                    const response = await fetch(`${URL_API}/orderStatus`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(requestData),
-                    });
-        
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch order status: ${response.statusText}`);
-                    }
-        
-                    const data = await response.json();
-        
-                    // Check if the order status is fetched properly
-                    const orderStatus = data.status; // Adjust based on backend response format
-                    console.log("Order Status:", orderStatus);
-        
-                    if (orderStatus === 2) {
-                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
-                        return; // Prevent further execution
-                    }
-        
-                    // If order is editable, proceed with making the quantity editable
-                    const inputField = document.createElement('input');
-                    inputField.type = 'number';
-                    inputField.value = currentQuantity;
-                    inputField.classList.add('edit-quantity');
-        
-                    // Add save button
-                    const saveButton = document.createElement('button');
-                    saveButton.textContent = 'Salvar';
-                    saveButton.classList.add('save-quantity-btn');
-        
-                    // Clear the quantity cell and append input and save button
-                    quantityCell.innerHTML = '';
-                    quantityCell.appendChild(inputField);
-                    quantityCell.appendChild(saveButton);
-        
-                    // Focus the input field immediately after it is appended
-                    inputField.focus();
-        
-                    // Add 'Enter' key support
-                    inputField.addEventListener('keypress', function (event) {
-                        if (event.key === 'Enter') saveButton.click();
-                    });
-        
-                    saveButton.addEventListener('click', async function () {
-                        const newQuantity = parseInt(inputField.value, 10);
-                        if (newQuantity && newQuantity > 0) {
-                            try {
-                                const response = await fetch(`${URL_API}/editproduct/${productId}`, {
-                                    method: 'PATCH',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({ quantity: newQuantity })
-                                });
-        
-                                if (!response.ok) throw new Error('Failed to update quantity');
-        
-                
-                                const data = await response.json();
-
-                                
-        // Assume 'data' is the response object you received from the server
-        // const data = response.data;
-        
-        // Retrieve the ipi value and total from the response
-        const ipi = data.updatedProduct.ipi;  // ipi value
-        const updatedTotal = data.updatedProduct.total;  // New total value
-        const cxfechada = data.updatedProduct.cxfechada;
-        const precofechada = data.updatedProduct.precofechada;
-        const precofrac = data.updatedProduct.precofrac;
-        
-  
-        
-                                // Update the quantity directly in the table after success
-                                quantityCell.textContent = newQuantity;
-
-
-
-                                 
-                                   const chosenPrice = (newQuantity >= cxfechada) ? precofechada : precofrac;
-
-                              
-                               
-
-                              
-                               const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
-                               console.log('IPI Tax value:', ipitax);
-                                console.log('IPI value:', ipi);
-                               
-                                // Optionally, you can re-calculate the total if necessary
-                                //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
-                                const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
-                                const productTotal = chosenPrice * newQuantity + ipiValue ;
-
-
-   // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-
-
-        
-                                // Update the total for this row
-                                row.cells[4].textContent = formatCurrency(chosenPrice);
-                                row.cells[5].textContent = formatCurrency(ipiValue);
-                                row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
-        
-                                // Update the total price in the modal
-                                //update();
-                                updateTotalPrice();
-        
-                               
-        
-                            } catch (error) {
-                                alert('Error updating quantity');
-                                console.error('Error updating quantity:', error);
-                            }
-                        } else {
-                            alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error fetching order status:', error);
-                    alert('An error occurred while checking the order status. Please try again later.');
-                }
-            });
-        });
-        
-
-*/
-     
+            
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -1473,20 +1245,6 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
 
-
-
-   
-/*
-            // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-        
-            // Round the total to 2 decimal places
-           // total = total.toFixed(2); // This will convert it to a string with 2 decimals
-            
-         document.getElementById('total-value').textContent = formatCurrency(total);
-        */
        
     }
         
