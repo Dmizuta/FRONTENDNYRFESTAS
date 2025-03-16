@@ -421,6 +421,26 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
   const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
   const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+
+
+// Dynamically assign the correct href based on the user's role
+if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+    cadastroLink.href = 'CADASTRO/CADASTRO_USER/cadastro.html';
+  } else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+    cadastroLink.href = 'CADASTRO/CADASTRO_REP/cadastrorep.html';
+  } else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+    cadastroLink.href = 'CADASTRO/CADASTRO_ADMIN/cadastroadmin.html';
+  } else {
+    pedidosLink.href = '#'; // Default action for unknown or missing roles
+    console.warn('Role not defined or invalid.');
+  }
+
+
+
+  /*
   // Dynamically assign the correct href based on the user's role
   if (userRole === 'USER') {
     pedidosLink.href = 'pedidos.html';
@@ -435,7 +455,7 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     pedidosLink.href = '#'; // Default action for unknown or missing roles
     console.warn('Role not defined or invalid.');
   }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 

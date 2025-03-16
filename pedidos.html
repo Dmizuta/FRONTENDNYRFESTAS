@@ -599,9 +599,9 @@
 
 <nav>
     <ul>
-        <li id="cadastro-link"><a href="#">Cadastro</a></li>
+        <li><a href="CADASTRO/CADASTRO_USER/cadastro.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
-        <li id="pedidos-link"><a href="#">Pedidos</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
     </ul>
 </nav>
 
@@ -763,26 +763,6 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('username');
     window.location.href = '/';
 });
-
-// Fetch the user's role from localStorage
-const userRole = localStorage.getItem('role');
-const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-
-// Dynamically assign the correct href based on the user's role
-if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-} else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-} else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-} else {
-    pedidosLink.href = '#';
-    console.warn('Role not defined or invalid.');
-}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

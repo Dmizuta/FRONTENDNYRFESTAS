@@ -613,10 +613,10 @@
 </header>
 
 <nav>
-    <ul>
-        <li id="cadastro-link"><a href="#">Cadastro</a></li>
+       <ul>
+        <li><a href="CADASTRO/CADASTRO_ADMIN/cadastroadmin.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
-        <li id="pedidos-link"><a href="#">Pedidos</a></li>
+        <li><a href="pedidosadmin.html">Pedidos</a></li>
     </ul>
 </nav>
 
@@ -839,46 +839,6 @@
         document.getElementById('logoutBtn').addEventListener('click', handleLogout);
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Fetch the user's role from localStorage
-        const userRole = localStorage.getItem('role');
-        
-        // Get link elements
-        const pedidosLinkContainer = document.getElementById('pedidos-link');
-        const cadastroLinkContainer = document.getElementById('cadastro-link');
-        
-        // Check if the link containers exist
-        if (pedidosLinkContainer && cadastroLinkContainer) {
-          const pedidosLink = pedidosLinkContainer.querySelector('a');
-          const cadastroLink = cadastroLinkContainer.querySelector('a');
-        
-          // Check if the links exist
-          if (pedidosLink && cadastroLink) {
-            // Dynamically assign the correct href based on the user's role
-            switch (userRole) {
-              case 'USER':
-                pedidosLink.href = 'pedidos.html';
-                cadastroLink.href = 'cadastro.html';
-                break;
-              case 'SELLER':
-                pedidosLink.href = 'pedidosrep.html';
-                cadastroLink.href = 'cadastrorep.html';
-                break;
-              case 'ADMIN':
-                pedidosLink.href = 'pedidosadmin.html';
-                cadastroLink.href = 'cadastroadmin.html';
-                break;
-              default:
-                pedidosLink.href = '#';
-                cadastroLink.href = '#';
-                console.warn('Role not defined or invalid:', userRole);
-            }
-          } else {
-            console.error('Links not found in the link containers.');
-          }
-        } else {
-          console.error('Link containers not found in the DOM.');
-        }
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
