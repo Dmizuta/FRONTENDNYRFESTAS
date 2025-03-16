@@ -1191,6 +1191,8 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                     // Update total price in the modal
                     updateTotalPrice();
 
+                    window.location.reload();
+
                 } catch (error) {
                     alert('Error updating quantity');
                     console.error('Error updating quantity:', error);
