@@ -2102,7 +2102,7 @@ document.getElementById("ipi").addEventListener("change", async function () {
                 if (response.ok) {
                     alert(`Aliquota atualizada para ${newIPI * 100}%`);
                 } else {
-                    alert("Erro ao atualizar IPI: " + data.error);
+                    alert("Não é possível atualizar o IPI, pedido com status FECHADO.");
                 }
             } catch (error) {
                 console.error("Erro ao atualizar IPI:", error);
