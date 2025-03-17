@@ -975,7 +975,9 @@ function displayOrders(orders) {
         console.log('Processing order:', order);
 
         // Ensure the total is a valid number and handle non-numeric values
-      /*  const total = parseFloat(order.total);
+      const total = parseFloat(order.total);
+      
+      /*
         if (isNaN(total)) {
             console.error('Invalid total value:', order.total);
             return; // Skip this order if total is invalid
