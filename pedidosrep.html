@@ -977,11 +977,9 @@ function displayOrders(orders) {
         // Ensure the total is a valid number and handle non-numeric values
       const total = parseFloat(order.total);
       
-      /*
-        if (isNaN(total)) {
-            console.error('Invalid total value:', order.total);
-            return; // Skip this order if total is invalid
-        }*/
+      if (isNaN(total)) {
+                    console.error('Invalid total value:', order.total);
+                }
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
