@@ -222,15 +222,32 @@
                 background-color: #f9f9f9;
             }
             
+
+
+
+            #total-order {
+            font-weight: bold; 
+            float: right;
+            
+            }
+
             #total-value {
             font-weight: bold;
             float: right;
+            color: white;
             
         }
 
         #discount-value {
             font-weight: bold;
             float: right;
+            color: rgb(204, 255, 103);
+            
+        }
+        #ipi-order {
+            font-weight: bold;
+            float: right;
+            color: rgb(255, 210, 127);
             
         }
 
@@ -635,6 +652,9 @@
 
     
     <!-- Orders will be inserted here dynamically -->
+
+
+
 </div>
 </div>
 
@@ -683,6 +703,7 @@
 
                 
 <div class="topButtons" >
+
                 <div class="container">
                     <div class="switch-container">
                         <!-- Left label -->
@@ -697,11 +718,6 @@
                         <span class="switch-label right-label">Orçamento</span>
                     </div>
                 </div>
-
-
-
-
-
 
                 <div class="dropdown">
             
@@ -748,13 +764,26 @@
             <!-- Total Order Section -->
             <div class="order-total">
 
+
                 <div>
-                    <span>Total do desconto:</span>
+                    <span>Valor do Pedido:</span>
+                    <span id="total-order">R$ 0,00</span>
+                </div>
+                
+                <div>
+                    <span>Valor do Ipi:</span>
+                    <span id="ipi-order">R$ 0,00</span>
+                </div>
+
+                
+
+                <div>
+                    <span>Valor do Desconto:</span>
                     <span id="discount-value">R$ 0,00</span>
                 </div>
 
-                    <div>
-                    <span>Total do pedido:</span>
+                <div>
+                    <span>Total do Pedido:</span>
                     <span id="total-value">R$ 0,00</span>
                 </div>
 
@@ -998,6 +1027,7 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
         const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
+    let ipiOrder = 0;
 
     // Clear existing content
     orderDetailsContent.innerHTML = '';
@@ -1030,7 +1060,16 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
         `;  
 
         orderDetailsContent.innerHTML += row;
+
         total += productTotal;
+        
+                
+        ipiOrder += ipi;
+
+        total2 = total - ipiOrder;
+       
+
+        console.log('IPI VALUE:',ipiOrder);
     });
 
 
@@ -1038,13 +1077,14 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
     // Function to update total with discount
     function updateTotal() {
         let discountValue = parseFloat(discount.value) || 0;
-        let discountTotal = total * discountValue;
+        let discountTotal = total * discountValue * (-1);
         let totalFinal = total * (1 - discountValue);
 
         function formatCurrency(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 };
-        
+        document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
+        document.getElementById('total-order').textContent = formatCurrency(total2);
         document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
         document.getElementById('total-value').textContent = formatCurrency(totalFinal);
     }
