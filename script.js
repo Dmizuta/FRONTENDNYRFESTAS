@@ -407,7 +407,7 @@ if (userRole !== "ADMIN") {
         const quantity = parseInt(document.getElementById('quantity').value);
 
         if (quantity < cxfracionada) {
-          alert("É NECESSÁRIA QUANTIDADE MÍNIMA!"); // Alert the user
+          alert("NECESSÁRIO QUANTIDADE MÍNIMA!"); // Alert the user
           return; // Exit the function without adding the product
       }
 
