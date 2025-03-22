@@ -595,7 +595,21 @@
     
     
     
+    #pedido-adm a {
     
+    text-decoration: none;
+   font-weight: bold;
+    border-radius: 25px;
+    padding: 6px 25px;
+
+    background-color: #BF6734;
+ 
+    
+    
+    border-radius: 25px;
+
+
+}
     
     
     
@@ -637,7 +651,7 @@
        <ul>
         <li><a href="CADASTRO/CADASTRO_ADMIN/cadastroadmin.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
-        <li><a href="pedidosadmin.html">Pedidos</a></li>
+        <li id="pedido-adm" ><a href="pedidosadmin.html">Pedidos</a></li>
     </ul>
 </nav>
 
@@ -1419,7 +1433,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         // Save Notes Button
         document.getElementById("save-notes-btn").addEventListener("click", async () => {
             const observation = document.getElementById("obs").value.trim(); // Get the observation value
-            const discount = document.getElementById("desc").value.trim();
+           // const discount = document.getElementById("desc").value.trim();
            // const discount = document.getElementById("desc").value; // Get the selected discount value
             const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
 
@@ -1433,7 +1447,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             const requestData = {
                 orderId: orderId,
                 observation: observation,
-                discount: discount, // Include discount in the request
+                //discount: discount, // Include discount in the request
             };
 
 
@@ -1450,7 +1464,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                 });
 
 
-console.log('RESULTADO', discount * 100);
+
              
 
 

@@ -97,16 +97,17 @@ nav a {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
-    padding: 12px 25px; /* Aumentado para botões mais largos */
+    padding: 6px 25px; /* Aumentado para botões mais largos */
     border-radius: 25px; /* Bordas mais arredondadas */
     font-size: 1.4rem; /* Aumentado para um tamanho maior */
     transition: background-color 0.3s, transform 0.2s;
 }
 
 nav a:hover {
-    background-color: #F2B680; /* Yellow-orange highlight on hover */
-    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+    background-color: #F2B680 !important; 
+    transform: scale(1.05) !important;
 }
+
 
 
 
