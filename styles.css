@@ -232,6 +232,7 @@ th {
 }*/
 
 .PAGE{
+    min-width: 1080px;
    margin-top: 200px;
 }
 
