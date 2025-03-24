@@ -733,12 +733,16 @@ font-size: 1rem;
 </header>
 
 <nav>
+
+    <div id="customerSelected">...</div>
+
     <ul>
         <li ><a href="CADASTRO/CADASTRO_REP/cadastrorep.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
         <l id="pedido-rep"><a href="pedidosrep.html">Pedidos</a></li>
     </ul>
 </nav>
+
 
 
 <div class="PAGE">
@@ -918,7 +922,7 @@ font-size: 1rem;
                     <button class="action-btn" onclick="printOrder()">IMPRIMIR</button>
                     <button id="save-notes-btn" class="action-btn">SALVAR</button>
                     
-                   
+                    <button id="duplicateOrderButton" class="action-btn">DUPLICAR</button>
                     
                     <button id="finish-order-btn" class="action-btn">FINALIZAR</button>
                     <button id="delete-order-btn" class="action-btn">APAGAR</button>
@@ -1192,7 +1196,7 @@ function populateModal(orderDetails) {
 
 
 
-    
+
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
     const ipiDisplay = document.getElementById('ipi-display');
@@ -2204,6 +2208,97 @@ document.getElementById("ipi").addEventListener("change", async function () {
         });
         
        //////////////////////////////////////////////////////////////////////////////////////////// 
+
+
+// Função para duplicar o pedido
+async function duplicateOrder() {
+    // Recupera os dados do localStorage
+    const username = localStorage.getItem('username');
+    const newCustomerId = localStorage.getItem('customerId');
+    const currentOrderId = localStorage.getItem('currentOrderId');
+
+    // Verifica se os dados necessários estão disponíveis
+    if (!username || !newCustomerId || !currentOrderId) {
+        console.error('Dados necessários não encontrados no localStorage.');
+        return;
+    }
+
+    // Dados a serem enviados na requisição
+    const requestData = {
+        username,
+        newCustomerId: parseInt(newCustomerId, 10), // Converte para número
+        currentOrderId: parseInt(currentOrderId, 10)  // Converte para número
+    };
+
+    try {
+        const response = await fetch(`${URL_API}/duplicate-order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+        }
+
+        const result = await response.json();
+        console.log(result.message); // Mensagem de sucesso
+        alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
+
+        // Recarrega a página após a duplicação bem-sucedida
+        window.location.reload();
+    } catch (error) {
+        console.error('Erro:', error.message);
+    }
+}
+
+// Adiciona o evento de clique ao botão
+document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Function to load customer name based on customerId in localStorage
+function loadCustomerName() {
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
+  
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
+}
+
+// Chama a função ao carregar a página
+loadCustomerName();
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 </script>
 
