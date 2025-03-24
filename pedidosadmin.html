@@ -2095,6 +2095,7 @@ async function duplicateOrder() {
     // Verifica se os dados necessários estão disponíveis
     if (!username || !newCustomerId || !currentOrderId) {
         console.error('Dados necessários não encontrados no localStorage.');
+        alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
         return;
     }
 
