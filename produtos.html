@@ -255,7 +255,11 @@
     </header>
 
     <nav>
-       
+        <div id="customerSelected">
+
+            <span id="customerName">...</span>
+            <span class="clear-btn" onclick="clearCustomer()">❌</span>
+          </div>
 
        
         <ul>
@@ -266,7 +270,7 @@
      
     </nav>
       
-    <div id="customerSelected">...</div>
+    
 
 
 
@@ -470,45 +474,51 @@ if (userRole === 'USER') {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadCustomerName();
-});
-
+// Function to load customer name based on customerId in localStorage
 function loadCustomerName() {
-  const customerId = localStorage.getItem('customerId');
-  console.log(customerId);
-  
-  if (!customerId) {
-      console.error('Customer ID not found in localStorage!');
-      document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
-      return;
-  }
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
 
-  // Fetch customer name from backend (sending customerId in the request body)
-  fetch(`${URL_API}/displayName`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ customerId }) // Sending customerId in the request body
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-  })
-  .then(data => {
-      // Display customer name from backend
-      const customerName = data.razaosocial || 'Unknown';
-      document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
-  })
-  .catch(error => {
-      console.error('Error fetching customer name:', error);
-      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-  });
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
 }
+
+// Function to clear the customer selection
+function clearCustomer() {
+    localStorage.removeItem('customerId');
+    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+}
+
+// Call the function when the page loads
+loadCustomerName();
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 document.getElementById('downloadButton').addEventListener('click', function() {

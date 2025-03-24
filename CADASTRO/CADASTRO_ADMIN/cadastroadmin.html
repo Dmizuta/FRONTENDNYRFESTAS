@@ -61,15 +61,6 @@
 
 
 
-#customerSelected{
-        font-family: Arial, Helvetica, sans-serif;
-        color:rgb(255, 255, 255);
-      margin-left: 15px;
-        position: fixed;
-        top:120px;
-        font-size: 0.98rem;
-        
-    }
 
 
     .button-container {
@@ -128,7 +119,7 @@
     <header>
         <!--<h1 id="nyrfestas">NYR Festas</h1>-->
         <div id="user-info">
-            <span id="username-display"></span>
+            <span id="username-display">...</span>
             <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
         </div>
 
@@ -141,7 +132,12 @@
 
     <nav>
 
-        <div id="customerSelected">Nenhum cliente selecionado</div>
+        <div id="customerSelected">
+
+            <span id="customerName">...</span>
+            <span class="clear-btn" onclick="clearCustomer()">❌</span>
+          </div>
+
 
         <ul>
             <li id="cadastro-adm"><a href="cadastroadmin.html">Cadastro</a></li>

@@ -59,15 +59,6 @@
 
 
 
-#customerSelected{
-        font-family: Arial, Helvetica, sans-serif;
-        color:rgb(255, 255, 255);
-      margin-left: 15px;
-        position: fixed;
-        top:120px;
-        font-size: 0.98rem;
-        
-    }
 
     .button-container {
     display: flex;
@@ -132,7 +123,12 @@
 
     <nav>
 
-        <div id="customerSelected">Nenhum cliente selecionado</div>
+        <div id="customerSelected">
+
+            <span id="customerName">...</span>
+            <span class="clear-btn" onclick="clearCustomer()">❌</span>
+          </div>
+
 
         <ul>
             <li id="cadastro-rep"><a href="cadastrorep.html">Cadastro</a></li>
