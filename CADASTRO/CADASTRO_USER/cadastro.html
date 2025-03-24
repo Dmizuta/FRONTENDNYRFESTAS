@@ -308,14 +308,16 @@ function loadCustomerData(customer) {
     });
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
+
 // Function to load customer name based on customerId in localStorage
 function loadCustomerName() {
     const customerId = localStorage.getItem('customerId');
     console.log(customerId);
-  
+
     if (!customerId) {
         console.error('Customer ID not found in localStorage!');
-        document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
+        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
         return;
     }
 
@@ -336,13 +338,24 @@ function loadCustomerName() {
     .then(data => {
         // Display customer name from backend
         const customerName = data.razaosocial || 'Unknown';
-        document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
     })
     .catch(error => {
         console.error('Error fetching customer name:', error);
-        document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
     });
 }
+
+// Function to clear the customer selection
+function clearCustomer() {
+    localStorage.removeItem('customerId');
+    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+}
+
+// Call the function when the page loads
+loadCustomerName();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Handle search input event
 document.getElementById('searchInput').addEventListener('input', async (e) => {
