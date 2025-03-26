@@ -1217,15 +1217,22 @@ function populateModal(orderDetails) {
 
 
 
-    //const descDropdown = document.getElementById('desc');
+    const descDropdown = document.getElementById('desc');
     const descDisplay = document.getElementById('desc-display');
    // Select the discount dropdown element
    const discount = document.querySelector('#desc');
     
 
+   if (orderDetails.desconto !== undefined && orderDetails.desconto !== null) {
+    descDropdown.value = orderDetails.desconto;
+} else {
+    descDropdown.value = 0; // Ensure 0 is set when no discount is provided
+}
+
+
      // Set the DESC dropdown value
-    // if (orderDetails.desconto) {
-        //descDropdown.value = orderDetails.desconto;}
+     //if (orderDetails.desconto) {
+      //  descDropdown.value = orderDetails.desconto;}
   
         // Update desc
 
