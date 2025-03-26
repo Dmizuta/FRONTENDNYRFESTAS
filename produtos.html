@@ -151,48 +151,49 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 #download {
-    display: flex;
-    align-items: center; /* Ensures proper vertical alignment */
-    max-width: 95%;
-    background-color: #e7e5e5;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin: 25px auto;
-    padding: 33px;
-    max-height: 45px;
-}
+        display: flex;
+        align-items: center; 
+        max-width: 95%;
+        background-color: #e7e5e5;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 2px auto;
+        padding: 33px;
+        max-height: 45px;
+    }
 
-#lista {
-    margin: 0; /* Removes extra space around the heading */
-}
+
+    #lista {
+        margin: 0; 
+    }
+
+
 
 #downloadButton {
-    display: flex; /* Ensure text and spinner align horizontally */
-    align-items: center;
-    justify-content: center; /* Center content inside button */
+    display: flex;
+    align-items: center; /* Ensure text and image align vertically */
+    justify-content: center;
     max-width: 230px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: #4CAF50;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     text-align: center;
     border: none;
     cursor: pointer;
     position: relative;
-    margin-left: auto; /* Pushes the button to the right */
+    margin-left: auto;
 }
+
+/* Style the image inside the button */
+.button-icon {
+    width: 20px; /* Adjust the width of the image */
+    height: 20px; /* Adjust the height of the image */
+    margin-right: 11px; /* Space between the image and text */
+}
+
 /* Spinner animation */
 .spinner {
     border: 2px solid #f3f3f3;
@@ -215,6 +216,69 @@
 .buttonTextHidden {
     opacity: 0.5;
 }
+
+
+/*
+
+    #download {
+        display: flex;
+        align-items: center; 
+        max-width: 95%;
+        background-color: #e7e5e5;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 25px auto;
+        padding: 33px;
+        max-height: 45px;
+    }
+
+    #lista {
+        margin: 0; 
+    }
+
+    #downloadButton {
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+        max-width: 230px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        margin-left: auto; 
+    }
+    
+    .spinner {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+        display: none;
+    }
+
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+   
+    .buttonTextHidden {
+        opacity: 0.5;
+    }
+
+
+*/
+
+
 
 
 
@@ -304,16 +368,33 @@
      
 
 
+
+
+
+
     
 
         <div id="download">
 
             <h1 id="lista">Lista de Produtos</h1>
 
+
+
+
+
+            
+        <button id="downloadButton" class="button">
+            <img src="/imagens/download.png" alt="icon" class="button-icon">
+            <span id="buttonText">Catálogo!</span>
+        </button>
+        
+<!--
             <button id="downloadButton" class="button">
                 <span id="spinner" class="spinner" style="display: none;"></span>
                 <span id="buttonText">Baixe o Catálogo aqui!</span>
-            </button>
+            </button> 
+            
+-->
             
             <!-- Hidden download link -->
             <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1YS7MBcVdLJ1DoKeeOLRrgUrjC-T3RiVy" download style="display: none;"></a>
