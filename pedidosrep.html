@@ -785,6 +785,10 @@ font-size: 1rem;
                         <span id="cnpj"></span>
                     </div>
                     <div class="order-info-row">
+                        <span>Email:</span>
+                        <span id="email"></span>
+                    </div>
+                    <div class="order-info-row">
                         <span>Representante:</span>
                         <span id="representante"></span>
                     </div>
@@ -1193,6 +1197,7 @@ function populateModal(orderDetails) {
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('email').textContent = orderDetails.email;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
