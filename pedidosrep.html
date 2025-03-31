@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos - NYR Festas</title>
+    <title>NYR Festas (R)</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
@@ -357,11 +357,38 @@ font-size: 1rem;
         background-color: #f9f9f9;
     }
     
-    #total-value {
-    font-weight: bold;
-    float: right;
-    
-}
+
+
+    #total-order {
+            font-weight: bold; 
+            float: right;
+            color: white;
+            }
+
+            #total-value {
+            font-weight: bolder;
+            float: right;
+            color: white;
+            
+        }
+
+        #discount-value {
+            font-weight:bold;
+            float: right;
+            color: rgb(245, 158, 158);
+            
+        }
+        #ipi-order {
+            font-weight: bold;
+            float: right;
+           
+            color: rgb(255, 255, 199);
+        }
+
+
+
+
+
     /* When modal is open, make it visible */
     .modal.show {
         display: flex;
@@ -475,7 +502,11 @@ font-size: 1rem;
     font-size: 1.1rem;
 }
 
-
+.valores{
+        color:white;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
 
 
 
@@ -517,6 +548,8 @@ font-size: 1rem;
         outline: none;
         transition: border-color 0.3s ease;
     }
+
+    
     
     /* Focus effect for the select input */
     #ipi:focus {
@@ -533,6 +566,8 @@ font-size: 1rem;
     #ipi:hover {
         border-color: #BF6734;
     }
+
+    
     
     /* Style for the select box container when it's not focused */
     .dropdown {
@@ -548,11 +583,10 @@ font-size: 1rem;
     
     /* By default, hide the print-only span*/ 
     .ipi-print-only {
-        
-        display: none;
-        
-    }
     
+        display: none;
+    }
+
     
 
 
@@ -615,6 +649,70 @@ font-size: 1rem;
     }
     
 
+
+
+        /* Style for the select dropdown */
+        #desc {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+
+
+
+
+    /* Focus effect for the select input */
+    #desc:focus {
+        border-color: #BF6734;
+    }
+    
+    /* Style for the options inside the dropdown */
+    #desc option {
+        padding: 10px;
+        background-color: #fff;
+    }
+    
+    /* Hover effect for the dropdown */
+    #desc:hover {
+        border-color: #BF6734;
+    }
+
+
+
+
+    .desc-print-only {
+    
+    display: none;
+    }
+
+
+
+ 
+    #pedido-rep a {
+    
+    text-decoration: none;
+   font-weight: bold;
+    border-radius: 25px;
+    padding: 6px 25px;
+
+    background-color: #BF6734;
+ 
+    
+    
+    border-radius: 25px;
+
+
+}
+    
+
+
     </style>
     
 <body>
@@ -635,12 +733,20 @@ font-size: 1rem;
 </header>
 
 <nav>
+
+    <div id="customerSelected">
+
+        <span id="customerName">...</span>
+        <span class="clear-btn" onclick="clearCustomer()">❌</span>
+      </div>
+
     <ul>
-        <li id="cadastro-link"><a href="#">Cadastro</a></li>
+        <li ><a href="CADASTRO/CADASTRO_REP/cadastrorep.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
-        <li id="pedidos-link"><a href="#">Pedidos</a></li>
+        <l id="pedido-rep"><a href="pedidosrep.html">Pedidos</a></li>
     </ul>
 </nav>
+
 
 
 <div class="PAGE">
@@ -677,6 +783,10 @@ font-size: 1rem;
                     <div class="order-info-row">
                         <span>CNPJ:</span>
                         <span id="cnpj"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Email:</span>
+                        <span id="email"></span>
                     </div>
                     <div class="order-info-row">
                         <span>Representante:</span>
@@ -732,7 +842,8 @@ font-size: 1rem;
                     </select>
                 </div>
                 </div>
-<!--
+
+
                 <div class="dropdown">
             
                     <div id="desclabel">
@@ -747,7 +858,7 @@ font-size: 1rem;
                     </select>
                 </div>               
                 </div>
-                        -->
+                        
                     </div>
 
              
@@ -755,6 +866,9 @@ font-size: 1rem;
 
 
                 </thead>
+
+
+
                 <tbody id="order-details-content">
                     <!-- Product rows will be dynamically populated here -->
                 </tbody>
@@ -762,16 +876,41 @@ font-size: 1rem;
             <div class="totalOrderBox">
                 <!-- Total Order Section -->
                 <div class="order-total">
+
                     <div>
-                        <span>Total do Pedido:</span>
+                        <span class="valores">Valor do pedido:</span>
+                        <span id="total-order">R$ 0,00</span>
+                    </div>
+                    
+                    <div>
+                        <span class="valores">Valor do ipi:</span>
+                        <span id="ipi-order">R$ 0,00</span>
+                    </div>
+    
+                    
+    
+                    <div>
+                        <span class="valores">Valor do desconto:</span>
+                        <span id="discount-value">R$ 0,00</span>
+                    </div>
+    
+                    <div>
+                        <span class="valores">Total do pedido:</span>
                         <span id="total-value">R$ 0,00</span>
                     </div>
+
                 </div>
             </div>
             <div>
                 <!-- Span for printing, initially hidden -->
                 <span id="ipi-display" class="ipi-print-only"></span>
                 </div>
+
+                <div>
+                    <!-- Span for printing, initially hidden -->
+                    <span id="desc-display" class="desc-print-only"></span>
+                    </div>
+
             <div class="obs-row">
                 <span>Observações:</span>
                 <textarea type="text" id="obs"
@@ -791,7 +930,7 @@ font-size: 1rem;
                     <button class="action-btn" onclick="printOrder()">IMPRIMIR</button>
                     <button id="save-notes-btn" class="action-btn">SALVAR</button>
                     
-                   
+                    <button id="duplicateOrderButton" class="action-btn">DUPLICAR</button>
                     
                     <button id="finish-order-btn" class="action-btn">FINALIZAR</button>
                     <button id="delete-order-btn" class="action-btn">APAGAR</button>
@@ -837,48 +976,6 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Fetch the user's role from localStorage
-const userRole = localStorage.getItem('role');
-
-// Get link elements
-const pedidosLinkContainer = document.getElementById('pedidos-link');
-const cadastroLinkContainer = document.getElementById('cadastro-link');
-
-// Check if the link containers exist
-if (pedidosLinkContainer && cadastroLinkContainer) {
-  const pedidosLink = pedidosLinkContainer.querySelector('a');
-  const cadastroLink = cadastroLinkContainer.querySelector('a');
-
-  // Check if the links exist
-  if (pedidosLink && cadastroLink) {
-    // Dynamically assign the correct href based on the user's role
-    switch (userRole) {
-      case 'USER':
-        pedidosLink.href = 'pedidos.html';
-        cadastroLink.href = 'cadastro.html';
-        break;
-      case 'SELLER':
-        pedidosLink.href = 'pedidosrep.html';
-        cadastroLink.href = 'cadastrorep.html';
-        break;
-      case 'ADMIN':
-        pedidosLink.href = 'pedidosadmin.html';
-        cadastroLink.href = 'cadastroadmin.html';
-        break;
-      default:
-        pedidosLink.href = '#';
-        cadastroLink.href = '#';
-        console.warn('Role not defined or invalid:', userRole);
-    }
-  } else {
-    console.error('Links not found in the link containers.');
-  }
-} else {
-  console.error('Link containers not found in the DOM.');
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Function to load orders from the backend
 async function loadOrders() {
     console.log('loadOrders function started');
@@ -920,9 +1017,6 @@ async function loadOrders() {
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -942,23 +1036,16 @@ function displayOrders(orders) {
         console.log('Processing order:', order);
 
         // Ensure the total is a valid number and handle non-numeric values
-        const total = parseFloat(order.total);
-        if (isNaN(total)) {
-            console.error('Invalid total value:', order.total);
-            return; // Skip this order if total is invalid
-        }
+      const total = parseFloat(order.total);
+      
+      if (isNaN(total)) {
+                    console.error('Invalid total value:', order.total);
+                }
 
 // Function to format numbers as currency (Brazilian Real - R$)
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
-
-
-
-
-
-
-
 
 const statusMap = {
     0: { text: 'Aberto', color: '#E07A5F' },
@@ -986,29 +1073,7 @@ const orderRow = `
 `;
 
 container.innerHTML += orderRow;
-/*
 
-
-
-        const statusText = order.status === 0 ? 'Aberto' :
-                           order.status === 1 ? 'Orçamento' :
-                           order.status === 2 ? 'Fechado' :
-                           order.status === 3 ? 'Fechado' : // Consider differentiating these if needed
-                           'Unknown'; 
-
-        const orderRow = `
-            <div class="order-row" data-id="${order.id}">
-                <div class="order-details">
-                    <div><strong>ID:</strong> ${order.id}</div>
-                    <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                    <div><strong>Representante:</strong> ${order.representante}</div>
-                    <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                    <div><strong>Total:</strong> ${formatCurrency(total)}</div>
-                    <div class="status"><strong>Status:</strong> ${statusText}</div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += orderRow;*/
     });
     console.log('All orders displayed');
 }
@@ -1132,8 +1197,14 @@ function populateModal(orderDetails) {
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('email').textContent = orderDetails.email;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
+
+
+
+
+
 
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
@@ -1147,8 +1218,41 @@ function populateModal(orderDetails) {
     // Update products table and calculate total
     ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
 
+
+
+
+
+    const descDropdown = document.getElementById('desc');
+    const descDisplay = document.getElementById('desc-display');
+   // Select the discount dropdown element
+   const discount = document.querySelector('#desc');
+    
+
+   if (orderDetails.desconto !== undefined && orderDetails.desconto !== null) {
+    descDropdown.value = orderDetails.desconto;
+} else {
+    descDropdown.value = 0; // Ensure 0 is set when no discount is provided
+}
+
+
+     // Set the DESC dropdown value
+     //if (orderDetails.desconto) {
+      //  descDropdown.value = orderDetails.desconto;}
+  
+        // Update desc
+
+
+
+    descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
+
+
+
+
+
+
     const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
+    let ipiOrder = 0;
 
     // Clear existing content
     orderDetailsContent.innerHTML = '';
@@ -1186,16 +1290,41 @@ function formatCurrency(value) {
         `;  
 
         orderDetailsContent.innerHTML += row;
+
         total += productTotal;
+        
+                
+        ipiOrder += ipi;
 
+        total2 = total - ipiOrder;
+       
 
-    // Update total price
-    document.getElementById('total-value').textContent = formatCurrency(total);
-
+        console.log('IPI VALUE:',ipiOrder);
     });
 
 
 
+    // Function to update total with discount
+    function updateTotal() {
+        let discountValue = parseFloat(discount.value) || 0;
+        let discountTotal = total * discountValue * (-1);
+        let totalFinal = total * (1 - discountValue);
+
+        function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                };
+        document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
+        document.getElementById('total-order').textContent = formatCurrency(total2);
+        document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+        document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+    }
+
+    // Initial calculation
+    updateTotal();
+
+    // Add event listener to recalculate when discount changes
+   // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
+    discount.addEventListener('change', updateTotal);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -1379,6 +1508,55 @@ function formatCurrency(value) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+// Function to update the total price in the modal
+function updateTotalPrice() {
+            const rows = document.querySelectorAll('#order-details-content tr');
+            let total = 0; // Starting with an initial value of 1000
+            const discount = document.querySelector('#desc');
+            let discountValue = parseFloat(discount.value) || 0;
+            
+            
+            rows.forEach(row => {
+
+
+                const productTotal = parseFloat(
+    row.cells[6].textContent
+
+        .replace('R$', '')
+        .trim()
+        .replace(/\./g, '') // Remove ALL dots
+        .replace(',', '.')  // Convert decimal separator
+);
+       
+        total =  total += productTotal;
+            });
+
+            
+    let discountTotal = total * discountValue;
+    let totalFinal = total * (1 - discountValue);
+
+
+    function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+
+    document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+
+
+
+       
+    }
+
+
+
+
+
+/*
 // Function to update the total price in the modal
 function updateTotalPrice() {
     const rows = document.querySelectorAll('#order-details-content tr');
@@ -1394,33 +1572,28 @@ function updateTotalPrice() {
         .replace(/\./g, '') // Remove ALL dots
         .replace(',', '.')  // Convert decimal separator
 );
-/*
-        const productTotal = parseFloat(row.cells[6].textContent.replace('R$', '').trim().replace('.', '').replace(',', '.'));
-        console.log('resultado total', productTotal)
-*/
-
-
-        
+   
 
 total =  total += productTotal;
 
-
-
-
-
     });
 
-    // Round the total to 2 decimal places
-   // total = total.toFixed(2); // This will convert it to a string with 2 decimals
+    let discountTotal = total * discountValue;
+let totalFinal = total * (1 - discountValue);
+
+
 
    // Function to format numbers as currency (Brazilian Real - R$)
    function formatCurrency(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 }
-    
- document.getElementById('total-value').textContent = formatCurrency(total);}
+ 
+                
+document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+ document.getElementById('total-value').textContent = formatCurrency(total);
+}
 
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1714,7 +1887,9 @@ function printOrder() {
         
 
             /* Hide certain elements */
+            #logo-image,
             #ipilabel,
+            #desclabel,
             #order-items-table th:nth-child(8),
             #order-items-table td:nth-child(8),
             #order-items-table th:nth-child(9),
@@ -2008,7 +2183,37 @@ document.getElementById("ipi").addEventListener("change", async function () {
                 if (response.ok) {
                     alert(`Aliquota atualizada para ${newIPI * 100}%`);
                 } else {
-                    alert("Erro ao atualizar IPI: " + data.error);
+                    alert("Não é possível atualizar o IPI, pedido com status FECHADO.");
+                }
+            } catch (error) {
+                console.error("Erro ao atualizar IPI:", error);
+                alert("Erro de conexão com o servidor.");
+            }
+            window.location.reload();
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        document.getElementById("desc").addEventListener("change", async function () {
+            const discount = parseFloat(this.value); // Get selected IPI value
+            const orderId = localStorage.getItem('currentOrderId');
+        
+            try {
+                const response = await fetch(`${URL_API}/update-desc`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ orderId, discount })
+                });
+        
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`Aplicado desconto de ${discount * 100}%`);
+                    console.log("DESCONTO:", discount);
+                } else {
+                    alert("Não é possível aplicar o desconto, pedido com status FECHADO.");
                 }
             } catch (error) {
                 console.error("Erro ao atualizar IPI:", error);
@@ -2017,11 +2222,114 @@ document.getElementById("ipi").addEventListener("change", async function () {
             window.location.reload();
         });
         
+       //////////////////////////////////////////////////////////////////////////////////////////// 
 
+
+// Função para duplicar o pedido
+async function duplicateOrder() {
+    // Recupera os dados do localStorage
+    const username = localStorage.getItem('username');
+    const newCustomerId = localStorage.getItem('customerId');
+    const currentOrderId = localStorage.getItem('currentOrderId');
+
+    // Verifica se os dados necessários estão disponíveis
+    if (!username || !newCustomerId || !currentOrderId) {
+        console.error('Dados necessários não encontrados no localStorage.');
+        alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
+        return;
+        
+    }
+    
+    // Dados a serem enviados na requisição
+    const requestData = {
+        username,
+        newCustomerId: parseInt(newCustomerId, 10), // Converte para número
+        currentOrderId: parseInt(currentOrderId, 10)  // Converte para número
+    };
+
+    try {
+        const response = await fetch(`${URL_API}/duplicate-order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+        }
+
+        const result = await response.json();
+        console.log(result.message); // Mensagem de sucesso
+        alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
+
+        // Recarrega a página após a duplicação bem-sucedida
+        window.location.reload();
+    } catch (error) {
+        console.error('Erro:', error.message);
+    }
+}
+
+// Adiciona o evento de clique ao botão
+document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Function to load customer name based on customerId in localStorage
+function loadCustomerName() {
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
+
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
+}
+
+// Function to clear the customer selection
+function clearCustomer() {
+    localStorage.removeItem('customerId');
+    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+}
+
+// Call the function when the page loads
+loadCustomerName();
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 </script>
 
 <script src="script.js"></script>
-
+<footer>
+    <p>&copy; 2025 | NYR Festas</p>
+  </footer>
 </body>
 </html>

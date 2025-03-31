@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - NYR Festas</title>
+    <title>NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+   <!-- <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">-->
     
 <!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,15 +121,7 @@
     }
 
 
-    #customerSelected{
-        font-family: Arial, Helvetica, sans-serif;
-        color:rgb(255, 255, 255);
-      margin-left: 15px;
-        position: fixed;
-        top:120px;
-        font-size: 0.98rem;
-        
-    }
+ 
 
     .modal-buttons button {
     background-color: #BF6734; /* Dark orange button color */
@@ -159,48 +151,49 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 #download {
-    display: flex;
-    align-items: center; /* Ensures proper vertical alignment */
-    max-width: 95%;
-    background-color: #e7e5e5;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin: 25px auto;
-    padding: 33px;
-    max-height: 45px;
-}
+        display: flex;
+        align-items: center; 
+        max-width: 95%;
+        background-color: #e7e5e5;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 2px auto;
+        padding: 33px;
+        max-height: 45px;
+    }
 
-#lista {
-    margin: 0; /* Removes extra space around the heading */
-}
+
+    #lista {
+        margin: 0; 
+    }
+
+
 
 #downloadButton {
-    display: flex; /* Ensure text and spinner align horizontally */
-    align-items: center;
-    justify-content: center; /* Center content inside button */
+    display: flex;
+    align-items: center; /* Ensure text and image align vertically */
+    justify-content: center;
     max-width: 230px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: #4CAF50;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     text-align: center;
     border: none;
     cursor: pointer;
     position: relative;
-    margin-left: auto; /* Pushes the button to the right */
+    margin-left: auto;
 }
+
+/* Style the image inside the button */
+.button-icon {
+    width: 20px; /* Adjust the width of the image */
+    height: 20px; /* Adjust the height of the image */
+    margin-right: 11px; /* Space between the image and text */
+}
+
 /* Spinner animation */
 .spinner {
     border: 2px solid #f3f3f3;
@@ -225,6 +218,86 @@
 }
 
 
+/*
+
+    #download {
+        display: flex;
+        align-items: center; 
+        max-width: 95%;
+        background-color: #e7e5e5;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 25px auto;
+        padding: 33px;
+        max-height: 45px;
+    }
+
+    #lista {
+        margin: 0; 
+    }
+
+    #downloadButton {
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+        max-width: 230px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        margin-left: auto; 
+    }
+    
+    .spinner {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+        display: none;
+    }
+
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+   
+    .buttonTextHidden {
+        opacity: 0.5;
+    }
+
+
+*/
+
+
+
+
+
+#produto a {
+    
+    text-decoration: none;
+   font-weight: bold;
+    border-radius: 25px;
+    padding: 6px 25px;
+    background-color: #BF6734;
+    border-radius: 25px;
+}
+
+
+
+
+
+
+
 </style>
 
 <body>
@@ -245,26 +318,30 @@
     </header>
 
     <nav>
-       
+        <div id="customerSelected">
+
+            <span id="customerName">...</span>
+            <span class="clear-btn" onclick="clearCustomer()">❌</span>
+          </div>
 
        
         <ul>
             <li id="cadastro-link"><a href="#">Cadastro</a></li>
-            <li><a href="produtos.html">Lista de Produtos</a></li>
+            <li id="produto"><a href="produtos.html">Lista de Produtos</a></li>
             <li id="pedidos-link"><a href="#">Pedidos</a></li>
         </ul>
      
     </nav>
       
-    <div id="customerSelected">...</div>
+    
 
 
 
     <div class="icons">
         <div class="icon-wrapper">
             <button id="carnaval" class="icon-button" aria-label="Filtrar produtos de Carnaval">
-                <img src="/imagens/carnaval.png" alt="Carnaval">
-                <span class="tooltip">Carnaval</span>
+                <img src="/imagens/carnaval.png" alt="Festas">
+                <span class="tooltip">Festas</span>
             </button>
         </div>
         <div class="icon-wrapper">
@@ -290,19 +367,37 @@
      
 
 
+
+
+
+
     
 
         <div id="download">
 
             <h1 id="lista">Lista de Produtos</h1>
 
+
+
+
+
+            
+        <button id="downloadButton" class="button">
+            <span id="spinner" class="spinner" style="display: none;"></span>
+            <img src="/imagens/download.png" alt="icon" class="button-icon">
+            <span id="buttonText">Catálogo!</span>
+        </button>
+        
+<!--
             <button id="downloadButton" class="button">
                 <span id="spinner" class="spinner" style="display: none;"></span>
                 <span id="buttonText">Baixe o Catálogo aqui!</span>
-            </button>
+            </button> 
+            
+-->
             
             <!-- Hidden download link -->
-            <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1baF4UZifBlhm-G6hx3K4mG0vUMNYAngk" download style="display: none;"></a>
+            <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1YS7MBcVdLJ1DoKeeOLRrgUrjC-T3RiVy" download style="display: none;"></a>
 
 
 
@@ -421,6 +516,26 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
   const userRole = localStorage.getItem('role'); // Ensure this is set at login
   const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
   const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
+
+
+// Dynamically assign the correct href based on the user's role
+if (userRole === 'USER') {
+    pedidosLink.href = 'pedidos.html';
+    cadastroLink.href = 'CADASTRO/CADASTRO_USER/cadastro.html';
+  } else if (userRole === 'SELLER') {
+    pedidosLink.href = 'pedidosrep.html';
+    cadastroLink.href = 'CADASTRO/CADASTRO_REP/cadastrorep.html';
+  } else if (userRole === 'ADMIN') {
+    pedidosLink.href = 'pedidosadmin.html';
+    cadastroLink.href = 'CADASTRO/CADASTRO_ADMIN/cadastroadmin.html';
+  } else {
+    pedidosLink.href = '#'; // Default action for unknown or missing roles
+    console.warn('Role not defined or invalid.');
+  }
+
+
+
+  /*
   // Dynamically assign the correct href based on the user's role
   if (userRole === 'USER') {
     pedidosLink.href = 'pedidos.html';
@@ -435,50 +550,56 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     pedidosLink.href = '#'; // Default action for unknown or missing roles
     console.warn('Role not defined or invalid.');
   }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadCustomerName();
-});
-
+// Function to load customer name based on customerId in localStorage
 function loadCustomerName() {
-  const customerId = localStorage.getItem('customerId');
-  console.log(customerId);
-  
-  if (!customerId) {
-      console.error('Customer ID not found in localStorage!');
-      document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
-      return;
-  }
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
 
-  // Fetch customer name from backend (sending customerId in the request body)
-  fetch(`${URL_API}/displayName`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ customerId }) // Sending customerId in the request body
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-  })
-  .then(data => {
-      // Display customer name from backend
-      const customerName = data.razaosocial || 'Unknown';
-      document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
-  })
-  .catch(error => {
-      console.error('Error fetching customer name:', error);
-      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-  });
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
 }
+
+// Function to clear the customer selection
+function clearCustomer() {
+    localStorage.removeItem('customerId');
+    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+}
+
+// Call the function when the page loads
+loadCustomerName();
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 document.getElementById('downloadButton').addEventListener('click', function() {
@@ -534,8 +655,13 @@ document.getElementById('downloadButton').addEventListener('click', function() {
             downloadLink.click();
         },10); // Simulating a 5-second task
     });*/
+
+
+
      </script>
     <script src="script.js"></script>
-  
+    <footer>
+        <p>&copy; 2025 | NYR Festas</p>
+      </footer>
 </body>
 </html>

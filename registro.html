@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro - NYR Festas</title>
+  <title>NYR Festas</title>
   <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -23,7 +23,7 @@ body {
 
 /* Container */
 .register-container {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -96,6 +96,20 @@ body {
   color: #707070;
 }
 
+body {
+    background: url('/imagens/juninobackground.png') no-repeat center center fixed;
+    background-size: cover;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+ 
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
   </style>
 </head>
 
@@ -184,5 +198,8 @@ body {
     togglePassword.classList.toggle("fa-eye-slash", !isPassword);
   });
   </script>
+  <footer>
+    <p>&copy; 2025 | NYR Festas</p>
+  </footer>
 </body>
 </html>

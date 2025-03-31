@@ -5,20 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - NYR Festas</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
+    <title>NYR Festas (A)</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" type="image/png" href="../../imagens/LOGO_NYR.png">
     <script src="https://cdn.jsdelivr.net/npm/cleave.js"></script>
 
-    <script src="config.js"></script>
+    <script src="../../config.js"></script>
 </head>
 
 </html>
 
 
-<style>
-  
 
+
+
+<style>
 /* MODAL STYLE*/
 #customer-list-container {
     max-width: 100%;
@@ -33,6 +34,7 @@
 #customer-list-container h3 {
     margin-bottom: 10px;
     color: #333;
+    font-size: 1.5em;
 }
 
 #customer-list {
@@ -52,6 +54,7 @@
     transition: background-color 0.2s ease;
 }
 
+
 #customer-list li:hover {
     background-color: #e6f7ff;
 }
@@ -59,21 +62,11 @@
 
 
 
-#customerSelected{
-        font-family: Arial, Helvetica, sans-serif;
-        color:rgb(255, 255, 255);
-      margin-left: 15px;
-        position: fixed;
-        top:120px;
-        font-size: 0.98rem;
-        
-    }
 
     .button-container {
     display: flex;
     gap: 10px; /* Adds spacing between buttons */
 }
-
 .button-container button {
     background-color: #BF6734; /* Dark orange button color */
     color: #fff;
@@ -98,14 +91,35 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+#cadastro-adm a {
+    
+    text-decoration: none;
+   font-weight: bold;
+    border-radius: 25px;
+    padding: 6px 25px;
+
+    background-color: #BF6734;
+ 
+    
+    
+    border-radius: 25px;
+
+
+}
+
+
+
+
+
+
 
 
 </style>
 <body>
     <header>
-        <h1 id="nyrfestas"></h1>
+        <!--<h1 id="nyrfestas">NYR Festas</h1>-->
         <div id="user-info">
-            <span id="username-display"></span>
+            <span id="username-display">...</span>
             <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
         </div>
 
@@ -118,23 +132,29 @@
 
     <nav>
 
-        <div id="customerSelected">Nenhum cliente selecionado</div>
+        <div id="customerSelected">
+
+            <span id="customerName">...</span>
+            <span class="clear-btn" onclick="clearCustomer()">❌</span>
+          </div>
+
 
         <ul>
-            <li id="cadastro-link"><a href="#">Cadastro</a></li>
-            <li><a href="produtos.html">Lista de Produtos</a></li>
-            <li id="pedidos-link"><a href="#">Pedidos</a></li>
+            <li id="cadastro-adm"><a href="cadastroadmin.html">Cadastro</a></li>
+            <li ><a href="../../produtos.html">Lista de Produtos</a></li>
+            <li><a href="../../pedidosadmin.html">Pedidos</a></li>
         </ul>
     </nav>
-
-
-
     <div class="PAGE">
     <section class="pagina">
-        <h2>Cadastro de Cliente</h2>
+        <h2>Cadastro de Cliente (ADMIN)</h2>
 
         <!-- Form for New Customer Entry or Editing -->
         <form id="cadastroForm" class="cadastro-form">
+
+          <!--<label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" placeholder="Nome do usuário" required>-->
+
             <label for="representante">Representante:</label>
             <input type="text" id="representante" name="representante" placeholder="Nome do Representante" required>
 
@@ -158,12 +178,6 @@
                 <button type="button" id="specialButton" style="display: none;">Apagar</button>
             </div>
             
-
-<!-- 
-            <button type="submit" id="cadastroButton">Cadastrar</button>
-            <button id="specialButton" style="display: none;">Apagar</button>-->
-
-
         </form>
 
         <div id="searchBox">
@@ -184,32 +198,19 @@
         
 
     </section>
-
 </div>
 
+
+
+
+
     <script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         window.addEventListener('DOMContentLoaded', async () => {
             const loggedInUsername = localStorage.getItem('username');
             localStorage.setItem('customerId', "" ); // If you want to explicitly set it to null
 
-       
+            
              // Handle login status
  const usuario = localStorage.getItem('username');
         if (usuario) {
@@ -227,43 +228,15 @@
 
 
 
-  // Fetch the user's role from localStorage
-  const userRole = localStorage.getItem('role'); // Ensure this is set at login
-  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-
-
-  
-  // Dynamically assign the correct href based on the user's role
-  if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
-
-
-
-
 
 // Fetch customers linked to the logged-in user (seller)
-const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}`);
+const response = await fetch(`${URL_API}/allcustomers`);
 const result = await response.json();
 
 if (result.success && result.data) {
     populateCustomerList(result.data);
 }}
 )
-
-
-
 
 // Function to display the customer list
 function populateCustomerList(customers) {
@@ -272,11 +245,18 @@ function populateCustomerList(customers) {
 
     customers.forEach(customer => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${customer.razaosocial} - ${customer.cnpj}`;
+        listItem.textContent = `${customer.username} - ${customer.representante} - ${customer.razaosocial} - (${customer.cnpj})`;
         listItem.addEventListener('click', () => loadCustomerData(customer));
         customerListContainer.appendChild(listItem);
     });
 }
+
+
+
+
+
+
+
 
 
 
@@ -294,9 +274,7 @@ function loadCustomerData(customer) {
     document.getElementById('email').value = customer.email || '';
     document.getElementById('cadastroButton').textContent = 'Atualizar';  // Change button to 'Update'
     document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
-
     document.getElementById("specialButton").style.display = "block";
-    
 
     // Store customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
@@ -312,14 +290,18 @@ function loadCustomerData(customer) {
     });
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 // Function to load customer name based on customerId in localStorage
 function loadCustomerName() {
     const customerId = localStorage.getItem('customerId');
     console.log(customerId);
-  
+
     if (!customerId) {
         console.error('Customer ID not found in localStorage!');
-        document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
+        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
         return;
     }
 
@@ -340,13 +322,53 @@ function loadCustomerName() {
     .then(data => {
         // Display customer name from backend
         const customerName = data.razaosocial || 'Unknown';
-        document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
     })
     .catch(error => {
         console.error('Error fetching customer name:', error);
-        document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
     });
 }
+
+// Function to clear the customer selection
+function clearCustomer() {
+    localStorage.removeItem('customerId');
+    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+}
+
+// Call the function when the page loads
+loadCustomerName();
+
+
+/*
+
+let debounceTimeout; // Variable to hold the timeout reference
+
+// Handle search input event
+document.getElementById('searchInput').addEventListener('input', async (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const loggedInUsername = localStorage.getItem('username');
+
+    // Clear any previous timeout
+    clearTimeout(debounceTimeout);
+
+    // Set a new timeout to delay the API request
+    debounceTimeout = setTimeout(async () => {
+        const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}&searchTerm=${searchTerm}`);
+        const result = await response.json();
+
+        if (result.success && result.data) {
+            const filteredCustomers = result.data.filter(customer => 
+                customer.razaosocial.toLowerCase().includes(searchTerm) || 
+                customer.cnpj.toLowerCase().includes(searchTerm)
+            );
+            populateCustomerList(filteredCustomers); // Update the UI with filtered customers
+        }
+    }, 300); // Delay in milliseconds (300ms)
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
 
 // Handle search input event
 document.getElementById('searchInput').addEventListener('input', async (e) => {
@@ -363,13 +385,22 @@ document.getElementById('searchInput').addEventListener('input', async (e) => {
         );
         populateCustomerList(filteredCustomers);
     }
-});
+});*/
+
+
+
+
+
+
+
+
 
 
 
 /*
 // Function to load customer data into the form when clicked
 function loadCustomerData(customer) {
+    document.getElementById('username').value = customer.username || '';
     document.getElementById('representante').value = customer.representante || '';
     document.getElementById('razaosocial').value = customer.razaosocial || '';
     document.getElementById('cnpj').value = customer.cnpj || '';
@@ -380,93 +411,30 @@ function loadCustomerData(customer) {
     document.getElementById('cadastroForm').dataset.id = customer.id; // Store customer ID
 
     // Store customerId in localStorage
-    //localStorage.setItem('id', customer.id);  // Set customerId in localStorage
     localStorage.setItem('customerId', customer.id);  // Set customerId in localStorage
 
 
-
-
-
-
-
-
-
-
-
-
-function loadCustomerName() {
-  const customerId = localStorage.getItem('customerId');
-  console.log(customerId);
-  
-  if (!customerId) {
-      console.error('Customer ID not found in localStorage!');
-      document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
-      return;
-  }
-
-  // Fetch customer name from backend (sending customerId in the request body)
-  fetch(`${URL_API}/displayName`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ customerId }) // Sending customerId in the request body
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-  })
-  .then(data => {
-      // Display customer name from backend
-      const customerName = data.razaosocial || 'Unknown';
-      document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
-  })
-  .catch(error => {
-      console.error('Error fetching customer name:', error);
-      document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-  });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-window.scrollTo({
+    window.scrollTo({
     top: 100,      // Vertical position (in pixels)
     left: 0,     // Horizontal position (in pixels)
     behavior: "smooth" // Smooth scrolling animation
-    
   });
-}*/
-        // Handle search input event
-        document.getElementById('searchInput').addEventListener('input', async (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const loggedInUsername = localStorage.getItem('username');
 
-            const response = await fetch(`${URL_API}/customers?username=${loggedInUsername}`);
+
+}
+
+
+*/
+    // Handle search input event
+    document.getElementById('searchBox').addEventListener('input', async (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+
+            const response = await fetch(`${URL_API}/allcustomers`);
             const result = await response.json();
 
             if (result.success && result.data) {
-                const filteredCustomers = result.data.filter(customer => 
+                const filteredCustomers = result.data.filter(customer => customer.username.toLowerCase().includes(searchTerm) ||customer.representante.toLowerCase().includes(searchTerm) ||
                     customer.razaosocial.toLowerCase().includes(searchTerm) || 
                     customer.cnpj.toLowerCase().includes(searchTerm)
                 );
@@ -474,6 +442,7 @@ window.scrollTo({
             }
         });
 
+     
 
 
 // Handle form submission (Create or Update)
@@ -481,9 +450,11 @@ const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    
     const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
-
+    
     const formData = {
+
         representante: document.getElementById('representante').value,
         razaosocial: document.getElementById('razaosocial').value,
         cnpj: document.getElementById('cnpj').value,
@@ -506,7 +477,7 @@ form.addEventListener('submit', async (e) => {
 
         if (customerId) {
             // Update existing customer
-            response = await fetch(`${URL_API}/updatecadastro/${customerId}`, {
+            response = await fetch(`${URL_API}/updatecadastroadmin/${customerId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -527,6 +498,8 @@ form.addEventListener('submit', async (e) => {
             form.reset();
             form.dataset.customerId = '';  // Clear stored customer ID after submission
             document.getElementById('cadastroButton').textContent = 'Cadastrar';  // Reset button text
+            // Reload the page after submission
+            window.location.reload();
         } else {
             alert('Error: ' + (result.error || 'FALHA NO CADASTRO.'));
         }
@@ -535,7 +508,6 @@ form.addEventListener('submit', async (e) => {
         alert('ERRO AO REALIZAR O CADASTRO.');
     }
 });
-
 new Cleave('#cnpj', {
     delimiters: ['.', '.', '/', '-'],
     blocks: [2, 3, 3, 4, 2],
@@ -546,6 +518,7 @@ new Cleave('#cnpj', {
     blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
     numericOnly: true, // Ensure only numbers are entered
 });
+
 
 
 
@@ -607,13 +580,9 @@ async function deleteCustomer() {
 
 
 
-
-
-
-
-
-
-
     </script>
+    <footer>
+        <p>&copy; 2025 | NYR Festas</p>
+      </footer>
 </body>
 </html>

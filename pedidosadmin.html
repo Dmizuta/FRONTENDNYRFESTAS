@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos - NYR Festas</title>
+    <title>NYR Festas (A)</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
@@ -222,16 +222,33 @@
                 background-color: #f9f9f9;
             }
             
-            #total-value {
-            font-weight: bold;
+
+
+
+            #total-order {
+            font-weight: bold; 
             float: right;
+            color: white;
+            }
+
+            #total-value {
+            font-weight: bolder;
+            float: right;
+            color: white;
             
         }
 
         #discount-value {
+            font-weight:bold;
+            float: right;
+            color: rgb(245, 158, 158);
+            
+        }
+        #ipi-order {
             font-weight: bold;
             float: right;
-            
+           
+            color: rgb(255, 255, 199);
         }
 
 
@@ -339,7 +356,11 @@
             font-size: 1.1rem;
         }
     
-    
+    .valores{
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
     
     
     
@@ -574,8 +595,21 @@
     
     
     
+    #pedido-adm a {
+    
+    text-decoration: none;
+   font-weight: bold;
+    border-radius: 25px;
+    padding: 6px 25px;
+
+    background-color: #BF6734;
+ 
     
     
+    border-radius: 25px;
+
+
+}
     
     
     
@@ -612,13 +646,28 @@
 
 </header>
 
+
+
+
+
 <nav>
-    <ul>
-        <li id="cadastro-link"><a href="#">Cadastro</a></li>
+    
+    <div id="customerSelected">
+
+        <span id="customerName">...</span>
+        <span class="clear-btn" onclick="clearCustomer()">❌</span>
+      </div>
+
+
+
+       <ul>
+        <li><a href="CADASTRO/CADASTRO_ADMIN/cadastroadmin.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
-        <li id="pedidos-link"><a href="#">Pedidos</a></li>
+        <li id="pedido-adm" ><a href="pedidosadmin.html">Pedidos</a></li>
     </ul>
 </nav>
+
+
 
 <div class="PAGE">
 
@@ -627,7 +676,10 @@
 <div class="box">
 
 <div class="search-wrapper">
+
 <input type="text" id="searchInput" placeholder="Buscar por...">
+
+
 </div>
 
 <div id="orders-container">
@@ -635,6 +687,9 @@
 
     
     <!-- Orders will be inserted here dynamically -->
+
+
+
 </div>
 </div>
 
@@ -654,6 +709,10 @@
                 <div class="order-info-row">
                     <span>CNPJ:</span>
                     <span id="cnpj"></span>
+                </div>
+                <div class="order-info-row">
+                    <span>Email:</span>
+                    <span id="email"></span>
                 </div>
                 <div class="order-info-row">
                     <span>Representante:</span>
@@ -683,6 +742,7 @@
 
                 
 <div class="topButtons" >
+
                 <div class="container">
                     <div class="switch-container">
                         <!-- Left label -->
@@ -697,11 +757,6 @@
                         <span class="switch-label right-label">Orçamento</span>
                     </div>
                 </div>
-
-
-
-
-
 
                 <div class="dropdown">
             
@@ -740,6 +795,8 @@
 
 
             </thead>
+
+
             <tbody id="order-details-content">
                 <!-- Product rows will be dynamically populated here -->
             </tbody>
@@ -748,17 +805,30 @@
             <!-- Total Order Section -->
             <div class="order-total">
 
+
                 <div>
-                    <span>Total do desconto:</span>
+                    <span class="valores">Valor do pedido:</span>
+                    <span id="total-order">R$ 0,00</span>
+                </div>
+                
+                <div>
+                    <span class="valores">Valor do ipi:</span>
+                    <span id="ipi-order">R$ 0,00</span>
+                </div>
+
+                
+
+                <div>
+                    <span class="valores">Valor do desconto:</span>
                     <span id="discount-value">R$ 0,00</span>
                 </div>
 
-
-
-                    <div>
-                    <span>Total do pedido:</span>
+                <div>
+                    <span class="valores">Total do pedido:</span>
                     <span id="total-value">R$ 0,00</span>
                 </div>
+
+
             </div>
         </div>
 
@@ -790,15 +860,18 @@
        
         <div class="allbtns">
             <div class="modal-actions">
+
                 <button class="action-btn" onclick="printOrder()">Imprimir</button>
                 <button id="save-notes-btn" class="action-btn">Salvar</button>
-                
+
+                <button id="duplicateOrderButton" class="action-btn">Duplicar</button>
                
                 
                 <button id="finish-order-btn" class="action-btn">Finalizar</button>
                 <button id="receive-order-btn" class="action-btn">Receber</button>
                 <button id="revert-order-btn" class="action-btn">Recuperar</button>
                 <button id="delete-order-btn" class="action-btn">Apagar</button>
+
             </div>
         
             <!-- Close Modal Button -->
@@ -839,46 +912,6 @@
         document.getElementById('logoutBtn').addEventListener('click', handleLogout);
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Fetch the user's role from localStorage
-        const userRole = localStorage.getItem('role');
-        
-        // Get link elements
-        const pedidosLinkContainer = document.getElementById('pedidos-link');
-        const cadastroLinkContainer = document.getElementById('cadastro-link');
-        
-        // Check if the link containers exist
-        if (pedidosLinkContainer && cadastroLinkContainer) {
-          const pedidosLink = pedidosLinkContainer.querySelector('a');
-          const cadastroLink = cadastroLinkContainer.querySelector('a');
-        
-          // Check if the links exist
-          if (pedidosLink && cadastroLink) {
-            // Dynamically assign the correct href based on the user's role
-            switch (userRole) {
-              case 'USER':
-                pedidosLink.href = 'pedidos.html';
-                cadastroLink.href = 'cadastro.html';
-                break;
-              case 'SELLER':
-                pedidosLink.href = 'pedidosrep.html';
-                cadastroLink.href = 'cadastrorep.html';
-                break;
-              case 'ADMIN':
-                pedidosLink.href = 'pedidosadmin.html';
-                cadastroLink.href = 'cadastroadmin.html';
-                break;
-              default:
-                pedidosLink.href = '#';
-                cadastroLink.href = '#';
-                console.warn('Role not defined or invalid:', userRole);
-            }
-          } else {
-            console.error('Links not found in the link containers.');
-          }
-        } else {
-          console.error('Link containers not found in the DOM.');
-        }
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -931,10 +964,6 @@
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 }
         
-
-
-
-
                 const statusMap = {
     0: { text: 'Aberto', color: '#E07A5F' },
     1: { text: 'Orçamento', color: '#FFB200' },
@@ -961,40 +990,9 @@ const orderRow = `
 `;
 
 container.innerHTML += orderRow;
-
-
-
-
-
-
-        /*
-                const statusText = order.status === 0 ? 'Aberto' :
-                                   order.status === 1 ? 'Orçamento' :
-                                   order.status === 2 ? 'Fechado' :
-                                   order.status === 3 ? 'Processado' :
-                                   'Unknown'; 
-                const orderRow = `
-                    <div class="order-row" data-id="${order.id}">
-                        <div class="order-details">
-                            <div><strong>ID:</strong> ${order.id}</div>
-                            <div><strong>Representante:</strong> ${order.representante}</div>
-                            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-                            <div class="status"><strong>Status:</strong> ${statusText}</div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += orderRow;
-                */
-
-                
+    
             });
 
-
-
-
-            
             console.log('All orders displayed');
         }
         
@@ -1032,6 +1030,7 @@ function populateModal(orderDetails) {
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
     document.getElementById('cnpj').textContent = orderDetails.cnpj;
+    document.getElementById('email').textContent = orderDetails.email;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
@@ -1057,8 +1056,7 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
      // Set the DESC dropdown value
      if (orderDetails.desconto) {
-        descDropdown.value = orderDetails.desconto;
-    }
+       descDropdown.value = orderDetails.desconto;  }
   
         // Update desc
 
@@ -1073,6 +1071,7 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
 
         const orderDetailsContent = document.getElementById('order-details-content');
     let total = 0;
+    let ipiOrder = 0;
 
     // Clear existing content
     orderDetailsContent.innerHTML = '';
@@ -1105,27 +1104,31 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
         `;  
 
         orderDetailsContent.innerHTML += row;
+
         total += productTotal;
+        
+                
+        ipiOrder += ipi;
+
+        total2 = total - ipiOrder;
+       
+
+        console.log('IPI VALUE:',ipiOrder);
     });
 
 
 
-
-
-
-
- 
-
     // Function to update total with discount
     function updateTotal() {
         let discountValue = parseFloat(discount.value) || 0;
-        let discountTotal = total * discountValue;
+        let discountTotal = total * discountValue * (-1);
         let totalFinal = total * (1 - discountValue);
 
         function formatCurrency(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
                 };
-        
+        document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
+        document.getElementById('total-order').textContent = formatCurrency(total2);
         document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
         document.getElementById('total-value').textContent = formatCurrency(totalFinal);
     }
@@ -1136,43 +1139,6 @@ ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex
     // Add event listener to recalculate when discount changes
    // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
     discount.addEventListener('change', updateTotal);
-
-
-/*
-        orderDetailsContent.innerHTML += row;
-        total += productTotal;
-
-
-
-        
-// Select the dropdown element
-const discount = document.querySelector('#desc');
-
-
-
-
-
-// Add an event listener to listen for changes
-//discount.addEventListener('change', function() {
-    // Get the selected value
-    let discountValue = discount.value;
-    console.log('DESCONTO',discountValue); // This will log the new selected value when changed
-//});
-
-const discountTotal = total * discountValue;
-
-const totalFinal = total * (1 - discountValue);
-
-
-
-
-
-
-            // Update total price
-    document.querySelector('#discount-value').textContent = formatCurrency(discountTotal);
-    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-  */
-    
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1197,6 +1163,7 @@ const totalFinal = total * (1 - discountValue);
             }
          
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         // Add event listeners for edit buttons
 document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
     button.addEventListener('click', async function () {
@@ -1268,6 +1235,8 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                     // Update total price in the modal
                     updateTotalPrice();
 
+                    window.location.reload();
+
                 } catch (error) {
                     alert('Error updating quantity');
                     console.error('Error updating quantity:', error);
@@ -1281,158 +1250,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
 
-        /*
-
-        // Add event listeners for edit buttons
-        document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-            button.addEventListener('click', async function () {
-                const row = this.closest('tr');
-        
-                const orderId = localStorage.getItem('currentOrderId');
-                const quantityCell = row.querySelector('.quantity');
-                const productId = row.getAttribute('data-product-id');
-                const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-        
-                // Fetch the current order status to determine if it's editable
-                const requestData = { orderId };
-                console.log("currentOrderId:", orderId);
-        
-                try {
-                    const response = await fetch(`${URL_API}/orderStatus`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(requestData),
-                    });
-        
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch order status: ${response.statusText}`);
-                    }
-        
-                    const data = await response.json();
-        
-                    // Check if the order status is fetched properly
-                    const orderStatus = data.status; // Adjust based on backend response format
-                    console.log("Order Status:", orderStatus);
-        
-                    if (orderStatus === 2) {
-                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ENVIADO OU PROCESSADO.");
-                        return; // Prevent further execution
-                    }
-        
-                    // If order is editable, proceed with making the quantity editable
-                    const inputField = document.createElement('input');
-                    inputField.type = 'number';
-                    inputField.value = currentQuantity;
-                    inputField.classList.add('edit-quantity');
-        
-                    // Add save button
-                    const saveButton = document.createElement('button');
-                    saveButton.textContent = 'Salvar';
-                    saveButton.classList.add('save-quantity-btn');
-        
-                    // Clear the quantity cell and append input and save button
-                    quantityCell.innerHTML = '';
-                    quantityCell.appendChild(inputField);
-                    quantityCell.appendChild(saveButton);
-        
-                    // Focus the input field immediately after it is appended
-                    inputField.focus();
-        
-                    // Add 'Enter' key support
-                    inputField.addEventListener('keypress', function (event) {
-                        if (event.key === 'Enter') saveButton.click();
-                    });
-        
-                    saveButton.addEventListener('click', async function () {
-                        const newQuantity = parseInt(inputField.value, 10);
-                        if (newQuantity && newQuantity > 0) {
-                            try {
-                                const response = await fetch(`${URL_API}/editproduct/${productId}`, {
-                                    method: 'PATCH',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({ quantity: newQuantity })
-                                });
-        
-                                if (!response.ok) throw new Error('Failed to update quantity');
-        
-                
-                                const data = await response.json();
-
-                                
-        // Assume 'data' is the response object you received from the server
-        // const data = response.data;
-        
-        // Retrieve the ipi value and total from the response
-        const ipi = data.updatedProduct.ipi;  // ipi value
-        const updatedTotal = data.updatedProduct.total;  // New total value
-        const cxfechada = data.updatedProduct.cxfechada;
-        const precofechada = data.updatedProduct.precofechada;
-        const precofrac = data.updatedProduct.precofrac;
-        
-  
-        
-                                // Update the quantity directly in the table after success
-                                quantityCell.textContent = newQuantity;
-
-
-
-                                 
-                                   const chosenPrice = (newQuantity >= cxfechada) ? precofechada : precofrac;
-
-                              
-                               
-
-                              
-                               const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
-                               console.log('IPI Tax value:', ipitax);
-                                console.log('IPI value:', ipi);
-                               
-                                // Optionally, you can re-calculate the total if necessary
-                                //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
-                                const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
-                                const productTotal = chosenPrice * newQuantity + ipiValue ;
-
-
-   // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-
-
-        
-                                // Update the total for this row
-                                row.cells[4].textContent = formatCurrency(chosenPrice);
-                                row.cells[5].textContent = formatCurrency(ipiValue);
-                                row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
-        
-                                // Update the total price in the modal
-                                //update();
-                                updateTotalPrice();
-        
-                               
-        
-                            } catch (error) {
-                                alert('Error updating quantity');
-                                console.error('Error updating quantity:', error);
-                            }
-                        } else {
-                            alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error fetching order status:', error);
-                    alert('An error occurred while checking the order status. Please try again later.');
-                }
-            });
-        });
-        
-
-*/
-     
+            
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -1473,20 +1291,6 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
 
 
 
-
-
-   
-/*
-            // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-        
-            // Round the total to 2 decimal places
-           // total = total.toFixed(2); // This will convert it to a string with 2 decimals
-            
-         document.getElementById('total-value').textContent = formatCurrency(total);
-        */
        
     }
         
@@ -1655,7 +1459,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
         // Save Notes Button
         document.getElementById("save-notes-btn").addEventListener("click", async () => {
             const observation = document.getElementById("obs").value.trim(); // Get the observation value
-            const discount = document.getElementById("desc").value.trim();
+           // const discount = document.getElementById("desc").value.trim();
            // const discount = document.getElementById("desc").value; // Get the selected discount value
             const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
 
@@ -1669,7 +1473,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             const requestData = {
                 orderId: orderId,
                 observation: observation,
-                discount: discount, // Include discount in the request
+                //discount: discount, // Include discount in the request
             };
 
 
@@ -1686,7 +1490,7 @@ document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
                 });
 
 
-console.log('RESULTADO', discount * 100);
+
              
 
 
@@ -2088,7 +1892,7 @@ console.log('RESULTADO', discount * 100);
                 // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
                 if (currentStatus === 2 || currentStatus === 3) {
                     // Proceed to change status to 2 (Fechado)
-                    const finishResponse = await fetch(`${URL_API}/revertOrder`, {
+                    const finishResponse = await fetch(`${URL_API}/revertOrderadmin`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ orderId, observation }), // Send the observation with the request
@@ -2292,14 +2096,157 @@ console.log('RESULTADO', discount * 100);
             window.location.reload();
         });
         
-        
-        
-        
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        // Função para duplicar o pedido
+async function duplicateOrder() {
+    // Recupera os dados do localStorage
+    const username = localStorage.getItem('username');
+    const newCustomerId = localStorage.getItem('customerId');
+    const currentOrderId = localStorage.getItem('currentOrderId');
+
+    // Verifica se os dados necessários estão disponíveis
+    if (!username || !newCustomerId || !currentOrderId) {
+        console.error('Dados necessários não encontrados no localStorage.');
+        alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
+        return;
+    }
+
+    // Dados a serem enviados na requisição
+    const requestData = {
+        username,
+        newCustomerId: parseInt(newCustomerId, 10), // Converte para número
+        currentOrderId: parseInt(currentOrderId, 10)  // Converte para número
+    };
+
+    try {
+        const response = await fetch(`${URL_API}/duplicate-order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+        }
+
+        const result = await response.json();
+        console.log(result.message); // Mensagem de sucesso
+        alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
+
+        // Recarrega a página após a duplicação bem-sucedida
+        window.location.reload();
+    } catch (error) {
+        console.error('Erro:', error.message);
+    }
+}
+
+// Adiciona o evento de clique ao botão
+document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+// Function to load customer name based on customerId in localStorage
+function loadCustomerName() {
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
+
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
+}
+
+// Function to clear the customer selection
+function clearCustomer() {
+    localStorage.removeItem('customerId');
+    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+}
+
+// Call the function when the page loads
+loadCustomerName();
+
+/*
+// Function to load customer name based on customerId in localStorage
+function loadCustomerName() {
+    const customerId = localStorage.getItem('customerId');
+    console.log(customerId);
+  
+    if (!customerId) {
+        console.error('Customer ID not found in localStorage!');
+        document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
+        return;
+    }
+
+    // Fetch customer name from backend (sending customerId in the request body)
+    fetch(`${URL_API}/displayName`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId }) // Sending customerId in the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Display customer name from backend
+        const customerName = data.razaosocial || 'Unknown';
+        document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
+    })
+    .catch(error => {
+        console.error('Error fetching customer name:', error);
+        document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+    });
+}
+
+// Chama a função ao carregar a página
+loadCustomerName();
+
+        */
         </script>
         
 
 
         <script src="script.js"></script>
+        <footer>
+            <p>&copy; 2025 | NYR Festas</p>
+          </footer>
 
 </body>
 </html>

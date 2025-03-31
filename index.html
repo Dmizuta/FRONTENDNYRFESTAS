@@ -3,21 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - NYR Festas</title>
+  <title>NYR Festas</title>
   <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
+  
   <script src="config.js"></script>
+  
 
   <style>
+
+
+
 
 #logo{
     
     width: 360px;;
-    padding-bottom: 40px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+
+
+    
+    
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+
 
     }
+
+
+    #logo:hover {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 10px #ffffff);
+}
+
+
+
+
+@keyframes zoomEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); } /* Zoom in */
+    100% { transform: scale(1); } /* Back to normal */
+    
+  }
+  
+  .zoom {
+    animation: zoomEffect 0.6s ease-in-out; /* Fast effect */
+  }
+
     .mainContainer {
       display: flex;
     flex-direction: column; /* Empilha os itens verticalmente */
@@ -29,6 +62,15 @@
     padding-bottom: 30px; /* Adiciona espaço no topo */
      
     }
+
+
+
+  
+
+
+
+
+
     body {
       font-family: Arial, sans-serif;
       display: flex;
@@ -42,19 +84,22 @@
     .login-container {
       
       align-content: center;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.5);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 300px;
+      
+      
     }
     .login-container h2 {
       text-align: center;
       margin-bottom: 20px;
+      
     }
     .login-container input {
       width: 100%;
-      padding: 10px;
+      padding: 10px;  
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -120,13 +165,39 @@
   color: #707070;
 }
 
+
+body {
+    background: url('/imagens/juninobackground.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+ 
+    color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+
+
+
+
+
+  
   </style>
 </head>
 <body>
 
+ 
+
 <div class="mainContainer">
   <div class="logoNyr">
-    <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+        <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
 </div>
 
   <div class="login-container">
@@ -231,9 +302,24 @@ const passwordInput = document.getElementById("password");
     togglePassword.classList.toggle("fa-eye", isPassword);
     togglePassword.classList.toggle("fa-eye-slash", !isPassword);
   });
+
+
+
+
+  window.onload = function() {
+  const logo = document.getElementById("logo");
+  logo.classList.add("zoom");
+};
+
+
+
+
   </script>
   
   
+  <footer>
+    <p>&copy; 2025 | NYR Festas</p>
+  </footer>
 
 </body>
 </html>
