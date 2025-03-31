@@ -7,13 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
-
     <script src="config.js"></script>
 </head>
 
 <style>
-
-
     .allbtns {
         display: flex;
         flex-direction: column;
@@ -70,380 +67,325 @@
         border-color: #ddd; /* Slightly darker border on hover */
     }
     
+    /* Orders container */
+    #orders-container {
+        max-width: 95%;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Order row layout */
+    .order-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer; /* Make the row clickable */
+    }
     
+    .order-details {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+    }
     
+    .order-details div {
+        margin: 0 10px;
+        color: #333;
+    }
     
+    /* Status styling */
+    .status {
+        font-weight: bold;
+        color: #007BFF;
+    }
     
+    .order-row:hover {
+        background-color: #eef2f5;
+    }
     
+    /* Responsive layout for mobile */
+    @media (max-width: 768px) {
+        .order-row {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .order-details {
+            flex-direction: column;
+        }
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        /* Orders container */
-        #orders-container {
-                max-width: 95%;
-                margin: 30px auto;
-                padding: 20px;
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            /* Order row layout */
-            .order-row {
-                display: flex;
-                justify-content: space-between;
-                padding: 15px;
-                border-bottom: 1px solid #ddd;
-                margin-bottom: 10px;
-                background-color: #f9f9f9;
-                border-radius: 5px;
-                font-size: 1.1rem;
-                cursor: pointer; /* Make the row clickable */
-            }
-            
-            .order-details {
-                display: flex;
-                flex: 1;
-                justify-content: space-between;
-            }
-            
-            .order-details div {
-                margin: 0 10px;
-                
-                color: #333;
-            }
-            
-            /* Status styling */
-            .status {
-                font-weight: bold;
-                color: #007BFF;
-            }
-            
-            .order-row:hover {
-                background-color: #eef2f5;
-            }
-            
-            /* Responsive layout for mobile */
-            @media (max-width: 768px) {
-                .order-row {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-            
-                .order-details {
-                    flex-direction: column;
-                }
-            }
-            
-            /* Modal Styling */
-        
-            .modal {
-            display: none;
-            position: fixed;
-           
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 60px 20px; /* Add padding to prevent content from touching edges */
+    /* Modal Styling */
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 60px 20px; /* Add padding to prevent content from touching edges */
         font-size: 1rem;
+    }
+    
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 1300px;
+        max-height: 90vh; /* Limit height to 80% of viewport */
+        overflow-y: auto; /* Enable vertical scrolling */
+        animation: fadeIn 0.3s ease-in-out;
+        margin: auto; /* Center modal on screen */
+    }
+    
+    #logo-image {
+        width: 20%;
+        padding: 10px;
+    }
+    
+    #order-details-content {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1rem;
+    }
+    
+    .order-info {
+        flex: 1;
+    }
+    
+    .order-info-row {
+        margin: 5px 0;
+    }
+    
+    /* Modal table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    table th, table td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    #order-items-body tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    #total-order {
+        font-weight: bold; 
+        float: right;
+        color: white;
+    }
+
+    #total-value {
+        font-weight: bolder;
+        float: right;
+        color: white;
+    }
+
+    #discount-value {
+        font-weight: bold;
+        float: right;
+        color: rgb(245, 158, 158);
+    }
+    
+    #ipi-order {
+        font-weight: bold;
+        float: right;
+        color: rgb(255, 255, 199);
+    }
+
+    /* When modal is open, make it visible */
+    .modal.show {
+        display: flex;
+    }
+    
+    .totalOrderBox {
+        padding: 20px 20px;
+        margin: 20px auto;
+        background-color: #13273d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    /* Responsiveness for smaller screens */
+    @media (max-width: 768px) {
+        .order-header {
+            flex-direction: column;
         }
-        
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 1300px;
-            max-height: 90vh; /* Limit height to 80% of viewport */
-            overflow-y: auto; /* Enable vertical scrolling */
-            animation: fadeIn 0.3s ease-in-out;
-            margin: auto; /* Center modal on screen */
+        .order-info {
+            margin-top: 20px;
         }
-        
-            
-            #logo-image {
-                width: 20%;
-                padding: 10px;
-            }
-            
-          
-            
-            #order-details-content {
-                padding: 10px;
-                text-align: center;
-              
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            
-            
-            .order-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 1.1rem;
-            }
-            
-            .order-info {
-                flex: 1;
-            }
-            
-            .order-info-row {
-                margin: 5px 0;
-            }
-            
-            /* Modal table styling */
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-            }
-            
-            table th, table td {
-                padding: 8px;
-                text-align: center;
-                border: 1px solid #ddd;
-            }
-            
-            #order-items-body tr:nth-child(even) {
-                background-color: #f9f9f9;
-            }
-            
-
-
-
-            #total-order {
-            font-weight: bold; 
-            float: right;
-            color: white;
-            }
-
-            #total-value {
-            font-weight: bolder;
-            float: right;
-            color: white;
-            
-        }
-
-        #discount-value {
-            font-weight:bold;
-            float: right;
-            color: rgb(245, 158, 158);
-            
-        }
-        #ipi-order {
-            font-weight: bold;
-            float: right;
-           
-            color: rgb(255, 255, 199);
-        }
-
-
-
-
-            /* When modal is open, make it visible */
-            .modal.show {
-                display: flex;
-            }
-            
-            .totalOrderBox {
-            
-            padding: 20px 20px;
-            margin: 20px auto;
-            background-color: #13273d;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        
-        
-        }
-        
-            /* Responsiveness for smaller screens */
-            @media (max-width: 768px) {
-                .order-header {
-                    flex-direction: column;
-                }
-            
-                .order-info {
-                    margin-top: 20px;
-                }
-            }
-            
-            .obs-row {
-            padding: 10px;
-            background-color: #aaa;
-            border-radius: 10px;
-            font-size: 1rem;
-          }
-        
-        
-          textarea {
-          width: 100%;
-          padding: 10px;
-          font-size: 1.1rem;
-          border-radius: 4px;
-          border: 1px solid #ccc;
-          box-sizing: border-box;
-          resize: none;
-          line-height: 24px; /* Set line height to calculate row height */
-          max-height: 120px; /* Limit to 3 rows (3 * 24px) */
-          overflow-y: auto; /* Enable scrolling when the content exceeds max height */
-        }
-        
-        
+    }
+    
+    .obs-row {
+        padding: 10px;
+        background-color: #aaa;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+    
+    textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1.1rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        resize: none;
+        line-height: 24px; /* Set line height to calculate row height */
+        max-height: 120px; /* Limit to 3 rows (3 * 24px) */
+        overflow-y: auto; /* Enable scrolling when the content exceeds max height */
+    }
+    
     /* Base styles for both buttons */
     .modalOrderDeleteButton, .modalOrderEditButton {
-      width: 40px;                /* Set desired width */
-      height: 40px;               /* Set desired height */
-      cursor: pointer;           /* Indicate the buttons are clickable */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+        width: 40px;                /* Set desired width */
+        height: 40px;               /* Set desired height */
+        cursor: pointer;           /* Indicate the buttons are clickable */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
     }
     
     .modalOrderEditButton img, .modalOrderDeleteButton img {
-      vertical-align: super;     /* Align image properly */
-      width: 20px;                /* Set image size */
-      height: auto;               /* Keep aspect ratio */
+        vertical-align: super;     /* Align image properly */
+        width: 20px;                /* Set image size */
+        height: auto;               /* Keep aspect ratio */
     }
     
     /* Hover state for both buttons */
     .modalOrderDeleteButton:hover, .modalOrderEditButton:hover {
-      transform: scale(1.1);  /* Slightly grow the button on hover */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow for depth */
+        transform: scale(1.1);  /* Slightly grow the button on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow for depth */
     }
     
     /* Optional: active state to shrink the button slightly when clicked */
     .modalOrderDeleteButton:active, .modalOrderEditButton:active {
-      transform: scale(0.98);  /* Shrink the button a bit when clicked */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
+        transform: scale(0.98);  /* Shrink the button a bit when clicked */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
     }
     
+    .save-quantity-btn {
+        background-color: #28a745;
+        width: 5rem;
+        display: block; 
+        margin: 0.5rem auto 0; /* Top margin, center alignment, no bottom margin */
+    }
+    .save-quantity-btn:hover {
+        background-color: #6aa277; /* Yellow-orange hover color */
+        transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
+    }
     
-          .save-quantity-btn {
-            background-color: #28a745;
-            width: 5rem;
-            display: block; 
-            margin: 0.5rem auto 0; /* Top margin, center ali
-            gnment, no bottom margin */
-        }
-        .save-quantity-btn:hover {
-            background-color: #6aa277; /* Yellow-orange hover color */
-            transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
-        }
-        
-        .edit-quantity {
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid #007BFF; /* Optional: blue border */
-            border-radius: 8px;
-            width: 5rem; /* Adjust width if necessary */
-            text-align: center;
-        }
-        
-        .order-total{
-            font-size: 1.1rem;
-        }
+    .edit-quantity {
+        padding: 10px;
+        font-size: 1rem;
+        border: 2px solid #007BFF; /* Optional: blue border */
+        border-radius: 8px;
+        width: 5rem; /* Adjust width if necessary */
+        text-align: center;
+    }
     
-    .valores{
+    .order-total {
+        font-size: 1.1rem;
+    }
+    
+    .valores {
         color: white;
         font-size: 1.1rem;
         font-weight: bold;
     }
     
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: self-start;
+        gap: 10px;
+        font-family: Arial, sans-serif;
+    }
     
+    /* Flexbox layout for labels and switch */
+    .switch-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
     
+    .switch-label {
+        font-size: 16px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
     
+    /* Style for the toggle switch */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
     
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
     
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #4CAF50;
+        transition: 0.4s;
+        border-radius: 34px;
+    }
     
-        .container {
-            display: flex;
-            flex-direction: column;
-            
-            align-items: self-start;
-            gap: 10px;
-            font-family: Arial, sans-serif;
-        }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;    
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+    }
     
-        /* Flexbox layout for labels and switch */
-        .switch-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    input:checked + .slider {
+        background-color: #ccc;
+    }
     
-        .switch-label {
-            font-size: 16px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
     
-        /* Style for the toggle switch */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #4CAF50;
-            transition: 0.4s;
-            border-radius: 34px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;    
-            border-radius: 50%;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: 0.4s;
-        }
-        
-        input:checked + .slider {
-            background-color: #ccc;
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-    
-       
-    
-    
-    
-    
-    
-    
-        /* Style for the dropdown container */
+    /* Style for the dropdown container */
     .dropdown {
         margin: 20px 0;
         font-family: Arial, sans-serif;
@@ -470,8 +412,6 @@
         outline: none;
         transition: border-color 0.3s ease;
     }
-
-    
     
     /* Focus effect for the select input */
     #ipi:focus {
@@ -488,46 +428,24 @@
     #ipi:hover {
         border-color: #BF6734;
     }
-
-    
     
     /* Style for the select box container when it's not focused */
     .dropdown {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        
         width: 100px;
         margin: 20px 0;
         padding-right: 30px;
     }
     
-    
     /* By default, hide the print-only span*/ 
     .ipi-print-only {
-    
         display: none;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* Style for the select dropdown */
-        #desc {
+    
+    /* Style for the select dropdown */
+    #desc {
         width: 100%;
         padding: 8px;
         font-size: 1rem;
@@ -538,11 +456,7 @@
         outline: none;
         transition: border-color 0.3s ease;
     }
-
-
-
-
-
+    
     /* Focus effect for the select input */
     #desc:focus {
         border-color: #BF6734;
@@ -558,27 +472,10 @@
     #desc:hover {
         border-color: #BF6734;
     }
-
-
-
-
+    
     .desc-print-only {
-    
-    display: none;
+        display: none;
     }
-    
-
-
-
-
-
-
-
-
-
-
-
-
     
     .topButtons {
         display: flex;        /* Enables flexbox */
@@ -591,1662 +488,1170 @@
         flex: 1; /* Makes both divs take equal space */
     }
     
-    
-    
-    
-    
     #pedido-adm a {
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 25px;
+        padding: 6px 25px;
+        background-color: #BF6734;
+        border-radius: 25px;
+    }
     
-    text-decoration: none;
-   font-weight: bold;
-    border-radius: 25px;
-    padding: 6px 25px;
+    /* New Control Panel Styles */
+    #control-panel {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
 
-    background-color: #BF6734;
- 
-    
-    
-    border-radius: 25px;
+    #control-panel h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
 
+    .filter-group {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+    }
 
-}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-            </style>
-        
-    
-    
+    .filter-group label {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #555;
+    }
 
+    #searchInput {
+        padding: 8px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
 
+    #status-filter {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: #fff;
+    }
 
-    
-    
+    #order-sum {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #007BFF;
+    }
+
+    /* Adjust .box for consistency */
+    .box {
+        max-width: 95%;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
 <body>
-
 <header>
     <h1 id="nyrfestas"></h1>
     <div id="user-info">
         <span id="username-display"></span>
         <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
     </div>
-
     <div class="logoNyr">
         <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
     </div>
-
-
-
 </header>
 
-
-
-
-
 <nav>
-    
     <div id="customerSelected">
-
         <span id="customerName">...</span>
         <span class="clear-btn" onclick="clearCustomer()">❌</span>
-      </div>
-
-
-
-       <ul>
+    </div>
+    <ul>
         <li><a href="CADASTRO/CADASTRO_ADMIN/cadastroadmin.html">Cadastro</a></li>
         <li><a href="produtos.html">Lista de Produtos</a></li>
-        <li id="pedido-adm" ><a href="pedidosadmin.html">Pedidos</a></li>
+        <li id="pedido-adm"><a href="pedidosadmin.html">Pedidos</a></li>
     </ul>
 </nav>
 
-
-
 <div class="PAGE">
-
-<h1>Meus Pedidos (ADMIN)</h1>
-
-<div class="box">
-
-<div class="search-wrapper">
-
-<input type="text" id="searchInput" placeholder="Buscar por...">
-
-
-</div>
-
-<div id="orders-container">
-
-
-    
-    <!-- Orders will be inserted here dynamically -->
-
-
-
-</div>
-</div>
-
-
-<div id="order-modal" class="modal">
-    <div class="modal-content">
-        <div class="order-header">
-            <div class="order-info">
-                <div class="order-info-row">
-                    <span>Numero do Pedido:</span>
-                    <span id="order-id"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Razao Social:</span>
-                    <span id="razao-social"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>CNPJ:</span>
-                    <span id="cnpj"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Email:</span>
-                    <span id="email"></span>
-                </div>
-                <div class="order-info-row">
-                    <span>Representante:</span>
-                    <span id="representante"></span>
-                </div>
+    <h1>Meus Pedidos (ADMIN)</h1>
+    <div class="box">
+        <!-- New Control Panel -->
+        <div id="control-panel">
+            <h3>Controle de Pedidos</h3>
+            <div class="filter-group">
+                <label for="searchInput">Pesquisar:</label>
+                <input type="text" id="searchInput" placeholder="Buscar por ID, vendedor, razão social...">
             </div>
-            <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
+            <div class="filter-group">
+                <label for="status-filter">Status:</label>
+                <select id="status-filter">
+                    <option value="all">Todos</option>
+                    <option value="0">Aberto</option>
+                    <option value="1">Orçamento</option>
+                    <option value="2">Fechado</option>
+                    <option value="3">Processado</option>
+                </select>
+            </div>
+            <div id="order-sum">Total: R$ 0,00</div>
         </div>
 
+        <div id="orders-container">
+            <!-- Orders will be inserted here dynamically -->
+        </div>
+    </div>
 
-
-
-        <table id="order-items-table">
-            <thead>
-                <tr>
-                    <th>-</th>   
-                    <th>Código</th>
-                    <th>Descrição</th>
-                    <th>Qtde</th>
-                    <th>Preço Unitário</th>
-                    <th>Ipi</th>
-                    <th>Subtotal</th>
-                    <th>Editar</th>
-                    <th>Apagar</th>
-                    
-                </tr>
-
-                
-<div class="topButtons" >
-
-                <div class="container">
-                    <div class="switch-container">
-                        <!-- Left label -->
-                        <span class="switch-label left-label active">Aberto</span>
-            
-                        <label class="switch">
-                            <input type="checkbox" id="toggleButton">
-                            <span class="slider"></span>
-                        </label>
-            
-                        <!-- Right label -->
-                        <span class="switch-label right-label">Orçamento</span>
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <div class="order-header">
+                <div class="order-info">
+                    <div class="order-info-row">
+                        <span>Numero do Pedido:</span>
+                        <span id="order-id"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Razao Social:</span>
+                        <span id="razao-social"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>CNPJ:</span>
+                        <span id="cnpj"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Email:</span>
+                        <span id="email"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Representante:</span>
+                        <span id="representante"></span>
                     </div>
                 </div>
-
-                <div class="dropdown">
-            
-                    <div id="ipilabel">
-                    <label for="ipi">IPI:</label>
-                    <!-- Dropdown for user interaction -->
-                    <select id="ipi">
-                        <option value='0'>B0</option>
-                        <option value='0.13'>B1</option>
-                        <option value='0.065'>B2</option>
-                        <option value='0.039'>B3</option>
-                    </select>
-                </div>
-                </div>
-
-                <div class="dropdown">
-            
-                    <div id="desclabel">
-                    <label for="desc">Desconto:</label>
-                    <!-- Dropdown for user interaction -->
-                    <select id="desc">
-                        <option value='0'>0%</option>
-                        <option value='0.03'>3%</option>
-                        <option value='0.05'>5%</option>
-                        <option value='0.08'>8%</option>
-                        <option value='0.10'>10%</option>
-                    </select>
-                </div>               
-                </div>
-
-
-
-                
+                <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
             </div>
 
-
-
-            </thead>
-
-
-            <tbody id="order-details-content">
-                <!-- Product rows will be dynamically populated here -->
-            </tbody>
-        </table>
-        <div class="totalOrderBox">
-            <!-- Total Order Section -->
-            <div class="order-total">
-
-
-                <div>
-                    <span class="valores">Valor do pedido:</span>
-                    <span id="total-order">R$ 0,00</span>
+            <table id="order-items-table">
+                <thead>
+                    <tr>
+                        <th>-</th>   
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Qtde</th>
+                        <th>Preço Unitário</th>
+                        <th>Ipi</th>
+                        <th>Subtotal</th>
+                        <th>Editar</th>
+                        <th>Apagar</th>
+                    </tr>
+                    <div class="topButtons">
+                        <div class="container">
+                            <div class="switch-container">
+                                <span class="switch-label left-label active">Aberto</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleButton">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="switch-label right-label">Orçamento</span>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <div id="ipilabel">
+                                <label for="ipi">IPI:</label>
+                                <select id="ipi">
+                                    <option value='0'>B0</option>
+                                    <option value='0.13'>B1</option>
+                                    <option value='0.065'>B2</option>
+                                    <option value='0.039'>B3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <div id="desclabel">
+                                <label for="desc">Desconto:</label>
+                                <select id="desc">
+                                    <option value='0'>0%</option>
+                                    <option value='0.03'>3%</option>
+                                    <option value='0.05'>5%</option>
+                                    <option value='0.08'>8%</option>
+                                    <option value='0.10'>10%</option>
+                                </select>
+                            </div>               
+                        </div>
+                    </div>
+                </thead>
+                <tbody id="order-details-content">
+                    <!-- Product rows will be dynamically populated here -->
+                </tbody>
+            </table>
+            <div class="totalOrderBox">
+                <div class="order-total">
+                    <div>
+                        <span class="valores">Valor do pedido:</span>
+                        <span id="total-order">R$ 0,00</span>
+                    </div>
+                    <div>
+                        <span class="valores">Valor do ipi:</span>
+                        <span id="ipi-order">R$ 0,00</span>
+                    </div>
+                    <div>
+                        <span class="valores">Valor do desconto:</span>
+                        <span id="discount-value">R$ 0,00</span>
+                    </div>
+                    <div>
+                        <span class="valores">Total do pedido:</span>
+                        <span id="total-value">R$ 0,00</span>
+                    </div>
                 </div>
-                
+            </div>
+            <div id="print-info">
                 <div>
-                    <span class="valores">Valor do ipi:</span>
-                    <span id="ipi-order">R$ 0,00</span>
+                    <span id="ipi-display" class="ipi-print-only"></span>
                 </div>
-
-                
-
                 <div>
-                    <span class="valores">Valor do desconto:</span>
-                    <span id="discount-value">R$ 0,00</span>
+                    <span id="desc-display" class="desc-print-only"></span>
                 </div>
-
-                <div>
-                    <span class="valores">Total do pedido:</span>
-                    <span id="total-value">R$ 0,00</span>
+            </div>
+            <div class="obs-row">
+                <span>Observações:</span>
+                <textarea type="text" id="obs" placeholder="Transportadora / Forma de pagamento"></textarea>
+            </div>
+            <div class="allbtns">
+                <div class="modal-actions">
+                    <button class="action-btn" onclick="printOrder()">Imprimir</button>
+                    <button id="save-notes-btn" class="action-btn">Salvar</button>
+                    <button id="duplicateOrderButton" class="action-btn">Duplicar</button>
+                    <button id="finish-order-btn" class="action-btn">Finalizar</button>
+                    <button id="receive-order-btn" class="action-btn">Receber</button>
+                    <button id="revert-order-btn" class="action-btn">Recuperar</button>
+                    <button id="delete-order-btn" class="action-btn">Apagar</button>
                 </div>
-
-
+                <button id="close-modal" class="action-btn">Fechar</button>
             </div>
         </div>
-
-
-        <div id="print-info">
-            
-            <div>
-            <!-- Span for printing, initially hidden -->
-            <span id="ipi-display" class="ipi-print-only"></span>
-            </div>
-
-            <div>
-            <!-- Span for printing, initially hidden -->
-            <span id="desc-display" class="desc-print-only"></span>
-            </div>
-
-        </div>
-
-
-        <div class="obs-row">
-            <span>Observações:</span>
-            <textarea type="text" id="obs"
-            placeholder=
-            "Transportadora / Forma de pagamento"
-            ></textarea>
-        </div>
-        
-        <!-- Action Buttons -->
-       
-        <div class="allbtns">
-            <div class="modal-actions">
-
-                <button class="action-btn" onclick="printOrder()">Imprimir</button>
-                <button id="save-notes-btn" class="action-btn">Salvar</button>
-
-                <button id="duplicateOrderButton" class="action-btn">Duplicar</button>
-               
-                
-                <button id="finish-order-btn" class="action-btn">Finalizar</button>
-                <button id="receive-order-btn" class="action-btn">Receber</button>
-                <button id="revert-order-btn" class="action-btn">Recuperar</button>
-                <button id="delete-order-btn" class="action-btn">Apagar</button>
-
-            </div>
-        
-            <!-- Close Modal Button -->
-            <button id="close-modal" class="action-btn">Fechar</button>
-        </div>
-        
     </div>
-    
-    </div>
-    
-    </div>
+</div>
 
+<script>
+    let allOrders = [];
 
-
-    <script>
-
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Function to handle login state and display username
-        function displayUserName() {
-            const username = localStorage.getItem('username');
-            if (username) {
-                document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-            }
+    // Function to handle login state and display username
+    function displayUserName() {
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
         }
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Function to handle logout
-        function handleLogout() {
-            localStorage.removeItem('username');
-            window.location.href = '/index.html';
-        }
-        
-        // Event listener for logout button
-        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Function to load orders from the backend
-        async function loadOrders() {
-            try {
-                const response = await fetch(`${URL_API}/orders-admin`, {
-                    method: 'GET'
-                });
-        
-                if (!response.ok) {
-                    document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
-                    return;
-                }
-        
-                const orders = await response.json();
-                displayOrders(orders);
-                console.log('CONTEUDO PEDIDO:', orders)
-            } catch (error) {
-                console.error('Error fetching orders:', error);
+    }
+    
+    // Function to handle logout
+    function handleLogout() {
+        localStorage.removeItem('username');
+        window.location.href = '/index.html';
+    }
+    
+    // Event listener for logout button
+    document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+    
+    // Function to load orders from the backend
+    async function loadOrders() {
+        try {
+            const response = await fetch(`${URL_API}/orders-admin`, { method: 'GET' });
+            if (!response.ok) {
                 document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
-            }
-        }
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Function to dynamically display orders
-        function displayOrders(orders) {
-            console.log('displayOrders function called with:', orders);
-            const container = document.getElementById('orders-container');
-            container.innerHTML = ''; // Clear existing content
-        
-            if (orders.length === 0) {
-                console.log('No orders found');
-                container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
                 return;
             }
-        
-            orders.forEach(order => {
-                console.log('Processing order:', order);
-        
-                // Ensure the total is a valid number and handle non-numeric values
-                const total = parseFloat(order.total);
-                if (isNaN(total)) {
-                    console.error('Invalid total value:', order.total);
-                }
-        
-                // Function to format numbers as currency (Brazilian Real - R$)
-                function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-        
-                const statusMap = {
-    0: { text: 'Aberto', color: '#E07A5F' },
-    1: { text: 'Orçamento', color: '#FFB200' },
-    2: { text: 'Fechado', color: '#6EC207' },
-    3: { text: 'Processado', color: '#3D8D7A' }
-};
-
-// Get status text and color
-const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
-
-const orderRow = `
-    <div class="order-row" data-id="${order.id}">
-        <div class="order-details">
-            <div><strong>ID:</strong> ${order.id}</div>
-            <div><strong>Representante:</strong> ${order.representante}</div>
-            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-            <div class="status" style="color: ${status.color};">
-                <strong>Status:</strong> ${status.text}
-            </div>
-        </div>
-    </div>
-`;
-
-container.innerHTML += orderRow;
-    
-            });
-
-            console.log('All orders displayed');
+            allOrders = await response.json();
+            filterAndDisplayOrders();
+            console.log('CONTEUDO PEDIDO:', allOrders);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+            document.getElementById('orders-container').innerHTML = '<p>FALHA AO CARREGAR OS PEDIDOS.</p>';
         }
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        // Function to fetch and display order details in the modal
-        async function fetchOrderDetails(orderId) {
-            console.log("CHECK HERE", orderId);
-            try {
-                console.log(`Fetching details for order ID: ${orderId}`);
-                const response = await fetch(`${URL_API}/order-details/${orderId}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch order details');
-                }
-                const orderDetails = await response.json();
-        
-                const orderID = orderDetails.id;
-                localStorage.setItem('currentOrderId', orderID);
-        
-                console.log('Order details received:', orderDetails);
-                populateModal(orderDetails);
-            } catch (error) {
-                console.error('Error fetching order details:', error);
-            }
-        }
-        
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-       
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    // Update general order information in the modal
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-    document.getElementById('email').textContent = orderDetails.email;
-    document.getElementById('representante').textContent = orderDetails.representante;
-    document.getElementById('obs').textContent = orderDetails.observacoes;
-
-    // Get IPI dropdown and display elements
-    const ipiDropdown = document.getElementById('ipi');
-    const ipiDisplay = document.getElementById('ipi-display');
-
+    }
     
-    // Set the IPI dropdown value
-    if (orderDetails.ipi_tax) {
-        ipiDropdown.value = orderDetails.ipi_tax;
+    // Function to filter and display orders
+    function filterAndDisplayOrders() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        const statusFilter = document.getElementById('status-filter').value;
+
+        const filteredOrders = allOrders.filter(order => {
+            const matchesSearch =
+                order.id.toString().includes(searchTerm) ||
+                order.representante.toLowerCase().includes(searchTerm) ||
+                order.razaosocial.toLowerCase().includes(searchTerm) ||
+                new Date(order.data).toLocaleDateString().includes(searchTerm) ||
+                (statusMap[order.status]?.text.toLowerCase() || '').includes(searchTerm);
+            const matchesStatus = statusFilter === 'all' || order.status.toString() === statusFilter;
+            return matchesSearch && matchesStatus;
+        });
+
+        displayOrders(filteredOrders);
+        updateSum(filteredOrders);
     }
 
-// Update products table and calculate total
-ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+    const statusMap = {
+        0: { text: 'Aberto', color: '#E07A5F' },
+        1: { text: 'Orçamento', color: '#FFB200' },
+        2: { text: 'Fechado', color: '#6EC207' },
+        3: { text: 'Processado', color: '#3D8D7A' }
+    };
 
+    // Function to dynamically display orders
+    function displayOrders(orders) {
+        const container = document.getElementById('orders-container');
+        container.innerHTML = ''; // Clear existing content
 
-    const descDropdown = document.getElementById('desc');
-    const descDisplay = document.getElementById('desc-display');
-   // Select the discount dropdown element
-   const discount = document.querySelector('#desc');
+        if (orders.length === 0) {
+            container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
+            return;
+        }
+
+        orders.forEach(order => {
+            const total = parseFloat(order.total) || 0;
+            const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
+            const orderRow = `
+                <div class="order-row" data-id="${order.id}">
+                    <div class="order-details">
+                        <div><strong>ID:</strong> ${order.id}</div>
+                        <div><strong>Representante:</strong> ${order.representante}</div>
+                        <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+                        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div class="status" style="color: ${status.color};">
+                            <strong>Status:</strong> ${status.text}
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += orderRow;
+        });
+    }
+
+    // Function to update the sum of filtered orders
+    function updateSum(orders) {
+        const totalSum = orders.reduce((sum, order) => sum + (parseFloat(order.total) || 0), 0);
+        document.getElementById('order-sum').textContent = `Total: R$ ${totalSum.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
     
-
-     // Set the DESC dropdown value
-     if (orderDetails.desconto) {
-       descDropdown.value = orderDetails.desconto;  }
-  
-        // Update desc
-
-
-    //********descDisplay.textContent = "DESC: " + descDropdown.options[descDropdown.selectedIndex].text;
-
-    descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
-
-
-
+    // Function to fetch and display order details in the modal
+    async function fetchOrderDetails(orderId) {
+        console.log("CHECK HERE", orderId);
+        try {
+            console.log(`Fetching details for order ID: ${orderId}`);
+            const response = await fetch(`${URL_API}/order-details/${orderId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch order details');
+            }
+            const orderDetails = await response.json();
     
+            const orderID = orderDetails.id;
+            localStorage.setItem('currentOrderId', orderID);
+    
+            console.log('Order details received:', orderDetails);
+            populateModal(orderDetails);
+        } catch (error) {
+            console.error('Error fetching order details:', error);
+        }
+    }
+    
+    // Function to populate the modal with order details
+    function populateModal(orderDetails) {
+        document.getElementById('order-id').textContent = orderDetails.id;
+        document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+        document.getElementById('cnpj').textContent = orderDetails.cnpj;
+        document.getElementById('email').textContent = orderDetails.email;
+        document.getElementById('representante').textContent = orderDetails.representante;
+        document.getElementById('obs').textContent = orderDetails.observacoes;
+
+        const ipiDropdown = document.getElementById('ipi');
+        const ipiDisplay = document.getElementById('ipi-display');
+        if (orderDetails.ipi_tax) {
+            ipiDropdown.value = orderDetails.ipi_tax;
+        }
+        ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
+
+        const descDropdown = document.getElementById('desc');
+        const descDisplay = document.getElementById('desc-display');
+        const discount = document.querySelector('#desc');
+        if (orderDetails.desconto) {
+            descDropdown.value = orderDetails.desconto;
+        }
+        descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
 
         const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0;
-    let ipiOrder = 0;
+        let total = 0;
+        let ipiOrder = 0;
 
-    // Clear existing content
-    orderDetailsContent.innerHTML = '';
+        orderDetailsContent.innerHTML = '';
 
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco);
-        const quantity = parseInt(product.quantidade, 10);
-        const factor = parseFloat(product.ipi);
-        const ipiTax = parseFloat(orderDetails.ipi_tax);
-        const ipi = factor * ipiTax * price * quantity;
-        const productTotal = (price * quantity) + ipi;
+        orderDetails.products.forEach((product, index) => {
+            const price = parseFloat(product.preco);
+            const quantity = parseInt(product.quantidade, 10);
+            const factor = parseFloat(product.ipi);
+            const ipiTax = parseFloat(orderDetails.ipi_tax);
+            const ipi = factor * ipiTax * price * quantity;
+            const productTotal = (price * quantity) + ipi;
 
-        // Function to format numbers as currency (Brazilian Real - R$)
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
-        
-        const row = `
-            <tr data-product-id="${product.id}">
-                <td>${index + 1}</td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td class="quantity">${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(ipi)}</td>
-                <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-            </tr>
-        `;  
-
-        orderDetailsContent.innerHTML += row;
-
-        total += productTotal;
-        
-                
-        ipiOrder += ipi;
-
-        total2 = total - ipiOrder;
-       
-
-        console.log('IPI VALUE:',ipiOrder);
-    });
-
-
-
-    // Function to update total with discount
-    function updateTotal() {
-        let discountValue = parseFloat(discount.value) || 0;
-        let discountTotal = total * discountValue * (-1);
-        let totalFinal = total * (1 - discountValue);
-
-        function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                };
-        document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
-        document.getElementById('total-order').textContent = formatCurrency(total2);
-        document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
-        document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-    }
-
-    // Initial calculation
-    updateTotal();
-
-    // Add event listener to recalculate when discount changes
-   // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
-    discount.addEventListener('change', updateTotal);
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-            // Check the status of the order and set the toggle button position
-            const toggleButton = document.getElementById('toggleButton'); // Your toggle button
-            console.log('status:', orderDetails.status);
-            if (toggleButton) {  // Ensure toggleButton exists before manipulating it
-                if (orderDetails.status === 0) {
-                    // If status is 0 (Aberto), set button to the left
-                    //toggleButton.classList.remove('toggled');
-                    toggleButton.checked = false; 
-                    toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
-                } else if (orderDetails.status === 1) {
-                    // If status is 1 (Orçamento), set button to the right
-                    console.log('status:', orderDetails.status);
-                   // toggleButton.classList.add('toggled');
-                   toggleButton.checked = true;
-                    toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
-                }
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
             }
-         
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Add event listeners for edit buttons
-document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-    button.addEventListener('click', async function () {
-        const row = this.closest('tr');
-        const orderId = localStorage.getItem('currentOrderId');
-        const quantityCell = row.querySelector('.quantity');
-        const productId = row.getAttribute('data-product-id');
-        const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-
-        // Directly allow quantity editing (removed status check)
-        const inputField = document.createElement('input');
-        inputField.type = 'number';
-        inputField.value = currentQuantity;
-        inputField.classList.add('edit-quantity');
-
-        // Add save button
-        const saveButton = document.createElement('button');
-        saveButton.textContent = 'Salvar';
-        saveButton.classList.add('save-quantity-btn');
-
-        // Clear the quantity cell and append input and save button
-        quantityCell.innerHTML = '';
-        quantityCell.appendChild(inputField);
-        quantityCell.appendChild(saveButton);
-        inputField.focus();
-
-        // Add 'Enter' key support
-        inputField.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') saveButton.click();
-        });
-
-        saveButton.addEventListener('click', async function () {
-            const newQuantity = parseInt(inputField.value, 10);
-            if (newQuantity && newQuantity > 0) {
-                try {
-                    const response = await fetch(`${URL_API}/editproduct/${productId}`, {
-                        method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ quantity: newQuantity })
-                    });
-
-                    if (!response.ok) throw new Error('Failed to update quantity');
-                    const data = await response.json();
-
-                    // Extract necessary data
-                    const ipi = data.updatedProduct.ipi;
-                    const updatedTotal = data.updatedProduct.total;
-                    const cxfechada = data.updatedProduct.cxfechada;
-                    const precofechada = data.updatedProduct.precofechada;
-                    const precofrac = data.updatedProduct.precofrac;
-                    const chosenPrice = (newQuantity >= cxfechada) ? precofechada : precofrac;
-                    const ipitax = data.updatedProduct.ipiTax || 0;
-
-                    // Calculate values
-                    const ipiValue = ipi * ipitax * chosenPrice * newQuantity;
-                    const productTotal = chosenPrice * newQuantity + ipiValue;
-
-                    // Format as currency
-                    function formatCurrency(value) {
-                        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                    }
-
-                    // Update table values
-                    quantityCell.textContent = newQuantity;
-                    row.cells[4].textContent = formatCurrency(chosenPrice);
-                    row.cells[5].textContent = formatCurrency(ipiValue);
-                    row.cells[6].textContent = formatCurrency(productTotal);
-
-                    // Update total price in the modal
-                    updateTotalPrice();
-
-                    window.location.reload();
-
-                } catch (error) {
-                    alert('Error updating quantity');
-                    console.error('Error updating quantity:', error);
-                }
-            } else {
-                alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
-            }
-        });
-    });
-});
-
-
-
             
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Function to update the total price in the modal
+            const row = `
+                <tr data-product-id="${product.id}">
+                    <td>${index + 1}</td>
+                    <td>${product.codproduto}</td>
+                    <td>${product.descricao}</td>
+                    <td class="quantity">${quantity}</td>
+                    <td>${formatCurrency(price)}</td>
+                    <td>${formatCurrency(ipi)}</td>
+                    <td>${formatCurrency(productTotal)}</td>
+                    <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                    <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+                </tr>
+            `;  
+            orderDetailsContent.innerHTML += row;
+
+            total += productTotal;
+            ipiOrder += ipi;
+        });
+
+        function updateTotal() {
+            let discountValue = parseFloat(discount.value) || 0;
+            let discountTotal = total * discountValue * (-1);
+            let totalFinal = total * (1 - discountValue);
+
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            }
+            document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
+            document.getElementById('total-order').textContent = formatCurrency(total - ipiOrder);
+            document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+            document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+        }
+
+        updateTotal();
+        discount.addEventListener('change', updateTotal);
+
+        const toggleButton = document.getElementById('toggleButton');
+        if (toggleButton) {
+            if (orderDetails.status === 0) {
+                toggleButton.checked = false; 
+            } else if (orderDetails.status === 1) {
+                toggleButton.checked = true;
+            }
+        }
+
+        document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
+            button.addEventListener('click', async function () {
+                const row = this.closest('tr');
+                const orderId = localStorage.getItem('currentOrderId');
+                const quantityCell = row.querySelector('.quantity');
+                const productId = row.getAttribute('data-product-id');
+                const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+
+                const inputField = document.createElement('input');
+                inputField.type = 'number';
+                inputField.value = currentQuantity;
+                inputField.classList.add('edit-quantity');
+
+                const saveButton = document.createElement('button');
+                saveButton.textContent = 'Salvar';
+                saveButton.classList.add('save-quantity-btn');
+
+                quantityCell.innerHTML = '';
+                quantityCell.appendChild(inputField);
+                quantityCell.appendChild(saveButton);
+                inputField.focus();
+
+                inputField.addEventListener('keypress', function (event) {
+                    if (event.key === 'Enter') saveButton.click();
+                });
+
+                saveButton.addEventListener('click', async function () {
+                    const newQuantity = parseInt(inputField.value, 10);
+                    if (newQuantity && newQuantity > 0) {
+                        try {
+                            const response = await fetch(`${URL_API}/editproduct/${productId}`, {
+                                method: 'PATCH',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ quantity: newQuantity })
+                            });
+
+                            if (!response.ok) throw new Error('Failed to update quantity');
+                            const data = await response.json();
+
+                            const ipi = data.updatedProduct.ipi;
+                            const updatedTotal = data.updatedProduct.total;
+                            const cxfechada = data.updatedProduct.cxfechada;
+                            const precofechada = data.updatedProduct.precofechada;
+                            const precofrac = data.updatedProduct.precofrac;
+                            const chosenPrice = (newQuantity >= cxfechada) ? precofechada : precofrac;
+                            const ipitax = data.updatedProduct.ipiTax || 0;
+
+                            const ipiValue = ipi * ipitax * chosenPrice * newQuantity;
+                            const productTotal = chosenPrice * newQuantity + ipiValue;
+
+                            function formatCurrency(value) {
+                                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                            }
+
+                            quantityCell.textContent = newQuantity;
+                            row.cells[4].textContent = formatCurrency(chosenPrice);
+                            row.cells[5].textContent = formatCurrency(ipiValue);
+                            row.cells[6].textContent = formatCurrency(productTotal);
+
+                            updateTotalPrice();
+                            window.location.reload();
+                        } catch (error) {
+                            alert('Error updating quantity');
+                            console.error('Error updating quantity:', error);
+                        }
+                    } else {
+                        alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
+                    }
+                });
+            });
+        });
+
         function updateTotalPrice() {
             const rows = document.querySelectorAll('#order-details-content tr');
-            let total = 0; // Starting with an initial value of 1000
+            let total = 0;
             const discount = document.querySelector('#desc');
             let discountValue = parseFloat(discount.value) || 0;
             
-            
             rows.forEach(row => {
-
-
                 const productTotal = parseFloat(
-    row.cells[6].textContent
-
-        .replace('R$', '')
-        .trim()
-        .replace(/\./g, '') // Remove ALL dots
-        .replace(',', '.')  // Convert decimal separator
-);
-       
-        total =  total += productTotal;
+                    row.cells[6].textContent
+                        .replace('R$', '')
+                        .trim()
+                        .replace(/\./g, '')
+                        .replace(',', '.')
+                );
+                total += productTotal;
             });
 
-            
-    let discountTotal = total * discountValue;
-    let totalFinal = total * (1 - discountValue);
+            let discountTotal = total * discountValue;
+            let totalFinal = total * (1 - discountValue);
 
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            }
 
-    function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
+            document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+            document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+        }
 
-    document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
-    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-
-
-
-       
+        document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
+            button.addEventListener('click', async (event) => {
+                event.stopPropagation();
+                const row = button.closest('tr');
+                const productId = row.getAttribute('data-product-id');
+                await deleteProduct(productId, orderDetails.id);
+            });
+        });
     }
-        
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-
-        
-            // Add event listeners for delete buttons
-            document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
-                button.addEventListener('click', async (event) => {
-                    event.stopPropagation(); // Prevent row click interference
-                    const row = button.closest('tr');
-                    const productId = row.getAttribute('data-product-id');
-                    await deleteProduct(productId, orderDetails.id);
-                });
+    
+    // Function to delete a product
+    async function deleteProduct(productId, orderId) {
+        try {
+            const response = await fetch(`${URL_API}/delete-product`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId, orderId })
             });
-        
-        }
-        
-        
-               
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // Function to delete a product
-        async function deleteProduct(productId, orderId) {
-            try {
-                const response = await fetch(`${URL_API}/delete-product`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
-                    },
-                    body: JSON.stringify({ productId, orderId }) // Envia os dados no corpo da requisição
-                });
-        
-                if (!response.ok) {
-                    throw new Error('Failed to delete product');
-                }
-        
-                console.log(`Product with ID ${productId} deleted successfully.`);
-                // Refresh order details to reflect changes
-                fetchOrderDetails(orderId); // Refresh order details to reflect changes
-            } catch (error) {
-                console.error('Error deleting product:', error);
+    
+            if (!response.ok) {
+                throw new Error('Failed to delete product');
             }
+    
+            console.log(`Product with ID ${productId} deleted successfully.`);
+            fetchOrderDetails(orderId);
+        } catch (error) {
+            console.error('Error deleting product:', error);
         }
-        
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-        /*
-        
-        // Show modal with order details
-        function openModal(orderId) {
-            fetchOrderDetails(orderId)
-                .then(orderDetails => {
-                    populateModal(orderDetails); // Populate modal with fetched details
-                    document.getElementById('order-modal').classList.add('show'); // Show modal
-                })
-                .catch(error => console.error('Error fetching order details:', error));
+    }
+    
+    // Event listener for opening the modal
+    document.getElementById("orders-container").addEventListener("click", function(event) {
+        if (event.target && event.target.closest(".order-row")) {
+            const orderRow = event.target.closest(".order-row");
+            const orderId = orderRow.getAttribute("data-id");
+            fetchOrderDetails(orderId);
+            document.getElementById("order-modal").style.display = "block";
         }
-        
-        // Event listener for order rows
-        document.querySelectorAll('.order-row').forEach(row => {
-            row.addEventListener('click', () => {
-                const orderId = row.getAttribute('data-id');
-                openModal(orderId); // Open modal with clicked order details
-            });
-        });
-        
-        // Close modal functionality
-        document.getElementById('close-modal').addEventListener('click', () => {
-            document.getElementById('order-modal').classList.remove('show'); // Hide modal
-        });
-        
-        
-        */
-        
-        // Event listener for opening the modal
-        document.getElementById("orders-container").addEventListener("click", function(event) {
-            if (event.target && event.target.closest(".order-row")) {
-                const orderRow = event.target.closest(".order-row");
-                const orderId = orderRow.getAttribute("data-id");
-                fetchOrderDetails(orderId);
-                document.getElementById("order-modal").style.display = "block";
-            }
-        });
-        
-        // Event listener for closing the modal
-        document.getElementById("close-modal").addEventListener("click", function() {
-            document.getElementById("order-modal").style.display = "none";
-        });
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.addEventListener("click", function(event) {
-            const modal = document.getElementById("order-modal");
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-        
-        // Load orders and user info when page loads
-        window.onload = function() {
-            loadOrders();
-            displayUserName();
+    });
+    
+    // Event listener for closing the modal
+    document.getElementById("close-modal").addEventListener("click", function() {
+        document.getElementById("order-modal").style.display = "none";
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener("click", function(event) {
+        const modal = document.getElementById("order-modal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+    
+    // Event listeners for filtering
+    document.getElementById('searchInput').addEventListener('input', filterAndDisplayOrders);
+    document.getElementById('status-filter').addEventListener('change', filterAndDisplayOrders);
+    
+    // Load orders and user info when page loads
+    window.onload = function() {
+        loadOrders();
+        displayUserName();
+    };
+    
+    const textarea = document.getElementById('obs');
+    textarea.addEventListener('input', () => {
+        textarea.style.height = 'auto';
+        textarea.style.height = `${textarea.scrollHeight}px`;
+    });
+    
+    // Save Notes Button
+    document.getElementById("save-notes-btn").addEventListener("click", async () => {
+        const observation = document.getElementById("obs").value.trim();
+        const orderId = localStorage.getItem('currentOrderId');
+    
+        if (!orderId) {
+            alert("No draft order found to save notes.");
+            return;
+        }
+    
+        const requestData = {
+            orderId: orderId,
+            observation: observation,
         };
-        
-        //////////////////////////////////////////////////////////////////////////////////////////
-        
-        const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
-        
-        searchBox.addEventListener('input', function() {
-            const searchTerm = searchBox.value.toLowerCase().trim();
-        
-            const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
-            orders.forEach(order => {
-                const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-                const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-                const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-                const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-                const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
-        
-                // Check if the search term matches any of these fields
-                if (
-                    orderId.includes(searchTerm) || 
-                    representate.includes(searchTerm) || 
-                    razaoSocial.includes(searchTerm) || 
-                    data.includes(searchTerm) || 
-                    status.includes(searchTerm)
-                ) {
-                    order.style.display = 'block'; // Show the order if it matches
-                } else {
-                    order.style.display = 'none'; // Hide the order if it doesn't match
-                }
+    
+        console.log('REQ DADOS:', requestData);
+    
+        try {
+            const response = await fetch(`${URL_API}/save-notes`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData),
             });
-        });
-        
-        
-        //////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        
-        
-        
-        
-        
-        const textarea = document.getElementById('obs');
-        
-        textarea.addEventListener('input', () => {
-          // Reset height to shrink if text is deleted
-          textarea.style.height = 'auto';
-          // Set height based on scrollHeight to expand as needed
-          textarea.style.height = `${textarea.scrollHeight}px`;
-        });
-        
-        
-        
-        
-        
-        
-        
-        // Save Notes Button
-        document.getElementById("save-notes-btn").addEventListener("click", async () => {
-            const observation = document.getElementById("obs").value.trim(); // Get the observation value
-           // const discount = document.getElementById("desc").value.trim();
-           // const discount = document.getElementById("desc").value; // Get the selected discount value
-            const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
 
-            
-        
-            if (!orderId) {
-                alert("No draft order found to save notes.");
-                return;
+            if (response.ok) {
+                alert('PEDIDO SALVO COM SUCESSO!');
+            } else {
+                console.error("Falha ao salvar pedido.");
+                alert('Ocorreu um erro, tente novamente.');
             }
-        
-            const requestData = {
-                orderId: orderId,
-                observation: observation,
-                //discount: discount, // Include discount in the request
-            };
-
-
-            
-            console.log('REQ DADOS:', requestData);
-        
-            try {
-                const response = await fetch(`${URL_API}/save-notes`, {
-                    method: "PATCH", // Use PATCH to indicate partial update
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(requestData),
-                });
-
-
-
-             
-
-
-
-                if (response.ok) {
-                    alert('PEDIDO SALVO COM SUCESSO!');
-                } else {
-                    console.error("Falha ao salvar pedido.");
-                    alert('Ocorreu um erro, tente novamente.');
-                }
-            } catch (error) {
-                console.error("Erro:", error);
-            }
-        });
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        document.getElementById("delete-order-btn").addEventListener("click", async () => {
-            
-            const orderId = localStorage.getItem('currentOrderId');
-        
-            // Confirmation dialog
-            const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO NÃO PODERÁ SER DESFEITA.");
-            if (!confirmDelete) {
-                // If the user cancels, stop the function
-                return;
-            }
-        
-            // Prepare data to send
-            const requestData = {
-                orderId: orderId, // Use the same key as in the backend
-            };
-        
-            try {
-                // Send a DELETE request to delete the order
-                const response = await fetch(`${URL_API}/delete-order`, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(requestData),
-                });
-        
-                if (response.ok) {
-                    alert('PEDIDO DELETADO COM SUCESSO!');
-        
-                    // Refresh the page
-                    window.location.reload();
-                    console.log("Order successfully deleted!");
-                } else {
-                    console.error("Falha ao deletar o pedido.");
-                    alert('An error occurred. Please try again later.');
-                }
-            } catch (error) {
-                console.error("Error submitting the order:", error);
-            }
-        });
-        
-        
-       ////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        function printOrder() {
-    // Clone the modal content to avoid modifying the actual modal
-    const modalClone = document.querySelector('#order-modal').cloneNode(true);
-
-    // Find the dropdown and replace it with its selected text
-    const ipiDropdown = modalClone.querySelector('#ipi');
-    if (ipiDropdown) {
-        const selectedIpiText = ipiDropdown.options[ipiDropdown.selectedIndex].text; // Get selected option text
-        const ipiTextElement = document.createElement('span'); // Create a span to replace the dropdown
-        ipiTextElement.textContent = selectedIpiText;
-        ipiDropdown.replaceWith(ipiTextElement); // Replace dropdown with text
-    }
-
-    // Open new print window
-    const printWindow = window.open('', '', 'width=800,height=600');
-    printWindow.document.write('<html><head><title>Print Order</title>');
-    printWindow.document.write('<style>');
-    printWindow.document.write(`
-        @media print {
-        
-        body {
-                font-family: Arial, sans-serif;
-                font-size: 12pt;
-                line-height: 1.5;
-                position: relative;
-                margin: 0;
-                padding-top: 60px; /* Space for header */
-                padding-bottom: 60px; /* Space for footer */
-            }
-
-            /* Header */
-            .header {
-                position: absolute;
-                top: 10px;
-                left: 0;
-                right: 0;
-                text-align: center;
-                font-size: 16pt;
-                font-weight: bold;
-                border-bottom: 2px solid #000;
-                padding-bottom: 10px;
-            }
-
-            /* Footer */
-            .footer {
-                position: absolute;
-                bottom: 10px;
-                left: 0;
-                right: 0;
-                text-align: center;
-                font-size: 10pt;
-                color: #555;
-                border-top: 1px solid #ddd;
-                padding-top: 10px;
-            }
-
-        
-
-            /* Hide certain elements */
-            #logo-image,
-            #ipilabel,
-            #desclabel,
-            #order-items-table th:nth-child(8),
-            #order-items-table td:nth-child(8),
-            #order-items-table th:nth-child(9),
-            #order-items-table td:nth-child(9),
-            .allbtns,
-            #submit-order-btn,
-            #delete-order-btn,
-            #close-modal {
-                display: none !important;
-            }
-
-            /* Table styles */
-            #order-items-table {
-                border-collapse: collapse;
-                width: 100%;
-                margin-top: 20px;
-                page-break-inside: auto;
-            }
-
-            #order-items-table th, #order-items-table td {
-                padding: 8px;
-                text-align: left;
-                border: 1px solid #ddd;
-            }
-
-            .totalOrderBox {
-                margin-top: 20px;
-                font-size: 14pt;
-                font-weight: bold;
-                border-top: 2px solid #000;
-                padding-top: 10px;
-                page-break-inside: avoid;
-            }
-
-    #print-info {
-        
-        font-size: 0.9rem;
-        padding-top: 20px;
-        
-    }
-
-            .obs-row {
-                font-size: 11pt;
-                margin-top: 0px;
-                padding: 10px;
-                background-color: #f9f9f9;
-                page-break-inside: avoid;
-            }
-
-            .obs-row textarea {
-                width: 100%;
-                font-size: 11pt;
-                border: 1px solid #ddd;
-                padding: 5px;
-                box-sizing: border-box;
-                resize: none;
-                white-space: pre-wrap;
-                overflow: visible;
-                min-height: 160px;
-                height: auto !important;
-            }
-
-            .order-header {
-                margin-bottom: 20px;
-                page-break-inside: avoid;
-            }
-
-            .order-info-row span {
-                font-weight: bold;
-            }
-
-            table {
-                font-size: 10pt;
-            }
-
-            .order-info, .order-total {
-                page-break-after: auto;
-            }
-
-            #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
-                width: 15%;
-            }
-
-            #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
-                width: 40%;
-            }
-
-            #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
-                width: 10%;
-            }
-
-            #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
-                width: 15%;
-            }
-
-            #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
-                width: 15%;
-            }
-
-            .switch-container {
-                display: none;
-            }
+        } catch (error) {
+            console.error("Erro:", error);
         }
-    `);
-    printWindow.document.write('</style></head><body>');
+    });
     
-    // Insert the header, footer, and watermark
-    printWindow.document.write('<div class="header">NYR Festas</div>');
-    //printWindow.document.write('<div class="footer">Phone: (11) 9 9469-8952 | email: financeiro@mm88.com.br</div>');
+    // Delete Order Button
+    document.getElementById("delete-order-btn").addEventListener("click", async () => {
+        const orderId = localStorage.getItem('currentOrderId');
     
+        const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO NÃO PODERÁ SER DESFEITA.");
+        if (!confirmDelete) {
+            return;
+        }
     
-    printWindow.document.write(modalClone.outerHTML); // Use modified modal content
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
-}
+        const requestData = { orderId: orderId };
+    
+        try {
+            const response = await fetch(`${URL_API}/delete-order`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData),
+            });
+    
+            if (response.ok) {
+                alert('PEDIDO DELETADO COM SUCESSO!');
+                window.location.reload();
+            } else {
+                console.error("Falha ao deletar o pedido.");
+                alert('An error occurred. Please try again later.');
+            }
+        } catch (error) {
+            console.error("Error submitting the order:", error);
+        }
+    });
+    
+    function printOrder() {
+        const modalClone = document.querySelector('#order-modal').cloneNode(true);
+        const ipiDropdown = modalClone.querySelector('#ipi');
+        if (ipiDropdown) {
+            const selectedIpiText = ipiDropdown.options[ipiDropdown.selectedIndex].text;
+            const ipiTextElement = document.createElement('span');
+            ipiTextElement.textContent = selectedIpiText;
+            ipiDropdown.replaceWith(ipiTextElement);
+        }
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        
-        document.getElementById("toggleButton").addEventListener("change", async (event) => {
-            const orderId = localStorage.getItem('currentOrderId');
-            const observation = document.getElementById("obs").value.trim(); // Get the observation value
-            console.log('toggleButton clicked by ADMIN')
-        
-            if (!orderId) {
-                alert('Order ID is missing. Please try again.');
+        const printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.write('<html><head><title>Print Order</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write(`
+            @media print {
+                body {
+                    font-family: Arial, sans-serif;
+                    font-size: 12pt;
+                    line-height: 1.5;
+                    position: relative;
+                    margin: 0;
+                    padding-top: 60px;
+                    padding-bottom: 60px;
+                }
+                .header {
+                    position: absolute;
+                    top: 10px;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    font-size: 16pt;
+                    font-weight: bold;
+                    border-bottom: 2px solid #000;
+                    padding-bottom: 10px;
+                }
+                .footer {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    font-size: 10pt;
+                    color: #555;
+                    border-top: 1px solid #ddd;
+                    padding-top: 10px;
+                }
+                #logo-image,
+                #ipilabel,
+                #desclabel,
+                #order-items-table th:nth-child(8),
+                #order-items-table td:nth-child(8),
+                #order-items-table th:nth-child(9),
+                #order-items-table td:nth-child(9),
+                .allbtns,
+                #submit-order-btn,
+                #delete-order-btn,
+                #close-modal {
+                    display: none !important;
+                }
+                #order-items-table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-top: 20px;
+                    page-break-inside: auto;
+                }
+                #order-items-table th, #order-items-table td {
+                    padding: 8px;
+                    text-align: left;
+                    border: 1px solid #ddd;
+                }
+                .totalOrderBox {
+                    margin-top: 20px;
+                    font-size: 14pt;
+                    font-weight: bold;
+                    border-top: 2px solid #000;
+                    padding-top: 10px;
+                    page-break-inside: avoid;
+                }
+                .obs-row {
+                    font-size: 11pt;
+                    margin-top: 20px;
+                    padding: 10px;
+                    background-color: #f9f9f9;
+                    page-break-inside: avoid;
+                }
+                .obs-row textarea {
+                    width: 100%;
+                    font-size: 11pt;
+                    border: 1px solid #ddd;
+                    padding: 5px;
+                    box-sizing: border-box;
+                    resize: none;
+                    white-space: pre-wrap;
+                    overflow: visible;
+                    min-height: 160px;
+                    height: auto !important;
+                }
+                .order-header {
+                    margin-bottom: 20px;
+                    page-break-inside: avoid;
+                }
+                .order-info-row span {
+                    font-weight: bold;
+                }
+                table {
+                    font-size: 10pt;
+                }
+                .order-info, .order-total {
+                    page-break-after: auto;
+                }
+                #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
+                    width: 15%;
+                }
+                #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
+                    width: 40%;
+                }
+                #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
+                    width: 10%;
+                }
+                #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
+                    width: 15%;
+                }
+                #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
+                    width: 15%;
+                }
+                .switch-container {
+                    display: none;
+                }
+            }
+        `);
+        printWindow.document.write('</style></head><body>');
+        printWindow.document.write('<div class="header">NYR Festas</div>');
+        printWindow.document.write(modalClone.outerHTML);
+        printWindow.document.close();
+        printWindow.print();
+    }
+    
+    document.getElementById("toggleButton").addEventListener("change", async (event) => {
+        const orderId = localStorage.getItem('currentOrderId');
+        const observation = document.getElementById("obs").value.trim();
+        console.log('toggleButton clicked by ADMIN');
+    
+        if (!orderId) {
+            alert('Order ID is missing. Please try again.');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`${URL_API}/orderStatus`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId }),
+            });
+    
+            const data = await response.json();
+            if (!data || data.status === undefined) {
+                console.error("Invalid response:", data);
                 return;
             }
-        
-        
-            try {
-                // Fetch the current status of the order
-                const response = await fetch(`${URL_API}/orderStatus`, {
+    
+            const currentStatus = data.status;
+    
+            if (currentStatus === 0) {
+                const submitResponse = await fetch(`${URL_API}/submit-order`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ orderId }),
+                    body: JSON.stringify({ orderId, observation }),
                 });
-        
-                const data = await response.json();
-                if (!data || data.status === undefined) {
-                    console.error("Invalid response:", data);
-                    return;
-                }
-        
-                const currentStatus = data.status;
-        
-                if (currentStatus === 0) {
-                    // Order is 'Aberto', proceed to submit (change to 'Orçamento')
-                    const submitResponse = await fetch(`${URL_API}/submit-order`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ orderId, observation }), // Send both orderId and observation
-                    });
-        
-                    if (submitResponse.ok) {
-                        alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
-                    } else {
-                        alert('Ocorreu um erro ao enviar o pedido.');
-                        event.target.checked = false; // Reset the toggle switch on error
-                    }
-                } 
-                
-                else if (currentStatus === 1) {
-                    // Order is 'Orçamento', check if revert is allowed
-                    const checkResponse = await fetch(`${URL_API}/checkOtherOpenedOrders`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ username: localStorage.getItem('username') }),
-                    });
-        
-                    const checkData = await checkResponse.json();
-                    if (checkData && checkData.canRevert) {
-                        await fetch(`${URL_API}/revertOrder`, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ orderId }),
-                        });
-        
-                        alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
-                    } else {
-                        alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
-                        event.target.checked = false; // Reset the toggle switch if revert isn't allowed
-                    }
-                } 
-                
-                else if (currentStatus === 2) {
-                    alert("O STATUS NÃO PODE SER ALTERADO, A ORDEM JÁ ESTÁ FECHADA.");
-                    event.target.checked = false; // Reset the toggle switch if order is closed
-                }
-        
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Ocorreu um erro ao processar a solicitação.");
-                event.target.checked = false; // Reset the toggle switch on error
-            }
-        
-          //window.location.reload();
-        });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        document.getElementById("revert-order-btn").addEventListener("click", async () => {
-            const orderId = localStorage.getItem('currentOrderId');
-            const observation = document.getElementById("obs").value.trim(); // Get the observation field value
-            console.log('finalizar botao apertado!')
-        
-            // Validate if orderId exists
-            if (!orderId) {
-                alert('Order ID is missing. Please try again.');
-                return;
-            }
-        
-         
-        
-            try {
-                // Fetch the current status of the order
-                const response = await fetch(`${URL_API}/orderStatus`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ orderId }),
-                });
-        
-                const data = await response.json();
-                if (!data || data.status === undefined) {
-                    console.error("Invalid response:", data);
-                    return;
-                }
-        
-                const currentStatus = data.status;
-        
-                // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
-                if (currentStatus === 2 || currentStatus === 3) {
-                    // Proceed to change status to 2 (Fechado)
-                    const finishResponse = await fetch(`${URL_API}/revertOrderadmin`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ orderId, observation }), // Send the observation with the request
-                    });
-        
-                    if (finishResponse.ok) {
-                        alert('PEDIDO RECUPERADO!');
-                    } else {
-                        alert('OCORREU UM ERRO.');
-                    }
+    
+                if (submitResponse.ok) {
+                    alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
                 } else {
-                    alert('PEDIDO JÁ ESTÁ ABERTO OU EM ORÇAMENTO.');
+                    alert('Ocorreu um erro ao enviar o pedido.');
+                    event.target.checked = false;
                 }
-        
-            } catch (error) {
-                console.error("Error:", error);
-                alert("OCORREU UM ERRO.");
+            } else if (currentStatus === 1) {
+                const checkResponse = await fetch(`${URL_API}/checkOtherOpenedOrders`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username: localStorage.getItem('username') }),
+                });
+    
+                const checkData = await checkResponse.json();
+                if (checkData && checkData.canRevert) {
+                    await fetch(`${URL_API}/revertOrder`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ orderId }),
+                    });
+                    alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
+                } else {
+                    alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
+                    event.target.checked = false;
+                }
+            } else if (currentStatus === 2) {
+                alert("O STATUS NÃO PODE SER ALTERADO, A ORDEM JÁ ESTÁ FECHADA.");
+                event.target.checked = false;
             }
-        
-            window.location.reload();
-        });
-        
-        
-        
-        
-        
-        
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        
-        
-        document.getElementById("receive-order-btn").addEventListener("click", async () => {
-            const orderId = localStorage.getItem('currentOrderId');
-            if (!orderId) {
-                alert("No order ID found.");
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Ocorreu um erro ao processar a solicitação.");
+            event.target.checked = false;
+        }
+    });
+    
+    document.getElementById("revert-order-btn").addEventListener("click", async () => {
+        const orderId = localStorage.getItem('currentOrderId');
+        const observation = document.getElementById("obs").value.trim();
+        console.log('finalizar botao apertado!');
+    
+        if (!orderId) {
+            alert('Order ID is missing. Please try again.');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`${URL_API}/orderStatus`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId }),
+            });
+    
+            const data = await response.json();
+            if (!data || data.status === undefined) {
+                console.error("Invalid response:", data);
                 return;
             }
-        
-            console.log('Finalizar botão apertado!', orderId);
-        
-            try {
-                const finishResponse = await fetch(`${URL_API}/receiveOrder`, {
+    
+            const currentStatus = data.status;
+    
+            if (currentStatus === 2 || currentStatus === 3) {
+                const finishResponse = await fetch(`${URL_API}/revertOrderadmin`, {
                     method: "PATCH",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ orderId: Number(orderId) }), // Ensure orderId is a number
+                    body: JSON.stringify({ orderId, observation }),
                 });
-        
-                if (!finishResponse.ok) {
-                    throw new Error(`Failed to finish order: ${finishResponse.status}`);
+    
+                if (finishResponse.ok) {
+                    alert('PEDIDO RECUPERADO!');
+                } else {
+                    alert('OCORREU UM ERRO.');
                 }
-                alert('PEDIDO RECEBIDO COM SUCESSO!');
-        
-                window.location.reload();
-            } catch (error) {
-                console.error("Error finishing order:", error);
-                alert("Erro ao finalizar pedido. Tente novamente!");
+            } else {
+                alert('PEDIDO JÁ ESTÁ ABERTO OU EM ORÇAMENTO.');
             }
-        });
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        
-        
-        
-        
-        
-        document.getElementById("finish-order-btn").addEventListener("click", async () => {
-            const orderId = localStorage.getItem('currentOrderId');
-            const observation = document.getElementById("obs").value.trim(); // Get the observation field value
-            console.log('finalizar botao apertado!')
-        
-            // Validate if orderId exists
-            if (!orderId) {
-                alert('Order ID is missing. Please try again.');
+        } catch (error) {
+            console.error("Error:", error);
+            alert("OCORREU UM ERRO.");
+        }
+        window.location.reload();
+    });
+    
+    document.getElementById("receive-order-btn").addEventListener("click", async () => {
+        const orderId = localStorage.getItem('currentOrderId');
+        if (!orderId) {
+            alert("No order ID found.");
+            return;
+        }
+    
+        console.log('Finalizar botão apertado!', orderId);
+    
+        try {
+            const finishResponse = await fetch(`${URL_API}/receiveOrder`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId: Number(orderId) }),
+            });
+    
+            if (!finishResponse.ok) {
+                throw new Error(`Failed to finish order: ${finishResponse.status}`);
+            }
+            alert('PEDIDO RECEBIDO COM SUCESSO!');
+            window.location.reload();
+        } catch (error) {
+            console.error("Error finishing order:", error);
+            alert("Erro ao finalizar pedido. Tente novamente!");
+        }
+    });
+    
+    document.getElementById("finish-order-btn").addEventListener("click", async () => {
+        const orderId = localStorage.getItem('currentOrderId');
+        const observation = document.getElementById("obs").value.trim();
+        console.log('finalizar botao apertado!');
+    
+        if (!orderId) {
+            alert('Order ID is missing. Please try again.');
+            return;
+        }
+    
+        if (!observation) {
+            alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES"');
+            return;
+        }
+    
+        const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FINALIZAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
+        if (!userConfirmed) {
+            return;
+        }
+    
+        try {
+            const response = await fetch(`${URL_API}/orderStatus`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId }),
+            });
+    
+            const data = await response.json();
+            if (!data || data.status === undefined) {
+                console.error("Invalid response:", data);
                 return;
             }
-        
-            // Check if observation is filled
-            if (!observation) {
-                alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES"');
-                return; // Stop if observation is empty
-            }
-        
-            // Confirmation before proceeding with the status change
-            const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FINALIZAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
-        
-            if (!userConfirmed) {
-                return; // Stop if the user cancels
-            }
-        
-            try {
-                // Fetch the current status of the order
-                const response = await fetch(`${URL_API}/orderStatus`, {
-                    method: "POST",
+    
+            const currentStatus = data.status;
+    
+            if (currentStatus === 0 || currentStatus === 1) {
+                const finishResponse = await fetch(`${URL_API}/finishOrder`, {
+                    method: "PATCH",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ orderId }),
+                    body: JSON.stringify({ orderId, observation }),
                 });
-        
-                const data = await response.json();
-                if (!data || data.status === undefined) {
-                    console.error("Invalid response:", data);
-                    return;
-                }
-        
-                const currentStatus = data.status;
-        
-                // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
-                if (currentStatus === 0 || currentStatus === 1) {
-                    // Proceed to change status to 2 (Fechado)
-                    const finishResponse = await fetch(`${URL_API}/finishOrder`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ orderId, observation }), // Send the observation with the request
-                    });
-        
-                    if (finishResponse.ok) {
-                        alert('PEDIDO FINALIZADO COM SUCESSO!');
-                    } else {
-                        alert('OCORREU UM ERRO.');
-                    }
+    
+                if (finishResponse.ok) {
+                    alert('PEDIDO FINALIZADO COM SUCESSO!');
                 } else {
-                    alert('O PEDIDO JÁ FOI FINALIZADO.');
+                    alert('OCORREU UM ERRO.');
                 }
-        
-            } catch (error) {
-                console.error("Error:", error);
-                alert("OCORREU UM ERRO.");
+            } else {
+                alert('O PEDIDO JÁ FOI FINALIZADO.');
             }
-        
-            window.location.reload();
-        });
-        
-        
-        
-        
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        
-        document.getElementById("desc").addEventListener("change", async function () {
-            const discount = parseFloat(this.value); // Get selected IPI value
-            const orderId = localStorage.getItem('currentOrderId');
-        
-            try {
-                const response = await fetch(`${URL_API}/update-desc`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ orderId, discount })
-                });
-        
-                const data = await response.json();
-                if (response.ok) {
-                    alert(`Aplicado desconto de ${discount * 100}%`);
-                } else {
-                    alert("Não é possível aplicar o desconto, pedido com status FECHADO.");
-                }
-            } catch (error) {
-                console.error("Erro ao atualizar IPI:", error);
-                alert("Erro de conexão com o servidor.");
-            }
-            window.location.reload();
-        });
-        
-       //////////////////////////////////////////////////////////////////////////////////////////// 
-        
-        
-        
-        
-        
-        document.getElementById("ipi").addEventListener("change", async function () {
-            const newIPI = parseFloat(this.value); // Get selected IPI value
-            const orderId = localStorage.getItem('currentOrderId');
-        
-            try {
-                const response = await fetch(`${URL_API}/update-ipi`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ orderId, newIPI })
-                });
-        
-                const data = await response.json();
-                if (response.ok) {
-                    alert(`IPI atualizado para ${newIPI * 100}%`);
-                } else {
-                    alert("Não é possível atualizar o IPI, pedido com status FECHADO.");
-                }
-            } catch (error) {
-                console.error("Erro ao atualizar IPI:", error);
-                alert("Erro de conexão com o servidor.");
-            }
-            window.location.reload();
-        });
-        
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        // Função para duplicar o pedido
-async function duplicateOrder() {
-    // Recupera os dados do localStorage
-    const username = localStorage.getItem('username');
-    const newCustomerId = localStorage.getItem('customerId');
-    const currentOrderId = localStorage.getItem('currentOrderId');
-
-    // Verifica se os dados necessários estão disponíveis
-    if (!username || !newCustomerId || !currentOrderId) {
-        console.error('Dados necessários não encontrados no localStorage.');
-        alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
-        return;
-    }
-
-    // Dados a serem enviados na requisição
-    const requestData = {
-        username,
-        newCustomerId: parseInt(newCustomerId, 10), // Converte para número
-        currentOrderId: parseInt(currentOrderId, 10)  // Converte para número
-    };
-
-    try {
-        const response = await fetch(`${URL_API}/duplicate-order`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+        } catch (error) {
+            console.error("Error:", error);
+            alert("OCORREU UM ERRO.");
         }
-
-        const result = await response.json();
-        console.log(result.message); // Mensagem de sucesso
-        alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
-
-        // Recarrega a página após a duplicação bem-sucedida
         window.location.reload();
-    } catch (error) {
-        console.error('Erro:', error.message);
+    });
+    
+    document.getElementById("desc").addEventListener("change", async function () {
+        const discount = parseFloat(this.value);
+        const orderId = localStorage.getItem('currentOrderId');
+    
+        try {
+            const response = await fetch(`${URL_API}/update-desc`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId, discount })
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                alert(`Aplicado desconto de ${discount * 100}%`);
+            } else {
+                alert("Não é possível aplicar o desconto, pedido com status FECHADO.");
+            }
+        } catch (error) {
+            console.error("Erro ao atualizar IPI:", error);
+            alert("Erro de conexão com o servidor.");
+        }
+        window.location.reload();
+    });
+    
+    document.getElementById("ipi").addEventListener("change", async function () {
+        const newIPI = parseFloat(this.value);
+        const orderId = localStorage.getItem('currentOrderId');
+    
+        try {
+            const response = await fetch(`${URL_API}/update-ipi`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId, newIPI })
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                alert(`IPI atualizado para ${newIPI * 100}%`);
+            } else {
+                alert("Não é possível atualizar o IPI, pedido com status FECHADO.");
+            }
+        } catch (error) {
+            console.error("Erro ao atualizar IPI:", error);
+            alert("Erro de conexão com o servidor.");
+        }
+        window.location.reload();
+    });
+    
+    // Function to duplicate the order
+    async function duplicateOrder() {
+        const username = localStorage.getItem('username');
+        const newCustomerId = localStorage.getItem('customerId');
+        const currentOrderId = localStorage.getItem('currentOrderId');
+
+        if (!username || !newCustomerId || !currentOrderId) {
+            console.error('Dados necessários não encontrados no localStorage.');
+            alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
+            return;
+        }
+
+        const requestData = {
+            username,
+            newCustomerId: parseInt(newCustomerId, 10),
+            currentOrderId: parseInt(currentOrderId, 10)
+        };
+
+        try {
+            const response = await fetch(`${URL_API}/duplicate-order`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+            }
+
+            const result = await response.json();
+            console.log(result.message);
+            alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
+            window.location.reload();
+        } catch (error) {
+            console.error('Erro:', error.message);
+        }
     }
-}
 
-// Adiciona o evento de clique ao botão
-document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
+    document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
+    // Function to load customer name based on customerId in localStorage
+    function loadCustomerName() {
+        const customerId = localStorage.getItem('customerId');
+        console.log(customerId);
 
+        if (!customerId) {
+            console.error('Customer ID not found in localStorage!');
+            document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+            return;
+        }
 
+        fetch(`${URL_API}/displayName`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const customerName = data.razaosocial || 'Unknown';
+            document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+        })
+        .catch(error => {
+            console.error('Error fetching customer name:', error);
+            document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+        });
+    }
 
-
-
-
-// Function to load customer name based on customerId in localStorage
-function loadCustomerName() {
-    const customerId = localStorage.getItem('customerId');
-    console.log(customerId);
-
-    if (!customerId) {
-        console.error('Customer ID not found in localStorage!');
+    // Function to clear the customer selection
+    function clearCustomer() {
+        localStorage.removeItem('customerId');
         document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
-        return;
     }
 
-    // Fetch customer name from backend (sending customerId in the request body)
-    fetch(`${URL_API}/displayName`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ customerId }) // Sending customerId in the request body
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Display customer name from backend
-        const customerName = data.razaosocial || 'Unknown';
-        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
-    })
-    .catch(error => {
-        console.error('Error fetching customer name:', error);
-        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-    });
-}
+    // Call the function when the page loads
+    loadCustomerName();
+</script>
 
-// Function to clear the customer selection
-function clearCustomer() {
-    localStorage.removeItem('customerId');
-    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
-}
-
-// Call the function when the page loads
-loadCustomerName();
-
-/*
-// Function to load customer name based on customerId in localStorage
-function loadCustomerName() {
-    const customerId = localStorage.getItem('customerId');
-    console.log(customerId);
-  
-    if (!customerId) {
-        console.error('Customer ID not found in localStorage!');
-        document.getElementById('customerSelected').textContent = 'Nenhum cliente selecionado';
-        return;
-    }
-
-    // Fetch customer name from backend (sending customerId in the request body)
-    fetch(`${URL_API}/displayName`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ customerId }) // Sending customerId in the request body
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Display customer name from backend
-        const customerName = data.razaosocial || 'Unknown';
-        document.getElementById('customerSelected').textContent = `Cliente: ${customerName}`;
-    })
-    .catch(error => {
-        console.error('Error fetching customer name:', error);
-        document.getElementById('customerSelected').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-    });
-}
-
-// Chama a função ao carregar a página
-loadCustomerName();
-
-        */
-        </script>
-        
-
-
-        <script src="script.js"></script>
-        <footer>
-            <p>&copy; 2025 | NYR Festas</p>
-          </footer>
-
+<script src="script.js"></script>
+<footer>
+    <p>© 2025 | NYR Festas</p>
+</footer>
 </body>
 </html>
