@@ -169,10 +169,26 @@
     }
 
 
-
+    #downloadButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 160px; /* Reduced width */
+    padding: 8px 12px; /* Adjusted padding */
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    flex-wrap: nowrap; /* Prevents excessive stretching */
+}
+/*
 #downloadButton {
     display: flex;
-    align-items: center; /* Ensure text and image align vertically */
+    align-items: center; 
     justify-content: center;
     max-width: 230px;
     padding: 10px 10px;
@@ -186,7 +202,7 @@
     position: relative;
     margin-left: auto;
 }
-
+*/
 /* Style the image inside the button */
 .button-icon {
     width: 20px; /* Adjust the width of the image */
@@ -218,65 +234,6 @@
 }
 
 
-/*
-
-    #download {
-        display: flex;
-        align-items: center; 
-        max-width: 95%;
-        background-color: #e7e5e5;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        margin: 25px auto;
-        padding: 33px;
-        max-height: 45px;
-    }
-
-    #lista {
-        margin: 0; 
-    }
-
-    #downloadButton {
-        display: flex; 
-        align-items: center;
-        justify-content: center; 
-        max-width: 230px;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 5px;
-        font-size: 16px;
-        text-align: center;
-        border: none;
-        cursor: pointer;
-        position: relative;
-        margin-left: auto; 
-    }
-    
-    .spinner {
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
-        border-radius: 50%;
-        width: 16px;
-        height: 16px;
-        animation: spin 1s linear infinite;
-        margin-right: 10px;
-        display: none;
-    }
-
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-   
-    .buttonTextHidden {
-        opacity: 0.5;
-    }
-
-
-*/
 
 
 
