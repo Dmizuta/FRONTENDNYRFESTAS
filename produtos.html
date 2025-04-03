@@ -399,7 +399,64 @@ padding-right: 20px;
 </div>
 
 
+
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModalBtn">×</span>
+        
+        <div class="modal-stage-one">
+            <div class="prodimage">
+                <img src="https://placehold.co/150" alt="Product Image">
+            </div>
+            
+            <div class="product-info">
+                <h3 id="codprod"></h3>
+                <p id="descrip"></p>
+            </div>
+
+            <div class="price1-info">
+                <p id="preco1"><strong></strong></p>
+            </div>
+
+            <div class="price2-info">
+                <p id="preco2"><strong></strong></p>
+            </div>
+
+            <div class="cxfechada-info">
+                <p id="CxFechada"><strong></strong></p>
+            </div>
+                
+            <div class="cxfracionada-info">
+                <p id="CxFracionada"><strong></strong></p>
+            </div>
+      
+            <div class="modal-buttons">
+                <div class="quantity">
+                    <input type="number" id="quantity" name="quantity" min="1" value="">
+                </div>
+                <!-- Stock Checkbox (hidden by default) -->
+                <div class="stock-control" style="display: none; margin-top: 10px;">
+                    <input type="checkbox" id="stockCheckbox" name="stockCheckbox">
+                    <label for="stockCheckbox">Em Estoque</label>
+                </div>
+                <button id="addButton">Adicionar</button>
+                <button id="cancelButton">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
  <!-- Modal -->
+
+
+ <!-- 
  <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeModalBtn">&times;</span>
@@ -434,7 +491,7 @@ padding-right: 20px;
             
             
             <div class="modal-buttons">
-               <!-- <label for="quantity">Quantity:</label> -->
+               <label for="quantity">Quantity:</label> 
                 
                <div class="quantity">
                <input type="number" id="quantity" name="quantity" min="1" value="">
@@ -447,7 +504,7 @@ padding-right: 20px;
     </div>
 </div>
 
-
+-->
 
 </div>
 

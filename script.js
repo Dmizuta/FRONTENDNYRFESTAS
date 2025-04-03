@@ -140,6 +140,314 @@ return `R$ ${value.toFixed(2).replace('.', ',')}`;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Function to populate the product table
+function populateProductTable(products) {
+  const tableBody = document.querySelector("#productTable tbody");
+  
+  const userRole = localStorage.getItem("role");
+
+  // Clear any existing rows
+  tableBody.innerHTML = "";
+
+  if (products && products.length > 0) {
+      products.forEach((product, index) => {
+          const row = tableBody.insertRow();
+
+          // Insert cells for each product detail
+          const cell1 = row.insertCell(0); // Ascending Index
+          const cell2 = row.insertCell(1); // Image
+          const cell3 = row.insertCell(2); // Product Code
+          const cell4 = row.insertCell(3); // Description
+          const cell5 = row.insertCell(4); // Quantity Closed
+          const cell6 = row.insertCell(5); // Price Closed
+          const cell7 = row.insertCell(6); // Quantity Fractioned
+          const cell8 = row.insertCell(7); // Price Fractioned
+          const cell9 = row.insertCell(8); // Add Button
+
+          // Populate cells with product data
+          cell1.textContent = index + 1;
+          cell2.innerHTML = `
+              <img src="${product.imagem || "https://via.placeholder.com/50"}" 
+                   alt="Product Image"  
+                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                   onmouseover="this.style.transform='scale(3)'" 
+                   onmouseout="this.style.transform='scale(1)'">
+          `;
+          cell3.textContent = product.codproduto || "N/A";
+          cell4.textContent = product.descricao || "N/A";
+          cell5.textContent = product.cxfechada || "N/A";
+          cell6.textContent = `${formatCurrency(product.precofechada)}`;
+          cell7.textContent = product.cxfracionada || "N/A";
+          cell8.textContent = `${formatCurrency(product.precofrac)}`;
+
+          // Handle the add button based on stock availability
+       
+
+
+
+            if (product.estoque === 0) {
+              cell9.innerHTML = `
+                  <button class="openModalBtn" style="background-color: red; color: white;">ESGOTADO</button>
+              `;
+          } else {
+              cell9.innerHTML = `
+                  <button class="openModalBtn" 
+                      onmousedown="this.style.transform='scale(0.95)';" 
+                      onmouseup="this.style.transform='scale(1)';" 
+                      onmouseleave="this.style.transform='scale(1)';">
+                      <img src="/imagens/shoppingcart.png" alt="Adicionar">
+                  </button>
+              `;
+          }  
+
+          // Add event listener for "Add" button
+          const openModalBtn = row.querySelector(".openModalBtn");
+          
+          if (openModalBtn) {
+              if (product.estoque === 0 && userRole !== "ADMIN") {
+                  openModalBtn.disabled = true;
+                  openModalBtn.style.cursor = 'not-allowed';
+                  openModalBtn.addEventListener("click", function () {
+                      alert("Este produto está esgotado!");
+                  });
+              } else {
+                  openModalBtn.addEventListener("click", function () {
+                      const productImage = row.querySelector("img").src;
+                      const productCode = row.cells[2].textContent;
+                      const productDesc = row.cells[3].textContent;
+                      const cxFechada = row.cells[4].textContent;
+                      const priceFechada = row.cells[5].textContent;
+                      const cxFracionada = row.cells[6].textContent;
+                      const priceFracionada = row.cells[7].textContent;
+
+                      openModal(
+                          productImage,
+                          productCode,
+                          productDesc,
+                          cxFechada,
+                          priceFechada,
+                          cxFracionada,
+                          priceFracionada,
+                          product.estoque // Pass estoque value
+                      );
+                  });
+              }
+          }
+      });
+  } else {
+      tableBody.innerHTML = '<tr><td colspan="9">SELECIONE UMA ESTAÇÃO.</td></tr>';
+  }
+}
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Function to open the modal with product details
+function openModal(
+  productImage,
+  productCode,
+  productDesc,
+  cxFechada,
+  priceFechada,
+  cxFracionada,
+  priceFracionada,
+  estoque
+) {
+  const modal = document.getElementById("myModal");
+  const productInfo = modal.querySelector(".product-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
+  const productImageElement = modal.querySelector("img");
+  const stockControl = modal.querySelector(".stock-control");
+  const stockCheckbox = modal.querySelector("#stockCheckbox");
+
+  // Populate modal with product details
+  productInfo.querySelector("h3").textContent = productCode;
+  productInfo.querySelector("p").textContent = productDesc;
+  priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${priceFechada}</span>`;
+  priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${priceFracionada}</span>`;
+  cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${cxFechada}</span>`;
+  cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${cxFracionada}</span>`;
+  productImageElement.src = productImage;
+
+  // Set checkbox state based on estoque
+  stockCheckbox.checked = estoque === 1;
+  stockCheckbox.setAttribute("data-product-code", productCode); // Add data attribute to track product
+
+  // Show checkbox only for Admin
+  const role = localStorage.getItem("role");
+  stockControl.style.display = role === "ADMIN" ? "block" : "none";
+
+  modal.style.display = "block";
+
+  // Attach event listener to checkbox inside modal
+  stockCheckbox.addEventListener("change", handleStockChange);
+}
+
+// Function to handle checkbox change
+function handleStockChange(event) {
+  const checkbox = event.target;
+  const productCode = checkbox.getAttribute("data-product-code");
+  const isChecked = checkbox.checked ? 1 : 0;
+
+  updateStock(productCode, isChecked);
+}
+
+// Function to update stock in backend
+async function updateStock(productCode, estoque) {
+  try {
+      const response = await fetch(`${URL_API}/update-stock`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productCode, estoque }),
+      });
+
+      if (!response.ok) {
+          throw new Error("Failed to update stock");
+      }
+
+      alert("Estoque atualizado com sucesso!");
+      location.reload(); // Reload the page after confirmation
+  } catch (error) {
+      console.error("Erro ao atualizar estoque:", error);
+      alert("Erro ao atualizar estoque!");
+  }
+}
+
+
+/*
+// Function to open the modal with product details
+function openModal(
+  productImage,
+  productCode,
+  productDesc,
+  cxFechada,
+  priceFechada,
+  cxFracionada,
+  priceFracionada,
+  estoque
+) {
+  const modal = document.getElementById("myModal");
+  const productInfo = modal.querySelector(".product-info");
+  const priceInfoFechada = modal.querySelector(".price1-info");
+  const priceInfoFracionada = modal.querySelector(".price2-info");
+  const cxFechadaInfo = modal.querySelector(".cxfechada-info");
+  const cxFracionadaInfo = modal.querySelector(".cxfracionada-info");
+  const productImageElement = modal.querySelector("img");
+  const stockControl = modal.querySelector(".stock-control");
+  const stockCheckbox = modal.querySelector("#stockCheckbox");
+
+  // Populate modal with product details
+  productInfo.querySelector("h3").textContent = productCode;
+  productInfo.querySelector("p").textContent = productDesc;
+  priceInfoFechada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fechada:</span> <span class="value1">${priceFechada}</span>`;
+  priceInfoFracionada.querySelector("p").innerHTML = `<span class="label1">Preço Caixa Fracionada:</span> <span class="value1">${priceFracionada}</span>`;
+  cxFechadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fechada:</span> <span class="value2">${cxFechada}</span>`;
+  cxFracionadaInfo.querySelector("p").innerHTML = `<span class="label2">Caixa Fracionada:</span> <span class="value2">${cxFracionada}</span>`;
+  productImageElement.src = productImage;
+
+  // Set checkbox state based on estoque
+  stockCheckbox.checked = estoque === 1;
+
+  // Show checkbox only for Admin
+  const role = localStorage.getItem("role");
+  if (role === "ADMIN") {
+      stockControl.style.display = "block";
+  } else {
+      stockControl.style.display = "none";
+  }
+
+  modal.style.display = "block";
+
+  const quantityInput = document.getElementById("quantity");
+  setTimeout(() => {
+      quantityInput.focus();
+  }, 100);
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("productModal");
+
+  modal.addEventListener("change", function (event) {
+      if (event.target.classList.contains("stockCheckbox")) {
+          const productCode = event.target.dataset.productCode;
+          const isChecked = event.target.checked ? 1 : 0;
+
+          updateStock(productCode, isChecked);
+      }
+  });
+});
+
+*/
+
+
+// Existing close modal listeners (unchanged)
+document.getElementById("closeModalBtn").addEventListener("click", function () {
+  document.getElementById("myModal").style.display = "none";
+});
+
+document.getElementById("cancelButton").addEventListener("click", function () {
+  document.getElementById("myModal").style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("myModal");
+  if (event.target === modal) {
+      modal.style.display = "none";
+  }
+});
+
+// Add logic for the "Adicionar" button
+document.getElementById("addButton").addEventListener("click", function () {
+  const quantity = document.getElementById("quantity").value;
+  const productCode = document.querySelector("#codprod").textContent;
+  const role = localStorage.getItem("role");
+  const stockCheckbox = document.getElementById("stockCheckbox");
+
+  // Your existing add-to-order logic here (if any)
+  console.log(`Adding ${quantity} of ${productCode} to order`);
+
+  // If Admin, check if stock changed and update
+  if (role === "Admin") {
+      const newStockValue = stockCheckbox.checked ? 1 : 0;
+      updateStock(productCode, newStockValue);
+  } else {
+      document.getElementById("myModal").style.display = "none";
+  }
+});
+/*
+// Function to update stock via API
+function updateStock(productCode, estoque) {
+  fetch(`${URL_API}/update-stock`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productCode, estoque }),
+  })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              alert(`Estoque atualizado: Produto agora está ${estoque ? "em estoque" : "esgotado"}`);
+              window.location.reload(); // Reload page after alert
+          } else {
+              alert("Erro ao atualizar o estoque");
+          }
+      })
+      .catch(error => {
+          console.error("Erro:", error);
+          alert("Erro ao atualizar o estoque");
+      });
+}
+*/
+/*
 function populateProductTable(products) {
 const tableBody = document.querySelector("#productTable tbody");
 
@@ -282,11 +590,11 @@ setTimeout(() => {
   quantityInput.focus();  // Focus on the quantity input field
 }, 100); // Optional: delay slightly to ensure modal is fully displayed before focusing
 };
+*/
 
 
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Event listener to close modal
 document.getElementById("closeModalBtn").addEventListener("click", function () {
@@ -607,7 +915,7 @@ if (userRole !== "ADMIN") {
   }
 }
 };
-
+/*
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
@@ -618,7 +926,7 @@ let searchInput = document.getElementById('searchInput');
 searchInput.focus();      // Refocus on the input
 }, 10);
 
-
+*/
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
