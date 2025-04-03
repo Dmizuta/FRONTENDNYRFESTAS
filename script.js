@@ -315,7 +315,7 @@ const customerId = localStorage.getItem("customerId");
 const username = localStorage.getItem("username");
 const userRole = localStorage.getItem("role");
 
-console.log("Action triggered. User role:", userRole);
+console.log("SO FAR SO GOOD");
 
 if (!username) {
     alert("NENHUM CADASTRO SELECIONADO.");
