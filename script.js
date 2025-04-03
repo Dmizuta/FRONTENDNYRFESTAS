@@ -301,7 +301,8 @@ function handleStockChange(event) {
 // Function to update stock in backend
 async function updateStock(productCode, estoque) {
   try {
-      const response = await fetch(`${URL_API}/update-stock`, {
+      const response = await fetch(`${URL_API}/git log --graph --oneline --decorate --all --color
+`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
@@ -623,7 +624,7 @@ const customerId = localStorage.getItem("customerId");
 const username = localStorage.getItem("username");
 const userRole = localStorage.getItem("role");
 
-console.log("Action triggered. User role:", userRole);
+console.log("so far so good!!!");
 
 if (!username) {
     alert("NENHUM CADASTRO SELECIONADO.");
@@ -915,7 +916,7 @@ if (userRole !== "ADMIN") {
   }
 }
 };
-/*
+
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
@@ -926,7 +927,7 @@ let searchInput = document.getElementById('searchInput');
 searchInput.focus();      // Refocus on the input
 }, 10);
 
-*/
+
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
