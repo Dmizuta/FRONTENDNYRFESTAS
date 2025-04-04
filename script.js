@@ -266,6 +266,11 @@ function openModal(
   const stockControl = modal.querySelector(".stock-control");
   const stockCheckbox = modal.querySelector("#stockCheckbox");
 
+
+
+
+
+
   // Populate modal with product details
   productInfo.querySelector("h3").textContent = productCode;
   productInfo.querySelector("p").textContent = productDesc;
@@ -283,7 +288,21 @@ function openModal(
   const role = localStorage.getItem("role");
   stockControl.style.display = role === "ADMIN" ? "block" : "none";
 
-  modal.style.display = "block";
+  //modal.style.display = "block";
+
+
+
+  // After showing the modal
+modal.style.display = "block";
+
+// Focus the quantity input
+setTimeout(() => {
+  const quantityInput = modal.querySelector("#quantity");
+  if (quantityInput) quantityInput.focus();
+}, 50);
+
+
+
 
   // Attach event listener to checkbox inside modal
   stockCheckbox.addEventListener("change", handleStockChange);
@@ -915,7 +934,7 @@ if (userRole !== "ADMIN") {
   }
 }
 };
-/*
+
 // Adiciona o evento de clique no botão
 document.getElementById("addButton").addEventListener("click", addProductToOrder);
 
@@ -926,7 +945,7 @@ let searchInput = document.getElementById('searchInput');
 searchInput.focus();      // Refocus on the input
 }, 10);
 
-*/
+
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {

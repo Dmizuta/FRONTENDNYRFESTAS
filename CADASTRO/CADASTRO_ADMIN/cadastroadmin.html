@@ -209,7 +209,7 @@
         window.addEventListener('DOMContentLoaded', async () => {
             const loggedInUsername = localStorage.getItem('username');
             localStorage.setItem('customerId', "" ); // If you want to explicitly set it to null
-
+            loadCustomerName();
             
              // Handle login status
  const usuario = localStorage.getItem('username');
@@ -336,8 +336,8 @@ function clearCustomer() {
     document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
 }
 
-// Call the function when the page loads
-loadCustomerName();
+
+
 
 
 /*
