@@ -2000,146 +2000,180 @@ document.getElementById("submit-order-btn").addEventListener("click", async () =
 
 
 
+  
 function printOrder() {
-    const modalContent = document.querySelector('#order-modal').outerHTML; // Get all modal content
-    const printWindow = window.open('', '', 'width=800,height=600'); // Open new print window
+    // Clone the modal content to avoid modifying the actual modal
+    const modalClone = document.querySelector('#order-modal').cloneNode(true);
 
-    // Inject the necessary print styles directly into the print window
+    // Find the dropdown and replace it with its selected text
+    const ipiDropdown = modalClone.querySelector('#ipi');
+    if (ipiDropdown) {
+        const selectedIpiText = ipiDropdown.options[ipiDropdown.selectedIndex].text; // Get selected option text
+        const ipiTextElement = document.createElement('span'); // Create a span to replace the dropdown
+        ipiTextElement.textContent = selectedIpiText;
+        ipiDropdown.replaceWith(ipiTextElement); // Replace dropdown with text
+    }
+
+    // Open new print window
+    const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write('<html><head><title>Print Order</title>');
     printWindow.document.write('<style>');
     printWindow.document.write(`
-     @media print {
-    /* General Page Style */
-    body {
-        font-family: Arial, sans-serif;
-        font-size: 12pt;
-        line-height: 1.5;
-    }
-
-    /* Logo styling */
-    #logo-image {
-        display: block;
-        margin: 0 auto 20px;
-        max-width: 200px;
-    }
-
-    /* Hide unnecessary columns and buttons */
-    #logo-image,
-       
-    #ipilabel,
-    #desclabel,
-    #order-items-table th:nth-child(8),
-    #order-items-table td:nth-child(8),
-    #order-items-table th:nth-child(9),
-    #order-items-table td:nth-child(9),
-    .allbtns,
-    #submit-order-btn,
-    #delete-order-btn,
-    #close-modal {
-        display: none !important;
-    }
-
-    /* Table Style */
-    #order-items-table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-        page-break-inside: auto; /* Prevent breaks inside the table */
-    }
-
-    #order-items-table th, #order-items-table td {
-        padding: 8px;
-        text-align: left;
-        border: 1px solid #ddd;
-    }
-
-    /* Make the total order section distinct */
-    .totalOrderBox {
-        margin-top: 20px;
-        font-size: 14pt;
-        font-weight: bold;
-        border-top: 2px solid #000;
-        padding-top: 10px;
-        page-break-inside: avoid; /* Ensure the section stays together */
-    }
-
-    /* Observations Section */
-    .obs-row {
-        font-size: 11pt;
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        page-break-inside: avoid; /* Prevent breaks in the observation area */
-    }
-
-    .obs-row textarea {
-        width: 100%;
-        font-size: 11pt;
-        border: 1px solid #ddd;
-        padding: 5px;
-        box-sizing: border-box;
-        resize: none; /* Disable resizing during print */
-        white-space: pre-wrap; /* Ensure text wraps within the textarea */
-        overflow: visible; /* Allow for overflow in the print view */
-        min-height: 160px; /* Set a reasonable minimum height */
-        height: auto !important; /* Allow it to expand to fit content */
+        @media print {
         
-    }
+        body {
+                font-family: Arial, sans-serif;
+                font-size: 12pt;
+                line-height: 1.5;
+                position: relative;
+                margin: 0;
+                padding-top: 60px; /* Space for header */
+                padding-bottom: 60px; /* Space for footer */
+            }
 
-    /* Section Spacing */
-    .order-header {
-        margin-bottom: 20px;
-        page-break-inside: avoid; /* Prevent break inside header */
-    }
+            /* Header */
+            .header {
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 16pt;
+                font-weight: bold;
+                border-bottom: 2px solid #000;
+                padding-bottom: 10px;
+            }
 
-    /* Ensure good readability */
-    .order-info-row span {
-        font-weight: bold;
-    }
+            /* Footer */
+            .footer {
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 10pt;
+                color: #555;
+                border-top: 1px solid #ddd;
+                padding-top: 10px;
+            }
 
-    table {
-        font-size: 10pt;
-    }
+        
 
-    /* Remove block-style page breaks, allow natural flow */
-    .order-info, .order-total {
-        page-break-after: auto; /* Let content flow naturally */
-    }
+            /* Hide certain elements */
+            #logo-image,
+            #ipilabel,
+            #desclabel,
+            #order-items-table th:nth-child(8),
+            #order-items-table td:nth-child(8),
+            #order-items-table th:nth-child(9),
+            #order-items-table td:nth-child(9),
+            .allbtns,
+            #submit-order-btn,
+            #delete-order-btn,
+            #close-modal {
+                display: none !important;
+            }
 
-    /* Adjust table column width */
-    #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
-        width: 15%;
-    }
+            /* Table styles */
+            #order-items-table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+                page-break-inside: auto;
+            }
 
-    #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
-        width: 40%;
-    }
+            #order-items-table th, #order-items-table td {
+                padding: 8px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
 
-    #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
-        width: 10%;
-    }
+            .totalOrderBox {
+                margin-top: 20px;
+                font-size: 14pt;
+                font-weight: bold;
+                border-top: 2px solid #000;
+                padding-top: 10px;
+                page-break-inside: avoid;
+            }
 
-    #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
-        width: 15%;
-    }
+            .obs-row {
+                font-size: 11pt;
+                margin-top: 20px;
+                padding: 10px;
+                background-color: #f9f9f9;
+                page-break-inside: avoid;
+            }
 
-    #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
-        width: 15%;
-    }
-}
+            .obs-row textarea {
+                width: 100%;
+                font-size: 11pt;
+                border: 1px solid #ddd;
+                padding: 5px;
+                box-sizing: border-box;
+                resize: none;
+                white-space: pre-wrap;
+                overflow: visible;
+                min-height: 160px;
+                height: auto !important;
+            }
 
+            .order-header {
+                margin-bottom: 20px;
+                page-break-inside: avoid;
+            }
 
+            .order-info-row span {
+                font-weight: bold;
+            }
 
+            table {
+                font-size: 10pt;
+            }
+
+            .order-info, .order-total {
+                page-break-after: auto;
+            }
+
+            #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
+                width: 15%;
+            }
+
+            #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
+                width: 40%;
+            }
+
+            #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
+                width: 10%;
+            }
+
+            #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
+                width: 15%;
+            }
+
+            #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
+                width: 15%;
+            }
+
+            .switch-container {
+                display: none;
+            }
+        }
     `);
     printWindow.document.write('</style></head><body>');
-    printWindow.document.write(modalContent); // Insert modal content into the print window
-    printWindow.document.write('</body></html>');
-    printWindow.document.close(); // Close the document to ensure all content is loaded
-    printWindow.print(); // Trigger the print dialog
+    
+    // Insert the header, footer, and watermark
+    printWindow.document.write('<div class="header">NYR Festas</div>');
+   // printWindow.document.write('<div class="footer">Phone: (11) 9 9469-8952 | Email: financeiro@mm88.com.br</div>');
+    
+    
+    printWindow.document.write(modalClone.outerHTML); // Use modified modal content
+    printWindow.document.close();
+    printWindow.print();
 }
 
-
-
+        
+  
 
 
 

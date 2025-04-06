@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
-   <!-- <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">-->
-    
-<!--
+    <!-- <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">-->
+
+    <!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -19,16 +20,19 @@
 
 
 <style>
+    .icon-button img {
+        width: 50px;
+        /* Ajuste o tamanho conforme necessário */
+        height: auto;
+        /* Mantém a proporção */
+        object-fit: contain;
+        /* Mantém a proporção da imagem */
+        margin-top: -7px;
+        /* Ajuste o valor conforme necessário */
+    }
 
-.icon-button img {
-    width: 50px; /* Ajuste o tamanho conforme necessário */
-    height: auto; /* Mantém a proporção */
-    object-fit: contain; /* Mantém a proporção da imagem */
-    margin-top: -7px; /* Ajuste o valor conforme necessário */
-}
 
-
-/* Estilo específico para os botões de ícone 
+    /* Estilo específico para os botões de ícone 
 .icon-button {
     background: none; 
     border: none; 
@@ -37,20 +41,24 @@
 }*/
 
 
-/* Para garantir que o estilo do botão de ícone tenha prioridade */
-.icon-button {
-    background: none !important; /* Remove o fundo, se necessário */
-    border: none !important; /* Remove a borda, se necessário */
-    padding: 0 !important; /* Remove o preenchimento, se necessário */
-    
-}
+    /* Para garantir que o estilo do botão de ícone tenha prioridade */
+    .icon-button {
+        background: none !important;
+        /* Remove o fundo, se necessário */
+        border: none !important;
+        /* Remove a borda, se necessário */
+        padding: 0 !important;
+        /* Remove o preenchimento, se necessário */
+
+    }
 
 
-.selected img {
-    
-   
-    filter: drop-shadow(0 0 10px #ffb050);
-    /*filter: drop-shadow( 0 0 15px #ffffff);*/
+    .selected img {
+filter: 
+  drop-shadow(0 0 3px #ffb050)
+  drop-shadow(0 0 3px #ffb050)
+  drop-shadow(0 0 3px #ffb050);
+
     transition: filter 0.3s ease-in-out;
 }
 
@@ -61,42 +69,45 @@
 
 
 
-.icon-wrapper {
-    position: relative;
-    display: inline-block;
-}
 
-.tooltip {
-    position: absolute;
-    bottom: 135%; /* Place above the image */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 5px 8px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    visibility: hidden;
-    opacity: 0;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
-}
+    .icon-wrapper {
+        position: relative;
+        display: inline-block;
+    }
 
-.icon-wrapper:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
+    .tooltip {
+        position: absolute;
+        bottom: 135%;
+        /* Place above the image */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        visibility: hidden;
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+    }
 
-/* Estilo para o contêiner de ícones */
+    .icon-wrapper:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Estilo para o contêiner de ícones */
     .icons {
         position: fixed;
-        top: calc(2rem + 87px); /* Ajuste para a altura desejada */
+        top: calc(2rem + 87px);
+        /* Ajuste para a altura desejada */
         right: 2rem;
         display: flex;
         gap: 0.9rem;
         align-items: center;
         z-index: 100;
-        
+
     }
 
     /* Estilo para as imagens dos ícones */
@@ -115,58 +126,72 @@
     }
 
     .icons img:active {
-        transform: scale(0.98); /* Shrinks button slightly */
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+        transform: scale(0.98);
+        /* Shrinks button slightly */
+        /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+        filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
     }
 
 
- 
+
 
     .modal-buttons button {
-    background-color: #BF6734; /* Dark orange button color */
-    color: #fff;
-    padding: 10px; /* More space */
-    margin-top: 10px;
-    border: none;
-    border-radius: 10px; /* Rounded corners */
-    cursor: pointer;
-    width: 100%;
-    font-size: 1em; /* Larger font */
-    font-weight: 600; /* Bold */
-    transition: transform 0.1s ease-in-out, background-color 0.3s;
-}
+        background-color: #BF6734;
+        /* Dark orange button color */
+        color: #fff;
+        padding: 10px;
+        /* More space */
+        margin-top: 10px;
+        border: none;
+        border-radius: 10px;
+        /* Rounded corners */
+        cursor: pointer;
+        width: 100%;
+        font-size: 1em;
+        /* Larger font */
+        font-weight: 600;
+        /* Bold */
+        transition: transform 0.1s ease-in-out, background-color 0.3s;
+    }
 
-.modal-buttons button:hover {
-    background-color: #e2943a; /* Light yellow-orange hover color */
-    transform: scale(1.03); /* Efeito de aumento ao passar o mouse */
-}
+    .modal-buttons button:hover {
+        background-color: #e2943a;
+        /* Light yellow-orange hover color */
+        transform: scale(1.03);
+        /* Efeito de aumento ao passar o mouse */
+    }
 
-.modal-buttons button:active {
-    transform: scale(0.98); /* Shrinks button slightly */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #a35c33; /* Darker shade */
-}
+    .modal-buttons button:active {
+        transform: scale(0.98);
+        /* Shrinks button slightly */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #a35c33;
+        /* Darker shade */
+    }
 
 
-#download {
-    display: flex;
-    align-items: center; /* Centers content vertically */
-    justify-content: space-between; /* Keeps title and button spaced */
-    max-width: 95%;
-    background-color: #e7e5e5;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin: 2px auto;
-    /*padding: 10px 20px; /* Adjusted padding for better centering */
-    
-padding-bottom: 10px;
-padding-left: 20px;
-padding-right: 20px;
+    #download {
+        display: flex;
+        align-items: center;
+        /* Centers content vertically */
+        justify-content: space-between;
+        /* Keeps title and button spaced */
+        max-width: 95%;
+        background-color: #e7e5e5;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 2px auto;
+        /*padding: 10px 20px; /* Adjusted padding for better centering */
 
-    height: 60px; /* Ensure enough height */
-}
-/*
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        height: 60px;
+        /* Ensure enough height */
+    }
+
+    /*
 
 #download {
         display: flex;
@@ -182,27 +207,31 @@ padding-right: 20px;
 */
 
     #lista {
-        margin: 0; 
+        margin: 0;
     }
 
 
     #downloadButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 160px; /* Reduced width */
-    padding: 8px 12px; /* Adjusted padding */
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 10px;
-    font-size: 16px;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-    flex-wrap: nowrap; /* Prevents excessive stretching */
-}
-/*
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 160px;
+        /* Reduced width */
+        padding: 8px 12px;
+        /* Adjusted padding */
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 10px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        margin-left: auto;
+        flex-wrap: nowrap;
+        /* Prevents excessive stretching */
+    }
+
+    /*
 #downloadButton {
     display: flex;
     align-items: center; 
@@ -220,65 +249,88 @@ padding-right: 20px;
     margin-left: auto;  
 }
 */
-/* Style the image inside the button */
-.button-icon {
-    width: 20px; /* Adjust the width of the image */
-    height: 20px; /* Adjust the height of the image */
-    margin-right: 11px; /* Space between the image and text */
+    /* Style the image inside the button */
+    .button-icon {
+        width: 20px;
+        /* Adjust the width of the image */
+        height: 20px;
+        /* Adjust the height of the image */
+        margin-right: 11px;
+        /* Space between the image and text */
+    }
+
+    /* Spinner animation */
+    .spinner {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+        display: none;
+    }
+
+    /* Spinner keyframes */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Hidden text opacity during spinner animation */
+    .buttonTextHidden {
+        opacity: 0.5;
+    }
+
+
+
+
+
+
+
+    #produto a {
+
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 25px;
+        padding: 6px 25px;
+        background-color: #BF6734;
+        border-radius: 25px;
+    }
+
+
+
+    #qtd-estoque {
+    display: flex;
+    gap: 20px; /* Adds space between the divs */
 }
 
-/* Spinner animation */
-.spinner {
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    animation: spin 1s linear infinite;
-    margin-right: 10px;
-    display: none;
-}
 
-/* Spinner keyframes */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
-/* Hidden text opacity during spinner animation */
-.buttonTextHidden {
-    opacity: 0.5;
+.stock-control {
+    margin-top: 10px; /* Keeps your original margin */
 }
 
 
-
-
-
-
-
-#produto a {
-    
-    text-decoration: none;
-   font-weight: bold;
-    border-radius: 25px;
-    padding: 6px 25px;
-    background-color: #BF6734;
-    border-radius: 25px;
-}
-
-
-
-
+/*
+.quantity {
+    width: 100px; 
+}*/
 
 
 
 </style>
 
 <body>
-   
-    
-        <header>
-       <h1 id="nyrfestas"></h1>
+
+
+    <header>
+        <h1 id="nyrfestas"></h1>
 
         <div id="user-info">
             <span id="username-display"></span>
@@ -296,18 +348,18 @@ padding-right: 20px;
 
             <span id="customerName">...</span>
             <span class="clear-btn" onclick="clearCustomer()">❌</span>
-          </div>
+        </div>
 
-       
+
         <ul>
             <li id="cadastro-link"><a href="#">Cadastro</a></li>
             <li id="produto"><a href="produtos.html">Lista de Produtos</a></li>
             <li id="pedidos-link"><a href="#">Pedidos</a></li>
         </ul>
-     
+
     </nav>
-      
-    
+
+
 
 
 
@@ -331,21 +383,21 @@ padding-right: 20px;
             </button>
         </div>
     </div>
-    
+
 
 
     <div class="PAGE">
 
 
 
-     
 
 
 
 
 
 
-    
+
+
 
         <div id="download">
 
@@ -355,51 +407,122 @@ padding-right: 20px;
 
 
 
-            
-        <button id="downloadButton" class="button">
-            <span id="spinner" class="spinner" style="display: none;"></span>
-            <img src="/imagens/download.png" alt="icon" class="button-icon">
-            <span id="buttonText">Catálogo!</span>
-        </button>
-        
 
-            
+            <button id="downloadButton" class="button">
+                <span id="spinner" class="spinner" style="display: none;"></span>
+                <img src="/imagens/download.png" alt="icon" class="button-icon">
+                <span id="buttonText">Catálogo!</span>
+            </button>
+
+
+
             <!-- Hidden download link -->
-            <a id="downloadLink" href="https://drive.google.com/uc?id=13Dy_eY7A4mQVWvi23q0hVXyT-vObMnDW" download style="display: none;"></a>
+            <a id="downloadLink" href="https://drive.google.com/uc?id=13Dy_eY7A4mQVWvi23q0hVXyT-vObMnDW" download
+                style="display: none;"></a>
 
 
 
         </div>
-    
-
-<!-- Search Wrapper -->
-<div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder=" Buscar por..." oninput="searchProducts()">
-</div>
- 
-<div class="produtos-moldura">
-    <table id="productTable">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Foto do produto</th>
-                <th>Código do produto</th>
-                <th>Descrição do produto</th>
-                <th>Quantidade cx fechada</th>
-                <th>Preço de cx fechada</th>
-                <th>Quantidade cx fracionada</th>
-                <th>Preço cx fracionada</th>
-                <th>Adicionar ao pedido</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Product rows will be dynamically inserted here -->
-        </tbody>
-    </table>
-</div>
 
 
- <!-- Modal -->
+        <!-- Search Wrapper -->
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder=" Buscar por..." oninput="searchProducts()">
+        </div>
+
+        <div class="produtos-moldura">
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Foto do produto</th>
+                        <th>Código do produto</th>
+                        <th>Descrição do produto</th>
+                        <th>Quantidade cx fechada</th>
+                        <th>Preço de cx fechada</th>
+                        <th>Quantidade cx fracionada</th>
+                        <th>Preço cx fracionada</th>
+                        <th>Adicionar ao pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Product rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModalBtn">×</span>
+
+                <div class="modal-stage-one">
+                    <div class="prodimage">
+                        <img src="https://placehold.co/150" alt="Product Image">
+                    </div>
+
+                    <div class="product-info">
+                        <h3 id="codprod"></h3>
+                        <p id="descrip"></p>
+                    </div>
+
+                    <div class="price1-info">
+                        <p id="preco1"><strong></strong></p>
+                    </div>
+
+                    <div class="price2-info">
+                        <p id="preco2"><strong></strong></p>
+                    </div>
+
+                    <div class="cxfechada-info">
+                        <p id="CxFechada"><strong></strong></p>
+                    </div>
+
+                    <div class="cxfracionada-info">
+                        <p id="CxFracionada"><strong></strong></p>
+                    </div>
+
+                    <div class="modal-buttons">
+
+
+
+
+
+                        <div id="qtd-estoque">
+
+                            <div class="quantity">
+                                <input type="number" id="quantity" name="quantity" min="1" value="">
+                            </div>
+
+                            <!-- Stock Checkbox (hidden by default) -->
+                            <div id="chkbxestoque" class="stock-control" style="display: none; margin-top: 10px;">
+                                <input type="checkbox" id="stockCheckbox" name="stockCheckbox">
+                                <label for="stockCheckbox">Em Estoque</label>
+                            </div>
+
+
+                        </div>
+
+
+                        <button id="addButton">Adicionar</button>
+                        <button id="cancelButton">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Modal -->
+
+
+        <!-- 
  <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeModalBtn">&times;</span>
@@ -434,7 +557,7 @@ padding-right: 20px;
             
             
             <div class="modal-buttons">
-               <!-- <label for="quantity">Quantity:</label> -->
+               <label for="quantity">Quantity:</label> 
                 
                <div class="quantity">
                <input type="number" id="quantity" name="quantity" min="1" value="">
@@ -447,16 +570,16 @@ padding-right: 20px;
     </div>
 </div>
 
+-->
 
-
-</div>
+    </div>
 
     <script>
-    
-////////////////////////////////////////////////////////////////////////////////////////////
 
-             // Handle login status
-             const username = localStorage.getItem('username');
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Handle login status
+        const username = localStorage.getItem('username');
         if (username) {
             document.getElementById('username-display').textContent = `Bem vindo, ${username}`;
         } else {
@@ -466,167 +589,168 @@ padding-right: 20px;
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
- // Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');  // Remove login data
-    window.location.href = '/';  // Redirect to login page
-});
+        // Logout function
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            localStorage.removeItem('username');  // Remove login data
+            window.location.href = '/';  // Redirect to login page
+        });
 
 
-////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-  // Fetch the user's role from localStorage
-  const userRole = localStorage.getItem('role'); // Ensure this is set at login
-  const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
-  const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
-
-
-// Dynamically assign the correct href based on the user's role
-if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'CADASTRO/CADASTRO_USER/cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'CADASTRO/CADASTRO_REP/cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'CADASTRO/CADASTRO_ADMIN/cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-  /*
-  // Dynamically assign the correct href based on the user's role
-  if (userRole === 'USER') {
-    pedidosLink.href = 'pedidos.html';
-    cadastroLink.href = 'cadastro.html';
-  } else if (userRole === 'SELLER') {
-    pedidosLink.href = 'pedidosrep.html';
-    cadastroLink.href = 'cadastrorep.html';
-  } else if (userRole === 'ADMIN') {
-    pedidosLink.href = 'pedidosadmin.html';
-    cadastroLink.href = 'cadastroadmin.html';
-  } else {
-    pedidosLink.href = '#'; // Default action for unknown or missing roles
-    console.warn('Role not defined or invalid.');
-  }
-*/
-
-////////////////////////////////////////////////////////////////////////////////////////////
+        // Fetch the user's role from localStorage
+        const userRole = localStorage.getItem('role'); // Ensure this is set at login
+        const pedidosLink = document.getElementById('pedidos-link').querySelector('a');
+        const cadastroLink = document.getElementById('cadastro-link').querySelector('a');
 
 
-// Function to load customer name based on customerId in localStorage
-function loadCustomerName() {
-    const customerId = localStorage.getItem('customerId');
-    console.log(customerId);
-
-    if (!customerId) {
-        console.error('Customer ID not found in localStorage!');
-        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
-        return;
-    }
-
-    // Fetch customer name from backend (sending customerId in the request body)
-    fetch(`${URL_API}/displayName`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ customerId }) // Sending customerId in the request body
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        // Dynamically assign the correct href based on the user's role
+        if (userRole === 'USER') {
+            pedidosLink.href = 'pedidos.html';
+            cadastroLink.href = 'CADASTRO/CADASTRO_USER/cadastro.html';
+        } else if (userRole === 'SELLER') {
+            pedidosLink.href = 'pedidosrep.html';
+            cadastroLink.href = 'CADASTRO/CADASTRO_REP/cadastrorep.html';
+        } else if (userRole === 'ADMIN') {
+            pedidosLink.href = 'pedidosadmin.html';
+            cadastroLink.href = 'CADASTRO/CADASTRO_ADMIN/cadastroadmin.html';
+        } else {
+            pedidosLink.href = '#'; // Default action for unknown or missing roles
+            console.warn('Role not defined or invalid.');
         }
-        return response.json();
-    })
-    .then(data => {
-        // Display customer name from backend
-        const customerName = data.razaosocial || 'Unknown';
-        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
-    })
-    .catch(error => {
-        console.error('Error fetching customer name:', error);
-        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-    });
-}
-
-// Function to clear the customer selection
-function clearCustomer() {
-    localStorage.removeItem('customerId');
-    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
-}
-
-// Call the function when the page loads
-loadCustomerName();
 
 
-////////////////////////////////////////////////////////////////////////////////////////////
-document.getElementById('downloadButton').addEventListener('click', function() {
-    // Get elements
-    const button = document.getElementById('downloadButton');
-    const spinner = document.getElementById('spinner');
-    const buttonText = document.getElementById('buttonText');
-    const downloadLink = document.getElementById('downloadLink');
-    
-    // Show the spinner and reduce text opacity immediately
-    spinner.style.display = 'inline-block';
-    buttonText.classList.add('buttonTextHidden');
-    
-    // Trigger the download immediately
-    downloadLink.click();
-    
-    // You can simulate any task if you want the spinner to stay visible for a duration.
-    setTimeout(() => {
-        // Hide the spinner and restore text opacity after 5 seconds or the task duration
-        spinner.style.display = 'none';
-        buttonText.classList.remove('buttonTextHidden');
-    }, 4000); // Adjust this delay as needed
-});
 
-/*
-document.getElementById('downloadButton').addEventListener('click', function() {
-        // Get elements
-        const button = document.getElementById('downloadButton');
-        const spinner = document.getElementById('spinner');
-        const buttonText = document.getElementById('buttonText');
-        const downloadLink = document.getElementById('downloadLink');
-        
-        // Show the spinner and reduce text opacity
-        spinner.style.display = 'inline-block';
-        buttonText.classList.add('buttonTextHidden');
-        
-        // Simulate a task (e.g., API call or download) with a timeout
-        const startTime = Date.now();
-        
-        setTimeout(() => {
-            // Simulating task duration (5 seconds)
-            const endTime = Date.now();
-            const duration = endTime - startTime;
-            
-            // Log the task duration
-            console.log(`Task completed in ${duration}ms`);
+        /*
+        // Dynamically assign the correct href based on the user's role
+        if (userRole === 'USER') {
+          pedidosLink.href = 'pedidos.html';
+          cadastroLink.href = 'cadastro.html';
+        } else if (userRole === 'SELLER') {
+          pedidosLink.href = 'pedidosrep.html';
+          cadastroLink.href = 'cadastrorep.html';
+        } else if (userRole === 'ADMIN') {
+          pedidosLink.href = 'pedidosadmin.html';
+          cadastroLink.href = 'cadastroadmin.html';
+        } else {
+          pedidosLink.href = '#'; // Default action for unknown or missing roles
+          console.warn('Role not defined or invalid.');
+        }
+      */
 
-            // Hide the spinner and restore text opacity
-            spinner.style.display = 'none';
-            buttonText.classList.remove('buttonTextHidden');
-            
-            // Trigger the download after the task finishes
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // Function to load customer name based on customerId in localStorage
+        function loadCustomerName() {
+            const customerId = localStorage.getItem('customerId');
+            console.log(customerId);
+
+            if (!customerId) {
+                console.error('Customer ID not found in localStorage!');
+                document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+                return;
+            }
+
+            // Fetch customer name from backend (sending customerId in the request body)
+            fetch(`${URL_API}/displayName`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ customerId }) // Sending customerId in the request body
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Display customer name from backend
+                    const customerName = data.razaosocial || 'Unknown';
+                    document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching customer name:', error);
+                    document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+                });
+        }
+
+        // Function to clear the customer selection
+        function clearCustomer() {
+            localStorage.removeItem('customerId');
+            document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+        }
+
+        // Call the function when the page loads
+        loadCustomerName();
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('downloadButton').addEventListener('click', function () {
+            // Get elements
+            const button = document.getElementById('downloadButton');
+            const spinner = document.getElementById('spinner');
+            const buttonText = document.getElementById('buttonText');
+            const downloadLink = document.getElementById('downloadLink');
+
+            // Show the spinner and reduce text opacity immediately
+            spinner.style.display = 'inline-block';
+            buttonText.classList.add('buttonTextHidden');
+
+            // Trigger the download immediately
             downloadLink.click();
-        },10); // Simulating a 5-second task
-    });*/
+
+            // You can simulate any task if you want the spinner to stay visible for a duration.
+            setTimeout(() => {
+                // Hide the spinner and restore text opacity after 5 seconds or the task duration
+                spinner.style.display = 'none';
+                buttonText.classList.remove('buttonTextHidden');
+            }, 4000); // Adjust this delay as needed
+        });
+
+        /*
+        document.getElementById('downloadButton').addEventListener('click', function() {
+                // Get elements
+                const button = document.getElementById('downloadButton');
+                const spinner = document.getElementById('spinner');
+                const buttonText = document.getElementById('buttonText');
+                const downloadLink = document.getElementById('downloadLink');
+                
+                // Show the spinner and reduce text opacity
+                spinner.style.display = 'inline-block';
+                buttonText.classList.add('buttonTextHidden');
+                
+                // Simulate a task (e.g., API call or download) with a timeout
+                const startTime = Date.now();
+                
+                setTimeout(() => {
+                    // Simulating task duration (5 seconds)
+                    const endTime = Date.now();
+                    const duration = endTime - startTime;
+                    
+                    // Log the task duration
+                    console.log(`Task completed in ${duration}ms`);
+        
+                    // Hide the spinner and restore text opacity
+                    spinner.style.display = 'none';
+                    buttonText.classList.remove('buttonTextHidden');
+                    
+                    // Trigger the download after the task finishes
+                    downloadLink.click();
+                },10); // Simulating a 5-second task
+            });*/
 
 
 
-     </script>
+    </script>
     <script src="script.js"></script>
     <footer>
         <p>&copy; 2025 | NYR Festas</p>
-      </footer>
+    </footer>
 </body>
+
 </html>
