@@ -1299,120 +1299,6 @@ function populateModal(orderDetails) {
     });
 
 
-/*
-
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    // Update general order information in the modal
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-    document.getElementById('email').textContent = orderDetails.email;
-    document.getElementById('representante').textContent = orderDetails.representante;
-    document.getElementById('obs').textContent = orderDetails.observacoes;
-
-
-
-
-
-
-    // Get IPI dropdown and display elements
-    const ipiDropdown = document.getElementById('ipi');
-    const ipiDisplay = document.getElementById('ipi-display');
-
-    // Set the IPI dropdown value
-    if (orderDetails.ipi_tax) {
-        ipiDropdown.value = orderDetails.ipi_tax;
-    }
-  
-    // Update products table and calculate total
-    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
-
-
-
-
-
-    const descDropdown = document.getElementById('desc');
-    const descDisplay = document.getElementById('desc-display');
-   // Select the discount dropdown element
-   const discount = document.querySelector('#desc');
-    
-
-   if (orderDetails.desconto !== undefined && orderDetails.desconto !== null) {
-    descDropdown.value = orderDetails.desconto;
-    } else {
-        descDropdown.value = 0; // Ensure 0 is set when no discount is provided
-    }
-
-
-     // Set the DESC dropdown value
-     //if (orderDetails.desconto) {
-      //  descDropdown.value = orderDetails.desconto;}
-  
-        // Update desc
-
-
-
-    descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
-
-
-
-
-
-
-    const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0;
-    let ipiOrder = 0;
-
-    // Clear existing content
-    orderDetailsContent.innerHTML = '';
-
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco);
-        const quantity = parseInt(product.quantidade, 10);
-        const factor = parseInt(product.ipi);
-        const ipiTax = parseFloat(orderDetails.ipi_tax);
-        const ipi = factor * ipiTax * price * quantity;
-        const productTotal = (price * quantity) + ipi;
-        console.log('Total de produtos:',productTotal);
-
-
-
-    // Function to format numbers as currency (Brazilian Real - R$)
-    function formatCurrency(value) {
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-    }
-
-
-
-        const row = `
-            <tr data-product-id="${product.id}">
-                <td>${index + 1}</td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td class="quantity">${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(ipi)}</td>
-                <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-            </tr>
-        `;  
-
-        orderDetailsContent.innerHTML += row;
-
-        total += productTotal;
-        
-                
-        ipiOrder += ipi;
-
-        total2 = total - ipiOrder;
-       
-
-        console.log('IPI VALUE:',ipiOrder);
-    });
-
-*/
 
     // Function to update total with discount
     function updateTotal() {
@@ -1587,12 +1473,13 @@ function populateModal(orderDetails) {
 
 
                                 // Update the total for this row
-                                row.cells[4].textContent = formatCurrency(chosenPrice);
-                                row.cells[5].textContent = formatCurrency(ipiValue);
-                                row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
+                                row.cells[5].textContent = formatCurrency(chosenPrice);
+                                row.cells[6].textContent = formatCurrency(ipiValue);
+                                row.cells[7].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
         
                                 // Update the total price in the modal
                                 //update();
+                                //window.location.reload();
                                 updateTotalPrice();
         
                                
@@ -1634,7 +1521,7 @@ function updateTotalPrice() {
 
 
                 const productTotal = parseFloat(
-    row.cells[6].textContent
+    row.cells[7].textContent
 
         .replace('R$', '')
         .trim()
@@ -1665,45 +1552,6 @@ function updateTotalPrice() {
 
 
 
-
-/*
-// Function to update the total price in the modal
-function updateTotalPrice() {
-    const rows = document.querySelectorAll('#order-details-content tr');
-    let total = 0; // Starting with an initial value of 1000
-    
-    rows.forEach(row => {
-
-
-        const productTotal = parseFloat(
-    row.cells[6].textContent
-        .replace('R$', '')
-        .trim()
-        .replace(/\./g, '') // Remove ALL dots
-        .replace(',', '.')  // Convert decimal separator
-);
-   
-
-total =  total += productTotal;
-
-    });
-
-    let discountTotal = total * discountValue;
-let totalFinal = total * (1 - discountValue);
-
-
-
-   // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
- 
-                
-document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
- document.getElementById('total-value').textContent = formatCurrency(total);
-}
-
-*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2162,6 +2010,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 
             if (submitResponse.ok) {
                 alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
+                window.location.reload();
             } else {
                 alert('Ocorreu um erro ao enviar o pedido.');
                 event.target.checked = false; // Reset the toggle switch on error
@@ -2185,6 +2034,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
                 });
 
                 alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
+                window.location.reload();
             } else {
                 alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
                 event.target.checked = false; // Reset the toggle switch if revert isn't allowed

@@ -635,6 +635,10 @@
                         <span>Representante:</span>
                         <span id="representante"></span>
                     </div>
+                    <div class="order-info-row">
+                        <span>Situação:</span>
+                        <span id="situacao"></span>
+                    </div>
                 </div>
                 <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
             </div>
@@ -844,7 +848,7 @@
     
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     
@@ -873,8 +877,6 @@
 
 
 
-
-
 function populateModal(orderDetails) {
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
@@ -882,7 +884,18 @@ function populateModal(orderDetails) {
     document.getElementById('email').textContent = orderDetails.email;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
+    
 
+    // Fetch situacao (status info) from backend using pedidoweb
+    fetch(`${URL_API}/pedidostatus/${orderDetails.id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('situacao').textContent = data.status;
+        })
+        .catch(error => {
+            console.error('Erro ao buscar status do pedido:', error);
+            document.getElementById('situacao').textContent = 'Status não encontrado';
+        });
     
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
@@ -978,82 +991,7 @@ function populateModal(orderDetails) {
 
 
 
-
-
-    /*
-    // Function to populate the modal with order details
-    function populateModal(orderDetails) {
-        document.getElementById('order-id').textContent = orderDetails.id;
-        document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-        document.getElementById('cnpj').textContent = orderDetails.cnpj;
-        document.getElementById('email').textContent = orderDetails.email;
-        document.getElementById('representante').textContent = orderDetails.representante;
-        document.getElementById('obs').textContent = orderDetails.observacoes;
-
-        const ipiDropdown = document.getElementById('ipi');
-        const ipiDisplay = document.getElementById('ipi-display');
-        if (orderDetails.ipi_tax) {
-            ipiDropdown.value = orderDetails.ipi_tax;
-        }
-        ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
-
-        const descDropdown = document.getElementById('desc');
-        const descDisplay = document.getElementById('desc-display');
-        const discount = document.querySelector('#desc');
-        if (orderDetails.desconto) {
-            descDropdown.value = orderDetails.desconto;
-        }
-        descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
-
-        const orderDetailsContent = document.getElementById('order-details-content');
-        let total = 0;
-        let ipiOrder = 0;
-
-        orderDetailsContent.innerHTML = '';
-
-        orderDetails.products.forEach((product, index) => {
-            const price = parseFloat(product.preco);
-            const quantity = parseInt(product.quantidade, 10);
-            const factor = parseFloat(product.ipi);
-            const ipiTax = parseFloat(orderDetails.ipi_tax);
-            const ipi = factor * ipiTax * price * quantity;
-            const productTotal = (price * quantity) + ipi;
-
-            function formatCurrency(value) {
-                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-            }
-            
-            const row = `
-                <tr data-product-id="${product.id}">
-                    <td>${index + 1}</td>
-                    <td>${product.codproduto}</td>
-                    <td>${product.descricao}</td>
-                    <td class="quantity">${quantity}</td>
-                    <td>${formatCurrency(price)}</td>
-                    <td>${formatCurrency(ipi)}</td>
-                    <td>${formatCurrency(productTotal)}</td>
-                    <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                    <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-                </tr>
-            `;  
-            orderDetailsContent.innerHTML += row;
-
-            total += productTotal;
-            ipiOrder += ipi;
-        });
-*/
-
-
-
-
-
-
-
-
-
-
-
-        function updateTotal() {
+    function updateTotal() {
             let discountValue = parseFloat(discount.value) || 0;
             let discountTotal = total * discountValue * (-1);
             let totalFinal = total * (1 - discountValue);
@@ -1078,6 +1016,13 @@ function populateModal(orderDetails) {
                 toggleButton.checked = true;
             }
         }
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             button.addEventListener('click', async function () {
@@ -1134,12 +1079,12 @@ function populateModal(orderDetails) {
                             }
 
                             quantityCell.textContent = newQuantity;
-                            row.cells[4].textContent = formatCurrency(chosenPrice);
-                            row.cells[5].textContent = formatCurrency(ipiValue);
-                            row.cells[6].textContent = formatCurrency(productTotal);
+                            row.cells[5].textContent = formatCurrency(chosenPrice);
+                            row.cells[6].textContent = formatCurrency(ipiValue);
+                            row.cells[7].textContent = formatCurrency(productTotal);
 
                             updateTotalPrice();
-                            window.location.reload();
+                           // window.location.reload();
                         } catch (error) {
                             alert('Error updating quantity');
                             console.error('Error updating quantity:', error);
@@ -1159,7 +1104,7 @@ function populateModal(orderDetails) {
             
             rows.forEach(row => {
                 const productTotal = parseFloat(
-                    row.cells[6].textContent
+                    row.cells[7].textContent
                         .replace('R$', '')
                         .trim()
                         .replace(/\./g, '')
@@ -1203,6 +1148,7 @@ function populateModal(orderDetails) {
             }
     
             console.log(`Product with ID ${productId} deleted successfully.`);
+            alert('PRODUTO DELETADO COM SUCESSO.');
             fetchOrderDetails(orderId);
         } catch (error) {
             console.error('Error deleting product:', error);
@@ -1501,6 +1447,7 @@ function populateModal(orderDetails) {
     
                 if (submitResponse.ok) {
                     alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
+                    window.location.reload();
                 } else {
                     alert('Ocorreu um erro ao enviar o pedido.');
                     event.target.checked = false;
@@ -1520,6 +1467,7 @@ function populateModal(orderDetails) {
                         body: JSON.stringify({ orderId }),
                     });
                     alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
+                    window.location.reload();
                 } else {
                     alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
                     event.target.checked = false;
