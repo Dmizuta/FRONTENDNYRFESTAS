@@ -797,6 +797,10 @@ font-size: 1rem;
                         <span>Representante:</span>
                         <span id="representante"></span>
                     </div>
+                    <div class="order-info-row">
+                        <span>Situação:</span>
+                        <span id="situacao"></span>
+                    </div>
                 </div>
                 <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
             </div>
@@ -1206,6 +1210,17 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
+     // Fetch situacao (status info) from backend using pedidoweb
+     fetch(`${URL_API}/pedidostatus/${orderDetails.id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('situacao').textContent = data.status;
+        })
+        .catch(error => {
+            console.error('Erro ao buscar status do pedido:', error);
+            document.getElementById('situacao').textContent = 'Status não encontrado';
+        });
+    
     
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
