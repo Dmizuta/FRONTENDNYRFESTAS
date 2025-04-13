@@ -498,65 +498,85 @@
         border-radius: 25px;
     }
     
-    /* New Control Panel Styles */
+
+
+
+
+
+
+
+
+
+
+
     #control-panel {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
 
-    #control-panel h3 {
-        margin: 0 0 15px 0;
-        font-size: 1.2rem;
-        color: #333;
-    }
+#control-panel h3 {
+    flex-basis: 100%;
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+}
 
-    .filter-group {
-        display: flex;
-        align-items: center;
-        margin: 10px 0;
-    }
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-    .filter-group label {
-        margin-right: 10px;
-        font-weight: bold;
-        color: #555;
-    }
+#searchInput,
+#status-filter {
+    padding: 8px 12px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
 
-    #searchInput {
-        padding: 8px;
-        width: 250px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
+#order-sum {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #007BFF;
+}
 
-    #status-filter {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-        background-color: #fff;
-    }
+#uploadForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-    #order-sum {
-        margin-top: 15px;
-        font-weight: bold;
-        font-size: 1.2rem;
-        color: #007BFF;
-    }
 
-    /* Adjust .box for consistency */
-    .box {
-        max-width: 95%;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+#uploadForm input[type="file"] {
+    font-size: 0.9rem;
+    border: none;
+}
+
+#uploadForm button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#uploadForm button:hover {
+    background-color: #218838;
+}
+
 </style>
 
 <body>
@@ -609,7 +629,7 @@
 
             <form id="uploadForm" enctype="multipart/form-data" method="POST">
                 <input type="file" name="file" />
-                <button type="submit">Atualizar situação do pedido</button>
+                <button type="submit">Atualizar Status do Pedido</button>
               </form>
         </div>
 
