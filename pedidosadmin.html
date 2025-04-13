@@ -592,6 +592,7 @@
             <div class="filter-group">
                 <label for="searchInput">Pesquisar:</label>
                 <input type="text" id="searchInput" placeholder="Buscar por ID, vendedor, razão social...">
+                
             </div>
             <div class="filter-group">
                 <label for="status-filter">Status:</label>
@@ -604,7 +605,15 @@
                 </select>
             </div>
             <div id="order-sum">Total: R$ 0,00</div>
+
+
+            <form id="uploadForm" enctype="multipart/form-data" method="POST">
+                <input type="file" name="file" />
+                <button type="submit">Atualizar situação do pedido</button>
+              </form>
         </div>
+
+
 
         <div id="orders-container">
             <!-- Orders will be inserted here dynamically -->
@@ -1740,6 +1749,30 @@ function populateModal(orderDetails) {
         localStorage.removeItem('customerId');
         document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
     }
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+  const form = document.getElementById('uploadForm');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(`${URL_API}/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      alert(result.message || 'Upload realizado com sucesso!');
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao enviar o arquivo.');
+    }
+  });
+
 
     // Call the function when the page loads
     loadCustomerName();
