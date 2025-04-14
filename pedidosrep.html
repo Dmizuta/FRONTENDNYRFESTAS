@@ -1399,7 +1399,7 @@ function populateModal(orderDetails) {
                     const orderStatus = data.status; // Adjust based on backend response format
                     console.log("Order Status:", orderStatus);
         
-                    if (orderStatus === 2) {
+                    if (orderStatus === 2 || orderStatus === 3) {
                         alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
                         return; // Prevent further execution
                     }
@@ -1614,7 +1614,7 @@ async function deleteProduct(productId, orderId) {
         const orderStatus = statusData.status; // Adjust based on backend response format
         console.log("Order Status:", orderStatus);
 
-        if (orderStatus === 2) {
+        if (orderStatus === 2 || orderStatus === 3) {
             alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
             return; // Stop further execution if status doesn't allow editing
         }

@@ -1083,7 +1083,7 @@ function populateModal(orderDetails) {
                     const newQuantity = parseInt(inputField.value, 10);
                     if (newQuantity && newQuantity > 0) {
                         try {
-                            const response = await fetch(`${URL_API}/editproduct/${productId}`, {
+                            const response = await fetch(`${URL_API}/editproduct-admin/${productId}`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ quantity: newQuantity })
@@ -1113,7 +1113,7 @@ function populateModal(orderDetails) {
                             row.cells[7].textContent = formatCurrency(productTotal);
 
                             updateTotalPrice();
-                           window.location.reload();
+                          // window.location.reload();
                         } catch (error) {
                             alert('Error updating quantity');
                             console.error('Error updating quantity:', error);
@@ -1166,7 +1166,7 @@ function populateModal(orderDetails) {
     // Function to delete a product
     async function deleteProduct(productId, orderId) {
         try {
-            const response = await fetch(`${URL_API}/delete-product`, {
+            const response = await fetch(`${URL_API}/delete-product-admin`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ productId, orderId })
