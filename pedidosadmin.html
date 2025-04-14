@@ -1113,7 +1113,7 @@ function populateModal(orderDetails) {
                             row.cells[7].textContent = formatCurrency(productTotal);
 
                             updateTotalPrice();
-                           // window.location.reload();
+                           window.location.reload();
                         } catch (error) {
                             alert('Error updating quantity');
                             console.error('Error updating quantity:', error);
@@ -1648,12 +1648,13 @@ function populateModal(orderDetails) {
         const orderId = localStorage.getItem('currentOrderId');
     
         try {
-            const response = await fetch(`${URL_API}/update-desc`, {
+            const response = await fetch(`${URL_API}/update-desc-admin`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, discount })
             });
-    
+    console.log('DESCONTO', response);
+
             const data = await response.json();
             if (response.ok) {
                 alert(`Aplicado desconto de ${discount * 100}%`);
@@ -1672,7 +1673,7 @@ function populateModal(orderDetails) {
         const orderId = localStorage.getItem('currentOrderId');
     
         try {
-            const response = await fetch(`${URL_API}/update-ipi`, {
+            const response = await fetch(`${URL_API}/update-ipi-admin`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, newIPI })
