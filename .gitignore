@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv
+.env
+
+# VS Code
+.vscode/
+
+# Logs
+logs
+*.log
+log.txt
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Optional cache
+.cache/
+dist/
+build/
