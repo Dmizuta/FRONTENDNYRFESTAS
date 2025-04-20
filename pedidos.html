@@ -47,7 +47,7 @@
         /* General button styles */
         .action-btn {
             padding: 10px 30px; /* Increased padding for a bigger button */
-            font-size: 1rem; /* Larger font size for a more sophisticated look */
+            font-size: 1.3rem; /* Larger font size for a more sophisticated look */
             font-weight: 600; /* Slightly bolder for emphasis */
             border: 2px solid transparent; /* Default border */
             border-radius: 12px; /* Softer rounded corners for a modern look */
@@ -82,7 +82,7 @@
             background-color: #f8f9fa;
             color: #333;
             border: 2px solid #007bff;
-            font-size: 18px;
+            font-size: 1.3rem;
             padding: 14px 30px;
             border-radius: 12px;
             font-family: 'Roboto', sans-serif;
@@ -138,75 +138,7 @@
         
         
         
-        
-        
-         .container {
-                display: flex;
-                flex-direction: column;
-                align-items: self-start;
-                gap: 10px;
-                font-family: Arial, sans-serif;
-            }
-        
-            /* Flexbox layout for labels and switch */
-            .switch-container {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-        
-            .switch-label {
-                font-size: 16px;
-                font-weight: bold;
-                transition: color 0.3s;
-            }
-        
-            /* Style for the toggle switch */
-            .switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-            
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-            
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #4CAF50;
-                transition: 0.4s;
-                border-radius: 34px;
-            }
-            
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;    
-                border-radius: 50%;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                transition: 0.4s;
-            }
-            
-            input:checked + .slider {
-                background-color: #ccc;
-            }
-            
-            input:checked + .slider:before {
-                transform: translateX(26px);
-            }
-        
+       
            
         
         
@@ -233,32 +165,11 @@
     margin-bottom: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1.35rem;
     cursor: pointer;
 }
-            /* Order row layout 
-            .order-row {
-                display: flex;
-                justify-content: space-between;
-                padding: 15px;
-                border-bottom: 1px solid #ddd;
-                margin-bottom: 10px;
-                background-color: #f9f9f9;
-                border-radius: 5px;
-                font-size: 1.1rem;
-                cursor: pointer; /* Make the row clickable 
-            }
-            */
-            .order-details {
-                display: flex;
-                flex: 1;
-                justify-content: space-between;
-            }
-            
-            .order-details div {
-                margin: 0 10px;
-                font-size: 1rem;color: #333;
-            }
+         
+           
             
             /* Status styling */
             .status {
@@ -277,9 +188,7 @@
                     align-items: flex-start;
                 }
             
-                .order-details {
-                    flex-direction: column;
-                }
+              
             }
             
             /* Modal Styling */
@@ -316,26 +225,12 @@
                 padding: 10px;
             }
             
-            /*.close-btn {
-                color: #aaa;
-                font-size: 28px;
-                font-weight: bold;
-                position: absolute;
-                top: 10px;
-                right: 25px;
-                border-color: #aaa;
-                cursor: pointer;
-            }
-            
-            .close-btn:focus {
-                color: black;
-                text-decoration: none;
-                cursor: pointer;
-            }*/
+           
             
             #order-details-content {
                 padding: 10px;
                 text-align: center;
+                
               
             }
             
@@ -350,7 +245,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .order-info {
@@ -442,14 +337,14 @@
             padding: 10px;
             background-color: #aaa;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 1.2rem;
           }
         
         
           textarea {
           width: 100%;
           padding: 10px;
-          font-size: 1rem;
+          font-size: 1.3rem;
           border-radius: 4px;
           border: 1px solid #ccc;
           box-sizing: border-box;
@@ -512,7 +407,7 @@
         
         .edit-quantity {
             padding: 10px;
-            font-size: 1rem;
+            font-size: 1.3rem;
             border: 2px solid #007BFF; /* Optional: blue border */
             border-radius: 8px;
             width: 5rem; /* Adjust width if necessary */
@@ -520,12 +415,12 @@
         }
         
         .order-total{
-            font-size: 1.1rem;
+            font-size: 1.35rem;
         }
         
         .valores{
                 color:white;
-                font-size: 1.1rem;
+                font-size: 1.3rem;
                 font-weight: bold;
             }
         
@@ -550,7 +445,7 @@
             
             /* Style for the label */
             .dropdown label {
-                font-size: 1rem;
+                font-size: 1.2rem;
                 font-weight: bold;
                 color: #333;
                 display: block;
@@ -561,7 +456,7 @@
             #ipi {
                 width: 100%;
                 padding: 8px;
-                font-size: 1rem;
+                font-size: 1.2rem;
                 color: #333;
                 background-color: #f0f0f0;
                 border: 1px solid #ccc;
@@ -618,7 +513,7 @@
             
                 width: 100%;
                 padding: 8px;
-                font-size: 1rem;
+                font-size: 1.2rem;
                 color: #333;
                 background-color: #f0f0f0;
                 border: 1px solid #ccc;
@@ -672,19 +567,7 @@
         
         
         
-                /* Style for the select dropdown */
-                #desc {
-                width: 100%;
-                padding: 8px;
-                font-size: 1rem;
-                color: #333;
-                background-color: #f0f0f0;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                outline: none;
-                transition: border-color 0.3s ease;
-            }
-        
+          
         
         
         
@@ -1132,22 +1015,7 @@ const orderRow = `
         <div style="color: ${status.color};"><strong>Status: ${status.text} </strong></div>
     </div>
 `;
-/*
-const orderRow = `
-    <div class="order-row" data-id="${order.id}">
-        <div class="order-details">
-            <div><strong>ID:</strong> ${order.id}</div>
-            
-            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-            <div class="status" style="color: ${status.color};">
-                <strong>Status:</strong> ${status.text}
-            </div>
-        </div>
-    </div>
-`;
-*/
+
 container.innerHTML += orderRow;
 
 

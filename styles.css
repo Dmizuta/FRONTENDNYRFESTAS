@@ -61,19 +61,10 @@ header {
     z-index: 100;
 }
 
-#nyrfestas {
-    color: #fff;
-    font-size: 2.5Rem; /* Aumentado para um destaque maior */
-    margin: 0;
-    font-weight: 1000; /* Negrito */
-    max-width: 100%;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
-
-}
 h1{
 
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #011a1f;
     
     margin: 10px auto;
@@ -105,7 +96,7 @@ nav a {
     font-weight: 500;
     padding: 6px 25px; /* Aumentado para botões mais largos */
     border-radius: 25px; /* Bordas mais arredondadas */
-    font-size: 1.4rem; /* Aumentado para um tamanho maior */
+    font-size: 1.8rem; /* Aumentado para um tamanho maior */
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -139,7 +130,7 @@ nav a:hover {
   
   .clear-btn {
     display: none;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
     color: red;
     flex-shrink: 0; /* Prevents the "❌" from getting squeezed */
@@ -181,7 +172,7 @@ h2 {
     padding: 20px;
     margin: 30px 0; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.4rem; /* Aumentado para um tamanho maior */
+    font-size: 1.7rem; /* Aumentado para um tamanho maior */
     border-bottom: 3px solid #C7A88C; /* Borda inferior mais espessa */
     font-weight: 600; /* Negrito */
 }
@@ -203,7 +194,7 @@ form label, form input {
     border: 2px solid #ccc; /* Borda mais espessa */
     border-radius: 10px; /* Bordas arredondadas */
     outline: none;
-    font-size: 1rem; /* Tamanho padrão */
+    font-size: 1.35rem; /* Tamanho padrão */
     transition: border-color 0.3s;
 }
 
@@ -226,7 +217,7 @@ button {
     border-radius: 10px; /* Rounded corners */
     cursor: pointer;
     width: 100%;
-    font-size: 1em; /* Larger font */
+    font-size: 1.35rem; /* Larger font */
     font-weight: 600; /* Bold */
     transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
@@ -256,7 +247,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 15px; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.1em; /* Tamanho padrão */
+    font-size: 1.35em; /* Tamanho padrão */
 }
 
 th {
@@ -271,7 +262,7 @@ th {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1rem; /* Tamanho padrão */
+    font-size: 1.25rem; /* Tamanho padrão */
     padding: 5px;
 }
 
@@ -293,7 +284,7 @@ th {
 
     margin-top: 5px;
     padding:8px;
-    font-size: medium;
+    font-size: 1.35rem;
     border-width: 1px;
     border-color: #BF6734;
     border-radius: 8px;
@@ -396,7 +387,7 @@ th {
        margin-left: 0px;
        border-radius: 8px;
        box-sizing: border-box;
-       font-size: 1rem;
+       font-size: 1.35rem;
        padding: 10px;
        width: 60%;
        border: 1px solid #ccc;
@@ -420,33 +411,33 @@ th {
 #codprod{
     padding:8px;
  
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 #descrip{
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
    #preco1{
     
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     
   }
   #preco2{
     
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   #CxFechada{
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
 
   #CxFracionada{
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
 
@@ -540,7 +531,7 @@ th {
     justify-content: center;
   }
   label{
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
 footer {
