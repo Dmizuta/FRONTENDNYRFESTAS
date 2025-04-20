@@ -1088,8 +1088,8 @@ const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
 const orderRow = `
     <div class="order-row" data-id="${order.id}">
         <div><strong>ID:</strong> ${order.id}</div>
-        <div><strong>Representante:</strong> ${order.representante}</div>
-        <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+        <div><strong>Representante:</strong> ${order.representante.toUpperCase()}</div>
+        <div><strong>Razão Social:</strong> ${order.razaosocial.toUpperCase()}</div>
         <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
         <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
         <div style="color: ${status.color};"><strong>Status: ${status.text} </strong></div>
@@ -1392,9 +1392,141 @@ function populateModal(orderDetails) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
+    button.addEventListener('click', async function () {
+        const row = this.closest('tr');
+        const orderId = localStorage.getItem('currentOrderId');
+        const quantityCell = row.querySelector('.quantity');
+        const productId = row.getAttribute('data-product-id');
+        const codproduto = row.cells[2].textContent.trim(); // Assuming codproduto is in column 3 (index 2)
+        const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
 
+        // Fetch the current order status to determine if it's editable
+        const requestData = { orderId };
+        console.log("currentOrderId:", orderId);
 
+        try {
+            const response = await fetch(`${URL_API}/orderStatus`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            });
 
+            if (!response.ok) {
+                throw new Error(`Failed to fetch order status: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            const orderStatus = data.status;
+            console.log("Order Status:", orderStatus);
+
+            if (orderStatus === 2 || orderStatus === 3) {
+                alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
+                return;
+            }
+
+            // Create editable input field
+            const inputField = document.createElement('input');
+            inputField.type = 'number';
+            inputField.value = currentQuantity;
+            inputField.classList.add('edit-quantity');
+
+            // Add save button
+            const saveButton = document.createElement('button');
+            saveButton.textContent = 'Salvar';
+            saveButton.classList.add('save-quantity-btn');
+
+            // Clear quantity cell and append input and button
+            quantityCell.innerHTML = '';
+            quantityCell.appendChild(inputField);
+            quantityCell.appendChild(saveButton);
+            inputField.focus();
+
+            // Add 'Enter' key support
+            inputField.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') saveButton.click();
+            });
+
+            saveButton.addEventListener('click', async function () {
+                const newQuantity = parseInt(inputField.value, 10);
+                if (!newQuantity || newQuantity <= 0) {
+                    alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
+                    return;
+                }
+
+                try {
+                    // Fetch cxfracionada using codproduto
+                    const productResponse = await fetch(`${URL_API}/product-buy/${codproduto}`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    if (!productResponse.ok) {
+                        throw new Error('Failed to fetch product details');
+                    }
+
+                    const productData = await productResponse.json();
+                    const product = Array.isArray(productData) ? productData[0] : productData;
+                    const cxfracionada = product.cxfracionada;
+
+                    // Validate minimum quantity
+                    if (newQuantity < cxfracionada) {
+                        alert('QUANTIDADE MÍNIMA NECESSÁRIA!');
+                        inputField.value = currentQuantity; // Reset to original
+                        return;
+                    }
+
+                    // Update product quantity
+                    const updateResponse = await fetch(`${URL_API}/editproduct/${productId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ quantity: newQuantity })
+                    });
+
+                    if (!updateResponse.ok) {
+                        throw new Error('Failed to update quantity');
+                    }
+
+                    const updateData = await updateResponse.json();
+                    const { cxfechada, precofechada, precofrac, ipi, ipiTax = 0 } = updateData.updatedProduct;
+
+                    // Update quantity in table
+                    quantityCell.textContent = newQuantity;
+
+                    // Calculate updated values
+                    const chosenPrice = newQuantity >= cxfechada ? precofechada : precofrac;
+                    const ipiValue = ipi * ipiTax * chosenPrice * newQuantity;
+                    const productTotal = chosenPrice * newQuantity + ipiValue;
+
+                    // Format currency function
+                    function formatCurrency(value) {
+                        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                    }
+
+                    // Update table row (adjusted for image column)
+                    row.cells[5].textContent = formatCurrency(chosenPrice); // Price (index 5)
+                    row.cells[6].textContent = formatCurrency(ipiValue);    // IPI (index 6)
+                    row.cells[7].textContent = formatCurrency(productTotal); // Subtotal (index 7)
+
+                    // Update modal totals
+                    updateTotalPrice();
+
+                } catch (error) {
+                    alert('Erro ao atualizar quantidade');
+                    console.error('Error updating quantity:', error);
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching order status:', error);
+            alert('Ocorreu um erro ao verificar o status do pedido. Tente novamente.');
+        }
+    });
+});
+/*
 
         // Add event listeners for edit buttons
         document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
@@ -1545,7 +1677,7 @@ function populateModal(orderDetails) {
         });
         
 
-
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

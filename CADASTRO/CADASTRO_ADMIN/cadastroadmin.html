@@ -253,17 +253,6 @@ function populateCustomerList(customers) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Function to load customer data into the form when clicked
 function loadCustomerData(customer) {
     document.getElementById('representante').value = customer.representante || '';
@@ -442,9 +431,79 @@ function loadCustomerData(customer) {
             }
         });
 
+
+//VERSÃO DO GROK3 QUE TORNA TODAS AS LETRAS MAIÚSCULAS
+
+        // Handle form submission (Create or Update)
+const form = document.getElementById('cadastroForm');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const loggedInUsername = localStorage.getItem('username'); // Get the logged-in username
+
+    // Collect form data and convert text fields to UPPERCASE
+    const formData = {
+        representante: document.getElementById('representante').value.toUpperCase(),
+        razaosocial: document.getElementById('razaosocial').value.toUpperCase(),
+        cnpj: document.getElementById('cnpj').value, // No case conversion (formatted by Cleave)
+        endereco: document.getElementById('endereco').value.toUpperCase(),
+        telefone: document.getElementById('telefone').value, // No case conversion (formatted by Cleave)
+        email: document.getElementById('email').value,
+        username: loggedInUsername ? loggedInUsername.toUpperCase() : loggedInUsername, // Convert if exists
+    };
+
+    const customerId = localStorage.getItem('customerId');
+
+    try {
+        let response;
+
+        if (customerId) {
+            // Update existing customer
+            response = await fetch(`${URL_API}/updatecadastroadmin/${customerId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        } else {
+            // Create new customer
+            response = await fetch(`${URL_API}/cadastrorep`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        }
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message); // Shows a dynamic message like "Customer created successfully."
+            form.reset();
+            form.dataset.customerId = ''; // Clear stored customer ID after submission
+            document.getElementById('cadastroButton').textContent = 'Cadastrar'; // Reset button text
+            // Reload the page after submission
+            window.location.reload();
+        } else {
+            alert('Error: ' + (result.error || 'FALHA NO CADASTRO.'));
+        }
+    } catch (error) {
+        console.error('Error submitting the form:', error);
+        alert('ERRO AO REALIZAR O CADASTRO.');
+    }
+});
+
+// Cleave.js for CNPJ and Telefone formatting
+new Cleave('#cnpj', {
+    delimiters: ['.', '.', '/', '-'],
+    blocks: [2, 3, 3, 4, 2],
+    numericOnly: true,
+});
+new Cleave('#telefone', {
+    delimiters: ['(', ') ', '-', '-'],
+    blocks: [0, 2, 5, 4], // Matches (XX) XXXXX-XXXX
+    numericOnly: true,
+});
      
-
-
+/*
 // Handle form submission (Create or Update)
 const form = document.getElementById('cadastroForm');
 form.addEventListener('submit', async (e) => {
@@ -520,7 +579,7 @@ new Cleave('#cnpj', {
 });
 
 
-
+*/
 
 
 

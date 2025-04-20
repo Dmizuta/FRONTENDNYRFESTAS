@@ -870,30 +870,15 @@
             const orderRow = `
     <div class="order-row" data-id="${order.id}">
         <div><strong>ID:</strong> ${order.id}</div>
-        <div><strong>Representante:</strong> ${order.representante}</div>
-        <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
+        <div><strong>Representante:</strong> ${order.representante.toUpperCase()}</div>
+        <div><strong>Razão Social:</strong> ${order.razaosocial.toUpperCase()}</div>
         <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
         <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
         <div style="color: ${status.color};"><strong>Status: ${status.text} </strong></div>
     </div>
 `;
 
-            /*
             
-            const orderRow = `
-                <div class="order-row" data-id="${order.id}">
-                    <div class="order-details">
-                        <div><strong>ID:</strong> ${order.id}</div>
-                        <div><strong>Representante:</strong> ${order.representante}</div>
-                        <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                        <div class="status" style="color: ${status.color};">
-                            <strong>Status:</strong> ${status.text}
-                        </div>
-                    </div>
-                </div>
-            `; */
             container.innerHTML += orderRow;
         });
     }

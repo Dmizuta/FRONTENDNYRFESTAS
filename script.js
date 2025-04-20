@@ -637,6 +637,16 @@ if (event.target === modal) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 const addProductToOrder = async () => {
 const customerId = localStorage.getItem("customerId");
 const username = localStorage.getItem("username");
@@ -714,13 +724,7 @@ if (userRole !== "ADMIN") {
         const cxfechada = product.cxfechada;
         const ipi = product.ipi;
 
-/*
-        const productDesc = productBuyData.descricao;
-        const precofechada = productBuyData.precofechada;
-        const precofrac = productBuyData.precofrac;
-        const cxfracionada = productBuyData.cxfracionada;
-        const cxfechada = productBuyData.cxfechada;
-        const ipi = productBuyData.ipi;*/
+
 
         console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "IPI:", ipi);
 
@@ -732,6 +736,17 @@ if (userRole !== "ADMIN") {
         }
 
         const quantity = parseInt(document.getElementById('quantity').value);
+
+
+     // Validate quantity is not 0 or NaN
+     if (isNaN(quantity) || quantity <= 0) {
+      alert("QUANTIDADE INVÁLIDA, INSIRA UM VALOR VÁLIDO.");
+      console.log("Invalid quantity:", quantity);
+      return;
+  }
+
+
+
 
         if (quantity < cxfracionada) {
           alert("NECESSÁRIO QUANTIDADE MÍNIMA!"); // Alert the user
@@ -768,13 +783,14 @@ if (userRole !== "ADMIN") {
         const addResult = await addResponse.json();
 
         if (addResponse.ok) {
-          setTimeout(() => {
-            let searchInput = document.getElementById('searchInput');
-          
-            searchInput.focus();      // Refocus on the input
-          }, 10);
+
+
+          document.getElementById("searchInput").value = ""; // Clear search input
+          document.getElementById("searchInput").focus(); // Refocus on the search input
+
 
           alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
+
           console.log("Product successfully added to order");
           modal.style.display = "none"; // Oculta o modal
           document.getElementById("quantity").value = ""; // Clear quantity field
@@ -843,15 +859,7 @@ if (userRole !== "ADMIN") {
 
 
       console.log("Product Data:", productBuyData);
-/*
-      // Extract product description and prices
-      const productDesc = productBuyData.descricao;
-      const precofechada = productBuyData.precofechada;
-      const precofrac = productBuyData.precofrac;
-      const cxfechada = productBuyData.cxfechada;
-      const ipi = productBuyData.ipi;
 
-      */
        
       
       
@@ -869,12 +877,6 @@ if (userRole !== "ADMIN") {
      
 
      
-/*
-      if (quantity < cxfracionada) {
-        alert("QUANTIDADE MÍNIMA NECESSÁRIA!"); // Alert the user
-        return; // Exit the function without adding the product
-    }
-*/
 
     
       // Choose the correct price based on the quantity
@@ -910,13 +912,13 @@ if (userRole !== "ADMIN") {
 
       if (addResponse.ok) {
 
-        setTimeout(() => {
-          let searchInput = document.getElementById('searchInput');
-        
-          searchInput.focus();      // Refocus on the input
-        }, 10);
+      
+        document.getElementById("searchInput").value = ""; // Clear search input
+        document.getElementById("searchInput").focus(); // Refocus on the search input
 
+      
         alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
+       
         console.log("Product successfully added to order");
         modal.style.display = "none"; // Oculta o modal
         document.getElementById("quantity").value = ""; // Clear quantity field
@@ -946,6 +948,17 @@ searchInput.focus();      // Refocus on the input
 }, 10);
 
 
+
+// Adiciona o evento de pressionar a tecla "Enter"
+document.addEventListener("keydown", (event) => {
+  const modal = document.getElementById("myModal");
+  if (event.key === "Enter" && modal && modal.style.display === "block") {
+      event.preventDefault(); // Prevent default Enter behavior
+      addProductToOrder();
+  }
+});
+
+/*
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
@@ -953,7 +966,7 @@ document.addEventListener("keydown", (event) => {
   }
 
 });
-
+*/
 
 
 

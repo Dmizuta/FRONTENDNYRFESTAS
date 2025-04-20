@@ -492,10 +492,10 @@ form.addEventListener('submit', async (e) => {
     const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
 
     const formData = {
-        representante: document.getElementById('representante').value,
-        razaosocial: document.getElementById('razaosocial').value,
+        representante: document.getElementById('representante').value.toUpperCase(),
+        razaosocial: document.getElementById('razaosocial').value.toUpperCase(),
         cnpj: document.getElementById('cnpj').value,
-        endereco: document.getElementById('endereco').value,
+        endereco: document.getElementById('endereco').value.toUpperCase(),
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
         username: loggedInUsername,
