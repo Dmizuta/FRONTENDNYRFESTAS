@@ -305,6 +305,28 @@ filter:
 }*/
 
 
+@media (max-width: 912px) {
+    .itemHeader {
+        display: none;
+    }
+    .qtdFracionadaHeader {
+        display: none;
+    }
+    .qtdFechadaHeader {
+        display: none;
+    }
+    .quantityClosed-cell {
+        display: none;
+    }
+    .quantityFractioned-cell {
+        display: none;
+    }
+    .index-cell {
+        display: none;
+    }
+}
+
+
 
 </style>
 
@@ -417,13 +439,13 @@ filter:
             <table id="productTable">
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th class="itemHeader">Item</th>
                         <th>Foto do produto</th>
                         <th>Código do produto</th>
                         <th>Descrição do produto</th>
-                        <th>Quantidade cx fechada</th>
+                        <th class="qtdFechadaHeader">Quantidade cx fechada</th>
                         <th>Preço de cx fechada</th>
-                        <th>Quantidade cx fracionada</th>
+                        <th class="qtdFracionadaHeader">Quantidade cx fracionada</th>
                         <th>Preço cx fracionada</th>
                         <th>Adicionar ao pedido</th>
                     </tr>

@@ -155,12 +155,15 @@ function populateProductTable(products) {
 
           // Insert cells for each product detail
           const cell1 = row.insertCell(0); // Ascending Index
+          cell1.classList.add("index-cell"); // Add class for styling
           const cell2 = row.insertCell(1); // Image
           const cell3 = row.insertCell(2); // Product Code
           const cell4 = row.insertCell(3); // Description
           const cell5 = row.insertCell(4); // Quantity Closed
+          cell5.classList.add("quantityClosed-cell"); // Add class for styling
           const cell6 = row.insertCell(5); // Price Closed
           const cell7 = row.insertCell(6); // Quantity Fractioned
+          cell7.classList.add("quantityFractioned-cell"); // Add class for styling
           const cell8 = row.insertCell(7); // Price Fractioned
           const cell9 = row.insertCell(8); // Add Button
 
