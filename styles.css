@@ -309,11 +309,6 @@ th {
     transition: transform 0.3s ease;
 }
 
-.prodimage:hover {
-   
-    transform: scale(2); /* Aumenta o tamanho do elemento em 10% */
-}
-
 
 .prodimage {    
    /* max-width: 90vw;  Limit width to 90% of the viewport */
@@ -323,7 +318,8 @@ th {
     object-fit: contain;  
       width: auto; 
     height: auto;  
-    display: block;  
+    display: block; 
+    margin-bottom: 20px; /* Space below the image */
     margin: 0 auto;  /* Centers the image */
 }
 

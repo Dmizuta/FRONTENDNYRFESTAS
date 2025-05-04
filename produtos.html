@@ -378,6 +378,7 @@ filter:
     .product-info, .price1-info, .price2-info, .cxfechada-info, .cxfracionada-info {
         padding: 8px 0;
         border-bottom: 1px solid #eee;
+        z-index: 1000;
     }
 
     /* Quantity and Stock Controls */
@@ -460,6 +461,177 @@ filter:
         .quantity input {
             font-size: 1rem;
         }
+    }
+
+    /* Expanded Image Modal */
+    .expanded-modal {
+        display: none;
+        position: fixed;
+        z-index: 10001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+    }
+
+    .expanded-modal-content {
+        position: relative;
+        margin: auto;
+        width: 90%;
+        max-width: 800px;
+        max-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanded-image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .expanded-image-container img:hover {
+        transform: scale(2);
+
+    }
+
+    .close-expanded {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 10002;
+    }
+
+    .close-expanded:hover {
+        color: #BF6734;
+    }
+
+    /* Image container styling */
+    .image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+        overflow: visible;
+    }
+
+    .prodimage {
+        text-align: center;
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .prodimage img {
+        max-width: 100%;
+        max-height: 250px;
+        object-fit: contain;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    /* Expand image button */
+    .expand-button {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1002;
+        transition: background 0.3s ease;
+    }
+
+    .expand-button:hover {
+        background: rgba(191, 103, 52, 0.8);
+    }
+
+    /* Expanded Image Modal */
+    .expanded-modal {
+        display: none;
+        position: fixed;
+        z-index: 10001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        overflow: hidden;
+    }
+
+    .expanded-modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanded-image-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanded-image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .close-expanded {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10002;
+    }
+
+    .close-expanded:hover {
+        background: rgba(191, 103, 52, 0.8);
+    }
+
+    /* Image zoom and pan */
+    .expanded-image-container {
+        overflow: hidden;
     }
 
 </style>
@@ -601,8 +773,10 @@ filter:
                 <span class="close" id="closeModalBtn">×</span>
 
                 <div class="modal-stage-one">
-                    <div class="prodimage">
-                        <img src="https://placehold.co/150" alt="Product Image">
+                    <div class="image-container">
+                        <div class="prodimage">
+                            <img src="https://placehold.co/150" alt="Product Image" id="prodImage">
+                        </div>
                     </div>
 
                     <div class="product-info">
@@ -646,8 +820,15 @@ filter:
             </div>
         </div>
 
-
-
+        <!-- Expanded Image Modal -->
+        <div id="expandedImageModal" class="expanded-modal">
+            <div class="expanded-modal-content">
+                <span class="close-expanded" id="closeExpandedBtn">×</span>
+                <div class="expanded-image-container">
+                    <img src="" id="expandedImage" alt="Imagem ampliada do produto">
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -821,7 +1002,40 @@ filter:
                 },10); // Simulating a 5-second task
             });*/
 
-
+        // Expanded Image Modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('myModal');
+            const expandedModal = document.getElementById('expandedImageModal');
+            const closeExpandedBtn = document.getElementById('closeExpandedBtn');
+            const prodImage = document.getElementById('prodImage');
+            const expandedImage = document.getElementById('expandedImage');
+            
+            // Permitir que o clique na imagem também abra o modal expandido
+            prodImage.addEventListener('click', function() {
+                const imageUrl = this.src;
+                expandedImage.src = imageUrl;
+                expandedModal.style.display = 'block';
+            });
+            
+            // Fechar modal de imagem expandida
+            closeExpandedBtn.addEventListener('click', function() {
+                expandedModal.style.display = 'none';
+            });
+            
+            // Fechar quando clicar fora do modal
+            window.addEventListener('click', function(event) {
+                if (event.target === expandedModal) {
+                    expandedModal.style.display = 'none';
+                }
+            });
+            
+            // Tecla ESC fecha o modal
+            window.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && expandedModal.style.display === 'block') {
+                    expandedModal.style.display = 'none';
+                }
+            });
+        });
 
     </script>
     <script src="script.js"></script>
