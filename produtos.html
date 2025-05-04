@@ -307,6 +307,161 @@ filter:
 
 
 
+    /* Modal Styles - Improvement */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+    }
+
+    /* Modal Content - Improvement */
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: 10vh auto;
+        padding: 25px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        overflow-y: auto; /* Enable vertical scrolling if needed */
+    }
+
+    /* Close Button - Repositioned */
+    #closeModalBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+        background: none;
+        border: none;
+        width: auto;
+        height: auto;
+        z-index: 1001;
+    }
+
+    #closeModalBtn:hover {
+        color: #BF6734;
+    }
+
+    /* Modal Stage One */
+    .modal-stage-one {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Product Image Container */
+    .prodimage {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .prodimage img {
+        max-width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+    /* Product Info Styling */
+    .product-info, .price1-info, .price2-info, .cxfechada-info, .cxfracionada-info {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    /* Quantity and Stock Controls */
+    #qtd-estoque {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .quantity {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .quantity input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #BF6734;
+        border-radius: 8px;
+        font-size: 1.2rem;
+    }
+
+    .stock-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    /* Modal Buttons */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    .modal-buttons button {
+        margin-top: 10px;
+        padding: 12px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 95%;
+            margin: auto;
+            padding: 15px;
+            max-height: 100vh;
+        }
+
+        #qtd-estoque {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .quantity {
+            width: 100%;
+        }
+
+        .stock-control {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-content {
+            padding: 10px;
+            margin: 2vh auto;
+        }
+
+        #codprod {
+            font-size: 1.2rem;
+        }
+
+        #descrip, #preco1, #preco2, #CxFechada, #CxFracionada {
+            font-size: 1rem;
+        }
+
+        .quantity input {
+            font-size: 1rem;
+        }
+    }
+
 </style>
 
 <body>
@@ -472,26 +627,17 @@ filter:
                     </div>
 
                     <div class="modal-buttons">
-
-
-
-
-
                         <div id="qtd-estoque">
-
                             <div class="quantity">
-                                <input type="number" id="quantity" name="quantity" min="1" value="">
+                                <input type="number" id="quantity" name="quantity" min="1" value="" placeholder="Quantidade">
                             </div>
 
                             <!-- Stock Checkbox (hidden by default) -->
-                            <div id="chkbxestoque" class="stock-control" style="display: none; margin-top: 10px;">
+                            <div id="chkbxestoque" class="stock-control" style="display: none;">
                                 <input type="checkbox" id="stockCheckbox" name="stockCheckbox">
                                 <label for="stockCheckbox">Em Estoque</label>
                             </div>
-
-
                         </div>
-
 
                         <button id="addButton">Adicionar</button>
                         <button id="cancelButton">Cancelar</button>
@@ -502,59 +648,6 @@ filter:
 
 
 
-
-        <!-- Modal -->
-
-
-        <!-- 
- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModalBtn">&times;</span>
-        
-        <div class="modal-stage-one">
-
-            <div class="prodimage">
-            <img src="https://placehold.co/150" alt="Product Image">
-            </div>
-            
-            <div class="product-info">
-                <h3 id="codprod"></h3>
-                <p id="descrip"></p>
-            </div>
-
-            <div  class="price1-info">
-                <p id="preco1"><strong></strong></p>
-            </div>
-
-            <div  class="price2-info">
-                <p id="preco2"><strong></strong></p>
-            </div>
-
-            <div  class="cxfechada-info">
-                <p id="CxFechada"><strong></strong></p>
-            </div>
-                
-            <div  class="cxfracionada-info">
-                <p id="CxFracionada"><strong></strong></p>
-            </div>
-      
-            
-            
-            <div class="modal-buttons">
-               <label for="quantity">Quantity:</label> 
-                
-               <div class="quantity">
-               <input type="number" id="quantity" name="quantity" min="1" value="">
-               </div> 
-               <button id="addButton">Adicionar</button>
-                <button id="cancelButton">Cancelar</button>
-            </div>
-        </div>
-        
-    </div>
-</div>
-
--->
 
     </div>
 

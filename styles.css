@@ -458,40 +458,95 @@ th {
 .modal {
     display: none; /* Hidden by default */
     position: fixed;
-    z-index: 10000; /* Ensure it’s on top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Ensure it's on top */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    overflow: hidden;
 }
 
 /* Modal Content */
 .modal-content {
-
-    max-width: 80vw; /* Limit width to 90% of the viewport */
-    max-height: 90vh; /* Limit height to 90% of the viewport */
-    /*overflow-x: auto;   Enable scrolling if content overflows */
-
-    position: absolute; /* Centered using transform */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     background-color: #fff;
-    padding: 30px;
-    /*width: 40%;
-    max-width: 800px;*/
+    margin: 10vh auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 
-
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaaaaa;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 .close:hover {
     color: #F2B680; /* Yellow-orange hover effect */
 }
 
+.prodimage {    
+    max-width: 100%; /* Limit width to viewport */
+    max-height: 250px; /* Reasonable height limit */
+    object-fit: contain;  
+    width: auto; 
+    height: auto;  
+    display: block;  
+    margin: 0 auto; /* Centers the image */
+}
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5vh auto;
+        padding: 15px;
+    }
+    
+    .prodimage {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 10px;
+        margin: 2vh auto;
+        width: 98%;
+    }
+    
+    .prodimage {
+        max-height: 150px;
+    }
+}
+
+#closeModalBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: auto;
+    height: auto;
+    z-index: 1001;
+}
 
 .label1 {
     font-weight: bold;
@@ -593,14 +648,11 @@ footer {
 }
 .modal-content {
 
-    width: 95vw; /* Limit width to 90% of the viewport */
-    height: 95vh; /* Limit height to 90% of the viewport */
+    width: 100%; /* Limit width to 90% of the viewport */
+    height: 100%; /* Limit height to 90% of the viewport */
     /*overflow-x: auto;   Enable scrolling if content overflows */
 
     position: relative; /* Centered using transform */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 30px;
     /*width: 40%;
