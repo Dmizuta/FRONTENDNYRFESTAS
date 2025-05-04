@@ -39,6 +39,11 @@
 }
 
 body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
     background-color: #F2F2F2; /* Light gray background for a soft look */
     color: #022327; /* Dark teal for readability */
 }
@@ -344,6 +349,7 @@ th {
     border: 1px solid #ccc;
     max-width: 95%;
   
+  
 }
   /* Search Produtos */
   .search-wrapper {
@@ -354,7 +360,7 @@ th {
     border: 1px solid #ccc;
     margin: 30px auto;
    padding: 15px;
-   max-width: 95%;
+
  
 }
 
@@ -545,3 +551,60 @@ footer {
     width: 100%;
   }
   
+
+  
+@media (max-width: 912px) {
+    .itemHeader {
+        display: none;
+    }
+    .qtdFracionadaHeader {
+        display: none;
+    }
+    .qtdFechadaHeader {
+        display: none;
+    }
+    .quantityClosed-cell {
+        display: none;
+    }
+    .quantityFractioned-cell {
+        display: none;
+    }
+    .index-cell {
+        display: none;
+    }
+
+    body {
+        
+    width: 912px;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+    background-color: #F2F2F2; /* Light gray background for a soft look */
+    color: #022327; /* Dark teal for readability */
+}
+
+
+
+.produtos-moldura{
+  
+    padding: 20px;
+    background-color: #e7e5e5; /* White background to maintain brightness */
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
+ 
+    border: 1px solid #ccc;
+   
+    width: 100%;
+  
+  
+}
+
+}
+@media (max-width: 768px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }}
