@@ -14,7 +14,7 @@
 
  <style>
     #logo {
-      width: 300px;
+      width: 350px;
       padding-top: 30px;
       padding-bottom: 20px;
       transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
@@ -170,7 +170,15 @@
 
 /* When screen is small or tablet size */
 @media (max-width: 912px) {
-    #bg-video, #bg-image {
+  
+   #logo {
+      width: 280px;
+      padding-top: 30px;
+      padding-bottom: 20px;
+      transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+    }
+  
+  #bg-video, #bg-image {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
@@ -184,6 +192,7 @@
   #bg-image {
     display: block !important;
   }
+
 }
 
 
