@@ -110,12 +110,44 @@ footer {
     bottom: 0;
     width: 100%;
   }
+
+
+ #bg-image {
+      display: none;
+    }
+
+/* When screen is small or tablet size */
+@media (max-width: 912px) {
+    #bg-video, #bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+
+  #bg-image {
+    display: block !important;
+  }
+}
+
+
   </style>
 </head>
 
 
 
 <body>
+
+
+
+ <img id="bg-image" src="/imagens/hlwn-mobile.png" alt="Background Image" />
+
+
+
+
+
   <div class="register-container">
     <h2>Registro</h2>
     <form id="registerForm">
