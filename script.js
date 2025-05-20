@@ -57,9 +57,9 @@ document.getElementById("hlwn").addEventListener("click", function() {
 // Auto-select default season on page load with delay
 window.addEventListener("load", () => {
   setTimeout(() => {
-      const juninoButton = document.getElementById("junino");
-      if (juninoButton) {
-          juninoButton.click();
+      const hlwnButton = document.getElementById("hlwn");
+      if (hlwnButton) {
+          hlwnButton.click();
       } else {
           console.error("Junino button not found!");
       }
