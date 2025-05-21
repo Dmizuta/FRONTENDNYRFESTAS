@@ -54,6 +54,9 @@ document.getElementById("hlwn").addEventListener("click", function() {
   handleSeasonSelection('halloween', this);
 });
 
+
+
+/*
 // Auto-select default season on page load with delay
 window.addEventListener("load", () => {
   setTimeout(() => {
@@ -65,7 +68,13 @@ window.addEventListener("load", () => {
       }
   }, 200);
 });
+*/
 
+// Auto-select default season on page load with delay
+window.addEventListener("load", () => {
+ document.getElementById("junino").click;
+    
+});
 
 /*
 // API URL for fetching product data
