@@ -56,7 +56,6 @@ document.getElementById("hlwn").addEventListener("click", function() {
 
 
 
-/*
 // Auto-select default season on page load with delay
 window.addEventListener("load", () => {
   setTimeout(() => {
@@ -67,13 +66,6 @@ window.addEventListener("load", () => {
           console.error("Junino button not found!");
       }
   }, 200);
-});
-*/
-
-// Auto-select default season on page load with delay
-window.addEventListener("load", () => {
- document.getElementById("junino").click;
-    
 });
 
 /*
