@@ -1777,6 +1777,49 @@ function populateModal(orderDetails) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+
+const form = document.getElementById('uploadForm');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  console.log('Submitting to:', URL_API);
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(`${URL_API}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    alert(result.message || 'Upload realizado com sucesso!');
+  } catch (error) {
+    console.error('Upload error:', error);
+    alert(`Erro ao enviar o arquivo: ${error.message}`);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+/*
   const form = document.getElementById('uploadForm');
 
   form.addEventListener('submit', async (e) => {
@@ -1798,9 +1841,11 @@ function populateModal(orderDetails) {
     }
   });
 
-
+*/
     // Call the function when the page loads
     loadCustomerName();
+
+    
 </script>
 
 <script src="script.js"></script>
