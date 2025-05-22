@@ -49,15 +49,15 @@ document.getElementById("carnaval").addEventListener("click", function() {
 document.getElementById("junino").addEventListener("click", function() {
   handleSeasonSelection('junino', this);
 });
-/*
+
 document.getElementById("hlwn").addEventListener("click", function() {
   handleSeasonSelection('halloween', this);
 });
-*/
 
+/*
 document.getElementById("hlwn").addEventListener("click", function() {
   alert("Em breve Halloween disponível! 🎃👻");
-});
+});*/
 
 
 // Auto-select default season on page load with delay
