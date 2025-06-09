@@ -151,8 +151,6 @@ filter:
         background-color: #a35c33;
         /* Darker shade */
     }
-
-
     #download {
         display: flex;
         align-items: center;
@@ -163,34 +161,49 @@ filter:
         background-color: #e7e5e5;
         border-radius: 8px;
         border: 1px solid #ccc;
-        margin: 2px auto;
+        margin: 1px auto;
+        
         /*padding: 10px 20px; /* Adjusted padding for better centering */
 
         padding-bottom: 10px;
         padding-left: 20px;
         padding-right: 20px;
 
-        height: 60px;
+        min-height: 70px; /* Altura mínima */
+height: auto;      /* Cresce conforme necessário */
+
         /* Ensure enough height */
     }
-
-    /*
-
-#download {
+/*
+    #download {
         display: flex;
-        align-items: center; 
+        align-items: center;
+        
+        justify-content: right;
+        
         max-width: 95%;
         background-color: #e7e5e5;
         border-radius: 8px;
         border: 1px solid #ccc;
         margin: 2px auto;
-        padding: 33px;
-        max-height: 45px;
+        
+padding-top: 20px;
+        padding-bottom: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        height: 60px;
+        
     }
 */
+#fest,#jun {
+    margin-right: 5px;
+}
 
     #lista {
-        margin: 0;
+        
+        margin-left: 0;
+        
     }
 
 
@@ -211,27 +224,48 @@ filter:
         cursor: pointer;
         margin-left: auto;
         flex-wrap: nowrap;
+    
+        /* Prevents excessive stretching */
+    }
+       #downloadButtonjun {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 160px;
+        /* Reduced width */
+        padding: 8px 12px;
+        /* Adjusted padding */
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 10px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        margin-left: auto;
+        flex-wrap: nowrap;
+        /* Prevents excessive stretching */
+    }
+   #downloadButtonfest {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 160px;
+        /* Reduced width */
+        padding: 8px 12px;
+        /* Adjusted padding */
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 10px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        margin-left: auto;
+        flex-wrap: nowrap;
         /* Prevents excessive stretching */
     }
 
-    /*
-#downloadButton {
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    max-width: 230px;
-    padding: 10px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 10px;
-    font-size: 16px;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    margin-left: auto;  
-}
-*/
     /* Style the image inside the button */
     .button-icon {
         width: 20px;
@@ -253,6 +287,28 @@ filter:
         margin-right: 10px;
         display: none;
     }
+       .spinnerjun {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+        display: none;
+    }
+       .spinnerfest {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+        display: none;
+    }
+
+
 
     /* Spinner keyframes */
     @keyframes spin {
@@ -704,22 +760,56 @@ filter:
 
 
     <div class="PAGE">
+       
 
         <div id="download">
+             <h1 id="lista">Downloads</h1>
 
-            <h1 id="lista">Lista de Produtos</h1>
+                <div id="fest">
+           
+
+            <button id="downloadButtonfest" class="buttonfest">
+                <span id="spinnerfest" class="spinner" style="display: none;"></span>
+                <img src="/imagens/download.png" alt="icon" class="button-icon">
+                <span id="buttonTextfest">Catálogo de Festas!</span>
+            </button>
+
+
+            <!-- Hidden download link -->
+            <a id="downloadLinkfest" href="https://drive.google.com/uc?export=download&id=1NxZXGRc8d5can_KlGtW4FTeT0YVbwGqS" download
+                style="display: none;"></a>
+</div>
+
+      
+    <div id="jun">
+           
+
+            <button id="downloadButtonjun" class="buttonjun">
+                <span id="spinnerjun" class="spinner" style="display: none;"></span>
+                <img src="/imagens/download.png" alt="icon" class="button-icon">
+                <span id="buttonTextjun">Catálogo Junino!</span>
+            </button>
+
+
+            <!-- Hidden download link -->
+            <a id="downloadLinkjun" href="https://drive.google.com/uc?export=download&id=1WeaP6tNUxgeMIBmB04lOdDNqVyDbVRvW" download
+                style="display: none;"></a>
+</div>
+
+      <div id="hlwn">
+            
 
             <button id="downloadButton" class="button">
                 <span id="spinner" class="spinner" style="display: none;"></span>
                 <img src="/imagens/download.png" alt="icon" class="button-icon">
-                <span id="buttonText">Catálogo!</span>
+                <span id="buttonText">Catálogo Halloween!</span>
             </button>
 
 
             <!-- Hidden download link -->
             <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1Bj8rucdFqBb_gpABdEBvkAQZ83QFzr5L" download
                 style="display: none;"></a>
-
+</div>
         
         </div>
 
@@ -957,6 +1047,51 @@ filter:
             }, 4000); // Adjust this delay as needed
         });
 
+           ////////////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('downloadButtonjun').addEventListener('click', function () {
+            // Get elements
+            const button = document.getElementById('downloadButtonjun');
+            const spinner = document.getElementById('spinnerjun');
+            const buttonText = document.getElementById('buttonTextjun');
+            const downloadLink = document.getElementById('downloadLinkjun');
+
+            // Show the spinner and reduce text opacity immediately
+            spinner.style.display = 'inline-block';
+            buttonText.classList.add('buttonTextHidden');
+
+            // Trigger the download immediately
+            downloadLink.click();
+
+            // You can simulate any task if you want the spinner to stay visible for a duration.
+            setTimeout(() => {
+                // Hide the spinner and restore text opacity after 5 seconds or the task duration
+                spinner.style.display = 'none';
+                buttonText.classList.remove('buttonTextHidden');
+            }, 4000); // Adjust this delay as needed
+        });
+
+         ////////////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('downloadButtonfest').addEventListener('click', function () {
+            // Get elements
+            const button = document.getElementById('downloadButtonfest');
+            const spinner = document.getElementById('spinnerfest');
+            const buttonText = document.getElementById('buttonTextfest');
+            const downloadLink = document.getElementById('downloadLinkfest');
+
+            // Show the spinner and reduce text opacity immediately
+            spinner.style.display = 'inline-block';
+            buttonText.classList.add('buttonTextHidden');
+
+            // Trigger the download immediately
+            downloadLink.click();
+
+            // You can simulate any task if you want the spinner to stay visible for a duration.
+            setTimeout(() => {
+                // Hide the spinner and restore text opacity after 5 seconds or the task duration
+                spinner.style.display = 'none';
+                buttonText.classList.remove('buttonTextHidden');
+            }, 4000); // Adjust this delay as needed
+        });
         /*
         document.getElementById('downloadButton').addEventListener('click', function() {
                 // Get elements
