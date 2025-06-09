@@ -151,175 +151,92 @@ filter:
         background-color: #a35c33;
         /* Darker shade */
     }
+    
+    /* Download Container */
     #download {
         display: flex;
-        align-items: center;
-        /* Centers content vertically */
-        justify-content: space-between;
-        /* Keeps title and button spaced */
+        align-items: center; /* Vertical centering */
+        justify-content: space-between; /* Space between buttons and heading */
         max-width: 95%;
         background-color: #e7e5e5;
         border-radius: 8px;
         border: 1px solid #ccc;
-        margin: 1px auto;
-        
-        /*padding: 10px 20px; /* Adjusted padding for better centering */
-
-        padding-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-
-        min-height: 70px; /* Altura mínima */
-height: auto;      /* Cresce conforme necessário */
-
-        /* Ensure enough height */
+        margin: 10px auto;
+        padding: 15px 20px;
+        min-height: 70px;
+        height: auto;
     }
-/*
-    #download {
+
+    #buttons-container {
+        display: flex;
+        align-items: center; /* Vertical centering for buttons */
+        gap: 10px; /* Space between buttons */
+    }
+
+    #fest, #jun, #hlwn {
+        display: flex;
+        align-items: center; /* Ensure buttons are vertically centered */
+    }
+
+  
+
+    /* Download Buttons */
+    #downloadButton, #downloadButtonjun, #downloadButtonfest {
         display: flex;
         align-items: center;
-        
-        justify-content: right;
-        
-        max-width: 95%;
-        background-color: #e7e5e5;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        margin: 2px auto;
-        
-padding-top: 20px;
-        padding-bottom: 10px;
-        padding-left: 5px;
-        padding-right: 5px;
-
-        height: 60px;
-        
-    }
-*/
-#fest,#jun {
-    margin-right: 5px;
-}
-
-    #lista {
-        
-        margin-left: 0;
-        
+        justify-content: center;
+        min-width: 180px; /* Fuller background */
+        padding: 10px 15px; /* Increased padding */
+        border-radius: 10px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        color: white;
+        white-space: nowrap;
     }
 
+    #downloadButtonfest {
+        background-color: #af4c96; /* Festas */
+    }
+
+    #downloadButtonjun {
+        background-color: #c99c59; /* Junino */
+    }
 
     #downloadButton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 160px;
-        /* Reduced width */
-        padding: 8px 12px;
-        /* Adjusted padding */
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 10px;
-        font-size: 16px;
-        text-align: center;
-        border: none;
-        cursor: pointer;
-        margin-left: auto;
-        flex-wrap: nowrap;
-    
-        /* Prevents excessive stretching */
-    }
-       #downloadButtonjun {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 160px;
-        /* Reduced width */
-        padding: 8px 12px;
-        /* Adjusted padding */
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 10px;
-        font-size: 16px;
-        text-align: center;
-        border: none;
-        cursor: pointer;
-        margin-left: auto;
-        flex-wrap: nowrap;
-        /* Prevents excessive stretching */
-    }
-   #downloadButtonfest {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 160px;
-        /* Reduced width */
-        padding: 8px 12px;
-        /* Adjusted padding */
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 10px;
-        font-size: 16px;
-        text-align: center;
-        border: none;
-        cursor: pointer;
-        margin-left: auto;
-        flex-wrap: nowrap;
-        /* Prevents excessive stretching */
+        background-color: #4CAF50; /* Halloween */
     }
 
-    /* Style the image inside the button */
+    /* Button Icon */
     .button-icon {
         width: 20px;
-        /* Adjust the width of the image */
         height: 20px;
-        /* Adjust the height of the image */
         margin-right: 11px;
-        /* Space between the image and text */
     }
 
-    /* Spinner animation */
+    /* Spinner */
     .spinner {
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
+        position: relative;
+        border: 3px solid #f3f3f3; /* Thicker border */
+        border-top: 3px solid #3498db;
         border-radius: 50%;
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
+        min-width: 20px; /* Prevent collapsing */
+        min-height: 20px;
+        box-sizing: border-box;
         animation: spin 1s linear infinite;
         margin-right: 10px;
         display: none;
-    }
-       .spinnerjun {
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
-        border-radius: 50%;
-        width: 16px;
-        height: 16px;
-        animation: spin 1s linear infinite;
-        margin-right: 10px;
-        display: none;
-    }
-       .spinnerfest {
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
-        border-radius: 50%;
-        width: 16px;
-        height: 16px;
-        animation: spin 1s linear infinite;
-        margin-right: 10px;
-        display: none;
+        vertical-align: middle;
     }
 
-
-
-    /* Spinner keyframes */
     @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
+
 
     /* Hidden text opacity during spinner animation */
     .buttonTextHidden {
@@ -761,56 +678,34 @@ padding-top: 20px;
 
     <div class="PAGE">
        
-
-        <div id="download">
-             <h1 id="lista">Downloads</h1>
-
+<div id="download">
+            <div id="buttons-container">
                 <div id="fest">
-           
-
-            <button id="downloadButtonfest" class="buttonfest">
-                <span id="spinnerfest" class="spinner" style="display: none;"></span>
-                <img src="/imagens/download.png" alt="icon" class="button-icon">
-                <span id="buttonTextfest">Catálogo de Festas!</span>
-            </button>
-
-
-            <!-- Hidden download link -->
-            <a id="downloadLinkfest" href="https://drive.google.com/uc?export=download&id=1NxZXGRc8d5can_KlGtW4FTeT0YVbwGqS" download
-                style="display: none;"></a>
-</div>
-
-      
-    <div id="jun">
-           
-
-            <button id="downloadButtonjun" class="buttonjun">
-                <span id="spinnerjun" class="spinner" style="display: none;"></span>
-                <img src="/imagens/download.png" alt="icon" class="button-icon">
-                <span id="buttonTextjun">Catálogo Junino!</span>
-            </button>
-
-
-            <!-- Hidden download link -->
-            <a id="downloadLinkjun" href="https://drive.google.com/uc?export=download&id=1WeaP6tNUxgeMIBmB04lOdDNqVyDbVRvW" download
-                style="display: none;"></a>
-</div>
-
-      <div id="hlwn">
+                    <button id="downloadButtonfest">
+                        <span id="spinnerfest" class="spinner" style="display: none;"></span>
+                        <img src="/imagens/download.png" alt="icon" class="button-icon">
+                        <span id="buttonTextfest">Catálogo de Festas!</span>
+                    </button>
+                    <a id="downloadLinkfest" href="https://drive.google.com/uc?export=download&id=1NxZXGRc8d5can_KlGtW4FTeT0YVbwGqS" download style="display: none;"></a>
+                </div>
+                <div id="jun">
+                    <button id="downloadButtonjun">
+                        <span id="spinnerjun" class="spinner" style="display: none;"></span>
+                        <img src="/imagens/download.png" alt="icon" class="button-icon">
+                        <span id="buttonTextjun">Catálogo Junino!</span>
+                    </button>
+                    <a id="downloadLinkjun" href="https://drive.google.com/uc?export=download&id=1WeaP6tNUxgeMIBmB04lOdDNqVyDbVRvW" download style="display: none;"></a>
+                </div>
+                <div id="hlwn">
+                    <button id="downloadButton">
+                        <span id="spinner" class="spinner" style="display: none;"></span>
+                        <img src="/imagens/download.png" alt="icon" class="button-icon">
+                        <span id="buttonText">Catálogo Halloween!</span>
+                    </button>
+                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1Bj8rucdFqBb_gpABdEBvkAQZ83QFzr5L" download style="display: none;"></a>
+                </div>
+            </div>
             
-
-            <button id="downloadButton" class="button">
-                <span id="spinner" class="spinner" style="display: none;"></span>
-                <img src="/imagens/download.png" alt="icon" class="button-icon">
-                <span id="buttonText">Catálogo Halloween!</span>
-            </button>
-
-
-            <!-- Hidden download link -->
-            <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1Bj8rucdFqBb_gpABdEBvkAQZ83QFzr5L" download
-                style="display: none;"></a>
-</div>
-        
         </div>
 
         <!-- Search Wrapper -->
