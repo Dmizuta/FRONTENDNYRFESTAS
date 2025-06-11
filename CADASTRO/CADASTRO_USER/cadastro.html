@@ -75,7 +75,7 @@
     border-radius: 10px; /* Rounded corners */
     cursor: pointer;
     width: 100%;
-    font-size: 1em; /* Larger font */
+    font-size: 1.35rem; /* Larger font */
     font-weight: 600; /* Bold */
     transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
@@ -492,10 +492,10 @@ form.addEventListener('submit', async (e) => {
     const loggedInUsername = localStorage.getItem('username');  // Get the logged-in username
 
     const formData = {
-        representante: document.getElementById('representante').value,
-        razaosocial: document.getElementById('razaosocial').value,
+        representante: document.getElementById('representante').value.toUpperCase(),
+        razaosocial: document.getElementById('razaosocial').value.toUpperCase(),
         cnpj: document.getElementById('cnpj').value,
-        endereco: document.getElementById('endereco').value,
+        endereco: document.getElementById('endereco').value.toUpperCase(),
         telefone: document.getElementById('telefone').value,
         email: document.getElementById('email').value,
         username: loggedInUsername,

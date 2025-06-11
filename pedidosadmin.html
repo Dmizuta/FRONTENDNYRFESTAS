@@ -28,7 +28,7 @@
     
     .action-btn {
         padding: 12px 25px;
-        font-size: 16px;
+        font-size: 1.2rem;
         font-weight: 500;
         border: 2px solid transparent; /* Default border */
         border-radius: 8px; /* Soft rounded corners */
@@ -57,7 +57,7 @@
         background-color: #f8f9fa; /* Light grey for "Fechar" */
         color: #333; /* Dark text */
         border: 2px solid #ccc; /* Light grey border */
-        font-size: 14px; /* Smaller text for close button */
+        font-size: 1.2rem; /* Smaller text for close button */
         padding: 8px 18px; /* Smaller padding */
         width: 120px; /* Smaller width */
         box-shadow: none; /* No shadow for close button */
@@ -77,18 +77,21 @@
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    /* Order row layout */
     .order-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 10px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        cursor: pointer; /* Make the row clickable */
-    }
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 1fr 0.8fr;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+   
     
     .order-details {
         display: flex;
@@ -167,7 +170,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
     
     .order-info {
@@ -247,13 +250,13 @@
         padding: 10px;
         background-color: #aaa;
         border-radius: 10px;
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     textarea {
         width: 100%;
         padding: 10px;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         border-radius: 4px;
         border: 1px solid #ccc;
         box-sizing: border-box;
@@ -302,7 +305,7 @@
     
     .edit-quantity {
         padding: 10px;
-        font-size: 1rem;
+        font-size: 1.3rem;
         border: 2px solid #007BFF; /* Optional: blue border */
         border-radius: 8px;
         width: 5rem; /* Adjust width if necessary */
@@ -310,12 +313,12 @@
     }
     
     .order-total {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
     
     .valores {
         color: white;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         font-weight: bold;
     }
     
@@ -335,7 +338,7 @@
     }
     
     .switch-label {
-        font-size: 16px;
+        font-size: 1.3rem;
         font-weight: bold;
         transition: color 0.3s;
     }
@@ -394,7 +397,7 @@
     
     /* Style for the label */
     .dropdown label {
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: #333;
         display: block;
@@ -405,7 +408,7 @@
     #ipi {
         width: 100%;
         padding: 8px;
-        font-size: 1rem;
+        font-size: 1.2rem;
         color: #333;
         background-color: #f0f0f0;
         border: 1px solid #ccc;
@@ -449,7 +452,7 @@
     #desc {
         width: 100%;
         padding: 8px;
-        font-size: 1rem;
+        font-size: 1.2rem;
         color: #333;
         background-color: #f0f0f0;
         border: 1px solid #ccc;
@@ -498,65 +501,99 @@
         border-radius: 25px;
     }
     
-    /* New Control Panel Styles */
+
+
+
+
+
+
+
+
+
+
     #control-panel {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
+    max-width: 95%;  
+    margin: 0 auto; /* <- This line centers it horizontally */
+    
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
 
-    #control-panel h3 {
-        margin: 0 0 15px 0;
-        font-size: 1.2rem;
-        color: #333;
-    }
+#control-panel h3 {
+    flex-basis: 100%;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
 
-    .filter-group {
-        display: flex;
-        align-items: center;
-        margin: 10px 0;
-    }
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-    .filter-group label {
-        margin-right: 10px;
-        font-weight: bold;
-        color: #555;
-    }
+#searchInput,
+#status-filter {
+    padding: 8px 12px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.3rem;
+}
 
-    #searchInput {
-        padding: 8px;
-        width: 250px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
+#order-sum {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #007BFF;
+}
 
-    #status-filter {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-        background-color: #fff;
-    }
+#uploadForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-    #order-sum {
-        margin-top: 15px;
-        font-weight: bold;
-        font-size: 1.2rem;
-        color: #007BFF;
-    }
 
-    /* Adjust .box for consistency */
-    .box {
-        max-width: 95%;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+#uploadForm input[type="file"] {
+    font-size: 1rem;
+    border: none;
+}
+
+#uploadForm button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#uploadForm button:hover {
+    background-color: #218838;
+}
+
+
+
+
+.linkfolder {
+
+    display: flex;
+    align-items: center; /* THIS centers vertically */
+    justify-content: left; /* This centers horizontally (optional) */  
+   
+
+}
+
+
 </style>
 
 <body>
@@ -584,14 +621,19 @@
 </nav>
 
 <div class="PAGE">
-    <h1>Meus Pedidos (ADMIN)</h1>
+    <h1>PEDIDOS (Admin)</h1>
     <div class="box">
         <!-- New Control Panel -->
         <div id="control-panel">
             <h3>Controle de Pedidos</h3>
+
+            
+
+
             <div class="filter-group">
                 <label for="searchInput">Pesquisar:</label>
                 <input type="text" id="searchInput" placeholder="Buscar por ID, vendedor, razão social...">
+                
             </div>
             <div class="filter-group">
                 <label for="status-filter">Status:</label>
@@ -603,8 +645,27 @@
                     <option value="3">Processado</option>
                 </select>
             </div>
+
+
             <div id="order-sum">Total: R$ 0,00</div>
+
+    
+<div class="linkfolder">
+<a id="link" href="https://drive.google.com/drive/folders/1fdOsBh2PVMJ8NaJsX0jFW0uPjDXPz6PA?usp=drive_link" target="_blank">
+  <img src="/imagens/folder.png" alt="Open Drive Folder" width="40" /> 
+</a>
+<p style="margin-left: 10px; font-size: x-large; color: #007BFF;">Pedidos e Boletos</p>
+</div>
+
+
+
+            <form id="uploadForm" enctype="multipart/form-data" method="POST">
+                <input type="file" name="file" />
+                <button type="submit">Upload status do pedido</button>
+              </form>
         </div>
+
+
 
         <div id="orders-container">
             <!-- Orders will be inserted here dynamically -->
@@ -634,6 +695,10 @@
                     <div class="order-info-row">
                         <span>Representante:</span>
                         <span id="representante"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Situação:</span>
+                        <span id="situacao"></span>
                     </div>
                 </div>
                 <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
@@ -818,20 +883,20 @@
         orders.forEach(order => {
             const total = parseFloat(order.total) || 0;
             const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
+            
+            
             const orderRow = `
-                <div class="order-row" data-id="${order.id}">
-                    <div class="order-details">
-                        <div><strong>ID:</strong> ${order.id}</div>
-                        <div><strong>Representante:</strong> ${order.representante}</div>
-                        <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-                        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-                        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                        <div class="status" style="color: ${status.color};">
-                            <strong>Status:</strong> ${status.text}
-                        </div>
-                    </div>
-                </div>
-            `;
+    <div class="order-row" data-id="${order.id}">
+        <div><strong>ID:</strong> ${order.id}</div>
+        <div><strong>Representante:</strong> ${order.representante.toUpperCase()}</div>
+        <div><strong>Razão Social:</strong> ${order.razaosocial.toUpperCase()}</div>
+        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+        <div style="color: ${status.color};"><strong>Status: ${status.text} </strong></div>
+    </div>
+`;
+
+            
             container.innerHTML += orderRow;
         });
     }
@@ -844,7 +909,7 @@
     
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     
@@ -873,8 +938,6 @@
 
 
 
-
-
 function populateModal(orderDetails) {
     document.getElementById('order-id').textContent = orderDetails.id;
     document.getElementById('razao-social').textContent = orderDetails.razaosocial;
@@ -882,7 +945,18 @@ function populateModal(orderDetails) {
     document.getElementById('email').textContent = orderDetails.email;
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
+    
 
+    // Fetch situacao (status info) from backend using pedidoweb
+    fetch(`${URL_API}/pedidostatus/${orderDetails.id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('situacao').textContent = data.status;
+        })
+        .catch(error => {
+            console.error('Erro ao buscar status do pedido:', error);
+            document.getElementById('situacao').textContent = 'Status não encontrado';
+        });
     
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
@@ -978,82 +1052,7 @@ function populateModal(orderDetails) {
 
 
 
-
-
-    /*
-    // Function to populate the modal with order details
-    function populateModal(orderDetails) {
-        document.getElementById('order-id').textContent = orderDetails.id;
-        document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-        document.getElementById('cnpj').textContent = orderDetails.cnpj;
-        document.getElementById('email').textContent = orderDetails.email;
-        document.getElementById('representante').textContent = orderDetails.representante;
-        document.getElementById('obs').textContent = orderDetails.observacoes;
-
-        const ipiDropdown = document.getElementById('ipi');
-        const ipiDisplay = document.getElementById('ipi-display');
-        if (orderDetails.ipi_tax) {
-            ipiDropdown.value = orderDetails.ipi_tax;
-        }
-        ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
-
-        const descDropdown = document.getElementById('desc');
-        const descDisplay = document.getElementById('desc-display');
-        const discount = document.querySelector('#desc');
-        if (orderDetails.desconto) {
-            descDropdown.value = orderDetails.desconto;
-        }
-        descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
-
-        const orderDetailsContent = document.getElementById('order-details-content');
-        let total = 0;
-        let ipiOrder = 0;
-
-        orderDetailsContent.innerHTML = '';
-
-        orderDetails.products.forEach((product, index) => {
-            const price = parseFloat(product.preco);
-            const quantity = parseInt(product.quantidade, 10);
-            const factor = parseFloat(product.ipi);
-            const ipiTax = parseFloat(orderDetails.ipi_tax);
-            const ipi = factor * ipiTax * price * quantity;
-            const productTotal = (price * quantity) + ipi;
-
-            function formatCurrency(value) {
-                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-            }
-            
-            const row = `
-                <tr data-product-id="${product.id}">
-                    <td>${index + 1}</td>
-                    <td>${product.codproduto}</td>
-                    <td>${product.descricao}</td>
-                    <td class="quantity">${quantity}</td>
-                    <td>${formatCurrency(price)}</td>
-                    <td>${formatCurrency(ipi)}</td>
-                    <td>${formatCurrency(productTotal)}</td>
-                    <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                    <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-                </tr>
-            `;  
-            orderDetailsContent.innerHTML += row;
-
-            total += productTotal;
-            ipiOrder += ipi;
-        });
-*/
-
-
-
-
-
-
-
-
-
-
-
-        function updateTotal() {
+    function updateTotal() {
             let discountValue = parseFloat(discount.value) || 0;
             let discountTotal = total * discountValue * (-1);
             let totalFinal = total * (1 - discountValue);
@@ -1078,6 +1077,13 @@ function populateModal(orderDetails) {
                 toggleButton.checked = true;
             }
         }
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
             button.addEventListener('click', async function () {
@@ -1109,7 +1115,7 @@ function populateModal(orderDetails) {
                     const newQuantity = parseInt(inputField.value, 10);
                     if (newQuantity && newQuantity > 0) {
                         try {
-                            const response = await fetch(`${URL_API}/editproduct/${productId}`, {
+                            const response = await fetch(`${URL_API}/editproduct-admin/${productId}`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ quantity: newQuantity })
@@ -1134,12 +1140,12 @@ function populateModal(orderDetails) {
                             }
 
                             quantityCell.textContent = newQuantity;
-                            row.cells[4].textContent = formatCurrency(chosenPrice);
-                            row.cells[5].textContent = formatCurrency(ipiValue);
-                            row.cells[6].textContent = formatCurrency(productTotal);
+                            row.cells[5].textContent = formatCurrency(chosenPrice);
+                            row.cells[6].textContent = formatCurrency(ipiValue);
+                            row.cells[7].textContent = formatCurrency(productTotal);
 
                             updateTotalPrice();
-                            window.location.reload();
+                          // window.location.reload();
                         } catch (error) {
                             alert('Error updating quantity');
                             console.error('Error updating quantity:', error);
@@ -1159,7 +1165,7 @@ function populateModal(orderDetails) {
             
             rows.forEach(row => {
                 const productTotal = parseFloat(
-                    row.cells[6].textContent
+                    row.cells[7].textContent
                         .replace('R$', '')
                         .trim()
                         .replace(/\./g, '')
@@ -1192,7 +1198,7 @@ function populateModal(orderDetails) {
     // Function to delete a product
     async function deleteProduct(productId, orderId) {
         try {
-            const response = await fetch(`${URL_API}/delete-product`, {
+            const response = await fetch(`${URL_API}/delete-product-admin`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ productId, orderId })
@@ -1203,6 +1209,7 @@ function populateModal(orderDetails) {
             }
     
             console.log(`Product with ID ${productId} deleted successfully.`);
+            alert('PRODUTO DELETADO COM SUCESSO.');
             fetchOrderDetails(orderId);
         } catch (error) {
             console.error('Error deleting product:', error);
@@ -1501,6 +1508,7 @@ function populateModal(orderDetails) {
     
                 if (submitResponse.ok) {
                     alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
+                    window.location.reload();
                 } else {
                     alert('Ocorreu um erro ao enviar o pedido.');
                     event.target.checked = false;
@@ -1520,6 +1528,7 @@ function populateModal(orderDetails) {
                         body: JSON.stringify({ orderId }),
                     });
                     alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
+                    window.location.reload();
                 } else {
                     alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
                     event.target.checked = false;
@@ -1671,12 +1680,13 @@ function populateModal(orderDetails) {
         const orderId = localStorage.getItem('currentOrderId');
     
         try {
-            const response = await fetch(`${URL_API}/update-desc`, {
+            const response = await fetch(`${URL_API}/update-desc-admin`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, discount })
             });
-    
+    console.log('DESCONTO', response);
+
             const data = await response.json();
             if (response.ok) {
                 alert(`Aplicado desconto de ${discount * 100}%`);
@@ -1695,7 +1705,7 @@ function populateModal(orderDetails) {
         const orderId = localStorage.getItem('currentOrderId');
     
         try {
-            const response = await fetch(`${URL_API}/update-ipi`, {
+            const response = await fetch(`${URL_API}/update-ipi-admin`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ orderId, newIPI })
@@ -1793,8 +1803,76 @@ function populateModal(orderDetails) {
         document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+/*
+
+const form = document.getElementById('uploadForm');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  console.log('Submitting to:', URL_API);
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(`${URL_API}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    alert(result.message || 'Upload realizado com sucesso!');
+  } catch (error) {
+    console.error('Upload error:', error);
+    alert(`Erro ao enviar o arquivo: ${error.message}`);
+  }
+});
+
+*/
+
+
+
+
+
+
+
+
+  const form = document.getElementById('uploadForm');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(`${URL_API}/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      alert(result.message || 'Upload realizado com sucesso!');
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao enviar o arquivo.');
+    }
+  });
+  
+
+
     // Call the function when the page loads
     loadCustomerName();
+
+    
 </script>
 
 <script src="script.js"></script>

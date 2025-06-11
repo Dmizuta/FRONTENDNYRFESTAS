@@ -43,7 +43,7 @@
 /* General button styles */
 .action-btn {
     padding: 10px 30px; /* Increased padding for a bigger button */
-    font-size: 1rem; /* Larger font size for a more sophisticated look */
+    font-size: 1.2rem; /* Larger font size for a more sophisticated look */
     font-weight: 600; /* Slightly bolder for emphasis */
     border: 2px solid transparent; /* Default border */
     border-radius: 12px; /* Softer rounded corners for a modern look */
@@ -152,7 +152,7 @@
     }
 
     .switch-label {
-        font-size: 16px;
+        font-size: 1.2rem;
         font-weight: bold;
         transition: color 0.3s;
     }
@@ -215,29 +215,25 @@
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    /* Order row layout */
+
+
+
     .order-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 10px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        cursor: pointer; /* Make the row clickable */
-    }
-    
-    .order-details {
-        display: flex;
-        flex: 1;
-        justify-content: space-between;
-    }
-    
-    .order-details div {
-        margin: 0 10px;
-        font-size: 1rem;color: #333;
-    }
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 3fr 1fr 1fr 0.8fr;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+   
+   
     
     /* Status styling */
     .status {
@@ -256,9 +252,7 @@
             align-items: flex-start;
         }
     
-        .order-details {
-            flex-direction: column;
-        }
+        
     }
     
     /* Modal Styling */
@@ -295,22 +289,7 @@ font-size: 1rem;
         padding: 10px;
     }
     
-    /*.close-btn {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        position: absolute;
-        top: 10px;
-        right: 25px;
-        border-color: #aaa;
-        cursor: pointer;
-    }
-    
-    .close-btn:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }*/
+
     
     #order-details-content {
         padding: 10px;
@@ -329,7 +308,7 @@ font-size: 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
     
     .order-info {
@@ -421,14 +400,14 @@ font-size: 1rem;
     padding: 10px;
     background-color: #aaa;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
 
   textarea {
   width: 100%;
   padding: 10px;
-  font-size: 1rem;
+  font-size: 1.3rem;
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -491,7 +470,7 @@ font-size: 1rem;
 
 .edit-quantity {
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.3rem;
     border: 2px solid #007BFF; /* Optional: blue border */
     border-radius: 8px;
     width: 5rem; /* Adjust width if necessary */
@@ -499,12 +478,12 @@ font-size: 1rem;
 }
 
 .order-total{
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .valores{
         color:white;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         font-weight: bold;
     }
 
@@ -529,7 +508,7 @@ font-size: 1rem;
     
     /* Style for the label */
     .dropdown label {
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: #333;
         display: block;
@@ -540,7 +519,7 @@ font-size: 1rem;
     #ipi {
         width: 100%;
         padding: 8px;
-        font-size: 1rem;
+        font-size: 1.2rem;
         color: #333;
         background-color: #f0f0f0;
         border: 1px solid #ccc;
@@ -592,12 +571,13 @@ font-size: 1rem;
 
 
 
+
  /* Style for the select dropdown */
  #desc {
     
         width: 100%;
         padding: 8px;
-        font-size: 1rem;
+        font-size: 1.2rem;
         color: #333;
         background-color: #f0f0f0;
         border: 1px solid #ccc;
@@ -651,19 +631,6 @@ font-size: 1rem;
 
 
 
-        /* Style for the select dropdown */
-        #desc {
-        width: 100%;
-        padding: 8px;
-        font-size: 1rem;
-        color: #333;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        transition: border-color 0.3s ease;
-    }
-
 
 
 
@@ -709,9 +676,35 @@ font-size: 1rem;
     border-radius: 25px;
 
 
+
+
+
+
+
 }
     
+   /* .link {
+    display: flex;
+    justify-content: center;
+    
+    background-color: #c9c9c9;
+}*/
 
+
+
+.linkfolder {
+
+    display: flex;
+    align-items: center; /* THIS centers vertically */
+    justify-content: baseline; /* This centers horizontally (optional) */
+  /*height: 200px; /* or whatever height your container is */
+    max-width: 95%;
+    background-color: #e7e5e5;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 30px auto;
+   padding: 15px;
+}
 
     </style>
     
@@ -757,6 +750,23 @@ font-size: 1rem;
 <div class="PAGE">
 
     <h1>Meus Pedidos</h1>
+
+
+    
+<div class="linkfolder">
+<a id="link" href="https://drive.google.com/drive/folders/1fdOsBh2PVMJ8NaJsX0jFW0uPjDXPz6PA?usp=drive_link" target="_blank">
+  <img src="/imagens/folder.png" alt="Open Drive Folder" width="40" /> 
+</a>
+<p style="margin-left: 10px; font-size: x-large; color: #007BFF;">Pedidos e Boletos</p>
+</div>
+
+
+
+
+
+
+
+
     
     <div class="box">
     
@@ -764,6 +774,18 @@ font-size: 1rem;
     <input type="text" id="searchInput" placeholder="Buscar por...">
     </div>
     
+
+
+
+
+
+
+
+
+
+
+
+
     <div id="orders-container">
     
     
@@ -796,6 +818,10 @@ font-size: 1rem;
                     <div class="order-info-row">
                         <span>Representante:</span>
                         <span id="representante"></span>
+                    </div>
+                    <div class="order-info-row">
+                        <span>Situação:</span>
+                        <span id="situacao"></span>
                     </div>
                 </div>
                 <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
@@ -1063,6 +1089,19 @@ const statusMap = {
 // Get status text and color
 const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
 
+
+const orderRow = `
+    <div class="order-row" data-id="${order.id}">
+        <div><strong>ID:</strong> ${order.id}</div>
+        <div><strong>Representante:</strong> ${order.representante.toUpperCase()}</div>
+        <div><strong>Razão Social:</strong> ${order.razaosocial.toUpperCase()}</div>
+        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+        <div style="color: ${status.color};"><strong>Status: ${status.text} </strong></div>
+    </div>
+`;
+
+/*
 const orderRow = `
     <div class="order-row" data-id="${order.id}">
         <div class="order-details">
@@ -1076,7 +1115,7 @@ const orderRow = `
             </div>
         </div>
     </div>
-`;
+`;*/
 
 container.innerHTML += orderRow;
 
@@ -1206,6 +1245,17 @@ function populateModal(orderDetails) {
     document.getElementById('representante').textContent = orderDetails.representante;
     document.getElementById('obs').textContent = orderDetails.observacoes;
 
+     // Fetch situacao (status info) from backend using pedidoweb
+     fetch(`${URL_API}/pedidostatus/${orderDetails.id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('situacao').textContent = data.status;
+        })
+        .catch(error => {
+            console.error('Erro ao buscar status do pedido:', error);
+            document.getElementById('situacao').textContent = 'Status não encontrado';
+        });
+    
     
     // Get IPI dropdown and display elements
     const ipiDropdown = document.getElementById('ipi');
@@ -1299,120 +1349,6 @@ function populateModal(orderDetails) {
     });
 
 
-/*
-
-// Function to populate the modal with order details
-function populateModal(orderDetails) {
-    // Update general order information in the modal
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-    document.getElementById('email').textContent = orderDetails.email;
-    document.getElementById('representante').textContent = orderDetails.representante;
-    document.getElementById('obs').textContent = orderDetails.observacoes;
-
-
-
-
-
-
-    // Get IPI dropdown and display elements
-    const ipiDropdown = document.getElementById('ipi');
-    const ipiDisplay = document.getElementById('ipi-display');
-
-    // Set the IPI dropdown value
-    if (orderDetails.ipi_tax) {
-        ipiDropdown.value = orderDetails.ipi_tax;
-    }
-  
-    // Update products table and calculate total
-    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
-
-
-
-
-
-    const descDropdown = document.getElementById('desc');
-    const descDisplay = document.getElementById('desc-display');
-   // Select the discount dropdown element
-   const discount = document.querySelector('#desc');
-    
-
-   if (orderDetails.desconto !== undefined && orderDetails.desconto !== null) {
-    descDropdown.value = orderDetails.desconto;
-    } else {
-        descDropdown.value = 0; // Ensure 0 is set when no discount is provided
-    }
-
-
-     // Set the DESC dropdown value
-     //if (orderDetails.desconto) {
-      //  descDropdown.value = orderDetails.desconto;}
-  
-        // Update desc
-
-
-
-    descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
-
-
-
-
-
-
-    const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0;
-    let ipiOrder = 0;
-
-    // Clear existing content
-    orderDetailsContent.innerHTML = '';
-
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco);
-        const quantity = parseInt(product.quantidade, 10);
-        const factor = parseInt(product.ipi);
-        const ipiTax = parseFloat(orderDetails.ipi_tax);
-        const ipi = factor * ipiTax * price * quantity;
-        const productTotal = (price * quantity) + ipi;
-        console.log('Total de produtos:',productTotal);
-
-
-
-    // Function to format numbers as currency (Brazilian Real - R$)
-    function formatCurrency(value) {
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-    }
-
-
-
-        const row = `
-            <tr data-product-id="${product.id}">
-                <td>${index + 1}</td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td class="quantity">${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(ipi)}</td>
-                <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-            </tr>
-        `;  
-
-        orderDetailsContent.innerHTML += row;
-
-        total += productTotal;
-        
-                
-        ipiOrder += ipi;
-
-        total2 = total - ipiOrder;
-       
-
-        console.log('IPI VALUE:',ipiOrder);
-    });
-
-*/
 
     // Function to update total with discount
     function updateTotal() {
@@ -1461,9 +1397,141 @@ function populateModal(orderDetails) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
+    button.addEventListener('click', async function () {
+        const row = this.closest('tr');
+        const orderId = localStorage.getItem('currentOrderId');
+        const quantityCell = row.querySelector('.quantity');
+        const productId = row.getAttribute('data-product-id');
+        const codproduto = row.cells[2].textContent.trim(); // Assuming codproduto is in column 3 (index 2)
+        const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
 
+        // Fetch the current order status to determine if it's editable
+        const requestData = { orderId };
+        console.log("currentOrderId:", orderId);
 
+        try {
+            const response = await fetch(`${URL_API}/orderStatus`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            });
 
+            if (!response.ok) {
+                throw new Error(`Failed to fetch order status: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            const orderStatus = data.status;
+            console.log("Order Status:", orderStatus);
+
+            if (orderStatus === 2 || orderStatus === 3) {
+                alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
+                return;
+            }
+
+            // Create editable input field
+            const inputField = document.createElement('input');
+            inputField.type = 'number';
+            inputField.value = currentQuantity;
+            inputField.classList.add('edit-quantity');
+
+            // Add save button
+            const saveButton = document.createElement('button');
+            saveButton.textContent = 'Salvar';
+            saveButton.classList.add('save-quantity-btn');
+
+            // Clear quantity cell and append input and button
+            quantityCell.innerHTML = '';
+            quantityCell.appendChild(inputField);
+            quantityCell.appendChild(saveButton);
+            inputField.focus();
+
+            // Add 'Enter' key support
+            inputField.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') saveButton.click();
+            });
+
+            saveButton.addEventListener('click', async function () {
+                const newQuantity = parseInt(inputField.value, 10);
+                if (!newQuantity || newQuantity <= 0) {
+                    alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
+                    return;
+                }
+
+                try {
+                    // Fetch cxfracionada using codproduto
+                    const productResponse = await fetch(`${URL_API}/product-buy/${codproduto}`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    if (!productResponse.ok) {
+                        throw new Error('Failed to fetch product details');
+                    }
+
+                    const productData = await productResponse.json();
+                    const product = Array.isArray(productData) ? productData[0] : productData;
+                    const cxfracionada = product.cxfracionada;
+
+                    // Validate minimum quantity
+                    if (newQuantity < cxfracionada) {
+                        alert('QUANTIDADE MÍNIMA NECESSÁRIA!');
+                        inputField.value = currentQuantity; // Reset to original
+                        return;
+                    }
+
+                    // Update product quantity
+                    const updateResponse = await fetch(`${URL_API}/editproduct/${productId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ quantity: newQuantity })
+                    });
+
+                    if (!updateResponse.ok) {
+                        throw new Error('Failed to update quantity');
+                    }
+
+                    const updateData = await updateResponse.json();
+                    const { cxfechada, precofechada, precofrac, ipi, ipiTax = 0 } = updateData.updatedProduct;
+
+                    // Update quantity in table
+                    quantityCell.textContent = newQuantity;
+
+                    // Calculate updated values
+                    const chosenPrice = newQuantity >= cxfechada ? precofechada : precofrac;
+                    const ipiValue = ipi * ipiTax * chosenPrice * newQuantity;
+                    const productTotal = chosenPrice * newQuantity + ipiValue;
+
+                    // Format currency function
+                    function formatCurrency(value) {
+                        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                    }
+
+                    // Update table row (adjusted for image column)
+                    row.cells[5].textContent = formatCurrency(chosenPrice); // Price (index 5)
+                    row.cells[6].textContent = formatCurrency(ipiValue);    // IPI (index 6)
+                    row.cells[7].textContent = formatCurrency(productTotal); // Subtotal (index 7)
+
+                    // Update modal totals
+                    updateTotalPrice();
+
+                } catch (error) {
+                    alert('Erro ao atualizar quantidade');
+                    console.error('Error updating quantity:', error);
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching order status:', error);
+            alert('Ocorreu um erro ao verificar o status do pedido. Tente novamente.');
+        }
+    });
+});
+/*
 
         // Add event listeners for edit buttons
         document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
@@ -1498,7 +1566,7 @@ function populateModal(orderDetails) {
                     const orderStatus = data.status; // Adjust based on backend response format
                     console.log("Order Status:", orderStatus);
         
-                    if (orderStatus === 2) {
+                    if (orderStatus === 2 || orderStatus === 3) {
                         alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
                         return; // Prevent further execution
                     }
@@ -1587,12 +1655,13 @@ function populateModal(orderDetails) {
 
 
                                 // Update the total for this row
-                                row.cells[4].textContent = formatCurrency(chosenPrice);
-                                row.cells[5].textContent = formatCurrency(ipiValue);
-                                row.cells[6].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
+                                row.cells[5].textContent = formatCurrency(chosenPrice);
+                                row.cells[6].textContent = formatCurrency(ipiValue);
+                                row.cells[7].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
         
                                 // Update the total price in the modal
                                 //update();
+                                //window.location.reload();
                                 updateTotalPrice();
         
                                
@@ -1613,7 +1682,7 @@ function populateModal(orderDetails) {
         });
         
 
-
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1634,7 +1703,7 @@ function updateTotalPrice() {
 
 
                 const productTotal = parseFloat(
-    row.cells[6].textContent
+    row.cells[7].textContent
 
         .replace('R$', '')
         .trim()
@@ -1665,45 +1734,6 @@ function updateTotalPrice() {
 
 
 
-
-/*
-// Function to update the total price in the modal
-function updateTotalPrice() {
-    const rows = document.querySelectorAll('#order-details-content tr');
-    let total = 0; // Starting with an initial value of 1000
-    
-    rows.forEach(row => {
-
-
-        const productTotal = parseFloat(
-    row.cells[6].textContent
-        .replace('R$', '')
-        .trim()
-        .replace(/\./g, '') // Remove ALL dots
-        .replace(',', '.')  // Convert decimal separator
-);
-   
-
-total =  total += productTotal;
-
-    });
-
-    let discountTotal = total * discountValue;
-let totalFinal = total * (1 - discountValue);
-
-
-
-   // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
- 
-                
-document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
- document.getElementById('total-value').textContent = formatCurrency(total);
-}
-
-*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1751,7 +1781,7 @@ async function deleteProduct(productId, orderId) {
         const orderStatus = statusData.status; // Adjust based on backend response format
         console.log("Order Status:", orderStatus);
 
-        if (orderStatus === 2) {
+        if (orderStatus === 2 || orderStatus === 3) {
             alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
             return; // Stop further execution if status doesn't allow editing
         }
@@ -2162,6 +2192,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
 
             if (submitResponse.ok) {
                 alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
+                window.location.reload();
             } else {
                 alert('Ocorreu um erro ao enviar o pedido.');
                 event.target.checked = false; // Reset the toggle switch on error
@@ -2185,6 +2216,7 @@ document.getElementById("toggleButton").addEventListener("change", async (event)
                 });
 
                 alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
+                window.location.reload();
             } else {
                 alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
                 event.target.checked = false; // Reset the toggle switch if revert isn't allowed

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYR Festas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
     <!-- <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">-->
 
     <!--
@@ -20,25 +21,7 @@
 
 
 <style>
-    .icon-button img {
-        width: 50px;
-        /* Ajuste o tamanho conforme necessário */
-        height: auto;
-        /* Mantém a proporção */
-        object-fit: contain;
-        /* Mantém a proporção da imagem */
-        margin-top: -7px;
-        /* Ajuste o valor conforme necessário */
-    }
 
-
-    /* Estilo específico para os botões de ícone 
-.icon-button {
-    background: none; 
-    border: none; 
-    padding: 0; 
-    cursor: pointer; 
-}*/
 
 
     /* Para garantir que o estilo do botão de ícone tenha prioridade */
@@ -112,7 +95,7 @@ filter:
 
     /* Estilo para as imagens dos ícones */
     .icons img {
-        width: 2.1rem;
+        width: 2.4rem;
         transition: transform 0.2s ease;
         cursor: pointer;
         position: relative;
@@ -168,119 +151,92 @@ filter:
         background-color: #a35c33;
         /* Darker shade */
     }
-
-
+    
+    /* Download Container */
     #download {
         display: flex;
-        align-items: center;
-        /* Centers content vertically */
-        justify-content: space-between;
-        /* Keeps title and button spaced */
+        align-items: center; /* Vertical centering */
+        justify-content: space-between; /* Space between buttons and heading */
         max-width: 95%;
         background-color: #e7e5e5;
         border-radius: 8px;
         border: 1px solid #ccc;
-        margin: 2px auto;
-        /*padding: 10px 20px; /* Adjusted padding for better centering */
-
-        padding-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-
-        height: 60px;
-        /* Ensure enough height */
+        margin: 10px auto;
+        padding: 15px 20px;
+        min-height: 70px;
+        height: auto;
     }
 
-    /*
-
-#download {
+    #buttons-container {
         display: flex;
-        align-items: center; 
-        max-width: 95%;
-        background-color: #e7e5e5;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        margin: 2px auto;
-        padding: 33px;
-        max-height: 45px;
-    }
-*/
-
-    #lista {
-        margin: 0;
+        align-items: center; /* Vertical centering for buttons */
+        gap: 10px; /* Space between buttons */
     }
 
+    #fest, #jun, #hlwn {
+        display: flex;
+        align-items: center; /* Ensure buttons are vertically centered */
+    }
 
-    #downloadButton {
+  
+
+    /* Download Buttons */
+    #downloadButton, #downloadButtonjun, #downloadButtonfest {
         display: flex;
         align-items: center;
         justify-content: center;
-        max-width: 160px;
-        /* Reduced width */
-        padding: 8px 12px;
-        /* Adjusted padding */
-        background-color: #4CAF50;
-        color: white;
+        min-width: 180px; /* Fuller background */
+        padding: 10px 15px; /* Increased padding */
         border-radius: 10px;
         font-size: 16px;
         text-align: center;
         border: none;
         cursor: pointer;
-        margin-left: auto;
-        flex-wrap: nowrap;
-        /* Prevents excessive stretching */
+        color: white;
+        white-space: nowrap;
     }
 
-    /*
-#downloadButton {
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    max-width: 230px;
-    padding: 10px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 10px;
-    font-size: 16px;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    margin-left: auto;  
-}
-*/
-    /* Style the image inside the button */
+    #downloadButtonfest {
+        background-color: #af4c96; /* Festas */
+    }
+
+    #downloadButtonjun {
+        background-color: #c99c59; /* Junino */
+    }
+
+    #downloadButton {
+        background-color: #4CAF50; /* Halloween */
+    }
+
+    /* Button Icon */
     .button-icon {
         width: 20px;
-        /* Adjust the width of the image */
         height: 20px;
-        /* Adjust the height of the image */
         margin-right: 11px;
-        /* Space between the image and text */
     }
 
-    /* Spinner animation */
+    /* Spinner */
     .spinner {
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #3498db;
+        position: relative;
+        border: 3px solid #f3f3f3; /* Thicker border */
+        border-top: 3px solid #3498db;
         border-radius: 50%;
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
+        min-width: 20px; /* Prevent collapsing */
+        min-height: 20px;
+        box-sizing: border-box;
         animation: spin 1s linear infinite;
         margin-right: 10px;
         display: none;
+        vertical-align: middle;
     }
 
-    /* Spinner keyframes */
     @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
+
 
     /* Hidden text opacity during spinner animation */
     .buttonTextHidden {
@@ -323,6 +279,348 @@ filter:
 }*/
 
 
+
+
+    /* Modal Styles - Improvement */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+    }
+
+    /* Modal Content - Improvement */
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: 10vh auto;
+        padding: 25px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        overflow-y: auto; /* Enable vertical scrolling if needed */
+    }
+
+    /* Close Button - Repositioned */
+    #closeModalBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+        background: none;
+        border: none;
+        width: auto;
+        height: auto;
+        z-index: 1001;
+    }
+
+    #closeModalBtn:hover {
+        color: #BF6734;
+    }
+
+    /* Modal Stage One */
+    .modal-stage-one {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Product Image Container */
+    .prodimage {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .prodimage img {
+        max-width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+    /* Product Info Styling */
+    .product-info, .price1-info, .price2-info, .cxfechada-info, .cxfracionada-info {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        z-index: 1000;
+    }
+
+    /* Quantity and Stock Controls */
+    #qtd-estoque {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .quantity {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .quantity input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #BF6734;
+        border-radius: 8px;
+        font-size: 1.2rem;
+    }
+
+    .stock-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    /* Modal Buttons */
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    .modal-buttons button {
+        margin-top: 10px;
+        padding: 12px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 95%;
+            margin: auto;
+            padding: 15px;
+            max-height: 100vh;
+        }
+
+        #qtd-estoque {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .quantity {
+            width: 100%;
+        }
+
+        .stock-control {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-content {
+            padding: 10px;
+            margin: 2vh auto;
+        }
+
+        #codprod {
+            font-size: 1.2rem;
+        }
+
+        #descrip, #preco1, #preco2, #CxFechada, #CxFracionada {
+            font-size: 1rem;
+        }
+
+        .quantity input {
+            font-size: 1rem;
+        }
+    }
+
+    /* Expanded Image Modal */
+    .expanded-modal {
+        display: none;
+        position: fixed;
+        z-index: 10001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+    }
+
+    .expanded-modal-content {
+        position: relative;
+        margin: auto;
+        width: 90%;
+        max-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanded-image-container img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .expanded-image-container img:hover {
+        transform: scale(1);
+
+    }
+
+    .close-expanded {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 10002;
+    }
+
+    .close-expanded:hover {
+        color: #BF6734;
+    }
+
+    /* Image container styling */
+    .image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+        overflow: visible;
+    }
+
+    .prodimage {
+        text-align: center;
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .prodimage img {
+        max-width: 100%;
+        max-height: 250px;
+        object-fit: contain;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    /* Expand image button */
+    .expand-button {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1002;
+        transition: 0.3s ease;
+    }
+
+    .expand-button:hover {
+        background: rgba(191, 103, 52, 0.8);
+    }
+
+    /* Expanded Image Modal */
+    .expanded-modal {
+        display: none;
+        position: fixed;
+        z-index: 10001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    .expanded-modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+    }
+
+    .expanded-image-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanded-image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+/*
+
+     .close-expanded {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 10002;
+    }*/
+    .close-expanded {
+        position: absolute;
+        top: 20px;
+        right: 100px;
+        font-size: 48px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10002;
+    }
+
+    .close-expanded:hover {
+        background: rgba(191, 103, 52, 0.8);
+    }
+
+    /* Image zoom and pan */
+    .expanded-image-container {
+        overflow: hidden;
+    }
 
 </style>
 
@@ -376,71 +674,70 @@ filter:
                 <span class="tooltip">Junino</span>
             </button>
         </div>
+
+        
+           
         <div class="icon-wrapper">
             <button id="hlwn" class="icon-button" aria-label="Filtrar produtos de Halloween">
                 <img src="/imagens/halloween.png" alt="Halloween">
                 <span class="tooltip">Halloween</span>
             </button>
         </div>
+         
+
+
     </div>
 
 
 
     <div class="PAGE">
-
-
-
-
-
-
-
-
-
-
-
-
-        <div id="download">
-
-            <h1 id="lista">Lista de Produtos</h1>
-
-
-
-
-
-
-            <button id="downloadButton" class="button">
-                <span id="spinner" class="spinner" style="display: none;"></span>
-                <img src="/imagens/download.png" alt="icon" class="button-icon">
-                <span id="buttonText">Catálogo!</span>
-            </button>
-
-
-
-            <!-- Hidden download link -->
-            <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1EL3Hkmk-QRGrDrd71YCeWbscwjgYhkGq" download
-                style="display: none;"></a>
-
-
-
+       
+<div id="download">
+            <div id="buttons-container">
+                <div id="fest">
+                    <button id="downloadButtonfest">
+                        <span id="spinnerfest" class="spinner" style="display: none;"></span>
+                        <img src="/imagens/download.png" alt="icon" class="button-icon">
+                        <span id="buttonTextfest">Catálogo de Festas!</span>
+                    </button>
+                    <a id="downloadLinkfest" href="https://drive.google.com/uc?export=download&id=1NxZXGRc8d5can_KlGtW4FTeT0YVbwGqS" download style="display: none;"></a>
+                </div>
+                <div id="jun">
+                    <button id="downloadButtonjun">
+                        <span id="spinnerjun" class="spinner" style="display: none;"></span>
+                        <img src="/imagens/download.png" alt="icon" class="button-icon">
+                        <span id="buttonTextjun">Catálogo Junino!</span>
+                    </button>
+                    <a id="downloadLinkjun" href="https://drive.google.com/uc?export=download&id=1P4YPtVoQl5KEYJzFE_MGYFc6hxFmQM6M" download style="display: none;"></a>
+                </div>
+                <div id="hlwn">
+                    <button id="downloadButton">
+                        <span id="spinner" class="spinner" style="display: none;"></span>
+                        <img src="/imagens/download.png" alt="icon" class="button-icon">
+                        <span id="buttonText">Catálogo Halloween!</span>
+                    </button>
+                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=103rFyb4vYjTItYxL4qAvALWLa_cQQ5w1" download style="display: none;"></a>
+                </div>
+            </div>
+            
         </div>
-
 
         <!-- Search Wrapper -->
         <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder=" Buscar por..." oninput="searchProducts()">                            
+            <input type="text" id="searchInput" placeholder=" Buscar por cód. ou descrição do produto..." oninput="searchProducts()">                            
         </div>
 
         <div class="produtos-moldura">
             <table id="productTable">
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th class="itemHeader">Item</th>
                         <th>Foto do produto</th>
                         <th>Código do produto</th>
                         <th>Descrição do produto</th>
-                        <th>Quantidade cx fechada</th>
+                        <th class="qtdFechadaHeader">Quantidade cx fechada</th>
                         <th>Preço de cx fechada</th>
-                        <th>Quantidade cx fracionada</th>
+                        <th class="qtdFracionadaHeader">Quantidade cx fracionada</th>
                         <th>Preço cx fracionada</th>
                         <th>Adicionar ao pedido</th>
                     </tr>
@@ -462,8 +759,10 @@ filter:
                 <span class="close" id="closeModalBtn">×</span>
 
                 <div class="modal-stage-one">
-                    <div class="prodimage">
-                        <img src="https://placehold.co/150" alt="Product Image">
+                    <div class="image-container">
+                        <div class="prodimage">
+                            <img src="https://placehold.co/150" alt="Product Image" id="prodImage">
+                        </div>
                     </div>
 
                     <div class="product-info">
@@ -488,26 +787,17 @@ filter:
                     </div>
 
                     <div class="modal-buttons">
-
-
-
-
-
                         <div id="qtd-estoque">
-
                             <div class="quantity">
-                                <input type="number" id="quantity" name="quantity" min="1" value="">
+                                <input type="number" id="quantity" name="quantity" min="1" value="" placeholder="Quantidade">
                             </div>
 
                             <!-- Stock Checkbox (hidden by default) -->
-                            <div id="chkbxestoque" class="stock-control" style="display: none; margin-top: 10px;">
+                            <div id="chkbxestoque" class="stock-control" style="display: none;">
                                 <input type="checkbox" id="stockCheckbox" name="stockCheckbox">
                                 <label for="stockCheckbox">Em Estoque</label>
                             </div>
-
-
                         </div>
-
 
                         <button id="addButton">Adicionar</button>
                         <button id="cancelButton">Cancelar</button>
@@ -516,61 +806,15 @@ filter:
             </div>
         </div>
 
-
-
-
-        <!-- Modal -->
-
-
-        <!-- 
- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModalBtn">&times;</span>
-        
-        <div class="modal-stage-one">
-
-            <div class="prodimage">
-            <img src="https://placehold.co/150" alt="Product Image">
-            </div>
-            
-            <div class="product-info">
-                <h3 id="codprod"></h3>
-                <p id="descrip"></p>
-            </div>
-
-            <div  class="price1-info">
-                <p id="preco1"><strong></strong></p>
-            </div>
-
-            <div  class="price2-info">
-                <p id="preco2"><strong></strong></p>
-            </div>
-
-            <div  class="cxfechada-info">
-                <p id="CxFechada"><strong></strong></p>
-            </div>
-                
-            <div  class="cxfracionada-info">
-                <p id="CxFracionada"><strong></strong></p>
-            </div>
-      
-            
-            
-            <div class="modal-buttons">
-               <label for="quantity">Quantity:</label> 
-                
-               <div class="quantity">
-               <input type="number" id="quantity" name="quantity" min="1" value="">
-               </div> 
-               <button id="addButton">Adicionar</button>
-                <button id="cancelButton">Cancelar</button>
+        <!-- Expanded Image Modal -->
+        <div id="expandedImageModal" class="expanded-modal">
+            <div class="expanded-modal-content">
+                <span class="close-expanded" id="closeExpandedBtn">×</span>
+                <div class="expanded-image-container">
+                    <img src="" id="expandedImage" alt="Imagem ampliada do produto">
+                </div>
             </div>
         </div>
-        
-    </div>
-</div>
-
--->
 
     </div>
 
@@ -712,6 +956,51 @@ filter:
             }, 4000); // Adjust this delay as needed
         });
 
+           ////////////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('downloadButtonjun').addEventListener('click', function () {
+            // Get elements
+            const button = document.getElementById('downloadButtonjun');
+            const spinner = document.getElementById('spinnerjun');
+            const buttonText = document.getElementById('buttonTextjun');
+            const downloadLink = document.getElementById('downloadLinkjun');
+
+            // Show the spinner and reduce text opacity immediately
+            spinner.style.display = 'inline-block';
+            buttonText.classList.add('buttonTextHidden');
+
+            // Trigger the download immediately
+            downloadLink.click();
+
+            // You can simulate any task if you want the spinner to stay visible for a duration.
+            setTimeout(() => {
+                // Hide the spinner and restore text opacity after 5 seconds or the task duration
+                spinner.style.display = 'none';
+                buttonText.classList.remove('buttonTextHidden');
+            }, 4000); // Adjust this delay as needed
+        });
+
+         ////////////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('downloadButtonfest').addEventListener('click', function () {
+            // Get elements
+            const button = document.getElementById('downloadButtonfest');
+            const spinner = document.getElementById('spinnerfest');
+            const buttonText = document.getElementById('buttonTextfest');
+            const downloadLink = document.getElementById('downloadLinkfest');
+
+            // Show the spinner and reduce text opacity immediately
+            spinner.style.display = 'inline-block';
+            buttonText.classList.add('buttonTextHidden');
+
+            // Trigger the download immediately
+            downloadLink.click();
+
+            // You can simulate any task if you want the spinner to stay visible for a duration.
+            setTimeout(() => {
+                // Hide the spinner and restore text opacity after 5 seconds or the task duration
+                spinner.style.display = 'none';
+                buttonText.classList.remove('buttonTextHidden');
+            }, 4000); // Adjust this delay as needed
+        });
         /*
         document.getElementById('downloadButton').addEventListener('click', function() {
                 // Get elements
@@ -744,7 +1033,40 @@ filter:
                 },10); // Simulating a 5-second task
             });*/
 
-
+        // Expanded Image Modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('myModal');
+            const expandedModal = document.getElementById('expandedImageModal');
+            const closeExpandedBtn = document.getElementById('closeExpandedBtn');
+            const prodImage = document.getElementById('prodImage');
+            const expandedImage = document.getElementById('expandedImage');
+            
+            // Permitir que o clique na imagem também abra o modal expandido
+            prodImage.addEventListener('click', function() {
+                const imageUrl = this.src;
+                expandedImage.src = imageUrl;
+                expandedModal.style.display = 'block';
+            });
+            
+            // Fechar modal de imagem expandida
+            closeExpandedBtn.addEventListener('click', function() {
+                expandedModal.style.display = 'none';
+            });
+            
+            // Fechar quando clicar fora do modal
+            window.addEventListener('click', function(event) {
+                if (event.target === expandedModal) {
+                    expandedModal.style.display = 'none';
+                }
+            });
+            
+            // Tecla ESC fecha o modal
+          window.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && expandedModal.style.display === 'block') {
+                    expandedModal.style.display = 'none';
+                }
+            });
+        });
 
     </script>
     <script src="script.js"></script>

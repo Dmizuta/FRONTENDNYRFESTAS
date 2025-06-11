@@ -39,6 +39,11 @@
 }
 
 body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
     background-color: #F2F2F2; /* Light gray background for a soft look */
     color: #022327; /* Dark teal for readability */
 }
@@ -61,19 +66,10 @@ header {
     z-index: 100;
 }
 
-#nyrfestas {
-    color: #fff;
-    font-size: 2.5Rem; /* Aumentado para um destaque maior */
-    margin: 0;
-    font-weight: 1000; /* Negrito */
-    max-width: 100%;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
-
-}
 h1{
 
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #011a1f;
     
     margin: 10px auto;
@@ -105,7 +101,7 @@ nav a {
     font-weight: 500;
     padding: 6px 25px; /* Aumentado para botões mais largos */
     border-radius: 25px; /* Bordas mais arredondadas */
-    font-size: 1.4rem; /* Aumentado para um tamanho maior */
+    font-size: 1.8rem; /* Aumentado para um tamanho maior */
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -139,7 +135,7 @@ nav a:hover {
   
   .clear-btn {
     display: none;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
     color: red;
     flex-shrink: 0; /* Prevents the "❌" from getting squeezed */
@@ -181,7 +177,7 @@ h2 {
     padding: 20px;
     margin: 30px 0; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.4rem; /* Aumentado para um tamanho maior */
+    font-size: 1.7rem; /* Aumentado para um tamanho maior */
     border-bottom: 3px solid #C7A88C; /* Borda inferior mais espessa */
     font-weight: 600; /* Negrito */
 }
@@ -203,7 +199,7 @@ form label, form input {
     border: 2px solid #ccc; /* Borda mais espessa */
     border-radius: 10px; /* Bordas arredondadas */
     outline: none;
-    font-size: 1rem; /* Tamanho padrão */
+    font-size: 1.35rem; /* Tamanho padrão */
     transition: border-color 0.3s;
 }
 
@@ -226,7 +222,7 @@ button {
     border-radius: 10px; /* Rounded corners */
     cursor: pointer;
     width: 100%;
-    font-size: 1em; /* Larger font */
+    font-size: 1.35rem; /* Larger font */
     font-weight: 600; /* Bold */
     transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
@@ -256,7 +252,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 15px; /* Aumentado para mais espaço */
     text-align: center;
-    font-size: 1.1em; /* Tamanho padrão */
+    font-size: 1.35em; /* Tamanho padrão */
 }
 
 th {
@@ -271,7 +267,7 @@ th {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1rem; /* Tamanho padrão */
+    font-size: 1.25rem; /* Tamanho padrão */
     padding: 5px;
 }
 
@@ -286,14 +282,14 @@ th {
 
 .PAGE{
     min-width: 1080px;
-   margin-top: 200px;
+   margin-top: 220px;
 }
 
 #quantity{
 
     margin-top: 5px;
     padding:8px;
-    font-size: medium;
+    font-size: 1.35rem;
     border-width: 1px;
     border-color: #BF6734;
     border-radius: 8px;
@@ -313,11 +309,6 @@ th {
     transition: transform 0.3s ease;
 }
 
-.prodimage:hover {
-   
-    transform: scale(1.2); /* Aumenta o tamanho do elemento em 10% */
-}
-
 
 .prodimage {    
    /* max-width: 90vw;  Limit width to 90% of the viewport */
@@ -327,7 +318,8 @@ th {
     object-fit: contain;  
       width: auto; 
     height: auto;  
-    display: block;  
+    display: block; 
+    margin-bottom: 20px; /* Space below the image */
     margin: 0 auto;  /* Centers the image */
 }
 
@@ -353,6 +345,7 @@ th {
     border: 1px solid #ccc;
     max-width: 95%;
   
+  
 }
   /* Search Produtos */
   .search-wrapper {
@@ -363,7 +356,7 @@ th {
     border: 1px solid #ccc;
     margin: 30px auto;
    padding: 15px;
-   max-width: 95%;
+
  
 }
 
@@ -396,7 +389,7 @@ th {
        margin-left: 0px;
        border-radius: 8px;
        box-sizing: border-box;
-       font-size: 1rem;
+       font-size: 1.35rem;
        padding: 10px;
        width: 60%;
        border: 1px solid #ccc;
@@ -420,33 +413,33 @@ th {
 #codprod{
     padding:8px;
  
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 #descrip{
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
    #preco1{
     
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     
   }
   #preco2{
     
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   #CxFechada{
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
 
   #CxFracionada{
     margin:3px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
 
@@ -461,48 +454,95 @@ th {
 .modal {
     display: none; /* Hidden by default */
     position: fixed;
-    z-index: 10000; /* Ensure it’s on top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Ensure it's on top */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    overflow: hidden;
 }
 
 /* Modal Content */
 .modal-content {
-
-    max-width: 80vw; /* Limit width to 90% of the viewport */
-    max-height: 90vh; /* Limit height to 90% of the viewport */
-    /*overflow: auto;   Enable scrolling if content overflows */
-
-    position: absolute; /* Centered using transform */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     background-color: #fff;
-    padding: 30px;
-    /*width: 40%;
-    max-width: 800px;*/
+    margin: 10vh auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 
-/* Close Button 
 .close {
     position: absolute;
-    top: 15px;
+    top: 10px;
     right: 15px;
-    font-size: 400px; 
+    color: #aaaaaa;
+    font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
-    color: #46ac16;  
-}*/
+}
 
 .close:hover {
     color: #F2B680; /* Yellow-orange hover effect */
 }
 
+.prodimage {    
+    max-width: 100%; /* Limit width to viewport */
+    max-height: 250px; /* Reasonable height limit */
+    object-fit: contain;  
+    width: auto; 
+    height: auto;  
+    display: block;  
+    margin: 0 auto; /* Centers the image */
+}
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5vh auto;
+        padding: 15px;
+    }
+    
+    .prodimage {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 10px;
+        margin: 2vh auto;
+        width: 98%;
+    }
+    
+    .prodimage {
+        max-height: 150px;
+    }
+}
+
+#closeModalBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: auto;
+    height: auto;
+    z-index: 1001;
+}
 
 .label1 {
     font-weight: bold;
@@ -540,7 +580,7 @@ th {
     justify-content: center;
   }
   label{
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
 footer {
@@ -554,3 +594,73 @@ footer {
     width: 100%;
   }
   
+
+  
+@media (max-width: 912px) {
+    .itemHeader {
+        display: none;
+    }
+    .qtdFracionadaHeader {
+        display: none;
+    }
+    .qtdFechadaHeader {
+        display: none;
+    }
+    .quantityClosed-cell {
+        display: none;
+    }
+    .quantityFractioned-cell {
+        display: none;
+    }
+    .index-cell {
+        display: none;
+    }
+
+    body {
+        
+    width: 912px;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+    background-color: #F2F2F2; /* Light gray background for a soft look */
+    color: #022327; /* Dark teal for readability */
+}
+
+
+
+.produtos-moldura{
+  
+    padding: 20px;
+    background-color: #e7e5e5; /* White background to maintain brightness */
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern depth */
+ 
+    border: 1px solid #ccc;
+   
+    width: 100%;
+  
+  
+}
+.modal-content {
+
+    width: 100%; /* Limit width to 90% of the viewport */
+    height: 100%; /* Limit height to 90% of the viewport */
+    /*overflow-x: auto;   Enable scrolling if content overflows */
+
+    position: relative; /* Centered using transform */
+    background-color: #fff;
+    padding: 30px;
+    /*width: 40%;
+    max-width: 800px;*/
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+}
+@media (max-width: 768px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }}

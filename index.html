@@ -12,64 +12,41 @@
   <script src="config.js"></script>
   
 
-  <style>
-
-
-
-
-#logo{
-    
-    width: 360px;;
-    padding-top: 30px;
-    padding-bottom: 20px;
-
-
-    
-    
-    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
-
-
+ <style>
+    #logo {
+      width: 350px;
+      padding-top: 30px;
+      padding-bottom: 20px;
+      transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
     }
 
-
     #logo:hover {
-    transform: scale(1.3);
-    filter: drop-shadow(0 0 10px #ffffff);
-}
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 10px #ffffff);
+    }
 
+    @keyframes zoomEffect {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
 
-
-
-@keyframes zoomEffect {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.5); } /* Zoom in */
-    100% { transform: scale(1); } /* Back to normal */
-    
-  }
-  
-  .zoom {
-    animation: zoomEffect 0.6s ease-in-out; /* Fast effect */
-  }
+    .zoom {
+      animation: zoomEffect 0.6s ease-in-out;
+    }
 
     .mainContainer {
       display: flex;
-    flex-direction: column; /* Empilha os itens verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: flex-start; /* Alinha os itens no topo */
-    height: 100vh; /* Altura total da tela */
-    max-width: 800px; /* Largura máxima do contêiner */
-    margin: 0 auto; /* Centraliza o contêiner horizontalmente */
-    padding-bottom: 30px; /* Adiciona espaço no topo */
-     
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-bottom: 30px;
+      position: relative;
+      z-index: 1;
     }
-
-
-
-  
-
-
-
-
 
     body {
       font-family: Arial, sans-serif;
@@ -78,33 +55,42 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #f0f0f0;
- 
     }
+
+    /* ✅ Video background */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
     .login-container {
-      
       align-content: center;
       background-color: rgba(255, 255, 255, 0.5);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 300px;
-      
-      
     }
+
     .login-container h2 {
       text-align: center;
       margin-bottom: 20px;
-      
     }
+
     .login-container input {
       width: 100%;
-      padding: 10px;  
+      padding: 10px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 4px;
-      box-sizing: border-box; /* Ensure padding is inside the width */
+      box-sizing: border-box;
     }
+
     .login-container button {
       width: 100%;
       padding: 10px;
@@ -115,111 +101,137 @@
       font-size: 16px;
       cursor: pointer;
     }
+
     .login-container button:hover {
       background-color: #4CAF50;
     }
+
     .error {
       color: red;
       text-align: center;
       font-size: 14px;
     }
+
     .register-btn {
       width: 100%;
       padding: 10px;
-      background-color: #f0f0f0; /* Light gray background */
-      color: #333; /* Darker text color */
-      border: 1px solid #ccc; /* Subtle border */
+      background-color: #f0f0f0;
+      color: #333;
+      border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
       margin-top: 10px;
     }
+
     .register-btn:hover {
-      background-color: #e0e0e0; /* Slightly darker gray on hover */
+      background-color: #e0e0e0;
     }
 
-    
+    .password-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-container input {
+      flex: 1;
+      padding-right: 35px;
+    }
+
+    #togglePassword {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+      color: #aaa6a6;
+    }
+
+    #togglePassword:hover {
+      color: #707070;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: white;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
 
 
 
-    /* Password Field with Toggle Icon */
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.password-container input {
-  flex: 1;
-  padding-right: 35px;
-}
-
-#togglePassword {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  color: #aaa6a6;
-}
-
-#togglePassword:hover {
-  color: #707070;
-}
+  #bg-image {
+      display: none;
+    }
 
 
-body {
-    background: url('/imagens/juninobackground.png') no-repeat center center fixed;
-    background-size: cover;
-}
 
-footer {
-    text-align: center;
-    padding: 20px;
- 
-    color: white;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+/* When screen is small or tablet size */
+@media (max-width: 912px) {
+  
+   #logo {
+      width: 280px;
+      padding-top: 60px;
+      padding-bottom: 70px;
+      transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+    }
+  
+  #bg-video, #bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+  #bg-video {
+    display: none !important;
+  }
+  #bg-image {
+    display: block !important;
   }
 
+}
 
 
-
-
-
-
-  
   </style>
 </head>
 <body>
 
- 
 
-<div class="mainContainer">
-  <div class="logoNyr">
-        <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
-</div>
 
-  <div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="Usuário" required>
+ <img id="bg-image" src="/imagens/hlwn-mobile.png" alt="Background Image" />
 
-      <div class="password-container">
-        <input type="password" id="password" placeholder="Senha" required>
-        <i id="togglePassword" class="fa-solid fa-eye-slash"></i>
-      </div>
 
-      <!-- <input type="password" id="password" placeholder="Senha" required>-->
 
-      <button type="submit">Entrar</button>
-    </form>
-    <p class="error" id="errorMessage"></p>
-    <!-- Subtle Registration Button -->
-    <button class="register-btn" onclick="window.location.href='registro.html'">Registrar</button> 
+
+  <!-- ✅ Video element as background -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="/videos/video.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo de fundo.
+  </video>
+
+  <div class="mainContainer">
+    <div class="logoNyr">
+      <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+    </div>
+
+    <div class="login-container">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Usuário" required>
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Senha" required>
+          <i id="togglePassword" class="fa-solid fa-eye-slash"></i>
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="error" id="errorMessage"></p>
+      <button class="register-btn" onclick="window.location.href='registro.html'">Registrar</button>
+    </div>
   </div>
-</div>
-
 
   <script>
 

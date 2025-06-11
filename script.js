@@ -54,14 +54,20 @@ document.getElementById("hlwn").addEventListener("click", function() {
   handleSeasonSelection('halloween', this);
 });
 
+/*
+document.getElementById("hlwn").addEventListener("click", function() {
+  alert("Em breve Halloween disponível! 🎃👻");
+});*/
+
+
 // Auto-select default season on page load with delay
 window.addEventListener("load", () => {
   setTimeout(() => {
-      const juninoButton = document.getElementById("junino");
-      if (juninoButton) {
-          juninoButton.click();
+      const hlwnButton = document.getElementById("hlwn");
+      if (hlwnButton) {
+          hlwnButton.click();
       } else {
-          console.error("Junino button not found!");
+          console.error("hlwn button not found!");
       }
   }, 200);
 });
@@ -155,12 +161,15 @@ function populateProductTable(products) {
 
           // Insert cells for each product detail
           const cell1 = row.insertCell(0); // Ascending Index
+          cell1.classList.add("index-cell"); // Add class for styling
           const cell2 = row.insertCell(1); // Image
           const cell3 = row.insertCell(2); // Product Code
           const cell4 = row.insertCell(3); // Description
           const cell5 = row.insertCell(4); // Quantity Closed
+          cell5.classList.add("quantityClosed-cell"); // Add class for styling
           const cell6 = row.insertCell(5); // Price Closed
           const cell7 = row.insertCell(6); // Quantity Fractioned
+          cell7.classList.add("quantityFractioned-cell"); // Add class for styling
           const cell8 = row.insertCell(7); // Price Fractioned
           const cell9 = row.insertCell(8); // Add Button
 
@@ -637,6 +646,16 @@ if (event.target === modal) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 const addProductToOrder = async () => {
 const customerId = localStorage.getItem("customerId");
 const username = localStorage.getItem("username");
@@ -714,13 +733,7 @@ if (userRole !== "ADMIN") {
         const cxfechada = product.cxfechada;
         const ipi = product.ipi;
 
-/*
-        const productDesc = productBuyData.descricao;
-        const precofechada = productBuyData.precofechada;
-        const precofrac = productBuyData.precofrac;
-        const cxfracionada = productBuyData.cxfracionada;
-        const cxfechada = productBuyData.cxfechada;
-        const ipi = productBuyData.ipi;*/
+
 
         console.log("Product Description:", productDesc, "Preco Fechada:", precofechada, "Preco Frac:", precofrac, "Cx Fechada:", cxfechada, "IPI:", ipi);
 
@@ -732,6 +745,17 @@ if (userRole !== "ADMIN") {
         }
 
         const quantity = parseInt(document.getElementById('quantity').value);
+
+
+     // Validate quantity is not 0 or NaN
+     if (isNaN(quantity) || quantity <= 0) {
+      alert("QUANTIDADE INVÁLIDA, INSIRA UM VALOR VÁLIDO.");
+      console.log("Invalid quantity:", quantity);
+      return;
+  }
+
+
+
 
         if (quantity < cxfracionada) {
           alert("NECESSÁRIO QUANTIDADE MÍNIMA!"); // Alert the user
@@ -768,13 +792,14 @@ if (userRole !== "ADMIN") {
         const addResult = await addResponse.json();
 
         if (addResponse.ok) {
-          setTimeout(() => {
-            let searchInput = document.getElementById('searchInput');
-          
-            searchInput.focus();      // Refocus on the input
-          }, 10);
+
+
+          document.getElementById("searchInput").value = ""; // Clear search input
+          document.getElementById("searchInput").focus(); // Refocus on the search input
+
 
           alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO.");
+
           console.log("Product successfully added to order");
           modal.style.display = "none"; // Oculta o modal
           document.getElementById("quantity").value = ""; // Clear quantity field
@@ -843,15 +868,7 @@ if (userRole !== "ADMIN") {
 
 
       console.log("Product Data:", productBuyData);
-/*
-      // Extract product description and prices
-      const productDesc = productBuyData.descricao;
-      const precofechada = productBuyData.precofechada;
-      const precofrac = productBuyData.precofrac;
-      const cxfechada = productBuyData.cxfechada;
-      const ipi = productBuyData.ipi;
 
-      */
        
       
       
@@ -869,12 +886,6 @@ if (userRole !== "ADMIN") {
      
 
      
-/*
-      if (quantity < cxfracionada) {
-        alert("QUANTIDADE MÍNIMA NECESSÁRIA!"); // Alert the user
-        return; // Exit the function without adding the product
-    }
-*/
 
     
       // Choose the correct price based on the quantity
@@ -910,13 +921,13 @@ if (userRole !== "ADMIN") {
 
       if (addResponse.ok) {
 
-        setTimeout(() => {
-          let searchInput = document.getElementById('searchInput');
-        
-          searchInput.focus();      // Refocus on the input
-        }, 10);
+      
+        document.getElementById("searchInput").value = ""; // Clear search input
+        document.getElementById("searchInput").focus(); // Refocus on the search input
 
+      
         alert(addResult.message || "PRODUTO ADICIONADO AO PEDIDO");
+       
         console.log("Product successfully added to order");
         modal.style.display = "none"; // Oculta o modal
         document.getElementById("quantity").value = ""; // Clear quantity field
@@ -946,6 +957,17 @@ searchInput.focus();      // Refocus on the input
 }, 10);
 
 
+
+// Adiciona o evento de pressionar a tecla "Enter"
+document.addEventListener("keydown", (event) => {
+  const modal = document.getElementById("myModal");
+  if (event.key === "Enter" && modal && modal.style.display === "block") {
+      event.preventDefault(); // Prevent default Enter behavior
+      addProductToOrder();
+  }
+});
+
+/*
 // Adiciona o evento de pressionar a tecla "Enter"
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
@@ -953,7 +975,7 @@ document.addEventListener("keydown", (event) => {
   }
 
 });
-
+*/
 
 
 
