@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,23 +8,17 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/loadComponents.js" defer></script>
     <link rel="icon" type="image/png" href="/imagens/LOGO_NYR.png">
-    <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">-->
-
     <script src="config.js"></script>
 </head>
-
 <style>
-
 .buttonsContainer {
     background-color: #f1f1f1;
-    border: 2px solid #e2e2e2; /* Added 'solid' to define border */
+    border: 2px solid #e2e2e2;
     border-radius: 10px;
     margin-top: 20px;
-    padding: 20px; /* Added padding to avoid content sticking to the border */
+    padding: 20px;
 }
 
-
-/* General container for all buttons */
 .allbtns {
     display: flex;
     flex-direction: column;
@@ -35,39 +30,35 @@
 .modal-actions {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 20px;  
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
-/* General button styles */
 .action-btn {
-    padding: 10px 30px; /* Increased padding for a bigger button */
-    font-size: 1.2rem; /* Larger font size for a more sophisticated look */
-    font-weight: 600; /* Slightly bolder for emphasis */
-    border: 2px solid transparent; /* Default border */
-    border-radius: 12px; /* Softer rounded corners for a modern look */
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 180px; /* Uniform width for buttons */
-    
-    background-color: #007bff; /* Blue background */
+    width: 180px;
+    background-color: #007bff;
     color: whitesmoke;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.274); /* Soft shadow for depth */
-    font-family: 'Roboto', sans-serif; /* Clean and modern font */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.274);
+    font-family: 'Roboto', sans-serif;
     text-align: center;
-    letter-spacing: 1px; /* Small space between letters for elegance */
+    letter-spacing: 1px;
 }
 
-/* Hover effect for action buttons */
 .action-btn:hover {
     background-color: #0069d9;
     border-color: #0056b3;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px); /* Slight lift effect on hover */
+    transform: translateY(-3px);
 }
 
-/* Active effect for action buttons */
 .action-btn:active {
     transform: scale(0.98);
     background-color: #0056b3;
@@ -85,140 +76,152 @@
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
-    width: min(90%, 4 * 180px + 3 * 20px); /* Shrinks with the container */
+    width: min(90%, 4 * 180px + 3 * 20px);
     transition: all 0.2s ease;
-    max-width: 100%; /* Ensures it never overflows */
+    max-width: 100%;
 }
 
-/* On smaller screens, make sure buttons adjust correctly */
 @media (max-width: 768px) {
     #close-modal {
-        width: 100%; /* Takes full width when space is limited */
+        width: 100%;
     }
 }
 
-
-/* Hover effect for the close button */
 #close-modal:hover {
     background-color: #e2e6ea;
-    border-color: #0056b3; /* Darker blue border on hover */
+    border-color: #0056b3;
     transform: translateY(-3px);
 }
 
-/* Active effect for the close button */
 #close-modal:active {
     transform: scale(0.98);
     background-color: #dae0e5;
 }
 
-/* Adding responsive styles for narrow screens */
 @media (max-width: 768px) {
     .modal-actions {
-        flex-direction: column; /* Stack buttons vertically on small screens */
+        flex-direction: column;
         gap: 15px;
     }
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    gap: 10px;
+    font-family: Arial, sans-serif;
+}
 
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
+.switch-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
 
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4CAF50;
+    transition: 0.4s;
+    border-radius: 34px;
+}
 
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
 
+input:checked + .slider {
+    background-color: #ccc;
+}
 
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
 
+#control-panel {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
 
+#control-panel h3 {
+    flex-basis: 100%;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
 
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
+#searchInput,
+#status-filter {
+    padding: 8px 12px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.3rem;
+}
 
+#order-sum {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #007BFF;
+}
 
-
-
-
- .container {
-        display: flex;
-        flex-direction: column;
-        align-items: self-start;
-        gap: 10px;
-        font-family: Arial, sans-serif;
-    }
-
-    /* Flexbox layout for labels and switch */
-    .switch-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .switch-label {
-        font-size: 1.2rem;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-
-    /* Style for the toggle switch */
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-    
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-    
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #4CAF50;
-        transition: 0.4s;
-        border-radius: 34px;
-    }
-    
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;    
-        border-radius: 50%;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-    }
-    
-    input:checked + .slider {
-        background-color: #ccc;
-    }
-    
-    input:checked + .slider:before {
-        transform: translateX(26px);
-    }
-
-   
-
-
-/* Orders container */
 #orders-container {
-        max-width: 95%;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    max-width: 95%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-
-
-    .order-row {
+.order-row {
     display: grid;
     grid-template-columns: 0.5fr 2fr 3fr 1fr 1fr 0.8fr;
     gap: 10px;
@@ -232,43 +235,33 @@
     cursor: pointer;
 }
 
-   
-   
-    
-    /* Status styling */
-    .status {
-        font-weight: bold;
-        color: #007BFF;
-    }
-    
-    .order-row:hover {
-        background-color: #eef2f5;
-    }
-    
-    /* Responsive layout for mobile */
-    @media (max-width: 768px) {
-        .order-row {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-    
-        
-    }
-    
-    /* Modal Styling */
+.status {
+    font-weight: bold;
+    color: #007BFF;
+}
 
-    .modal {
+.order-row:hover {
+    background-color: #eef2f5;
+}
+
+@media (max-width: 768px) {
+    .order-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.modal {
     display: none;
     position: fixed;
-    
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    padding: 60px 20px; /* Add padding to prevent content from touching edges */
-font-size: 1rem;
+    padding: 60px 20px;
+    font-size: 1rem;
 }
 
 .modal-content {
@@ -277,938 +270,629 @@ font-size: 1rem;
     border-radius: 10px;
     width: 90%;
     max-width: 1300px;
-    max-height: 90vh; /* Limit height to 80% of viewport */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 90vh;
+    overflow-y: auto;
     animation: fadeIn 0.3s ease-in-out;
-    margin: auto; /* Center modal on screen */
+    margin: auto;
 }
 
-    
-    #logo-image {
-        width: 20%;
-        padding: 10px;
-    }
-    
+#logo-image {
+    width: 20%;
+    padding: 10px;
+}
 
-    
-    #order-details-content {
-        padding: 10px;
-        text-align: center;
-      
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-   
-    
-    .order-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1.2rem;
-    }
-    
-    .order-info {
-        flex: 1;
-    }
-    
-    .order-info-row {
-        margin: 5px 0;
-    }
-    
-    /* Modal table styling */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    
-    table th, table td {
-        padding: 8px;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
-    
-    #order-items-body tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    
+#order-details-content {
+    padding: 10px;
+    text-align: center;
+}
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    #total-order {
-            font-weight: bold; 
-            float: right;
-            color: white;
-            }
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
 
-            #total-value {
-            font-weight: bolder;
-            float: right;
-            color: white;
-            
-        }
+.order-info {
+    flex: 1;
+}
 
-        #discount-value {
-            font-weight:bold;
-            float: right;
-            color: rgb(245, 158, 158);
-            
-        }
-        #ipi-order {
-            font-weight: bold;
-            float: right;
-           
-            color: rgb(255, 255, 199);
-        }
+.order-info-row {
+    margin: 5px 0;
+}
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
+table th, table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
 
+#order-items-body tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
+#total-order {
+    font-weight: bold;
+    float: right;
+    color: white;
+}
 
-    /* When modal is open, make it visible */
-    .modal.show {
-        display: flex;
-    }
-    
-    .totalOrderBox {
-    
+#total-value {
+    font-weight: bolder;
+    float: right;
+    color: white;
+}
+
+#discount-value {
+    font-weight: bold;
+    float: right;
+    color: rgb(245, 158, 158);
+}
+
+#ipi-order {
+    font-weight: bold;
+    float: right;
+    color: rgb(255, 255, 199);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.totalOrderBox {
     padding: 20px 20px;
     margin: 20px auto;
     background-color: #13273d;
     color: white;
     border: none;
     border-radius: 5px;
-
-
 }
 
-    /* Responsiveness for smaller screens */
-    @media (max-width: 768px) {
-        .order-header {
-            flex-direction: column;
-        }
-    
-        .order-info {
-            margin-top: 20px;
-        }
+@media (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
     }
-    
-    .obs-row {
+    .order-info {
+        margin-top: 20px;
+    }
+}
+
+.obs-row {
     padding: 10px;
     background-color: #aaa;
     border-radius: 10px;
     font-size: 1.2rem;
-  }
-
-
-  textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 1.3rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  resize: none;
-  line-height: 24px; /* Set line height to calculate row height */
-  max-height: 120px; /* Limit to 3 rows (3 * 24px) */
-  overflow-y: auto; /* Enable scrolling when the content exceeds max height */
 }
 
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.3rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: none;
+    line-height: 24px;
+    max-height: 120px;
+    overflow-y: auto;
+}
 
-
-
-
-
-
-/* Base styles for both buttons */
 .modalOrderDeleteButton, .modalOrderEditButton {
-  width: 40px;                /* Set desired width */
-  height: 40px;               /* Set desired height */
-  cursor: pointer;           /* Indicate the buttons are clickable */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .modalOrderEditButton img, .modalOrderDeleteButton img {
-  vertical-align: super;     /* Align image properly */
-  width: 20px;                /* Set image size */
-  height: auto;               /* Keep aspect ratio */
+    vertical-align: super;
+    width: 20px;
+    height: auto;
 }
 
-/* Hover state for both buttons */
 .modalOrderDeleteButton:hover, .modalOrderEditButton:hover {
-  transform: scale(1.1);  /* Slightly grow the button on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow for depth */
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Optional: active state to shrink the button slightly when clicked */
 .modalOrderDeleteButton:active, .modalOrderEditButton:active {
-  transform: scale(0.98);  /* Shrink the button a bit when clicked */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow on active state */
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-
-
-
-
-
-
-  .save-quantity-btn {
+.save-quantity-btn {
     background-color: #28a745;
     width: 5rem;
-    display: block; 
-    margin: 0.5rem auto 0; /* Top margin, center ali
-    gnment, no bottom margin */
+    display: block;
+    margin: 0.5rem auto 0;
 }
+
 .save-quantity-btn:hover {
-    background-color: #6aa277; /* Yellow-orange hover color */
-    transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
+    background-color: #6aa277;
+    transform: scale(1.03);
 }
 
 .edit-quantity {
     padding: 10px;
     font-size: 1.3rem;
-    border: 2px solid #007BFF; /* Optional: blue border */
+    border: 2px solid #007BFF;
     border-radius: 8px;
-    width: 5rem; /* Adjust width if necessary */
+    width: 5rem;
     text-align: center;
 }
 
-.order-total{
+.order-total {
     font-size: 1.3rem;
 }
 
-.valores{
-        color:white;
-        font-size: 1.3rem;
-        font-weight: bold;
-    }
+.valores {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
 
+.dropdown {
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
 
+.dropdown label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
 
+#ipi {
+    width: 100%;
+    padding: 8px;
+    font-size: 1.2rem;
+    color: #333;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
 
+#ipi:focus {
+    border-color: #BF6734;
+}
 
+#ipi option {
+    padding: 10px;
+    background-color: #fff;
+}
 
+#ipi:hover {
+    border-color: #BF6734;
+}
 
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100px;
+    margin: 20px 0;
+    padding-right: 30px;
+}
 
-
-
-
-
-
-    
-        /* Style for the dropdown container */
-        .dropdown {
-        margin: 20px 0;
-        font-family: Arial, sans-serif;
-    }
-    
-    /* Style for the label */
-    .dropdown label {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #333;
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    /* Style for the select dropdown */
-    #ipi {
-        width: 100%;
-        padding: 8px;
-        font-size: 1.2rem;
-        color: #333;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        transition: border-color 0.3s ease;
-    }
-
-    
-    
-    /* Focus effect for the select input */
-    #ipi:focus {
-        border-color: #BF6734;
-    }
-    
-    /* Style for the options inside the dropdown */
-    #ipi option {
-        padding: 10px;
-        background-color: #fff;
-    }
-    
-    /* Hover effect for the dropdown */
-    #ipi:hover {
-        border-color: #BF6734;
-    }
-
-    
-    
-    /* Style for the select box container when it's not focused */
-    .dropdown {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        
-        width: 100px;
-        margin: 20px 0;
-        padding-right: 30px;
-    }
-    
-    
-    /* By default, hide the print-only span*/ 
-    .ipi-print-only {
-    
-        display: none;
-    }
-
-    
-
-
-
-
-
- /* Style for the select dropdown */
- #desc {
-    
-        width: 100%;
-        padding: 8px;
-        font-size: 1.2rem;
-        color: #333;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        transition: border-color 0.3s ease;
-    }
-
-    /* Focus effect for the select input */
-    #desc:focus {
-        border-color: #BF6734;
-    }
-    
-    /* Style for the options inside the dropdown */
-    #desc option {
-        padding: 10px;
-        background-color: #fff;
-    }
-    
-    /* Hover effect for the dropdown */
-    #desc:hover {
-        border-color: #BF6734;
-    }
-
-
-
-
-    .desc-print-only {
-    
+.ipi-print-only {
     display: none;
-    }
-    
+}
 
+#desc {
+    width: 100%;
+    padding: 8px;
+    font-size: 1.2rem;
+    color: #333;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
 
+#desc:focus {
+    border-color: #BF6734;
+}
 
+#desc option {
+    padding: 10px;
+    background-color: #fff;
+}
 
+#desc:hover {
+    border-color: #BF6734;
+}
 
-
-    
-    .topButtons {
-        display: flex;        /* Enables flexbox */
-        justify-content: space-between; /* Distributes space between the two divs */
-        align-items: center;  /* Aligns items vertically in the center */
-        gap: 10px;            /* Adds space between the two divs (optional) */
-    }
-    
-    .topButtons > div {
-        flex: 1; /* Makes both divs take equal space */
-    }
-    
-
-
-
-
-
-
-
-    /* Focus effect for the select input */
-    #desc:focus {
-        border-color: #BF6734;
-    }
-    
-    /* Style for the options inside the dropdown */
-    #desc option {
-        padding: 10px;
-        background-color: #fff;
-    }
-    
-    /* Hover effect for the dropdown */
-    #desc:hover {
-        border-color: #BF6734;
-    }
-
-
-
-
-    .desc-print-only {
-    
+.desc-print-only {
     display: none;
-    }
+}
 
+.topButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
 
+.topButtons > div {
+    flex: 1;
+}
 
- 
-    #pedido-rep a {
-    
+#pedido-rep a {
     text-decoration: none;
-   font-weight: bold;
+    font-weight: bold;
     border-radius: 25px;
     padding: 6px 25px;
-
     background-color: #BF6734;
- 
-    
-    
-    border-radius: 25px;
-
-
-
-
-
-
-
 }
-    
-   /* .link {
-    display: flex;
-    justify-content: center;
-    
-    background-color: #c9c9c9;
-}*/
-
-
 
 .linkfolder {
-
     display: flex;
-    align-items: center; /* THIS centers vertically */
-    justify-content: baseline; /* This centers horizontally (optional) */
-  /*height: 200px; /* or whatever height your container is */
+    align-items: center;
+    justify-content: baseline;
     max-width: 95%;
     background-color: #e7e5e5;
     border-radius: 8px;
     border: 1px solid #ccc;
     margin: 30px auto;
-   padding: 15px;
+    padding: 15px;
 }
-
-    </style>
-    
+</style>
 <body>
-
-<header>
-    <h1 id="nyrfestas"></h1>
-    <div id="user-info">
-        <span id="username-display"></span>
-        <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
-    </div>
-
-
-    <div class="logoNyr">
-        <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
-    </div>
-
-
-</header>
-
-<nav>
-
-    <div id="customerSelected">
-
-        <span id="customerName">...</span>
-        <span class="clear-btn" onclick="clearCustomer()">❌</span>
-      </div>
-
-    <ul>
-        <li ><a href="CADASTRO/CADASTRO_REP/cadastrorep.html">Cadastro</a></li>
-        <li><a href="produtos.html">Lista de Produtos</a></li>
-        <l id="pedido-rep"><a href="pedidosrep.html">Pedidos</a></li>
-    </ul>
-</nav>
-
-
-
-
-
-
-
-
-<div class="PAGE">
-
-    <h1>Meus Pedidos</h1>
-
-
-    
-<div class="linkfolder">
-<a id="link" href="https://drive.google.com/drive/folders/1fdOsBh2PVMJ8NaJsX0jFW0uPjDXPz6PA?usp=drive_link" target="_blank">
-  <img src="/imagens/folder.png" alt="Open Drive Folder" width="40" /> 
-</a>
-<p style="margin-left: 10px; font-size: x-large; color: #007BFF;">Pedidos e Boletos</p>
-</div>
-
-
-
-
-
-
-
-
-    
-    <div class="box">
-    
-    <div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder="Buscar por...">
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-    <div id="orders-container">
-    
-    
-        
-        <!-- Orders will be inserted here dynamically -->
-    </div>
-    </div>
-    
-    
-    <div id="order-modal" class="modal">
-        <div class="modal-content">
-            <div class="order-header">
-                <div class="order-info">
-                    <div class="order-info-row">
-                        <span>Numero do Pedido:</span>
-                        <span id="order-id"></span>
-                    </div>
-                    <div class="order-info-row">
-                        <span>Razao Social:</span>
-                        <span id="razao-social"></span>
-                    </div>
-                    <div class="order-info-row">
-                        <span>CNPJ:</span>
-                        <span id="cnpj"></span>
-                    </div>
-                    <div class="order-info-row">
-                        <span>Email:</span>
-                        <span id="email"></span>
-                    </div>
-                    <div class="order-info-row">
-                        <span>Representante:</span>
-                        <span id="representante"></span>
-                    </div>
-                    <div class="order-info-row">
-                        <span>Situação:</span>
-                        <span id="situacao"></span>
-                    </div>
+    <header>
+        <h1 id="nyrfestas"></h1>
+        <div id="user-info">
+            <span id="username-display"></span>
+            <button id="logoutBtn" aria-label="Logout do usuário">Sair</button>
+        </div>
+        <div class="logoNyr">
+            <img id="logo" src="/imagens/LOGO.png" alt="LOGO">
+        </div>
+    </header>
+    <nav>
+        <div id="customerSelected">
+            <span id="customerName">...</span>
+            <span class="clear-btn" onclick="clearCustomer()">❌</span>
+        </div>
+        <ul>
+            <li><a href="CADASTRO/CADASTRO_REP/cadastrorep.html">Cadastro</a></li>
+            <li><a href="produtos.html">Lista de Produtos</a></li>
+            <li id="pedido-rep"><a href="pedidosrep.html">Pedidos</a></li>
+        </ul>
+    </nav>
+    <div class="PAGE">
+        <h1>Meus Pedidos</h1>
+        <div class="box">
+            <div id="control-panel">
+                <h3>Painel de Controle</h3>
+                <div class="filter-group">
+                    <label for="searchInput">Pesquisar:</label>
+                    <input type="text" id="searchInput" placeholder="Buscar por ID, vendedor, razão social...">
                 </div>
-                <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter">
+                        <option value="all">Todos</option>
+                        <option value="0">Aberto</option>
+                        <option value="1">Orçamento</option>
+                        <option value="2">Fechado</option>
+                        <option value="3">Processado</option>
+                    </select>
+                </div>
+                <div id="order-sum">Total: R$ 0,00</div>
             </div>
-    
-            <table id="order-items-table">
-                <thead>
-                    <tr>
-                        <th>-</th>   
-                        <th>Imagem</th>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Qtde</th>
-                        <th>Preço Unitário</th>
-                        <th>Ipi</th>
-                        <th>Subtotal</th>
-                        <th>Editar</th>
-                        <th>Apagar</th>
-                    </tr>
-
-
-                
-                    <div class="topButtons" >
-                        <div class="container">
-                            <div class="switch-container">
-                                <!-- Left label -->
-                                <span class="switch-label left-label active">Aberto</span>
-                    
-                                <label class="switch">
-                                    <input type="checkbox" id="toggleButton">
-                                    <span class="slider"></span>
-                                </label>
-                    
-                                <!-- Right label -->
-                                <span class="switch-label right-label">Orçamento</span>
+            <div class="linkfolder">
+                <a id="link" href="https://drive.google.com/drive/folders/1fdOsBh2PVMJ8NaJsX0jFW0uPjDXPz6PA?usp=drive_link" target="_blank">
+                    <img src="/imagens/folder.png" alt="Open Drive Folder" width="40" />
+                </a>
+                <p style="margin-left: 10px; font-size: x-large; color: #007BFF;">Pedidos e Boletos</p>
+            </div>
+            <div id="orders-container">
+                <!-- Orders will be inserted here dynamically -->
+            </div>
+        </div>
+        <div id="order-modal" class="modal">
+            <div class="modal-content">
+                <div class="order-header">
+                    <div class="order-info">
+                        <div class="order-info-row">
+                            <span>Numero do Pedido:</span>
+                            <span id="order-id"></span>
+                        </div>
+                        <div class="order-info-row">
+                            <span>Razao Social:</span>
+                            <span id="razao-social"></span>
+                        </div>
+                        <div class="order-info-row">
+                            <span>CNPJ:</span>
+                            <span id="cnpj"></span>
+                        </div>
+                        <div class="order-info-row">
+                            <span>Email:</span>
+                            <span id="email"></span>
+                        </div>
+                        <div class="order-info-row">
+                            <span>Representante:</span>
+                            <span id="representante"></span>
+                        </div>
+                        <div class="order-info-row">
+                            <span>Situação:</span>
+                            <span id="situacao"></span>
+                        </div>
+                    </div>
+                    <img src="/imagens/LOGO_NYR.png" alt="Logo" id="logo-image">
+                </div>
+                <table id="order-items-table">
+                    <thead>
+                        <tr>
+                            <th>-</th>
+                            <th>Imagem</th>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Qtde</th>
+                            <th>Preço Unitário</th>
+                            <th>Ipi</th>
+                            <th>Subtotal</th>
+                            <th>Editar</th>
+                            <th>Apagar</th>
+                        </tr>
+                        <div class="topButtons">
+                            <div class="container">
+                                <div class="switch-container">
+                                    <span class="switch-label left-label active">Aberto</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="toggleButton">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="switch-label right-label">Orçamento</span>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <div id="ipilabel">
+                                    <label for="ipi">IPI:</label>
+                                    <select id="ipi">
+                                        <option value='0'>B0</option>
+                                        <option value='0.13'>B1</option>
+                                        <option value='0.065'>B2</option>
+                                        <option value='0.039'>B3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <div id="desclabel">
+                                    <label for="desc">Desconto:</label>
+                                    <select id="desc">
+                                        <option value='0'>0%</option>
+                                        <option value='0.03'>3%</option>
+                                        <option value='0.05'>5%</option>
+                                        <option value='0.08'>8%</option>
+                                        <option value='0.10'>10%</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-        
-                        
-                <div class="dropdown">
-            
-                    <div id="ipilabel">
-                    <label for="ipi">IPI:</label>
-                    <!-- Dropdown for user interaction -->
-                    <select id="ipi">
-                        <option value='0'>B0</option>
-                        <option value='0.13'>B1</option>
-                        <option value='0.065'>B2</option>
-                        <option value='0.039'>B3</option>
-                    </select>
-                </div>
-                </div>
-
-
-                <div class="dropdown">
-            
-                    <div id="desclabel">
-                    <label for="desc">Desconto:</label>
-                    
-                    <select id="desc">
-                        <option value='0'>0%</option>
-                        <option value='0.03'>3%</option>
-                        <option value='0.05'>5%</option>
-                        <option value='0.08'>8%</option>
-                        <option value='0.10'>10%</option>
-                    </select>
-                </div>               
-                </div>
-                        
+                    </thead>
+                    <tbody id="order-details-content">
+                        <!-- Product rows will be dynamically populated here -->
+                    </tbody>
+                </table>
+                <div class="totalOrderBox">
+                    <div class="order-total">
+                        <div>
+                            <span class="valores">Valor do pedido:</span>
+                            <span id="total-order">R$ 0,00</span>
+                        </div>
+                        <div>
+                            <span class="valores">Valor do ipi:</span>
+                            <span id="ipi-order">R$ 0,00</span>
+                        </div>
+                        <div>
+                            <span class="valores">Valor do desconto:</span>
+                            <span id="discount-value">R$ 0,00</span>
+                        </div>
+                        <div>
+                            <span class="valores">Total do pedido:</span>
+                            <span id="total-value">R$ 0,00</span>
+                        </div>
                     </div>
-
-             
-        
-
-
-                </thead>
-
-
-
-                <tbody id="order-details-content">
-                    <!-- Product rows will be dynamically populated here -->
-                </tbody>
-            </table>
-            <div class="totalOrderBox">
-                <!-- Total Order Section -->
-                <div class="order-total">
-
-                    <div>
-                        <span class="valores">Valor do pedido:</span>
-                        <span id="total-order">R$ 0,00</span>
-                    </div>
-                    
-                    <div>
-                        <span class="valores">Valor do ipi:</span>
-                        <span id="ipi-order">R$ 0,00</span>
-                    </div>
-    
-                    
-    
-                    <div>
-                        <span class="valores">Valor do desconto:</span>
-                        <span id="discount-value">R$ 0,00</span>
-                    </div>
-    
-                    <div>
-                        <span class="valores">Total do pedido:</span>
-                        <span id="total-value">R$ 0,00</span>
-                    </div>
-
                 </div>
-            </div>
-            <div>
-                <!-- Span for printing, initially hidden -->
-                <span id="ipi-display" class="ipi-print-only"></span>
-                </div>
-
                 <div>
-                    <!-- Span for printing, initially hidden -->
-                    <span id="desc-display" class="desc-print-only"></span>
-                    </div>
-
-            <div class="obs-row">
-                <span>Observações:</span>
-                <textarea type="text" id="obs"
-                placeholder=
-                "OBRIGATÓRIO: Transportadora / Forma de pagamento"
-                ></textarea>
-            </div>
-    
-
-<!-- Action Buttons -->
-
-
-
-<div class="buttonsContainer">
-            <div class="allbtns">
-                <div class="modal-actions">
-                    <button class="action-btn" onclick="printOrder()">IMPRIMIR</button>
-                    <button id="save-notes-btn" class="action-btn">SALVAR</button>
-                    
-                    <button id="duplicateOrderButton" class="action-btn">DUPLICAR</button>
-                    
-                    <button id="finish-order-btn" class="action-btn">FINALIZAR</button>
-                    <button id="delete-order-btn" class="action-btn">APAGAR</button>
+                    <span id="ipi-display" class="ipi-print-only"></span>
                 </div>
-            
-                <!-- Close Modal Button -->
-                <button id="close-modal" class="action-btn">Fechar</button>
+                <div>
+                    <span id="desc-display" class="desc-print-only"></span>
+                </div>
+                <div class="obs-row">
+                    <span>Observações:</span>
+                    <textarea type="text" id="obs" placeholder="OBRIGATÓRIO: Transportadora / Forma de pagamento"></textarea>
+                </div>
+                <div class="buttonsContainer">
+                    <div class="allbtns">
+                        <div class="modal-actions">
+                            <button class="action-btn" onclick="printOrder()">IMPRIMIR</button>
+                            <button id="save-notes-btn" class="action-btn">SALVAR</button>
+                            <button id="duplicateOrderButton" class="action-btn">DUPLICAR</button>
+                            <button id="finish-order-btn" class="action-btn">FINALIZAR</button>
+                            <button id="delete-order-btn" class="action-btn">APAGAR</button>
+                        </div>
+                        <button id="close-modal" class="action-btn">Fechar</button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <script>
+        let allOrders = [];
 
-
-</div>
-</div>
-
-</div>
-
-
-
-
-
-<script>
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Handle login status
-const username = localStorage.getItem('username');
-if (username) {
-    document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
-} else {
-    alert("Você precisa estar logado para acessar esta página!");
-    window.location.href = '/';
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Logout function
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('username');
-    window.location.href = '/';
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Function to load orders from the backend
-async function loadOrders() {
-    console.log('loadOrders function started');
-
-    // Fetch username from localStorage
-    const username = localStorage.getItem('username');
-    console.log('Username from localStorage:', username);
-
-    // Check if username exists
-    if (!username) {
-        console.log('No username found in localStorage');
-        document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
-        return;
-    }
-
-    try {
-        console.log('Sending request to backend...');
-        const response = await fetch(`${URL_API}/ordersrep?username=` + username, {
-            method: 'GET'
-        });
-
-        console.log('Response received:', response);
-
-        // Check if the response is ok
-        if (!response.ok) {
-            console.log('Failed to fetch orders. Status:', response.status, response.statusText);
-            document.getElementById('orders-container').innerHTML = '<p>Falha ao carregar.</p>';
-            return;
+        // Handle login status
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').textContent = `Bem-vindo, ${username}`;
+        } else {
+            alert("Você precisa estar logado para acessar esta página!");
+            window.location.href = '/';
         }
 
-        const orders = await response.json();
-        console.log('Parsed orders data:', orders);
-        displayOrders(orders);
-
-    } catch (error) {
-        console.error('Error fetching orders:', error);
-        document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
-    }
-}
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-// Function to dynamically display orders
-function displayOrders(orders) {
-    console.log('displayOrders function called with:', orders);
-    const container = document.getElementById('orders-container');
-    container.innerHTML = ''; // Clear existing content
-
-    if (orders.length === 0) {
-        console.log('No orders found');
-        container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
-        return;
-    }
-
-    orders.forEach(order => {
-        console.log('Processing order:', order);
-
-        // Ensure the total is a valid number and handle non-numeric values
-      const total = parseFloat(order.total);
-      
-      if (isNaN(total)) {
-                    console.error('Invalid total value:', order.total);
-                }
-
-// Function to format numbers as currency (Brazilian Real - R$)
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-}
-
-const statusMap = {
-    0: { text: 'Aberto', color: '#E07A5F' },
-    1: { text: 'Orçamento', color: '#FFB200' },
-    2: { text: 'Fechado', color: '#6EC207' },
-    3: { text: 'Processado', color: '#3D8D7A' }
-};
-
-// Get status text and color
-const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
-
-
-const orderRow = `
-    <div class="order-row" data-id="${order.id}">
-        <div><strong>ID:</strong> ${order.id}</div>
-        <div><strong>Representante:</strong> ${order.representante.toUpperCase()}</div>
-        <div><strong>Razão Social:</strong> ${order.razaosocial.toUpperCase()}</div>
-        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-        <div style="color: ${status.color};"><strong>Status: ${status.text} </strong></div>
-    </div>
-`;
-
-/*
-const orderRow = `
-    <div class="order-row" data-id="${order.id}">
-        <div class="order-details">
-            <div><strong>ID:</strong> ${order.id}</div>
-            <div><strong>Representante:</strong> ${order.representante}</div>
-            <div><strong>Razão Social:</strong> ${order.razaosocial}</div>
-            <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
-            <div><strong>Total:</strong> R$ ${formatCurrency(order.total)}</div>
-            <div class="status" style="color: ${status.color};">
-                <strong>Status:</strong> ${status.text}
-            </div>
-        </div>
-    </div>
-`;*/
-
-container.innerHTML += orderRow;
-
-    });
-    console.log('All orders displayed');
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-const searchBox = document.getElementById('searchInput'); // Changed to 'searchInput'
-        
-        searchBox.addEventListener('input', function() {
-            const searchTerm = searchBox.value.toLowerCase().trim();
-        
-            const orders = document.querySelectorAll('.order-row'); // Assuming each order has a class 'order'
-            orders.forEach(order => {
-                const orderId = order.querySelector('.order-details div:nth-child(1)').textContent.toLowerCase();
-                const representate = order.querySelector('.order-details div:nth-child(2)').textContent.toLowerCase();
-                const razaoSocial = order.querySelector('.order-details div:nth-child(3)').textContent.toLowerCase();
-                const data = order.querySelector('.order-details div:nth-child(4)').textContent.toLowerCase();
-                const status = order.querySelector('.order-details div:nth-child(6)').textContent.toLowerCase();
-        
-                // Check if the search term matches any of these fields
-                if (
-                    orderId.includes(searchTerm) || 
-                    representate.includes(searchTerm) || 
-                    razaoSocial.includes(searchTerm) || 
-                    data.includes(searchTerm) || 
-                    status.includes(searchTerm)
-                ) {
-                    order.style.display = 'block'; // Show the order if it matches
-                } else {
-                    order.style.display = 'none'; // Hide the order if it doesn't match
-                }
-            });
+        // Logout function
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            window.location.href = '/';
         });
-        
-        
-   
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Function to load orders from the backend
+        async function loadOrders() {
+            console.log('loadOrders function started');
+            const username = localStorage.getItem('username');
+            console.log('Username from localStorage:', username);
 
+            if (!username) {
+                console.log('No username found in localStorage');
+                document.getElementById('orders-container').innerHTML = '<p>User not authenticated</p>';
+                return;
+            }
 
+            try {
+                console.log('Sending request to backend...');
+                const response = await fetch(`${URL_API}/ordersrep?username=${encodeURIComponent(username)}`, {
+                    method: 'GET'
+                });
 
-// Load orders when the page is ready
-document.addEventListener('DOMContentLoaded', () => {
-  
-    console.log('DOM fully loaded and parsed');
-    loadOrders();
-});
+                console.log('Response received:', response);
+                if (!response.ok) {
+                    console.log('Failed to fetch orders. Status:', response.status, response.statusText);
+                    document.getElementById('orders-container').innerHTML = '<p>Falha ao carregar.</p>';
+                    return;
+                }
 
+                allOrders = await response.json();
+                console.log('Parsed orders data:', allOrders);
+                filterAndDisplayOrders();
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                document.getElementById('orders-container').innerHTML = '<p>Failed to load orders.</p>';
+            }
+        }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Function to filter and display orders
+        function filterAndDisplayOrders() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const statusFilter = document.getElementById('status-filter').value;
 
+            const filteredOrders = allOrders.filter(order => {
+                const matchesSearch =
+                    order.id.toString().includes(searchTerm) ||
+                    order.representante.toLowerCase().includes(searchTerm) ||
+                    order.razaosocial.toLowerCase().includes(searchTerm) ||
+                    new Date(order.data).toLocaleDateString().includes(searchTerm) ||
+                    (statusMap[order.status]?.text.toLowerCase() || '').includes(searchTerm);
+                const matchesStatus = statusFilter === 'all' || order.status.toString() === statusFilter;
+                return matchesSearch && matchesStatus;
+            });
 
+            displayOrders(filteredOrders);
+            updateSum(filteredOrders);
+        }
 
-// Get the modal element
-const modal = document.getElementById("order-modal");
-const closeModalBtn = document.getElementById("close-modal");
+        const statusMap = {
+            0: { text: 'Aberto', color: '#E07A5F' },
+            1: { text: 'Orçamento', color: '#FFB200' },
+            2: { text: 'Fechado', color: '#6EC207' },
+            3: { text: 'Processado', color: '#3D8D7A' }
+        };
 
-// Event listener for opening the modal
-document.getElementById("orders-container").addEventListener("click", function(event) {
-    if (event.target && event.target.closest(".order-row")) {
-        const orderRow = event.target.closest(".order-row");
-        const orderId = orderRow.getAttribute("data-id");
-        fetchOrderDetails(orderId);
-        document.getElementById("order-modal").style.display = "block";
-        console.log("CHECK HERE 01", orderId);
-    
-    }
-});
+        // Function to dynamically display orders
+        function displayOrders(orders) {
+            console.log('displayOrders function called with:', orders);
+            const container = document.getElementById('orders-container');
+            container.innerHTML = '';
 
-// Event listener for closing the modal
-closeModalBtn.addEventListener("click", function() {
-    modal.style.display = "none";
-});
+            if (orders.length === 0) {
+                console.log('No orders found');
+                container.innerHTML = '<p>Nenhum pedido encontrado.</p>';
+                return;
+            }
 
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
+            orders.forEach(order => {
+                console.log('Processing order:', order);
+                const total = parseFloat(order.total) || 0;
+                const status = statusMap[order.status] || { text: 'Unknown', color: 'gray' };
 
+                const orderRow = `
+                    <div class="order-row" data-id="${order.id}">
+                        <div><strong>ID:</strong> ${order.id}</div>
+                        <div><strong>Representante:</strong> ${order.representante.toUpperCase()}</div>
+                        <div><strong>Razão Social:</strong> ${order.razaosocial.toUpperCase()}</div>
+                        <div><strong>Data:</strong> ${new Date(order.data).toLocaleDateString()}</div>
+                        <div><strong>Total:</strong> R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div style="color: ${status.color};"><strong>Status: ${status.text}</strong></div>
+                    </div>
+                `;
+                container.innerHTML += orderRow;
+            });
+            console.log('All orders displayed');
+        }
 
+        // Function to update total sum
+        function updateSum(orders) {
+            const totalSum = orders.reduce((sum, order) => sum + (parseFloat(order.total) || 0), 0);
+            document.getElementById('order-sum').textContent = `Total: R$ ${totalSum.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Event listeners for filtering
+        document.getElementById('searchInput').addEventListener('input', filterAndDisplayOrders);
+        document.getElementById('status-filter').addEventListener('change', filterAndDisplayOrders);
 
+        // Load orders when the page is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM fully loaded and parsed');
+            loadOrders();
+            loadCustomerName();
+        });
 
-    // Function to fetch and display order details in the modal
-    async function fetchOrderDetails(orderId) {
+        // Get the modal element
+        const modal = document.getElementById("order-modal");
+        const closeModalBtn = document.getElementById("close-modal");
+
+        // Event listener for opening the modal
+        document.getElementById("orders-container").addEventListener("click", function(event) {
+            if (event.target && event.target.closest(".order-row")) {
+                const orderRow = event.target.closest(".order-row");
+                const orderId = orderRow.getAttribute("data-id");
+                fetchOrderDetails(orderId);
+                document.getElementById("order-modal").style.display = "block";
+                console.log("CHECK HERE 01", orderId);
+            }
+        });
+
+        // Event listener for closing the modal
+        closeModalBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Function to fetch and display order details in the modal
+        async function fetchOrderDetails(orderId) {
             console.log("CHECK HERE", orderId);
             try {
                 console.log(`Fetching details for order ID: ${orderId}`);
@@ -1217,1109 +901,708 @@ window.addEventListener("click", function(event) {
                     throw new Error('Failed to fetch order details');
                 }
                 const orderDetails = await response.json();
-        
                 const orderID = orderDetails.id;
                 localStorage.setItem('currentOrderId', orderID);
-        
                 console.log('Order details received:', orderDetails);
                 populateModal(orderDetails);
             } catch (error) {
                 console.error('Error fetching order details:', error);
             }
         }
-    
 
+        function populateModal(orderDetails) {
+            document.getElementById('order-id').textContent = orderDetails.id;
+            document.getElementById('razao-social').textContent = orderDetails.razaosocial;
+            document.getElementById('cnpj').textContent = orderDetails.cnpj;
+            document.getElementById('email').textContent = orderDetails.email;
+            document.getElementById('representante').textContent = orderDetails.representante;
+            document.getElementById('obs').textContent = orderDetails.observacoes;
 
+            fetch(`${URL_API}/pedidostatus/${orderDetails.id}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('situacao').textContent = data.status;
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar status do pedido:', error);
+                    document.getElementById('situacao').textContent = 'Status não encontrado';
+                });
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            const ipiDropdown = document.getElementById('ipi');
+            const ipiDisplay = document.getElementById('ipi-display');
+            if (orderDetails.ipi_tax) {
+                ipiDropdown.value = orderDetails.ipi_tax;
+            }
+            ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
 
+            const descDropdown = document.getElementById('desc');
+            const descDisplay = document.getElementById('desc-display');
+            const discount = document.querySelector('#desc');
+            if (orderDetails.desconto !== undefined && orderDetails.desconto !== null) {
+                descDropdown.value = orderDetails.desconto;
+            } else {
+                descDropdown.value = 0;
+            }
+            descDisplay.textContent = "DESC: " + parseFloat(discount.value) * 100 + "%";
 
+            const orderDetailsContent = document.getElementById('order-details-content');
+            let total = 0;
+            let ipiOrder = 0;
+            orderDetailsContent.innerHTML = '';
 
+            orderDetails.products.forEach((product, index) => {
+                const price = parseFloat(product.preco);
+                const quantity = parseInt(product.quantidade, 10);
+                const factor = parseFloat(product.ipi);
+                const ipiTax = parseFloat(orderDetails.ipi_tax);
+                const ipi = factor * ipiTax * price * quantity;
+                const productTotal = (price * quantity) + ipi;
 
-
-function populateModal(orderDetails) {
-    document.getElementById('order-id').textContent = orderDetails.id;
-    document.getElementById('razao-social').textContent = orderDetails.razaosocial;
-    document.getElementById('cnpj').textContent = orderDetails.cnpj;
-    document.getElementById('email').textContent = orderDetails.email;
-    document.getElementById('representante').textContent = orderDetails.representante;
-    document.getElementById('obs').textContent = orderDetails.observacoes;
-
-     // Fetch situacao (status info) from backend using pedidoweb
-     fetch(`${URL_API}/pedidostatus/${orderDetails.id}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('situacao').textContent = data.status;
-        })
-        .catch(error => {
-            console.error('Erro ao buscar status do pedido:', error);
-            document.getElementById('situacao').textContent = 'Status não encontrado';
-        });
-    
-    
-    // Get IPI dropdown and display elements
-    const ipiDropdown = document.getElementById('ipi');
-    const ipiDisplay = document.getElementById('ipi-display');
-
-    // Set the IPI dropdown value
-    if (orderDetails.ipi_tax) {
-        ipiDropdown.value = orderDetails.ipi_tax;
-    }
-  
-    // Update products table and calculate total
-    ipiDisplay.textContent = "IPI: " + ipiDropdown.options[ipiDropdown.selectedIndex].text;
-
-
-
-
-
-    const descDropdown = document.getElementById('desc');
-    const descDisplay = document.getElementById('desc-display');
-   // Select the discount dropdown element
-   const discount = document.querySelector('#desc');
-    
-
-   if (orderDetails.desconto !== undefined && orderDetails.desconto !== null) {
-    descDropdown.value = orderDetails.desconto;
-    } else {
-        descDropdown.value = 0; // Ensure 0 is set when no discount is provided
-    }
-
-
-     // Set the DESC dropdown value
-     //if (orderDetails.desconto) {
-      //  descDropdown.value = orderDetails.desconto;}
-  
-        // Update desc
-
-
-
-    descDisplay.textContent = "DESC: " + parseFloat(discount.value)*100 + "%";
-
-
-
-
-
-    const orderDetailsContent = document.getElementById('order-details-content');
-    let total = 0;
-    let ipiOrder = 0;
-
-    orderDetailsContent.innerHTML = ''; // Clear previous content
-
-    orderDetails.products.forEach((product, index) => {
-        const price = parseFloat(product.preco);
-        const quantity = parseInt(product.quantidade, 10);
-        const factor = parseFloat(product.ipi);
-        const ipiTax = parseFloat(orderDetails.ipi_tax);
-        const ipi = factor * ipiTax * price * quantity;
-        const productTotal = (price * quantity) + ipi;
-
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
-
-        const row = `
-            <tr data-product-id="${product.id}">
-                <td>${index + 1}</td>
-                <td><img src="${product.imagem}" alt="Imagem do Produto" class="product-image" style="width:40px;"></td>
-                <td>${product.codproduto}</td>
-                <td>${product.descricao}</td>
-                <td class="quantity">${quantity}</td>
-                <td>${formatCurrency(price)}</td>
-                <td>${formatCurrency(ipi)}</td>
-                <td>${formatCurrency(productTotal)}</td>
-                <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
-                <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
-            </tr>
-        `;  
-    
-
-    orderDetailsContent.innerHTML += row;
-
-    total += productTotal;
-
-            
-    ipiOrder += ipi;
-
-    total2 = total - ipiOrder;
-
-
-    console.log('IPI VALUE:',ipiOrder);
-
-    });
-
-
-
-    // Function to update total with discount
-    function updateTotal() {
-        let discountValue = parseFloat(discount.value) || 0;
-        let discountTotal = total * discountValue * (-1);
-        let totalFinal = total * (1 - discountValue);
-
-        function formatCurrency(value) {
+                function formatCurrency(value) {
                     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                };
-        document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
-        document.getElementById('total-order').textContent = formatCurrency(total2);
-        document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
-        document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-    }
+                }
 
-    // Initial calculation
-    updateTotal();
+                const row = `
+                    <tr data-product-id="${product.id}">
+                        <td>${index + 1}</td>
+                        <td><img src="${product.imagem}" alt="Imagem do Produto" class="product-image" style="width:40px;"></td>
+                        <td>${product.codproduto}</td>
+                        <td>${product.descricao}</td>
+                        <td class="quantity">${quantity}</td>
+                        <td>${formatCurrency(price)}</td>
+                        <td>${formatCurrency(ipi)}</td>
+                        <td>${formatCurrency(productTotal)}</td>
+                        <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
+                        <td><button class="modalOrderDeleteButton"><img src="/imagens/trashcan.png" alt="Apagar"></button></td>
+                    </tr>
+                `;
+                orderDetailsContent.innerHTML += row;
+                total += productTotal;
+                ipiOrder += ipi;
+            });
 
-    // Add event listener to recalculate when discount changes
-   // discount.removeEventListener('change', updateTotal); // Prevent multiple bindings
-    discount.addEventListener('change', updateTotal);
+            total2 = total - ipiOrder;
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-            // Check the status of the order and set the toggle button position
-            const toggleButton = document.getElementById('toggleButton'); // Your toggle button
-            console.log('status:', orderDetails.status);
-            if (toggleButton) {  // Ensure toggleButton exists before manipulating it
+            function updateTotal() {
+                let discountValue = parseFloat(discount.value) || 0;
+                let discountTotal = total * discountValue * (-1);
+                let totalFinal = total * (1 - discountValue);
+
+                function formatCurrency(value) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                }
+                document.getElementById('ipi-order').textContent = formatCurrency(ipiOrder);
+                document.getElementById('total-order').textContent = formatCurrency(total2);
+                document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+                document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+            }
+
+            updateTotal();
+            discount.addEventListener('change', updateTotal);
+
+            const toggleButton = document.getElementById('toggleButton');
+            if (toggleButton) {
                 if (orderDetails.status === 0) {
-                    // If status is 0 (Aberto), set button to the left
-                    //toggleButton.classList.remove('toggled');
-                    toggleButton.checked = false; 
-                    toggleButton.innerHTML = 'Enviar para Orçamento'; // Button text for status 0
+                    toggleButton.checked = false;
                 } else if (orderDetails.status === 1) {
-                    // If status is 1 (Orçamento), set button to the right
-                    console.log('status:', orderDetails.status);
-                   // toggleButton.classList.add('toggled');
-                   toggleButton.checked = true;
-                    toggleButton.innerHTML = 'Orçamento Enviado'; // Button text for status 1
+                    toggleButton.checked = true;
                 }
             }
-         
 
+            document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
+                button.addEventListener('click', async function () {
+                    const row = this.closest('tr');
+                    const orderId = localStorage.getItem('currentOrderId');
+                    const quantityCell = row.querySelector('.quantity');
+                    const productId = row.getAttribute('data-product-id');
+                    const codproduto = row.cells[2].textContent.trim();
+                    const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    const requestData = { orderId };
+                    console.log("currentOrderId:", orderId);
 
-document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-    button.addEventListener('click', async function () {
-        const row = this.closest('tr');
-        const orderId = localStorage.getItem('currentOrderId');
-        const quantityCell = row.querySelector('.quantity');
-        const productId = row.getAttribute('data-product-id');
-        const codproduto = row.cells[2].textContent.trim(); // Assuming codproduto is in column 3 (index 2)
-        const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+                    try {
+                        const response = await fetch(`${URL_API}/orderStatus`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(requestData),
+                        });
 
-        // Fetch the current order status to determine if it's editable
-        const requestData = { orderId };
-        console.log("currentOrderId:", orderId);
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch order status: ${response.statusText}`);
+                        }
 
-        try {
-            const response = await fetch(`${URL_API}/orderStatus`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestData),
-            });
+                        const data = await response.json();
+                        const orderStatus = data.status;
+                        console.log("Order Status:", orderStatus);
 
-            if (!response.ok) {
-                throw new Error(`Failed to fetch order status: ${response.statusText}`);
-            }
+                        if (orderStatus === 2 || orderStatus === 3) {
+                            alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
+                            return;
+                        }
 
-            const data = await response.json();
-            const orderStatus = data.status;
-            console.log("Order Status:", orderStatus);
+                        const inputField = document.createElement('input');
+                        inputField.type = 'number';
+                        inputField.value = currentQuantity;
+                        inputField.classList.add('edit-quantity');
 
-            if (orderStatus === 2 || orderStatus === 3) {
-                alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
-                return;
-            }
+                        const saveButton = document.createElement('button');
+                        saveButton.textContent = 'Salvar';
+                        saveButton.classList.add('save-quantity-btn');
 
-            // Create editable input field
-            const inputField = document.createElement('input');
-            inputField.type = 'number';
-            inputField.value = currentQuantity;
-            inputField.classList.add('edit-quantity');
+                        quantityCell.innerHTML = '';
+                        quantityCell.appendChild(inputField);
+                        quantityCell.appendChild(saveButton);
+                        inputField.focus();
 
-            // Add save button
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Salvar';
-            saveButton.classList.add('save-quantity-btn');
+                        inputField.addEventListener('keypress', function (event) {
+                            if (event.key === 'Enter') saveButton.click();
+                        });
 
-            // Clear quantity cell and append input and button
-            quantityCell.innerHTML = '';
-            quantityCell.appendChild(inputField);
-            quantityCell.appendChild(saveButton);
-            inputField.focus();
+                        saveButton.addEventListener('click', async function () {
+                            const newQuantity = parseInt(inputField.value, 10);
+                            if (!newQuantity || newQuantity <= 0) {
+                                alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
+                                return;
+                            }
 
-            // Add 'Enter' key support
-            inputField.addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') saveButton.click();
-            });
-
-            saveButton.addEventListener('click', async function () {
-                const newQuantity = parseInt(inputField.value, 10);
-                if (!newQuantity || newQuantity <= 0) {
-                    alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
-                    return;
-                }
-
-                try {
-                    // Fetch cxfracionada using codproduto
-                    const productResponse = await fetch(`${URL_API}/product-buy/${codproduto}`, {
-                        method: 'GET',
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-
-                    if (!productResponse.ok) {
-                        throw new Error('Failed to fetch product details');
-                    }
-
-                    const productData = await productResponse.json();
-                    const product = Array.isArray(productData) ? productData[0] : productData;
-                    const cxfracionada = product.cxfracionada;
-
-                    // Validate minimum quantity
-                    if (newQuantity < cxfracionada) {
-                        alert('QUANTIDADE MÍNIMA NECESSÁRIA!');
-                        inputField.value = currentQuantity; // Reset to original
-                        return;
-                    }
-
-                    // Update product quantity
-                    const updateResponse = await fetch(`${URL_API}/editproduct/${productId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ quantity: newQuantity })
-                    });
-
-                    if (!updateResponse.ok) {
-                        throw new Error('Failed to update quantity');
-                    }
-
-                    const updateData = await updateResponse.json();
-                    const { cxfechada, precofechada, precofrac, ipi, ipiTax = 0 } = updateData.updatedProduct;
-
-                    // Update quantity in table
-                    quantityCell.textContent = newQuantity;
-
-                    // Calculate updated values
-                    const chosenPrice = newQuantity >= cxfechada ? precofechada : precofrac;
-                    const ipiValue = ipi * ipiTax * chosenPrice * newQuantity;
-                    const productTotal = chosenPrice * newQuantity + ipiValue;
-
-                    // Format currency function
-                    function formatCurrency(value) {
-                        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                    }
-
-                    // Update table row (adjusted for image column)
-                    row.cells[5].textContent = formatCurrency(chosenPrice); // Price (index 5)
-                    row.cells[6].textContent = formatCurrency(ipiValue);    // IPI (index 6)
-                    row.cells[7].textContent = formatCurrency(productTotal); // Subtotal (index 7)
-
-                    // Update modal totals
-                    updateTotalPrice();
-
-                } catch (error) {
-                    alert('Erro ao atualizar quantidade');
-                    console.error('Error updating quantity:', error);
-                }
-            });
-        } catch (error) {
-            console.error('Error fetching order status:', error);
-            alert('Ocorreu um erro ao verificar o status do pedido. Tente novamente.');
-        }
-    });
-});
-/*
-
-        // Add event listeners for edit buttons
-        document.querySelectorAll('.modalOrderEditButton').forEach((button) => {
-            button.addEventListener('click', async function () {
-                const row = this.closest('tr');
-        
-                const orderId = localStorage.getItem('currentOrderId');
-                const quantityCell = row.querySelector('.quantity');
-                const productId = row.getAttribute('data-product-id');
-                const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
-        
-                // Fetch the current order status to determine if it's editable
-                const requestData = { orderId };
-                console.log("currentOrderId:", orderId);
-        
-                try {
-                    const response = await fetch(`${URL_API}/orderStatus`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(requestData),
-                    });
-        
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch order status: ${response.statusText}`);
-                    }
-        
-                    const data = await response.json();
-        
-                    // Check if the order status is fetched properly
-                    const orderStatus = data.status; // Adjust based on backend response format
-                    console.log("Order Status:", orderStatus);
-        
-                    if (orderStatus === 2 || orderStatus === 3) {
-                        alert("NÃO É POSSÍVEL EDITAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
-                        return; // Prevent further execution
-                    }
-        
-                    // If order is editable, proceed with making the quantity editable
-                    const inputField = document.createElement('input');
-                    inputField.type = 'number';
-                    inputField.value = currentQuantity;
-                    inputField.classList.add('edit-quantity');
-        
-                    // Add save button
-                    const saveButton = document.createElement('button');
-                    saveButton.textContent = 'Salvar';
-                    saveButton.classList.add('save-quantity-btn');
-        
-                    // Clear the quantity cell and append input and save button
-                    quantityCell.innerHTML = '';
-                    quantityCell.appendChild(inputField);
-                    quantityCell.appendChild(saveButton);
-        
-                    // Focus the input field immediately after it is appended
-                    inputField.focus();
-        
-                    // Add 'Enter' key support
-                    inputField.addEventListener('keypress', function (event) {
-                        if (event.key === 'Enter') saveButton.click();
-                    });
-        
-                    saveButton.addEventListener('click', async function () {
-                        const newQuantity = parseInt(inputField.value, 10);
-                        if (newQuantity && newQuantity > 0) {
                             try {
-                                const response = await fetch(`${URL_API}/editproduct/${productId}`, {
+                                const productResponse = await fetch(`${URL_API}/product-buy/${codproduto}`, {
+                                    method: 'GET',
+                                    headers: { 'Content-Type': 'application/json' }
+                                });
+
+                                if (!productResponse.ok) {
+                                    throw new Error('Failed to fetch product details');
+                                }
+
+                                const productData = await productResponse.json();
+                                const product = Array.isArray(productData) ? productData[0] : productData;
+                                const cxfracionada = product.cxfracionada;
+
+                                if (newQuantity < cxfracionada) {
+                                    alert('QUANTIDADE MÍNIMA NECESSÁRIA!');
+                                    inputField.value = currentQuantity;
+                                    return;
+                                }
+
+                                const updateResponse = await fetch(`${URL_API}/editproduct/${productId}`, {
                                     method: 'PATCH',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
                                     body: JSON.stringify({ quantity: newQuantity })
                                 });
-        
-                                if (!response.ok) throw new Error('Failed to update quantity');
-        
-                
-                                const data = await response.json();
 
-                                
-        // Assume 'data' is the response object you received from the server
-        // const data = response.data;
-        
-        // Retrieve the ipi value and total from the response
-        const ipi = data.updatedProduct.ipi;  // ipi value
-        const updatedTotal = data.updatedProduct.total;  // New total value
-        const cxfechada = data.updatedProduct.cxfechada;
-        const precofechada = data.updatedProduct.precofechada;
-        const precofrac = data.updatedProduct.precofrac;
-        
-  
-        
-                                // Update the quantity directly in the table after success
+                                if (!updateResponse.ok) {
+                                    throw new Error('Failed to update quantity');
+                                }
+
+                                const updateData = await updateResponse.json();
+                                const { cxfechada, precofechada, precofrac, ipi, ipiTax = 0 } = updateData.updatedProduct;
+
                                 quantityCell.textContent = newQuantity;
+                                const chosenPrice = newQuantity >= cxfechada ? precofechada : precofrac;
+                                const ipiValue = ipi * ipiTax * chosenPrice * newQuantity;
+                                const productTotal = chosenPrice * newQuantity + ipiValue;
 
+                                function formatCurrency(value) {
+                                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+                                }
 
-
-                                 
-                                   const chosenPrice = (newQuantity >= cxfechada) ? precofechada : precofrac;
-
-                              
-                               
-
-                              
-                               const ipitax = data.updatedProduct.ipiTax || 0; // Default to 0 if ipiTax is undefined
-                               console.log('IPI Tax value:', ipitax);
-                                console.log('IPI value:', ipi);
-                               
-                                // Optionally, you can re-calculate the total if necessary
-                                //const price = parseFloat(row.cells[4].textContent.replace(/[^\d.-]/g, '').trim()); // Remove any non-numeric characters
-                                const ipiValue = ipi * ipitax * chosenPrice * newQuantity; 
-                                const productTotal = chosenPrice * newQuantity + ipiValue ;
-        
-
-
-   // Function to format numbers as currency (Brazilian Real - R$)
-   function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-                }
-
-
-                                // Update the total for this row
                                 row.cells[5].textContent = formatCurrency(chosenPrice);
                                 row.cells[6].textContent = formatCurrency(ipiValue);
-                                row.cells[7].textContent = formatCurrency(productTotal); // Ensure it's formatted properly
-        
-                                // Update the total price in the modal
-                                //update();
-                                //window.location.reload();
+                                row.cells[7].textContent = formatCurrency(productTotal);
                                 updateTotalPrice();
-        
-                               
-        
                             } catch (error) {
-                                alert('Error updating quantity');
+                                alert('Erro ao atualizar quantidade');
                                 console.error('Error updating quantity:', error);
                             }
-                        } else {
-                            alert('ADICIONE UMA QUANTIDADE VÁLIDA.');
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error fetching order status:', error);
-                    alert('An error occurred while checking the order status. Please try again later.');
-                }
+                        });
+                    } catch (error) {
+                        console.error('Error fetching order status:', error);
+                        alert('Ocorreu um erro ao verificar o status do pedido. Tente novamente.');
+                    }
+                });
             });
-        });
-        
 
-*/
+            document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
+                button.addEventListener('click', async (event) => {
+                    event.stopPropagation();
+                    const row = button.closest('tr');
+                    const productId = row.getAttribute('data-product-id');
+                    await deleteProduct(productId, orderDetails.id);
+                });
+            });
+        }
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-// Function to update the total price in the modal
-function updateTotalPrice() {
+        function updateTotalPrice() {
             const rows = document.querySelectorAll('#order-details-content tr');
-            let total = 0; // Starting with an initial value of 1000
+            let total = 0;
             const discount = document.querySelector('#desc');
             let discountValue = parseFloat(discount.value) || 0;
-            
-            
+
             rows.forEach(row => {
-
-
                 const productTotal = parseFloat(
-    row.cells[7].textContent
-
-        .replace('R$', '')
-        .trim()
-        .replace(/\./g, '') // Remove ALL dots
-        .replace(',', '.')  // Convert decimal separator
-);
-       
-        total =  total += productTotal;
+                    row.cells[7].textContent
+                        .replace('R$', '')
+                        .trim()
+                        .replace(/\./g, '')
+                        .replace(',', '.')
+                );
+                total += productTotal;
             });
 
-            
-    let discountTotal = total * discountValue;
-    let totalFinal = total * (1 - discountValue);
+            let discountTotal = total * discountValue * (-1);
+            let totalFinal = total * (1 - discountValue);
 
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            }
 
-    function formatCurrency(value) {
-                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
+            document.getElementById('total-value').textContent = formatCurrency(totalFinal);
+        }
+
+        async function deleteProduct(productId, orderId) {
+            const requestData = { orderId };
+            console.log("currentOrderId:", orderId);
+
+            try {
+                const statusResponse = await fetch(`${URL_API}/orderStatus`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                if (!statusResponse.ok) {
+                    throw new Error(`Failed to fetch order status: ${statusResponse.statusText}`);
                 }
 
-    document.getElementById('discount-value').textContent = formatCurrency(discountTotal);
-    document.getElementById('total-value').textContent = formatCurrency(totalFinal);
-
-
-
-       
-    }
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    // Add event listeners for delete buttons
-    document.querySelectorAll('.modalOrderDeleteButton').forEach((button) => {
-        button.addEventListener('click', async (event) => {
-            event.stopPropagation(); // Prevent row click interference
-            const row = button.closest('tr');
-            const productId = row.getAttribute('data-product-id');
-            await deleteProduct(productId, orderDetails.id);
-        });
-    });
-}
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-// Function to delete a product
-async function deleteProduct(productId, orderId) {
-    // Fetch the current order status to determine if it's editable
-    const requestData = { orderId };
-    console.log("currentOrderId:", orderId);
-
-    try {
-        const statusResponse = await fetch(`${URL_API}/orderStatus`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
-        });
-
-        if (!statusResponse.ok) {
-            throw new Error(`Failed to fetch order status: ${statusResponse.statusText}`);
-        }
-
-        const statusData = await statusResponse.json();
-
-        // Check the order status
-        const orderStatus = statusData.status; // Adjust based on backend response format
-        console.log("Order Status:", orderStatus);
-
-        if (orderStatus === 2 || orderStatus === 3) {
-            alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
-            return; // Stop further execution if status doesn't allow editing
-        }
-
-        // If status allows, proceed with deletion
-        const response = await fetch(`${URL_API}/delete-product`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json', // Define content type as JSON
-            },
-            body: JSON.stringify({ productId, orderId }), // Send product and order ID in request body
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete product');
-        }
-
-        console.log(`Product with ID ${productId} deleted successfully.`);
-        alert('PRODUTO DELETADO COM SUCESSO.');
-
-        // Refresh order details to reflect changes
-        fetchOrderDetails(orderId);
-    } catch (error) {
-        console.error('Error deleting product:', error);
-        alert('An error occurred. Please try again.');
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Show modal with order details
-function openModal(orderId) {
-    fetchOrderDetails(orderId)
-        .then(orderDetails => {
-            populateModal(orderDetails); // Populate modal with fetched details
-            document.getElementById('order-modal').classList.add('show'); // Show modal
-        })
-        .catch(error => console.error('Error fetching order details:', error));
-}
-
-// Event listener for order rows
-document.querySelectorAll('.order-row').forEach(row => {
-    row.addEventListener('click', () => {
-        const orderId = row.getAttribute('data-id');
-        
-        openModal(orderId); // Open modal with clicked order details
-        
-
-  
-    });
-});
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Close modal functionality
-document.getElementById('close-modal').addEventListener('click', () => {
-    document.getElementById('order-modal').classList.remove('show'); // Hide modal
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const textarea = document.getElementById('obs');
-
-textarea.addEventListener('input', () => {
-  // Reset height to shrink if text is deleted
-  textarea.style.height = 'auto';
-  // Set height based on scrollHeight to expand as needed
-  textarea.style.height = `${textarea.scrollHeight}px`;
-});
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Save Notes Button
-document.getElementById("save-notes-btn").addEventListener("click", async () => {
-    const observation = document.getElementById("obs").value.trim(); // Get the observation value
-    const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
-
-    if (!orderId) {
-        alert("No draft order found to save notes.");
-        return;
-    }
-
-    const requestData = {
-        orderId: orderId,
-        observation: observation,
-    };
-
-    try {
-        const response = await fetch(`${URL_API}/save-notes`, {
-            method: "PATCH", // Use PATCH to indicate partial update
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
-        });
-
-        if (response.ok) {
-            alert('PEDIDO SALVO COM SUCESSO!');
-        } else {
-            console.error("Falha ao salvar pedido.");
-            alert('Ocorreu um erro, tente novamente.');
-        }
-    } catch (error) {
-        console.error("Erro:", error);
-    }
-});
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-document.getElementById("delete-order-btn").addEventListener("click", async () => {
-    const orderId = localStorage.getItem('currentOrderId');
-
-    // Fetch the current order status to determine if it's deletable
-    const requestData = { orderId };
-    console.log("currentOrderId:", orderId);
-
-    try {
-        const statusResponse = await fetch(`${URL_API}/orderStatus`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
-        });
-
-        if (!statusResponse.ok) {
-            throw new Error(`Failed to fetch order status: ${statusResponse.statusText}`);
-        }
-
-        const statusData = await statusResponse.json();
-
-        // Check the order status
-        const orderStatus = statusData.status; // Adjust based on backend response format
-        console.log("Order Status:", orderStatus);
-
-        if (orderStatus === 2) {
-            alert("NÃO É POSSÍVEL DELETAR O PEDIDO ESTÁ FINALIZADO.");
-            return; // Stop further execution if status doesn't allow deletion
-        }
-
-        // Confirmation dialog
-        const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.");
-        if (!confirmDelete) {
-            // If the user cancels, stop the function
-            return;
-        }
-
-        // Prepare data to send
-        const deleteRequestData = {
-            orderId: orderId, // Use the same key as in the backend
-        };
-
-        // Send a DELETE request to delete the order
-        const deleteResponse = await fetch(`${URL_API}/delete-order`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(deleteRequestData),
-        });
-
-        if (deleteResponse.ok) {
-            alert('PEDIDO DELETADO COM SUCESSO!');
-
-            // Refresh the page
-            window.location.reload();
-            console.log("Order successfully deleted!");
-        } else {
-            console.error("Falha ao deletar o pedido.");
-            alert('An error occurred. Please try again later.');
-        }
-    } catch (error) {
-        console.error("Error handling the delete order action:", error);
-    }
-});
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-  
-function printOrder() {
-    // Clone the modal content to avoid modifying the actual modal
-    const modalClone = document.querySelector('#order-modal').cloneNode(true);
-
-    // Find the dropdown and replace it with its selected text
-    const ipiDropdown = modalClone.querySelector('#ipi');
-    if (ipiDropdown) {
-        const selectedIpiText = ipiDropdown.options[ipiDropdown.selectedIndex].text; // Get selected option text
-        const ipiTextElement = document.createElement('span'); // Create a span to replace the dropdown
-        ipiTextElement.textContent = selectedIpiText;
-        ipiDropdown.replaceWith(ipiTextElement); // Replace dropdown with text
-    }
-
-    // Open new print window
-    const printWindow = window.open('', '', 'width=800,height=600');
-    printWindow.document.write('<html><head><title>Print Order</title>');
-    printWindow.document.write('<style>');
-    printWindow.document.write(`
-        @media print {
-        
-        body {
-                font-family: Arial, sans-serif;
-                font-size: 12pt;
-                line-height: 1.5;
-                position: relative;
-                margin: 0;
-                padding-top: 60px; /* Space for header */
-                padding-bottom: 60px; /* Space for footer */
-            }
-
-            /* Header */
-            .header {
-                position: absolute;
-                top: 10px;
-                left: 0;
-                right: 0;
-                text-align: center;
-                font-size: 16pt;
-                font-weight: bold;
-                border-bottom: 2px solid #000;
-                padding-bottom: 10px;
-            }
-
-            /* Footer */
-            .footer {
-                position: absolute;
-                bottom: 10px;
-                left: 0;
-                right: 0;
-                text-align: center;
-                font-size: 10pt;
-                color: #555;
-                border-top: 1px solid #ddd;
-                padding-top: 10px;
-            }
-
-        
-
-            /* Hide certain elements */
-            #logo-image,
-            #ipilabel,
-            #desclabel,
-            #order-items-table th:nth-child(9),
-            #order-items-table td:nth-child(9),
-            #order-items-table th:nth-child(10),
-            #order-items-table td:nth-child(10),
-            .allbtns,
-            #submit-order-btn,
-            #delete-order-btn,
-            #close-modal {
-                display: none !important;
-            }
-
-            /* Table styles */
-            #order-items-table {
-                border-collapse: collapse;
-                width: 100%;
-                margin-top: 20px;
-                page-break-inside: auto;
-            }
-
-            #order-items-table th, #order-items-table td {
-                padding: 8px;
-                text-align: center;
-                vertical-align: middle;
-                border: 1px solid #ddd;
-            }
-
-            .totalOrderBox {
-                margin-top: 20px;
-                font-size: 14pt;
-                font-weight: bold;
-                border-top: 2px solid #000;
-                padding-top: 10px;
-                page-break-inside: avoid;
-            }
-
-            .obs-row {
-                font-size: 11pt;
-                margin-top: 20px;
-                padding: 10px;
-                background-color: #f9f9f9;
-                page-break-inside: avoid;
-            }
-
-            .obs-row textarea {
-                width: 100%;
-                font-size: 11pt;
-                border: 1px solid #ddd;
-                padding: 5px;
-                box-sizing: border-box;
-                resize: none;
-                white-space: pre-wrap;
-                overflow: visible;
-                min-height: 160px;
-                height: auto !important;
-            }
-
-            .order-header {
-                margin-bottom: 20px;
-                page-break-inside: avoid;
-            }
-
-            .order-info-row span {
-                font-weight: bold;
-            }
-
-            table {
-                font-size: 10pt;
-            }
-
-            .order-info, .order-total {
-                page-break-after: auto;
-            }
-
-            #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
-                width: 15%;
-            }
-
-            #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
-                width: 10%;
-            }
-
-            #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
-                width: 40%;
-            }
-
-            #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
-                width: 10%;
-            }
-
-            #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
-                width: 15%;
-            }
-             #order-items-table th:nth-child(7), #order-items-table td:nth-child(7) {
-                    width: 15%;
-                }
-                        #order-items-table th:nth-child(8), #order-items-table td:nth-child(8) {
-                    width: 20%;
+                const statusData = await statusResponse.json();
+                const orderStatus = statusData.status;
+                console.log("Order Status:", orderStatus);
+
+                if (orderStatus === 2 || orderStatus === 3) {
+                    alert("NÃO É POSSÍVEL DELETAR O PRODUTO, PEDIDO ESTÁ FINALIZADO.");
+                    return;
                 }
 
-                
-            .switch-container {
-                display: none;
+                const response = await fetch(`${URL_API}/delete-product`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productId, orderId }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to delete product');
+                }
+
+                console.log(`Product with ID ${productId} deleted successfully.`);
+                alert('PRODUTO DELETADO COM SUCESSO.');
+                fetchOrderDetails(orderId);
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('An error occurred. Please try again.');
             }
         }
-    `);
-    printWindow.document.write('</style></head><body>');
-    
-    // Insert the header, footer, and watermark
-    printWindow.document.write('<div class="header">NYR Festas</div>');
-   // printWindow.document.write('<div class="footer">Phone: (11) 9 9469-8952 | Email: financeiro@mm88.com.br</div>');
-    
-    
-    printWindow.document.write(modalClone.outerHTML); // Use modified modal content
-    printWindow.document.close();
-    printWindow.print();
-}
 
-        
-  
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-document.getElementById("toggleButton").addEventListener("change", async (event) => {
-    const orderId = localStorage.getItem('currentOrderId');
-    const observation = document.getElementById("obs").value.trim(); // Get the observation value
-
-    if (!orderId) {
-        alert('Order ID is missing. Please try again.');
-        return;
-    }
-
-
-    try {
-        // Fetch the current status of the order
-        const response = await fetch(`${URL_API}/orderStatus`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ orderId }),
-        });
-
-        const data = await response.json();
-        if (!data || data.status === undefined) {
-            console.error("Invalid response:", data);
-            return;
+        function openModal(orderId) {
+            fetchOrderDetails(orderId)
+                .then(orderDetails => {
+                    populateModal(orderDetails);
+                    document.getElementById('order-modal').classList.add('show');
+                })
+                .catch(error => console.error('Error fetching order details:', error));
         }
 
-        const currentStatus = data.status;
-
-        if (currentStatus === 0) {
-            // Order is 'Aberto', proceed to submit (change to 'Orçamento')
-            const submitResponse = await fetch(`${URL_API}/submit-order`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ orderId, observation }), // Send both orderId and observation
+        document.querySelectorAll('.order-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const orderId = row.getAttribute('data-id');
+                openModal(orderId);
             });
+        });
 
-            if (submitResponse.ok) {
-                alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
-                window.location.reload();
-            } else {
-                alert('Ocorreu um erro ao enviar o pedido.');
-                event.target.checked = false; // Reset the toggle switch on error
+        document.getElementById('close-modal').addEventListener('click', () => {
+            document.getElementById('order-modal').classList.remove('show');
+        });
+
+        const textarea = document.getElementById('obs');
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        });
+
+        document.getElementById("save-notes-btn").addEventListener("click", async () => {
+            const observation = document.getElementById("obs").value.trim();
+            const orderId = localStorage.getItem('currentOrderId');
+
+            if (!orderId) {
+                alert("No draft order found to save notes.");
+                return;
             }
-        } 
-        
-        else if (currentStatus === 1) {
-            // Order is 'Orçamento', check if revert is allowed
-            const checkResponse = await fetch(`${URL_API}/checkOtherOpenedOrders`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username: localStorage.getItem('username') }),
-            });
 
-            const checkData = await checkResponse.json();
-            if (checkData && checkData.canRevert) {
-                await fetch(`${URL_API}/revertOrder`, {
+            const requestData = {
+                orderId: orderId,
+                observation: observation,
+            };
+
+            try {
+                const response = await fetch(`${URL_API}/save-notes`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                if (response.ok) {
+                    alert('PEDIDO SALVO COM SUCESSO!');
+                } else {
+                    console.error("Falha ao salvar pedido.");
+                    alert('Ocorreu um erro, tente novamente.');
+                }
+            } catch (error) {
+                console.error("Erro:", error);
+            }
+        });
+
+        document.getElementById("delete-order-btn").addEventListener("click", async () => {
+            const orderId = localStorage.getItem('currentOrderId');
+            const requestData = { orderId };
+            console.log("currentOrderId:", orderId);
+
+            try {
+                const statusResponse = await fetch(`${URL_API}/orderStatus`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestData),
+                });
+
+                if (!statusResponse.ok) {
+                    throw new Error(`Failed to fetch order status: ${statusResponse.statusText}`);
+                }
+
+                const statusData = await statusResponse.json();
+                const orderStatus = statusData.status;
+                console.log("Order Status:", orderStatus);
+
+                if (orderStatus === 2) {
+                    alert("NÃO É POSSÍVEL DELETAR O PEDIDO ESTÁ FINALIZADO.");
+                    return;
+                }
+
+                const confirmDelete = confirm("TEM CERTEZA QUE DESEJA APAGAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.");
+                if (!confirmDelete) {
+                    return;
+                }
+
+                const deleteRequestData = {
+                    orderId: orderId,
+                };
+
+                const deleteResponse = await fetch(`${URL_API}/delete-order`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(deleteRequestData),
+                });
+
+                if (deleteResponse.ok) {
+                    alert('PEDIDO DELETADO COM SUCESSO!');
+                    window.location.reload();
+                } else {
+                    console.error("Falha ao deletar o pedido.");
+                    alert('An error occurred. Please try again later.');
+                }
+            } catch (error) {
+                console.error("Error handling the delete order action:", error);
+            }
+        });
+
+        function printOrder() {
+            const modalClone = document.querySelector('#order-modal').cloneNode(true);
+            const ipiDropdown = modalClone.querySelector('#ipi');
+            if (ipiDropdown) {
+                const selectedIpiText = ipiDropdown.options[ipiDropdown.selectedIndex].text;
+                const ipiTextElement = document.createElement('span');
+                ipiTextElement.textContent = selectedIpiText;
+                ipiDropdown.replaceWith(ipiTextElement);
+            }
+
+            const printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write('<html><head><title>Print Order</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write(`
+                @media print {
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 12pt;
+                        line-height: 1.5;
+                        position: relative;
+                        margin: 0;
+                        padding-top: 60px;
+                        padding-bottom: 60px;
+                    }
+                    .header {
+                        position: absolute;
+                        top: 10px;
+                        left: 0;
+                        right: 0;
+                        text-align: center;
+                        font-size: 16pt;
+                        font-weight: bold;
+                        border-bottom: 2px solid #000;
+                        padding-bottom: 10px;
+                    }
+                    .footer {
+                        position: absolute;
+                        bottom: 10px;
+                        left: 0;
+                        right: 0;
+                        text-align: center;
+                        font-size: 10pt;
+                        color: #555;
+                        border-top: 1px solid #ddd;
+                        padding-top: 10px;
+                    }
+                    #logo-image,
+                    #ipilabel,
+                    #desclabel,
+                    #order-items-table th:nth-child(9),
+                    #order-items-table td:nth-child(9),
+                    #order-items-table th:nth-child(10),
+                    #order-items-table td:nth-child(10),
+                    .allbtns,
+                    #submit-order-btn,
+                    #delete-order-btn,
+                    #close-modal {
+                        display: none !important;
+                    }
+                    #order-items-table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        margin-top: 20px;
+                        page-break-inside: auto;
+                    }
+                    #order-items-table th, #order-items-table td {
+                        padding: 8px;
+                        text-align: center;
+                        vertical-align: middle;
+                        border: 1px solid #ddd;
+                    }
+                    .totalOrderBox {
+                        margin-top: 20px;
+                        font-size: 14pt;
+                        font-weight: bold;
+                        border-top: 2px solid #000;
+                        padding-top: 10px;
+                        page-break-inside: avoid;
+                    }
+                    .obs-row {
+                        font-size: 11pt;
+                        margin-top: 20px;
+                        padding: 10px;
+                        background-color: #f9f9f9;
+                        page-break-inside: avoid;
+                    }
+                    .obs-row textarea {
+                        width: 100%;
+                        font-size: 11pt;
+                        border: 1px solid #ddd;
+                        padding: 5px;
+                        box-sizing: border-box;
+                        resize: none;
+                        white-space: pre-wrap;
+                        overflow: visible;
+                        min-height: 160px;
+                        height: auto !important;
+                    }
+                    .order-header {
+                        margin-bottom: 20px;
+                        page-break-inside: avoid;
+                    }
+                    .order-info-row span {
+                        font-weight: bold;
+                    }
+                    table {
+                        font-size: 10pt;
+                    }
+                    .order-info, .order-total {
+                        page-break-after: auto;
+                    }
+                    #order-items-table th:nth-child(2), #order-items-table td:nth-child(2) {
+                        width: 15%;
+                    }
+                    #order-items-table th:nth-child(3), #order-items-table td:nth-child(3) {
+                        width: 10%;
+                    }
+                    #order-items-table th:nth-child(4), #order-items-table td:nth-child(4) {
+                        width: 40%;
+                    }
+                    #order-items-table th:nth-child(5), #order-items-table td:nth-child(5) {
+                        width: 10%;
+                    }
+                    #order-items-table th:nth-child(6), #order-items-table td:nth-child(6) {
+                        width: 15%;
+                    }
+                    #order-items-table th:nth-child(7), #order-items-table td:nth-child(7) {
+                        width: 15%;
+                    }
+                    #order-items-table th:nth-child(8), #order-items-table td:nth-child(8) {
+                        width: 20%;
+                    }
+                    .switch-container {
+                        display: none;
+                    }
+                }
+            `);
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write('<div class="header">NYR Festas</div>');
+            printWindow.document.write(modalClone.outerHTML);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        document.getElementById("toggleButton").addEventListener("change", async (event) => {
+            const orderId = localStorage.getItem('currentOrderId');
+            const observation = document.getElementById("obs").value.trim();
+
+            if (!orderId) {
+                alert('Order ID is missing. Please try again.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${URL_API}/orderStatus`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ orderId }),
                 });
 
-                alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
-                window.location.reload();
-            } else {
-                alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
-                event.target.checked = false; // Reset the toggle switch if revert isn't allowed
+                const data = await response.json();
+                if (!data || data.status === undefined) {
+                    console.error("Invalid response:", data);
+                    return;
+                }
+
+                const currentStatus = data.status;
+
+                if (currentStatus === 0) {
+                    const submitResponse = await fetch(`${URL_API}/submit-order`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ orderId, observation }),
+                    });
+
+                    if (submitResponse.ok) {
+                        alert('PEDIDO FOI ENVIADO PARA ORÇAMENTO COM SUCESSO!');
+                        window.location.reload();
+                    } else {
+                        alert('Ocorreu um erro ao enviar o pedido.');
+                        event.target.checked = false;
+                    }
+                } else if (currentStatus === 1) {
+                    const checkResponse = await fetch(`${URL_API}/checkOtherOpenedOrders`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ username: localStorage.getItem('username') }),
+                    });
+
+                    const checkData = await checkResponse.json();
+                    if (checkData && checkData.canRevert) {
+                        await fetch(`${URL_API}/revertOrder`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ orderId }),
+                        });
+
+                        alert("STATUS DA ORDEM REVERTIDO PARA 'ABERTO' COM SUCESSO!");
+                        window.location.reload();
+                    } else {
+                        alert("O STATUS NÃO PODE SER REVERTIDO NO MOMENTO, EXISTE OUTRA ORDEM EM 'ABERTO.'");
+                        event.target.checked = false;
+                    }
+                } else if (currentStatus === 2) {
+                    alert("O STATUS NÃO PODE SER ALTERADO, A ORDEM JÁ ESTÁ FECHADA.");
+                    event.target.checked = false;
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Ocorreu um erro ao processar a solicitação.");
+                event.target.checked = false;
             }
-        } 
-        
-        else if (currentStatus === 2) {
-            alert("O STATUS NÃO PODE SER ALTERADO, A ORDEM JÁ ESTÁ FECHADA.");
-            event.target.checked = false; // Reset the toggle switch if order is closed
-        }
-
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Ocorreu um erro ao processar a solicitação.");
-        event.target.checked = false; // Reset the toggle switch on error
-    }
-
-    //window.location.reload();
-});
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-document.getElementById("finish-order-btn").addEventListener("click", async () => {
-    const orderId = localStorage.getItem('currentOrderId');
-    const observation = document.getElementById("obs").value.trim(); // Get the observation field value
-
-    // Validate if orderId exists
-    if (!orderId) {
-        alert('Order ID is missing. Please try again.');
-        return;
-    }
-
-    // Check if observation is filled
-    if (!observation) {
-        alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES"');
-        return; // Stop if observation is empty
-    }
-
-    // Confirmation before proceeding with the status change
-    const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FECHAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
-
-    if (!userConfirmed) {
-        return; // Stop if the user cancels
-    }
-
-    try {
-        // Fetch the current status of the order
-        const response = await fetch(`${URL_API}/orderStatus`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ orderId }),
         });
 
-        const data = await response.json();
-        if (!data || data.status === undefined) {
-            console.error("Invalid response:", data);
-            return;
-        }
-
-        const currentStatus = data.status;
-
-        // Check if the order is in status 0 (Aberto) or 1 (Orçamento)
-        if (currentStatus === 0 || currentStatus === 1) {
-            // Proceed to change status to 2 (Fechado)
-            const finishResponse = await fetch(`${URL_API}/finishOrder`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ orderId, observation }), // Send the observation with the request
-            });
-
-            if (finishResponse.ok) {
-                alert('PEDIDO FINALIZADO COM SUCESSO!');
-            } else {
-                alert('OCORREU UM ERRO.');
-            }
-        } else {
-            alert('O PEDIDO JÁ FOI FINALIZADO.');
-        }
-
-    } catch (error) {
-        console.error("Error:", error);
-        alert("OCORREU UM ERRO.");
-    }
-
-    window.location.reload();
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-document.getElementById("ipi").addEventListener("change", async function () {
-            const newIPI = parseFloat(this.value); // Get selected IPI value
+        document.getElementById("finish-order-btn").addEventListener("click", async () => {
             const orderId = localStorage.getItem('currentOrderId');
-        
+            const observation = document.getElementById("obs").value.trim();
+
+            if (!orderId) {
+                alert('Order ID is missing. Please try again.');
+                return;
+            }
+
+            if (!observation) {
+                alert('FAVOR INSERIR DADOS DE TRANSPORTADORA E FORMA DE PAGAMENTO NO CAMPO "OBSERVAÇÕES"');
+                return;
+            }
+
+            const userConfirmed = window.confirm('TEM CERTEZA QUE DESEJA FECHAR ESTE PEDIDO? ESTA AÇÃO É IRREVERSÍVEL.');
+            if (!userConfirmed) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${URL_API}/orderStatus`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ orderId }),
+                });
+
+                const data = await response.json();
+                if (!data || data.status === undefined) {
+                    console.error("Invalid response:", data);
+                    return;
+                }
+
+                const currentStatus = data.status;
+
+                if (currentStatus === 0 || currentStatus === 1) {
+                    const finishResponse = await fetch(`${URL_API}/finishOrder`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ orderId, observation }),
+                    });
+
+                    if (finishResponse.ok) {
+                        alert('PEDIDO FINALIZADO COM SUCESSO!');
+                    } else {
+                        alert('OCORREU UM ERRO.');
+                    }
+                } else {
+                    alert('O PEDIDO JÁ FOI FINALIZADO.');
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("OCORREU UM ERRO.");
+            }
+            window.location.reload();
+        });
+
+        document.getElementById("ipi").addEventListener("change", async function () {
+            const newIPI = parseFloat(this.value);
+            const orderId = localStorage.getItem('currentOrderId');
+
             try {
                 const response = await fetch(`${URL_API}/update-ipi`, {
                     method: "POST",
@@ -2328,7 +1611,7 @@ document.getElementById("ipi").addEventListener("change", async function () {
                     },
                     body: JSON.stringify({ orderId, newIPI })
                 });
-        
+
                 const data = await response.json();
                 if (response.ok) {
                     alert(`Aliquota atualizada para ${newIPI * 100}%`);
@@ -2342,13 +1625,10 @@ document.getElementById("ipi").addEventListener("change", async function () {
             window.location.reload();
         });
 
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////
-        
         document.getElementById("desc").addEventListener("change", async function () {
-            const discount = parseFloat(this.value); // Get selected IPI value
+            const discount = parseFloat(this.value);
             const orderId = localStorage.getItem('currentOrderId');
-        
+
             try {
                 const response = await fetch(`${URL_API}/update-desc`, {
                     method: "POST",
@@ -2357,7 +1637,7 @@ document.getElementById("ipi").addEventListener("change", async function () {
                     },
                     body: JSON.stringify({ orderId, discount })
                 });
-        
+
                 const data = await response.json();
                 if (response.ok) {
                     alert(`Aplicado desconto de ${discount * 100}%`);
@@ -2371,115 +1651,92 @@ document.getElementById("ipi").addEventListener("change", async function () {
             }
             window.location.reload();
         });
-        
-       //////////////////////////////////////////////////////////////////////////////////////////// 
 
+        async function duplicateOrder() {
+            const username = localStorage.getItem('username');
+            const newCustomerId = localStorage.getItem('customerId');
+            const currentOrderId = localStorage.getItem('currentOrderId');
 
-// Função para duplicar o pedido
-async function duplicateOrder() {
-    // Recupera os dados do localStorage
-    const username = localStorage.getItem('username');
-    const newCustomerId = localStorage.getItem('customerId');
-    const currentOrderId = localStorage.getItem('currentOrderId');
+            if (!username || !newCustomerId || !currentOrderId) {
+                console.error('Dados necessários não encontrados no localStorage.');
+                alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
+                return;
+            }
 
-    // Verifica se os dados necessários estão disponíveis
-    if (!username || !newCustomerId || !currentOrderId) {
-        console.error('Dados necessários não encontrados no localStorage.');
-        alert('SELECIONE UM CLIENTE NA PÁGINA DE CADASTRO.');
-        return;
-        
-    }
-    
-    // Dados a serem enviados na requisição
-    const requestData = {
-        username,
-        newCustomerId: parseInt(newCustomerId, 10), // Converte para número
-        currentOrderId: parseInt(currentOrderId, 10)  // Converte para número
-    };
+            const requestData = {
+                username,
+                newCustomerId: parseInt(newCustomerId, 10),
+                currentOrderId: parseInt(currentOrderId, 10)
+            };
 
-    try {
-        const response = await fetch(`${URL_API}/duplicate-order`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        });
+            try {
+                const response = await fetch(`${URL_API}/duplicate-order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro ao duplicar o pedido.');
+                }
+
+                const result = await response.json();
+                console.log(result.message);
+                alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
+                window.location.reload();
+            } catch (error) {
+                console.error('Erro:', error.message);
+            }
         }
 
-        const result = await response.json();
-        console.log(result.message); // Mensagem de sucesso
-        alert('PEDIDO: ' + currentOrderId + ' DUPLICADO COM SUCESSO!');
+        document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
 
-        // Recarrega a página após a duplicação bem-sucedida
-        window.location.reload();
-    } catch (error) {
-        console.error('Erro:', error.message);
-    }
-}
+        function loadCustomerName() {
+            const customerId = localStorage.getItem('customerId');
+            console.log(customerId);
 
-// Adiciona o evento de clique ao botão
-document.getElementById('duplicateOrderButton').addEventListener('click', duplicateOrder);
+            if (!customerId) {
+                console.error('Customer ID not found in localStorage!');
+                document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+                return;
+            }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-// Function to load customer name based on customerId in localStorage
-function loadCustomerName() {
-    const customerId = localStorage.getItem('customerId');
-    console.log(customerId);
-
-    if (!customerId) {
-        console.error('Customer ID not found in localStorage!');
-        document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
-        return;
-    }
-
-    // Fetch customer name from backend (sending customerId in the request body)
-    fetch(`${URL_API}/displayName`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ customerId }) // Sending customerId in the request body
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            fetch(`${URL_API}/displayName`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ customerId })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const customerName = data.razaosocial || 'Unknown';
+                document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
+            })
+            .catch(error => {
+                console.error('Error fetching customer name:', error);
+                document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
+            });
         }
-        return response.json();
-    })
-    .then(data => {
-        // Display customer name from backend
-        const customerName = data.razaosocial || 'Unknown';
-        document.getElementById('customerName').textContent = `Cliente: ${customerName}`;
-    })
-    .catch(error => {
-        console.error('Error fetching customer name:', error);
-        document.getElementById('customerName').textContent = 'SELECIONE UM CLIENTE E TENTE NOVAMENTE.';
-    });
-}
 
-// Function to clear the customer selection
-function clearCustomer() {
-    localStorage.removeItem('customerId');
-    document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
-}
+        function clearCustomer() {
+            localStorage.removeItem('customerId');
+            document.getElementById('customerName').textContent = 'Nenhum cliente selecionado';
+        }
 
-// Call the function when the page loads
-loadCustomerName();
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-</script>
-
-<script src="script.js"></script>
-<footer>
-    <p>&copy; 2025 | NYR Festas</p>
-  </footer>
+        loadCustomerName();
+    </script>
+    <script src="script.js"></script>
+    <footer>
+        <p>© 2025 | NYR Festas</p>
+    </footer>
 </body>
 </html>

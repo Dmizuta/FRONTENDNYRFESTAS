@@ -625,7 +625,7 @@
     <div class="box">
         <!-- New Control Panel -->
         <div id="control-panel">
-            <h3>Controle de Pedidos</h3>
+            <h3>Painel de Controle</h3>
 
             
 
@@ -635,10 +635,11 @@
                 <input type="text" id="searchInput" placeholder="Buscar por ID, vendedor, razão social...">
                 
             </div>
+
             <div class="filter-group">
                 <label for="status-filter">Status:</label>
                 <select id="status-filter">
-                    <option value="all">Todos</option>
+                    <option value="all">Todos</option>  
                     <option value="0">Aberto</option>
                     <option value="1">Orçamento</option>
                     <option value="2">Fechado</option>
@@ -1804,45 +1805,6 @@ function populateModal(orderDetails) {
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-/*
-
-const form = document.getElementById('uploadForm');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  console.log('Submitting to:', URL_API);
-
-  const formData = new FormData(form);
-
-  try {
-    const response = await fetch(`${URL_API}/upload`, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    alert(result.message || 'Upload realizado com sucesso!');
-  } catch (error) {
-    console.error('Upload error:', error);
-    alert(`Erro ao enviar o arquivo: ${error.message}`);
-  }
-});
-
-*/
-
-
-
-
-
 
 
 
