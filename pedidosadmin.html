@@ -581,6 +581,19 @@
     background-color: #218838;
 }
 
+
+
+
+.linkfolder {
+
+    display: flex;
+    align-items: center; /* THIS centers vertically */
+    justify-content: left; /* This centers horizontally (optional) */  
+   
+
+}
+
+
 </style>
 
 <body>
@@ -613,6 +626,10 @@
         <!-- New Control Panel -->
         <div id="control-panel">
             <h3>Controle de Pedidos</h3>
+
+            
+
+
             <div class="filter-group">
                 <label for="searchInput">Pesquisar:</label>
                 <input type="text" id="searchInput" placeholder="Buscar por ID, vendedor, razão social...">
@@ -628,7 +645,18 @@
                     <option value="3">Processado</option>
                 </select>
             </div>
+
+
             <div id="order-sum">Total: R$ 0,00</div>
+
+    
+<div class="linkfolder">
+<a id="link" href="https://drive.google.com/drive/folders/1fdOsBh2PVMJ8NaJsX0jFW0uPjDXPz6PA?usp=drive_link" target="_blank">
+  <img src="/imagens/folder.png" alt="Open Drive Folder" width="40" /> 
+</a>
+<p style="margin-left: 10px; font-size: x-large; color: #007BFF;">Pedidos e Boletos</p>
+</div>
+
 
 
             <form id="uploadForm" enctype="multipart/form-data" method="POST">
