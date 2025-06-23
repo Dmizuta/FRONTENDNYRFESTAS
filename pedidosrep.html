@@ -1242,6 +1242,7 @@ textarea {
         document.getElementById("save-notes-btn").addEventListener("click", async () => {
             const observation = document.getElementById("obs").value.trim();
             const orderId = localStorage.getItem('currentOrderId');
+            const role = localStorage.getItem('role');
 
             if (!orderId) {
                 alert("No draft order found to save notes.");
@@ -1251,13 +1252,19 @@ textarea {
             const requestData = {
                 orderId: orderId,
                 observation: observation,
+                role: role,
+               
             };
+
+            
+
 
             try {
                 const response = await fetch(`${URL_API}/save-notes`, {
                     method: "PATCH",
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "application/json"
+            
                     },
                     body: JSON.stringify(requestData),
                 });
@@ -1266,7 +1273,7 @@ textarea {
                     alert('PEDIDO SALVO COM SUCESSO!');
                 } else {
                     console.error("Falha ao salvar pedido.");
-                    alert('Ocorreu um erro, tente novamente.');
+                    alert('Ocorreu um erro, verifique se o pedido já foi fechado.');
                 }
             } catch (error) {
                 console.error("Erro:", error);

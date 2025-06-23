@@ -1260,6 +1260,7 @@ function populateModal(orderDetails) {
     document.getElementById("save-notes-btn").addEventListener("click", async () => {
         const observation = document.getElementById("obs").value.trim();
         const orderId = localStorage.getItem('currentOrderId');
+        const role = localStorage.getItem('role');
     
         if (!orderId) {
             alert("No draft order found to save notes.");
@@ -1269,6 +1270,7 @@ function populateModal(orderDetails) {
         const requestData = {
             orderId: orderId,
             observation: observation,
+            role: role
         };
     
         console.log('REQ DADOS:', requestData);
