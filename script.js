@@ -177,7 +177,8 @@ function populateProductTable(products) {
           cell1.textContent = index + 1;
           cell2.innerHTML = `
               <img src="${product.imagem || "https://via.placeholder.com/50"}" 
-                   alt="Product Image"  
+                   alt="Product Image"
+                   loading="lazy"  
                    style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
                    onmouseover="this.style.transform='scale(3)'" 
                    onmouseout="this.style.transform='scale(1)'">
