@@ -301,6 +301,17 @@
     .save-quantity-btn:hover {
         background-color: #6aa277; /* Yellow-orange hover color */
         transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
+
+            }
+            .save-price-btn{
+        background-color: #28a745;
+        width: 5rem;
+        display: block; 
+        margin: 0.5rem auto 0; /* Top margin, center alignment, no bottom margin */
+    }
+    .save-price-btn:hover {
+        background-color: #6aa277; /* Yellow-orange hover color */
+        transform: scale(1.03); /* Aumenta o tamanho do elemento em 10% */
     }
     
     .edit-quantity {
@@ -1027,7 +1038,7 @@ function populateModal(orderDetails) {
                 <td>${product.codproduto}</td>
                 <td>${product.descricao}</td>
                 <td class="quantity">${quantity}</td>
-                <td>${formatCurrency(price)}</td>
+                <td class="price">${formatCurrency(price)}</td>
                 <td>${formatCurrency(ipi)}</td>
                 <td>${formatCurrency(productTotal)}</td>
                 <td><button class="modalOrderEditButton"><img src="/imagens/pencil.png" alt="Editar"></button></td>
@@ -1091,8 +1102,25 @@ function populateModal(orderDetails) {
                 const row = this.closest('tr');
                 const orderId = localStorage.getItem('currentOrderId');
                 const quantityCell = row.querySelector('.quantity');
+                const priceCell = row.querySelector('.price');
+
+
                 const productId = row.getAttribute('data-product-id');
                 const currentQuantity = parseInt(quantityCell.textContent.trim(), 10);
+
+
+                function parseBRL(value) {
+  return parseFloat(
+    value.replace('R$', '').trim().replace(/\./g, '').replace(',', '.')
+  );
+}
+
+
+                const currentPrice = parseBRL(priceCell.textContent.trim(), 10);
+                
+
+
+
 
                 const inputField = document.createElement('input');
                 inputField.type = 'number';
@@ -1107,6 +1135,62 @@ function populateModal(orderDetails) {
                 quantityCell.appendChild(inputField);
                 quantityCell.appendChild(saveButton);
                 inputField.focus();
+
+
+
+                const inputPriceField = document.createElement('input');
+                inputPriceField.type = 'number';
+                inputPriceField.value = currentPrice;
+                inputPriceField.classList.add('edit-quantity');
+
+                const savePrice = document.createElement('button');                                                                       
+                savePrice.textContent = 'Salvar';
+                savePrice.classList.add('save-price-btn');
+
+                priceCell.innerHTML = '';
+                priceCell.appendChild(inputPriceField);
+                priceCell.appendChild(savePrice);
+
+
+
+savePrice.addEventListener('click', async function () {
+    const newPrice = parseFloat(inputPriceField.value);
+    if (!isNaN(newPrice) && newPrice > 0) {
+        try {
+            const response = await fetch(`${URL_API}/editprice-admin/${productId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ price: newPrice })
+            });
+
+            if (!response.ok) throw new Error('Failed to update price');
+            const data = await response.json();
+
+            // Format and update UI
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(value);
+            }
+
+            priceCell.textContent = formatCurrency(newPrice);
+            updateTotalPrice();
+
+        } catch (error) {
+            alert('Erro ao atualizar o preço.');
+            console.error('Erro ao atualizar o preço:', error);
+        }
+    } else {
+        alert('INSIRA UM VALOR DE PREÇO VÁLIDO.');
+    }
+});
+
+
+
+
+
+
 
                 inputField.addEventListener('keypress', function (event) {
                     if (event.key === 'Enter') saveButton.click();
@@ -1196,6 +1280,11 @@ function populateModal(orderDetails) {
         });
     }
     
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // Function to delete a product
     async function deleteProduct(productId, orderId) {
         try {
