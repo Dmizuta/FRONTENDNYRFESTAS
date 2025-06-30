@@ -56,8 +56,12 @@ document.getElementById("junino").addEventListener("click", function() {
   handleSeasonSelection('junino', this);
 });
 
-document.getElementById("hlwn").addEventListener("click", function() {
+document.getElementById("icon-hlwn").addEventListener("click", function() {
   handleSeasonSelection('halloween', this);
+});
+
+document.getElementById("icon-copa").addEventListener("click", function() {
+  handleSeasonSelection('copa', this);
 });
 
 /*
@@ -69,7 +73,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 // Auto-select default season on page load with delay
 window.addEventListener("load", () => {
   setTimeout(() => {
-      const hlwnButton = document.getElementById("hlwn");
+      const hlwnButton = document.getElementById("icon-hlwn");
       if (hlwnButton) {
           hlwnButton.click();
       } else {
@@ -83,7 +87,8 @@ window.addEventListener("load", () => {
 const backgroundImages = {
   carnaval: "/imagens/festa-1.jpg",
   junino: "/imagens/junino-1.jpg",
-  halloween: "/imagens/hlwn-1.jpg"
+  halloween: "/imagens/hlwn-1.jpg",
+  copa: "/imagens/copa-1.jpg"
 };
 
 function updateBackground(season) {
