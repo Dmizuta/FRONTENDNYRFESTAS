@@ -90,6 +90,7 @@ function updateBackground(season) {
   const imageUrl = backgroundImages[season];
   if (imageUrl) {
     document.body.style.backgroundImage = `url('${imageUrl}')`;
+    document.body.style.backgroundPosition = "center 80px";
   } else {
     console.warn(`No background image found for season: ${season}`);
   }
