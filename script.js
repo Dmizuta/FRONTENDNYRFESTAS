@@ -146,7 +146,7 @@ function populateProductTable(products) {
               <img src="${product.imagem || "https://via.placeholder.com/50"}" 
                    alt="Product Image"
                    loading="lazy"  
-                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: zoom-in;" 
                    onmouseover="this.style.transform='scale(3)'" 
                    onmouseout="this.style.transform='scale(1)'">
           `;
