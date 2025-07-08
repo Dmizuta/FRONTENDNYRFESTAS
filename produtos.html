@@ -635,13 +635,38 @@ body{
 }
 
 
+/*
+
+.note {
+    position: absolute;
+
+    top: 25px;
+    right: 240px;
+    font-size: 1.25rem; 
+    padding: 5px;
+}
+*/
+
 </style>
 
 <body>
 
 
     <header>
-        <h1 id="nyrfestas"></h1>
+
+
+        <div class="note">
+  <img id="notificationBell" src="/imagens/bell-3.png" alt="Notificações" width="55">
+  <span id="notificationCount">3</span>
+
+  <div id="notificationDropdown" style="display: none;">
+    <ul id="notificationList">
+      <!-- JS vai inserir aqui -->
+    </ul>
+  </div>
+</div>
+
+ 
 
         <div id="user-info">
             <span id="username-display"></span>
@@ -735,7 +760,8 @@ body{
                         <img src="/imagens/download.png" alt="icon" class="button-icon">
                         <span id="buttonText">Catálogo Halloween!</span>
                     </button>
-                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1BfZV8sO52KuiwxpdY79l-WSWu6sIAfig" download style="display: none;"></a>
+                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1nys-7TLaZDgkWK0K8UmfUk8l-hB8MDb1" download style="display: none;"></a>
+                    
                     
                     
                 </div>
@@ -1090,6 +1116,17 @@ body{
                 }
             });
         });
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
     <script src="script.js"></script>
