@@ -27,12 +27,18 @@ async function fetchProductData(epoca) {
   }
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Select all season icons
 const seasonIcons = document.querySelectorAll(".icon-button");
 
 // Function to fetch data and highlight selected icon
+
+
 function handleSeasonSelection(season, clickedElement) {
   fetchProductData(season);
+  updateBackground(season); // <- Adiciona essa linha aqui 👇
 
   // Remove highlight from all icons
   seasonIcons.forEach(icon => icon.classList.remove("selected"));
@@ -50,8 +56,12 @@ document.getElementById("junino").addEventListener("click", function() {
   handleSeasonSelection('junino', this);
 });
 
-document.getElementById("hlwn").addEventListener("click", function() {
+document.getElementById("icon-hlwn").addEventListener("click", function() {
   handleSeasonSelection('halloween', this);
+});
+
+document.getElementById("icon-copa").addEventListener("click", function() {
+  handleSeasonSelection('copa', this);
 });
 
 /*
@@ -63,7 +73,7 @@ document.getElementById("hlwn").addEventListener("click", function() {
 // Auto-select default season on page load with delay
 window.addEventListener("load", () => {
   setTimeout(() => {
-      const hlwnButton = document.getElementById("hlwn");
+      const hlwnButton = document.getElementById("icon-hlwn");
       if (hlwnButton) {
           hlwnButton.click();
       } else {
@@ -72,71 +82,28 @@ window.addEventListener("load", () => {
   }, 200);
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
-// API URL for fetching product data
+const backgroundImages = {
+  carnaval: "/imagens/festa-1.jpg",
+  junino: "/imagens/junino-1.jpg",
+  halloween: "/imagens/hlwn-1.jpg",
+  copa: "/imagens/copa-1.jpg"
+};
 
-// Função para buscar produtos da estação selecionada
-async function fetchProductData(epoca) {
-  console.log(`Fetching products for season: ${epoca}`); // Log para verificar a estação
-  try {
-      const response = await fetch(`${URL_API}/products?epoca=${epoca}`); // Adiciona o parâmetro de estação à URL
-      const data = await response.json();
-
-      // Log the fetched data to check the structure
-      console.log(data);
-
-      // Map the data into the table
-      populateProductTable(data);
-  } catch (error) {
-      console.error("Error fetching product data:", error);
-
-      // Handle errors and show a user-friendly message in the table
-      const tableBody = document.querySelector("#productTable tbody");
-      tableBody.innerHTML =
-          '<tr><td colspan="7">Não foi possível carregar os produtos, tente novamente mais tarde.</td></tr>';
+function updateBackground(season) {
+  const imageUrl = backgroundImages[season];
+  if (imageUrl) {
+    document.body.style.backgroundImage = `url('${imageUrl}')`;
+    document.body.style.backgroundPosition = "center 100px";
+  } else {
+    console.warn(`No background image found for season: ${season}`);
   }
 }
 
 
 
 
-// Select all season icons
-const seasonIcons = document.querySelectorAll(".icon-button");
-
-// Function to fetch data and highlight selected icon
-function handleSeasonSelection(season, clickedElement) {
-  fetchProductData(season);
-
-  // Remove highlight from all icons
-  seasonIcons.forEach(icon => icon.classList.remove("selected"));
-
-  // Add highlight to the clicked icon
-  clickedElement.classList.add("selected");
-}
-
-// Add click event listeners to each icon
-document.getElementById("carnaval").addEventListener("click", function() {
-  handleSeasonSelection('carnaval', this);
-});
-
-document.getElementById("junino").addEventListener("click", function() {
-  handleSeasonSelection('junino', this);
-});
-
-document.getElementById("hlwn").addEventListener("click", function() {
-  handleSeasonSelection('halloween', this);
-});
-
-// Auto-select default season on page load with delay
-window.addEventListener("DOMContentLoaded", () => {
-setTimeout(() => {
-    document.getElementById("junino").click();
-}, 200); // Delay in milliseconds (500ms = 0.5s)
-});
-
-
-*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function to format numbers as currency (Brazilian Real - R$)
@@ -177,8 +144,9 @@ function populateProductTable(products) {
           cell1.textContent = index + 1;
           cell2.innerHTML = `
               <img src="${product.imagem || "https://via.placeholder.com/50"}" 
-                   alt="Product Image"  
-                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: pointer;" 
+                   alt="Product Image"
+                   loading="lazy"  
+                   style="width: 50px; height: 50px; object-fit: cover; transition: transform 0.3s; cursor: zoom-in;" 
                    onmouseover="this.style.transform='scale(3)'" 
                    onmouseout="this.style.transform='scale(1)'">
           `;

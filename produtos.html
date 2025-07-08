@@ -158,8 +158,8 @@ filter:
         align-items: center; /* Vertical centering */
         justify-content: space-between; /* Space between buttons and heading */
         max-width: 95%;
-        background-color: #e7e5e5;
-        border-radius: 8px;
+        background-color: #e7e5e5d3;
+        border-radius: 10px;
         border: 1px solid #ccc;
         margin: 10px auto;
         padding: 15px 20px;
@@ -622,6 +622,19 @@ filter:
         overflow: hidden;
     }
 
+
+
+
+body{
+  padding-top: 30px;  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out; /* efeito suave */
+}
+
+
 </style>
 
 <body>
@@ -678,13 +691,19 @@ filter:
         
            
         <div class="icon-wrapper">
-            <button id="hlwn" class="icon-button" aria-label="Filtrar produtos de Halloween">
+            <button id="icon-hlwn" class="icon-button" aria-label="Filtrar produtos de Halloween">
                 <img src="/imagens/halloween.png" alt="Halloween">
                 <span class="tooltip">Halloween</span>
             </button>
         </div>
          
-
+        <div class="icon-wrapper">
+            <button id="icon-copa" class="icon-button" aria-label="Filtrar produtos de Copa">
+                <img src="/imagens/copa.png" alt="Copa">
+                <span class="tooltip">Copa</span>
+            </button>
+        </div>
+         
 
     </div>
 
@@ -700,7 +719,7 @@ filter:
                         <img src="/imagens/download.png" alt="icon" class="button-icon">
                         <span id="buttonTextfest">Catálogo de Festas!</span>
                     </button>
-                    <a id="downloadLinkfest" href="https://drive.google.com/uc?export=download&id=1NxZXGRc8d5can_KlGtW4FTeT0YVbwGqS" download style="display: none;"></a>
+                    <a id="downloadLinkfest" href="https://drive.google.com/uc?export=download&id=1o95YZBBoKditx-R256Zdbc5Z5bsAO1Gz" download style="display: none;"></a>
                 </div>
                 <div id="jun">
                     <button id="downloadButtonjun">
@@ -708,7 +727,7 @@ filter:
                         <img src="/imagens/download.png" alt="icon" class="button-icon">
                         <span id="buttonTextjun">Catálogo Junino!</span>
                     </button>
-                    <a id="downloadLinkjun" href="https://drive.google.com/uc?export=download&id=1P4YPtVoQl5KEYJzFE_MGYFc6hxFmQM6M" download style="display: none;"></a>
+                    <a id="downloadLinkjun" href="https://drive.google.com/uc?export=download&id=1BfSZraob1b5MZ6PL6Mj68QUB1ePUzjA6" download style="display: none;"></a>
                 </div>
                 <div id="hlwn">
                     <button id="downloadButton">
@@ -716,7 +735,9 @@ filter:
                         <img src="/imagens/download.png" alt="icon" class="button-icon">
                         <span id="buttonText">Catálogo Halloween!</span>
                     </button>
-                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=103rFyb4vYjTItYxL4qAvALWLa_cQQ5w1" download style="display: none;"></a>
+                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1BfZV8sO52KuiwxpdY79l-WSWu6sIAfig" download style="display: none;"></a>
+                    
+                    
                 </div>
             </div>
             
@@ -761,7 +782,9 @@ filter:
                 <div class="modal-stage-one">
                     <div class="image-container">
                         <div class="prodimage">
-                            <img src="https://placehold.co/150" alt="Product Image" id="prodImage">
+                          <!--  <img src="https://placehold.co/150" alt="Product Image" id="prodImage"> -->
+                            <img src="https://placehold.co/150" alt="Product Image" id="prodImage" loading="lazy">
+
                         </div>
                     </div>
 

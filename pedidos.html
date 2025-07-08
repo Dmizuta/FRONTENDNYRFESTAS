@@ -829,6 +829,7 @@
         placeholder=
         "OBRIGATÓRIO: Transportadora / Forma de pagamento / Nf"
         ></textarea>
+        <p>Este documento não é oficial, o pedido final encontra-se na sua pasta de "Pedidos e Boletos".</p>
     </div>
 
 
@@ -1707,6 +1708,7 @@ textarea.addEventListener('input', () => {
 document.getElementById("save-notes-btn").addEventListener("click", async () => {
     const observation = document.getElementById("obs").value.trim(); // Get the observation value
     const orderId = localStorage.getItem('currentOrderId'); // Get current order ID
+    const role = localStorage.getItem('role');
 
     if (!orderId) {
         alert("No draft order found to save notes.");
@@ -1716,6 +1718,7 @@ document.getElementById("save-notes-btn").addEventListener("click", async () => 
     const requestData = {
         orderId: orderId,
         observation: observation,
+        role: role
     };
 
     try {
