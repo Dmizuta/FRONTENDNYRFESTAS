@@ -1004,3 +1004,64 @@ tableRows.forEach((row) => {
 
 
 
+
+
+const bell = document.getElementById("notificationBell");
+const dropdown = document.getElementById("notificationDropdown");
+const count = document.getElementById("notificationCount");
+const list = document.getElementById("notificationList");
+
+// Dummy notifications
+const notifications = [
+  "Olá, tudo bem? Fique atento às notificações, aqui estarão disponíveis as últimas novidades",
+  "Catálogo Halloween Atualizado - 08/07/25",
+  
+  
+];
+
+// ⚙️ Renderiza as notificações e decide se mostra o contador
+function renderNotifications() {
+  list.innerHTML = "";
+
+  notifications.forEach((note) => {
+    const li = document.createElement("li");
+    li.textContent = note;
+    list.appendChild(li);
+  });
+
+  const hasSeen = localStorage.getItem("notificationsSeen");
+
+  if (notifications.length > 0 && !hasSeen) {
+    count.textContent = notifications.length;
+    count.style.display = "inline";
+  } else {
+    count.style.display = "none";
+  }
+}
+
+// 🛎️ Clicar no sino
+bell.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const isVisible = dropdown.style.display === "block";
+
+  if (isVisible) {
+    dropdown.style.display = "none";
+  } else {
+    dropdown.style.display = "block";
+
+    // 👇 Marca como "visto" e esconde o contador permanentemente
+    localStorage.setItem("notificationsSeen", "true");
+    count.style.display = "none";
+  }
+});
+
+// 🔐 Fecha o dropdown se clicar fora
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".note")) {
+    dropdown.style.display = "none";
+  }
+});
+
+// 🔁 Inicia tudo
+renderNotifications();
+

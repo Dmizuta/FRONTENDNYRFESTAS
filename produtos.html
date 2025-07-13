@@ -635,13 +635,94 @@ body{
 }
 
 
+/*
+
+.note {
+    position: absolute;
+
+    top: 25px;
+    right: 240px;
+    font-size: 1.25rem; 
+    padding: 5px;
+}
+*/
+.note {
+  position: absolute;
+  top: 25px;
+    right: 240px;
+    font-size: 1.25rem; 
+    padding: 5px;
+  cursor: pointer;
+}
+
+#notificationCount {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  font-size: 17px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+
+#notificationDropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 250px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  z-index: 100;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none; /* controlado pelo JS */
+}
+
+#notificationDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#notificationDropdown ul li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+#notificationDropdown ul li:last-child {
+  border-bottom: none;
+  
+}
+
+
+
+
 </style>
 
 <body>
 
 
     <header>
-        <h1 id="nyrfestas"></h1>
+
+
+        <div class="note">
+  <img id="notificationBell" src="/imagens/bell-3.png" alt="Notificações" width="45">
+  <span id="notificationCount"></span>
+
+  <div id="notificationDropdown" style="display: none;">
+    <ul id="notificationList">
+      <!-- JS vai inserir aqui -->
+    </ul>
+  </div>
+</div>
+
+ 
 
         <div id="user-info">
             <span id="username-display"></span>
@@ -735,7 +816,8 @@ body{
                         <img src="/imagens/download.png" alt="icon" class="button-icon">
                         <span id="buttonText">Catálogo Halloween!</span>
                     </button>
-                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1BfZV8sO52KuiwxpdY79l-WSWu6sIAfig" download style="display: none;"></a>
+                    <a id="downloadLink" href="https://drive.google.com/uc?export=download&id=1nys-7TLaZDgkWK0K8UmfUk8l-hB8MDb1" download style="display: none;"></a>
+                    
                     
                     
                 </div>
@@ -1090,6 +1172,17 @@ body{
                 }
             });
         });
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
     <script src="script.js"></script>
