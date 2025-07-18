@@ -1013,8 +1013,8 @@ const list = document.getElementById("notificationList");
 
 // Dummy notifications
 const notifications = [
-  "Olá, tudo bem? Fique atento às notificações, aqui estarão disponíveis as últimas novidades",
-  "Catálogo Halloween Atualizado - 08/07/25",
+  
+  "Catálogo Halloween Atualizado - 18/07/25",
   
   
 ];
