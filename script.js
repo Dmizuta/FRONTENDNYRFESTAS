@@ -1014,7 +1014,7 @@ const list = document.getElementById("notificationList");
 // Dummy notifications
 const notifications = [
   
-  "Catálogo Halloween Atualizado - 18/07/25",
+  "Baixe agora, catálogo halloween atualizado - 24/07/25",
   
   
 ];
